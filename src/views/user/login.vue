@@ -49,27 +49,27 @@ export default {
 <style lang="less" scoped>
     .header {
         width: 100%;
-        height: 4.12rem;
+        height: 4.8rem;
         color: #f00;
         background: url('../../assets/images/user/h_bg.png');
         background-size: 100% 100%;
         overflow: hidden;
         .logo {
-            width: 1.54rem;
-            margin: 0.48rem auto 0;
+            width: 1.75rem;
+            margin: 0.6rem auto 0;
             img{
                 width: 100%;
             }
         }
         .tit {
-            font-size: 0.3rem;
+            font-size: 0.4rem;
             color: #fff;
             text-align: center;
             margin-top: .1rem;
         }
         .xian {
             width: 100%;
-            height: 2.4rem;
+            height: 2.8rem;
             img{
                 width: 100%;
                 height: 100%;
@@ -84,28 +84,30 @@ export default {
             position: relative;
             .input-row {
                 position: relative;
-                margin-bottom: .1rem;
+                margin-bottom: .3rem;
                 i {
                     position: absolute;
-                    top: 0.16rem;
-                    left: 12px;
+                    top: 0.13rem;
+                    left: 0.2rem;
                     color: #497be5;
                     font-size: 0.35rem;
                 }
                 .icon-yanjing {
                     position: absolute;
-                    top: 0.16rem;
-                    right: 12px;
+                    top: 0.12rem;
+                    right: 0.25rem;
                     color: #497be5;
                     font-size: 0.4rem;
                 }
                 input {
+                    width: 85%;
                     border: 1px solid #82b1ff;
                     border-radius: 20px;
-                    padding: 12px 10px 10px 0.8rem;
+                    padding: 0.05rem 0 0.05rem 0.8rem;
                     color: #9cb7f2;
                     font-size: 0.28rem;
                     height: 0.66rem;
+                    background: #faffbd;
                 }
             }
             .fogotpass {
@@ -118,10 +120,9 @@ export default {
         }
         .login {
             width: 100%;
-            /*background: #5686ed;*/
             background-image:linear-gradient(30deg, #246bfe, #5b90fe);
-            height: 0.66rem;
-            line-height: 0.66rem;
+            height: 0.76rem;
+            line-height: 0.76rem;
             text-align: center;
             box-shadow: 2px 3px 5px #c3d5fd;
             color: #fff;
@@ -131,8 +132,8 @@ export default {
         }
         .res {
             width: 100%;
-            height: 0.66rem;
-            line-height: 0.66rem;
+            height: 0.73rem;
+            line-height: 0.73rem;
             text-align: center;
             color: #fff;
             font-size: 16px;
