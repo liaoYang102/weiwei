@@ -8,15 +8,21 @@ import Mint from 'mint-ui'
 import Vuex from 'vuex'
 import echatrs from 'echarts'
 import axios from 'axios'
-import './assets/icons_font/iconfont.css';
+import './assets/icons_font/iconfont.css'
 import 'mint-ui/lib/style.css'
+import { Group, DatetimeRange } from 'vux'
+import vuexI18n from 'vuex-i18n'
 
 Vue.use(Vuex)
 Vue.use(Mint)
+Vue.component('group', Group)
+Vue.component('datetime-range', DatetimeRange)
+
+Vue.use(vuexI18n)
 
 Vue.config.productionTip = false
 
-const whiteList = ['/login', '/index', '/register'];// 不重定向白名单
+const whiteList = ['/login', '/index', '/register','/'];// 不重定向白名单
 router.beforeEach((to, from, next) => {
 
     if (store.getters.userstate) { // 
@@ -44,8 +50,6 @@ router.beforeEach((to, from, next) => {
         }
     }   
 });
-
-
 
 /* eslint-disable no-new */
 new Vue({
