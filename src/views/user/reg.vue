@@ -146,6 +146,10 @@
 				color: #9cb7f2;
 				text-align: center;
 				margin-top: .3rem;
+				span {
+					color: #f6573d;
+					font-size: 0.24rem;
+				}
 			}
 		}
 	}
