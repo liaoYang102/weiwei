@@ -10,6 +10,7 @@ import echatrs from 'echarts'
 import axios from 'axios'
 import './assets/icons_font/iconfont.css'
 import 'mint-ui/lib/style.css'
+import './style/global.css'
 import './config/wy_rem'
 import { Group, DatetimeRange, Cell } from 'vux'
 
