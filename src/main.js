@@ -10,13 +10,9 @@ import echatrs from 'echarts'
 import axios from 'axios'
 import './assets/icons_font/iconfont.css'
 import 'mint-ui/lib/style.css'
-<<<<<<< HEAD
 import './style/global.css'
 import './config/wy_rem'
-import { Group, DatetimeRange, Cell } from 'vux'
-=======
 import { Group, DatetimeRange, Cell, XInput  } from 'vux'
->>>>>>> aa0dc3c64f403bdb9ed21bc9959dc3c7332f9466
 
 Vue.use(Vuex)
 Vue.use(Mint)
