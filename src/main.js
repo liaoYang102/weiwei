@@ -10,7 +10,7 @@ import echatrs from 'echarts'
 import axios from 'axios'
 import './assets/icons_font/iconfont.css'
 import 'mint-ui/lib/style.css'
-import './config/wy_rem.js'
+import './config/wy_rem'
 import { Group, DatetimeRange, Cell } from 'vux'
 
 Vue.use(Vuex)
@@ -21,11 +21,11 @@ Vue.component('cell', Cell)
 
 Vue.config.productionTip = false
 
-const whiteList = ['/login', '/index', '/register','/'];// 不重定向白名单
+const whiteList = ['/user/login', '/index', '/user/reg','/','/member/index'];// 不重定向白名单
 router.beforeEach((to, from, next) => {
 
     if (store.getters.userstate) { // 
-        if (to.path === '/login') {
+        if (to.path === '/user/login') {
           next();
         } 
         else {
@@ -45,7 +45,7 @@ router.beforeEach((to, from, next) => {
         if (whiteList.indexOf(to.path) !== -1) { // 在免登录白名单，直接进入
             next()
         } else {
-            next('/login'); // 否则全部重定向到登录页
+            next('/user/login'); // 否则全部重定向到登录页
         }
     }   
 });
