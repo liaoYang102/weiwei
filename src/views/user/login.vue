@@ -12,19 +12,24 @@
 
         <div class="content">
             <div class="inputwrap">
-                <group>
-                    <x-input title="必须输入2333" placeholder="输入手机号">
-                        <i class="iconfont icon-shouji"></i>
-                    </x-input>
-                    <x-input title="必须输入2333" placeholder="输入密码">
-                        <i class="iconfont icon-suo"></i>
-                        <span class="iconfont icon-yanjing"></span>
-                    </x-input>
-                </group>
+                <div class="input-row">
+                    <i class="iconfont icon-shouji"></i> 
+                    <input type="text" placeholder="输入手机号" id="phonum">
+                </div>
+                <div class="input-row">
+                    <i class="iconfont icon-suo"></i> 
+                    <input type="password" placeholder="输入密码" id="pass"> 
+                    <span class="iconfont icon-yanjing"></span>
+                </div>
                 <p class="fogotpass">
                     <a href="./index.php?i=7&amp;c=entry&amp;m=mx_shop&amp;do=mobile&amp;r=user.change" style="color: rgb(106, 150, 243);">忘记密码</a>
                 </p>
             </div>
+
+            <div class="login">登录</div>
+            
+            <div class="res">新用户注册</div>
+            
         </div>
 
         
@@ -52,6 +57,9 @@ export default {
         .logo {
             width: 1.54rem;
             margin: 0.48rem auto 0;
+            img{
+                width: 100%;
+            }
         }
         .tit {
             font-size: 0.3rem;
@@ -62,26 +70,43 @@ export default {
         .xian {
             width: 100%;
             height: 2.4rem;
+            img{
+                width: 100%;
+                height: 100%;
+            }
         }
+        
     }
     .content {
         width: 76%;
         margin: .5rem auto;
         .inputwrap {
             position: relative;
-             i {
-                position: absolute;
-                top: 0.16rem;
-                left: 12px;
-                color: #497be5;
-                font-size: 0.35rem;
-            }
-            .icon-yanjing {
-                position: absolute;
-                top: 0.16rem;
-                right: 12px;
-                color: #497be5;
-                font-size: 0.4rem;
+            .input-row {
+                position: relative;
+                margin-bottom: .1rem;
+                i {
+                    position: absolute;
+                    top: 0.16rem;
+                    left: 12px;
+                    color: #497be5;
+                    font-size: 0.35rem;
+                }
+                .icon-yanjing {
+                    position: absolute;
+                    top: 0.16rem;
+                    right: 12px;
+                    color: #497be5;
+                    font-size: 0.4rem;
+                }
+                input {
+                    border: 1px solid #82b1ff;
+                    border-radius: 20px;
+                    padding: 12px 10px 10px 0.8rem;
+                    color: #9cb7f2;
+                    font-size: 0.28rem;
+                    height: 0.66rem;
+                }
             }
             .fogotpass {
                 color: #6a96f3;
@@ -90,6 +115,32 @@ export default {
                 position: relative;
                 top: -0.2rem;
             }
+        }
+        .login {
+            width: 100%;
+            /*background: #5686ed;*/
+            background-image:linear-gradient(30deg, #246bfe, #5b90fe);
+            height: 0.66rem;
+            line-height: 0.66rem;
+            text-align: center;
+            box-shadow: 2px 3px 5px #c3d5fd;
+            color: #fff;
+            font-size: 16px;
+            border-radius: 20px;
+            margin-top: .2rem;
+        }
+        .res {
+            width: 100%;
+            height: 0.66rem;
+            line-height: 0.66rem;
+            text-align: center;
+            color: #fff;
+            font-size: 16px;
+            border-radius: 20px;
+            margin-top: .2rem;
+            border: 1px solid #82b1ff;
+            color: #5686ed;
+            margin-top: .5rem;
         }
     }
 </style>
