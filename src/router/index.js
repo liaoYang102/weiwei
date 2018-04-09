@@ -4,6 +4,7 @@ import index from '@/components/index'
 import navBar from '@/components/navBar'
 import login from '@/views/user/login'
 import reg from '@/views/user/reg'
+import member from '@/views/member/index'
 
 Vue.use(Router)
 
@@ -21,8 +22,13 @@ export default new Router({
     },
     {
       path: '/user/reg',
-      name: 'login',
+      name: 'reg',
       component: reg
+    },
+    {
+      path: '/member/index'
+      name: 'member',
+      component: member
     }
   ]
 })
