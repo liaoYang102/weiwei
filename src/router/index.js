@@ -26,7 +26,7 @@ export default new Router({
       component: reg
     },
     {
-      path: '/member/index'
+      path: '/member/index',
       name: 'member',
       component: member
     }
