@@ -22,7 +22,7 @@ export default new Router({
     {
       path: '/user/reg',
       name: 'login',
-      component; reg
+      component: reg
     }
   ]
 })
