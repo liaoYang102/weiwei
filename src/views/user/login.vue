@@ -1,24 +1,11 @@
 <template>
     <div>
-<<<<<<< HEAD
         <Top :title="title"></Top>
-=======
-        <div class="header">
-            <div class="logo">
-              <img src="../../assets/images/user/logo.png" alt="">
-            </div> 
-            <p class="tit">用户登录</p> 
-            <div class="xian">
-                <img src="../../assets/images/user/xian.png" alt="">
-            </div>
-        </div>
->>>>>>> 121d6684355a62619fd5a15b613059df18b6cad8
 
         <div class="content">
             <div class="inputwrap">
                 <div class="input-row">
                     <i class="iconfont icon-shouji"></i> 
-<<<<<<< HEAD
                     <input type="text" placeholder="输入手机号" v-model="user.phone">
                 </div>
                 <div class="input-row">
@@ -36,23 +23,6 @@
             <div class="res">
                 <router-link to="/user/reg">新用户注册</router-link>
             </div>
-=======
-                    <input type="text" placeholder="输入手机号" id="phonum">
-                </div>
-                <div class="input-row">
-                    <i class="iconfont icon-suo"></i> 
-                    <input type="password" placeholder="输入密码" id="pass"> 
-                    <span class="iconfont icon-yanjing"></span>
-                </div>
-                <p class="fogotpass">
-                    <a href="./index.php?i=7&amp;c=entry&amp;m=mx_shop&amp;do=mobile&amp;r=user.change" style="color: rgb(106, 150, 243);">忘记密码</a>
-                </p>
-            </div>
-
-            <div class="login">登录</div>
-            
-            <div class="res">新用户注册</div>
->>>>>>> 121d6684355a62619fd5a15b613059df18b6cad8
             
         </div>
 
@@ -61,7 +31,6 @@
 </template>
 
 <script>
-<<<<<<< HEAD
 import Top from '../../components/user_header'
 export default {
     data () {
@@ -83,51 +52,10 @@ export default {
             console.log("--", par) 	
         }
     }
-=======
-export default {
-  data () {
-    return {
-      
-    }
-  }
->>>>>>> 121d6684355a62619fd5a15b613059df18b6cad8
 }
 </script>
 
 <style lang="less" scoped>
-<<<<<<< HEAD
-=======
-    .header {
-        width: 100%;
-        height: 4.8rem;
-        color: #f00;
-        background: url('../../assets/images/user/h_bg.png');
-        background-size: 100% 100%;
-        overflow: hidden;
-        .logo {
-            width: 1.75rem;
-            margin: 0.6rem auto 0;
-            img{
-                width: 100%;
-            }
-        }
-        .tit {
-            font-size: 0.4rem;
-            color: #fff;
-            text-align: center;
-            margin-top: .1rem;
-        }
-        .xian {
-            width: 100%;
-            height: 2.8rem;
-            img{
-                width: 100%;
-                height: 100%;
-            }
-        }
-        
-    }
->>>>>>> 121d6684355a62619fd5a15b613059df18b6cad8
     .content {
         width: 76%;
         margin: .5rem auto;
