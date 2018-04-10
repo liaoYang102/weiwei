@@ -26,6 +26,7 @@ Vue.component('cell-box', CellBox)
 Vue.component('x-header', XHeader)
 Vue.component('scroller', Scroller)
 Vue.component('load-more', LoadMore)
+Vue.component('popup', Popup)
 
 Vue.component('confirm', Confirm)
 
