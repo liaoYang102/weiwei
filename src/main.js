@@ -20,6 +20,8 @@ Vue.component('group', Group)
 Vue.component('datetime-range', DatetimeRange)
 Vue.component('cell', Cell)
 
+Vue.prototype.$http = axios  //定义axios组件用法  this.$http(opt).then(fn)
+
 Vue.config.productionTip = false
 
 const whiteList = ['/user/login', '/index', '/user/reg','/','/member/index'];// 不重定向白名单

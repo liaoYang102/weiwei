@@ -5,6 +5,7 @@ import navBar from '@/components/navBar'
 import login from '@/views/user/login'
 import reg from '@/views/user/reg'
 import member from '@/views/member/index'
+import sorder from '@/views/sorder/index'
 
 Vue.use(Router)
 
@@ -29,6 +30,10 @@ export default new Router({
       path: '/member/index',
       name: 'member',
       component: member
+    },{
+      path: '/sorder/index',
+      name:'sorder',
+      component: sorder
     }
   ]
 })
