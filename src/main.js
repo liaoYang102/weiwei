@@ -12,7 +12,7 @@ import './assets/icons_font/iconfont.css'
 import 'mint-ui/lib/style.css'
 import './style/global.css'
 import './config/wy_rem'
-import { Group, DatetimeRange, Cell, Tab, TabItem, CellBox, XHeader, Scroller, LoadMore } from 'vux'
+import { Group, DatetimeRange, Cell, Tab, TabItem, CellBox, XHeader, Scroller, LoadMore, Popup } from 'vux'
 
 Vue.use(Vuex)
 Vue.use(Mint)
@@ -25,6 +25,7 @@ Vue.component('cell-box', CellBox)
 Vue.component('x-header', XHeader)
 Vue.component('scroller', Scroller)
 Vue.component('load-more', LoadMore)
+Vue.component('popup', Popup)
 
 Vue.prototype.$http = axios  //定义axios组件用法  this.$http(opt).then(fn)
 

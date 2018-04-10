@@ -1,7 +1,7 @@
 <template>
 	<div class="couponTab">
 		<tab class="tab" :line-width="2" active-color="#397df8">
-			<tab-item v-for="(item,index) in couponType" :selected="typeActive == index" @on-item-click="onItemClick(index)">{{item}}</tab-item>
+			<!-- <tab-item v-for="(item,index) in couponType" :selected="typeActive == index" @on-item-click="onItemClick(index)">{{item}}</tab-item> -->
 		</tab>
 		<i id="menu" class="iconfont"></i>
 	</div>
