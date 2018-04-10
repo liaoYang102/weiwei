@@ -4,7 +4,7 @@
         <div class="inputwrap">
             <div class="tel">
                 <span>你当前手机号:</span> 
-                <span class="phonum">177xxxx8995</span>
+                <span class="phonum">17775608995</span>
             </div> 
             <div class="code">
                 <div class="input-row">
@@ -77,6 +77,18 @@ export default {
                     height: 0.6rem;
                     width: 2.6rem;
                 }
+                input::-webkit-input-placeholder {
+                    color: #97bcf2 !important; // WebKit browsers 
+                }
+                input:-moz-placeholder {
+                    color: #97bcf2 !important; // Mozilla Firefox 4 to 18 
+                }
+                input::-moz-placeholder {
+                    color: #97bcf2 !important; //Mozilla Firefox 19+ /
+                }
+                input:-ms-input-placeholder {
+                    color: #97bcf2 !important; //Internet Explorer 10+ */
+                }
             }
             button {
                 margin-left: 0.3rem;
@@ -96,13 +108,14 @@ export default {
             button {
                 letter-spacing: 2px;
                 box-shadow: 4px 4px 14px #c4d2ee;
-                padding: 8px 12px!important;
-                border-color: #276cff;
+                padding: 9px 12px!important;
+                border: none;
                 background-image: linear-gradient(30deg, #246bfe, #5b90fe);
                 border-radius: 0.5rem!important;
                 width: 5.75rem;
                 margin-top: 2.15rem;
                 color: #fff;
+                font-size: 0.3rem;
             }
         }
 

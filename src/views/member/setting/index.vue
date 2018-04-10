@@ -3,27 +3,33 @@
         <settingHeader :title="title"></settingHeader>
         <div class="top">
             <group>
-                <cell-box is-link>切换账号</cell-box>
-                <cell-box is-link>安全中心</cell-box>
-                <cell-box is-link>消息设置</cell-box>
-                <cell-box is-link>更换手机号</cell-box>
+                <cell title="切换账号" is-link @click.native="ShowConfirm"></cell>
+                <cell title="安全中心" is-link></cell>
+                <cell title="消息设置" is-link></cell>
+                <cell title="更换手机号" is-link link="/member/setting/oldphone"></cell>
             </group>
         </div>
         
-        
         <group>
-            <cell-box is-link>重置登录密码</cell-box>
+            <cell title="重置登录密码" is-link link="/user/change"></cell>
         </group>
         
-
         <div class="bottom">
             <group>
-                <cell-box is-link>关于</cell-box>
+                <cell title="关于" is-link></cell>
             </group>
         </div>
 
         <div class="btn">
-            <div class="exit">退出登录</div>
+            <div class="exit" @click="exitlogin">退出登录</div>
+        </div>
+
+        <!-- 确认框 -->
+        <div v-transfer-dom>
+            <confirm v-model="show" @on-cancel="onCancel" @on-confirm="onConfirm" @on-show="onShow" @on-hide="onHide">
+                <img src="../../../assets/images/member/warning.png" alt="" width="20%">
+                <p style="text-align:center; color:#256fff;font-size:0.35rem; margin-top:0.2rem">{{ message }}</p>
+            </confirm>
         </div>
     </div>
 </template>
@@ -34,16 +40,49 @@ import settingHeader from '../../../components/setting_header'
 export default {
     data(){
         return{
-            title: '设置'
+            title: '设置',
+            show: false,
+            msgTitle: '提示',
+            message: '是否切换账号？'
         }
     },
     components: {
         settingHeader
     },
+    methods: {
+        onCancel () {
+            console.log('on cancel')
+        },
+        onConfirm (msg) {
+            console.log('on confirm')
+            let path = '/user/login'
+            this.$router.push({path: path})
+            if (msg) {
+                alert(msg)
+            }
+        },
+        onHide () {
+            console.log('on hide')
+        },
+        onShow () {
+            console.log('on show')
+        },
+        ShowConfirm() {
+            this.show = true
+        },
+        exitlogin() {
+            let path = '/'
+            this.$router.push({path: path})
+        }
+
+    }
 }
 </script>
 
 <style lang="less" scoped>
+.weui-dialog__bd:first-child,.weui-dialog__bd:first-child,.weui-dialog__bd{
+    padding: 0
+}
 .content {
     overflow: hidden;
     background: #efeff4;
