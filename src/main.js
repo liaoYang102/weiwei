@@ -23,7 +23,7 @@ Vue.component('x-input', XInput)
 
 Vue.config.productionTip = false
 
-const whiteList = ['/user/login', '/index', '/user/reg','/','/member/index'];// 不重定向白名单
+const whiteList = ['/user/login', '/index', '/user/reg','/user/change','/user/coupon','/','/member/index'];// 不重定向白名单
 router.beforeEach((to, from, next) => {
 
     if (store.getters.userstate) { // 
