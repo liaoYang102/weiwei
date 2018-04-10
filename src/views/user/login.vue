@@ -32,7 +32,6 @@
 
 <script>
 import Top from '../../components/user_header'
-import api from '../../global/api'
 export default {
     data () {
         return {

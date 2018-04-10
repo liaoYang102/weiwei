@@ -12,7 +12,7 @@ import './assets/icons_font/iconfont.css'
 import 'mint-ui/lib/style.css'
 import './style/global.css'
 import './config/wy_rem'
-import { Group, DatetimeRange, Cell, XInput  } from 'vux'
+import { Group, DatetimeRange, Cell, XInput, Tab, TabItem } from 'vux'
 
 Vue.use(Vuex)
 Vue.use(Mint)
@@ -20,11 +20,14 @@ Vue.component('group', Group)
 Vue.component('datetime-range', DatetimeRange)
 Vue.component('cell', Cell)
 Vue.component('x-input', XInput)
+Vue.component('tab', Tab)
+Vue.component('tab-item', TabItem)
 
 Vue.prototype.$http = axios  //定义axios组件用法  this.$http(opt).then(fn)
 
 Vue.config.productionTip = false
 
+/*
 const whiteList = ['/user/login', '/index', '/user/reg','/','/member/index'];// 不重定向白名单
 router.beforeEach((to, from, next) => {
 
@@ -53,6 +56,8 @@ router.beforeEach((to, from, next) => {
         }
     }   
 });
+
+*/
 
 /* eslint-disable no-new */
 new Vue({
