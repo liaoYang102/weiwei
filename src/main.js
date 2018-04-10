@@ -30,10 +30,8 @@ Vue.prototype.$http = axios  //定义axios组件用法  this.$http(opt).then(fn)
 
 Vue.config.productionTip = false
 
-const whiteList = ['/user/login', '/index', '/user/reg','/','/member/index'];// 不重定向白名单
+//const whiteList = ['/user/login', '/index', '/user/reg','/','/member/index'];// 不重定向白名单
 // router.beforeEach((to, from, next) => {
-
-
 //     if (store.getters.userstate) { // 
 //         if (to.path === '/user/login') {
 //           next();
@@ -42,10 +40,8 @@ const whiteList = ['/user/login', '/index', '/user/reg','/','/member/index'];// 
 //             //避免F5刷新时，vex数据全无，所以需要重新获取一次数据
 //             if(!store.getters.username){ //判断是否有用户信息 把token换成userInfo
 //                 console.log('未获取到用户',store.getters.username) 
-                
 //                 store.dispatch('setUser').then(res => { 
 //                     next(); 
-                    
 //                 }).catch(err => {
 //                     console.log(err);
 //                 });
