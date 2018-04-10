@@ -26,6 +26,7 @@ i,em{font-style:normal;}
 .fr { float: right; }
 .mb10{margin-bottom: 10px;}
 .mt10{margin-top: 10px;}
+.ellipsis{    white-space: nowrap; overflow: hidden;text-overflow: ellipsis;}
 /*placeholder css*/
 ::-moz-placeholder{ font-family: "Microsoft YaHei"} 
 ::-webkit-input-placeholder{ font-family: "Microsoft YaHei"} 
