@@ -1,34 +1,28 @@
 <template>
     <div>
-        <div class="header">
-            <div class="logo">
-              <img src="../../assets/images/user/logo.png" alt="">
-            </div> 
-            <p class="tit">用户登录</p> 
-            <div class="xian">
-                <img src="../../assets/images/user/xian.png" alt="">
-            </div>
-        </div>
+        <Top :title="title"></Top>
 
         <div class="content">
             <div class="inputwrap">
                 <div class="input-row">
                     <i class="iconfont icon-shouji"></i> 
-                    <input type="text" placeholder="输入手机号" id="phonum">
+                    <input type="text" placeholder="输入手机号" v-model="user.phone">
                 </div>
                 <div class="input-row">
                     <i class="iconfont icon-suo"></i> 
-                    <input type="password" placeholder="输入密码" id="pass"> 
+                    <input type="password" placeholder="输入密码" v-model="user.password"> 
                     <span class="iconfont icon-yanjing"></span>
                 </div>
                 <p class="fogotpass">
-                    <a href="./index.php?i=7&amp;c=entry&amp;m=mx_shop&amp;do=mobile&amp;r=user.change" style="color: rgb(106, 150, 243);">忘记密码</a>
+                    <router-link to="/user/change">忘记密码</router-link> 
                 </p>
             </div>
 
-            <div class="login">登录</div>
+            <div class="login" @click="login();">登录</div>
             
-            <div class="res">新用户注册</div>
+            <div class="res">
+                <router-link to="/user/reg">新用户注册</router-link>
+            </div>
             
         </div>
 
@@ -37,46 +31,31 @@
 </template>
 
 <script>
+import Top from '../../components/user_header'
 export default {
-  data () {
-    return {
-      
+    data () {
+        return {
+            title: '用户登录',
+            user: {
+                phone: '',
+                password: null
+            }
+        }
+    },
+    components: {
+        Top
+    },
+    methods: {
+        login: function() {
+            // 登录校验
+			let  par = JSON.parse(JSON.stringify(this.user)) ;
+            console.log("--", par) 	
+        }
     }
-  }
 }
 </script>
 
 <style lang="less" scoped>
-    .header {
-        width: 100%;
-        height: 4.8rem;
-        color: #f00;
-        background: url('../../assets/images/user/h_bg.png');
-        background-size: 100% 100%;
-        overflow: hidden;
-        .logo {
-            width: 1.75rem;
-            margin: 0.6rem auto 0;
-            img{
-                width: 100%;
-            }
-        }
-        .tit {
-            font-size: 0.4rem;
-            color: #fff;
-            text-align: center;
-            margin-top: .1rem;
-        }
-        .xian {
-            width: 100%;
-            height: 2.8rem;
-            img{
-                width: 100%;
-                height: 100%;
-            }
-        }
-        
-    }
     .content {
         width: 76%;
         margin: .5rem auto;
