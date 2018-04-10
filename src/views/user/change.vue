@@ -2,12 +2,9 @@
 	<div>
 		<div class="header">
 			<div class="logo">
-				<img src="../../assets/images/user/logo.png" alt="">
+				<img src="../../assets/images/user/change.png" alt="">
 			</div>
-			<p class="tit">用户注册</p>
-			<div class="xian">
-				<img src="../../assets/images/user/xian.png" alt="">
-			</div>
+			<p class="tit">重置密码</p>
 		</div>
 
 		<div class="content">
@@ -30,11 +27,8 @@
 					<input class="inputItem" type="text" placeholder="确认密码">
 				</div>
 			</div>
-
-			<div class="reg-btn">立即注册</div>
-			<p class="text">已有账号？
-				<a href="./index.php?i=7&amp;c=entry&amp;m=mx_shop&amp;do=mobile&amp;r=user.login"><span>立即登录</span></a>
-			</p>
+			<p class="sm">登录密码由6-20位数字和字母组成</p>
+			<div class="reg-btn">提交</div>
 		</div>
 
 	</div>
@@ -46,8 +40,6 @@
 			return {
 
 			}
-		},
-		created(){
 		}
 	}
 </script>
@@ -57,7 +49,6 @@
 		width: 100%;
 		height: 4.8rem;
 		color: #f00;
-		background: url('../../assets/images/user/h_bg.png');
 		background-size: 100% 100%;
 		overflow: hidden;
 		.logo {
@@ -69,7 +60,7 @@
 		}
 		.tit {
 			font-size: 0.4rem;
-			color: #fff;
+			color: rgb(135, 186, 255);
 			text-align: center;
 			margin-top: .1rem;
 		}
@@ -86,6 +77,12 @@
 	.content {
 		width: 76%;
 		margin: .5rem auto;
+		.sm {
+			color: rgb(119, 158, 248);
+			margin-top: -10px;
+			margin-bottom: 0.3rem;
+			font-size: 14px;
+		}
 		.inputwrap {
 			position: relative;
 			.input-row {

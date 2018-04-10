@@ -30,9 +30,9 @@ Vue.prototype.$http = axios  //定义axios组件用法  this.$http(opt).then(fn)
 
 Vue.config.productionTip = false
 
-/*
 const whiteList = ['/user/login', '/index', '/user/reg','/','/member/index'];// 不重定向白名单
 // router.beforeEach((to, from, next) => {
+
 
 //     if (store.getters.userstate) { // 
 //         if (to.path === '/user/login') {
@@ -60,7 +60,6 @@ const whiteList = ['/user/login', '/index', '/user/reg','/','/member/index'];// 
 //     }   
 // });
 
-*/
 
 /* eslint-disable no-new */
 new Vue({
