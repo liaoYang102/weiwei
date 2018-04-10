@@ -46,6 +46,18 @@ export default {
     .inputwrap {
         position: relative;
         padding-top: 0.98rem;
+        input::-webkit-input-placeholder {
+            color: #97bcf2 !important; // WebKit browsers 
+        }
+        input:-moz-placeholder {
+            color: #97bcf2 !important; // Mozilla Firefox 4 to 18 
+        }
+        input::-moz-placeholder {
+            color: #97bcf2 !important; //Mozilla Firefox 19+ /
+        }
+        input:-ms-input-placeholder {
+            color: #97bcf2 !important; //Internet Explorer 10+ */
+        }
         .tel {
             margin-left: 0.9rem;
             margin-bottom: 0.32rem;
@@ -116,13 +128,14 @@ export default {
             button {
                 letter-spacing: 2px;
                 box-shadow: 4px 4px 14px #c4d2ee;
-                padding: 8px 12px!important;
-                border-color: #276cff;
+                padding: 9px 12px!important;
+                border: none;
                 background-image: linear-gradient(30deg, #246bfe, #5b90fe);
                 border-radius: 0.5rem!important;
                 width: 5.75rem;
                 margin-top: 2.15rem;
                 color: #fff;
+                font-size: 0.3rem;
             }
         }
 

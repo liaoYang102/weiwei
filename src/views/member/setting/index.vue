@@ -26,8 +26,9 @@
 
         <!-- 确认框 -->
         <div v-transfer-dom>
-            <confirm v-model="show" :title="msgTitle" @on-cancel="onCancel" @on-confirm="onConfirm" @on-show="onShow" @on-hide="onHide">
-                <p style="text-align:center;">{{ message }}</p>
+            <confirm v-model="show" @on-cancel="onCancel" @on-confirm="onConfirm" @on-show="onShow" @on-hide="onHide">
+                <img src="../../../assets/images/member/warning.png" alt="" width="20%">
+                <p style="text-align:center; color:#256fff;font-size:0.35rem; margin-top:0.2rem">{{ message }}</p>
             </confirm>
         </div>
     </div>
@@ -79,6 +80,9 @@ export default {
 </script>
 
 <style lang="less" scoped>
+.weui-dialog__bd:first-child,.weui-dialog__bd:first-child,.weui-dialog__bd{
+    padding: 0
+}
 .content {
     overflow: hidden;
     background: #efeff4;
