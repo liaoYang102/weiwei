@@ -1,6 +1,6 @@
 <template>
     <div>
-        <x-header :left-options="{backText: ''}" style="background:#fff; color: #000" class="header">{{ title }}</x-header>
+        <x-header :left-options="{backText: ''}" style="background:#fff;" class="header">{{ title }}</x-header>
     </div>
 </template>
 
@@ -13,7 +13,7 @@ export default {
 </script>
 <style lang='less'>
 	#app .vux-header .vux-header-left .left-arrow:before{
-	    border: 1px solid black;
+	    border: 1px solid #222;
 	    border-width: 1px 0 0 1px;
     }
     #app .vux-header .vux-header-title{

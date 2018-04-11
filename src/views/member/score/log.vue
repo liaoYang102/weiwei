@@ -16,7 +16,7 @@
 
         <scroller lock-x  height='-160' @on-scroll-bottom="onScrollBottom" ref="scrollerBottom" style="background-color:#fff">
 	      <div class="box">
-	        <div class="log-box" v-for="(item, index) in logList">
+	        <div class="log-box" v-for="(item, index) in logList" :key="index">
                 <div class="log-wrap">
                     <p class="contentOne">
                         <span>{{ item.content}}</span>
@@ -45,9 +45,12 @@ export default {
         return {
             title: '积分记录',
             logList: [
-                { content: '年终积分清零', score: '-720', date: '2018-01-01 00:00:00' },
-                { content: '购物赠送', score: '+100', date: '2017-12-07 12:02:45' },
-                { content: '购买商城商品', score: '-100', date: '2017-12-07 12:02:45' }
+                { content: '年终积分清零', score: '-720', date: '2018-01-01 00:00:00'},
+                { content: '购物赠送', score: '+100', date: '2017-12-07 12:02:45'},
+                { content: '购买商城商品', score: '-100', date: '2017-12-07 12:02:45'},
+                { content: '年终积分清零', score: '-720', date: '2018-01-01 00:00:00'},
+                { content: '购物赠送', score: '+100', date: '2017-12-07 12:02:45'},
+                { content: '购买商城商品', score: '-100', date: '2017-12-07 12:02:45'}
             ]
         }
     },
@@ -149,6 +152,8 @@ export default {
         
     }
 }
-
+.vux-loadmore{
+    display: none;
+}
 </style>
 
