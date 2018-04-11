@@ -17,7 +17,7 @@ export default {
 	    border-width: 1px 0 0 1px;
     }
     #app .vux-header .vux-header-title{
-        color: black;
+        color: #333;
     }
 </style>
 
