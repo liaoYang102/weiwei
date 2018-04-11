@@ -6,7 +6,7 @@
 	      <tab-item class='vux-center' @on-item-click="onItemClick">待付款</tab-item>
 	      <tab-item @on-item-click="onItemClick">进行中</tab-item>
 	      <tab-item @on-item-click="onItemClick">已完成</tab-item>
-	      <tab-item @on-item-click="onItemClick"><span class="iconfont icon-caidan" style="color: rgb(50, 119, 255);"></span></tab-item>
+	      <tab-item disabled><span @click='onMenuClick' class="iconfont icon-caidan" style="color: rgb(50, 119, 255);"></span></tab-item>
 	    </tab>
 	    <div v-transfer-dom>
 	      <popup v-model="show9" position="right">
@@ -14,7 +14,7 @@
 	        </div>
 	      </popup>
 	    </div>
-	    <scroller lock-x height="600px" @on-scroll-bottom="onScrollBottom" ref="scrollerBottom" :scroll-bottom-offst="600" style="background-color:#efeff4" v-if='test'>
+	    <scroller lock-x  @on-scroll-bottom="onScrollBottom" ref="scrollerBottom" style="background-color:#efeff4" v-if='test'>
 	      <div class="box2">
 	        <div class="shop-box">
 				<div class="orders_wrap">
@@ -75,7 +75,7 @@
 	  	return{
 	  		title: '我的订单',
 	  		test: true,
-	  		show9: true
+	  		show9: false
 	  	}
 	  },
 	  components: {
@@ -85,6 +85,13 @@
 	  	onItemClick (index) {
 	  		this.test = false;
 	        console.log('on item click:', index);
+	    },
+	    onMenuClick(){
+	    	this.show9 = true;
+	    	var html = document.getElementsByTagName("html")[0];
+	    	var body = document.getElementsByTagName('body')[0];
+	    	html.style.overflow = 'hidden';
+	    	body.style.overflow = 'hidden';
 	    },
 	    onScrollBottom(){
 	    	var load = document.getElementById("loading");
@@ -107,6 +114,9 @@
 	}
 </script>
 <style lang='less' scoped>
+	html,body{
+		height: 100%;
+	}
 	.scrollable .vux-tab-item{
 		flex:inherit;
 	}
