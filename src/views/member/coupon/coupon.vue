@@ -40,7 +40,7 @@
 
 <script>
 	import { Tab, TabItem, Masker, Drawer } from 'vux'
-	import settingHeader from '../../components/setting_header'
+	import settingHeader from '../../../components/setting_header'
 	export default {
 		data() {
 			return {
@@ -115,7 +115,7 @@
 	.couponList {
 		margin-top: 55px;
 		.bgImgThree {
-			background: url(../../assets/images/user/rollBg4.png) no-repeat;
+			background: url(../../../assets/images/user/rollBg4.png) no-repeat;
 			background-size: 100% 100%;
 		}
 		.rollOne {
@@ -169,7 +169,7 @@
 					color: #82a6ee;
 				}
 				.btnImgThree {
-					background: url(../../assets/images/user/rollBtn4.png) no-repeat;
+					background: url(../../../assets/images/user/rollBtn4.png) no-repeat;
 					background-size: 100% 100%;
 					height: 0.6rem;
 					span {
