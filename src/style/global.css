@@ -1,8 +1,4 @@
 /*reset*/
-html,body{
-	height:100%;
-	overflow: visible;
-}
 html{max-width: 640px;margin:0 auto;}
 article,aside,dialog,footer,header,section,footer,nav,figure,menu{display:block}
 body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, code, form, fieldset, figure, section, legend, textarea, p, blockquote, th, td, input, select, textarea, button { margin: 0; padding: 0 }

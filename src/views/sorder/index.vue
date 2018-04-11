@@ -14,7 +14,7 @@
 	        </div>
 	      </popup>
 	    </div>
-	    <scroller lock-x  @on-scroll-bottom="onScrollBottom" ref="scrollerBottom" style="background-color:#efeff4" v-if='test'>
+	    <scroller lock-x  height='-100' @on-scroll-bottom="onScrollBottom" ref="scrollerBottom" style="background-color:#efeff4" v-if='test'>
 	      <div class="box2">
 	        <div class="shop-box">
 				<div class="orders_wrap">
@@ -88,10 +88,6 @@
 	    },
 	    onMenuClick(){
 	    	this.show9 = true;
-	    	var html = document.getElementsByTagName("html")[0];
-	    	var body = document.getElementsByTagName('body')[0];
-	    	html.style.overflow = 'hidden';
-	    	body.style.overflow = 'hidden';
 	    },
 	    onScrollBottom(){
 	    	var load = document.getElementById("loading");
