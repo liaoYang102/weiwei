@@ -12,7 +12,7 @@ import './assets/icons_font/iconfont.css'
 import 'mint-ui/lib/style.css'
 import './style/global.css'
 import './config/wy_rem'
-import { Group, DatetimeRange, Cell, Tab, TabItem, CellBox, XHeader, Scroller, LoadMore,TransferDom, Confirm } from 'vux'
+import { Group, DatetimeRange, Cell, Tab, TabItem, CellBox, XHeader, Scroller, LoadMore,TransferDom, Confirm, Popup } from 'vux'
 
 Vue.use(Vuex)
 Vue.use(Mint)
