@@ -6,12 +6,12 @@ import login from '@/views/user/login'
 import reg from '@/views/user/reg'
 import change from '@/views/user/change'
 import coupon from '@/views/user/coupon'
-import forget_pw from '@/views/user/forget_pw'
 import member from '@/views/member/index'
 import setting from '@/views/member/setting/index'
 import newphone from '@/views/member/setting/newphone'
 import oldphone from '@/views/member/setting/oldphone'
 import sorder from '@/views/sorder/index'
+import msg_setting from '@/views/member/message/setting'
 
 Vue.use(Router)
 
@@ -52,11 +52,6 @@ export default new Router({
       component: sorder
     },
     {
-      path: '/user/forget_pw',
-      name:'forget_pw',
-      component: forget_pw
-    },
-    {
       path: '/member/setting/index',
       name:'setting',
       component: setting
@@ -70,6 +65,11 @@ export default new Router({
       path: '/member/setting/oldphone',
       name:'oldphone',
       component: oldphone
+    },
+    {
+      path: '/member/message/setting',
+      name:'msg_setting',
+      component: msg_setting
     }
   ]
 })
