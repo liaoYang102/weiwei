@@ -92,11 +92,11 @@ export default {
         font-size: 0.3rem;
         color: #FFFFFF;
         letter-spacing: 0;
-        padding-top: 0.3rem;
+        padding-top: 0.2rem;
         img{
             position: absolute;
             width: 16%;
-            top: 0.35rem;
+            top: 0.25rem;
         }
         span{
             display: inline-block;
