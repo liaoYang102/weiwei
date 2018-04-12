@@ -16,6 +16,7 @@ import address_edit from '@/views/member/address/edit'
 import score from '@/views/member/score/index'
 import score_log from '@/views/member/score/log'
 import shop_product from '@/views/shop/product'
+import all_shop from '@/views/shop/all_shops'
 
 Vue.use(Router)
 
@@ -94,6 +95,11 @@ export default new Router({
       path: '/shop/product',
       name:'shop_product',
       component: shop_product
+    },
+    {
+      path: '/shop/all_shops',
+      name:'all_shops',
+      component: all_shops
     }
   ]
 })
