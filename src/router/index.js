@@ -16,7 +16,7 @@ import address_edit from '@/views/member/address/edit'
 import score from '@/views/member/score/index'
 import score_log from '@/views/member/score/log'
 import shop_product from '@/views/shop/product'
-import all_shop from '@/views/shop/all_shops'
+import all_shops from '@/views/shop/all_shops'
 
 Vue.use(Router)
 
