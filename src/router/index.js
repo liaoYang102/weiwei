@@ -23,6 +23,7 @@ Vue.use(Router)
 export default new Router({
   routes: [
     {
+      //登录页
       path: '/user/login',
       name: 'login',
       component: login
