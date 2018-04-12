@@ -80,7 +80,7 @@ export default {
 <style lang="less" scoped>
 .top{
     width: 100%;
-    height: 2.3rem;
+    height: 1.98rem;
     position: relative;
     background:#fff;
     background: -webkit-linear-gradient(left,  #5EC3FF, #106FE3); /* Safari 5.1 - 6.0 */
@@ -90,32 +90,32 @@ export default {
     .rules{
         position: relative;
         width: 2rem;
-        left: 72%;
+        left: 5.8rem;
         font-family: PingFangSC-Regular;
-        font-size: 0.3rem;
+        font-size: 0.24rem;
         color: #FFFFFF;
         letter-spacing: 0;
         padding-top: 0.2rem;
         img{
             position: absolute;
-            width: 16%;
-            top: 0.25rem;
+            width: 14%;
+            top: 0.23rem;
         }
         span{
             display: inline-block;
-            margin-left: 0.48rem;
+            margin-left: 0.35rem;
         }
     }
     .score{
         font-family: PingFangSC-Regular;
-        font-size: 0.3rem;
+        font-size: 0.24rem;
         color: #FFFFFF;
         letter-spacing: 0;
         text-align: center;
         margin-top: -0.2rem;
         .score-text{
             display: inline-block;
-            font-size: 0.62rem;
+            font-size: 0.74rem;
         }
         img{
             width: 5%;
@@ -124,30 +124,32 @@ export default {
 }
 .log-box{
     width: 100%;
-    height: 1.2rem;
+    height: 1.34rem;
     background: #ffffff;
     position: relative;
     .log-wrap{
-        margin-left:0.4rem;
+        margin-left:0.3rem;
         border-bottom: 1px solid #D8DFF0;
-        height: 1.2rem;
-        margin-top:0.2rem;
-        font-size: 0.35rem;
+        height: 1.32rem;
+        font-size: 0.32rem;
         .contentOne{
             position: relative;
+            top: 0.27rem;
             color: #1A2642;
             .right{
                 position: absolute;
                 right: 0.2rem;
+                font-size: 0.36rem;
             }
             .red{
                 color: #F23030;
             }
         }
         .contentTwo{
-            margin-top: 0.1rem;
-            font-size: 0.3rem;
+            margin-top: 0.3rem;
+            font-size: 0.28rem;
             color: #90A2C7;
+            line-height: 0.4rem;
         }
         
     }

@@ -16,7 +16,10 @@
 
         <swiper :list="demo03_list" auto style="width:100%;margin:0 auto;" height="180px" dots-class="custom-bottom" dots-position="center"></swiper>
     
-        
+        <div class="shopList">
+            <li></li>
+            <li></li>
+        </div>
     
     
     </div>
