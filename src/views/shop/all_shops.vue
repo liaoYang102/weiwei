@@ -10,9 +10,29 @@
             <tab-item @on-item-click="onItemClick">价格</tab-item>
             <tab-item @on-item-click="onItemClick">
                 筛选
-                
             </tab-item>
 	    </tab>
+
+        <div class="panel">
+            <li>
+                <div class="selected">
+                    <span>综合</span> 
+                    <img src="../../assets/images/shop/selected.png" alt="">
+                </div>
+            </li>
+            <li>
+                <div class="selected">
+                    <span>积分兑</span> 
+                    <img src="../../assets/images/shop/selected.png" alt="">
+                </div>
+            </li>
+            <li>
+                <div class="selected">
+                    <span>积分购</span> 
+                    <img src="../../assets/images/shop/selected.png" alt="">
+                </div>
+            </li>
+        </div>
 
         <swiper :list="demo03_list" auto style="width:100%;margin:0 auto;" height="2.2rem" dots-class="custom-bottom" dots-position="center"></swiper>
     
@@ -47,4 +67,25 @@ export default {
     }
 }
 </script>
+
+<style lang="less" scoped>
+.panel{
+    width: 100%;
+    height: 1.74rem;
+    background: #fff;
+    li{
+        list-style: none;
+        margin: 0.18rem 0.29rem 0.06rem 0.46rem;
+        font-size: 0.28rem;
+        .selected{
+           color: #336FFF;
+           img{
+               float: right;
+               width: 5%;
+           }
+        }
+    }
+}
+</style>
+
 
