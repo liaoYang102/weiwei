@@ -10,7 +10,15 @@ module.exports = {
     // Paths
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
-    proxyTable: {},
+    proxyTable: {
+        '/api': {  
+            target: 'http://www.cgc999.com/app/index.php?i=2&c=entry&m=mx_shop&do=app&r=',  
+            changeOrigin: true,  
+            pathRewrite: {  
+                '^/api': '/'
+            }  
+        }  
+    },
 
     // Various Dev Server settings
     host: 'localhost', // can be overwritten by process.env.HOST

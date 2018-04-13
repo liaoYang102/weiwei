@@ -12,6 +12,7 @@
   "dependencies": {
     "axios": "^0.18.0",
     "echarts": "^4.0.4",
+    "fastclick": "^1.0.6",
     "mint-ui": "^2.2.13",
     "vue": "^2.5.2",
     "vue-router": "^3.0.1",
