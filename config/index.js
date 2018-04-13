@@ -10,10 +10,18 @@ module.exports = {
     // Paths
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
-    proxyTable: {},
+    proxyTable: {
+        '/api': {  
+            target: 'http://www.cgc999.com/app/index.php?i=2&c=entry&m=mx_shop&do=app&r=',  
+            changeOrigin: true,  
+            pathRewrite: {  
+                '^/api': '/'
+            }  
+        }  
+    },
 
     // Various Dev Server settings
-    host: '192.168.3.98', // can be overwritten by process.env.HOST
+    host: 'localhost', // can be overwritten by process.env.HOST
     port: 8080, // can be overwritten by process.env.PORT, if port is in use, a free one will be determined
     autoOpenBrowser: false,
     errorOverlay: true,
