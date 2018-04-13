@@ -78,6 +78,17 @@
 	  		show9: false
 	  	}
 	  },
+	  created(){
+	  	this.$http({
+            method:'POST',
+            url:('data_center.cgc_report'),
+            emulateJSON:true
+        }).then(function (response) {
+		    console.log(response);
+		}).catch(function (response) {
+		    console.log(response);
+		});
+	  },
 	  components: {
 	        settingHeader
 	  },
