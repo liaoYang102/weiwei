@@ -2,7 +2,7 @@
     <div id="shops">
         <settingHeader :title="title"></settingHeader>
 
-        <tab line-width='0' style="border-top: 1px solid #E1E1E1;">
+        <tab :line-width='0' style="border-top: 1px solid #E1E1E1;">
 	        <tab-item selected @on-item-click="showPanel">
               {{ tabItem}} <img src="../../assets/images/shop/xiaActive.png" alt="" width="6%">
             </tab-item>
@@ -26,7 +26,7 @@
             </popup>
         </div>
 
-        <maskRight :value="value"></maskRight>
+        <maskRight ref='xioaqiang'></maskRight>
 
         <swiper :list="demoList" auto style="width:100%;margin:0 auto;" height="2.2rem" dots-class="custom-bottom" dots-position="center"></swiper>
     
@@ -67,8 +67,7 @@ export default {
             ],
             showMaskTop: false,
             sMaskRight: false,
-            act1: 0,
-            value: false
+            act1: 0
         }
     },
     mounted:function(){
@@ -78,28 +77,20 @@ export default {
         showPanel: function(){
             if(this.showMaskTop == false){
                 this.showMaskTop = true;
-                // let hidden = document.getElementById('app')
-                // hidden.setAttribute("style", "overflow: hidden;");
             }else {
                 this.showMaskTop = false
             }
-            
-            
         },
         select: function(obj,i){
             this.act1 = i;
             this.showMaskTop = false;
             this.tabItem = obj.title;
-            let hidden = document.getElementById('app')
-            hidden.setAttribute("style", "overflow: auto;");
-        },
-        confirmSelect: function(obj) {
-            
         },
         onMenuClick: function() {
-            this.showMaskTop = false;
-            this.value = true;
-            console.log('--', this.value)
+            this.$refs.xioaqiang.show1 = true;
+        },
+        onItemClick: function() {
+
         }
 
     }
