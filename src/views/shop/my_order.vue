@@ -13,10 +13,12 @@
 	        <div class="shop-box">
 				<div class="box-head">
 					<div class="fl">
-						<img src="" alt="">
+						<img src="" alt="" class='shop-logo'>
 						<span class="box-name">优衣库冒牌店</span>
 						<img src="../../assets/images/shop/turn_right.png" alt="">
 					</div>
+					<div class="fr">等待买家付款</div>
+					<div class="clear"></div>
 				</div>
 				<div class="box-detail">
 					<div class="shop-detail">
@@ -121,6 +123,25 @@
 	}
 	.box2{
 		background-color: #F5F6FA;
+		.box-head{
+			height: 0.8rem;
+			line-height: 0.8rem;
+			.fr{
+				font-size: 0.28rem;
+				color: #336FFF;
+				margin-right: 0.2rem;
+			}
+			.fl{
+				.shop-logo{
+					width: 0.36rem;
+					height: 0.36rem;
+				}
+				.box-name{
+					font-size: 0.3rem;
+					color: #1A2642;
+				}
+			}
+		}
 	}
 </style>
 <style lang="less">
