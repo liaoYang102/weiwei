@@ -90,6 +90,7 @@
 </script>
 
 <style lang="less" scoped>
+<<<<<<< HEAD
 	.vux-loadmore{
 		display: none;
 	}
@@ -153,3 +154,7 @@
 		font-size: 0.14rem!important;
 	}
 </style>
+=======
+	
+</style>
+>>>>>>> b9dbe2fad6e7dc1d14445f664539ef6e4af47da5
