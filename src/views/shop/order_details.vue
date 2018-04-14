@@ -29,6 +29,11 @@
 				    <cell-form-preview :list="list"></cell-form-preview>
 				    <cell-form-preview :list="list2"></cell-form-preview>
 			    </group>
+
+			    <div class="return">
+			    	<div class="return-red">返积分</div>
+			    	<span>返积分 <span>200</span>点</span>
+			    </div>
 			</ul>
 			
 			<ul class="recommended">
@@ -153,6 +158,15 @@ import recommended from './components/recommended'
 						color: #90A2C7;
 						margin-top: 0.21rem;
 					}
+				}
+			}
+			.return{
+				padding: 0.35rem 0;
+				padding-left: 0.21rem;
+				.return-red{
+					background-image: linear-gradient(269deg, #FF7A80 0%, #FF5365 100%);
+					border-radius: 0.02rem;
+
 				}
 			}
 		}
