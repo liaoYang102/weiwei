@@ -30,9 +30,9 @@
 				    <cell-form-preview :list="list2"></cell-form-preview>
 			    </group>
 
-			    <div class="return">
+			    <div class="return" v-if="value != 0">
 			    	<div class="return-red">返积分</div>
-			    	<span>返积分 <span>200</span>点</span>
+			    	<span>返积分<span class="score-blue">200</span>点</span>
 			    </div>
 			</ul>
 			
@@ -42,10 +42,33 @@
 			</ul>
 		</div>
 
-		<div class="footer">
-			<div class="comments">评价</div>
-			<div class="view">查看物流</div>
+
+		<!-- 买家已收货 无返积分-->
+		<div class="footer" v-if="value == 0">  
+			<div class="comments commen">评价</div>
+			<div class="view commen">查看物流</div>
+			<div class="view commen">申请售后</div>
 		</div>
+
+		<!-- 卖家已发货 有返积分-->
+		<div class="footer" v-else-if="value == 1">
+			<div class="canel commen">确认收货</div>
+			<div class="view commen">取消订单</div>
+		</div>
+
+		<!-- 买家已付款 有返积分-->
+		<div class="footer" v-else-if="value == 3">
+			<div class="view commen">取消发货</div>
+		</div>
+
+		<!-- 等待买家付款 有返积分-->
+		<div class="footer" v-else-if="value == 2">
+			<div class="canel commen">付款</div>
+			<div class="view commen">取消订单</div>
+		</div>
+
+		
+
 			
 	</div>
 </template>
@@ -68,7 +91,8 @@ import recommended from './components/recommended'
 					{ label: '创建时间', value:'10.00'},
 					{ label: '订单状态', value:'买家已收货'},
 					{ label: '完成时间', value:'2018-03-17 11:44:21'}
-				]
+				],
+				value: 1
 			}
 		},
 		components: {
@@ -163,10 +187,20 @@ import recommended from './components/recommended'
 			.return{
 				padding: 0.35rem 0;
 				padding-left: 0.21rem;
+				font-size: 0.28rem;
+				color: #90A2C7;
 				.return-red{
 					background-image: linear-gradient(269deg, #FF7A80 0%, #FF5365 100%);
+					width: 0.88rem;
 					border-radius: 0.02rem;
-
+					font-size: 0.24rem;
+					color: #FFFFFF;
+					text-align: center;
+					float: left;
+					margin-right: 0.1rem;
+				}
+				.score-blue{
+					color: #336FFF;
 				}
 			}
 		}
@@ -190,20 +224,26 @@ import recommended from './components/recommended'
 		font-size: 0.28rem;
 		color: #90A2C7;
 		padding: 0.22rem 0;
-		.view{
+		.commen{
 			float: right;
+			margin-right: 0.2rem;
+		}
+		.view{
 			border: 1px solid #90A2C7;
 			border-radius: 0.04rem;
 			padding: 0.08rem 0.19rem;
-			margin-right: 0.2rem;
 		}
 		.comments{
-			float: right;
-			margin-right: 0.2rem;
 			border: 1px solid #F23030;
 			border-radius: 0.04rem;
 			padding: 0.08rem 0.47rem;
 			color: #F23030;
+		}
+		.canel{
+			padding: 0.08rem 0.19rem;
+			border: 1px solid #336FFF;
+			border-radius: 0.04rem;
+			color: #336FFF;
 		}
 	}
 
