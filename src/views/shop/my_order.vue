@@ -13,30 +13,63 @@
 	        <div class="shop-box">
 				<div class="box-head">
 					<div class="fl">
-						<img src="" alt="" class='shop-logo'>
+						<img src="../../assets/images/shop/UNIQLO.png" alt="" class='shop-logo'>
 						<span class="box-name">优衣库冒牌店</span>
-						<img src="../../assets/images/shop/turn_right.png" alt="">
+						<img src="../../assets/images/shop/turn_right.png" alt="" class='turn-right'>
 					</div>
 					<div class="fr">等待买家付款</div>
 					<div class="clear"></div>
 				</div>
 				<div class="box-detail">
 					<div class="shop-detail">
-						<img src="../../assets/images/shop/order_detail1.png" alt="">
-						<div class="fl">
+						<img src="../../assets/images/shop/order_detail1.png" alt="" class='fl'>
+						<div class="fl shop-details">
 							<p class="shop-name">女装U宽腿牛仔裤(水洗产品)</p>
 							<p class="shop-size">颜色:蓝色；尺码:L/170修身</p>
 						</div>
+						<div class="clear"></div>
 					</div>
 					<div class="shop-total">
 						<p class="fr">
 							共 1 件 合计：<span class="shop-price">100积分+30元</span>
 						</p>
+						<div class="clear"></div>
 					</div>
 				</div>
 				<div class="box-bottom">
+					<div class="shop-btn btn-status1 fr">付款</div>
 					<div class="shop-btn fr">取消订单</div>
-					<div class="shop-btn fr">付款</div>
+				</div>
+	        </div>
+	        <div class="shop-box">
+				<div class="box-head">
+					<div class="fl">
+						<img src="../../assets/images/shop/UNIQLO.png" alt="" class='shop-logo'>
+						<span class="box-name">优衣库冒牌店</span>
+						<img src="../../assets/images/shop/turn_right.png" alt="" class='turn-right'>
+					</div>
+					<div class="fr">等待买家付款</div>
+					<div class="clear"></div>
+				</div>
+				<div class="box-detail">
+					<div class="shop-detail">
+						<img src="../../assets/images/shop/order_detail2.png" alt="" class='fl'>
+						<div class="fl shop-details">
+							<p class="shop-name">女装U宽腿牛仔裤(水洗产品)</p>
+							<p class="shop-size">颜色:蓝色；尺码:L/170修身</p>
+						</div>
+						<div class="clear"></div>
+					</div>
+					<div class="shop-total">
+						<p class="fr">
+							共 1 件 合计：<span class="shop-price">100积分+30元</span>
+						</p>
+						<div class="clear"></div>
+					</div>
+				</div>
+				<div class="box-bottom">
+					<div class="shop-btn btn-status1 fr">付款</div>
+					<div class="shop-btn fr">取消订单</div>
 				</div>
 	        </div>
 	        <load-more tip="loading" id='loading'></load-more>
@@ -90,7 +123,6 @@
 </script>
 
 <style lang="less" scoped>
-<<<<<<< HEAD
 	.vux-loadmore{
 		display: none;
 	}
@@ -125,8 +157,10 @@
 	.box2{
 		background-color: #F5F6FA;
 		.box-head{
+			margin-top: 0.25rem;
 			height: 0.8rem;
 			line-height: 0.8rem;
+			background-color: #Fff;
 			.fr{
 				font-size: 0.28rem;
 				color: #336FFF;
@@ -134,13 +168,80 @@
 			}
 			.fl{
 				.shop-logo{
+					margin-left: 0.32rem;
+					vertical-align: middle;
 					width: 0.36rem;
 					height: 0.36rem;
 				}
 				.box-name{
 					font-size: 0.3rem;
 					color: #1A2642;
+					margin-left: 0.15rem;
 				}
+				.turn-right{
+					width: 0.24rem;
+					height: 0.24rem;
+				}
+			}
+		}
+		.box-detail{
+			.shop-detail{
+				height: 1.7rem;
+				padding-right: 0.2rem;
+				img{
+					margin:0.05rem 0.2rem 0.05rem 6px;
+					width: 1.6rem;
+					height: 1.6rem;
+				}
+				.shop-details{
+					margin-top: 0.18rem;
+					.shop-name{
+						font-size: 0.28rem;
+						color: #1A2642;
+					}
+					.shop-size{
+						font-size: 0.24rem;
+						color: #90A2C7;
+					}
+				}
+			}
+			.shop-total{
+				height: 0.8rem;
+				line-height: 0.8rem;
+				padding-right: 0.32rem;
+				background-color: #fff;
+				.fr{
+					font-size: 0.24rem;
+					color: #1A2642;
+					.shop-price{
+						font-size: 0.28rem;
+						color: #000000;
+					}
+				}
+			}	
+		}
+		.box-bottom{
+			border-top: 1px solid #D8DFF0;
+			height: 0.8rem;
+			line-height: 1rem;
+			padding-right: 0.22rem;
+			background-color: #fff;
+			padding-top: 0.2rem;
+			.shop-btn{
+				display: inline-block;
+				width: 1.5rem;
+				height: 0.56rem;
+				line-height: 0.56rem;
+				text-align: center;
+				font-size: 0.28rem;
+				color: #90A2C7;
+				border: 1px solid #90A2C7;
+				border-radius: 4px;
+				margin-left:0.2rem;
+			}
+			.btn-status1{
+				color:#336FFF;
+				border: 1px solid #336FFF;
 			}
 		}
 	}
@@ -154,7 +255,5 @@
 		font-size: 0.14rem!important;
 	}
 </style>
-=======
 	
 </style>
->>>>>>> b9dbe2fad6e7dc1d14445f664539ef6e4af47da5
