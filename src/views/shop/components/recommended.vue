@@ -1,21 +1,26 @@
 <template>
 	<div class="ul-recommended">
-		<group v-for="(item, index) in goodslist">
-			<cell is-link>
-				<div class="ul-top">
-					<div class="ul-left"><img src="../../../assets/images/shop/product.png"></div>
-					<div class="ul-center">
-						<span>{{ item.name}}</span><br>
-						<span class="gray">{{ item.date}}</span><br>
-						<span class="money-red">￥{{ item.money}}</span>
-						<div class="score-num">+{{ item.score}}积分</div>
-					</div>
-					<div class="ul-right">
-						<span>了解详情</span>
-					</div>
-				</div>
-		    </cell>
-		</group>
+		<scroller lock-x height='-235' @on-scroll-bottom="onScrollBottom" ref="scrollerBottom" style="background-color:#F5F6FA" v-if='test'>
+			<div>
+				<group v-for="(item, index) in goodslist">
+					<cell is-link>
+						<div class="ul-top">
+							<div class="ul-left"><img src="../../../assets/images/shop/product.png"></div>
+							<div class="ul-center">
+								<span>{{ item.name}}</span><br>
+								<span class="gray">{{ item.date}}</span><br>
+								<span class="money-red">￥{{ item.money}}</span>
+								<div class="score-num">+{{ item.score}}积分</div>
+							</div>
+							<div class="ul-right">
+								<span>了解详情</span>
+							</div>
+						</div>
+				    </cell>
+				</group>
+				<load-more tip="loading" id='loading'></load-more>
+			</div>
+		</scroller>
 	</div>
 </template>
 
@@ -26,9 +31,31 @@
 				goodslist: [
 					{ name: '女装U宽腿牛仔裤(水洗产品)' ,date: '2018年02月27日', money: '3598', score: '266'},
 					{ name: '女装U宽腿牛仔裤(水洗产品)' ,date: '2018年02月27日', money: '3598', score: '266'},
+					{ name: '女装U宽腿牛仔裤(水洗产品)' ,date: '2018年02月27日', money: '3598', score: '266'},
+					{ name: '女装U宽腿牛仔裤(水洗产品)' ,date: '2018年02月27日', money: '3598', score: '266'},
 					{ name: '女装U宽腿牛仔裤(水洗产品)' ,date: '2018年02月27日', money: '3598', score: '266'}
-				]
+				],
+				test: true,
 			}
+		},
+		methods:{
+	        onScrollBottom(){
+		    	var load = document.getElementById("loading");
+		    	load.style.display = 'block'
+		    	if (this.onFetching) {
+			        // do nothing
+			      } else {
+			        this.onFetching = true
+			        setTimeout(() => {
+			        	load.style.display = 'none'
+			        	console.log(123);
+			          	this.$nextTick(() => {
+			            this.$refs.scrollerBottom.reset()
+			          })
+			          this.onFetching = false
+			        }, 2000)
+			      }
+		    },
 		}
 	}
 </script>

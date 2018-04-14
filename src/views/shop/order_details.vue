@@ -30,7 +30,7 @@
 				    <cell-form-preview :list="list2"></cell-form-preview>
 			    </group>
 
-			    <div class="return" v-if="value != 0">
+			    <div class="return" v-if="value != 0 && value != 4">
 			    	<div class="return-red">返积分</div>
 			    	<span>返积分<span class="score-blue">200</span>点</span>
 			    </div>
@@ -67,6 +67,11 @@
 			<div class="view commen">取消订单</div>
 		</div>
 
+		<!-- 交易关闭 未付款 无返积分 -->
+		<div class="footer" v-else-if="value == 4">
+			<div class="view commen">删除订单</div>
+		</div>
+
 		
 
 			
@@ -92,7 +97,7 @@ import recommended from './components/recommended'
 					{ label: '订单状态', value:'买家已收货'},
 					{ label: '完成时间', value:'2018-03-17 11:44:21'}
 				],
-				value: 1
+				value: 4
 			}
 		},
 		components: {
@@ -271,6 +276,9 @@ import recommended from './components/recommended'
 }
 .ul-content .weui-form-preview__value{
 	margin-right: 0.44rem;
+}
+.vux-loadmore{
+    display: none;
 }
 
 </style>
