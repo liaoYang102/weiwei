@@ -1,48 +1,43 @@
 <template>
     <div>
-        <scroller lock-x  height='-50' @on-scroll-bottom="onScrollBottom" ref="scrollerBottom" style="background-color:#efeff4" v-if='test'>
+        <scroller lock-x @on-scroll-bottom="onScrollBottom" ref="scrollerBottom" style="background-color:#F5F6FA" v-if='test'>
             <div class="shopList">
                 <div class="all-shop">
-                    <div v-if="status == 1"> 
-                        <li v-for="(item,index) in list"  v-if="item.status ==1">
-                            <div class="list score">
-                                <div class="score-exchange">积分兑换</div>
-                                <div class="score-box">
-                                    <img src="../../../assets/images/shop/shop1.png" alt="">
-                                    <div class="text-box">
-                                        <span>{{ item.name }}</span>
-                                        <div class="score-num">{{ item.score}}</div>
-                                        <span class="remaining">{{ item.remaining}}</span>
-                                    </div>
+                    
+                    <li v-for="(item,index) in scorelist">
+                        <div class="list" :class="{'score' : status == 0}">
+                            <div class="score-exchange" v-if="status == 0">积分兑换</div>
+                            <div class="score-box">
+                                <img src="../../../assets/images/shop/shop1.png" alt="">
+                                <div class="text-box">
+                                    <span>{{ item.name }}</span>
+                                    <div class="score-num">{{ item.score}}</div>
+                                    <span class="remaining">{{ item.remaining}}</span>
                                 </div>
                             </div>
-                        </li>
-                    </div>
+                        </div>
+                    </li>
                     
-                    <div v-else-if="status == 2">
-                        <li v-for="(item,index) in list" v-if="item.status ==2">
-                            <div class="list">
-                                <div class="score-box">
-                                    <img src="../../../assets/images/shop/shop1.png" alt="">
-                                    <div class="text-box">
-                                        <span>{{ item.name }}</span>
-                                        <div>
-                                            <span class="money-red">{{ item.presentprice}}</span>
-                                            <div class="score-num" style="display:inline-block;">+{{ item.score}}</div>
-                                        </div>
-                                        <span class="remaining">
-                                        <span class="delete">{{ item.orprice}}</span>
-                                        <div class="right">{{ item.pin}}</div> 
-                                        </span>
+                    <li v-for="(item,index) in moneylist">
+                        <div class="list">
+                            <div class="score-box">
+                                <img src="../../../assets/images/shop/shop1.png" alt="">
+                                <div class="text-box">
+                                    <span>{{ item.name }}</span>
+                                    <div>
+                                        <span class="money-red">{{ item.presentprice}}</span>
+                                        <div class="score-num" style="display:inline-block;">+{{ item.score}}</div>
                                     </div>
+                                    <span class="remaining">
+                                    <span class="delete">{{ item.orprice}}</span>
+                                    <div class="right">{{ item.pin}}</div> 
+                                    </span>
                                 </div>
                             </div>
-                        </li>
-                    </div>
-                    
+                        </div>
+                    </li>
                 </div>
                 
-
                 <load-more tip="loading" id='loading'></load-more>
             </div>
 
@@ -62,9 +57,14 @@ export default {
                 { name: 'Vivo X21 屏幕指纹版全面...', presentprice: '￥3598' ,orprice: '￥4355', pin: '月销4714', score: '265积分', status: 2},
                 { name: 'Vivo X21 屏幕指纹版全面...', presentprice: '￥3598' ,orprice: '￥4355', pin: '月销4714', score: '265积分', status: 2}
             ],
-            status: 2,
+            status: 1,
             score: true,
+            scorelist: [],
+            moneylist: []
         }
+    },
+    created:function(){
+        this.filterData();
     },
     methods:{
         onScrollBottom(){
@@ -83,7 +83,16 @@ export default {
 		          this.onFetching = false
 		        }, 2000)
 		      }
-	    }
+	    },
+        filterData(){
+            let vm = this
+            for (var i = 0; i<vm.list.length;i++) {
+                if(vm.list[i].status == 1){
+                    vm.scorelist.push(vm.list[i])
+                }
+                vm.moneylist.push(vm.list[i])
+            }
+        }
     }
 }
 </script>

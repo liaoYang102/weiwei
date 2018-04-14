@@ -14,6 +14,7 @@ import score from '@/views/member/score/index'
 import score_log from '@/views/member/score/log'
 import shop_product from '@/views/shop/product'
 import all_shops from '@/views/shop/all_shops'
+import order_details from '@/views/shop/order_details'
 
 const anni = [
     {
@@ -89,6 +90,11 @@ const anni = [
       path: '/shop/all_shops',
       name:'all_shops',
       component: all_shops
+    },
+    {
+      path: '/shop/order_details',
+      name: 'order_details',
+      component: order_details
     }
   ]
 
