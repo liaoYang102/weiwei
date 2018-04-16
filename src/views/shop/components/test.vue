@@ -53,7 +53,8 @@
 		data(){
 			return {
 				list: {
-					title: '全球好货云集', dataList:[
+					title: '全球好货云集', 
+					dataList:[
 						{ goodsname:'COACH女士贝壳包', tag: [ { name:'时尚大牌'}, { name: '方便百搭'}]},
 						{ goodsname:'COACH女士贝壳包', tag: [ { name:'时尚大牌'}, { name: '方便百搭'}]}
 					]
@@ -68,14 +69,16 @@
 				let vm = this;
 				if(vm.theme == "海外购"){
 					vm.list = {
-						title: '全球好货云集', dataList:[
+						title: '全球好货云集', 
+						dataList:[
 							{ goodsname:'COACH女士贝壳包', tag: [ { name:'时尚大牌'}, { name: '方便百搭'}]},
 							{ goodsname:'COACH女士贝壳包', tag: [ { name:'时尚大牌'}, { name: '方便百搭'}]}
 						]
 					}
 				} else {
 					vm.list = {
-						title: '好东西,中国造', dataList:[
+						title: '好东西,中国造', 
+						dataList:[
 							{ goodsname:'COACH女士贝壳包', tag: [ { name:'时尚大牌'}, { name: '方便百搭'}]},
 							{ goodsname:'COACH女士贝壳包', tag: [ { name:'时尚大牌'}, { name: '方便百搭'}]}
 						]
@@ -148,7 +151,7 @@ li{
 				    padding: 0.22rem 0.27rem 0.72rem 0rem;
 				    margin-left: 0.23rem;
 					.gray{
-						font-size: 0.22;
+						font-size: 0.22rem;
 						color: #90A2C7;
 					}
 					.right-img{

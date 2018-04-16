@@ -1,73 +1,53 @@
 <template>
-<<<<<<< HEAD
 	<section class=''>
 		<settingHeader :title="title"></settingHeader>
+
 		<swiper :imgList="imgList"></swiper>
+		<div>
+			<navindex></navindex>
+			<div class="set-height">
+				<scorenav :scoreTitle="scoreTitle0"></scorenav>
+			</div>
+			
+
+			<div class="set-height">
+				<scorenav :scoreTitle="scoreTitle1"></scorenav>
+			</div>
+
+			<swiper :imgList="imgList2"></swiper>
+
+
+			<section>
+				<div class="top">
+					<div class="top-title">
+						<div class="circle1"></div>
+						<div class="recommended">官方推荐</div>
+						<div class="circle2"></div>
+					</div>
+
+					<div class="top-secondtitle">
+						<div class="border1"></div>
+						<span>跨品牌最高</span>
+						<span class="text">满199减100</span>
+						<span>上不封顶</span>
+						<div class="border2"></div>
+					</div>
+				</div>
+
+				<test :theme="purchase" style="margin-top: 0.19rem;"></test>
+
+				<test :theme="best"></test>
+			</section>
+
+			<img src="../../assets/images/shop/i_banner.png" style="width: 100%;">
+			
+			<tab></tab>
+		</div>
 	</section>
 </template>
 
 <script>
-	import settingHeader from '../../components/setting_header'
-	import swiper from './components/swiper'
-export default {
-	data(){
-		return {
-			title: '信用商城',
-			imgList:[
-				'https://img20.360buyimg.com/da/jfs/t18169/49/1676902787/199684/abf88174/5ad405d6N903b6152.jpg.webp','https://img20.360buyimg.com/da/jfs/t18169/49/1676902787/199684/abf88174/5ad405d6N903b6152.jpg.webp','https://img20.360buyimg.com/da/jfs/t18169/49/1676902787/199684/abf88174/5ad405d6N903b6152.jpg.webp'
-			]
-		}
-	},
-	components:{
-		settingHeader,
-		swiper
-	}
-
-=======
-	<div>
-		<navindex></navindex>
-		<div class="set-height">
-			<scorenav :scoreTitle="scoreTitle0"></scorenav>
-		</div>
-		
-
-		<div class="set-height">
-			<scorenav :scoreTitle="scoreTitle1"></scorenav>
-		</div>
-
-
-		<section>
-			<div class="top">
-				<div class="top-title">
-					<div class="circle1"></div>
-					<div class="recommended">官方推荐</div>
-					<div class="circle2"></div>
-				</div>
-
-				<div class="top-secondtitle">
-					<div class="border1"></div>
-					<span>跨品牌最高</span>
-					<span class="text">满199减100</span>
-					<span>上不封顶</span>
-					<div class="border2"></div>
-				</div>
-			</div>
-
-			<test :theme="purchase" style="margin-top: 0.19rem;"></test>
-
-			<test :theme="best"></test>
-		</section>
-
-		<img src="../../assets/images/shop/i_banner.png" style="width: 100%;">
-
-		
-		<!-- <test></test> -->
-
-		<tab></tab>
-	</div>
-</template>
-
-<script>
+import settingHeader from '../../components/setting_header'
 import navindex from './components/nav_index'
 import scorenav from './components/scoreNav'
 import test from './components/test'
@@ -75,17 +55,28 @@ import tab from './components/tab_index'
 import swiper from './components/swiper'
 export default {
 	components: {
-		navindex,scorenav,test,tab,swiper
+		settingHeader,navindex,scorenav,test,tab,swiper
 	},
 	data(){
 		return {
+			title: '信用商城',
 			scoreTitle0: '信用积分兑',
 			scoreTitle1: '信用积分购',
 			purchase: '海外购',
-			best: '中国臻品'
+			best: '中国臻品',
+			imgList:[
+				'https://img20.360buyimg.com/da/jfs/t18169/49/1676902787/199684/abf88174/5ad405d6N903b6152.jpg.webp',
+				'https://img20.360buyimg.com/da/jfs/t18169/49/1676902787/199684/abf88174/5ad405d6N903b6152.jpg.webp',
+				'https://img20.360buyimg.com/da/jfs/t18169/49/1676902787/199684/abf88174/5ad405d6N903b6152.jpg.webp'
+			],
+			imgList2:[
+				'https://img20.360buyimg.com/da/jfs/t18169/49/1676902787/199684/abf88174/5ad405d6N903b6152.jpg.webp',
+				'https://img20.360buyimg.com/da/jfs/t18169/49/1676902787/199684/abf88174/5ad405d6N903b6152.jpg.webp',
+				'https://img20.360buyimg.com/da/jfs/t18169/49/1676902787/199684/abf88174/5ad405d6N903b6152.jpg.webp',
+				'https://img20.360buyimg.com/da/jfs/t18169/49/1676902787/199684/abf88174/5ad405d6N903b6152.jpg.webp'
+			]
 		}
 	}
->>>>>>> af2fe494af9f57eff1e250f8d56288a5e0ee6cbe
 }
 </script>
 
@@ -157,7 +148,6 @@ body{
 	background: #f5f6fa;
 }
 .set-height{
-	/*height: 5.3rem;*/
 	overflow: hidden;
 }
 
