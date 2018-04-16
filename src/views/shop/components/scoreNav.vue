@@ -1,5 +1,5 @@
 <template>
-	<div class="score-nav">
+	<div class="score-nav" v-model="scoreTitle">
 		<div class="score-top">
 			<div class="score-title">{{ title}}</div>
 			<div class="score-btn">
@@ -33,6 +33,9 @@
 
 <script>
 	export default {
+		props:{
+			scoreTitle: String
+		},
 		data(){
 			return {
 				scorelist: [
@@ -40,11 +43,18 @@
 					{ title: '飞利浦剃须刀', score: '1000积分', money: '199.67元'},
 					{ title: '飞利浦剃须刀', score: '1000积分', money: '199.67元'}
 				],
-				title: '信用积分兑'
+				title: ''
 			}
 		},
-		method:{
-
+		mounted:function(){
+        	this.onList()
+    	},	
+		methods:{
+			onList(){
+				let vm = this;
+				vm.title = vm.scoreTitle;
+				console.log('---', vm.title)
+			}
 		}
 	}
 </script>
