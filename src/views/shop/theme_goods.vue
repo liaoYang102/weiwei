@@ -23,7 +23,7 @@
 		    		<div class="theme-list">
 				    	<div class="list">
 				    		<li class="li" v-for="(item,index) in themeList">
-				    			<div class="img"><img src="../../assets/images/shop/1.png"></div>
+				    			<div class="img"><img src="../../assets/images/shop/goods01.png"></div>
 				    			<div class="li-text">
 				    				<span>{{ item.goodsname}}...</span>
 				    				<div class="gray">
