@@ -28,8 +28,8 @@
 
         <maskRight ref='xioaqiang'></maskRight>
 
-        <swiper :list="demoList" auto style="width:100%;margin:0 auto;" height="2.2rem" dots-class="custom-bottom" dots-position="center"></swiper>
-    
+        <Swiper :imgList="imgList"></Swiper>
+
         <shopList></shopList>
     
     </div>
@@ -39,27 +39,24 @@
 import settingHeader from '../../components/setting_header'
 import shopList from './components/all_shopsList'
 import maskRight from './components/maskRight'
-const imgList = [
-  'http://placeholder.qiniudn.com/800x300/FF3B3B/ffffff',
-  'http://placeholder.qiniudn.com/800x300/FFEF7D/ffffff',
-  'http://placeholder.qiniudn.com/800x300/8AEEB1/ffffff'
-]
+import Swiper from './components/swiper'
 
-const demoList = imgList.map((one, index) => ({
-  url: 'javascript:',
-  img: one
-}))
 export default {
     components: {
         settingHeader,
         shopList,
-        maskRight
+        maskRight,
+        Swiper
     },
     data(){
         return {
             title: '手机',
             tabItem: '综合',
-            demoList,
+            imgList: [
+              'http://placeholder.qiniudn.com/800x300/FF3B3B/ffffff',
+              'http://placeholder.qiniudn.com/800x300/FFEF7D/ffffff',
+              'http://placeholder.qiniudn.com/800x300/8AEEB1/ffffff'
+            ],
             panel: [ 
                 { title: '综合', status: 0},
                 { title: '积分兑', status: 1}, 

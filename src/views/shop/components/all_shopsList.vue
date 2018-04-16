@@ -180,9 +180,5 @@ export default {
     }
 }
 </style>
-<style lang='less'>
-.vux-slider > .vux-swiper > .vux-swiper-item > a > .vux-swiper-desc{
-    background-image: none;
-}
-</style>
+
 
