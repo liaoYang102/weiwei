@@ -103,6 +103,9 @@ export default {
 .vux-loadmore{
     display: none;
 }
+li:nth-child(odd) .list{
+    margin-right: 0.04rem;
+}
 .shopList{
     width: 100%;
     background-color: #F5F6FA;
@@ -116,7 +119,6 @@ export default {
             color: #1A2642;
             margin-bottom: 0.04rem;
             .list{
-                margin-right:0.04rem;
                 background: #fff;
                 height: 4.35rem;
                 .score-exchange{
