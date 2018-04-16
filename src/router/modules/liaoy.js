@@ -1,6 +1,7 @@
 import setting from '@/views/member/setting/index'
 import o_success from '@/views/shop/o_success'
 import my_order from '@/views/shop/my_order'
+import shop from '@/views/shop/index'
 
 const liaoy = [
 	{
@@ -17,6 +18,11 @@ const liaoy = [
       path: '/shop/my_order',
       name:'my_order',
       component: my_order
+    },
+    {
+      path: '/shop',
+      name:'shop',
+      component: shop
     }
 ]
 
