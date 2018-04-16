@@ -68,8 +68,10 @@ li{
 	color: #222222;
 }
 .score-nav{
+	position: relative;
 	background: #f5f6fa;
 	width: 100%;
+	padding-bottom: 2rem;
 	.score-top{
 		position: relative;
 		z-index: 0;
@@ -108,14 +110,15 @@ li{
 		}
 	}
 	.score-list{
-		position: relative;
-		top: -1.6rem;
+		position: absolute;
+		top: 1.6rem;
 		z-index: 2;
 		padding-left: 0.2rem;
 		.score-li{
 			float: left;
 			width: 2.34rem;
 			margin-right: 0.04rem;
+			box-shadow: 0 0.02rem 0.1rem 0 rgba(102,102,102,0.20);
 			.img{
 				vertical-align: middle;
 				text-align: center;
