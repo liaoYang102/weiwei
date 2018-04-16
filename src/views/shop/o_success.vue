@@ -26,7 +26,9 @@
 		</div>
 		<div class="bottom">
 			<p class="recommend">为你推荐</p>
-			<ul>
+			<recommended></recommended>
+		</div>
+			<!-- <ul>
 				<li>
 					<img src="../../assets/images/shop/product.png" alt="" class='fl'>
 					<div class="shopBasic fl">
@@ -70,12 +72,13 @@
 					<div class="clear"></div>
 				</li>
 			</ul>
-		</div>
+		</div> -->
 	</section>
 </template>
 
 <script>
 	import settingHeader from '../../components/setting_header'
+	import recommended from './components/recommended'
 	export default{
 		data(){
 			return {
@@ -83,7 +86,7 @@
 			}
 		},
 		components:{
-			settingHeader
+			settingHeader,recommended
 		}
 	}
 </script>
@@ -162,13 +165,14 @@
 		}
 	}
 	.bottom{
+		overflow: auto;
 		.recommend{
 			padding-left: 0.18rem;
 			font-size: 0.3rem;
 			color: #222222;
 			line-height: 0.9rem;
 		}
-		ul{
+		/*ul{
 			li{
 				border-top: 1px solid #E1E1E1;
 				padding-bottom: 5px;
@@ -225,6 +229,6 @@
 					}
 				}
 			}
-		}
+		}*/
 	}
 </style>
