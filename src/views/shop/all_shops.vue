@@ -2,8 +2,9 @@
     <div id="shops">
         <settingHeader :title="title"></settingHeader>
 
+       
         <tab :line-width='0' style="border-top: 1px solid #E1E1E1;">
-	        <tab-item selected @on-item-click="showPanel">
+            <tab-item selected @on-item-click="showPanel">
               {{ tabItem}} <img src="../../assets/images/shop/xiaActive.png" alt="" width="6%">
             </tab-item>
             <tab-item class='vux-center' @on-item-click="onItemClick">销量</tab-item>
@@ -11,8 +12,11 @@
             <tab-item @on-item-click="onMenuClick">
                 筛选
             </tab-item>
-	    </tab>
+        </tab>
 
+     
+
+        
         <div v-transfer-dom>
             <popup v-model="showMaskTop" position="top">
                 <div class="panel">
@@ -24,7 +28,8 @@
                     </li>
                 </div>
             </popup>
-        </div>
+        </div> 
+        
 
         <maskRight ref='xioaqiang'></maskRight>
 
@@ -95,12 +100,6 @@ export default {
 </script>
 
 <style lang="less" scoped>
-.vux-popup-dialog{
-    background: #fff;
-}
-.vux-popup-dialog.vux-popup-top{
-    top: 1.815rem;
-}
 .panel{
     width: 100%;
     height: 1.74rem;
@@ -121,7 +120,13 @@ export default {
 </style>
 
 <style lang="less">
-.vux-popup-mask{
+ .vux-popup-dialog{
+    background: #fff !important;
+}
+.vux-popup-dialog.vux-popup-top{
+    top: 1.815rem !important;
+}
+ .vux-popup-mask{
     top: 1.8rem !important;
 }
 </style>

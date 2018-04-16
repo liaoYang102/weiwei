@@ -1,4 +1,5 @@
 <template>
+<<<<<<< HEAD
 	<section class=''>
 		<settingHeader :title="title"></settingHeader>
 		<swiper :imgList="imgList"></swiper>
@@ -22,6 +23,19 @@ export default {
 		swiper
 	}
 
+=======
+	<div>
+		<scorenav></scorenav>
+	</div>
+</template>
+
+<script>
+import scorenav from './components/scoreNav'
+export default {
+	components: {
+		scorenav
+	}
+>>>>>>> af2fe494af9f57eff1e250f8d56288a5e0ee6cbe
 }
 </script>
 
