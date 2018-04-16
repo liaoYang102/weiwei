@@ -23,6 +23,11 @@ const liaoy = [
       path: '/shop',
       name:'shop',
       component: shop
+    },
+    {
+      path: '/shop/index',
+      name:'shop',
+      component: shop
     }
 ]
 
