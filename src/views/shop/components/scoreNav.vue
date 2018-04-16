@@ -20,15 +20,14 @@
 						<div class="red">{{ item.score}}</div>
 						<div class="coupons">优惠券</div>
 					</div>
-
 					<div v-else>
 						<div class="li-red">{{item.score}}+{{item.money}}</div>
 					</div>
-					
 				</div>
 			</li>
 		</div>
 	</div>
+	
 </template>
 
 <script>
@@ -53,7 +52,6 @@
 			onList(){
 				let vm = this;
 				vm.title = vm.scoreTitle;
-				console.log('---', vm.title)
 			}
 		}
 	}
@@ -116,7 +114,7 @@ li{
 		padding-left: 0.2rem;
 		.score-li{
 			float: left;
-			width: 2.34rem;
+			width: 32%;
 			margin-right: 0.04rem;
 			box-shadow: 0 0.02rem 0.1rem 0 rgba(102,102,102,0.20);
 			.img{
