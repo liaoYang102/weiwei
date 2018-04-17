@@ -91,11 +91,10 @@
 	}
 	
 	.couponTab {
-		position: fixed;
-		top: 46px;
-		width: 100%;
 		display: flex;
 		align-items: center;
+		background: white;
+		z-index: 11111;
 		.tab {
 			flex: 1;
 			.vux-tab-item {
@@ -113,7 +112,6 @@
 	}
 	
 	.couponList {
-		margin-top: 55px;
 		.bgImgThree {
 			background: url(../../../assets/images/user/rollBg4.png) no-repeat;
 			background-size: 100% 100%;
@@ -157,7 +155,7 @@
 				}
 			}
 			.right {
-				width: 35%;
+				width: 50%;
 				display: inline-block;
 				text-align: center;
 				position: absolute;

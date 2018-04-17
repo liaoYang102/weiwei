@@ -1,138 +1,145 @@
 <template>
 	<div>
-		<userheader :title="title"></userheader>
-
+		<settingHeader :title="title"></settingHeader>
 		<div class="content">
-			<div class="inputwrap">
-				<div class="input-row">
-					<i class="iconfont icon-shouji"></i>
-					<input class="inputItem" type="text" placeholder="输入手机号" id="phonum">
-				</div>
-				<div class="input-row">
-					<i class="iconfont icon-buchongiconsvg02"></i>
-					<input type="password" placeholder="输入验证码" id="pass">
-					<p class="send_yzm">获取验证码</p>
-				</div>
-				<div class="input-row">
-					<i class="iconfont icon-suo"></i>
-					<input class="inputItem" type="text" placeholder="输入密码">
-				</div>
-				<div class="input-row">
-					<i class="iconfont icon-suo"></i>
-					<input class="inputItem" type="text" placeholder="确认密码">
-				</div>
+			<div class="login-box">
+				<img src="../../../static/member/login-img.png" />
 			</div>
-
-			<div class="reg-btn">立即注册</div>
-			<p class="text">已有账号？
-				<a href="./index.php?i=7&amp;c=entry&amp;m=mx_shop&amp;do=mobile&amp;r=user.login"><span>立即登录</span></a>
-			</p>
+			<group gutter="0">
+				<!--<cell class="input-item" title="国家" value="中国" is-link value-align="right"></cell>-->
+				<x-input class="input-item" ref="phone" v-model="phone" placeholder="用户名" type="number" :max="11" :required="true" @on-change="change"></x-input>
+				<x-input class="input-item" ref="password" v-model="password" placeholder="密码" type="password" :required="true"></x-input>
+				<x-input v-if="!isReg" class="input-item bounceInUp animated" type="number" ref="code" v-model="code" placeholder="验证码" @on-change="codeChange">
+					<x-button slot="right" type="primary" mini>发送验证码</x-button>
+				</x-input>
+			</group>
+			<!--			<div class="tip">每个手机号只能作为一个账号注册</div>-->
+			<div class="tip">
+				<x-button class="add-btn" :gradients="['#1D62F0', '#19D5FD']" @click.native="submit">{{btnText}}</x-button>
+			</div>
+			<div v-transfer-dom>
+				<confirm v-model="show" :title="regText" theme="ios" @on-confirm="onConfirm">
+					<p style="text-align:center;">该账户没有注册,是否立即注册?</p>
+				</confirm>
+			</div>
 		</div>
-
 	</div>
 </template>
 
 <script>
-	import userheader from '../../components/user_header'
+	import { XInput, Group, XButton, Cell, Loading, AlertModule, Confirm } from 'vux'
+	import settingHeader from '../../components/setting_header'
 	export default {
 		data() {
 			return {
-				title: "用户注册"
+				title: '新用户注册', //头部标题
+				phone: '', //手机号码
+				password: '', //密码
+				code: '', //验证码
+				show: false,
+				regText: '提示',
+				disabled: true,
+				btnText: '立即登录',
+				isReg: true //判断是否注册
+			}
+		},
+		created() {},
+		mounted() {
+			this.$refs.phone.focus()
+		},
+		methods: {
+			submit() {
+				if(this.phone == '17520439845' && this.password == '123456') {
+					this.disabled = false
+					this.$vux.loading.show({
+						text: '登陆中'
+					})
+					setTimeout(() => {
+						this.$vux.loading.hide()
+					}, 2000)
+				} else if(this.phone.length == 11 && this.phone != '17520439845') {
+					//					AlertModule.show({
+					//						title: '提示',
+					//						content: '该账号没有注册,是否立即注册?',
+					//						onShow() {
+					//							console.log('Module: I\'m showing')
+					//						},
+					//						onHide() {
+					//							console.log('Module: I\'m hiding now')
+					//						}
+					//					})
+					this.show = true
+				}
+			},
+			codeChange(val) {
+				if(val.length == 5) {
+					this.$refs.code.blur()
+				}
+			},
+			change(val) {
+				var _this = this
+				if(val.length == 11) {
+					_this.$refs.phone.blur()
+					_this.$refs.password.focus()
+				}
+			},
+			onConfirm() {
+				this.isReg = false
+				this.btnText = "立即注册"
 			}
 		},
 		components: {
-			userheader
-		},
-		created(){
+			settingHeader,
+			XInput,
+			Group,
+			XButton,
+			Cell,
+			Loading,
+			Confirm
 		}
 	}
 </script>
 
 <style lang="less" scoped>
-	.content {
-		width: 76%;
-		margin: .5rem auto;
-		.inputwrap {
-			position: relative;
-			.input-row {
-				position: relative;
-				margin-bottom: .3rem;
-				i {
-					position: absolute;
-					top: 0.13rem;
-					left: 0.2rem;
-					color: #497be5;
-					font-size: 0.35rem;
-				}
-				.icon-yanjing {
-					position: absolute;
-					top: 0.12rem;
-					right: 0.25rem;
-					color: #497be5;
-					font-size: 0.4rem;
-				}
-				.inputItem {
-					width: 85%;
-					border: 1px solid #82b1ff;
-					border-radius: 20px;
-					padding: 0.05rem 0 0.05rem 0.8rem;
-					color: #9cb7f2;
-					font-size: 0.28rem;
-					height: 0.66rem;
-					background: #faffbd;
-				}
-				#pass {
-					width: 44%;
-					border: 1px solid #82b1ff;
-					border-radius: 20px;
-					padding: 0.05rem 0 0.05rem 0.8rem;
-					color: #9cb7f2;
-					font-size: 0.28rem;
-					height: 0.66rem;
-				}
-				.send_yzm {
-					width: 37%;
-					height: 0.66rem;
-					line-height: 0.66rem;
-					border: 1px solid #82b1ff;
-					padding: 0.05rem 0 0.05rem 0;
-					border-radius: 20px;
-					text-align: center;
-					color: #9cb7f2;
-					background: #eaf5ff;
-					font-size: 0.28rem;
-					float: right;
-				}
-			}
-			.fogotpass {
-				color: #6a96f3;
-				font-size: 0.28rem;
-				text-align: right;
-				position: relative;
-				top: -0.2rem;
-			}
+	.login-box {
+		width: 100%;
+		height: 3.5rem;
+		position: relative;
+		img {
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			width: 2rem;
+			height: auto;
 		}
-		.reg-btn {
-			width: 100%;
-			background-image: linear-gradient(30deg, #246bfe, #5b90fe);
-			height: 0.76rem;
-			line-height: 0.76rem;
-			text-align: center;
-			box-shadow: 2px 3px 5px #c3d5fd;
-			color: #fff;
-			font-size: 16px;
-			border-radius: 20px;
-			margin-top: .2rem;
-		}
-		.text {
-			font-size: 0.24rem;
-			color: #9cb7f2;
-			text-align: center;
-			margin-top: .3rem;
-			span {
-				color: #f6573d;
-				font-size: 0.24rem;
-			}
-		}
+	}
+	
+	.input-item {
+		height: 1.02rem;
+		font-family: PingFangSC-Regular;
+		font-size: 0.28rem;
+		letter-spacing: 0;
+		padding-top: 0;
+		padding-bottom: 0;
+		box-sizing: border-box;
+	}
+	
+	.tip {
+		padding: 10px 15px;
+		ont-family: PingFangSC-Regular;
+		font-size: 0.28rem;
+		color: #90A2C7;
+		letter-spacing: 0;
+		text-align: center;
+	}
+	
+	.add-btn {
+		height: 0.88rem;
+		margin-top: 0.55rem;
+		ont-family: PingFangSC-Regular;
+		font-size: 0.28rem;
+		color: #FFFFFF;
+		letter-spacing: 0;
 	}
 </style>
