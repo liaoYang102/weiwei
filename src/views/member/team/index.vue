@@ -107,7 +107,7 @@
 
 <style lang="less" scoped>
 	.content {
-		background: #eaeaea9c;
+		background: #F5F6FA;
 	}
 	.scroller-box{padding-bottom: 180px;}
 	.xs-plugin-pullup-up {

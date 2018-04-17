@@ -4,7 +4,7 @@
 		<group>
 			<cell class="address-item" :title="name"></cell>
 			<x-input class="address-item" placeholder="手机号码" :max="11" type="number" is-type="china-mobile" required></x-input>
-			<x-address class="address-item" @on-hide="logHide" v-model="value_0_1" :list="addressData" title="" placeholder="请选择地址" value-text-align="left"></x-address>
+			<x-address class="address-item address-check" @on-hide="logHide" v-model="value_0_1" :list="addressData" title="" placeholder="请选择地址" value-text-align="left"></x-address>
 			<x-input class="address-item" placeholder="详细地址" :max="11" type="text" required></x-input>
 			<x-input class="address-item" placeholder="邮政编码" :max="6" type="number"></x-input>
 		</group>
@@ -50,12 +50,14 @@
 		font-size: 0.3rem!important;
 		color: #1A2642;
 		letter-spacing: 0;
+		padding-top: 0;
+		padding-bottom: 0;
+		height: 1.02rem;
 	}
-	
-	.vux-cell-value {
-		color: #1A2642!important;
+	.address-check{
+		padding-top: 0.1rem;
+		box-sizing: border-box;
 	}
-	
 	.add-btn {
 		width: 6.18rem;
 		height: 0.88rem;

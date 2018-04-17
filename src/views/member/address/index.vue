@@ -1,7 +1,7 @@
 <template>
 	<div class="content">
 		<settingHeader :title="title"></settingHeader>
-		<scroller lock-x height="-40">
+		<scroller lock-x height="-46">
 			<div class="box2">
 				<div class="list" v-for="(item,index) in list">
 					<div class="top">
@@ -14,7 +14,7 @@
 					<div class="bottom">
 						<check-icon :value.sync="item.isdefault">设置为默认地址</check-icon>
 						<div>
-							<span>编辑</span>
+							<router-link to="/member/address/edit"><span>编辑</span></router-link>
 							<span>删除</span>
 						</div>
 					</div>
@@ -87,9 +87,9 @@
 
 <style lang="less" scoped>
 	.content {
-		background: #eaeaea9c;
+		background: #F5F6FA;
 	}
-	.box2{padding-bottom: 180px;}
+	.box2{padding-bottom: 180px;padding-top: 0.21rem;}
 	.list {
 		box-sizing: border-box;
 		margin-bottom: 0.21rem;
@@ -119,14 +119,14 @@
 			display: flex;
 			justify-content: space-between;
 			align-items: center;
-			font-size: 0.28rem;
+			font-size: 0.24rem;
 			.weui-icon-success {
 				color: dodgerblue!important;
 			}
 			span {
 				display: inline-block;
-				width: 1.36rem;
-				height: 0.58rem;
+				width: 1rem;
+				height: 0.55rem;
 				line-height: 0.6rem;
 				border: 1px solid #90A2C7;
 				border-radius: 4px;

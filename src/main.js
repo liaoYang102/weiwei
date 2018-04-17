@@ -39,6 +39,13 @@ Vue.prototype.$http = axios  //定义axios组件用法  this.$http(opt).then(fn)
 axios.defaults.baseURL = '/api';
 Vue.config.productionTip = false
 
+//引用动画库
+import animate from 'animate.css'
+Vue.use(animate)
+
+import  { LoadingPlugin } from 'vux'
+Vue.use(LoadingPlugin)
+
 //const whiteList = ['/user/login', '/index', '/user/reg','/','/member/index'];// 不重定向白名单
 // router.beforeEach((to, from, next) => {
 //     if (store.getters.userstate) { // 
@@ -70,6 +77,7 @@ Vue.config.productionTip = false
 new Vue({
   el: '#app',
   router,
+  store,
   components: { App },
   template: '<App/>'
 })

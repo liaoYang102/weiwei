@@ -41,10 +41,12 @@
 	.list {
 		.list-item {
 			font-family: PingFangSC-Regular;
-			font-size: 0.32rem;
+			font-size: 0.28rem;
 			color: #1A2642;
 			letter-spacing: 0;
 			height: 1.02rem;
+			padding-top: 0!important;
+			padding-bottom: 0!important;
 			.tx {
 				width: 1rem;
 				height: 1rem;
