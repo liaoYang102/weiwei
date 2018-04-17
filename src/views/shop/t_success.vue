@@ -10,17 +10,17 @@
 			<div class="clear"></div>
 		</div>
 		<div class="center">
-			<div class="personInfo">
+			<!-- <div class="personInfo">
 				<p class="basic">收件人：张生 185****6787</p>
 				<p class="address">收货地址：<span class='fr'>广东佛山市南海区桂城街道佛平路与宝翠路交界万科金色领域界</span><div class="clear"></div></p>
-			</div>
+			</div> -->
 			<div class="money">
-				<p class="realPayment">
+				<!-- <p class="realPayment">
 					实付款：<span class="totalMoney">100积分+20.00元</span>
-				</p>
+				</p> -->
 				<div class="btn">
-					<div class="redeemDetails">兑换详情</div>
-					<div class="exchangeCenter">兑换中心</div>
+					<div class="redeemDetails">兑换中心</div>
+					<div class="exchangeCenter">评价商品</div>
 					<div class="clear"></div>
 				</div>
 			</div>
@@ -38,7 +38,7 @@
 	export default{
 		data(){
 			return {
-				title:'支付成功'
+				title:'确认订单'
 			}
 		},
 		components:{
@@ -91,7 +91,6 @@
 			}
 		}
 		.money{
-			padding-left: 0.2rem;
 			padding-top: 0.12rem;
 			.realPayment{
 				font-size: 0.24rem;
@@ -104,18 +103,23 @@
 			.btn{
 				width: 100%;
 				padding-left: 0.55rem;
-				margin-top: 0.45rem;
+				margin-top: 0.31rem;
 				.redeemDetails,.exchangeCenter{
 					float: left;
 					width: 2.4rem;
 					height: 0.7rem;
-					border: 2px solid #A0A0A0;
+					border: 2px solid #90A2C7;
 					border-radius: 0.1rem;
 					text-align: center;
 					line-height: 0.7rem;
 					font-size: 0.34rem;
-					color: #666;
+					color: #90A2C7;
 					margin-left: 0.36rem;
+				}
+				.exchangeCenter{
+					border: 2px solid #336FFF;
+					border-radius: 0.1rem;
+					color:#336FFF;
 				}
 			}
 		}

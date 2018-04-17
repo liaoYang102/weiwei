@@ -1,6 +1,6 @@
 <template>
     <div>
-        <x-header :left-options="{backText: ''}" style="background:#fff;" class="header">{{ title }}</x-header>
+        <x-header :left-options="{backText: ''}" style="background:#fff;border-bottom: 1px solid #D8DFF0;" class="header">{{ title }}</x-header>
     </div>
 </template>
 

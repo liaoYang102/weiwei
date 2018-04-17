@@ -1,7 +1,10 @@
 import setting from '@/views/member/setting/index'
 import o_success from '@/views/shop/o_success'
+import t_success from '@/views/shop/t_success'
 import my_order from '@/views/shop/my_order'
 import shop from '@/views/shop/index'
+import shop_cart from '@/views/shop/shop_cart'
+
 
 const liaoy = [
 	{
@@ -28,6 +31,16 @@ const liaoy = [
       path: '/shop/index',
       name:'shop',
       component: shop
+    },
+    {
+      path: '/shop/t_success',
+      name:'t_success',
+      component: t_success
+    },
+    {
+      path: '/shop/shop_cart',
+      name:'shop_cart',
+      component: shop_cart
     }
 ]
 
