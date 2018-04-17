@@ -1,276 +1,292 @@
 <template>
-	<header>
-		<section>
-			<div class="header">
-				<div class="setting fl">
-					<img src="../../assets/images/member/member_setting.png"> 
-					<span>设置</span>
+	<div class="info-box">
+		<settingHeader :title="title"></settingHeader>
+		<div class="content">
+			<section>
+				<div class="info-bg">
+					<router-link to="/member/setting/index"><img class="setting-img" src="../../assets/images/member/shezi.png" /></router-link>
+					<div class="avatar">
+						<img src="../../assets/images/member/score_1.png" alt="" />
+						<p class="nickname">yang</p>
+						<p class="status">1级会员</p>
+					</div>
+					<div class="account">
+						<div class="universal">
+							<p>
+								<div class="num">
+									<span class="money">1000.49</span>
+									<badge></badge>
+								</div>
+							</p>
+							<p class="universalAccount">CGC通用积分</p>
+						</div>
+						<div class="universal">
+							<div class="num">
+								<span class="money">2800.01 </span>
+
+							</div>
+							<p class="universalAccount">信用积分</p>
+						</div>
+					</div>
 				</div>
-				<div class="clear"></div>
-			</div>
-			<div class="avatar">
-				<img alt="" src="http://www.cgc999.com/attachment/images/7/2018/02/D6G6C03wqGjOzlg6OzS0GjcOsOCL6g.jpg"> 
-				<p class="nickname">yang</p> 
-				<p class="status">1级会员</p>
-			</div>
-			<div class="account">
-				<div class="universal">
-					<p class="num"><span class="money">1000.49</span> <span class="circle"></span></p> 
-					<p class="universalAccount">CGC通用积分</p>
-				</div> 
-				<div class="credit">
-					<p class="num">2800.01 </p> 
-					<p class="creditlAccount">信用积分</p>
+			</section>
+			<section>
+				<div class="navigation">
+					<ul>
+						<li>
+							<div class="li-box">
+								<img src="../../assets/images/member/member_wallet.png">
+								<badge class="new"></badge>
+							</div>
+							<p>我的钱包</p>
+						</li>
+						<li>
+							<div class="li-box">
+								<img src="../../assets/images/member/member_cardpackage.png">
+								<badge class="new"></badge>
+							</div>
+							<p>我的团队</p>
+						</li>
+						<li>
+							<div class="li-box">
+								<img src="../../assets/images/member/member_account.png">
+								<badge class="new-account" text="2312"></badge>
+							</div>
+
+							<p>会员积分</p>
+						</li>
+						<li>
+							<div class="li-box">
+								<img src="../../assets/images/member/member_code.png">
+							</div>
+
+							<p>赚钱码</p>
+						</li>
+					</ul>
 				</div>
-			</div>
-		</section>
-		<section>
-			<div class="navigation">
-				<ul>
-					<li>
-						<img src="../../assets/images/member/member_wallet.png"> 
-						<span class="new"></span> 
-						<p>我的钱包</p>
-					</li> 
-					<li>
-						<img src="../../assets/images/member/member_cardpackage.png"> 
-						<p>我的团队</p>
-					</li> 
-					<li>
-						<img src="../../assets/images/member/member_account.png"> 
-						<p>会员积分</p>
-					</li> 
-					<li>
-						<img src="../../assets/images/member/member_code.png"> 
-						<p>赚钱码</p>
-					</li>
-				</ul>
-			</div>
-		</section>
-		<section>
-			<div class="banner">
-				<img src="../../assets/images/member/member_banner.png" alt="">
-			</div>
-		</section>
-		<section>
-			<div class="list">
-	            <ul>
-                    <li>
-                        <img src="../../assets/images/member/member_1.png" alt="">
-                        <p class="listName">我的优惠券</p>
-                    </li>
-                    <li>
-                        <img src="../../assets/images/member/member_2.png" alt="">
-                        <p class="listName">我的订单</p>
-                    </li>
-                    <li>
-                        <img src="../../assets/images/member/member_3.png" alt="">
-                        <p class="listName">我的关注</p>
-                    </li>
-                    <li>
-                        <img src="../../assets/images/member/member_4.png" alt="">
-                        <p class="listName">收货地址</p>
-                    </li>
-                    <li>
-                        <img src="../../assets/images/member/member_5.png" alt="">
-                        <p class="listName">门禁系统</p>
-                    </li>
-                    <li>
-                        <img src="../../assets/images/member/m_index17.png" alt="">
-                        <p class="listName">幸运抽奖</p>
-                    </li>
-                    <li>
-                        <img src="../../assets/images/member/m_index12.png" alt="">
-                        <p class="listName">积分商城</p>
-                    </li>
-                    <li>
-                        <img src="../../assets/images/member/m_index13.png" alt="">
-                        <p class="listName">我的卡包</p>
-                    </li>
-	            </ul>
-        	</div>
-		</section>
-	</header>
+			</section>
+			<section>
+				<div class="banner">
+					<img src="../../assets/images/member/member_banner.png" alt="">
+				</div>
+			</section>
+			<section>
+				<group gutter="0">
+					<cell v-for="(item,index) in infoList" class="info-item" :title="item.text" is-link :link="item.url">
+						<img slot="icon" :src="item.img">
+					</cell>
+				</group>
+			</section>
+		</div>
+
+	</div>
 </template>
 
 <script>
-export default {
-  data(){
-  	return{
-
-  	}
-  }
-}
+	import { Badge, Cell, Group } from 'vux'
+	import settingHeader from '../../components/setting_header'
+	export default {
+		data() {
+			return {
+				title: '个人中心',
+				infoList: [{
+						img: '../../../static/member/member_1.png',
+						text: '我的优惠券',
+						url:'/member/coupon/coupon'
+					},
+					{
+						img: '../../../static/member/member_2.png',
+						text: '我的订单'
+					},
+					{
+						img: '../../../static/member/member_3.png',
+						text: '我的关注'
+					},
+					{
+						img: '../../../static/member/member_4.png',
+						text: '收货地址',
+						url:'/member/address/index'
+					},
+					{
+						img: '../../../static/member/member_5.png',
+						text: '门禁系统'
+					},
+					{
+						img: '../../../static/member/m_index17.png',
+						text: '幸运抽奖'
+					},
+					{
+						img: '../../../static/member/m_index12.png',
+						text: '积分商城'
+					},
+					{
+						img: '../../../static/member/m_index13.png',
+						text: '我的卡包'
+					},
+				],
+				yhqTip: '5张快过期'
+			}
+		},
+		components: {
+			settingHeader,
+			Badge,
+			Cell,
+			Group
+		}
+	}
 </script>
 
-<style	lang="less" scoped>
-	header{
-		padding-top: 0.561rem;
-    	height: 100%;
-    	.header{
-	    	width: 100%;
-		    padding-left: 0.34rem;
-		    padding-right: 0.34rem;
-		    .setting{
-		    	width: 1.19rem;
-			    height: 0.544rem;
-			    border: 1px solid #EFEFEF;
-			    border-radius: 0.85rem;
-			    line-height: 0.48rem;
-			    img{
-			    	width: 0.21rem;
-				    height: 0.21rem;
-				    margin-left: 0.19rem;
-				    vertical-align: middle;
-			    }
-			    span{
-			    	font-size: 0.2rem;
-			    }
-		    }
-    	}
-    	.avatar{
-    		width: 100%;
-		    padding-top: 0.196rem;
-		    text-align: center;
-		    img{
-		    	border-radius: 50%;
-			    width: 1.5rem;
-			    height: 1.5rem;
-		    }
-		    .nickname{
-	    	    margin-top: 0.203rem;
-			    font-size: 0.38rem;
-			    color: #333333;
-			    letter-spacing: 0;
-		    }
-		    .status{
-		    	margin-top: 0.0708rem;
-			    font-size: 0.26rem;
-			    color: #9E9E9E;
-			    letter-spacing: 0;
-		    }
-    	}
-    	.account{
-		    margin-top: 0.313rem;
-		    margin-bottom: 0.186rem;
-		    display: flex;
-		    width: 100%;
-		    .universal{
-	    		flex: 1;
-	    		text-align: center;
-	    		.num{
-				    font-size: 0.391rem;
-				    color: #333333;
-				    letter-spacing: 0;
-				    position: relative;
-				    line-height: 0.54rem;
-				    .money{
-				    	margin-right: 0.2rem;
-				    }
-				    .circle{
-				    	position: absolute;
-					    top: 0;
-					    bottom: 0;
-					    margin: auto 0;
-					    display: inline-block;
-					    border-radius: 50%;
-					    width: 0.12rem;
-					    height: 0.12rem;
-					    background-color: #FF5B42;
-				    }
-	    		}
-	    		.universalAccount{
-	    			font-size: 0.204rem;
-				    color: #A3A3A3;
-				    letter-spacing: 0;
-	    		}
+<style lang="less" scoped>
+	.info-box {
+		height: 100%;
+		background-color: #F5F6FA;
+		.info-bg {
+			height: 4.47rem;
+			background: url(../../assets/images/member/index-bg.png) no-repeat;
+			background-size: 100%;
+			position: relative;
+		}
+		.setting-img {
+			width: 0.44rem;
+			height: 0.44rem;
+			position: absolute;
+			right: 0.33rem;
+			top: 0.28rem;
+		}
+		.avatar {
+			width: 100%;
+			padding-top: 0.29rem;
+			text-align: center;
+			img {
+				border-radius: 50%;
+				width: 1.44rem;
+				height: 1.44rem;
 			}
-	    	.credit{
-	    		flex: 1;
-	    		text-align: center;
-	    		.num{
-				    font-size: 0.391rem;
-				    color: #333333;
-				    letter-spacing: 0;
-				    position: relative;
-				    line-height: 0.54rem;
-	    		}
-	    		.creditlAccount{
-				    font-size: 0.204rem;
-				    color: #A3A3A3;
-				    letter-spacing: 0;
-	    		}
-	    	}
-    	}
-    	.navigation{
-    		width: 100%;
-    		padding-bottom:0.2rem;
-		    border-top: 0.17rem solid #f5f8f9;
-		    border-bottom: 0.17rem solid #f5f8f9;
-		    ul{
-		    	padding-left: 0.2rem;
-			    padding-right: 0.2rem;
-			    padding-top: 0.26rem;
-			    display: flex;
-			    li{
-		    	    flex: 1;
-				    text-align: center;
-				    position: relative;
-				    img{
-			    	    width: 0.442rem;
-						height: 0.442rem;
-				    }
-				    .new{
-				    	position: absolute;
-					    background: #FF5B42;
-					    border: 1px solid #FFFFFF;
-					    width: 0.2rem;
-					    height: 0.2rem;
-					    border-radius: 50%;
-					    left: 0.84rem;
-					    top: -2px;
-				    }
-				    p{
-				    	font-size: 0.204rem;
-					    color: #7D7D7D;
-					    letter-spacing: 0;
-				    }
-			    }
-		    }
-    	}
-    	.banner{
-    		width: 100%;
-    		height: 2.2rem;
-    		img{
-			    width: 100%;
-   				height: 2.2rem;
-    		}
-    	}
-    	.list{
-    		padding-bottom: 50px;
-    		ul{
-			    display: flex;
-			    flex-wrap: wrap;
-			    padding-bottom: 0.17rem;
-			    border-top: 0.17rem solid #f5f8f9;
-			    border-bottom: 0.17rem solid #f5f8f9;
-			    li{
-			    	width: 25%;
-		    	    text-align: center;
-    				height: 1.5rem;
-    				img{
-    					margin-top: 0.3rem;
-					    margin-bottom: 0.1rem;
-					    width: 0.6rem;
-					    height: 0.6rem;
-    				}
-    				.listName{
-					    font-size: 0.26rem;
-					    color: #464646;
-					    letter-spacing: 0;
-    				}
-			    }
-    		}
-    	}
+			.nickname {
+				font-family: PingFangSC-Regular;
+				font-size: 0.38rem;
+				color: #FFFFFF;
+				letter-spacing: 0;
+			}
+			.status {
+				font-family: PingFangSC-Regular;
+				font-size: 0.24rem;
+				color: #FFFFFF;
+				letter-spacing: 0;
+				margin-top: 0.1rem;
+			}
+		}
+		.account {
+			margin-top: 0.313rem;
+			margin-bottom: 0.186rem;
+			display: flex;
+			width: 100%;
+			.universal {
+				flex: 1;
+				text-align: center;
+				.num {
+					font-size: 0.391rem;
+					color: #333333;
+					letter-spacing: 0;
+					position: relative;
+					display: flex;
+					align-items: center;
+					justify-content: center;
+					.money {
+						font-family: PingFangSC-Medium;
+						font-size: 0.46rem;
+						color: #FFFFFF;
+						letter-spacing: 0;
+						margin-right: 0.2rem;
+					}
+				}
+				.universalAccount {
+					font-family: PingFangSC-Regular;
+					font-size: 0.24rem;
+					color: #FFFFFF;
+					letter-spacing: 0;
+				}
+			}
+			.credit {
+				flex: 1;
+				text-align: center;
+				.num {
+					font-size: 0.391rem;
+					color: #333333;
+					letter-spacing: 0;
+					position: relative;
+					line-height: 0.54rem;
+				}
+				.creditlAccount {
+					font-size: 0.204rem;
+					color: #A3A3A3;
+					letter-spacing: 0;
+				}
+			}
+		}
+		.navigation {
+			width: 100%;
+			margin: 0.2rem 0;
+			background: white;
+			ul {
+				padding: 0.26rem 0.2rem;
+				display: flex;
+				li {
+					flex: 1;
+					position: relative;
+					display: flex;
+					align-items: center;
+					justify-content: center;
+					flex-direction: column;
+					.li-box {
+						position: relative;
+						width: 0.52rem;
+						height: 0.52rem;
+						img {
+							width: 100%;
+							height: auto;
+						}
+						.new {
+							position: absolute;
+							right: -3px;
+							top: -2px;
+						}
+						.new-account {
+							position: absolute;
+							right: -28px;
+							top: -2px;
+						}
+					}
+					p {
+						font-family: PingFangSC-Regular;
+						font-size: 0.24rem;
+						color: #7D7D7D;
+						letter-spacing: 0;
+						margin-top: 0.18rem;
+					}
+				}
+			}
+		}
+		.banner {
+			width: 100%;
+			height: 2.2rem;
+			margin-bottom: 0.2rem;
+			img {
+				width: 100%;
+				height: 2.2rem;
+			}
+		}
+		.info-item {
+			font-family: PingFangSC-Regular;
+			font-size: 0.28rem;
+			color: #464646;
+			letter-spacing: 0;
+			img {
+				width: 0.48rem;
+				height: 0.48rem;
+				vertical-align: sub;
+				margin-right: 0.13rem;
+			}
+		}
 	}
 </style>
