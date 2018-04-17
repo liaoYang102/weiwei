@@ -57,7 +57,7 @@ export default {
                 { name: 'Vivo X21 屏幕指纹版全面...', presentprice: '￥3598' ,orprice: '￥4355', pin: '月销4714', score: '265积分', status: 2},
                 { name: 'Vivo X21 屏幕指纹版全面...', presentprice: '￥3598' ,orprice: '￥4355', pin: '月销4714', score: '265积分', status: 2}
             ],
-            status: 1,
+            status: 0,
             score: true,
             scorelist: [],
             moneylist: []
@@ -89,8 +89,9 @@ export default {
             for (var i = 0; i<vm.list.length;i++) {
                 if(vm.list[i].status == 1){
                     vm.scorelist.push(vm.list[i])
+                }else{
+                    vm.moneylist.push(vm.list[i])
                 }
-                vm.moneylist.push(vm.list[i])
             }
         }
     }
@@ -101,6 +102,9 @@ export default {
 <style lang="less" scoped>
 .vux-loadmore{
     display: none;
+}
+li:nth-child(odd) .list{
+    margin-right: 0.04rem;
 }
 .shopList{
     width: 100%;
@@ -115,7 +119,6 @@ export default {
             color: #1A2642;
             margin-bottom: 0.04rem;
             .list{
-                margin-right:0.04rem;
                 background: #fff;
                 height: 4.35rem;
                 .score-exchange{
@@ -179,9 +182,5 @@ export default {
     }
 }
 </style>
-<style lang='less'>
-.vux-slider > .vux-swiper > .vux-swiper-item > a > .vux-swiper-desc{
-    background-image: none;
-}
-</style>
+
 

@@ -12,7 +12,7 @@ import './assets/icons_font/iconfont.css'
 import 'mint-ui/lib/style.css'
 import './style/global.css'
 import './config/wy_rem'
-import { Group, DatetimeRange, Cell, Tab, TabItem, CellBox, XHeader, Scroller, LoadMore,TransferDom, Confirm, Popup, Toast, Swiper, InlineXNumber, CheckIcon} from 'vux'
+import { Group, DatetimeRange, Cell, Tab, TabItem, CellBox, XHeader, Scroller, LoadMore,TransferDom, Confirm, Popup, Toast, Swiper, InlineXNumber, CheckIcon, CellFormPreview} from 'vux'
 import FastClick from 'fastclick'
 
 FastClick.attach(document.body);
@@ -34,6 +34,7 @@ Vue.component('confirm', Confirm)
 Vue.component('swiper', Swiper)
 Vue.component('inline-x-number', InlineXNumber)
 Vue.component('check-icon', CheckIcon)
+Vue.component('cell-form-preview', CellFormPreview)
 
 Vue.prototype.$http = axios  //定义axios组件用法  this.$http(opt).then(fn)
 axios.defaults.baseURL = '/api';

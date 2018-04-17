@@ -19,11 +19,9 @@
 					<div class="box2">
 						<div class="title">热门品牌</div>
 						<div class="type-box clearfix">
-							<div v-for="i in 21">
-								<span>
-							<img src="../../assets/images/shop/apple.png"/>
-						</span>
-								<p>小米</p>
+							<div v-for="i in item">
+								<span><img src="../../assets/images/shop/apple.png"></span>
+								<p>{{i.name}}</p>
 							</div>
 						</div>
 						<div class="title">热门品牌</div>
@@ -50,8 +48,48 @@
 			return {
 				title: '商品分类',
 				itemActive: 0,
-				listData: ['海外购', '海外购', '海外购', '海外购', '海外购', '海外购', '海外购', '海外购', '海外购', '海外购', '海外购', '海外购', '海外购', '海外购', '海外购'],
-				demo04_list: ['https://img1.360buyimg.com/pop/jfs/t16792/328/1497480399/93929/c0d0fbb1/5ac9f290N29a3ad9d.jpg', 'https://img1.360buyimg.com/pop/jfs/t16792/328/1497480399/93929/c0d0fbb1/5ac9f290N29a3ad9d.jpg']
+				listData: ['海外购', '中国臻品', '外套', 'T恤', '裤子', '鞋子', '饰品', '生活用品', '珠宝', '日用品', '保暖内衣', '女士裙子', '潮牌', '运动鞋', '休闲系列'],
+				demo04_list: ['https://img1.360buyimg.com/pop/jfs/t16792/328/1497480399/93929/c0d0fbb1/5ac9f290N29a3ad9d.jpg', 'https://img1.360buyimg.com/pop/jfs/t16792/328/1497480399/93929/c0d0fbb1/5ac9f290N29a3ad9d.jpg'],
+				item:[{
+					"img":"../../assets/images/shop/apple.png",
+					"name":"苹果"
+				},{
+					"img":"../../assets/images/shop/hw.png",
+					"name":'华为'
+				},{
+					"img":"../../assets/images/shop/oppo.png",
+					"name":'oppo'
+				},{
+					"img":"../../assets/images/shop/xiaomi.png",
+					"name":'小米'
+				},{
+					"img":"../../assets/images/shop/xiaomi.png",
+					"name":'小米'
+				},{
+					"img":"../../assets/images/shop/hw.png",
+					"name":'华为'
+				},{
+					"img":"../../assets/images/shop/oppo.png",
+					"name":'oppo'
+				},{
+					"img":"../../assets/images/shop/xiaomi.png",
+					"name":'小米'
+				},{
+					"img":"../../assets/images/shop/apple.png",
+					"name":'苹果'
+				},{
+					"img":"../../assets/images/shop/apple.png",
+					"name":'苹果'
+				},{
+					"img":"../../assets/images/shop/oppo.png",
+					"name":'oppo'
+				},{
+					"img":"../../assets/images/shop/hw.png",
+					"name":'华为'
+				},{
+					"img":"../../assets/images/shop/xiaomi.png",
+					"name":'小米'
+				}]
 			}
 		},
 		methods: {
