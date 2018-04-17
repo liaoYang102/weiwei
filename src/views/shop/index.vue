@@ -4,7 +4,7 @@
 
 		<swiper :imgList="imgList"></swiper>
 		
-		<navindex></navindex>
+		<navindex></navindex>  
 		
 		<scorenav :scoreTitle="scoreTitle0"></scorenav>
 		

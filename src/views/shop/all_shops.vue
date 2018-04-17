@@ -14,9 +14,6 @@
             </tab-item>
         </tab>
 
-     
-
-        
         <div v-transfer-dom>
             <popup v-model="showMaskTop" position="top">
                 <div class="panel">
@@ -29,7 +26,6 @@
                 </div>
             </popup>
         </div> 
-        
 
         <maskRight ref='xioaqiang'></maskRight>
 

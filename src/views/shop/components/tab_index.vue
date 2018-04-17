@@ -10,7 +10,7 @@
 		    </tab>
 
 		    <div class="tab-item">
-    	    	<scroller lock-x @on-scroll-bottom="onScrollBottom" ref="scrollerBottom" v-if='test'>
+    	    	<scroller lock-x height='-200' @on-scroll-bottom="onScrollBottom" ref="scrollerBottom" v-if='test'>
     	    		<div class="tab-list">
     			    	<div class="list">
     			    		<li class="tab-li" v-for="(item, index) in shopList">
