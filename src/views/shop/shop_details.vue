@@ -3,9 +3,9 @@
 		<x-header :left-options="{backText: '',preventGoBack:'true'}" title="slot:overwrite-title"  style="background:#fff;" class="tab_shop">
 		    <div class="overwrite-title-demo" slot="overwrite-title">
 		        <tab bar-position="bottom" custom-bar-width="40px">
-			      <tab-item selected @on-item-click="onShop">商品</tab-item>
-			      <tab-item @on-item-click="scrollTo">详情</tab-item>
-			      <tab-item @on-item-click="onItemClick">评价</tab-item>
+			      <tab-item :selected="tabTitle == '商品'" @on-item-click="onShop">商品</tab-item>
+			      <tab-item :selected="tabTitle == '详情'" @on-item-click="scrollTo">详情</tab-item>
+			      <tab-item :selected="tabTitle == '评价'" @on-item-click="onItemClick">评价</tab-item>
 			    </tab>
 		    </div>
 	    </x-header>
@@ -68,7 +68,7 @@
 							<div  class="comments_date">2018.03.30 颜色:蓝色; 尺码:170/92A/M</div>
 						</div>
 						
-						<div class="comments_btn">查看全部评价</div>
+						<div class="comments_btn" @click="view">查看全部评价</div>
 					</div>
 				</div>
 			</div>
@@ -116,7 +116,7 @@ export default {
 	},
 	data(){
 		return {
-			tabTitle: '商品',
+			tabTitle: '商品'
 		}
 	},
 	mounted: function(){
@@ -140,6 +140,10 @@ export default {
 		onItemClick () {
 			this.tabTitle = '评价';
 			window.scrollTo(0, 0);
+	    },
+	    view(){
+	    	this.tabTitle = '评价';
+	    	window.scrollTo(0, 0);
 	    }
 	}
 }	

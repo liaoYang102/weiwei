@@ -47,7 +47,6 @@
 					<div class="ul-right">
 						<span>女装U宽腿牛仔裤(水洗产品)</span>
 						<p>颜色:蓝色；尺码:L/170修身</p>
-						<!-- <p>X1</p> -->
 					</div>
 				</div>
 
@@ -84,20 +83,31 @@ export default {
 				{ label: '申请时间', value:'2018-03-17 11:44:21'},
 				{ label: '退款编号', value:'3242572342423232'}
 			],
-			view: false,
+			view: true,
 			timetitle: '请退货并填写物流信息',
-			remainingDays: '6天23时59分'
+			remainingDays: ''
 		}
 	},
 	mounted:function(){
-	    this.changeDate()
+		var int1 = window.setInterval(this.changeDate,60000);
+	    this.changeDate();
 	},
 	methods:{
 		changeDate(){
-			let vm =this;
-			setinterval(function(){
-				
-			},60000)
+			var nowreduce = new Date();
+			var endreduce = new Date(Date.parse("2018/4/24 18:00:00"));
+			var leftTimereduce = parseInt((endreduce-nowreduce)/1000);
+			var day = Math.floor((leftTimereduce)/3600/24);
+			var hour = Math.floor((leftTimereduce-day*3600*24)/3600);
+			var minute = Math.floor((leftTimereduce-day*3600*24-hour*60*60)/60);
+			this.remainingDays = day + '天' + hour + '时' + minute + '分';
+			console.log(this.remainingDays);
+			if(day==0&&hour==0&&minute==0){
+				this.timetitle = '退货已超时'
+				this.remainingDays = '您在一周内未填写物流订单号'
+				this.view = false
+				window.clearInterval(int1);
+			}
 		}
 	}
 }
