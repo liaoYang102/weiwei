@@ -70,10 +70,10 @@
 			    </div>
 			</ul>
 			
-			<ul class="recommended">
-				<div class="re-title">为你推荐</div>
-				<recommended></recommended>
-			</ul>
+			<!-- <ul class="recommended">
+				<div class="re-title">为你推荐</div> -->
+			<recommended></recommended>
+			<!-- </ul> -->
 		</div>
 
 
@@ -298,16 +298,6 @@ li{
 				.score-blue{
 					color: #336FFF;
 				}
-			}
-		}
-		.recommended{
-			margin-top: 0.2rem;
-			.re-title{
-				font-size: 0.3rem;
-				color: #222222;
-				padding: 0.3rem 0;
-				padding-left: 0.18rem;
-				border-bottom: 0.01rem solid #E1E1E1;
 			}
 		}
 

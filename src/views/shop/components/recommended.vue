@@ -1,27 +1,34 @@
 <template>
-	<div class="ul-recommended">
-		<scroller lock-x height='-235' @on-scroll-bottom="onScrollBottom" ref="scrollerBottom" style="background-color:#F5F6FA" v-if='test'>
-			<div>
-				<group v-for="(item, index) in goodslist">
-					<cell is-link>
-						<div class="ul-top">
-							<div class="ul-left"><img src="../../../assets/images/shop/product.png"></div>
-							<div class="ul-center">
-								<span>{{ item.name}}</span><br>
-								<span class="gray">{{ item.date}}</span><br>
-								<span class="money-red">￥{{ item.money}}</span>
-								<div class="score-num">+{{ item.score}}积分</div>
-							</div>
-							<div class="ul-right">
-								<span>了解详情</span>
-							</div>
-						</div>
-				    </cell>
-				</group>
-				<load-more tip="loading" id='loading'></load-more>
+	<section>
+		<ul class="recommended">
+			<div class="re-title">为你推荐</div>
+			<div class="ul-recommended">
+				<scroller lock-x height='-235' @on-scroll-bottom="onScrollBottom" ref="scrollerBottom" style="background-color:#F5F6FA" v-if='test'>
+					<div>
+						<group v-for="(item, index) in goodslist">
+							<cell is-link>
+								<div class="ul-top">
+									<div class="ul-left"><img src="../../../assets/images/shop/product.png"></div>
+									<div class="ul-center">
+										<span>{{ item.name}}</span><br>
+										<span class="gray">{{ item.date}}</span><br>
+										<span class="money-red">￥{{ item.money}}</span>
+										<div class="score-num">+{{ item.score}}积分</div>
+									</div>
+									<div class="ul-right">
+										<span>了解详情</span>
+									</div>
+								</div>
+						    </cell>
+						</group>
+						<load-more tip="loading" id='loading'></load-more>
+					</div>
+				</scroller>
 			</div>
-		</scroller>
-	</div>
+		</ul>
+	</section>
+
+	
 </template>
 
 <script>
@@ -61,6 +68,17 @@
 </script>
 
 <style lang="less" scoped>
+.recommended{
+	margin-top: 0.2rem;
+	background: #fff;
+	.re-title{
+		font-size: 0.3rem;
+		color: #222222;
+		padding: 0.3rem 0;
+		padding-left: 0.18rem;
+		border-bottom: 0.01rem solid #E1E1E1;
+	}
+}
 .ul-top{
 	background: #fff;
 	font-size: 0.28rem;
