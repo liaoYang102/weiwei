@@ -1,10 +1,8 @@
 <template>
 	<div id="app" v-cloak>
-		<div class="child-view">
-			<transition :name="transitionName">
-				<router-view class='admin' />
-			</transition>
-		</div>
+		<transition :name="transitionName">
+			<router-view class='child-view' />
+		</transition>
 	</div>
 </template>
 
@@ -43,72 +41,59 @@
 </script>
 
 <style lang='less'>
-<<<<<<< HEAD
 html,body{
   height: 100%;
 }
+
 #app {
-  height: 100%;
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+	font-family: 'Avenir', Helvetica, Arial, sans-serif;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+.child-view {
+	margin-top: 46px;
+	transition: all .5s cubic-bezier(.55, 0, .1, 1);
+	
+}
+
+.slide-left-enter,
+.slide-right-leave-active {
+	-webkit-transform: translate(100%,0);
+	transform: translate(100%,0);
+}
+
+.slide-left-leave-active,
+.slide-right-enter {
+	-webkit-transform: translate(-100%,0);
+	transform: translate(-100%,0);
+}
+/*弹窗 取消  确定  按钮颜色*/
+
+.weui-dialog__btn_primary {
+	color: #f90!important;
+}
+
+.weui-dialog__btn_default {
+	color: #353535!important;
+}
+/*单选框颜色*/
+
+.vux-check-icon>.weui-icon-success:before,
+.vux-check-icon>.weui-icon-success-circle:before {
+	color: #1c70f1!important;
+}
+/*地址选择框 完成按钮 颜色*/
+
+.vux-popup-header-right {
+	color: #FF9900!important;
+}
+
+/*input框架  高度100%*/
+.weui-cell__bd{
+	height: 100%;
+	input{
+		height: 100%;
+	}
 }
 </style>
-=======
-	#app {
-		font-family: 'Avenir', Helvetica, Arial, sans-serif;
-		-webkit-font-smoothing: antialiased;
-		-moz-osx-font-smoothing: grayscale;
-	}
-	
-	.child-view {
-		margin-top: 46px;
-		width: 100%;
-		height: 100%;
-	}
-	
-	.admin {
-		transition: all .5s cubic-bezier(.55, 0, .1, 1);
-	}
-	
-	.slide-left-enter,
-	.slide-right-leave-active {
-		-webkit-transform: translate(100%,0);
-		transform: translate(100%,0);
-	}
-	
-	.slide-left-leave-active,
-	.slide-right-enter {
-		-webkit-transform: translate(-100%,0);
-		transform: translate(-100%,0);
-	}
-	/*弹窗 取消  确定  按钮颜色*/
-	
-	.weui-dialog__btn_primary {
-		color: #f90!important;
-	}
-	
-	.weui-dialog__btn_default {
-		color: #353535!important;
-	}
-	/*单选框颜色*/
-	
-	.vux-check-icon>.weui-icon-success:before,
-	.vux-check-icon>.weui-icon-success-circle:before {
-		color: #1c70f1!important;
-	}
-	/*地址选择框 完成按钮 颜色*/
-	
-	.vux-popup-header-right {
-		color: #FF9900!important;
-	}
-	
-	/*input框架  高度100%*/
-	.weui-cell__bd{
-		height: 100%;
-		input{
-			height: 100%;
-		}
-	}
-</style>
->>>>>>> 490f95ef7ab7b38f6c95f1ab0b661dac0c7043e6

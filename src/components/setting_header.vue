@@ -1,13 +1,7 @@
 <template>
-<<<<<<< HEAD
-    <div>
-        <x-header :left-options="{backText: ''}" style="background:#fff;border-bottom: 1px solid #D8DFF0;" class="header">{{ title }}</x-header>
-    </div>
-=======
 	<div>
 		<x-header :left-options="{backText: '',preventGoBack:'true'}" style="background:#fff;" class="header" @on-click-back="goBack">{{ title }}</x-header>
 	</div>
->>>>>>> 490f95ef7ab7b38f6c95f1ab0b661dac0c7043e6
 </template>
 
 <script>

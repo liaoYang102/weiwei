@@ -16,6 +16,7 @@ import shop_product from '@/views/shop/product'
 import all_shops from '@/views/shop/all_shops'
 import order_details from '@/views/shop/order_details'
 import theme_goods from '@/views/shop/theme_goods'
+import shop_details from '@/views/shop/shop_details'
 
 const anni = [
     {
@@ -101,6 +102,11 @@ const anni = [
       path: '/shop/theme_goods',
       name: 'theme_goods',
       component: theme_goods
+    },
+    {
+      path: '/shop/shop_details',
+      name: 'shop_details',
+      component: shop_details
     }
   ]
 
