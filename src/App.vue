@@ -1,10 +1,8 @@
 <template>
 	<div id="app" v-cloak>
-		<div class="child-view">
-			<transition :name="transitionName">
-				<router-view class='admin' />
-			</transition>
-		</div>
+		<transition :name="transitionName">
+			<router-view class='child-view' />
+		</transition>
 	</div>
 </template>
 
@@ -32,8 +30,8 @@
 				console.log(index)
 			}
 		},
-		watch: {　　　
-			'$route' (to, from) {　　　
+		watch: {
+			'$route' (to, from) {
 				console.log(this.$store.state.page.show)
 				this.transitionName = this.$store.state.page.show ? 'slide-left' : 'slide-right'
 				this.$store.state.page.show = !this.$store.state.page.show
@@ -43,7 +41,6 @@
 </script>
 
 <style lang='less'>
-<<<<<<< HEAD
 html,body{
   height: 100%;
 }
@@ -53,24 +50,12 @@ html,body{
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-</style>
-=======
-	#app {
-		font-family: 'Avenir', Helvetica, Arial, sans-serif;
-		-webkit-font-smoothing: antialiased;
-		-moz-osx-font-smoothing: grayscale;
-	}
-	
 	.child-view {
-		margin-top: 46px;
+		transition: all .5s cubic-bezier(.55, 0, .1, 1);
+		padding-top: 46px;
 		width: 100%;
 		height: 100%;
 	}
-	
-	.admin {
-		transition: all .5s cubic-bezier(.55, 0, .1, 1);
-	}
-	
 	.slide-left-enter,
 	.slide-right-leave-active {
 		-webkit-transform: translate(100%,0);
@@ -111,4 +96,3 @@ html,body{
 		}
 	}
 </style>
->>>>>>> 490f95ef7ab7b38f6c95f1ab0b661dac0c7043e6
