@@ -97,9 +97,6 @@ export default {
 		          this.onFetching = false
 		        }, 2000)
 		      }
-<<<<<<< HEAD
-	    }
-=======
 	    },
 	    logIndexChange (arg) {
           	console.log(arg)
@@ -107,7 +104,6 @@ export default {
         show (index) {
           	this.$refs.previewer.show(index)
         }
->>>>>>> ae29c8370ff40d6e4311b0a2118ba248b901d754
 	}
 }
 </script>

@@ -12,11 +12,7 @@ import './assets/icons_font/iconfont.css'
 import 'mint-ui/lib/style.css'
 import './style/global.css'
 import './config/wy_rem'
-<<<<<<< HEAD
-import { Group, DatetimeRange, Cell, Tab, TabItem, CellBox, XHeader, Scroller, LoadMore,TransferDom, Confirm, Popup, Toast, Swiper, InlineXNumber, CheckIcon, CellFormPreview, XSwitch, XNumber, Badge, Previewer, Timeline, TimelineItem } from 'vux'
-=======
-import { Group, DatetimeRange, Cell, Tab, TabItem, CellBox, XHeader, Scroller, LoadMore,TransferDom, Confirm, Popup, Toast, Swiper, InlineXNumber, CheckIcon, CellFormPreview, XSwitch, XNumber, Badge, Rater, XTextarea, Previewer} from 'vux'
->>>>>>> ae29c8370ff40d6e4311b0a2118ba248b901d754
+import { Group, DatetimeRange, Cell, Tab, TabItem, CellBox, XHeader, Scroller, LoadMore,TransferDom, Confirm, Popup, Toast, Swiper, InlineXNumber, CheckIcon, CellFormPreview, XSwitch, XNumber, Badge, Previewer, Timeline, TimelineItem, Rater, XTextarea } from 'vux'
 import FastClick from 'fastclick'
 
 FastClick.attach(document.body);
@@ -42,15 +38,11 @@ Vue.component('cell-form-preview', CellFormPreview)
 Vue.component('x-switch', XSwitch)
 Vue.component('x-number', XNumber)
 Vue.component('badge', Badge)
-<<<<<<< HEAD
 Vue.component('previewer', Previewer)
 Vue.component('timeline', Timeline)
 Vue.component('timeline-item', TimelineItem)
-=======
 Vue.component('rater', Rater)
 Vue.component('x-textarea', XTextarea)
-Vue.component('previewer', Previewer)
->>>>>>> ae29c8370ff40d6e4311b0a2118ba248b901d754
 
 Vue.prototype.$http = axios  //定义axios组件用法  this.$http(opt).then(fn)
 axios.defaults.baseURL = '/api';
