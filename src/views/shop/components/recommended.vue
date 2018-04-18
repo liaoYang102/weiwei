@@ -11,9 +11,11 @@
 									<div class="ul-left"><img src="../../../assets/images/shop/product.png"></div>
 									<div class="ul-center">
 										<span>{{ item.name}}</span><br>
-										<span class="gray">{{ item.date}}</span><br>
-										<span class="money-red">￥{{ item.money}}</span>
-										<div class="score-num">+{{ item.score}}积分</div>
+										<span class="gray">{{ item.date}}</span>
+										<p class="shopPrice">
+											<span class="priceNum">￥{{ item.money}}</span> 
+											<span class="shopAcount">+{{ item.score}}积分</span>
+										</p>
 									</div>
 									<div class="ul-right">
 										<span>了解详情</span>
@@ -103,20 +105,29 @@
 			font-size: 0.24rem;
 			color: #90A2C7;
 		}
-		.money-red{
-		    font-size: 0.32rem;
-		    color: #F23030;
-		}
-		.score-num{
-			display:inline-block;
-		    background-image: linear-gradient(238deg, #5EC3FF 0%, #106FE3 100%);
-		    text-align: center;
-		    color:#fff;
-		    font-size: 0.22rem;
-		    height: 0.36rem;
-		    border-radius: 0.04rem;
-		    margin: 0.14rem 0 0.26rem 0;
-		    padding: 0.01rem 0.08rem;
+		.shopPrice{
+			margin-top: 0.07rem;
+			.priceNum{
+				display: inline-block;
+				
+				font-size: 0.32rem;
+				color: #F23030;
+				font-weight: 700;
+				vertical-align: middle;
+			}
+			.shopAcount{
+				font-weight: normal;
+				display: inline-block;
+				padding-left: 0.06rem;
+				padding-right: 0.08rem;
+				height: 0.4rem;
+				text-align: center;
+				font-size: 0.24rem;
+				line-height: 0.4rem;
+				background-image: linear-gradient(238deg, #5EC3FF 0%, #106FE3 100%);
+				border-radius: 0.04rem;
+				color:#fff;
+			}
 		}
 		
 	}
