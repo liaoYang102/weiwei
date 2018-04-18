@@ -4,7 +4,8 @@ import t_success from '@/views/shop/t_success'
 import my_order from '@/views/shop/my_order'
 import shop from '@/views/shop/index'
 import shop_cart from '@/views/shop/shop_cart'
-
+import confirm from '@/views/shop/confirm'
+import logistics from '@/views/shop/logistics'
 
 const liaoy = [
 	{
@@ -41,6 +42,16 @@ const liaoy = [
       path: '/shop/shop_cart',
       name:'shop_cart',
       component: shop_cart
+    },
+    {
+      path: '/shop/confirm',
+      name:'confirm',
+      component: confirm
+    },
+    {
+      path: '/shop/logistics',
+      name:'logistics',
+      component: logistics
     }
 ]
 

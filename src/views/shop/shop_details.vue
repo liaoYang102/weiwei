@@ -1,5 +1,6 @@
 <template>
 	<section class="shop_details">
+		<tabDetail></tabDetail>
 		<div v-if="tabTitle == '评价'" style="background: #fff">
 			<comments></comments>
 			<footers></footers>
@@ -91,9 +92,10 @@
 import specifications from './components/specifications' 
 import comments from './components/comments'
 import footers from './components/shop_details_footer'
+import tabDetail from './components/tab_detail'
 export default {
 	components: {
-		specifications, comments, footers
+		specifications, comments, footers, tabDetail
 	},
 	data(){
 		return {
