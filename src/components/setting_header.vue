@@ -13,7 +13,6 @@
 			goBack() {
 				this.$store.state.page.show = true
 				window.history.go(-1)
-				this.$store.state.page.show = ''
 			}
 		}
 	}
@@ -30,6 +29,7 @@
 	.header{
 		position: fixed!important;
 		top: 0;
+		left: 0;
 		width: 100%;
 		z-index: 1111;
 	}

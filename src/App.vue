@@ -30,8 +30,8 @@
 				console.log(index)
 			}
 		},
-		watch: {　　　
-			'$route' (to, from) {　　　
+		watch: {
+			'$route' (to, from) {
 				console.log(this.$store.state.page.show)
 				this.transitionName = this.$store.state.page.show ? 'slide-left' : 'slide-right'
 				this.$store.state.page.show = !this.$store.state.page.show
@@ -52,11 +52,11 @@ html,body{
 }
 
 .child-view {
-	margin-top: 46px;
 	transition: all .5s cubic-bezier(.55, 0, .1, 1);
-	
+	padding-top: 46px;
+	width: 100%;
+	height: 100%;
 }
-
 .slide-left-enter,
 .slide-right-leave-active {
 	-webkit-transform: translate(100%,0);
@@ -88,7 +88,6 @@ html,body{
 .vux-popup-header-right {
 	color: #FF9900!important;
 }
-
 /*input框架  高度100%*/
 .weui-cell__bd{
 	height: 100%;
