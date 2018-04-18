@@ -63,13 +63,13 @@
 .footer .vux-badge{
 	position: absolute;
 	border-radius: 0.3rem;
-	height: 0.25rem;
-	width: 0.2rem;
+	height: 0.3rem;
+	width: 0.25rem;
 	font-size: 0.18rem;
-	line-height: 0.25rem;
+	line-height: 0.32rem;
 	text-align: left;
 	left: 27%;
-	top: 13%;
+	top: 12%;
 	padding: 0 0.08rem 0 0.02rem;
 }
 </style>

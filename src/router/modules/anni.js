@@ -17,6 +17,7 @@ import all_shops from '@/views/shop/all_shops'
 import order_details from '@/views/shop/order_details'
 import theme_goods from '@/views/shop/theme_goods'
 import shop_details from '@/views/shop/shop_details'
+import write_comments from '@/views/shop/write_comments'
 
 const anni = [
     {
@@ -107,6 +108,11 @@ const anni = [
       path: '/shop/shop_details',
       name: 'shop_details',
       component: shop_details
+    },
+    {
+      path: '/shop/write_comments',
+      name: 'write_comments',
+      component: write_comments
     }
   ]
 
