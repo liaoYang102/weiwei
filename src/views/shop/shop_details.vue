@@ -2,6 +2,7 @@
 	<section class="shop_details">
 		<div v-if="tabTitle == '评价'" style="background: #fff">
 			<comments></comments>
+			<footers></footers>
 		</div>
 
 		<div v-else>
@@ -77,18 +78,7 @@
 				</div>
 			</div>
 
-			<div class="footer">
-				<div class="footer_icon">
-					<img src="../../assets/images/shop/customer.png"><br>
-					<span>客服</span>
-				</div>
-				<div class="footer_icon">
-					<img src="../../assets/images/shop/cart.png"><br>
-					<span>购物车</span>
-				</div>
-				<div class="footer-btn btn_green">加入购物车</div>
-				<div class="footer-btn btn_blue">立即购买</div>
-			</div>
+			<footers></footers>
 
 			<specifications ref='sp'></specifications>
 
@@ -100,9 +90,10 @@
 <script>
 import specifications from './components/specifications' 
 import comments from './components/comments'
+import footers from './components/shop_details_footer'
 export default {
 	components: {
-		specifications, comments
+		specifications, comments, footers
 	},
 	data(){
 		return {
@@ -264,43 +255,6 @@ export default {
 					font-size: 0.24rem;
 				}
 			}
-		}
-	}
-
-	.footer{
-		position: fixed;
-		bottom: 0;
-		width: 100%;
-		height: 1rem;
-		background: #FFF;
-		border-top: 0.01rem solid #eeeeee;
-		.footer_icon{
-			width: 18%;
-			float: left;
-			font-size: 0.2rem;
-			color: #7386AD;
-			text-align: center;
-			border-right: 0.01rem solid #eeeeee;
-			margin: auto;
-			padding-top: 0.16rem;
-			padding-bottom: 0.09rem;
-			img{
-				width: 30%;
-			}
-		}
-		.footer-btn{
-			width: 31.8%;
-			text-align: center;
-			font-size: 0.32rem;
-			color: #FFFFFF;
-			float: left;
-			padding: 0.26rem 0 0.29rem 0;
-		}
-		.btn_green{
-			background: #00DB83;
-		}
-		.btn_blue{
-			background: #336FFF;
 		}
 	}
 }
