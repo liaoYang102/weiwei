@@ -65,7 +65,6 @@ html,body{
 	transition: all .5s cubic-bezier(.55, 0, .1, 1);
 	padding-top: 46px;
 	width: 100%;
-	height: 100%;
 }
 .slide-left-enter,
 .slide-right-leave-active {

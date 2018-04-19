@@ -5,36 +5,38 @@
 		    	<div class="specifications">
 		    		<div class="sp-content">
 		    			<div class="sp-panel">
-		    				<div class="ab-img"><img src="../../../assets/images/shop/close.png"></div>
+		    				<div class="ab-img"><img src="../../../assets/images/shop/close.png" @click="close"></div>
 		    				<img src="../../../assets/images/shop/shop4.png">
 		    				<div class="sp-text">
 		    					<span class="sp-red">￥3598</span>
 		    					<div class="sp-score">+266积分</div>
 		    					<div class="sp-gray">库存7282件</div>
-		    					<div>已选“36”</div>
+		    					<div>已选
+		    						<span v-for="(item,index) in list3">“{{ item.options}}” </span>
+		    					</div>
 		    				</div>
 		    			</div>
 
 		    			<div class="sp-color">
 		    				<div>颜色分类</div>
 		    				<div class="sp-color-li">
-		    					<li class="sp-li-btn">粉色尊贵版</li>
+		    					<li class="sp-li-btn" v-for="(item,index) in list1" :class="{'sp-li-selected':act1==index}" @click="active(index)">{{ item.name}}</li>
 		    				</div>
 		    			</div>
 
 		    			<div class="sp-color">
 		    				<div>颜色分类</div>
 		    				<div class="sp-color-li">
-		    					<li class="sp-li-num">1</li>
+		    					<li class="sp-li-num" v-for="(item,index) in list2" :class="{'sp-li-selected':act2==index}" @click="active2(index)">{{ item.num}}</li>
 		    				</div>
 		    			</div>
 
 		    			<div class="sp-buynum">
 		    				<div class="sp-buyname">购买数量</div>
 		    				<div class="sp-number">
-		    					<div class="minus">-</div>
-		    					<div class="num">1</div>
-		    					<div class="add">+</div>
+		    					<div class="minus" @click="minus">-</div>
+		    					<div class="num">{{ num}}</div>
+		    					<div class="add" @click="add">+</div>
 		    				</div>
 		    			</div>
 		    		</div>
@@ -49,11 +51,53 @@
 export default {
 	data(){
 		return {
-			show1: false
+			show1: false,
+			act1: 0,
+			act2: 0,
+			list1:[
+				{ name: '粉色尊贵版'},
+				{ name: '粉色尊贵版'},
+				{ name: '粉色尊贵版'},
+				{ name: '粉色尊贵版'}
+			],
+			list2:[
+				{ num: '1'},
+				{ num: '2'},
+				{ num: '3'}
+			],
+			num: 1,
+			list3: [
+				{ options: '粉色尊贵版'},
+				{ options: '1'}
+			]
 		}
 	},
 	methods: {
-		
+		active:function (index) {
+	        this.act1 = index
+	        let vm = this;
+	        let option = vm.list1[index].name
+	        let obj = { options: option}
+	        console.log('-=-=', vm.list3)
+	        vm.list3.push(obj)
+	        
+	    },
+	    active2:function (index) {
+	        this.act2 = index
+	    },
+	    add:function(){
+	    	this.num++;
+	    },
+	    minus: function(){
+	    	this.num--;
+	    	if(this.num <= 1){
+	    		this.num = 1;
+	    	}
+	    },
+	    close: function(){
+	    	this.show1 = false
+	    }
+
 	}
 }	
 </script>
@@ -134,9 +178,11 @@ li{
 						float: left;
 						margin-right: 0.24rem;
 						margin-bottom: 0.2rem;
+						padding: 0.08rem 0;
 					}
 					.sp-li-selected{
 						background: #336FFF;
+						color: #fff;
 					}
 					.sp-li-num{
 						float: left;

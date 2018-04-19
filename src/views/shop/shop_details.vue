@@ -1,9 +1,17 @@
 <template>
 	<section class="shop_details">
-		<tabDetail></tabDetail>
+		<x-header :left-options="{backText: '',preventGoBack:'true'}" title="slot:overwrite-title"  style="background:#fff;" class="tab_shop">
+		    <div class="overwrite-title-demo" slot="overwrite-title">
+		        <tab bar-position="bottom" custom-bar-width="40px">
+			      <tab-item :selected="tabTitle == '商品'" @on-item-click="onShop">商品</tab-item>
+			      <tab-item :selected="tabTitle == '详情'" @on-item-click="scrollTo">详情</tab-item>
+			      <tab-item :selected="tabTitle == '评价'" @on-item-click="onItemClick">评价</tab-item>
+			    </tab>
+		    </div>
+	    </x-header>
+
 		<div v-if="tabTitle == '评价'" style="background: #fff">
 			<comments></comments>
-			<footers></footers>
 		</div>
 
 		<div v-else>
@@ -60,7 +68,7 @@
 							<div  class="comments_date">2018.03.30 颜色:蓝色; 尺码:170/92A/M</div>
 						</div>
 						
-						<div class="comments_btn">查看全部评价</div>
+						<div class="comments_btn" @click="view">查看全部评价</div>
 					</div>
 				</div>
 			</div>
@@ -73,16 +81,27 @@
 						<p>缤纷绽放 尽享喜悦</p>
 						<span>—— 芬兰经典品牌Marimekko合作系列</span>
 						<p class="text_many">
-							芬兰经典设计品牌Marimekko创立于1951年,以原始版画和色彩闻名于世。
+							芬兰经典设计品牌Marimekko创立于1951年，以原始版画和色彩闻名于世。其理念是为人们带来快乐的每一天。优衣库携手Marimekko，推出新的服装合作系列。本次的特别合作系列，采用简约、富有创造力、功能性的设计，为您带来大胆不失活力的单品。
 						</p>
 					</div>
 				</div>
 			</div>
 
-			<footers></footers>
-
 			<specifications ref='sp'></specifications>
+		</div>
 
+		<div class="footer">
+			<div class="footer_icon">
+				<img src="../../assets/images/shop/customer.png"><br>
+				<span>客服</span>
+			</div>
+			<div class="footer_icon">
+				<img src="../../assets/images/shop/cart.png">
+				<badge text="12"></badge><br>
+				<span>购物车</span>
+			</div>
+			<div class="footer-btn btn_green">加入购物车</div>
+			<div class="footer-btn btn_blue">立即购买</div>
 		</div>
 		
 	</section>
@@ -91,21 +110,41 @@
 <script>
 import specifications from './components/specifications' 
 import comments from './components/comments'
-import footers from './components/shop_details_footer'
-import tabDetail from './components/tab_detail'
 export default {
 	components: {
-		specifications, comments, footers, tabDetail
+		specifications, comments
 	},
 	data(){
 		return {
-			tabTitle: '评价'
+			tabTitle: '商品'
 		}
+	},
+	mounted: function(){
+		this.onShop()
 	},
 	methods: {
 		showMask: function() {
 		    this.$refs.sp.show1 = true;
-		}
+		},
+		onShop(){
+			this.tabTitle = '商品'
+			window.scrollTo(0, 0);
+			console.log('---11',this.tabTitle)
+		},
+		scrollTo(){
+			this.tabTitle = '详情';
+			window.setTimeout(function(){
+				window.scrollTo(0, 720);
+			},0)
+		},
+		onItemClick () {
+			this.tabTitle = '评价';
+			window.scrollTo(0, 0);
+	    },
+	    view(){
+	    	this.tabTitle = '评价';
+	    	window.scrollTo(0, 0);
+	    }
 	}
 }	
 </script>
@@ -259,6 +298,43 @@ export default {
 			}
 		}
 	}
+
+	.footer{
+		position: fixed;
+		bottom: 0;
+		width: 100%;
+		height: 1rem;
+		background: #FFF;
+		border-top: 0.01rem solid #eeeeee;
+		.footer_icon{
+			width: 18%;
+			float: left;
+			font-size: 0.2rem;
+			color: #7386AD;
+			text-align: center;
+			border-right: 0.01rem solid #eeeeee;
+			margin: auto;
+			padding-top: 0.16rem;
+			padding-bottom: 0.09rem;
+			img{
+				width: 30%;
+			}
+		}
+		.footer-btn{
+			width: 31.8%;
+			text-align: center;
+			font-size: 0.32rem;
+			color: #FFFFFF;
+			float: left;
+			padding: 0.26rem 0 0.29rem 0;
+		}
+		.btn_green{
+			background: #00DB83;
+		}
+		.btn_blue{
+			background: #336FFF;
+		}
+	}
 }
 </style>
 
@@ -292,5 +368,34 @@ export default {
 }
 .shop_cell .vux-no-group-title{
 	margin-top: 0.22rem;
+}
+#app .vux-header .vux-header-left .left-arrow:before {
+	border: 1px solid #222;
+	border-width: 1px 0 0 1px;
+}
+
+#app .vux-header .vux-header-title {
+	color: #333;
+}
+.vux-header{
+	position: fixed!important;
+	top: 0;
+	width: 100%;
+	z-index: 1111;
+}
+.tab_shop .vux-tab-ink-bar{
+	bottom:4px;
+}
+.footer .vux-badge{
+	position: absolute;
+	border-radius: 0.3rem;
+	height: 0.3rem;
+	width: 0.25rem;
+	font-size: 0.18rem;
+	line-height: 0.32rem;
+	text-align: left;
+	left: 27%;
+	top: 12%;
+	padding: 0 0.08rem 0 0.02rem;
 }
 </style>

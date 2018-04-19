@@ -51,14 +51,6 @@
 
 		<div class="content">
 			<ul class="ul-content">
-				<!-- <div class="ul-top">
-					<div class="ul-left"><img src="../../assets/images/shop/product.png"></div>
-					<div class="ul-right">
-						<span>女装U宽腿牛仔裤(水洗产品)宽腿牛仔裤宽腿宽腿牛仔裤</span>
-						<p>X1</p>
-					</div>
-				</div>
- -->
 				<group>
 				    <cell-form-preview :list="list"></cell-form-preview>
 				    <cell-form-preview :list="list2"></cell-form-preview>
@@ -69,11 +61,8 @@
 			    	<span>返积分<span class="score-blue">200</span>点</span>
 			    </div>
 			</ul>
-			
-			<!-- <ul class="recommended">
-				<div class="re-title">为你推荐</div> -->
+		
 			<recommended></recommended>
-			<!-- </ul> -->
 		</div>
 
 
