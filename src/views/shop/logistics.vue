@@ -16,16 +16,26 @@
 		<div class="time-line">
 			<timeline>
 				<timeline-item v-for="(i, index) in count" :key="index">
-					<h4 :class="[i === 1 ? 'recent' : '']" @click="test">Timeline Node {{i + 1}}</h4>
+					<h4 :class="[i === 1 ? 'recent' : '']" >Timeline Node {{i + 1}}</h4>
 					<p :class="[i === 1 ? 'recent' : '']" class='bottom'>index {{i + 1}}</p>
 				</timeline-item>
 			</timeline>
+		</div>
+		<div class="recommended">
+			<recommended></recommended>
+		</div>
+		<div class="comment">
+			<div class="fr">
+				<div class="fl">在线客服</div>
+				<div class="fl dispatch">派件评价</div>
+			</div>
 		</div>
 	</section>
 </template>
 
 <script>
 	import settingHeader from '../../components/setting_header'
+	import recommended from './components/recommended'
 	export default{
 		data(){
 			return{
@@ -34,12 +44,10 @@
 			}
 		},
 		components: {
-	        settingHeader
+	        settingHeader,recommended
 	    },
 	    methods:{
-	    	test(){
-	    		alert('we');
-	    	}
+	    	
 	    }
 	}
 </script>
@@ -95,7 +103,28 @@
 				}
 			}
 		}
-		
+		.comment{
+			height: 1rem;
+			.fr{
+				margin-right: 0.2rem;
+				margin-top: 0.2rem;
+				.fl{
+					margin-left: 0.2rem;
+					width:1.5rem;
+					height:0.56rem; 
+					border-radius: 4px ;
+					border:1px solid #90A2C7;
+					font-size:0.28rem;
+					color:#90A2C7;
+					text-align: center;
+					line-height: 0.56rem
+				}
+				.dispatch{
+					color: #336FFF;
+					border-color: #336FFF;
+				}
+			}
+		}
 	}
 </style>
 

@@ -6,6 +6,7 @@ import shop from '@/views/shop/index'
 import shop_cart from '@/views/shop/shop_cart'
 import confirm from '@/views/shop/confirm'
 import logistics from '@/views/shop/logistics'
+import refund from '@/views/shop/refund'
 
 const liaoy = [
 	{
@@ -53,6 +54,11 @@ const liaoy = [
       path: '/shop/logistics',
       name:'logistics',
       component: logistics
+    },
+    {
+      path: '/shop/refund',
+      name:'refund',
+      component: refund
     }
 ]
 
