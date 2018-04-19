@@ -26,7 +26,6 @@
 			</div>
 		</div>
 		<div class="bottom">
-			<p class="recommend">为你推荐</p>
 			<recommended></recommended>
 		</div>			
 	</section>

@@ -1,7 +1,7 @@
 <template>
 	<div id="app" v-cloak>
 		<transition :name="transitionName">
-			<router-view class='child-view' />
+			<router-view :class="[show ? 'child-view' : '']" />
 		</transition>
 	</div>
 </template>
@@ -12,11 +12,20 @@
 		name: 'App',
 		data() {
 			return {
-				transitionName: '' // 默认动态路由变化为slide-right
+				transitionName: '', // 默认动态路由变化为slide-right
+				show:''
 			}
 		},
 		created() {
-			console.log(this.$store.state.page.show)
+			var ua = navigator.userAgent.toLowerCase();
+			var isWeixin = ua.indexOf('micromessenger') != -1;
+			if (isWeixin) {
+				this.show = false;
+			    return true;
+			}else{
+				this.show = true;
+			    return false;
+			}
 		},
 		components: {
 			ButtonTab,

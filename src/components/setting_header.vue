@@ -1,11 +1,27 @@
 <template>
-	<div>
+	<div v-if='show'>
 		<x-header :left-options="{backText: '',preventGoBack:'true'}" style="background:#fff;" class="header" @on-click-back="goBack">{{ title }}</x-header>
 	</div>
 </template>
 
 <script>
 	export default {
+		data(){
+			return{
+				show:''
+			}
+		},
+		created(){
+			var ua = navigator.userAgent.toLowerCase();
+			var isWeixin = ua.indexOf('micromessenger') != -1;
+			if (isWeixin) {
+				this.show = false;
+			    return true;
+			}else{
+				this.show = true;
+			    return false;
+			}
+		},
 		props: {
 			title: String //定义传值的类型<br>    }
 		},
@@ -31,6 +47,6 @@
 		top: 0;
 		left: 0;
 		width: 100%;
-		z-index: 1111;
+		z-index: 111;
 	}
 </style>
