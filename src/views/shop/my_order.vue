@@ -131,7 +131,7 @@
 				</div>
 				<div class="box-bottom">
 					<div class="shop-btn btn-status1 fr" @click="goTsuccess">确认收货</div>
-					<div class="shop-btn fr">退货</div>
+					<div class="shop-btn fr" @clcik="goRefund">退货</div>
 					<div class="shop-btn fr" @click="goLogistics">查看物流</div>
 				</div>
 	        </div>
@@ -189,6 +189,9 @@
 		    },
 		    goTsuccess(){
 		    	this.$router.push({ path: '/shop/t_success'})
+		    },
+		    goRefund(){
+		    	this.$router.push({ path: '/shop/refund'})
 		    }
 		}
 	}

@@ -16,7 +16,6 @@
 
 		<div v-else>
 			<div><img src="../../assets/images/shop/theme_banner0.png" style="width: 100%;"></div>
-
 			<div class="shop_content">
 				<div class="shop">
 					<div class="shop_title"><span>女装U宽腿牛仔裤(水洗产品)宽腿牛仔裤宽腿宽腿牛仔裤</span></div>
@@ -95,7 +94,7 @@
 				<img src="../../assets/images/shop/customer.png"><br>
 				<span>客服</span>
 			</div>
-			<div class="footer_icon">
+			<div class="footer_icon" @click="goShopcart">
 				<img src="../../assets/images/shop/cart.png">
 				<badge text="12"></badge><br>
 				<span>购物车</span>
@@ -127,7 +126,11 @@ export default {
 		    this.$refs.sp.show1 = true;
 		},
 		onShop(){
-			this.tabTitle = '商品'
+			if(this.$route.params.title != null&& this.$route.params !=null){
+				this.tabTitle = this.$route.params.title;
+			}else{
+				this.tabTitle = '商品'
+			}
 			window.scrollTo(0, 0);
 			console.log('---11',this.tabTitle)
 		},
