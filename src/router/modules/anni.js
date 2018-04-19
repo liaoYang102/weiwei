@@ -85,38 +85,42 @@ const anni = [
       name:'score_log',
       component: score_log
     },
+
+
+
+    // 商城模块
     {
-      path: '/shop/product',
+      path: '/shop/product',//商品分类
       name:'shop_product',
       component: shop_product
     },
     {
-      path: '/shop/all_shops',
+      path: '/shop/all_shops',//所有商品
       name:'all_shops',
       component: all_shops
     },
     {
-      path: '/shop/order_details',
+      path: '/shop/order_details',//订单详情，兑换详情
       name: 'order_details',
       component: order_details
     },
     {
-      path: '/shop/theme_goods',
+      path: '/shop/theme_goods',//主题商品
       name: 'theme_goods',
       component: theme_goods
     },
     {
-      path: '/shop/shop_details',
+      path: '/shop/shop_details',//商城详情
       name: 'shop_details',
       component: shop_details
     },
     {
-      path: '/shop/write_comments',
+      path: '/shop/write_comments',//商品评论
       name: 'write_comments',
       component: write_comments
     },
     {
-      path: '/shop/refund_details',
+      path: '/shop/refund_details',//退款详情
       name: 'refund_details',
       component: refund_details
     }

@@ -37,7 +37,7 @@
 					</div>
 				</div>
 				<div class="box-bottom">
-					<div class="shop-btn btn-status1 fr">付款</div>
+					<div class="shop-btn btn-status1 fr" @click="goConfirm">付款</div>
 					<div class="shop-btn fr">取消订单</div>
 				</div>
 	        </div>
@@ -99,8 +99,8 @@
 					</div>
 				</div>
 				<div class="box-bottom">
-					<div class="shop-btn btn-status1 fr">确认收货</div>
-					<div class="shop-btn fr">查看物流</div>
+					<div class="shop-btn btn-status1 fr" @click="goTsuccess">确认收货</div>
+					<div class="shop-btn fr" @click="goLogistics">查看物流</div>
 				</div>
 	        </div>
 	        <div class="shop-box">
@@ -130,9 +130,9 @@
 					</div>
 				</div>
 				<div class="box-bottom">
-					<div class="shop-btn btn-status1 fr">确认收货</div>
+					<div class="shop-btn btn-status1 fr" @click="goTsuccess">确认收货</div>
 					<div class="shop-btn fr">退货</div>
-					<div class="shop-btn fr">查看物流</div>
+					<div class="shop-btn fr" @click="goLogistics">查看物流</div>
 				</div>
 	        </div>
 	        <load-more tip="loading" id='loading'></load-more>
@@ -180,6 +180,15 @@
 			          this.onFetching = false
 			        }, 2000)
 			      }
+		    },
+		    goConfirm(){
+		    	this.$router.push({ path: '/shop/confirm'})
+		    },
+		    goLogistics(){
+		    	this.$router.push({ path: '/shop/logistics'})
+		    },
+		    goTsuccess(){
+		    	this.$router.push({ path: '/shop/t_success'})
 		    }
 		}
 	}
@@ -311,16 +320,10 @@
 </style>
 <style lang="less">
 	.myOrder .vux-tab-item-badge{
-		font-size: 0.16rem!important;
+		font-size: 0.16rem !important;
 		margin:auto 0 auto 0.04rem !important;
 	}
 	.myOrder .vux-tab-item{
-		font-size: 0.14rem!important;
+		font-size: 0.28rem !important;
 	}
 </style>
-<<<<<<< HEAD
-	
-</style>
-=======
-
->>>>>>> d70b72247f6dd858266846e129a79cd929200d5f

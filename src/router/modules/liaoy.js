@@ -13,8 +13,9 @@ const liaoy = [
       name:'setting',
       component: setting
     },
+    // 商城模块
     {
-      path: '/shop/o_success',
+      path: '/shop/o_success',//
       name:'o_success',
       component: o_success
     },

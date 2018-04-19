@@ -40,7 +40,7 @@
 		    				</div>
 		    			</div>
 		    		</div>
-		    		<div class="sp-btn">确定</div>
+		    		<div class="sp-btn" @click="goConfirm">确定</div>
 		    	</div>
 		  	</popup>
 		</div>
@@ -96,6 +96,9 @@ export default {
 	    },
 	    close: function(){
 	    	this.show1 = false
+	    },
+	    goConfirm(){
+	    	this.$router.push({ path: '/shop/confirm'})
 	    }
 
 	}

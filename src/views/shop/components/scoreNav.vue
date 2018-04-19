@@ -2,7 +2,7 @@
 	<div class="score-nav" v-model="scoreTitle">
 		<div class="score-top">
 			<div class="score-title">{{ title}}</div>
-			<div class="score-btn">
+			<div class="score-btn" @click="goAllshop">
 				<span>全场包邮，积分全额兑换</span>
 				<img src="../../../assets/images/shop/arrow.png">
 			</div>
@@ -12,7 +12,7 @@
 			</div>
 		</div>
 		<div class="score-list">
-			<li class="score-li" v-for="(item, index) in scorelist">
+			<li class="score-li" v-for="(item, index) in scorelist" @click="goShopdetails">
 				<div class="img"><img src="../../../assets/images/shop/1.png"></div>
 				<div class="li-text">
 					<span>{{ item.title}}</span>
@@ -52,6 +52,13 @@
 			onList(){
 				let vm = this;
 				vm.title = vm.scoreTitle;
+			},
+			goAllshop(){
+				let title = this.title
+				this.$router.push({ path: '/shop/all_shops', params: { title }})
+			},
+			goShopdetails(){
+				this.$router.push({ path: '/shop/shop_details'})
 			}
 		}
 	}

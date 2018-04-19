@@ -114,7 +114,7 @@
 				<span class="selectAll">全选</span>
 				<p class="shop-price fr">总计：<span class="priceNum">￥3598</span> <span class="shopAcount">+266积分</span></p>
 			</div>
-			<div class="fr clearing">
+			<div class="fr clearing" @click="goConfirm">
 				结算(1)
 			</div>
 	    </div>
@@ -161,6 +161,9 @@
 		    		e.target.innerHTML = '编辑';
 		    		this.item = true;
 		    	}
+		    },
+		    goConfirm(){
+		    	this.$router.push({ path:'/shop/confirm'})
 		    }
 		}
 	}

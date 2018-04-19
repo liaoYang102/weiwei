@@ -22,7 +22,7 @@
 		    	<scroller lock-x @on-scroll-bottom="onScrollBottom" ref="scrollerBottom" v-if='test'>
 		    		<div class="theme-list">
 				    	<div class="list">
-				    		<li class="li" v-for="(item,index) in themeList">
+				    		<li class="li" v-for="(item,index) in themeList" @click="goShopdetails">
 				    			<div class="img"><img src="../../assets/images/shop/goods01.png"></div>
 				    			<div class="li-text">
 				    				<span>{{ item.goodsname}}...</span>
@@ -107,6 +107,9 @@ import Swiper from './components/swiper'
 		    	}else{
 		    		themeId.style.background = '#7688d9';
 		    	}
+		    },
+		    goShopdetails(){
+		    	this.$router.push({ path: '/shop/shop_details'})
 		    }
 
 		}

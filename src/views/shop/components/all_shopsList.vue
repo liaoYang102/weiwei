@@ -4,7 +4,7 @@
             <div class="shopList">
                 <div class="all-shop">
                     
-                    <li v-for="(item,index) in scorelist">
+                    <li v-for="(item,index) in scorelist" @click="goShopdetails">
                         <div class="list" :class="{'score' : status == 0}">
                             <div class="score-exchange" v-if="status == 0">积分兑换</div>
                             <div class="score-box">
@@ -18,7 +18,7 @@
                         </div>
                     </li>
                     
-                    <li v-for="(item,index) in moneylist">
+                    <li v-for="(item,index) in moneylist" @click="goShopdetails">
                         <div class="list">
                             <div class="score-box">
                                 <img src="../../../assets/images/shop/shop1.png" alt="">
@@ -93,6 +93,9 @@ export default {
                     vm.moneylist.push(vm.list[i])
                 }
             }
+        },
+        goShopdetails(){
+            this.$router.push({ path: '/shop/shop_details'})
         }
     }
 }
