@@ -351,7 +351,7 @@
 						font-size: .28rem;
 						display: block;
 						vertical-align: bottom;
-						padding-right: .2rem;
+						padding-right: .2rem;	
 					}
 				}
 				 .product{
