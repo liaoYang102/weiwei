@@ -19,8 +19,8 @@
 					实付款：<span class="totalMoney">100积分+20.00元</span>
 				</p>
 				<div class="btn">
-					<div class="redeemDetails">兑换详情</div>
-					<div class="exchangeCenter">兑换中心</div>
+					<div class="redeemDetails" @click="goOrderdetails">兑换详情</div>
+					<div class="exchangeCenter" @click="goMyorder">兑换中心</div>
 					<div class="clear"></div>
 				</div>
 			</div>
@@ -42,6 +42,14 @@
 		},
 		components:{
 			settingHeader,recommended
+		},
+		methods:{
+			goOrderdetails(){
+				this.$router.push({ path: '/shop/order_details'})
+			},
+			goMyorder(){
+				this.$router.push({ path: '/shop/my_order'})
+			}
 		}
 	}
 </script>

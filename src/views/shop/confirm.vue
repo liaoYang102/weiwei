@@ -34,7 +34,7 @@
 						<div class="clear"></div>
 					</li>
 	        	</ul>
-	        	<div class="btn">立即支付</div>
+	        	<div class="btn" @click="goShopsuccess">立即支付</div>
 	        </div>
 	      </popup>
 	    </div>
@@ -95,6 +95,9 @@ export default {
 	methods:{
 		popup(){
 			this.show9 = true;
+		},
+		goShopsuccess(){
+			this.$router.push({ path:'/shop/o_success'})
 		}
 	}
 }

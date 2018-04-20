@@ -3,14 +3,14 @@
 		<div class="content">
 			<div class="theme-goods">
 				<div class="theme-goods-top">
-					<div class="goods-left">
+					<div class="goods-left" @click="goThemegoods">
 						<div class="text-img"><img src="../../../assets/images/shop/purchase.png"></div>
 						<div class="goods-border"></div>
 						<div>{{ list.title}}</div>
 						<div class="img"><img src="../../../assets/images/shop/12.png"></div>
 					</div>
 					<div class="goods-right">
-						<li class="goods-details" v-for="( item,index) in list.dataList">
+						<li class="goods-details" v-for="( item,index) in list.dataList" @click="goShopdetails">
 							<span>{{ item.goodsname}}</span><br>
 							<div class="gray" v-for="(tag) in item.tag">{{ tag.name}}</div>
 							<div class="right-img">
@@ -21,16 +21,7 @@
 				</div>
 
 				<div class="goods" v-if="theme == '海外购'">
-					<li class="li-goods">
-						<div class="li-left">
-							<span>韩国护肤品</span>
-							<div class="li-gray">满100减30</div>
-						</div>
-						<div class="li-right">
-							<img src="../../../assets/images/shop/6.png">
-						</div>
-					</li>
-					<li class="li-goods">
+					<li class="li-goods" @click="goProduct" v-for="(item, index) in 2" >
 						<div class="li-left">
 							<span>韩国护肤品</span>
 							<div class="li-gray">满100减30</div>
@@ -84,8 +75,16 @@
 						]
 					}
 				}
-				
 				console.log('---', vm.theme)
+			},
+			goThemegoods(){
+				this.$router.push({ path: '/shop/theme_goods'})
+			},
+			goShopdetails(){
+				this.$router.push({ path: '/shop/shop_details'})
+			},
+			goProduct(){
+				this.$router.push({ path: '/shop/product'})
 			}
 		}
 	}

@@ -1,8 +1,8 @@
 <template>
 	<section class="shop_details">
-		<x-header :left-options="{backText: '',preventGoBack:'true'}" title="slot:overwrite-title"  style="background:#fff;" class="tab_shop">
+		<x-header :left-options="{backText: '',preventGoBack:'true'}" title="slot:overwrite-title" @on-click-back="goBack" style="background:#fff;" class="tab_shop">
 		    <div class="overwrite-title-demo" slot="overwrite-title">
-		        <tab bar-position="bottom" custom-bar-width="40px">
+		        <tab bar-position="bottom" custom-bar-width="40px">	
 			      <tab-item :selected="tabTitle == '商品'" @on-item-click="onShop">商品</tab-item>
 			      <tab-item :selected="tabTitle == '详情'" @on-item-click="scrollTo">详情</tab-item>
 			      <tab-item :selected="tabTitle == '评价'" @on-item-click="onItemClick">评价</tab-item>
@@ -16,7 +16,6 @@
 
 		<div v-else>
 			<div><img src="../../assets/images/shop/theme_banner0.png" style="width: 100%;"></div>
-
 			<div class="shop_content">
 				<div class="shop">
 					<div class="shop_title"><span>女装U宽腿牛仔裤(水洗产品)宽腿牛仔裤宽腿宽腿牛仔裤</span></div>
@@ -95,13 +94,13 @@
 				<img src="../../assets/images/shop/customer.png"><br>
 				<span>客服</span>
 			</div>
-			<div class="footer_icon">
+			<div class="footer_icon" @click="goShopcart">
 				<img src="../../assets/images/shop/cart.png">
 				<badge text="12"></badge><br>
 				<span>购物车</span>
 			</div>
-			<div class="footer-btn btn_green">加入购物车</div>
-			<div class="footer-btn btn_blue">立即购买</div>
+			<div class="footer-btn btn_green" @click="goShopcart">加入购物车</div>
+			<div class="footer-btn btn_blue" @click="goConfirm">立即购买</div>
 		</div>
 		
 	</section>
@@ -127,7 +126,11 @@ export default {
 		    this.$refs.sp.show1 = true;
 		},
 		onShop(){
-			this.tabTitle = '商品'
+			if(this.$route.params.title != null&& this.$route.params !=null){
+				this.tabTitle = this.$route.params.title;
+			}else{
+				this.tabTitle = '商品'
+			}
 			window.scrollTo(0, 0);
 			console.log('---11',this.tabTitle)
 		},
@@ -144,7 +147,17 @@ export default {
 	    view(){
 	    	this.tabTitle = '评价';
 	    	window.scrollTo(0, 0);
-	    }
+	    },
+	    goShopcart(){
+	    	this.$router.push({ path: '/shop/shop_cart'})
+	    },
+	    goConfirm(){
+	    	this.$router.push({ path: '/shop/confirm'})
+	    },
+	    goBack() {
+			this.$store.state.page.show = true
+			window.history.go(-1)
+		}
 	}
 }	
 </script>

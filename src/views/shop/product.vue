@@ -5,7 +5,9 @@
 			<div class="content-left">
 				<scroller lock-x>
 					<div class="box1">
-						<div class="box1-item" v-for="(item,index) in listData" :class="{'border-left':index == itemActive}" @click.active="boxItemActive(index)"><span>{{item}}</span></div>
+						<div class="box1-item" v-for="(item,index) in listData" :class="{'border-left':index == itemActive}" @click.active="boxItemActive(index)">
+							<span>{{item}}</span>
+						</div>
 					</div>
 				</scroller>
 			</div>
@@ -19,7 +21,7 @@
 					<div class="box2">
 						<div class="title">热门品牌</div>
 						<div class="type-box clearfix">
-							<div v-for="i in item">
+							<div v-for="i in item" @click="goAllshop">
 								<span><img :src="i.img"></span>
 								<p>{{i.name}}</p>
 							</div>
@@ -93,6 +95,12 @@
 		methods: {
 			boxItemActive(index) {
 				this.itemActive = index
+				if(index === 0 || index === 1){
+					this.$router.push({ path: '/shop/theme_goods'})
+				}
+			},
+			goAllshop(){
+				this.$router.push({ path: '/shop/all_shops'})
 			}
 		},
 		components: {

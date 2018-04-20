@@ -65,11 +65,12 @@ export default {
             ],
             showMaskTop: false,
             sMaskRight: false,
-            act1: 0
+            act1: 0,
+            shopTitle: ''
         }
     },
     mounted:function(){
-        
+        // this.shopTitle = this.$router.params.title
     },
     methods: {
         showPanel: function(){

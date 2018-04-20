@@ -47,7 +47,7 @@
 			<div class="left">
 				<check-icon :value.sync="demo1">匿名</check-icon>
 			</div>
-			<div class="right">
+			<div class="right" @click="goComents">
 				提交评价
 			</div>
 		</div>
@@ -77,6 +77,9 @@ export default {
            var windowURL = window.URL || window.webkitURL;
            var formdata = new FormData();
            console.log('-')
+       },
+       goComents(){
+       		this.$router.push({name:'shop_details',params:{title: '评价'}})
        }
 	}
 }

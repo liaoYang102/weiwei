@@ -27,7 +27,7 @@
 		<div class="comment">
 			<div class="fr">
 				<div class="fl">在线客服</div>
-				<div class="fl dispatch">派件评价</div>
+				<div class="fl dispatch" @click="goWritecomments">派件评价</div>
 			</div>
 		</div>
 	</section>
@@ -47,7 +47,9 @@
 	        settingHeader,recommended
 	    },
 	    methods:{
-	    	
+	    	goWritecomments(){
+	    		this.$router.push({path: '/shop/write_comments'})
+	    	}
 	    }
 	}
 </script>

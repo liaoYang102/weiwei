@@ -41,8 +41,8 @@
 			        <radio :options="['1', '2', '3', '4','5','6','7','8']"></radio>
 			      </div>
 			    </scroller>
-	          <div class="pay-box">
-				<x-button class="add-btn" :gradients="['#1D62F0', '#19D5FD']">确定</x-button>
+	          <div class="pay-box" @click="goRefunddetails">
+				<x-button class="add-btn" :gradients="['#1D62F0', '#19D5FD']" >确定</x-button>
 			  </div>
 	        </group>
 	      </popup>
@@ -86,6 +86,9 @@
 			},
 			test(){
 				this.show1 = true;
+			},
+			goRefunddetails(){
+				this.$router.push({ path: '/shop/refund_details'})
 			}
 		}
 	}

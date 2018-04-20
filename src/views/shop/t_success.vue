@@ -19,14 +19,13 @@
 					实付款：<span class="totalMoney">100积分+20.00元</span>
 				</p> -->
 				<div class="btn">
-					<div class="redeemDetails">兑换中心</div>
-					<div class="exchangeCenter">评价商品</div>
+					<div class="redeemDetails" @click="goMyorder">兑换中心</div>
+					<div class="exchangeCenter" @click="goComment">评价商品</div>
 					<div class="clear"></div>
 				</div>
 			</div>
 		</div>
 		<div class="bottom">
-			<p class="recommend">为你推荐</p>
 			<recommended></recommended>
 		</div>			
 	</section>
@@ -43,6 +42,14 @@
 		},
 		components:{
 			settingHeader,recommended
+		},
+		methods:{
+			goMyorder(){
+				this.$router.push({ path: '/shop/my_order'})
+			},
+			goComment(){
+				this.$router.push({ path: '/shop/write_comments'})
+			}
 		}
 	}
 </script>

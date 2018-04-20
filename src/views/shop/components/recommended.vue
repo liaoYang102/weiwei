@@ -17,7 +17,7 @@
 											<span class="shopAcount">+{{ item.score}}积分</span>
 										</p>
 									</div>
-									<div class="ul-right">
+									<div class="ul-right" @click="goShopdetails">
 										<span>了解详情</span>
 									</div>
 								</div>
@@ -65,6 +65,9 @@
 			        }, 2000)
 			      }
 		    },
+		    goShopdetails(){
+		    	this.$router.push({ path: '/shop/shop_details'})
+		    }
 		}
 	}
 </script>
