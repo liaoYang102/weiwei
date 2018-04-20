@@ -19,6 +19,7 @@ import theme_goods from '@/views/shop/theme_goods'
 import shop_details from '@/views/shop/shop_details'
 import write_comments from '@/views/shop/write_comments'
 import refund_details from '@/views/shop/refund_details'
+import multi_user_mall from '@/views/multi_user_mall/index'
 
 const anni = [
     {
@@ -123,6 +124,11 @@ const anni = [
       path: '/shop/refund_details',//退款详情
       name: 'refund_details',
       component: refund_details
+    },
+    {
+      path: '/multi_user_mall',//多用户商城首页
+      name: 'multi_user_mall',
+      component: multi_user_mall
     }
   ]
 

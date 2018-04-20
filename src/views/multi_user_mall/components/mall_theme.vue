@@ -1,13 +1,8 @@
 <template>
-	<section>
-		<div class="mt">
+	<section v-model="themeTitle">
+	    <div class="mall-theme">
+	    	<div class="theme-title" :class="[themeTitle == '男子休闲'?'text':'']">{{themeTitle}}</div>
 
-			<tab :line-width="3" :scroll-threshold="4" custom-bar-width="30px" class="tab">
-		      <tab-item selected @on-item-click="onItemClick">精选</tab-item>
-		      <tab-item @on-item-click="onItemClick">我能兑换</tab-item>
-		      <tab-item @on-item-click="onItemClick">食品</tab-item>
-		      <tab-item @on-item-click="onItemClick">生活用品</tab-item>
-		    </tab>
 		    <div class="wrapper" ref="wrapper">
 				<div class="content">
 					<div class="tab-list">
@@ -28,25 +23,7 @@
     	    	    </div>
 				</div>
 			</div>
-		    <!-- <div class="tab-item">
-    	    	<scroller lock-x height='-200' @on-scroll-bottom="onScrollBottom" ref="scrollerBottom" v-if='test'>
-    	    		<div class="tab-list">
-    			    	<div class="list">
-    			    		<li class="tab-li" v-for="(item, index) in shopList" @click="goShopdetails">
-    			    			<img src="../../../assets/images/shop/shop3.png">
-    			    			<div class="tab-text"><span>{{ item.shopname}}</span></div>
-    			    			<div class="tab-tag">
-    			    				<span class="tag-red">￥{{ item.money}}</span>
-    			    				<div class="tag-bule">+{{ item.score}}积分</div>
-    			    			</div>
-    			    		</li>
-    			    	</div>
-
-    	    	        <load-more tip="loading" id='loading'></load-more>
-    	    	    </div>
-    	    	</scroller>
-		    </div> -->
-		</div>
+	    </div>
 	</section>
 </template>
 
@@ -54,6 +31,9 @@
 	import BScroll from 'better-scroll'
 	import Loading from '../../../components/loading'
 	export default {
+		props:{
+			themeTitle: String
+		},
 		data(){
 			return {
 				test: true,
@@ -121,80 +101,75 @@
 </script>
 
 <style lang="less" scoped>
-.wrapper {
-	height: 300px;
-	overflow: hidden;
-}
 li{
 	list-style: none;
-	background: #fff;
-	font-size: 0.24rem;
-	color: #1A2642;
 }
-li:nth-child(odd){
-	margin-right: 0.01rem;
-}
-.vux-loadmore{
-    display: none;
-}
-.mt{
-	margin-top: 0.2rem;
-}
-/*.tab-item{
-	margin-top: 0.02rem;
-	width: 100%;
-	background: #f5f6fa;*/
-	.tab-list{
-		margin-bottom: 0.02rem;
-		.tab-li{
-			float: left;
-			width: 49.8%;
-			img{
-				width: 100%;
-			}
-			.tab-text{
-				margin-left: 0.23rem;
-				margin-right: 0.28rem;
-				word-wrap: break-word; 
-				word-break: normal;
-			}
-			.tab-tag{
-				margin-top: 0.18rem;
-				margin-left: 0.23rem;
-				margin-bottom: 0.22rem;
-				.shopPrice{
-					.priceNum{
-						display: inline-block;
-						font-size: 0.32rem;
-						color: #F23030;
-						font-weight: 700;
-						vertical-align: middle;
-					}
-					.shopAcount{
-						font-weight: normal;
-						display: inline-block;
-						padding-left: 0.06rem;
-						padding-right: 0.08rem;
-						height: 0.4rem;
-						text-align: center;
-						font-size: 0.24rem;
-						line-height: 0.4rem;
-						background-image: linear-gradient(238deg, #5EC3FF 0%, #106FE3 100%);
-						border-radius: 0.04rem;
-						color:#fff;
+	.mall-theme{
+		width: 100%;
+		margin-top: 0.2rem;
+		margin-bottom: 0.2rem;
+		.theme-title{
+			background: #fff;
+			color: #7687D9;
+			font-size: 0.32rem;
+			text-align: center;
+			box-shadow: 0px 0.02rem 0.1rem 0px rgba(26,38,66,0.2);
+			padding: 0.28rem 0 0.27rem 0;
+			margin-bottom: 0.2rem;
+		}
+		.text{
+			color: #1A2642;
+		}
+		.wrapper {
+			height: 300px;
+			overflow: hidden;
+			background: #F5F6FA;
+		}
+		.tab-list{
+			margin-bottom: 0.02rem;
+			.tab-li{
+				float: left;
+				width: 49.8%;
+				background: #fff;
+				margin-right: 0.01rem;
+				img{
+					width: 100%;
+				}
+				.tab-text{
+					margin-left: 0.23rem;
+					margin-right: 0.28rem;
+					word-wrap: break-word; 
+					word-break: normal;
+				}
+				.tab-tag{
+					margin-top: 0.18rem;
+					margin-left: 0.23rem;
+					margin-bottom: 0.22rem;
+					.shopPrice{
+						.priceNum{
+							display: inline-block;
+							font-size: 0.32rem;
+							color: #F23030;
+							font-weight: 700;
+							vertical-align: middle;
+						}
+						.shopAcount{
+							font-weight: normal;
+							display: inline-block;
+							padding-left: 0.06rem;
+							padding-right: 0.08rem;
+							height: 0.4rem;
+							text-align: center;
+							font-size: 0.24rem;
+							line-height: 0.4rem;
+							background-image: linear-gradient(238deg, #5EC3FF 0%, #106FE3 100%);
+							border-radius: 0.04rem;
+							color:#fff;
+						}
 					}
 				}
 			}
 		}
 	}
-/*}*/
-</style>
 
-<style lang="less">
-.tab .vux-tab .vux-tab-item{
-	color: #90A2C7;
-}
-.tab .vux-tab .vux-tab-item .vux-tab-selected{
-	color: #3889FF !important;
-}
 </style>
