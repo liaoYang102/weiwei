@@ -2,7 +2,7 @@
 
 	<div class="wrapper" ref="wrapper">
 		<div class="content">
-			<div class="list" v-for="(item,index) in list" @click="ShowItem(item)">{{index}}</div>
+			<div class="list" v-for="(item,index) in list">{{index}}</div>
 		</div>
 	</div>
 
@@ -49,9 +49,6 @@
 					}
 				})
 
-			},
-			ShowItem(item) {
-				console.log(item)
 			},
 			LoadData() {
 				console.log(123)

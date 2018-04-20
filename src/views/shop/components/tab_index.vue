@@ -8,8 +8,25 @@
 		      <tab-item @on-item-click="onItemClick">食品</tab-item>
 		      <tab-item @on-item-click="onItemClick">生活用品</tab-item>
 		    </tab>
-
-		    <div class="tab-item">
+		    <div class="wrapper" ref="wrapper">
+				<div class="content">
+					<div class="tab-list">
+    			    	<div class="list">
+    			    		<li class="tab-li" v-for="(item, index) in shopList">
+    			    			<img src="../../../assets/images/shop/shop3.png">
+    			    			<div class="tab-text"><span>{{ item.shopname}}</span></div>
+    			    			<div class="tab-tag">
+    			    				<span class="tag-red">￥{{ item.money}}</span>
+    			    				<div class="tag-bule">+{{ item.score}}积分</div>
+    			    			</div>
+    			    		</li>
+    			    		<div class="clear"></div>
+    			    	</div>
+    			    	<loading v-if="show"></loading>
+    	    	    </div>
+				</div>
+			</div>
+		    <!-- <div class="tab-item">
     	    	<scroller lock-x height='-200' @on-scroll-bottom="onScrollBottom" ref="scrollerBottom" v-if='test'>
     	    		<div class="tab-list">
     			    	<div class="list">
@@ -26,16 +43,19 @@
     	    	        <load-more tip="loading" id='loading'></load-more>
     	    	    </div>
     	    	</scroller>
-		    </div>
+		    </div> -->
 		</div>
 	</section>
 </template>
 
 <script>
+	import BScroll from 'better-scroll'
+	import Loading from '../../../components/loading'
 	export default {
 		data(){
 			return {
 				test: true,
+				show:false,
 				shopList: [
 					{ shopname: 'VANS Old Skool lite黑白超轻鞋款 黑色38.5', money: '3598', score: '266'},
 					{ shopname: 'VANS Old Skool lite黑白超轻鞋款 黑色38.5', money: '3598', score: '266'},
@@ -44,27 +64,53 @@
 				]
 			}
 		},
+		components:{
+			Loading
+		},
+		mounted() {
+			// this.$nextTick(() => {
+			this.InitScroll()
+
+			// })
+		},
 		methods:{
 			onItemClick(){
 
 			},
-	        onScrollBottom(){
-		    	var load = document.getElementById("loading");
-		    	load.style.display = 'block'
-		    	if (this.onFetching) {
-			        // do nothing
-			      } else {
-			        this.onFetching = true
-			        setTimeout(() => {
-			        	load.style.display = 'none'
-			        	console.log(123);
-			          	this.$nextTick(() => {
-			            this.$refs.scrollerBottom.reset()
-			          })
-			          this.onFetching = false
-			        }, 2000)
-			      }
-		    },
+	        InitScroll() {
+				this.$nextTick(() => {
+					if(!this.scroll) {
+						this.scroll = new BScroll(this.$refs.wrapper, {
+							click: true,
+							scrollY: true,
+							pullUpLoad: {
+								threshold: -30, // 负值是当上拉到超过低部 70px；正值是距离底部距离 时，                    
+							}
+						})
+						this.scroll.on('pullingUp', (pos) => {
+							this.show = true;
+							this.LoadData()
+							this.$nextTick(function() {
+								this.scroll.finishPullUp();
+								this.scroll.refresh();
+							});
+						})
+					} else {
+						this.scroll.refresh()
+					}
+				})
+
+			},
+			LoadData() {
+				var _this = this
+				setTimeout(function(){
+					_this.show = false;
+					let obj = [{ shopname: 'VANS Old Skool lite黑白超轻鞋款 黑色38.5', money: '3598', score: '266'},
+					{ shopname: 'VANS Old Skool lite黑白超轻鞋款 黑色38.5', money: '3598', score: '266'}];
+					_this.shopList = _this.shopList.concat(obj);
+					console.log(_this.shopList);
+				},3000)
+			},
 		    goShopdetails(){
 		    	this.$router.push({ path: '/shop/shop_details'})
 		    }
@@ -73,6 +119,10 @@
 </script>
 
 <style lang="less" scoped>
+.wrapper {
+	height: 300px;
+	overflow: hidden;
+}
 li{
 	list-style: none;
 	background: #fff;
@@ -88,10 +138,10 @@ li:nth-child(odd){
 .mt{
 	margin-top: 0.2rem;
 }
-.tab-item{
+/*.tab-item{
 	margin-top: 0.02rem;
 	width: 100%;
-	background: #f5f6fa;
+	background: #f5f6fa;*/
 	.tab-list{
 		margin-bottom: 0.02rem;
 		.tab-li{
@@ -128,7 +178,7 @@ li:nth-child(odd){
 			}
 		}
 	}
-}
+/*}*/
 </style>
 
 <style lang="less">
