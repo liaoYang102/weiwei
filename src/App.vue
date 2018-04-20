@@ -22,11 +22,19 @@
 		},
 		data() {
 			return {
-				ButtonTab: '' // 默认动态路由变化为slide-right
+				show:''
 			}
 		},
 		created() {
-             console.log(this.direction)
+			var ua = navigator.userAgent.toLowerCase();
+			var isWeixin = ua.indexOf('micromessenger') != -1;
+			if (isWeixin) {
+				this.show = false;
+			    return true;
+			}else{
+				this.show = true;
+			    return false;
+			}
 		},
 		components: {
 			ButtonTab,
@@ -36,12 +44,10 @@
 			handleClick: function() {
 				this.$toast('Hello world!')
 			},
-			index(index) {
-				console.log(index)
-			}
 		},
-		watch: {　　　
-			'$route' (to, from) {　　
+		watch: {
+			'$route' (to, from) {
+				
 			}　
 		}
 	}

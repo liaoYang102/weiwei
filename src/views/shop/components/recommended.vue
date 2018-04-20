@@ -1,27 +1,36 @@
 <template>
-	<div class="ul-recommended">
-		<scroller lock-x height='-235' @on-scroll-bottom="onScrollBottom" ref="scrollerBottom" style="background-color:#F5F6FA" v-if='test'>
-			<div>
-				<group v-for="(item, index) in goodslist">
-					<cell is-link>
-						<div class="ul-top">
-							<div class="ul-left"><img src="../../../assets/images/shop/product.png"></div>
-							<div class="ul-center">
-								<span>{{ item.name}}</span><br>
-								<span class="gray">{{ item.date}}</span><br>
-								<span class="money-red">￥{{ item.money}}</span>
-								<div class="score-num">+{{ item.score}}积分</div>
-							</div>
-							<div class="ul-right">
-								<span>了解详情</span>
-							</div>
-						</div>
-				    </cell>
-				</group>
-				<load-more tip="loading" id='loading'></load-more>
+	<section>
+		<ul class="recommended">
+			<div class="re-title">为你推荐</div>
+			<div class="ul-recommended">
+				<scroller lock-x height='-235' @on-scroll-bottom="onScrollBottom" ref="scrollerBottom" style="background-color:#F5F6FA" v-if='test'>
+					<div>
+						<group v-for="(item, index) in goodslist">
+							<cell is-link>
+								<div class="ul-top">
+									<div class="ul-left"><img src="../../../assets/images/shop/product.png"></div>
+									<div class="ul-center">
+										<span>{{ item.name}}</span><br>
+										<span class="gray">{{ item.date}}</span>
+										<p class="shopPrice">
+											<span class="priceNum">￥{{ item.money}}</span> 
+											<span class="shopAcount">+{{ item.score}}积分</span>
+										</p>
+									</div>
+									<div class="ul-right" @click="goShopdetails">
+										<span>了解详情</span>
+									</div>
+								</div>
+						    </cell>
+						</group>
+						<load-more tip="loading" id='loading'></load-more>
+					</div>
+				</scroller>
 			</div>
-		</scroller>
-	</div>
+		</ul>
+	</section>
+
+	
 </template>
 
 <script>
@@ -56,11 +65,25 @@
 			        }, 2000)
 			      }
 		    },
+		    goShopdetails(){
+		    	this.$router.push({ path: '/shop/shop_details'})
+		    }
 		}
 	}
 </script>
 
 <style lang="less" scoped>
+.recommended{
+	margin-top: 0.2rem;
+	background: #fff;
+	.re-title{
+		font-size: 0.3rem;
+		color: #222222;
+		padding: 0.3rem 0;
+		padding-left: 0.18rem;
+		border-bottom: 0.01rem solid #E1E1E1;
+	}
+}
 .ul-top{
 	background: #fff;
 	font-size: 0.28rem;
@@ -85,20 +108,29 @@
 			font-size: 0.24rem;
 			color: #90A2C7;
 		}
-		.money-red{
-		    font-size: 0.32rem;
-		    color: #F23030;
-		}
-		.score-num{
-			display:inline-block;
-		    background-image: linear-gradient(238deg, #5EC3FF 0%, #106FE3 100%);
-		    text-align: center;
-		    color:#fff;
-		    font-size: 0.22rem;
-		    height: 0.36rem;
-		    border-radius: 0.04rem;
-		    margin: 0.14rem 0 0.26rem 0;
-		    padding: 0.01rem 0.08rem;
+		.shopPrice{
+			margin-top: 0.07rem;
+			.priceNum{
+				display: inline-block;
+				
+				font-size: 0.32rem;
+				color: #F23030;
+				font-weight: 700;
+				vertical-align: middle;
+			}
+			.shopAcount{
+				font-weight: normal;
+				display: inline-block;
+				padding-left: 0.06rem;
+				padding-right: 0.08rem;
+				height: 0.4rem;
+				text-align: center;
+				font-size: 0.24rem;
+				line-height: 0.4rem;
+				background-image: linear-gradient(238deg, #5EC3FF 0%, #106FE3 100%);
+				border-radius: 0.04rem;
+				color:#fff;
+			}
 		}
 		
 	}

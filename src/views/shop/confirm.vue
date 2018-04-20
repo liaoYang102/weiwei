@@ -34,7 +34,7 @@
 						<div class="clear"></div>
 					</li>
 	        	</ul>
-	        	<div class="btn">立即支付</div>
+	        	<div class="btn" @click="goShopsuccess">立即支付</div>
 	        </div>
 	      </popup>
 	    </div>
@@ -46,21 +46,18 @@
                 <div class="shopInfo">
 					<img src="../../assets/images/shop/product.png" alt="" class='fl'>
 					<div class='fl' style='padding-top:0.1rem;'>
-						<p class="shopName">女装U宽腿牛仔裤(水洗产品)宽腿牛仔裤宽腿宽腿牛仔裤</p>
+						<p class="shopName">女装U宽腿牛仔裤(水洗产品)</p>
+						<p class="shopSize">颜色:蓝色；尺码:L/170修身 <span class="fr">X4</span></p>
 						<p class="shopPrice"><span class="priceNum">￥3598</span> <span class="shopAcount">+266积分</span></p>
 					</div>
 					<div class="clear"></div>
                 </div>
-                <div class="buyNum">
-					<span class="exchange fl">兑换数量</span>
-					<div class="calculation fr">
-						<div style="text-align:center;">
-					      <inline-x-number width="58px" :min='0'></inline-x-number>
-					    </div>
-					</div>
-					<div class="clear"></div>
-                </div>
                 <cell title="店铺优惠" value="省10元：100减5" :border-intent="false"></cell>
+                <cell :border-intent="false">
+					<span slot="title" style="color:#F23030;">CGC通用余额抵扣</span>
+					<span class="banlance" style='font-size: 0.24rem;color: #90A2C7;'><x-switch title="余额: ￥23400" sytle="padding-right: 0 !important;"></x-switch></span>
+
+                </cell>
                 <cell title="兑换方式" value="积分+现金" :border-intent="false"></cell>
                 <cell title="配送方式" value="统一运费(10.00元)" :border-intent="false"></cell>
                 <cell title="积分" value="100积分" :border-intent="false"></cell>
@@ -85,6 +82,7 @@ import settingHeader from '../../components/setting_header'
 export default {
 	data(){
 		return {
+			show: false,
 			title:'确认订单',
 			show9:false,
 			demo1: true,
@@ -97,6 +95,9 @@ export default {
 	methods:{
 		popup(){
 			this.show9 = true;
+		},
+		goShopsuccess(){
+			this.$router.push({ path:'/shop/o_success'})
 		}
 	}
 }
@@ -200,6 +201,7 @@ export default {
 	.shopInfo{
 		border-top: 1px solid #D9D9D9;
 		padding: 12px 15px;
+		background-color: #F5F6FA;
 		img{
 			width: 1.52rem;
 			height: 1.52rem;
@@ -207,10 +209,16 @@ export default {
 		}
 		.shopName{
 			font-size: 0.28rem;
-			color:#333;
+			color: #1A2642;
+			font-weight: 700;
 			line-height:0.33rem;
-			width: 4.8rem;
+			width: 5.05rem;
 			word-wrap:break-word;
+		}
+		.shopSize{
+			font-size: 0.24rem;
+			color: #90A2C7;
+			line-height:0.53rem;
 		}
 		.shopPrice{
 			margin-top: 0.24rem;
@@ -225,7 +233,8 @@ export default {
 			.shopAcount{
 				font-weight: normal;
 				display: inline-block;
-				width: 1.2rem;
+				padding-left: 6px;
+				padding-right: 8px;
 				height: 0.4rem;
 				text-align: center;
 				font-size: 0.24rem;
@@ -234,14 +243,6 @@ export default {
 				border-radius: 4px;
 				color:#fff;
 			}
-		}
-	}
-	.buyNum{
-		border-top: 1px solid #D9D9D9;
-		padding: 12px 15px;
-		.exchange{
-			font-size: 0.3rem;
-			color: #222222;
 		}
 	}
 	.leave{
@@ -290,13 +291,20 @@ export default {
 			height: 1.05rem;
 			line-height: 1.05rem;
 			text-align: center;
-			background-image: linear-gradient(238deg, #5EC3FF 0%, #106FE3 100%);
+			background: #336FFF;
 			font-size: 0.28rem;
 			color: #FFFFFF;
 		}
 	}
 </style>
 <style lang='less'>
+	.weui-cell_switch{
+	    padding-right: 0!important;
+	}
+	.weui-label{
+		width: 8em!important;
+		margin-right: 0.2rem;
+	}
 	.weui-icon-success{
 		float: right;
 		margin-right: 0.25rem;
@@ -321,9 +329,9 @@ export default {
 		color:#222;
 	}
 	.weui-cell__ft{
-		color: #222!important;
+		color: #1A2642!important;
 	}
 	.weui-cell{
-		padding: 12px 15px!important;
+		padding: 0.12rem 0.15rem;
 	}
 </style>

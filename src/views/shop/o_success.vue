@@ -2,11 +2,12 @@
 	<section>
 		<settingHeader :title="title"></settingHeader>
 		<div class="head">
-			<img src="../../assets/images/shop/payment_successful.png" alt="">
-			<div class="message fr">
+			<img src="../../assets/images/shop/payment_successful.png" alt="" class='fl'>
+			<div class="message fl">
 				<p class="success">支付成功</p>
 				<p class="prompt">宝贝会很快送到您手里~</p>
 			</div>
+			<div class="clear"></div>
 		</div>
 		<div class="center">
 			<div class="personInfo">
@@ -18,61 +19,15 @@
 					实付款：<span class="totalMoney">100积分+20.00元</span>
 				</p>
 				<div class="btn">
-					<div class="redeemDetails">兑换详情</div>
-					<div class="exchangeCenter">兑换中心</div>
+					<div class="redeemDetails" @click="goOrderdetails">兑换详情</div>
+					<div class="exchangeCenter" @click="goMyorder">兑换中心</div>
 					<div class="clear"></div>
 				</div>
 			</div>
 		</div>
 		<div class="bottom">
-			<p class="recommend">为你推荐</p>
 			<recommended></recommended>
-		</div>
-			<!-- <ul>
-				<li>
-					<img src="../../assets/images/shop/product.png" alt="" class='fl'>
-					<div class="shopBasic fl">
-						<div class="basicName">
-							<span class="logo">商品</span>
-							<span class="name">女装U宽腿牛仔裤(水洗产品)</span>
-							<div class="clear"></div>
-						</div>
-						<p class="basicTime">2018年02月27日</p>
-						<p class="basicPrice">210积分+20元</p>
-						<span class="position">了解详情 <img src="../../assets/images/shop/turn_right.png" alt=""></span>
-					</div>
-					<div class="clear"></div>
-				</li>
-				<li>
-					<img src="../../assets/images/shop/product.png" alt="" class='fl'>
-					<div class="shopBasic fl">
-						<div class="basicName">
-							<span class="logo">商品</span>
-							<span class="name">女装U宽腿牛仔裤(水洗产品)</span>
-							<div class="clear"></div>
-						</div>
-						<p class="basicTime">2018年02月27日</p>
-						<p class="basicPrice">210积分+20元</p>
-						<span class="position">了解详情 <img src="../../assets/images/shop/turn_right.png" alt=""></span>
-					</div>
-					<div class="clear"></div>
-				</li>
-				<li>
-					<img src="../../assets/images/shop/product.png" alt="" class='fl'>
-					<div class="shopBasic fl">
-						<div class="basicName">
-							<span class="logo">商品</span>
-							<span class="name">女装U宽腿牛仔裤(水洗产品)</span>
-							<div class="clear"></div>
-						</div>
-						<p class="basicTime">2018年02月27日</p>
-						<p class="basicPrice">210积分+20元</p>
-						<span class="position">了解详情 <img src="../../assets/images/shop/turn_right.png" alt=""></span>
-					</div>
-					<div class="clear"></div>
-				</li>
-			</ul>
-		</div> -->
+		</div>			
 	</section>
 </template>
 
@@ -87,6 +42,14 @@
 		},
 		components:{
 			settingHeader,recommended
+		},
+		methods:{
+			goOrderdetails(){
+				this.$router.push({ path: '/shop/order_details'})
+			},
+			goMyorder(){
+				this.$router.push({ path: '/shop/my_order'})
+			}
 		}
 	}
 </script>
@@ -103,7 +66,7 @@
 			height: 2.2rem;
 		}
 		.message{
-			margin-right: 1.01rem;
+			margin-left: 0.2rem;
 			margin-top:0.69rem;
 			.success{
 				font-size: 0.36rem;
@@ -172,63 +135,5 @@
 			color: #222222;
 			line-height: 0.9rem;
 		}
-		/*ul{
-			li{
-				border-top: 1px solid #E1E1E1;
-				padding-bottom: 5px;
-				padding-top: 5px;
-				padding-left: 6px;
-				position: relative;
-				img{
-					width: 1.6rem;
-					height: 1.6rem;
-					margin-right: 0.18rem;
-				}
-				.shopBasic{
-					padding-top: 0.1rem;
-					.basicName{
-						padding-left: 4px;
-						margin-bottom: 0.1rem;
-						.logo{
-							display: inline-block;
-							vertical-align: middle;
-							width: 0.64rem;
-							height: 0.32rem;
-							line-height: 0.32rem;
-							background: #3889FF;
-							text-align: center;
-							border-radius: 2px;
-							font-size: 0.24rem;
-							color: #FFFFFF;
-						}
-						.name{
-							display: inline-block;
-							font-size: 0.28rem;
-							color: #222222;
-						}
-					}
-					.basicTime{
-						margin-bottom: 0.11rem;
-						font-size: 0.24rem;
-						color: #A0A0A0;
-					}
-					.basicPrice{
-						font-size: 0.24rem;
-						color: #FF8A30;
-					}
-					.position{
-						position: absolute;
-						top:0.75rem;
-						right: 0.202rem;
-						font-size: 0.28rem;
-						color: #9B9B9B;
-						img{
-							width: 0.2rem;
-							height: 0.2rem;
-						}
-					}
-				}
-			}
-		}*/
 	}
 </style>

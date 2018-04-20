@@ -13,7 +13,7 @@ module.exports = {
     proxyTable: {
         '/api': {  
             target: 'http://www.cgc999.com/app/index.php?i=2&c=entry&m=mx_shop&do=app&r=',  
-            changeOrigin: true,  
+            changeOrigin: true, 
             pathRewrite: {  
                 '^/api': '/'
             }  
@@ -21,7 +21,15 @@ module.exports = {
     },
 
     // Various Dev Server settings
+<<<<<<< HEAD
     host: '192.168.3.98', // can be overwritten by process.env.HOST
+=======
+<<<<<<< HEAD
+    host: '192.168.3.132', // can be overwritten by process.env.HOST
+=======
+    host: '192.168.3.120', // can be overwritten by process.env.HOST
+>>>>>>> fea2ceb994f158551e6c294e8ca6453b21e24693
+>>>>>>> b375806f946e6cc08c7eb6d7c826b5bafe162578
     port: 8080, // can be overwritten by process.env.PORT, if port is in use, a free one will be determined
     autoOpenBrowser: false,
     errorOverlay: true,

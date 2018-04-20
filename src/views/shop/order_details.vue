@@ -15,16 +15,42 @@
 			</div>
 		</div>
 
-		<div class="content">
-			<ul class="ul-content">
-				<div class="ul-top">
-					<div class="ul-left"><img src="../../assets/images/shop/product.png"></div>
-					<div class="ul-right">
-						<span>女装U宽腿牛仔裤(水洗产品)宽腿牛仔裤宽腿宽腿牛仔裤</span>
-						<p>X1</p>
+		<div class="order">
+			<li>
+				<div class="order-content">
+					<div class="order-img">
+						<img src="../../assets/images/shop/order_detail1.png">
+					</div>
+					<div class="text-right">
+						<span>女装U宽腿牛仔裤(水洗产品)</span><br>
+						<span class="text-gray">颜色:蓝色; 尺码:L/170修身</span>
 					</div>
 				</div>
+				<div class="order-btn">
+					<div class="comments commen" @click="goWritecomments">评价</div>
+					<div class="giveup commen" @click="goRefund">退货</div>
+				</div>
+			</li>
 
+			<li>
+				<div class="order-content">
+					<div class="order-img">
+						<img src="../../assets/images/shop/order_detail1.png">
+					</div>
+					<div class="text-right">
+						<span>女装U宽腿牛仔裤(水洗产品)</span><br>
+						<span class="text-gray">颜色:蓝色; 尺码:L/170修身</span>
+					</div>
+				</div>
+				<div class="order-btn">
+					<div class="comments commen">评价</div>
+					<div class="giveup commen">退货</div>
+				</div>
+			</li>
+		</div>
+
+		<div class="content">
+			<ul class="ul-content">
 				<group>
 				    <cell-form-preview :list="list"></cell-form-preview>
 				    <cell-form-preview :list="list2"></cell-form-preview>
@@ -35,11 +61,8 @@
 			    	<span>返积分<span class="score-blue">200</span>点</span>
 			    </div>
 			</ul>
-			
-			<ul class="recommended">
-				<div class="re-title">为你推荐</div>
-				<recommended></recommended>
-			</ul>
+		
+			<recommended></recommended>
 		</div>
 
 
@@ -106,12 +129,24 @@ import recommended from './components/recommended'
 		methods: {
 			onClick:function(){
 				console.log('-=-')
+			},
+			goWritecomments: function(){
+				this.$router.push({ path: '/shop/write_comments'})
+			},
+			goRefund(){
+				this.$router.push({ path: '/shop/refund'})
 			}
 		}
 	}
 </script>
 
 <style lang="less" scoped>
+li{
+	list-style: none;
+	background: #F5F6FA;
+	margin-bottom: 0.04rem;
+	overflow: hidden;
+}
 .order-details{
 	background: #F5F6FA;
 	.top{
@@ -154,6 +189,57 @@ import recommended from './components/recommended'
 				color: #7386AD;
 			}
 		}
+	}
+	.order{
+		width: 100%;
+		background: #fff;
+		.order-content{
+			width: 100%;
+			overflow: hidden;
+			.order-img{
+				float: left;
+				width: 22%;
+				margin-right: 0.19rem;
+				img{
+					width: 99%;
+					margin: 0.05rem 0 0.05rem 0.06rem;
+				}
+			}
+			.text-right{
+				float: left;
+				font-size: 0.28rem;
+				color: #1A2642;
+				margin-top: 0.18rem;
+				.text-gray{
+					font-size: 0.24rem;
+					color: #90A2C7;
+				}
+			}
+		}
+		.order-btn{
+			clear: both;
+			width: 100%;
+			padding: 0.12rem 0;
+			.commen{
+				float: right;
+				margin-right: 0.2rem;
+				margin-bottom: 0.12rem;
+				text-align: center;
+				width: 1.5rem;
+			}
+			.comments{
+				border: 0.01rem solid #336FFF;
+				border-radius: 0.04rem;
+				padding: 0.08rem 0;
+				color: #336FFF;
+			}
+			.giveup{
+				border: 0.01rem solid #90A2C7;
+				border-radius: 0.04rem;
+				padding: 0.08rem 0;
+			}
+		}
+		
 	}
 	.content{
 		clear: both;
@@ -209,16 +295,6 @@ import recommended from './components/recommended'
 				}
 			}
 		}
-		.recommended{
-			margin-top: 0.2rem;
-			.re-title{
-				font-size: 0.3rem;
-				color: #222222;
-				padding: 0.3rem 0;
-				padding-left: 0.18rem;
-				border-bottom: 0.01rem solid #E1E1E1;
-			}
-		}
 
 	}
 	.footer{
@@ -232,21 +308,23 @@ import recommended from './components/recommended'
 		.commen{
 			float: right;
 			margin-right: 0.2rem;
+			text-align: center;
+			width: 1.5rem;
 		}
 		.view{
-			border: 1px solid #90A2C7;
+			border: 0.01rem solid #90A2C7;
 			border-radius: 0.04rem;
-			padding: 0.08rem 0.19rem;
+			padding: 0.08rem 0;
 		}
 		.comments{
-			border: 1px solid #F23030;
+			border: 0.01rem solid #F23030;
 			border-radius: 0.04rem;
-			padding: 0.08rem 0.47rem;
+			padding: 0.08rem 0;
 			color: #F23030;
 		}
 		.canel{
-			padding: 0.08rem 0.19rem;
-			border: 1px solid #336FFF;
+			padding: 0.08rem 0;
+			border: 0.01rem solid #336FFF;
 			border-radius: 0.04rem;
 			color: #336FFF;
 		}
@@ -257,6 +335,9 @@ import recommended from './components/recommended'
 
 <style lang="less">
 .ul-content .weui-cells{
+	margin-top: 0 !important;
+}
+.vux-no-group-title{
 	margin-top: 0 !important;
 }
 .ul-content .weui-form-preview__bd{

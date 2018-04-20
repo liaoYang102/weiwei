@@ -35,7 +35,6 @@ export default {
     data(){
     	return {
     		show1:false,
-    		showMaskRight: true,	
     		logolist: [
     			{ name:'logo'},
     			{ name:'logo'},

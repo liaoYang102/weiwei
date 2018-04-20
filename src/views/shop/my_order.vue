@@ -8,7 +8,7 @@
 	      <tab-item @on-item-click="onItemClick">已完成</tab-item>
 	      <tab-item @on-item-click="onItemClick">已取消</tab-item>
 	    </tab>
-	    <scroller lock-x  @on-scroll-bottom="onScrollBottom" ref="scrollerBottom" style="background-color:#efeff4" v-if='test'>
+	    <scroller lock-x height="+50" @on-scroll-bottom="onScrollBottom" ref="scrollerBottom" style="background-color:#efeff4" v-if='test'>
 	      <div class="box2">
 	        <div class="shop-box">
 				<div class="box-head">
@@ -37,7 +37,7 @@
 					</div>
 				</div>
 				<div class="box-bottom">
-					<div class="shop-btn btn-status1 fr">付款</div>
+					<div class="shop-btn btn-status1 fr" @click="goConfirm">付款</div>
 					<div class="shop-btn fr">取消订单</div>
 				</div>
 	        </div>
@@ -45,10 +45,10 @@
 				<div class="box-head">
 					<div class="fl">
 						<img src="../../assets/images/shop/UNIQLO.png" alt="" class='shop-logo'>
-						<span class="box-name">优衣库冒牌店</span>
+						<span class="box-name">优衣库专卖店</span>
 						<img src="../../assets/images/shop/turn_right.png" alt="" class='turn-right'>
 					</div>
-					<div class="fr">等待买家付款</div>
+					<div class="fr">买家已付款</div>
 					<div class="clear"></div>
 				</div>
 				<div class="box-detail">
@@ -68,8 +68,71 @@
 					</div>
 				</div>
 				<div class="box-bottom">
-					<div class="shop-btn btn-status1 fr">付款</div>
-					<div class="shop-btn fr">取消订单</div>
+					<!-- <div class="shop-btn btn-status1 fr">付款</div> -->
+					<div class="shop-btn fr">提醒发货</div>
+				</div>
+	        </div>
+	        <div class="shop-box">
+				<div class="box-head">
+					<div class="fl">
+						<img src="../../assets/images/shop/UNIQLO.png" alt="" class='shop-logo'>
+						<span class="box-name">优衣库专卖店</span>
+						<img src="../../assets/images/shop/turn_right.png" alt="" class='turn-right'>
+					</div>
+					<div class="fr">卖家已发货</div>
+					<div class="clear"></div>
+				</div>
+				<div class="box-detail">
+					<div class="shop-detail">
+						<img src="../../assets/images/shop/order_detail2.png" alt="" class='fl'>
+						<div class="fl shop-details">
+							<p class="shop-name">女装U宽腿牛仔裤(水洗产品)</p>
+							<p class="shop-size">颜色:蓝色；尺码:L/170修身</p>
+						</div>
+						<div class="clear"></div>
+					</div>
+					<div class="shop-total">
+						<p class="fr">
+							共 1 件 合计：<span class="shop-price">100积分+30元</span>
+						</p>
+						<div class="clear"></div>
+					</div>
+				</div>
+				<div class="box-bottom">
+					<div class="shop-btn btn-status1 fr" @click="goTsuccess">确认收货</div>
+					<div class="shop-btn fr" @click="goLogistics">查看物流</div>
+				</div>
+	        </div>
+	        <div class="shop-box">
+				<div class="box-head">
+					<div class="fl">
+						<img src="../../assets/images/shop/UNIQLO.png" alt="" class='shop-logo'>
+						<span class="box-name">优衣库专卖店</span>
+						<img src="../../assets/images/shop/turn_right.png" alt="" class='turn-right'>
+					</div>
+					<div class="fr">交易成功</div>
+					<div class="clear"></div>
+				</div>
+				<div class="box-detail">
+					<div class="shop-detail">
+						<img src="../../assets/images/shop/order_detail2.png" alt="" class='fl'>
+						<div class="fl shop-details">
+							<p class="shop-name">女装U宽腿牛仔裤(水洗产品)</p>
+							<p class="shop-size">颜色:蓝色；尺码:L/170修身</p>
+						</div>
+						<div class="clear"></div>
+					</div>
+					<div class="shop-total">
+						<p class="fr">
+							共 1 件 合计：<span class="shop-price">100积分+30元</span>
+						</p>
+						<div class="clear"></div>
+					</div>
+				</div>
+				<div class="box-bottom">
+					<div class="shop-btn btn-status1 fr" @click="goTsuccess">确认收货</div>
+					<div class="shop-btn fr" @clcik="goRefund">退货</div>
+					<div class="shop-btn fr" @click="goLogistics">查看物流</div>
 				</div>
 	        </div>
 	        <load-more tip="loading" id='loading'></load-more>
@@ -117,6 +180,18 @@
 			          this.onFetching = false
 			        }, 2000)
 			      }
+		    },
+		    goConfirm(){
+		    	this.$router.push({ path: '/shop/confirm'})
+		    },
+		    goLogistics(){
+		    	this.$router.push({ path: '/shop/logistics'})
+		    },
+		    goTsuccess(){
+		    	this.$router.push({ path: '/shop/t_success'})
+		    },
+		    goRefund(){
+		    	this.$router.push({ path: '/shop/refund'})
 		    }
 		}
 	}
@@ -248,16 +323,10 @@
 </style>
 <style lang="less">
 	.myOrder .vux-tab-item-badge{
-		font-size: 0.16rem!important;
+		font-size: 0.16rem !important;
 		margin:auto 0 auto 0.04rem !important;
 	}
 	.myOrder .vux-tab-item{
-		font-size: 0.14rem!important;
+		font-size: 0.28rem !important;
 	}
 </style>
-<<<<<<< HEAD
-	
-</style>
-=======
-
->>>>>>> d70b72247f6dd858266846e129a79cd929200d5f

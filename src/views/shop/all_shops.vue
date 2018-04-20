@@ -14,9 +14,6 @@
             </tab-item>
         </tab>
 
-     
-
-        
         <div v-transfer-dom>
             <popup v-model="showMaskTop" position="top">
                 <div class="panel">
@@ -29,7 +26,6 @@
                 </div>
             </popup>
         </div> 
-        
 
         <maskRight ref='xioaqiang'></maskRight>
 
@@ -69,11 +65,12 @@ export default {
             ],
             showMaskTop: false,
             sMaskRight: false,
-            act1: 0
+            act1: 0,
+            shopTitle: ''
         }
     },
     mounted:function(){
-        
+        // this.shopTitle = this.$router.params.title
     },
     methods: {
         showPanel: function(){
