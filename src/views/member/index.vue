@@ -34,33 +34,40 @@
 				<div class="navigation">
 					<ul>
 						<li>
-							<div class="li-box">
-								<img src="../../assets/images/member/member_wallet.png">
-								<badge class="new"></badge>
-							</div>
-							<p>我的钱包</p>
+							<router-link to="/member/purse/index">
+								<div class="li-box">
+									<img src="../../assets/images/member/member_wallet.png">
+									<badge class="new"></badge>
+								</div>
+								<p>我的钱包</p>
+							</router-link>
 						</li>
 						<li>
-							<div class="li-box">
-								<img src="../../assets/images/member/member_cardpackage.png">
-								<badge class="new"></badge>
-							</div>
-							<p>我的团队</p>
+							<router-link to="/member/team/index">
+								<div class="li-box">
+									<img src="../../assets/images/member/member_cardpackage.png">
+									<badge class="new"></badge>
+								</div>
+								<p>我的团队</p>
+							</router-link>
 						</li>
 						<li>
-							<div class="li-box">
-								<img src="../../assets/images/member/member_account.png">
-								<badge class="new-account" text="2312"></badge>
-							</div>
+							<router-link to="/member/purse/qrcode">
+								<div class="li-box">
+									<img src="../../assets/images/member/member_account.png">
+									<badge class="new-account" text="2312"></badge>
+								</div>
 
-							<p>会员积分</p>
+								<p>会员积分</p>
+							</router-link>
 						</li>
 						<li>
-							<div class="li-box">
-								<img src="../../assets/images/member/member_code.png">
-							</div>
-
-							<p>赚钱码</p>
+							<router-link to="/member/purse/qrcode">
+								<div class="li-box">
+									<img src="../../assets/images/member/member_code.png">
+								</div>
+								<p>赚钱码</p>
+							</router-link>
 						</li>
 					</ul>
 				</div>
@@ -92,11 +99,12 @@
 				infoList: [{
 						img: '../../../static/member/member_1.png',
 						text: '我的优惠券',
-						url:'/member/coupon/coupon'
+						url: '/member/coupon/coupon'
 					},
 					{
 						img: '../../../static/member/member_2.png',
-						text: '我的订单'
+						text: '我的订单',
+						url: '/member/address/index'
 					},
 					{
 						img: '../../../static/member/member_3.png',
@@ -105,7 +113,7 @@
 					{
 						img: '../../../static/member/member_4.png',
 						text: '收货地址',
-						url:'/member/address/index'
+						url: '/member/address/index'
 					},
 					{
 						img: '../../../static/member/member_5.png',
@@ -121,7 +129,8 @@
 					},
 					{
 						img: '../../../static/member/m_index13.png',
-						text: '我的卡包'
+						text: '我的卡包',
+						url: '/member/card/index'
 					},
 				],
 				yhqTip: '5张快过期'
@@ -233,36 +242,38 @@
 				display: flex;
 				li {
 					flex: 1;
-					position: relative;
-					display: flex;
-					align-items: center;
-					justify-content: center;
-					flex-direction: column;
-					.li-box {
+					a {
 						position: relative;
-						width: 0.52rem;
-						height: 0.52rem;
-						img {
-							width: 100%;
-							height: auto;
+						display: flex;
+						align-items: center;
+						justify-content: center;
+						flex-direction: column;
+						.li-box {
+							position: relative;
+							width: 0.52rem;
+							height: 0.52rem;
+							img {
+								width: 100%;
+								height: auto;
+							}
+							.new {
+								position: absolute;
+								right: -3px;
+								top: -2px;
+							}
+							.new-account {
+								position: absolute;
+								right: -28px;
+								top: -2px;
+							}
 						}
-						.new {
-							position: absolute;
-							right: -3px;
-							top: -2px;
+						p {
+							font-family: PingFangSC-Regular;
+							font-size: 0.24rem;
+							color: #7D7D7D;
+							letter-spacing: 0;
+							margin-top: 0.18rem;
 						}
-						.new-account {
-							position: absolute;
-							right: -28px;
-							top: -2px;
-						}
-					}
-					p {
-						font-family: PingFangSC-Regular;
-						font-size: 0.24rem;
-						color: #7D7D7D;
-						letter-spacing: 0;
-						margin-top: 0.18rem;
 					}
 				}
 			}

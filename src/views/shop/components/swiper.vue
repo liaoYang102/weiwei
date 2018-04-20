@@ -1,11 +1,16 @@
 <template>
 	<div v-model="imgList">
-		<swiper :list="demoList" auto style="width:100%;margin:0 auto;" :height="height" dots-class="custom-bottom" dots-position="center"></swiper>
+		<swiper :options="swiperOption">
+	        <swiper-slide v-for="item in demoList">
+	        	<img :src="item">
+	        </swiper-slide>
+	        <div class="swiper-pagination" slot="pagination"></div>
+        </swiper>
 	</div>
 </template>
 
 <script>
-	
+	import { swiper, swiperSlide } from 'vue-awesome-swiper'
 	export default {
 		props:{
 			imgList: Array
@@ -13,28 +18,33 @@
 		data(){
 			return {
 				demoList:[],
-				height:"2.2rem"
+				swiperOption :{
+					pagination:{
+						el:'.swiper-pagination'
+					},
+					autoplay: true,
+					loop:true
+				},
 			}
 		},
-		mounted:function(){
+		created(){
         	this.onList()
-    	},	
+    	},
+    	components: {
+			swiper,
+			swiperSlide
+		},
     	methods:{
 			onList(){
-				console.log('--', this.imgList)
-				const demoList = this.imgList.map((one, index) => ({
-				  url: 'javascript:',
-				  img: one
-				}))
-				this.demoList = demoList;
-				console.log('--22', this.demoList)
+				this.demoList = this.imgList;
 			}
 		}
 	}
 </script>
 
-<style lang='less'>
-.vux-slider > .vux-swiper > .vux-swiper-item > a > .vux-swiper-desc{
-    background-image: none !important;
-}
+<style lang='less' scoped>
+	img{
+		width: 7.5rem;
+		height: 2.2rem;
+	}
 </style>

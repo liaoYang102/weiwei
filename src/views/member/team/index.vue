@@ -14,7 +14,7 @@
 		<scroller class="scroller-box" lock-x height="-100" :use-pullup="showUp" :pullup-config="upConf" @on-pullup-loading="selPullUp" ref="scrollerBottom">
 			<div class="box2">
 				<div class="list" v-for="(item,index) in list" :key="index">
-					<div class="header">
+					<div class="he">
 						<div class="user-img">
 							<img :src="item.img" />
 						</div>
@@ -160,7 +160,7 @@
 	.list {
 		margin-bottom: 0.21rem;
 		background: white;
-		.header {
+		.he {
 			display: flex;
 			padding: 0.35rem 0.29rem;
 			align-items: center;

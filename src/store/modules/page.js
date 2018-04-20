@@ -1,7 +1,12 @@
 const page = {
 	state: {
-		show: false
-	}
-};
+		direction: 'forward'
+	},
+	mutations: {
+		UPDATE_DIRECTION(state, payload) {
+			state.direction = payload.direction
+		}
 
+	}
+}
 export default page;

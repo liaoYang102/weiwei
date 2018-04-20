@@ -100,14 +100,14 @@
 				display: flex;
 				justify-content: space-between;
 				font-family: PingFangSC-Regular;
-				font-size: 0.32rem;
+				font-size: 0.28rem;
 				color: #1A2642;
 				letter-spacing: 0;
 				margin-bottom: 0.11rem;
 			}
 			p {
 				font-family: PingFangSC-Regular;
-				font-size: 0.30rem;
+				font-size: 0.28rem;
 				color: #1A2642;
 				letter-spacing: 0;
 			}
