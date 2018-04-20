@@ -125,13 +125,14 @@ li{
 		.wrapper {
 			/*height: 300px;
 			overflow: hidden;*/
-			background: #F5F6FA;
 		}
 		.tab-list{
 			margin-bottom: 0.02rem;
+			background: #F5F6FA;
 			.tab-li{
 				float: left;
 				width: 49.8%;
+				margin-bottom: 0.02rem;
 				background: #fff;
 				margin-right: 0.01rem;
 				img{

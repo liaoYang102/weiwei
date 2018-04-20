@@ -234,54 +234,51 @@ li:nth-child(odd){
 .mt{
 	margin-top: 0.2rem;
 }
-/*.tab-item{
-	margin-top: 0.02rem;
-	width: 100%;
-	background: #f5f6fa;*/
-	.tab-list{
+.tab-list{
+	margin-bottom: 0.02rem;
+	background: #f5f6fa;
+	.tab-li{
+		float: left;
+		width: 49.8%;
 		margin-bottom: 0.02rem;
-		.tab-li{
-			float: left;
-			width: 49.8%;
-			img{
-				width: 100%;
-			}
-			.tab-text{
-				margin-left: 0.23rem;
-				margin-right: 0.28rem;
-				word-wrap: break-word; 
-				word-break: normal;
-			}
-			.tab-tag{
-				margin-top: 0.18rem;
-				margin-left: 0.23rem;
-				margin-bottom: 0.22rem;
-				.shopPrice{
-					.priceNum{
-						display: inline-block;
-						font-size: 0.32rem;
-						color: #F23030;
-						font-weight: 700;
-						vertical-align: middle;
-					}
-					.shopAcount{
-						font-weight: normal;
-						display: inline-block;
-						padding-left: 0.06rem;
-						padding-right: 0.08rem;
-						height: 0.4rem;
-						text-align: center;
-						font-size: 0.24rem;
-						line-height: 0.4rem;
-						background-image: linear-gradient(238deg, #5EC3FF 0%, #106FE3 100%);
-						border-radius: 0.04rem;
-						color:#fff;
-					}
+		img{
+			width: 100%;
+		}
+		.tab-text{
+			margin-left: 0.23rem;
+			margin-right: 0.28rem;
+			word-wrap: break-word; 
+			word-break: normal;
+		}
+		.tab-tag{
+			margin-top: 0.18rem;
+			margin-left: 0.23rem;
+			margin-bottom: 0.22rem;
+			.shopPrice{
+				.priceNum{
+					display: inline-block;
+					font-size: 0.32rem;
+					color: #F23030;
+					font-weight: 700;
+					vertical-align: middle;
+				}
+				.shopAcount{
+					font-weight: normal;
+					display: inline-block;
+					padding-left: 0.06rem;
+					padding-right: 0.08rem;
+					height: 0.4rem;
+					text-align: center;
+					font-size: 0.24rem;
+					line-height: 0.4rem;
+					background-image: linear-gradient(238deg, #5EC3FF 0%, #106FE3 100%);
+					border-radius: 0.04rem;
+					color:#fff;
 				}
 			}
 		}
 	}
-/*}*/
+}
 </style>
 
 <style lang="less">
