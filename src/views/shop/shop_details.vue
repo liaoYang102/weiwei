@@ -20,8 +20,10 @@
 				<div class="shop">
 					<div class="shop_title"><span>女装U宽腿牛仔裤(水洗产品)宽腿牛仔裤宽腿宽腿牛仔裤</span></div>
 					<div class="shop_left">
-						<span class="shop_red">￥3598</span>
-						<div class="shop_score">+266积分</div><br>
+						<p class="shopPrice">
+							<span class="priceNum">￥3598</span> 
+							<span class="shopAcount">+266积分</span>
+						</p>
 						<span>运费:10.00</span>
 					</div>
 					<div class="shop_right">
@@ -119,25 +121,26 @@ export default {
 		}
 	},
 	mounted: function(){
-		this.onShop()
+		this.onRouter()
 	},
 	methods: {
 		showMask: function() {
 		    this.$refs.sp.show1 = true;
 		},
-		onShop(){
+		onRouter(){
 			if(this.$route.params.title != null&& this.$route.params !=null){
 				this.tabTitle = this.$route.params.title;
-			}else{
-				this.tabTitle = '商品'
 			}
+		},
+		onShop(){
+			this.tabTitle = '商品'
 			window.scrollTo(0, 0);
 			console.log('---11',this.tabTitle)
 		},
 		scrollTo(){
 			this.tabTitle = '详情';
 			window.setTimeout(function(){
-				window.scrollTo(0, 720);
+				window.scrollTo(0, 700);
 			},0)
 		},
 		onItemClick () {
@@ -183,22 +186,29 @@ export default {
 				font-size: 0.24rem;
 				color: #90A2C7;
 				padding-bottom: 0.29rem;
-				.shop_red{
-					color: #F23030;
-					font-size: 0.32rem;
-				}
-				.shop_score{
-					width: 1.2rem;
-					background-image: linear-gradient(241deg, #5EC3FF 1%, #106FE3 100%);
-					text-align: center;
-					color:#fff;
-					font-size: 0.22rem;
-					height: 0.36rem;
-					line-height: 0.36rem;
-					border-radius: 0.05rem;
-					margin: 0.1rem 0 0.19rem 0.1rem;
-					padding: 0.02rem 0;
-					display: inline-block;
+				.shopPrice{
+					margin-bottom: 0.09rem;
+					.priceNum{
+						display: inline-block;
+						
+						font-size: 0.32rem;
+						color: #F23030;
+						font-weight: 700;
+						vertical-align: middle;
+					}
+					.shopAcount{
+						font-weight: normal;
+						display: inline-block;
+						padding-left: 0.06rem;
+						padding-right: 0.08rem;
+						height: 0.4rem;
+						text-align: center;
+						font-size: 0.24rem;
+						line-height: 0.4rem;
+						background-image: linear-gradient(238deg, #5EC3FF 0%, #106FE3 100%);
+						border-radius: 0.04rem;
+						color:#fff;
+					}
 				}
 			}
 			.shop_right{
@@ -296,16 +306,17 @@ export default {
 		.details_text{
 			width: 100%;
 			border-top: 0.01rem solid #eeeeee;
+			padding-bottom: 0.54rem;
 			.text{
 				width: 77%;
 				margin: 0 auto;
 				font-size: 0.32rem;
 				color: #222222;
-				padding-bottom: 0.54rem;
 				p{
 					padding-top: 0.41rem;
 				}
 				.text_many{
+					/*padding-bottom: 1rem;*/
 					font-size: 0.24rem;
 				}
 			}
@@ -334,7 +345,7 @@ export default {
 			}
 		}
 		.footer-btn{
-			width: 31.8%;
+			width: 31.6%;
 			text-align: center;
 			font-size: 0.32rem;
 			color: #FFFFFF;
@@ -394,7 +405,7 @@ export default {
 	position: fixed!important;
 	top: 0;
 	width: 100%;
-	z-index: 1111;
+	z-index: 111;
 }
 .tab_shop .vux-tab-ink-bar{
 	bottom:4px;

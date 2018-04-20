@@ -9,7 +9,7 @@
 					<span>商品评价</span>
 				</div>
 				<div class="star">
-					<rater v-model="data" :max="5" active-color="#336FFF" class="center"></rater>
+					<rater v-model="data" :max="5" active-color="#336FFF" class="center" margin="5"></rater>
 				</div>
 			</div>
 
@@ -34,11 +34,11 @@
 			</div>
 			<div class="store-star">
 				<div class="s-text">商品打分</div>
-				<rater v-model="data2" :max="5" active-color="#336FFF" class="s-star"></rater>
+				<rater v-model="data2" :max="5" active-color="#336FFF" class="s-star" margin="5"></rater>
 			</div>
 			<div class="store-star">
 				<div class="s-text">物流服务</div>
-				<rater v-model="data3" :max="5" active-color="#336FFF" class="s-star"></rater>
+				<rater v-model="data3" :max="5" active-color="#336FFF" class="s-star" margin="5"></rater>
 			</div>
 		</div>
 
@@ -65,9 +65,12 @@ export default {
 			demo1: false,
 			title: '评论',
 			data: 0,
-			data2: 3,
-			data3: 3
+			data2: 0,
+			data3: 0
 		}
+	},
+	created(){
+
 	},
 	methods:{
 		test:function (e) {
@@ -87,6 +90,7 @@ export default {
 
 <style lang="less" scoped>
 .write-comments{
+	height: 100%;
 	width: 100%;
 	background: #F5F6FA;
 	.writing{
@@ -191,6 +195,7 @@ export default {
 		width: 100%;
 		height: 0.94rem;
 		line-height: 0.94rem;
+		background: #fff;
 		.left{
 			float: left;
 			width: 64.5%;
@@ -227,5 +232,9 @@ export default {
 }
 .textarea .weui-cells:after{
 	border-bottom: none !important;
+}
+.footer .weui-icon-circle{
+	/*float: left;
+	margin: auto 0;*/
 }
 </style>

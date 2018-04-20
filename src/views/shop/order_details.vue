@@ -27,8 +27,8 @@
 					</div>
 				</div>
 				<div class="order-btn">
-					<div class="comments commen">评价</div>
-					<div class="giveup commen">退货</div>
+					<div class="comments commen" @click="goWritecomments">评价</div>
+					<div class="giveup commen" @click="goRefund">退货</div>
 				</div>
 			</li>
 
@@ -129,6 +129,12 @@ import recommended from './components/recommended'
 		methods: {
 			onClick:function(){
 				console.log('-=-')
+			},
+			goWritecomments: function(){
+				this.$router.push({ path: '/shop/write_comments'})
+			},
+			goRefund(){
+				this.$router.push({ path: '/shop/refund'})
 			}
 		}
 	}

@@ -115,6 +115,7 @@ li{
 		}
 	}
 	.bg{
+		width: 100%;
 		background: url('../../../assets/images/shop/scorebg1.png') no-repeat;
 	}
 	.score-list{

@@ -8,8 +8,10 @@
 		    				<div class="ab-img"><img src="../../../assets/images/shop/close.png" @click="close"></div>
 		    				<img src="../../../assets/images/shop/shop4.png">
 		    				<div class="sp-text">
-		    					<span class="sp-red">￥3598</span>
-		    					<div class="sp-score">+266积分</div>
+		    					<p class="shopPrice">
+									<span class="priceNum">￥3598</span> 
+									<span class="shopAcount">+266积分</span>
+								</p>
 		    					<div class="sp-gray">库存7282件</div>
 		    					<div>已选
 		    						<span v-for="(item,index) in list3">“{{ item.options}}” </span>
@@ -143,21 +145,27 @@ li{
 					margin-top: 0.23rem;
 					font-size: 0.28rem;
 					color: #1A2642;
-					.sp-red{
-						font-size: 0.32rem;
-						color: #F23030;
-					}
-					.sp-score{
-						width: 1.2rem;
-						background-image: linear-gradient(241deg, #5EC3FF 1%, #106FE3 100%);
-						text-align: center;
-						color:#fff;
-						font-size: 0.22rem;
-						height: 0.36rem;
-						line-height: 0.36rem;
-						border-radius: 0.05rem;
-						padding: 0.02rem 0;
-						display: inline-block;
+					.shopPrice{
+						.priceNum{
+							display: inline-block;
+							font-size: 0.32rem;
+							color: #F23030;
+							font-weight: 700;
+							vertical-align: middle;
+						}
+						.shopAcount{
+							font-weight: normal;
+							display: inline-block;
+							padding-left: 0.06rem;
+							padding-right: 0.08rem;
+							height: 0.4rem;
+							text-align: center;
+							font-size: 0.24rem;
+							line-height: 0.4rem;
+							background-image: linear-gradient(238deg, #5EC3FF 0%, #106FE3 100%);
+							border-radius: 0.04rem;
+							color:#fff;
+						}
 					}
 					.sp-gray{
 						font-size: 0.28rem;
