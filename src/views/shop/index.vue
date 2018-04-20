@@ -1,42 +1,68 @@
 <template>
-	<section class=''>
-		<settingHeader :title="title"></settingHeader>
+	<section>
+		<div class="wrapper" ref="wrapper">
+			<div class="content">
+				<settingHeader :title="title"></settingHeader>
 
-		<swiper :imgList="imgList"></swiper>
-		
-		<navindex></navindex>  
-		
-		<scorenav :scoreTitle="scoreTitle0"></scorenav>
-		
-		<scorenav :scoreTitle="scoreTitle1"></scorenav>
-		
-		<swiper :imgList="imgList2" style="margin-top: 0.2rem;"></swiper>
+				<swiper :imgList="imgList"></swiper>
+				
+				<navindex></navindex>  
+				
+				<scorenav :scoreTitle="scoreTitle0"></scorenav>
+				
+				<scorenav :scoreTitle="scoreTitle1"></scorenav>
+				
+				<swiper :imgList="imgList2" style="margin-top: 0.2rem;"></swiper>
 
-		<section>
-			<div class="top">
-				<div class="top-title">
-					<div class="circle1"></div>
-					<div class="recommended">官方推荐</div>
-					<div class="circle2"></div>
-				</div>
+				<section>
+					<div class="top">
+						<div class="top-title">
+							<div class="circle1"></div>
+							<div class="recommended">官方推荐</div>
+							<div class="circle2"></div>
+						</div>
 
-				<div class="top-secondtitle">
-					<div class="border1"></div>
-					<span>跨品牌最高</span>
-					<span class="text">满199减100</span>
-					<span>上不封顶</span>
-					<div class="border2"></div>
-				</div>
+						<div class="top-secondtitle">
+							<div class="border1"></div>
+							<span>跨品牌最高</span>
+							<span class="text">满199减100</span>
+							<span>上不封顶</span>
+							<div class="border2"></div>
+						</div>
+					</div>
+
+					<test :theme="purchase" style="margin-top: 0.19rem;"></test>
+
+					<test :theme="best"></test>
+				</section>
+
+				<img src="../../assets/images/shop/i_banner.png" style="width: 100%;">
+
+				<tab :line-width="3" :scroll-threshold="4" custom-bar-width="30px" class="tab mt">
+			      <tab-item selected @on-item-click="onItemClick">精选</tab-item>
+			      <tab-item @on-item-click="onItemClick">我能兑换</tab-item>
+			      <tab-item @on-item-click="onItemClick">食品</tab-item>
+			      <tab-item @on-item-click="onItemClick">生活用品</tab-item>
+			    </tab>
+
+				<div class="tab-list">
+			    	<div class="list">
+			    		<li class="tab-li" v-for="(item, index) in shopList">
+			    			<img src="../../assets/images/shop/shop3.png">
+			    			<div class="tab-text"><span>{{ item.shopname}}</span></div>
+			    			<div class="tab-tag">
+		    					<p class="shopPrice">
+									<span class="priceNum">￥{{ item.money}}</span> 
+									<span class="shopAcount">+{{ item.score}}积分</span>
+								</p>
+			    			</div>
+			    		</li>
+			    		<div class="clear"></div>
+			    	</div>
+			    	<loading v-if="show"></loading>
+	    	    </div>
 			</div>
-
-			<test :theme="purchase" style="margin-top: 0.19rem;"></test>
-
-			<test :theme="best"></test>
-		</section>
-
-		<img src="../../assets/images/shop/i_banner.png" style="width: 100%;">
-		
-		<tab></tab>
+		</div>
 	</section>
 </template>
 
@@ -45,11 +71,12 @@ import settingHeader from '../../components/setting_header'
 import navindex from './components/nav_index'
 import scorenav from './components/scoreNav'
 import test from './components/test'
-import tab from './components/tab_index'
 import swiper from './components/swiper'
+import BScroll from 'better-scroll'
+import Loading from '../../components/loading'
 export default {
 	components: {
-		settingHeader,navindex,scorenav,test,tab,swiper
+		settingHeader,navindex,scorenav,test,swiper,Loading
 	},
 	data(){
 		return {
@@ -68,8 +95,61 @@ export default {
 				'https://img20.360buyimg.com/da/jfs/t18169/49/1676902787/199684/abf88174/5ad405d6N903b6152.jpg.webp',
 				'https://img20.360buyimg.com/da/jfs/t18169/49/1676902787/199684/abf88174/5ad405d6N903b6152.jpg.webp',
 				'https://img20.360buyimg.com/da/jfs/t18169/49/1676902787/199684/abf88174/5ad405d6N903b6152.jpg.webp'
+			],
+			test: true,
+			show:false,
+			shopList: [
+				{ shopname: 'VANS Old Skool lite黑白超轻鞋款 黑色38.5', money: '3598', score: '266'},
+				{ shopname: 'VANS Old Skool lite黑白超轻鞋款 黑色38.5', money: '3598', score: '266'},
+				{ shopname: 'VANS Old Skool lite黑白超轻鞋款 黑色38.5', money: '3598', score: '266'},
+				{ shopname: 'VANS Old Skool lite黑白超轻鞋款 黑色38.5', money: '3598', score: '266'}
 			]
 		}
+	},
+	mounted() {
+		this.InitScroll()
+	},
+	methods:{
+		onItemClick(){
+
+		},
+        InitScroll() {
+			this.$nextTick(() => {
+				if(!this.scroll) {
+					this.scroll = new BScroll(this.$refs.wrapper, {
+						click: true,
+						scrollY: true,
+						pullUpLoad: {
+							threshold: -30, // 负值是当上拉到超过低部 70px；正值是距离底部距离 时，                    
+						}
+					})
+					this.scroll.on('pullingUp', (pos) => {
+						this.show = true;
+						this.LoadData()
+						this.$nextTick(function() {
+							this.scroll.finishPullUp();
+							this.scroll.refresh();
+						});
+					})
+				} else {
+					this.scroll.refresh()
+				}
+			})
+
+		},
+		LoadData() {
+			var _this = this
+			setTimeout(function(){
+				_this.show = false;
+				let obj = [{ shopname: 'VANS Old Skool lite黑白超轻鞋款 黑色38.5', money: '3598', score: '266'},
+				{ shopname: 'VANS Old Skool lite黑白超轻鞋款 黑色38.5', money: '3598', score: '266'}];
+				_this.shopList = _this.shopList.concat(obj);
+				console.log(_this.shopList);
+			},3000)
+		},
+	    goShopdetails(){
+	    	this.$router.push({ path: '/shop/shop_details'})
+	    }
 	}
 }
 </script>
@@ -135,6 +215,73 @@ export default {
 		}
 	}
 }
+.wrapper {
+	height: 13.3rem;
+	overflow: hidden;
+}
+li{
+	list-style: none;
+	background: #fff;
+	font-size: 0.24rem;
+	color: #1A2642;
+}
+li:nth-child(odd){
+	margin-right: 0.01rem;
+}
+.vux-loadmore{
+    display: none;
+}
+.mt{
+	margin-top: 0.2rem;
+}
+/*.tab-item{
+	margin-top: 0.02rem;
+	width: 100%;
+	background: #f5f6fa;*/
+	.tab-list{
+		margin-bottom: 0.02rem;
+		.tab-li{
+			float: left;
+			width: 49.8%;
+			img{
+				width: 100%;
+			}
+			.tab-text{
+				margin-left: 0.23rem;
+				margin-right: 0.28rem;
+				word-wrap: break-word; 
+				word-break: normal;
+			}
+			.tab-tag{
+				margin-top: 0.18rem;
+				margin-left: 0.23rem;
+				margin-bottom: 0.22rem;
+				.shopPrice{
+					.priceNum{
+						display: inline-block;
+						font-size: 0.32rem;
+						color: #F23030;
+						font-weight: 700;
+						vertical-align: middle;
+					}
+					.shopAcount{
+						font-weight: normal;
+						display: inline-block;
+						padding-left: 0.06rem;
+						padding-right: 0.08rem;
+						height: 0.4rem;
+						text-align: center;
+						font-size: 0.24rem;
+						line-height: 0.4rem;
+						background-image: linear-gradient(238deg, #5EC3FF 0%, #106FE3 100%);
+						border-radius: 0.04rem;
+						color:#fff;
+					}
+				}
+			}
+		}
+	}
+/*}*/
 </style>
 
 <style lang="less">
@@ -144,5 +291,10 @@ body{
 .set-height{
 	overflow: hidden;
 }
-
+.tab .vux-tab .vux-tab-item{
+	color: #90A2C7;
+}
+.tab .vux-tab .vux-tab-item .vux-tab-selected{
+	color: #3889FF !important;
+}
 </style>

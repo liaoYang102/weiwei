@@ -3,7 +3,7 @@
 	    <div class="mall-theme">
 	    	<div class="theme-title" :class="[themeTitle == '男子休闲'?'text':'']">{{themeTitle}}</div>
 
-		    <div class="wrapper" ref="wrapper">
+		    <div class="wrapper"> <!-- ref="wrapper" -->
 				<div class="content">
 					<div class="tab-list">
     			    	<div class="list">
@@ -19,7 +19,7 @@
     			    		</li>
     			    		<div class="clear"></div>
     			    	</div>
-    			    	<loading v-if="show"></loading>
+    			    	<!-- <loading v-if="show"></loading> -->
     	    	    </div>
 				</div>
 			</div>
@@ -28,8 +28,8 @@
 </template>
 
 <script>
-	import BScroll from 'better-scroll'
-	import Loading from '../../../components/loading'
+	// import BScroll from 'better-scroll'
+	// import Loading from '../../../components/loading'
 	export default {
 		props:{
 			themeTitle: String
@@ -42,16 +42,18 @@
 					{ shopname: 'VANS Old Skool lite黑白超轻鞋款 黑色38.5', money: '3598', score: '266'},
 					{ shopname: 'VANS Old Skool lite黑白超轻鞋款 黑色38.5', money: '3598', score: '266'},
 					{ shopname: 'VANS Old Skool lite黑白超轻鞋款 黑色38.5', money: '3598', score: '266'},
+					{ shopname: 'VANS Old Skool lite黑白超轻鞋款 黑色38.5', money: '3598', score: '266'},
+					{ shopname: 'VANS Old Skool lite黑白超轻鞋款 黑色38.5', money: '3598', score: '266'},
 					{ shopname: 'VANS Old Skool lite黑白超轻鞋款 黑色38.5', money: '3598', score: '266'}
 				]
 			}
 		},
 		components:{
-			Loading
+			// Loading
 		},
 		mounted() {
 			// this.$nextTick(() => {
-			this.InitScroll()
+			// this.InitScroll()
 
 			// })
 		},
@@ -121,8 +123,8 @@ li{
 			color: #1A2642;
 		}
 		.wrapper {
-			height: 300px;
-			overflow: hidden;
+			/*height: 300px;
+			overflow: hidden;*/
 			background: #F5F6FA;
 		}
 		.tab-list{
