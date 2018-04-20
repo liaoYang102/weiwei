@@ -1,24 +1,32 @@
 <template>
 	<div id="app" v-cloak>
-		<div class="child-view">
-			<transition :name="transitionName">
-				<router-view class='admin' />
-			</transition>
-		</div>
+		<transition :name="viewTransition" :css="!!direction">
+			<router-view class="router-view"></router-view>
+		</transition>
 	</div>
 </template>
 
 <script>
 	import { ButtonTab, ButtonTabItem } from 'vux'
+	import { mapState } from 'vuex'
 	export default {
 		name: 'App',
+		computed: {
+			...mapState({
+				direction: state => state.page.direction,
+			}),
+			viewTransition() {
+				if(!this.direction) return ''
+				return 'vux-pop-' + (this.direction === 'forward' ? 'in' : 'out')
+			}
+		},
 		data() {
 			return {
-				transitionName: '' // 默认动态路由变化为slide-right
+				ButtonTab: '' // 默认动态路由变化为slide-right
 			}
 		},
 		created() {
-			console.log(this.$store.state.page.show)
+             console.log(this.direction)
 		},
 		components: {
 			ButtonTab,
@@ -33,42 +41,54 @@
 			}
 		},
 		watch: {　　　
-			'$route' (to, from) {　　　
-				console.log(this.$store.state.page.show)
-				this.transitionName = this.$store.state.page.show ? 'slide-left' : 'slide-right'
-				this.$store.state.page.show = !this.$store.state.page.show
+			'$route' (to, from) {　　
 			}　
 		}
 	}
 </script>
 
 <style lang='less'>
+	* {
+		-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+	}
+	
 	#app {
 		font-family: 'Avenir', Helvetica, Arial, sans-serif;
 		-webkit-font-smoothing: antialiased;
 		-moz-osx-font-smoothing: grayscale;
 	}
 	
-	.child-view {
-		margin-top: 46px;
-		width: 100%;
+	.vux-pop-out-enter-active,
+	.vux-pop-out-leave-active,
+	.vux-pop-in-enter-active,
+	.vux-pop-in-leave-active {
+		will-change: transform;
+		transition: all 300ms;
 		height: 100%;
+		top: 0;
+		position: absolute;
+		backface-visibility: hidden;
+		perspective: 1000;
 	}
 	
-	.admin {
-		transition: all .5s cubic-bezier(.55, 0, .1, 1);
+	.vux-pop-out-enter {
+		opacity: 0;
+		transform: translate3d(-100%, 0, 0);
 	}
 	
-	.slide-left-enter,
-	.slide-right-leave-active {
-		-webkit-transform: translate(100%,0);
-		transform: translate(100%,0);
+	.vux-pop-out-leave-active {
+		opacity: 0;
+		transform: translate3d(100%, 0, 0);
 	}
 	
-	.slide-left-leave-active,
-	.slide-right-enter {
-		-webkit-transform: translate(-100%,0);
-		transform: translate(-100%,0);
+	.vux-pop-in-enter {
+		opacity: 0;
+		transform: translate3d(100%, 0, 0);
+	}
+	
+	.vux-pop-in-leave-active {
+		opacity: 0;
+		transform: translate3d(-100%, 0, 0);
 	}
 	/*弹窗 取消  确定  按钮颜色*/
 	
@@ -90,12 +110,15 @@
 	.vux-popup-header-right {
 		color: #FF9900!important;
 	}
-	
 	/*input框架  高度100%*/
-	.weui-cell__bd{
-		height: 100%;
-		input{
+	
+	.input-div {
+		.weui-cell__bd {
 			height: 100%;
+			input {
+				height: 100%;
+			}
 		}
 	}
+	/*我的钱包*/
 </style>

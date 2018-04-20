@@ -5,17 +5,21 @@
 			<div class="login-box">
 				<img src="../../../static/member/login-img.png" />
 			</div>
-			<group gutter="0">
+			<group gutter="0" class="input-div">
 				<!--<cell class="input-item" title="国家" value="中国" is-link value-align="right"></cell>-->
-				<x-input class="input-item" ref="phone" v-model="phone" placeholder="用户名" type="number" :max="11" :required="true" @on-change="change"></x-input>
+				<x-input class="input-item" ref="phone" v-model="phone" placeholder="用户名" type="number" :max="11" :required="true" @on-change="nameChange"></x-input>
 				<x-input class="input-item" ref="password" v-model="password" placeholder="密码" type="password" :required="true"></x-input>
 				<x-input v-if="!isReg" class="input-item bounceInUp animated" type="number" ref="code" v-model="code" placeholder="验证码" @on-change="codeChange">
-					<x-button slot="right" type="primary" mini>发送验证码</x-button>
+					<x-button slot="right" type="primary" mini @click.native="sendCode" :disabled="sendFlag">{{codeText}}</x-button>
 				</x-input>
 			</group>
 			<!--			<div class="tip">每个手机号只能作为一个账号注册</div>-->
 			<div class="tip">
-				<x-button class="add-btn" :gradients="['#1D62F0', '#19D5FD']" @click.native="submit">{{btnText}}</x-button>
+				<x-button class="add-btn" @click.native="submit" :show-loading="showLoading" :gradients="['#1D62F0', '#19D5FD']" :disabled="isClick">{{btnText}}</x-button>
+			</div>
+			<div class="login-re">
+				<span>忘记密码?</span>
+				<!--<span @click.native="codeLogin">验证码登录</span>-->
 			</div>
 			<div v-transfer-dom>
 				<confirm v-model="show" :title="regText" theme="ios" @on-confirm="onConfirm">
@@ -32,15 +36,19 @@
 	export default {
 		data() {
 			return {
-				title: '新用户注册', //头部标题
+				title: '用户登录', //头部标题
 				phone: '', //手机号码
 				password: '', //密码
 				code: '', //验证码
 				show: false,
 				regText: '提示',
-				disabled: true,
+				isClick: true,
 				btnText: '立即登录',
-				isReg: true //判断是否注册
+				isReg: true, //判断是否注册
+				codeText: '发送验证码',
+				num: 60,
+				sendFlag:false,
+				showLoading:false
 			}
 		},
 		created() {},
@@ -49,8 +57,8 @@
 		},
 		methods: {
 			submit() {
+				this.showLoading = true
 				if(this.phone == '17520439845' && this.password == '123456') {
-					this.disabled = false
 					this.$vux.loading.show({
 						text: '登陆中'
 					})
@@ -58,34 +66,48 @@
 						this.$vux.loading.hide()
 					}, 2000)
 				} else if(this.phone.length == 11 && this.phone != '17520439845') {
-					//					AlertModule.show({
-					//						title: '提示',
-					//						content: '该账号没有注册,是否立即注册?',
-					//						onShow() {
-					//							console.log('Module: I\'m showing')
-					//						},
-					//						onHide() {
-					//							console.log('Module: I\'m hiding now')
-					//						}
-					//					})
 					this.show = true
 				}
 			},
 			codeChange(val) {
 				if(val.length == 5) {
 					this.$refs.code.blur()
+					this.isClick = false
 				}
 			},
-			change(val) {
+			nameChange(val) {
 				var _this = this
 				if(val.length == 11) {
 					_this.$refs.phone.blur()
 					_this.$refs.password.focus()
+					this.isClick = false
 				}
 			},
 			onConfirm() {
 				this.isReg = false
+				this.showLoading = false
 				this.btnText = "立即注册"
+			},
+			sendCode() {
+				var _this = this
+				_this.$refs.code.focus()
+				if(_this.num == 0) {
+					_this.codeText = "发送验证码";
+					_this.num = 60;
+					_this.sendFlag = false
+					return;
+				} else {
+					_this.num--
+					_this.codeText = '重新发送验证码' + "(" + _this.num + ")"
+					_this.sendFlag = true
+				}
+				
+				setTimeout(function() {
+					_this.sendCode()
+				}, 1000)
+			},
+			codeLogin(){
+				
 			}
 		},
 		components: {
@@ -141,5 +163,13 @@
 		font-size: 0.28rem;
 		color: #FFFFFF;
 		letter-spacing: 0;
+	}
+	.login-re{
+		padding: 10px 15px;
+		display: flex;
+		justify-content: space-between;
+		span{
+			color: #10aeff;
+		}
 	}
 </style>

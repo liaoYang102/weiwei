@@ -1,169 +1,153 @@
 <template>
 	<div>
-		<div class="header">
-			<div class="logo">
-				<img src="../../assets/images/user/change.png" alt="">
-			</div>
-			<p class="tit">重置密码</p>
-		</div>
-
+		<settingHeader :title="title"></settingHeader>
 		<div class="content">
-			<div class="inputwrap">
-				<div class="input-row">
-					<i class="iconfont icon-shouji"></i>
-					<input class="inputItem" type="text" placeholder="输入手机号" id="phonum">
-				</div>
-				<div class="input-row">
-					<i class="iconfont icon-buchongiconsvg02"></i>
-					<input type="password" placeholder="输入验证码" id="pass">
-					<p class="send_yzm">获取验证码</p>
-				</div>
-				<div class="input-row">
-					<i class="iconfont icon-suo"></i>
-					<input class="inputItem" type="text" placeholder="输入密码">
-				</div>
-				<div class="input-row">
-					<i class="iconfont icon-suo"></i>
-					<input class="inputItem" type="text" placeholder="确认密码">
-				</div>
+			<div class="login-box">
+				<img src="../../assets/images/user/change.png" />
 			</div>
-			<p class="sm">登录密码由6-20位数字和字母组成</p>
-			<div class="reg-btn">提交</div>
+			<group gutter="0" class="input-div">
+				<x-input class="input-item" ref="phone" v-model="phone" placeholder="输入手机号码" type="number" :max="11" :required="true" @on-change="nameChange"></x-input>
+				<x-input class="input-item" ref="password" v-model="password" placeholder="输入新密码" type="password" :required="true"></x-input>
+				<x-input class="input-item" type="number" ref="code" v-model="code" placeholder="验证码" @on-change="codeChange">
+					<x-button slot="right" type="primary" mini @click.native="sendCode" :disabled="sendFlag">{{codeText}}</x-button>
+				</x-input>
+			</group>
+			<div class="tip">
+				<x-button class="add-btn" @click.native="submit" :show-loading="showLoading" :gradients="['#1D62F0', '#19D5FD']" :disabled="isClick">{{btnText}}</x-button>
+			</div>
 		</div>
-
 	</div>
 </template>
 
 <script>
+	import { XInput, Group, XButton, Cell, Loading, AlertModule } from 'vux'
+	import settingHeader from '../../components/setting_header'
 	export default {
 		data() {
 			return {
-
+				title: '重置登录密码', //头部标题
+				phone: '', //手机号码
+				password: '', //密码
+				code: '', //验证码
+				regText: '提示',
+				isClick: true,
+				btnText: '提交',
+				codeText: '发送验证码',
+				num: 60,
+				sendFlag:false,
+				showLoading:false
 			}
+		},
+		created() {},
+		mounted() {
+			this.$refs.phone.focus()
+		},
+		methods: {
+			submit() {
+				this.showLoading = true
+				if(this.phone == '17520439845' && this.password == '123456') {
+					this.$vux.loading.show({
+						text: '登陆中'
+					})
+					setTimeout(() => {
+						this.$vux.loading.hide()
+					}, 2000)
+				} else if(this.phone.length == 11 && this.phone != '17520439845') {
+					this.show = true
+				}
+			},
+			codeChange(val) {
+				if(val.length == 5) {
+					this.$refs.code.blur()
+					this.isClick = false
+				}
+			},
+			nameChange(val) {
+				var _this = this
+				if(val.length == 11) {
+					_this.$refs.phone.blur()
+					_this.$refs.password.focus()
+					this.isClick = false
+				}
+			},
+			sendCode() {
+				var _this = this
+				_this.$refs.code.focus()
+				if(_this.num == 0) {
+					_this.codeText = "发送验证码";
+					_this.num = 60;
+					_this.sendFlag = false
+					return;
+				} else {
+					_this.num--
+					_this.codeText = '重新发送验证码' + "(" + _this.num + ")"
+					_this.sendFlag = true
+				}
+				
+				setTimeout(function() {
+					_this.sendCode()
+				}, 1000)
+			}
+		},
+		components: {
+			settingHeader,
+			XInput,
+			Group,
+			XButton,
+			Cell,
+			Loading
 		}
 	}
 </script>
 
 <style lang="less" scoped>
-	.header {
+	.login-box {
 		width: 100%;
-		height: 4.8rem;
-		color: #f00;
-		background-size: 100% 100%;
-		overflow: hidden;
-		.logo {
-			width: 1.75rem;
-			margin: 0.6rem auto 0;
-			img {
-				width: 100%;
-			}
-		}
-		.tit {
-			font-size: 0.4rem;
-			color: rgb(135, 186, 255);
-			text-align: center;
-			margin-top: .1rem;
-		}
-		.xian {
-			width: 100%;
-			height: 2.8rem;
-			img {
-				width: 100%;
-				height: 100%;
-			}
+		height: 3.5rem;
+		position: relative;
+		img {
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			width: 2rem;
+			height: auto;
 		}
 	}
 	
-	.content {
-		width: 76%;
-		margin: .5rem auto;
-		.sm {
-			color: rgb(119, 158, 248);
-			margin-top: -10px;
-			margin-bottom: 0.3rem;
-			font-size: 14px;
-		}
-		.inputwrap {
-			position: relative;
-			.input-row {
-				position: relative;
-				margin-bottom: .3rem;
-				i {
-					position: absolute;
-					top: 0.13rem;
-					left: 0.2rem;
-					color: #497be5;
-					font-size: 0.35rem;
-				}
-				.icon-yanjing {
-					position: absolute;
-					top: 0.12rem;
-					right: 0.25rem;
-					color: #497be5;
-					font-size: 0.4rem;
-				}
-				.inputItem {
-					width: 85%;
-					border: 1px solid #82b1ff;
-					border-radius: 20px;
-					padding: 0.05rem 0 0.05rem 0.8rem;
-					color: #9cb7f2;
-					font-size: 0.28rem;
-					height: 0.66rem;
-					background: #faffbd;
-				}
-				#pass {
-					width: 44%;
-					border: 1px solid #82b1ff;
-					border-radius: 20px;
-					padding: 0.05rem 0 0.05rem 0.8rem;
-					color: #9cb7f2;
-					font-size: 0.28rem;
-					height: 0.66rem;
-				}
-				.send_yzm {
-					width: 37%;
-					height: 0.66rem;
-					line-height: 0.66rem;
-					border: 1px solid #82b1ff;
-					padding: 0.05rem 0 0.05rem 0;
-					border-radius: 20px;
-					text-align: center;
-					color: #9cb7f2;
-					background: #eaf5ff;
-					font-size: 0.28rem;
-					float: right;
-				}
-			}
-			.fogotpass {
-				color: #6a96f3;
-				font-size: 0.28rem;
-				text-align: right;
-				position: relative;
-				top: -0.2rem;
-			}
-		}
-		.reg-btn {
-			width: 100%;
-			background-image: linear-gradient(30deg, #246bfe, #5b90fe);
-			height: 0.76rem;
-			line-height: 0.76rem;
-			text-align: center;
-			box-shadow: 2px 3px 5px #c3d5fd;
-			color: #fff;
-			font-size: 16px;
-			border-radius: 20px;
-			margin-top: .2rem;
-		}
-		.text {
-			font-size: 0.24rem;
-			color: #9cb7f2;
-			text-align: center;
-			margin-top: .3rem;
-			span {
-				color: #f6573d;
-				font-size: 0.24rem;
-			}
+	.input-item {
+		height: 1.02rem;
+		font-family: PingFangSC-Regular;
+		font-size: 0.28rem;
+		letter-spacing: 0;
+		padding-top: 0;
+		padding-bottom: 0;
+		box-sizing: border-box;
+	}
+	
+	.tip {
+		padding: 10px 15px;
+		ont-family: PingFangSC-Regular;
+		font-size: 0.28rem;
+		color: #90A2C7;
+		letter-spacing: 0;
+		text-align: center;
+	}
+	
+	.add-btn {
+		height: 0.88rem;
+		margin-top: 0.55rem;
+		ont-family: PingFangSC-Regular;
+		font-size: 0.28rem;
+		color: #FFFFFF;
+		letter-spacing: 0;
+	}
+	.login-re{
+		padding: 10px 15px;
+		display: flex;
+		justify-content: space-between;
+		span{
+			color: #10aeff;
 		}
 	}
 </style>
