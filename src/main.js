@@ -11,13 +11,13 @@ import axios from 'axios'
 import './assets/icons_font/iconfont.css'
 import 'mint-ui/lib/style.css'
 import './style/global.css'
+import 'swiper/dist/css/swiper.css'
 import './config/wy_rem'
 import { Group, DatetimeRange, Cell, Tab, TabItem, CellBox, XHeader, Scroller, LoadMore,TransferDom, Confirm, Popup, Toast, Swiper, InlineXNumber, CheckIcon, CellFormPreview, XSwitch, XNumber, Badge, Previewer, Timeline, TimelineItem, Rater, XTextarea } from 'vux'
 import FastClick from 'fastclick'
 
-
-
 FastClick.attach(document.body);
+
 Vue.use(Vuex)
 Vue.use(Mint)
 Vue.directive('transfer-dom', TransferDom)

@@ -2,7 +2,18 @@
 	<div class="content">
 		<settingHeader :title="title"></settingHeader>
 		<div class="list">
-			<div class="content-left">
+			<div class="wrapper" ref="wrapper">
+				<div class="content">
+					<div class="content-left">
+    			    	<div class="box1">
+							<div class="box1-item" v-for="(item,index) in listData" :class="{'border-left':index == itemActive}" @click.active="boxItemActive(index)">
+								<span>{{item}}</span>
+							</div>
+						</div>
+    	    	    </div>
+				</div>
+			</div>
+			<!-- <div class="content-left">
 				<scroller lock-x>
 					<div class="box1">
 						<div class="box1-item" v-for="(item,index) in listData" :class="{'border-left':index == itemActive}" @click.active="boxItemActive(index)">
@@ -10,7 +21,7 @@
 						</div>
 					</div>
 				</scroller>
-			</div>
+			</div> -->
 			<div class="content-right">
 				<swiper :aspect-ratio="300/800" height="aspect-ratio">
 					<swiper-item class="swiper-demo-img" v-for="(item, index) in demo04_list" :key="index">
@@ -41,6 +52,7 @@
 </template>
 
 <script>
+	import BScroll from 'better-scroll'
 	import { Scroller, Swiper, SwiperItem } from 'vux'
 	import settingHeader from '../../components/setting_header'
 	export default {
@@ -92,7 +104,29 @@
 				}]
 			}
 		},
+		mounted() {
+			// this.$nextTick(() => {
+			this.InitScroll()
+
+			// })
+		},
 		methods: {
+			InitScroll() {
+				this.$nextTick(() => {
+					if(!this.scroll) {
+						this.scroll = new BScroll(this.$refs.wrapper, {
+							click: true,
+							scrollY: true,
+							pullUpLoad: {
+								threshold: -30, // 负值是当上拉到超过低部 70px；正值是距离底部距离 时，                    
+							}
+						})
+					} else {
+						this.scroll.refresh()
+					}
+				})
+
+			},
 			boxItemActive(index) {
 				this.itemActive = index
 				if(index === 0 || index === 1){
@@ -132,6 +166,10 @@
 	
 	.list {
 		display: flex;
+		.wrapper {
+			height: 12.45rem;
+			overflow: hidden;
+		}
 		.content-left {
 			width: 2.1rem;
 			/*padding-bottom: 50px;*/
