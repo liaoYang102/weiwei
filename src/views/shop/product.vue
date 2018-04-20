@@ -15,22 +15,20 @@
 						<img :src="item">
 					</swiper-item>
 				</swiper>
-				<scroller lock-x>
+				<scroller lock-x height="-110">
 					<div class="box2">
 						<div class="title">热门品牌</div>
 						<div class="type-box clearfix">
 							<div v-for="i in item">
-								<span><img src="../../assets/images/shop/apple.png"></span>
+								<span><img :src="i.img"></span>
 								<p>{{i.name}}</p>
 							</div>
 						</div>
 						<div class="title">热门品牌</div>
 						<div class="type-box clearfix">
-							<div v-for="i in 21">
-								<span>
-							<img src="../../assets/images/shop/apple.png"/>
-						</span>
-								<p>小米</p>
+							<div v-for="i in item">
+								<span><img :src="i.img"/></span>
+								<p>{{i.name}}</p>
 							</div>
 						</div>
 					</div>
@@ -51,43 +49,43 @@
 				listData: ['海外购', '中国臻品', '外套', 'T恤', '裤子', '鞋子', '饰品', '生活用品', '珠宝', '日用品', '保暖内衣', '女士裙子', '潮牌', '运动鞋', '休闲系列'],
 				demo04_list: ['https://img1.360buyimg.com/pop/jfs/t16792/328/1497480399/93929/c0d0fbb1/5ac9f290N29a3ad9d.jpg', 'https://img1.360buyimg.com/pop/jfs/t16792/328/1497480399/93929/c0d0fbb1/5ac9f290N29a3ad9d.jpg'],
 				item:[{
-					"img":"../../assets/images/shop/apple.png",
+					"img":"http://www.logoids.com/upload/image/201804/15240382172248838.jpg",
 					"name":"苹果"
 				},{
-					"img":"../../assets/images/shop/hw.png",
+					"img":"http://www.logoids.com/upload/image/201804/15240380219342299.jpg",
 					"name":'华为'
 				},{
-					"img":"../../assets/images/shop/oppo.png",
+					"img":"http://www.logoids.com/upload/image/201804/15240378205641691.jpg",
 					"name":'oppo'
 				},{
-					"img":"../../assets/images/shop/xiaomi.png",
+					"img":"http://www.logoids.com/upload/image/201804/15240376906592008.jpg",
 					"name":'小米'
 				},{
-					"img":"../../assets/images/shop/xiaomi.png",
+					"img":"http://www.logoids.com/upload/image/201804/15240374719953276.jpg",
 					"name":'小米'
 				},{
-					"img":"../../assets/images/shop/hw.png",
+					"img":"http://www.logoids.com/upload/image/201804/15240363475676435.jpg",
 					"name":'华为'
 				},{
-					"img":"../../assets/images/shop/oppo.png",
+					"img":"http://www.logoids.com/upload/image/201804/15240361364797529.jpg",
 					"name":'oppo'
 				},{
-					"img":"../../assets/images/shop/xiaomi.png",
+					"img":"http://www.logoids.com/upload/image/201804/15240356806127836.jpg",
 					"name":'小米'
 				},{
-					"img":"../../assets/images/shop/apple.png",
+					"img":"http://www.logoids.com/upload/image/201804/15240354882315717.jpg",
 					"name":'苹果'
 				},{
-					"img":"../../assets/images/shop/apple.png",
+					"img":"http://www.logoids.com/upload/image/201611/2016110515012682411.jpg",
 					"name":'苹果'
 				},{
-					"img":"../../assets/images/shop/oppo.png",
+					"img":"http://www.logoids.com/upload/image/201804/15240311177004133.jpg",
 					"name":'oppo'
 				},{
-					"img":"../../assets/images/shop/hw.png",
+					"img":"http://www.logoids.com/upload/image/201804/15240306367235121.jpg",
 					"name":'华为'
 				},{
-					"img":"../../assets/images/shop/xiaomi.png",
+					"img":"http://www.logoids.com/upload/image/201611/2016112117161830872.jpg",
 					"name":'小米'
 				}]
 			}
@@ -121,17 +119,16 @@
 	
 	.box1,
 	.box2 {
-		padding-bottom: 180px;
+		/*padding-bottom: 180px*/;
 	}
 	
 	.list {
 		display: flex;
-		height: 100vh;
 		.content-left {
 			width: 2.1rem;
-			height: 100%;
-			padding-bottom: 50px;
+			/*padding-bottom: 50px;*/
 			.box1-item {
+				background: #F5F6FA;
 				height: 1.18rem;
 				line-height: 1.18rem;
 				text-align: center;
@@ -150,7 +147,7 @@
 			}
 			.border-left {
 				border-left: 0.03rem solid #3889FF;
-				background: #f0f0f0;
+				background: #fff;
 			}
 		}
 		.content-right {
@@ -180,9 +177,12 @@
 						display: inline-block;
 						width: 100%;
 						height: 0.84rem;
-						line-height: 0.84rem;
 						text-align: center;
 						border: 0.02rem solid #D8DFF0;
+						img{
+							width: 100%;
+							height: 0.8rem;
+						}
 					}
 					p {
 						margin-top: 0.06rem;

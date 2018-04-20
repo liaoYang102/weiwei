@@ -42,7 +42,7 @@
 			      </div>
 			    </scroller>
 	          <div class="pay-box">
-				<x-button class="add-btn" :gradients="['#1D62F0', '#19D5FD']" >确定</x-button>
+				<x-button class="add-btn" :gradients="['#1D62F0', '#19D5FD']">确定</x-button>
 			  </div>
 	        </group>
 	      </popup>

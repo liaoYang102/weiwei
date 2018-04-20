@@ -1,8 +1,6 @@
 <template>
 	<div id="app" v-cloak>
-		<transition :name="transitionName">
-			<router-view :class="[show ? 'child-view' : '']" />
-		</transition>
+		<router-view />
 	</div>
 </template>
 
@@ -12,7 +10,7 @@
 		name: 'App',
 		data() {
 			return {
-				transitionName: '', // 默认动态路由变化为slide-right
+				
 				show:''
 			}
 		},
@@ -35,15 +33,10 @@
 			handleClick: function() {
 				this.$toast('Hello world!')
 			},
-			index(index) {
-				console.log(index)
-			}
 		},
 		watch: {
 			'$route' (to, from) {
-				console.log(this.$store.state.page.show)
-				this.transitionName = this.$store.state.page.show ? 'slide-left' : 'slide-right'
-				this.$store.state.page.show = !this.$store.state.page.show
+				
 			}　
 		}
 	}
@@ -56,26 +49,27 @@ html,body{
 
 #app {
 	height: 100%;
+	padding-top: 46px;
 	font-family: 'Avenir', Helvetica, Arial, sans-serif;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 }
 
 .child-view {
-	transition: all .5s cubic-bezier(.55, 0, .1, 1);
+	transition: all .5s linear;
 	padding-top: 46px;
 	width: 100%;
 }
 .slide-left-enter,
 .slide-right-leave-active {
-	-webkit-transform: translate(100%,0);
-	transform: translate(100%,0);
+	-webkit-transform: translateX(100%);
+	transform: translateX(100%);
 }
 
 .slide-left-leave-active,
 .slide-right-enter {
-	-webkit-transform: translate(-100%,0);
-	transform: translate(-100%,0);
+	-webkit-transform: translateX(-100%);
+	transform: translateX(-100%);
 }
 /*弹窗 取消  确定  按钮颜色*/
 

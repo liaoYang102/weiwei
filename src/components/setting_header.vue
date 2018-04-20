@@ -27,8 +27,8 @@
 		},
 		methods: {
 			goBack() {
-				this.$store.state.page.show = true
-				window.history.go(-1)
+				this.$store.state.page.show = true;
+				window.history.go(-1);
 			}
 		}
 	}

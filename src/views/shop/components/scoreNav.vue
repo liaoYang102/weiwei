@@ -1,6 +1,6 @@
 <template>
 	<div class="score-nav" v-model="scoreTitle">
-		<div class="score-top">
+		<div class="score-top" :class="[title == '信用积分购'?'bg':'']">
 			<div class="score-title">{{ title}}</div>
 			<div class="score-btn">
 				<span>全场包邮，积分全额兑换</span>
@@ -106,6 +106,9 @@ li{
 				margin-right: 0.1rem;
 			}
 		}
+	}
+	.bg{
+		background: url('../../../assets/images/shop/scorebg1.png') no-repeat;
 	}
 	.score-list{
 		position: absolute;
