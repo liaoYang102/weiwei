@@ -102,6 +102,7 @@ import Swiper from './components/swiper'
 		    modifyTheme(){
 		    	let themeId = document.getElementById('theme');
 		    	let vm =this;
+		    	vm.title = this.$route.params.themeTitle
 		    	if (vm.title == '中国臻品') {
 		    		themeId.style.background = '#f72d61';
 		    	}else{

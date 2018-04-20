@@ -2,7 +2,6 @@
     <div id="shops">
         <settingHeader :title="title"></settingHeader>
 
-       
         <tab :line-width='0' style="border-top: 1px solid #E1E1E1;">
             <tab-item selected @on-item-click="showPanel">
               {{ tabItem}} <img src="../../assets/images/shop/xiaActive.png" alt="" width="6%">
@@ -70,7 +69,7 @@ export default {
         }
     },
     mounted:function(){
-        // this.shopTitle = this.$router.params.title
+        this.tabItem = this.$route.params.title
     },
     methods: {
         showPanel: function(){

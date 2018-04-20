@@ -54,8 +54,8 @@
 				vm.title = vm.scoreTitle;
 			},
 			goAllshop(){
-				let title = this.title
-				this.$router.push({ path: '/shop/all_shops', params: { title }})
+				let title = this.title.slice(2);
+				this.$router.push({ name: 'all_shops', params: { title }})
 			},
 			goShopdetails(){
 				this.$router.push({ path: '/shop/shop_details'})

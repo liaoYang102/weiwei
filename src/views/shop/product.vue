@@ -96,7 +96,7 @@
 			boxItemActive(index) {
 				this.itemActive = index
 				if(index === 0 || index === 1){
-					this.$router.push({ path: '/shop/theme_goods'})
+					this.$router.push({ name: 'theme_goods', params: { themeTitle: this.listData[index]}})
 				}
 			},
 			goAllshop(){

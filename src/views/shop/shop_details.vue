@@ -417,7 +417,7 @@ export default {
 	width: 0.25rem;
 	font-size: 0.18rem;
 	line-height: 0.32rem;
-	text-align: left;
+	text-align: center;
 	left: 27%;
 	top: 12%;
 	padding: 0 0.08rem 0 0.02rem;
