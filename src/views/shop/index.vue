@@ -1,5 +1,5 @@
 <template>
-	<section>
+	<section class="shopIndex">
 		<div class="wrapper" ref="wrapper">
 			<div class="content">
 				<settingHeader :title="title"></settingHeader>
@@ -31,9 +31,9 @@
 						</div>
 					</div>
 
-					<test :theme="purchase" style="margin-top: 0.19rem;"></test>
+					<theme :theme="purchase" style="margin-top: 0.19rem;"></theme>
 
-					<test :theme="best"></test>
+					<theme :theme="best"></theme>
 				</section>
 
 				<img src="../../assets/images/shop/i_banner.png" style="width: 100%;">
@@ -53,7 +53,8 @@
 			    			<div class="tab-tag">
 		    					<p class="shopPrice">
 									<span class="priceNum">￥{{ item.money}}</span> 
-									<span class="shopAcount">+{{ item.score}}积分</span>
+									<span class="shopAcount" v-if="item.score!== ''">+{{ item.score}}积分</span>
+									<span class="shopTag" v-else-if="item.score == ''" :class="[item.tag == '满减'?'tagBg':'']">{{ item.tag}}</span>
 								</p>
 			    			</div>
 			    		</li>
@@ -70,13 +71,13 @@
 import settingHeader from '../../components/setting_header'
 import navindex from './components/nav_index'
 import scorenav from './components/scoreNav'
-import test from './components/test'
+import theme from './components/theme'
 import swiper from './components/swiper'
 import BScroll from 'better-scroll'
 import Loading from '../../components/loading'
 export default {
 	components: {
-		settingHeader,navindex,scorenav,test,swiper,Loading
+		settingHeader,navindex,scorenav,theme,swiper,Loading
 	},
 	data(){
 		return {
@@ -99,10 +100,10 @@ export default {
 			test: true,
 			show:false,
 			shopList: [
-				{ shopname: 'VANS Old Skool lite黑白超轻鞋款 黑色38.5', money: '3598', score: '266'},
-				{ shopname: 'VANS Old Skool lite黑白超轻鞋款 黑色38.5', money: '3598', score: '266'},
-				{ shopname: 'VANS Old Skool lite黑白超轻鞋款 黑色38.5', money: '3598', score: '266'},
-				{ shopname: 'VANS Old Skool lite黑白超轻鞋款 黑色38.5', money: '3598', score: '266'}
+				{ shopname: 'VANS Old Skool lite黑白超轻鞋款 黑色38.5', money: '3598', score: '266', tag: '满减'},
+				{ shopname: 'VANS Old Skool lite黑白超轻鞋款 黑色38.5', money: '3598', score: '266', tag: '新品'},
+				{ shopname: 'VANS Old Skool lite黑白超轻鞋款 黑色38.5', money: '3598', score: '', tag: '满减'},
+				{ shopname: 'VANS Old Skool lite黑白超轻鞋款 黑色38.5', money: '3598', score: '', tag: '新品'}
 			]
 		}
 	},
@@ -216,7 +217,7 @@ export default {
 	}
 }
 .wrapper {
-	height: 13.3rem;
+	height: 100%;
 	overflow: hidden;
 }
 li{
@@ -275,6 +276,19 @@ li:nth-child(odd){
 					border-radius: 0.04rem;
 					color:#fff;
 				}
+				.shopTag{
+					background:linear-gradient(127.8deg,rgba(0,215,124,1),rgba(27,246,153,1));
+					border-radius: 0.02rem ; 
+					text-align: center;
+					color: #fff;
+					height: 0.4rem;
+					padding-left: 0.06rem;
+					padding-right: 0.08rem;
+					font-size: 0.24rem;
+				}
+				.tagBg{
+					background:linear-gradient(-90deg,rgba(255,122,128,1),rgba(255,83,101,1));
+				}
 			}
 		}
 	}
@@ -282,6 +296,9 @@ li:nth-child(odd){
 </style>
 
 <style lang="less">
+.shopIndex{
+	height: 100%;
+}
 body{
 	background: #f5f6fa;
 }

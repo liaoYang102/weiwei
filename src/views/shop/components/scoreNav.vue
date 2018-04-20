@@ -147,13 +147,14 @@ li{
 						margin-right: 0.22rem;
 					}
 					.coupons{
-						float: left;
+						float: right;
 						background: rgba(56,137,255,0.20);
 						font-size: 0.2rem;
 						color: #3889FF;
-						margin-top: 0.12rem;
+						margin-top: 0.13rem;
 						padding-left: 0.07rem;
 						padding-right: 0.06rem;
+						padding-top: 0.02rem;
 						margin-right: 0.12rem;
 					}
 				}
