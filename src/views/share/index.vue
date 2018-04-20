@@ -13,7 +13,7 @@
 		        	<img :src="item">
 		        </swiper-slide>
 		        <div class="swiper-pagination" slot="pagination"></div>
-		      </swiper>
+		     </swiper>
 		</div>
 		<div class="wrap">
 			<div class="nav clearfix">
@@ -279,6 +279,9 @@
 	.info-box {
 		.content-head{
 			position: relative;
+			width: 100%;
+			height: 3.4rem;
+			/*border: 1px solid #333;*/
 			img{
 				height: 100%;
 				width: 100%;
@@ -303,8 +306,9 @@
 			background: #fff;
 			border-radius: 10px 10px 0 0;
 			position: relative;
-			top: -.2rem;
+			top: -.15rem;
 			width: 100%;
+			z-index: 4;
 			.nav{
 				ul{
 					width: 100%;
@@ -537,6 +541,7 @@
 								}
 								.num{
 									float: right;
+									margin-top: .1rem;
 								}
 							}
 							.zhekou{
