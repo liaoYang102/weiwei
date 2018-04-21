@@ -10,11 +10,11 @@
 		    </div>
 	    </x-header>
 
-		<div v-if="tabTitle == '评价'" style="background: #fff">
+		<div v-if="tabTitle == '评价'" style="background: #fff;height: 100%;">
 			<comments></comments>
 		</div>
 
-		<div v-else>
+		<div v-else  style="margin-top: 1rem;">
 			<div><img src="../../assets/images/shop/theme_banner0.png" style="width: 100%;"></div>
 			<div class="shop_content">
 				<div class="shop">
@@ -73,8 +73,8 @@
 					</div>
 				</div>
 			</div>
-
-			<div class="details">
+ 
+			<div class="details" id="details">
 				<div class="title">图文详情</div>
 				<div class="img"><img src="../../assets/images/shop/shop_details.png"></div>
 				<div class="details_text">
@@ -120,6 +120,9 @@ export default {
 			tabTitle: '商品'
 		}
 	},
+	create: function(){
+
+	},
 	mounted: function(){
 		this.onRouter()
 	},
@@ -130,6 +133,7 @@ export default {
 		onRouter(){
 			if(this.$route.params.title != null&& this.$route.params !=null){
 				this.tabTitle = this.$route.params.title;
+				window.scrollTo(0, 0);
 			}
 		},
 		onShop(){
@@ -140,7 +144,8 @@ export default {
 		scrollTo(){
 			this.tabTitle = '详情';
 			window.setTimeout(function(){
-				window.scrollTo(0, 700);
+				let obj = document.getElementById('details')
+				window.scrollTo(0, obj.offsetTop-46);
 			},0)
 		},
 		onItemClick () {
@@ -167,6 +172,7 @@ export default {
 
 <style lang="less" scoped>
 .shop_details{
+	height: 100%;
 	width: 100%;
 	background: #F5F6FA;
 	.shop_content{
@@ -282,7 +288,7 @@ export default {
 					text-align: center;
 					color: #336FFF;
 					font-size: 0.28rem;
-					padding: 0.02rem 0;
+					padding: 0.05rem 0 0 0;
 
 				}
 			}
@@ -316,7 +322,6 @@ export default {
 					padding-top: 0.41rem;
 				}
 				.text_many{
-					/*padding-bottom: 1rem;*/
 					font-size: 0.24rem;
 				}
 			}
@@ -413,13 +418,7 @@ export default {
 .footer .vux-badge{
 	position: absolute;
 	border-radius: 0.3rem;
-	height: 0.3rem;
-	width: 0.25rem;
-	font-size: 0.18rem;
-	line-height: 0.32rem;
-	text-align: center;
-	left: 27%;
-	top: 12%;
-	padding: 0 0.08rem 0 0.02rem;
+	left: 28%;
+	top: 6%;
 }
 </style>

@@ -22,8 +22,8 @@
 						<img src="../../assets/images/shop/order_detail1.png">
 					</div>
 					<div class="text-right">
-						<span>女装U宽腿牛仔裤(水洗产品)</span><br>
-						<span class="text-gray">颜色:蓝色; 尺码:L/170修身</span>
+						<span>女装U宽腿牛仔裤(水洗产品)</span>
+						<p class="text-gray">颜色:蓝色；尺码:L/170修身 <span class="fr">X4</span></p>
 					</div>
 				</div>
 				<div class="order-btn">
@@ -164,7 +164,7 @@ li{
 				float: left;
 			}
 			.left-text{
-				margin-top: -0.05rem;
+				margin-top: -0.02rem;
 				float: left;
 			}
 			.icon{
@@ -210,9 +210,13 @@ li{
 				font-size: 0.28rem;
 				color: #1A2642;
 				margin-top: 0.18rem;
+				width: 4.44rem;
 				.text-gray{
 					font-size: 0.24rem;
 					color: #90A2C7;
+				}
+				.fr{
+					float: right;
 				}
 			}
 		}
@@ -334,6 +338,9 @@ li{
 </style>
 
 <style lang="less">
+.ul-content{
+	margin-bottom: 0.2rem;
+}
 .ul-content .weui-cells{
 	margin-top: 0 !important;
 }

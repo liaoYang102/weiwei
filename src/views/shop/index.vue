@@ -229,9 +229,6 @@ li{
 li:nth-child(odd){
 	margin-right: 0.01rem;
 }
-.vux-loadmore{
-    display: none;
-}
 .mt{
 	margin-top: 0.2rem;
 }

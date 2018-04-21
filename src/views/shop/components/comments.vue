@@ -1,12 +1,12 @@
 <template>
-	<section>
-		<div class="tab-title">商品评价</div>
+	<section style="height: 100%;">
+		<div class="wrapper" ref="wrapper">
+			<div class="content">
+				<div class="tab-title">商品评价</div>
 
-		<div>
-		    <scroller lock-x @on-scroll-bottom="onScrollBottom" ref="scrollerBottom" style="background-color:#F5F6FA" v-if='test'>
 		        <div class="commentsList">
 		            <div class="list">
-		            	<li class="li-comments">
+		            	<li class="li-comments" v-for="item in 8">
 		            		<div class="comments_author">
 		            			<img src="../../../assets/images/shop/photo.png">
 		            			<span class="name">陈独秀</span>
@@ -16,38 +16,47 @@
 		            		<div class="comments_date">2018.03.30 颜色:蓝色; 尺码:170/92A/M</div>
 
 		            		<div class="imgList">
-			            		<scroller lock-y scrollbar-x>
-		            		      	<div class="box1">
-		            		        	<div class="box1-item" v-for="(item, index) in list">
-		            		        		<!-- <img src="../../../assets/images/shop/comments1.png"> -->
-		            		        		<img class="previewer-demo-img" :src="item.src" width="100" @click="show(index)">
-		            		        	</div>
-		            		        	<div v-transfer-dom>
-	            		        	      	<previewer :list="list" ref="previewer" :options="options" @on-index-change="logIndexChange">
-	            		        	      		<div style="color: white">kaskjfksk</div>
-	            		        	      	</previewer>
-	            		        	    </div>
-		            		      	</div>
-		            		    </scroller>
+		            			<swiper :options="swiperOption" class="box1">
+	            			       	<swiper-slide v-for="(item,index) in list">
+	            			       		<div class="box1-item">
+    			                        	<img  class="previewer-demo-img" :src="item.src" width="100" @click="show(index)">
+	            			       		</div>
+	            			       	</swiper-slide>
+	            			    </swiper>
+	            			    
 		            		</div>
-		            		
 		            	</li>
+		            	<div class="clear"></div>
 		            </div>
-		            
-		            <load-more tip="loading" id='loading'></load-more>
+		            <loading v-if="showLoading"></loading>
 		        </div>
-
-		    </scroller>
-		    
+			</div>
 		</div>
+		<div v-transfer-dom>
+	        <previewer :list="list" ref="previewer" :options="options" @on-index-change="logIndexChange"></previewer>
+	    </div>
 	</section>
 </template>
 
 <script>
+import BScroll from 'better-scroll'
+import Loading from '../../../components/loading'
+import {swiper,swiperSlide } from 'vue-awesome-swiper'
+import 'swiper/dist/css/swiper.css'
 export default {
+	components: {
+		Loading,swiper,swiperSlide
+	},
+
 	data(){
 		return {
 			test: true,
+			showLoading: false,
+			swiperOption: {
+				autoHeight: true,
+	          slidesPerView: 'auto',
+              spaceBetween: 10
+	        },
 			list: [{
 			        msrc: 'http://ww1.sinaimg.cn/thumbnail/663d3650gy1fplwu9ze86j20m80b40t2.jpg',
 			        src: 'http://ww1.sinaimg.cn/large/663d3650gy1fplwu9ze86j20m80b40t2.jpg',
@@ -62,60 +71,94 @@ export default {
 			      }, {
 			        msrc: 'http://ww1.sinaimg.cn/thumbnail/663d3650gy1fplwwcynw2j20p00b4js9.jpg',
 			        src: 'http://ww1.sinaimg.cn/large/663d3650gy1fplwwcynw2j20p00b4js9.jpg'
-			      }],
+			      },
+			      {
+  			        msrc: 'http://ww1.sinaimg.cn/thumbnail/663d3650gy1fplwu9ze86j20m80b40t2.jpg',
+  			        src: 'http://ww1.sinaimg.cn/large/663d3650gy1fplwu9ze86j20m80b40t2.jpg',
+  			        w: 800,
+  			        h: 400
+  			      },
+  			      {
+  			        msrc: 'http://ww1.sinaimg.cn/thumbnail/663d3650gy1fplwvqwuoaj20xc0p0t9s.jpg',
+  			        src: 'http://ww1.sinaimg.cn/large/663d3650gy1fplwvqwuoaj20xc0p0t9s.jpg',
+  			        w: 1200,
+  			        h: 900
+  			      }, {
+  			        msrc: 'http://ww1.sinaimg.cn/thumbnail/663d3650gy1fplwwcynw2j20p00b4js9.jpg',
+  			        src: 'http://ww1.sinaimg.cn/large/663d3650gy1fplwwcynw2j20p00b4js9.jpg'
+  			      }],
 	      	options: {
 		        getThumbBoundsFn (index) {
-		          // find thumbnail element
 		          let thumbnail = document.querySelectorAll('.previewer-demo-img')[index]
-		          // get window scroll Y
 		          let pageYScroll = window.pageYOffset || document.documentElement.scrollTop
-		          // optionally get horizontal scroll
-		          // get position of element relative to viewport
 		          let rect = thumbnail.getBoundingClientRect()
-		          // w = width
 		          return {x: rect.left, y: rect.top + pageYScroll, w: rect.width}
-		          // Good guide on how to get element coordinates:
-		          // http://javascript.info/tutorial/coordinates
 		        }
 	      	}
 		}
 	},
+	mounted:function(){
+		this.InitScroll()
+	},
 	methods:{
-        onScrollBottom(){
-	    	var load = document.getElementById("loading");
-	    	load.style.display = 'block'
-	    	if (this.onFetching) {
-		        // do nothing
-		      } else {
-		        this.onFetching = true
-		        setTimeout(() => {
-		        	load.style.display = 'none'
-		        	console.log(123);
-		          	this.$nextTick(() => {
-		            this.$refs.scrollerBottom.reset()
-		          })
-		          this.onFetching = false
-		        }, 2000)
-		      }
-	    },
 	    logIndexChange (arg) {
           	console.log(arg)
         },
-        show (index) {
+        show(index) {
+        	console.log('-=-=', index)
+        	console.log(this.$refs.previewer);
           	this.$refs.previewer.show(index)
-        }
+        },
+        InitScroll() {
+			this.$nextTick(() => {
+				if(!this.scroll) {
+					this.scroll = new BScroll(this.$refs.wrapper, {
+						click: true,
+						scrollY: true,
+						pullUpLoad: {
+							threshold: -30, // 负值是当上拉到超过低部 70px；正值是距离底部距离 时，                    
+						}
+					})
+					this.scroll.on('pullingUp', (pos) => {
+						this.showLoading = true;
+						this.LoadData()
+						this.$nextTick(function() {
+							this.scroll.finishPullUp();
+							this.scroll.refresh();
+						});
+					})
+				} else {
+					this.scroll.refresh()
+				}
+			})
+
+		},
+		LoadData() {
+			var _this = this
+			setTimeout(function(){
+				_this.showLoading = false;
+				// let obj = [{ shopname: 'VANS Old Skool lite黑白超轻鞋款 黑色38.5', money: '3598', score: '266'},
+				// { shopname: 'VANS Old Skool lite黑白超轻鞋款 黑色38.5', money: '3598', score: '266'}];
+				// _this.shopList = _this.shopList.concat(obj);
+				console.log(_this.shopList);
+			},3000)
+		}
 	}
 }
 </script>
 
 <style lang="less" scoped>
+.imgList .swiper-slide {
+    width: 1.52rem;
+}
 li{
 	list-style: none;
 	margin-top: 0.01rem;
 	background: #FFF;
 }
-.vux-loadmore{
-    display: none;
+.wrapper {
+	height: 100%;
+	overflow: hidden;
 }
 .tab-title{
 	padding-left: 0.19rem;
@@ -151,8 +194,8 @@ li{
 				margin-top: 0.13rem;
 				.box1 {
 				  height: 1.52rem;
-				  position: relative;
-				  width: 100rem;
+				  /*position: relative;*/
+				  /*width: 100rem;*/
 				}
 				.box1-item {
 				  width: 1.52rem;

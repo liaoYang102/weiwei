@@ -1,128 +1,133 @@
 <template>
 	<section class='cart'>
-		<settingHeader :title="title"></settingHeader>
-		<scroller lock-x height='-100' @on-scroll-bottom="onScrollBottom" ref="scrollerBottom">
-	      <div class="box2">
-	      	<div class="list">
-				<div class="storeName">
-					<check-icon :value.sync='demo' style="width:0.88rem;height:0.88rem;text-align:center;line-height:0.88rem;" class='fl'></check-icon>
-					<div class="fr" style="width:6.62rem;line-height: 0.88rem;border-bottom:1px solid #D8DFF0">
-						<div class="fl">
-							<img src="../../assets/images/shop/UNIQLO.png" alt="">
-							<span>优衣库旗舰店</span>
+		<div class="wrapper" ref="wrapper">
+			<div class="content">
+				<settingHeader :title="title"></settingHeader>
+				<div class="box2">
+			      	<div class="list">
+						<div class="storeName">
+							<check-icon :value.sync='demo' style="width:0.88rem;height:0.88rem;text-align:center;line-height:0.88rem;" class='fl'></check-icon>
+							<div class="fr" style="width:6.62rem;line-height: 0.88rem;border-bottom:1px solid #D8DFF0">
+								<div class="fl">
+									<img src="../../assets/images/shop/UNIQLO.png" alt="">
+									<span>优衣库旗舰店</span>
+								</div>
+								<div class="fr edit" @click='edit($event)'>编辑</div>
+							</div>
 						</div>
-						<div class="fr edit" @click='edit($event)'>编辑</div>
-					</div>
-				</div>
-				<div class="store-shop">
-					<check-icon :value.sync="demo" style="width:0.88rem;height:2.24rem;text-align:center;line-height:2.24rem;" class='fl'></check-icon>
-					<div class="fr" style="width:6.62rem;padding-bottom:0.2rem;border-bottom:1px solid #D8DFF0;padding-top:0.2rem;">
-						<div class="fl">
-							<img src="../../assets/images/shop/order_detail1.png" alt="">
-						</div>
-						<div class="fl shop-content" v-if='item'>
-							<p class="shop-name">女装U宽腿牛仔裤(水洗产品)女装U宽腿牛仔裤(水洗产品)</p>
-							<p class="shop-size">颜色:蓝色；尺码:L/170修身 <span class="fr">X4</span></p>
-							<p class="shop-price"><span class="priceNum">￥3598</span> <span class="shopAcount">+266积分</span></p>
-						</div>
-						<div class="fr shopEdit" v-else>
-							<div class="fl">
-								<inline-x-number width="1.8rem" :min='0'></inline-x-number>
-								<div class="editSize">
-									<div class="fl">蓝色；165/S</div>
-									<div class="fr"><img src="../../assets/images/shop/modify.png" alt=""></div>
+						<div class="store-shop">
+							<check-icon :value.sync="demo" style="width:0.88rem;height:2.24rem;text-align:center;line-height:2.24rem;" class='fl'></check-icon>
+							<div class="fr" style="width:6.62rem;padding-bottom:0.2rem;border-bottom:1px solid #D8DFF0;padding-top:0.2rem;">
+								<div class="fl">
+									<img src="../../assets/images/shop/order_detail1.png" alt="">
+								</div>
+								<div class="fl shop-content" v-if='item'>
+									<p class="shop-name">女装U宽腿牛仔裤(水洗产品)女装U宽腿牛仔裤(水洗产品)</p>
+									<p class="shop-size">颜色:蓝色；尺码:L/170修身 <span class="fr">X4</span></p>
+									<p class="shop-price"><span class="priceNum">￥3598</span> <span class="shopAcount">+266积分</span></p>
+								</div>
+								<div class="fr shopEdit" v-else>
+									<div class="fl">
+										<inline-x-number width="1.8rem" :min='0'></inline-x-number>
+										<div class="editSize">
+											<div class="fl">蓝色；165/S</div>
+											<div class="fr"><img src="../../assets/images/shop/modify.png" alt=""></div>
+										</div>
+									</div>
+									<div class="fr delete">
+										删除
+									</div>
 								</div>
 							</div>
-							<div class="fr delete">
-								删除
+							<div class="clear"></div>
+						</div>
+						<div class="store-shop">
+							<check-icon :value.sync="demo" style="width:0.88rem;height:2.24rem;text-align:center;line-height:2.24rem;" class='fl'></check-icon>
+							<div class="fr" style="width:6.62rem;padding-bottom:0.2rem;border-bottom:1px solid #D8DFF0;padding-top:0.2rem;">
+								<div class="fl">
+									<img src="../../assets/images/shop/order_detail1.png" alt="">
+								</div>
+								<div class="fl shop-content" v-if='item'>
+									<p class="shop-name">女装U宽腿牛仔裤(水洗产品)女装U宽腿牛仔裤(水洗产品)</p>
+									<p class="shop-size">颜色:蓝色；尺码:L/170修身 <span class="fr">X4</span></p>
+									<p class="shop-price"><span class="priceNum">￥3598</span> <span class="shopAcount">+266积分</span></p>
+								</div>
+								<div class="fr shopEdit"  v-else>
+									<div class="fl">
+										<inline-x-number width="1.8rem" :min='0'></inline-x-number>
+										<div class="editSize">
+											<div class="fl">蓝色；165/S</div>
+											<div class="fr"><img src="../../assets/images/shop/modify.png" alt=""></div>
+										</div>
+									</div>
+									<div class="fr delete">
+										删除
+									</div>
+								</div>
 							</div>
+							<div class="clear"></div>
+						</div>
+					</div>
+					<div class="list" v-for="item in 2">
+						<div class="storeName">
+							<check-icon :value.sync="demo" style="width:0.88rem;height:0.88rem;text-align:center;line-height:0.88rem;" class='fl'></check-icon>
+							<div class="fr" style="width:6.62rem;line-height: 0.88rem;border-bottom:1px solid #D8DFF0">
+								<div class="fl">
+									<img src="../../assets/images/shop/UNIQLO.png" alt="">
+									<span>优衣库旗舰店</span>
+								</div>
+								<div class="fr edit" @click='edit($event)'>编辑</div>
+							</div>
+						</div>
+						<div class="store-shop">
+							<check-icon :value.sync="demo" style="width:0.88rem;height:2.24rem;text-align:center;line-height:2.24rem;" class='fl'></check-icon>
+							<div class="fr" style="width:6.62rem;padding-bottom:0.2rem;border-bottom:1px solid #D8DFF0;padding-top:0.2rem;">
+								<div class="fl">
+									<img src="../../assets/images/shop/order_detail1.png" alt="">
+								</div>
+								<div class="fl shop-content" v-if='item'>
+									<p class="shop-name">女装U宽腿牛仔裤(水洗产品)女装U宽腿牛仔裤(水洗产品)</p>
+									<p class="shop-size">颜色:蓝色；尺码:L/170修身 <span class="fr">X4</span></p>
+									<p class="shop-price"><span class="priceNum">￥3598</span> <span class="shopAcount">+266积分</span></p>
+								</div>
+								<div class="fr shopEdit" v-else>
+									<div class="fl">
+										<inline-x-number width="1.8rem" :min='0'></inline-x-number>
+										<div class="editSize">
+											<div class="fl">蓝色；165/S</div>
+											<div class="fr"><img src="../../assets/images/shop/modify.png" alt=""></div>
+										</div>
+									</div>
+									<div class="fr delete">
+										删除
+									</div>
+								</div>
+							</div>
+							<div class="clear"></div>
 						</div>
 					</div>
 					<div class="clear"></div>
-				</div>
-				<div class="store-shop">
-					<check-icon :value.sync="demo" style="width:0.88rem;height:2.24rem;text-align:center;line-height:2.24rem;" class='fl'></check-icon>
-					<div class="fr" style="width:6.62rem;padding-bottom:0.2rem;border-bottom:1px solid #D8DFF0;padding-top:0.2rem;">
-						<div class="fl">
-							<img src="../../assets/images/shop/order_detail1.png" alt="">
-						</div>
-						<div class="fl shop-content" v-if='item'>
-							<p class="shop-name">女装U宽腿牛仔裤(水洗产品)女装U宽腿牛仔裤(水洗产品)</p>
-							<p class="shop-size">颜色:蓝色；尺码:L/170修身 <span class="fr">X4</span></p>
-							<p class="shop-price"><span class="priceNum">￥3598</span> <span class="shopAcount">+266积分</span></p>
-						</div>
-						<div class="fr shopEdit"  v-else>
-							<div class="fl">
-								<inline-x-number width="1.8rem" :min='0'></inline-x-number>
-								<div class="editSize">
-									<div class="fl">蓝色；165/S</div>
-									<div class="fr"><img src="../../assets/images/shop/modify.png" alt=""></div>
-								</div>
-							</div>
-							<div class="fr delete">
-								删除
-							</div>
-						</div>
-					</div>
-					<div class="clear"></div>
+					<loading v-if="show"></loading>
 				</div>
 			</div>
-			<div class="list">
-				<div class="storeName">
-					<check-icon :value.sync="demo" style="width:0.88rem;height:0.88rem;text-align:center;line-height:0.88rem;" class='fl'></check-icon>
-					<div class="fr" style="width:6.62rem;line-height: 0.88rem;border-bottom:1px solid #D8DFF0">
-						<div class="fl">
-							<img src="../../assets/images/shop/UNIQLO.png" alt="">
-							<span>优衣库旗舰店</span>
-						</div>
-						<div class="fr edit" @click='edit($event)'>编辑</div>
-					</div>
+			<div class="position">
+				<div class="fl total">
+					<check-icon :value.sync="demo" style='width:0.88rem;text-align:center;line-height:0.9rem;' class='fl'></check-icon>
+					<span class="selectAll">全选</span>
+					<p class="shop-price fr">总计：<span class="priceNum">￥3598</span> <span class="shopAcount">+266积分</span></p>
 				</div>
-				<div class="store-shop">
-					<check-icon :value.sync="demo" style="width:0.88rem;height:2.24rem;text-align:center;line-height:2.24rem;" class='fl'></check-icon>
-					<div class="fr" style="width:6.62rem;padding-bottom:0.2rem;border-bottom:1px solid #D8DFF0;padding-top:0.2rem;">
-						<div class="fl">
-							<img src="../../assets/images/shop/order_detail1.png" alt="">
-						</div>
-						<div class="fl shop-content" v-if='item'>
-							<p class="shop-name">女装U宽腿牛仔裤(水洗产品)女装U宽腿牛仔裤(水洗产品)</p>
-							<p class="shop-size">颜色:蓝色；尺码:L/170修身 <span class="fr">X4</span></p>
-							<p class="shop-price"><span class="priceNum">￥3598</span> <span class="shopAcount">+266积分</span></p>
-						</div>
-						<div class="fr shopEdit" v-else>
-							<div class="fl">
-								<inline-x-number width="1.8rem" :min='0'></inline-x-number>
-								<div class="editSize">
-									<div class="fl">蓝色；165/S</div>
-									<div class="fr"><img src="../../assets/images/shop/modify.png" alt=""></div>
-								</div>
-							</div>
-							<div class="fr delete">
-								删除
-							</div>
-						</div>
-					</div>
-					<div class="clear"></div>
+				<div class="fr clearing" @click="goConfirm">
+					结算(1)
 				</div>
-			</div>
-		  <load-more tip="loading" id='loading'></load-more>
-	      </div>
-	    </scroller>
-	    <div class="position">
-			<div class="fl total">
-				<check-icon :value.sync="demo" style='width:0.88rem;text-align:center;line-height:0.9rem;' class='fl'></check-icon>
-				<span class="selectAll">全选</span>
-				<p class="shop-price fr">总计：<span class="priceNum">￥3598</span> <span class="shopAcount">+266积分</span></p>
-			</div>
-			<div class="fr clearing" @click="goConfirm">
-				结算(1)
-			</div>
-	    </div>
+		    </div>
+		</div>
 	</section>
 </template>
 
 <script>
 	import settingHeader from '../../components/setting_header'
+	import BScroll from 'better-scroll'
+	import Loading from '../../components/loading'
 	export default{
 		data(){
 			return{
@@ -130,29 +135,40 @@
 				demo1: false,
 				item:true,
 				demo:false,
+				show: false
 			}
 		},
 		components:{
-			settingHeader,
+			settingHeader,Loading
+		},
+		mounted() {
+			this.InitScroll()
 		},
 		methods:{
-			onScrollBottom(){
-		    	var load = document.getElementById("loading");
-		    	load.style.display = 'block'
-		    	if (this.onFetching) {
-			        // do nothing
-			      } else {
-			        this.onFetching = true
-			        setTimeout(() => {
-			        	load.style.display = 'none'
-			        	console.log(123);
-			          	this.$nextTick(() => {
-			            this.$refs.scrollerBottom.reset()
-			          })
-			          this.onFetching = false
-			        }, 2000)
-			      }
-		    },
+			InitScroll() {
+				this.$nextTick(() => {
+					if(!this.scroll) {
+						this.scroll = new BScroll(this.$refs.wrapper, {
+							click: true,
+							scrollY: true,
+							pullUpLoad: {
+								threshold: -30, // 负值是当上拉到超过低部 70px；正值是距离底部距离 时，                    
+							}
+						})
+						this.scroll.on('pullingUp', (pos) => {
+							this.show = true;
+							// this.LoadData()
+							this.$nextTick(function() {
+								this.scroll.finishPullUp();
+								this.scroll.refresh();
+							});
+						})
+					} else {
+						this.scroll.refresh()
+					}
+				})
+
+			},
 		    edit(e){
 		    	if(this.item){
 		    		e.target.innerHTML = '完成';
@@ -171,11 +187,9 @@
 </script>
 
 <style lang="less" scoped>
-	.vux-loadmore{
-		display: none;
-		background-color: #F5F6FA;
-		width: 100%;
-		margin:0;
+	.wrapper {
+		height: 100%;
+		overflow: hidden;
 	}
 	section{
 		background-color: #F5F6FA;
@@ -333,6 +347,7 @@
 </style>
 <style lang='less'>
 	.cart{
+		height: 100%;
 		.vux-number-input{
 			border:none;
 			border-right: 1px solid #ececec;

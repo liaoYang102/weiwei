@@ -4,7 +4,7 @@
 		<div class="head">
 			<img src="../../assets/images/shop/payment_successful.png" alt="" class='fl'>
 			<div class="message fl">
-				<p class="success">支付成功</p>
+				<p class="success">交易成功</p>
 				<p class="prompt">宝贝会很快送到您手里~</p>
 			</div>
 			<div class="clear"></div>

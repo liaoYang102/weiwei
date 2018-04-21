@@ -73,6 +73,7 @@
 		transition: all 300ms;
 		height: 100%;
 		top: 0;
+		width: 100%;
 		position: absolute;
 		backface-visibility: hidden;
 		perspective: 1000;

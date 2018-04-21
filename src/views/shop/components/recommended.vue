@@ -74,7 +74,6 @@
 
 <style lang="less" scoped>
 .recommended{
-	margin-top: 0.2rem;
 	background: #fff;
 	.re-title{
 		font-size: 0.3rem;

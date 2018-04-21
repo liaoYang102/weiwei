@@ -64,7 +64,7 @@
                 <cell title="现金" value="20元" :border-intent="false"></cell>
                 <div class="leave">
 					<span class="message">卖家留言</span>
-					<input type="text" placeholder='选填:填写内容已和卖家协商确认'>
+					<input type="text" placeholder='选填:填写内容已和卖家协商确认' style="width: 55%;font-size: 0.24rem">
                 </div>
             </group>
 		</div>
@@ -73,6 +73,7 @@
 				共 <span class='color'>1</span> 件，总计：<span class="totalNum">¥3598</span><span class="totalAccount">+266积分</span>
 			</div>
 			<div class="confirmSumbit fr" @click='popup'>确认提交</div>
+			<div class="clear"></div>
 		</div>
 	</section>
 </template>
@@ -256,7 +257,6 @@ export default {
 	}
 	.submit{
 		width: 100%;
-		height: 1.05em;
 		.total{
 			background-color: #fff;
 			width: 4.4rem;
@@ -298,40 +298,46 @@ export default {
 	}
 </style>
 <style lang='less'>
-	.weui-cell_switch{
+.shops .weui-cells{
+	margin-top: 0 !important;
+}
+.shops .vux-no-group-title{
+	margin-top: 0 !important;
+}
+.shops .weui-cell_switch{
 	    padding-right: 0!important;
 	}
-	.weui-label{
+.shops .weui-label{
 		width: 8em!important;
 		margin-right: 0.2rem;
 	}
-	.weui-icon-success{
+.shops .weui-icon-success{
 		float: right;
 		margin-right: 0.25rem;
 	}
-	.weui-icon-circle{
+.shops .weui-icon-circle{
 		float: right;
 		margin-right: 0.25rem;
 	}
-	.vux-number-input{
+.shops .vux-number-input{
 		border: none!important;
 		font-size: 0.28rem!important;
 		color:#333!important;
 	}
-	.vux-number-selector{
+.shops .vux-number-selector{
 		color:#222!important;
 		background: #F5F5F5!important;
 	}
-	.vux-number-selector svg{
+.shops .vux-number-selector svg{
 		fill:#222!important;
 	}
-	.vux-label{
+.shops .vux-label{
 		color:#222;
 	}
-	.weui-cell__ft{
+.shops .weui-cell__ft{
 		color: #1A2642!important;
 	}
-	.weui-cell{
-		padding: 0.12rem 0.15rem;
+.shops .weui-cell{
+		padding: 0.15rem 0.15rem;
 	}
 </style>
