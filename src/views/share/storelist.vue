@@ -2,15 +2,16 @@
 	<div class="storelist">
 		<settingHeader :title="title"></settingHeader>
 		<div class="nav">
-			<div class="area">
-				<p>区域<i class="iconfont icon-shixinjiantou-copy"></i></p>
+			<div class="area" @click="onArea()">
+				<p>区域<i class="iconfont" :class="areaShang ? 'icon-shixinjiantou' : 'icon-shixinjiantou-copy'"></i></p>
 			</div>
-			<div class="type">
-				<p>类型<i class="iconfont icon-shixinjiantou-copy"></i></p>
+			<div class="type" @click="onType()">
+				<p>类型<i class="iconfont" :class="typeShang ? 'icon-shixinjiantou' : 'icon-shixinjiantou-copy'"></i></p>
 			</div>
-			<div class="price">
-				<p>价格<i class="iconfont icon-shixinjiantou-copy"></i></p>
+			<div class="price" @click="onPrice()">
+				<p>价格<i class="iconfont" :class="priceShang ? 'icon-shixinjiantou' : 'icon-shixinjiantou-copy'"></i></p>
 			</div>
+			
 		</div>
 
 		<div class="wrapper" ref="wrapper">
@@ -91,6 +92,45 @@
 
 		</div>
 
+		
+		<!-- //区域框 -->
+		<div v-transfer-dom>
+	      <popup v-model="areaShang" position="top">
+	        <div class="change_area">
+	        	<div class="title">
+	        		<i class="iconfont icon-dizhi1"></i>
+	        		<span class="adre">广州</span>
+	        		<span class="again">重新定位</span>
+	        	</div>
+	        	<div class="list">
+	        		<ul class="clearfix">
+	        			<!-- <li class="first">不限</li> -->
+	        			<li v-for="(item,index) in adList" @click="toggle(index,event)" :class="{current:index==active}">{{item}}</li>
+	        		</ul>
+	        	</div>
+	        </div>
+	      </popup>
+	    </div>
+
+	    <!-- 类型框 -->
+    	<div v-transfer-dom class="aa">
+	      <popup v-model="typeShang" position="top">
+	        	<group>
+			    	<radio title="title" :options="options"></radio>
+			  	</group>
+	      </popup>
+	    </div>
+
+	    <!-- 价格/距离框 -->
+	    <div v-transfer-dom class="aa">
+	      <popup v-model="typeShang" position="top">
+	        	<group>
+			    	<radio title="title" :options="opPrice"></radio>
+			  	</group>
+	      </popup>
+	    </div>
+		
+
 	</div>
 </template>
 
@@ -103,7 +143,32 @@
 			return {
 				title: '门店列表',
 				data:[],
-				scroll
+				areaShang:false,//区域箭头
+				typeShang:true,//类型箭头
+				priceShang:false,//价格箭头
+				active:1,//列表选中样式（地址）
+				options:['美容院','老人院','月子中心'],//类型筛选
+				/*options2:[
+					{
+						icon: 'http://dn-placeholder.qbox.me/110x110/FF2D55/000',
+  						key: '001',
+  						value: 'radio001'
+					},
+					{
+						icon: 'http://dn-placeholder.qbox.me/110x110/FF2D55/000',
+  						key: '002',
+  						value: 'radio002'
+					}
+				]*/
+				
+
+				adList:[
+					"不限", 
+					"白云区",
+					"番禺区",
+					"天河区",
+					"越秀区"
+				]
 			}
 		},
 		components:{
@@ -115,22 +180,67 @@
 		mounted(){
 			this.InitScroll();
 		},
+		computed:{
+			
+		},
 		methods:{
 			InitScroll(){
-				
+				this.$nextTick(() => {
+			        this.scroll = new BScroll(this.$refs.wrapper, {})
+			      })
 			},
 			onLoadData(){
 
+			},
+			onArea(){
+				//点击区域
+				if(this.areaShang){
+					this.areaShang=false;
+				}else{
+					this.areaShang=true;
+
+				}
+			},
+			onType(){
+				//点击类型
+				if(this.typeShang){
+					this.typeShang=false;
+				}else{
+					this.typeShang=true
+				}
+			},
+			onPrice(){
+				//点击价格
+				if(this.priceShang){
+					this.priceShang=false;
+				}else{
+					this.priceShang=true
+				}
+			},
+			toggle(index){
+				this.active=index;
 			}
 		}
 	}
 </script>
+<style>
 
+		.aa .weui-cells_radio .weui-check:checked + .weui-icon-checked:before{
+			color: #336FFF !important;
+		}
+		.aa .vux-radio-label{
+			color: #336FFF !important;
+		}
+
+</style>
 <style lang="less" scoped>
 	@import url('../../../static/css/global'); 
+
+	.storelist{}
+
 	.wrapper{
-		height:11.15rem;
-		overflow:hidden;
+		 height:11.15rem;
+		overflow:hidden; 
 	}
 	.storelist{
 
@@ -161,8 +271,8 @@
 		}
 	}
 	.content{
-		/*width: 95%;*/
-		/*margin:0 auto;*/
+		width: 95%;
+		margin:0 auto;
 		/*margin:1rem auto 0;*/
 		/*border-top:1px solid #D8DFF0;*/
 		/*padding-bottom: .4rem;*/
@@ -249,4 +359,60 @@
 			}
 		}
 	}
+
+
+	/*地址遮罩*/
+	.vux-popup-dialog{
+		background: #fff;
+	}
+	.change_area{
+		padding-top: .28rem;
+		.title{
+			padding-left: .2rem;
+			i{
+				font-size: .5rem;
+				color: #333;
+			}
+			.adre{
+				font-size: .24rem;
+				color: #1A2642;
+				position: relative;
+				top: -.1rem;
+				left: -.1rem;
+			}
+			.again{
+				color: #336FFF;
+				font-size: .28rem;
+				position: relative;
+				top: -.1rem;
+			}
+		}
+		.list{
+			width: 7.08rem;
+			margin: 0 auto;
+			/*border:1px solid #333;*/
+			padding-left: .12rem;
+			li{
+				width: 2.16rem;
+				height: .66rem;
+				line-height: .66rem;
+				background: #F5F6FA;
+				color: #333;
+				float: left;
+				margin-right: .2rem;
+				margin-bottom: .2rem;
+				border-radius: 4px;
+				text-align: center;
+			}
+			li.current{
+				background: #336FFF;
+				color: #fff;
+			}
+		}
+	}
+
+	.weui-cells_radio .weui-check:checked + .weui-icon-checked:before{
+		color: #336FFF !important;
+	}
+
 </style>
