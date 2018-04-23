@@ -1,6 +1,7 @@
 import ShareIndex from '@/views/share/index'
 import Sdetail from '@/views/share/sdetail'
 import StoreList from '@/views/share/storelist'
+import MeaiDetail from '@/views/share/meaidetail'
 
 
 const inygl =[
@@ -18,6 +19,11 @@ const inygl =[
 		path:'/share/storelist',//门店列表
 		name:'storelist',
 		component:StoreList
+	},
+	{
+		path:'/share/meaidetail',//套餐详情
+		name:'meaidetail',
+		component:MeaiDetail
 	}
 ]
 
