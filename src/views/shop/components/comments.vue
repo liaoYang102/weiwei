@@ -140,7 +140,7 @@ export default {
 				// let obj = [{ shopname: 'VANS Old Skool lite黑白超轻鞋款 黑色38.5', money: '3598', score: '266'},
 				// { shopname: 'VANS Old Skool lite黑白超轻鞋款 黑色38.5', money: '3598', score: '266'}];
 				// _this.shopList = _this.shopList.concat(obj);
-				console.log(_this.shopList);
+				// console.log(_this.shopList);
 			},3000)
 		}
 	}
@@ -161,6 +161,7 @@ li{
 	overflow: hidden;
 }
 .tab-title{
+	background: #FFF;
 	padding-left: 0.19rem;
 	height: 0.99rem;
 	border-bottom: 0.01rem solid #D8DFF0;

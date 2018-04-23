@@ -19,7 +19,7 @@
 			<div class="nav clearfix">
 				<ul class="fl">
 					<a href="javascript:;">
-						<li>
+						<li @click="showProduct">
 							<img src="../../assets/images/share/product.png">
 							<p>产品介绍</p>
 						</li>
@@ -260,6 +260,11 @@
 			XButton,
 			swiper,
 			swiperSlide
+		},
+		methods:{
+			showProduct(){
+				this.$router.push('/share/pintroduce')
+			}
 		}
 	}
 </script>

@@ -2,6 +2,7 @@ import ShareIndex from '@/views/share/index'
 import Sdetail from '@/views/share/sdetail'
 import StoreList from '@/views/share/storelist'
 import MeaiDetail from '@/views/share/meaidetail'
+import PIntroduce from '@/views/share/pintroduce'
 
 
 const inygl =[
@@ -24,6 +25,11 @@ const inygl =[
 		path:'/share/meaidetail',//套餐详情
 		name:'meaidetail',
 		component:MeaiDetail
+	},
+	{
+		path:'/share/pintroduce',//威伐光介绍
+		name:'pintroduce',
+		component:PIntroduce
 	}
 ]
 
