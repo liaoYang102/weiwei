@@ -22,18 +22,18 @@
 		},
 		data() {
 			return {
-				show:''
+				show: ''
 			}
 		},
 		created() {
 			var ua = navigator.userAgent.toLowerCase();
 			var isWeixin = ua.indexOf('micromessenger') != -1;
-			if (isWeixin) {
+			if(isWeixin) {
 				this.show = false;
-			    return true;
-			}else{
+				return true;
+			} else {
 				this.show = true;
-			    return false;
+				return false;
 			}
 		},
 		components: {
@@ -47,7 +47,8 @@
 		},
 		watch: {
 			'$route' (to, from) {
-				
+				document.body.scrollTop = 0
+				document.documentElement.scrollTop = 0
 			}　
 		}
 	}
@@ -69,8 +70,9 @@
 	.vux-pop-in-enter-active,
 	.vux-pop-in-leave-active {
 		will-change: transform;
-		transition: all 300ms;
+		transition: all 500ms;
 		height: 100%;
+		width: 100%;
 		top: 0;
 		position: absolute;
 		backface-visibility: hidden;
@@ -78,22 +80,18 @@
 	}
 	
 	.vux-pop-out-enter {
-		opacity: 0;
 		transform: translate3d(-100%, 0, 0);
 	}
 	
 	.vux-pop-out-leave-active {
-		opacity: 0;
 		transform: translate3d(100%, 0, 0);
 	}
 	
 	.vux-pop-in-enter {
-		opacity: 0;
 		transform: translate3d(100%, 0, 0);
 	}
 	
 	.vux-pop-in-leave-active {
-		opacity: 0;
 		transform: translate3d(-100%, 0, 0);
 	}
 	/*弹窗 取消  确定  按钮颜色*/
