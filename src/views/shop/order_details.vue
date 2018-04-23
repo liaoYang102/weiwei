@@ -39,7 +39,7 @@
 					</div>
 					<div class="text-right">
 						<span>女装U宽腿牛仔裤(水洗产品)</span><br>
-						<span class="text-gray">颜色:蓝色; 尺码:L/170修身</span>
+						<p class="text-gray">颜色:蓝色；尺码:L/170修身 <span class="fr">X4</span></p>
 					</div>
 				</div>
 				<div class="order-btn">
@@ -207,13 +207,14 @@ li{
 			}
 			.text-right{
 				float: left;
-				font-size: 0.28rem;
+				font-size: 0.3rem;
 				color: #1A2642;
 				margin-top: 0.18rem;
-				width: 4.44rem;
+				width: 70%;
 				.text-gray{
 					font-size: 0.24rem;
 					color: #90A2C7;
+					margin-top: 0.05rem;
 				}
 				.fr{
 					float: right;
@@ -229,18 +230,18 @@ li{
 				margin-right: 0.2rem;
 				margin-bottom: 0.12rem;
 				text-align: center;
+				height: 0.5rem;
+				line-height: 0.54rem;
 				width: 1.5rem;
 			}
 			.comments{
 				border: 0.01rem solid #336FFF;
 				border-radius: 0.04rem;
-				padding: 0.08rem 0;
 				color: #336FFF;
 			}
 			.giveup{
 				border: 0.01rem solid #90A2C7;
 				border-radius: 0.04rem;
-				padding: 0.08rem 0;
 			}
 		}
 		
@@ -314,20 +315,19 @@ li{
 			margin-right: 0.2rem;
 			text-align: center;
 			width: 1.5rem;
+			height: 0.56rem;
+			line-height: 0.6rem;
 		}
 		.view{
 			border: 0.01rem solid #90A2C7;
 			border-radius: 0.04rem;
-			padding: 0.08rem 0;
 		}
 		.comments{
 			border: 0.01rem solid #F23030;
 			border-radius: 0.04rem;
-			padding: 0.08rem 0;
 			color: #F23030;
 		}
 		.canel{
-			padding: 0.08rem 0;
 			border: 0.01rem solid #336FFF;
 			border-radius: 0.04rem;
 			color: #336FFF;

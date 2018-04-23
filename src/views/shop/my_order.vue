@@ -14,7 +14,7 @@
 			        <div class="box2">
 			            <div class="shop-box">
 			    			<div class="box-head">
-			    				<div class="fl">
+			    				<div class="fl" @click="goOrderdetails">
 			    					<img src="../../assets/images/shop/UNIQLO.png" alt="" class='shop-logo'>
 			    					<span class="box-name">优衣库冒牌店</span>
 			    					<img src="../../assets/images/shop/turn_right.png" alt="" class='turn-right'>
@@ -254,6 +254,9 @@
 		    },
 		    goRefund(){
 		    	this.$router.push({ path: '/shop/refund'})
+		    },
+		    goOrderdetails(){
+		    	this.$router.push({ path: '/shop/order_details'})
 		    }
 		}
 	}
