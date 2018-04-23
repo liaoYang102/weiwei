@@ -109,7 +109,11 @@
 	.content {
 		background: #F5F6FA;
 	}
-	.scroller-box{padding-bottom: 180px;}
+	
+	.scroller-box {
+		padding-bottom: 180px;
+	}
+	
 	.xs-plugin-pullup-up {
 		margin-bottom: 180px;
 	}
@@ -202,6 +206,7 @@
 					font-family: PingFangSC-Medium;
 					letter-spacing: 0;
 					font-size: 0.28rem;
+					text-align: center;
 					p:nth-child(1) {
 						color: #90A2C7;
 					}

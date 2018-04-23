@@ -13,31 +13,19 @@
 				<span class="arrow fr">></span>
 			</div>
 		</div>
+
 		<div v-transfer-dom>
-	      <popup v-model="show9" position="bottom">
-	        <div style="height:5.38rem;background-color:white" class='popup'>
-	        	<div class="popupTop">
-					<span class="fl">X</span>
-					<span class="fr">选择支付方式</span>
-	        	</div>
-	        	<ul>
-					<li>
-						<div class='fl wechat'></div>
-						<span class="fl">微信支付</span>
-						<check-icon :value.sync="demo1" class='fr'></check-icon>
-						<div class="clear"></div>
-					</li>
-					<li>
-						<div class='fl wechat'></div>
-						<span class="fl">余额支付</span>
-						<check-icon :value.sync="demo2" class='fr'></check-icon>
-						<div class="clear"></div>
-					</li>
-	        	</ul>
-	        	<div class="btn" @click="goShopsuccess">立即支付</div>
-	        </div>
-	      </popup>
-	    </div>
+			<popup v-model="show9">
+				<popup-header left-text="取消" right-text="确定" title="选择支付方式" :show-bottom-border="false" @on-click-left="show9 = false" @on-click-right="show9 = false"></popup-header>
+				<group gutter="0">
+					<radio :options="list" @on-change="change"></radio>
+					<div class="pay-box">
+						<x-button class="add-btn" :gradients="['#1D62F0', '#19D5FD']" @click.native="goShopsuccess">立即支付</x-button>
+					</div>
+				</group>
+			</popup>
+		</div>
+
 		<div class="shops">
 			<group style='margin-bottom:0.38rem;'>
                 <cell title="优衣库旗舰店" is-link :border-intent="false" >
@@ -68,6 +56,7 @@
                 </div>
             </group>
 		</div>
+		
 		<div class="submit">
 			<div class="total fl">
 				共 <span class='color'>1</span> 件，总计：<span class="totalNum">¥3598</span><span class="totalAccount">+266积分</span>
@@ -79,6 +68,7 @@
 </template>
 
 <script>
+import { Group, CellBox, XButton, PopupHeader, Radio,Checklist } from 'vux'
 import settingHeader from '../../components/setting_header'
 export default {
 	data(){
@@ -88,10 +78,30 @@ export default {
 			show9:false,
 			demo1: true,
 			demo2: false,
+			list: [{
+				icon: '../../../static/member/bandCard.png',
+				key: '1',
+				value: '银行卡支付'
+			}, {
+				icon: '../../../static/member/treasure.png',
+				key: '2',
+				value: '支付宝支付'
+			}, {
+				icon: '../../../static/member/wechapaid.png',
+				key: '3',
+				value: '微信支付'
+			}],
+
 		}
 	},
 	components:{
-		settingHeader
+		settingHeader,
+		Group,
+		CellBox,
+		XButton,
+		PopupHeader,
+		Radio,
+		Checklist 
 	},
 	methods:{
 		popup(){
@@ -99,6 +109,9 @@ export default {
 		},
 		goShopsuccess(){
 			this.$router.push({ path:'/shop/o_success'})
+		},
+		change(value, label) {
+			console.log('change:', value, label)
 		}
 	}
 }
