@@ -77,14 +77,12 @@
         </div>
         
 
-        <!-- <shopList></shopList> -->
     
     </div>
 </template>
 
 <script>
 import settingHeader from '../../components/setting_header'
-// import shopList from './components/all_shopsList'
 import maskRight from './components/maskRight'
 import Swiper from './components/swiper'
 import BScroll from 'better-scroll'
@@ -93,7 +91,6 @@ import Loading from '../../components/loading'
 export default {
     components: {
         settingHeader,
-        // shopList,
         maskRight,
         Swiper,
         Loading
@@ -254,7 +251,7 @@ li:nth-child(odd) .list{
             margin-bottom: 0.04rem;
             .list{
                 background: #fff;
-                height: 4.35rem;
+                padding-bottom: 0.04rem;
                 .score-exchange{
                     position: absolute;
                     left: -0.05rem;
