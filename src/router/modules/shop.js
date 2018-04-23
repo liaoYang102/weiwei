@@ -14,6 +14,7 @@ import shop_details from '@/views/shop/shop_details'
 import write_comments from '@/views/shop/write_comments'
 import refund_details from '@/views/shop/refund_details'
 import multi_user_mall from '@/views/multi_user_mall/index'
+import search from '@/views/multi_user_mall/search'
 
 const shopModule = [
 	// 商城模块
@@ -101,6 +102,11 @@ const shopModule = [
 	  path: '/multi_user_mall',//多用户商城首页
 	  name: 'multi_user_mall',
 	  component: multi_user_mall
+	},
+	{
+	  path: '/multi_user_mall/search',//多用户商城首页
+	  name: 'search',
+	  component: search
 	}
 ];
 

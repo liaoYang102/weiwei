@@ -22,7 +22,7 @@
 					pagination:{
 						el:'.swiper-pagination'
 					},
-					// autoplay: true,
+					autoplay: true,
 					loop:true
 				},
 			}

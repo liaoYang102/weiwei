@@ -127,7 +127,7 @@ export default {
 	mounted(){
 		this.onRouter();
 		let top = parseInt(document.getElementById('details').offsetTop);
-		this.obj = top;
+		this.obj = top -40;
 	},
 	methods: {
 		showMask: function() {
@@ -148,6 +148,8 @@ export default {
 			this.tabTitle = '详情';
 			var that = this;
 			window.setTimeout(function(){
+				let top = parseInt(document.getElementById('details').offsetTop);
+				that.obj = top - 40;
 				window.scrollTo(0,that.obj);
 			},200)
 		},
