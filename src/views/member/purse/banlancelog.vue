@@ -41,7 +41,7 @@
 								</div>
 							</div>
 						</card>
-						<div class="twoClass" v-if="shaixuanFalg && typeIndex == 1">
+						<div class="twoClass slideInDown animated" v-if="shaixuanFalg && typeIndex == 1">
 							<div class="type-item" v-for="(item,index) in twoClass">
 								<span :class="{'twoActive':twoIndex == index}" @click="twoChange(index)">{{item}}</span>
 							</div>
@@ -163,7 +163,6 @@
 <style lang="less" scoped>
 	@import '~vux/src/styles/1px.less';
 	.position-vertical-demo {
-		margin-top: 46px;
 		background: white;
 		.card-demo-flex {
 			display: flex;
@@ -258,7 +257,7 @@
 			left: 0px;
 		}*/
 		.wrapper {
-			height: 10.1rem;
+			height: 11rem;
 			overflow: hidden;
 		}
 		.banlanceLog-list {

@@ -18,47 +18,47 @@ import multi_user_mall from '@/views/multi_user_mall/index'
 const shopModule = [
 	// 商城模块
 	{
-	  path: '/shop/o_success',//
+	  path: '/shop/o_success',//支付成功
 	  name:'o_success',
 	  component: o_success
 	},
 	{
-	  path: '/shop/my_order',
+	  path: '/shop/my_order',//我的订单
 	  name:'my_order',
 	  component: my_order
 	},
 	{
-	  path: '/shop',
+	  path: '/shop',//首页
 	  name:'shop',
 	  component: shop
 	},
 	{
-	  path: '/shop/index',
+	  path: '/shop/index',//首页
 	  name:'shop',
 	  component: shop
 	},
 	{
-	  path: '/shop/t_success',
+	  path: '/shop/t_success',//交易成功
 	  name:'t_success',
 	  component: t_success
 	},
 	{
-	  path: '/shop/shop_cart',
+	  path: '/shop/shop_cart',//购物车
 	  name:'shop_cart',
 	  component: shop_cart
 	},
 	{
-	  path: '/shop/confirm',
+	  path: '/shop/confirm',//确认订单
 	  name:'confirm',
 	  component: confirm
 	},
 	{
-	  path: '/shop/logistics',
+	  path: '/shop/logistics',//物流
 	  name:'logistics',
 	  component: logistics
 	},
 	{
-	  path: '/shop/refund',
+	  path: '/shop/refund',//退货
 	  name:'refund',
 	  component: refund
 	},

@@ -11,22 +11,26 @@
 						<p class="status">1级会员</p>
 					</div>
 					<div class="account">
-						<div class="universal">
-							<p>
-								<div class="num">
-									<span class="money">1000.49</span>
-									<badge></badge>
-								</div>
-							</p>
-							<p class="universalAccount">CGC通用积分</p>
-						</div>
-						<div class="universal">
-							<div class="num">
-								<span class="money">2800.01 </span>
-
+						<router-link to="/member/earnings/index">
+							<div class="universal">
+								<p>
+									<div class="num">
+										<span class="money">1000.49</span>
+										<badge></badge>
+									</div>
+								</p>
+								<p class="universalAccount">CGC通用积分</p>
 							</div>
-							<p class="universalAccount">信用积分</p>
-						</div>
+						</router-link>
+						<router-link to="">
+							<div class="universal">
+								<div class="num">
+									<span class="money">2800.01 </span>
+
+								</div>
+								<p class="universalAccount">信用积分</p>
+							</div>
+						</router-link>
 					</div>
 				</div>
 			</section>
@@ -52,7 +56,7 @@
 							</router-link>
 						</li>
 						<li>
-							<router-link to="/member/purse/qrcode">
+							<router-link to="/member/score/index">
 								<div class="li-box">
 									<img src="../../assets/images/member/member_account.png">
 									<badge class="new-account" text="2312"></badge>
@@ -108,7 +112,8 @@
 					},
 					{
 						img: '../../../static/member/member_3.png',
-						text: '我的关注'
+						text: '我的关注',
+						url: '/member/follow/index'
 					},
 					{
 						img: '../../../static/member/member_4.png',
@@ -190,46 +195,48 @@
 			margin-bottom: 0.186rem;
 			display: flex;
 			width: 100%;
-			.universal {
+			a {
 				flex: 1;
 				text-align: center;
-				.num {
-					font-size: 0.391rem;
-					color: #333333;
-					letter-spacing: 0;
-					position: relative;
-					display: flex;
-					align-items: center;
-					justify-content: center;
-					.money {
-						font-family: PingFangSC-Medium;
-						font-size: 0.46rem;
+				.universal {
+					.num {
+						font-size: 0.391rem;
+						color: #333333;
+						letter-spacing: 0;
+						position: relative;
+						display: flex;
+						align-items: center;
+						justify-content: center;
+						.money {
+							font-family: PingFangSC-Medium;
+							font-size: 0.46rem;
+							color: #FFFFFF;
+							letter-spacing: 0;
+							margin-right: 0.2rem;
+						}
+					}
+					.universalAccount {
+						font-family: PingFangSC-Regular;
+						font-size: 0.24rem;
 						color: #FFFFFF;
 						letter-spacing: 0;
-						margin-right: 0.2rem;
 					}
 				}
-				.universalAccount {
-					font-family: PingFangSC-Regular;
-					font-size: 0.24rem;
-					color: #FFFFFF;
-					letter-spacing: 0;
-				}
-			}
-			.credit {
-				flex: 1;
-				text-align: center;
-				.num {
-					font-size: 0.391rem;
-					color: #333333;
-					letter-spacing: 0;
-					position: relative;
-					line-height: 0.54rem;
-				}
-				.creditlAccount {
-					font-size: 0.204rem;
-					color: #A3A3A3;
-					letter-spacing: 0;
+				.credit {
+					flex: 1;
+					text-align: center;
+					.num {
+						font-size: 0.391rem;
+						color: #333333;
+						letter-spacing: 0;
+						position: relative;
+						line-height: 0.54rem;
+					}
+					.creditlAccount {
+						font-size: 0.204rem;
+						color: #A3A3A3;
+						letter-spacing: 0;
+					}
 				}
 			}
 		}

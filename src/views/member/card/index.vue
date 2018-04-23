@@ -4,7 +4,7 @@
 		<div class="card-box">
 			<div class="card-header">
 				<div class="tab">
-					<tab v-model="cardLook">
+					<tab v-model="cardLook" custom-bar-width="0.56rem">
 						<tab-item selected @on-item-click="lookCard">全部</tab-item>
 						<tab-item @on-item-click="lookCard">我的</tab-item>
 					</tab>
@@ -17,7 +17,7 @@
 			</div>
 			<swiper v-model="cardLook" height="800px" :show-dots="false">
 				<swiper-item>
-					<scroller lock-x height="-120" @on-scroll-bottom="onScrollBottom" ref="scrollerBottom" :scroll-bottom-offst="200">
+					<scroller lock-x height="-80" @on-scroll-bottom="onScrollBottom" ref="scrollerBottom" :scroll-bottom-offst="200">
 						<div class="box2">
 							<div class="card-list">
 								<div class="card-ltem" :class="[item.type ==1 ? 'b-bg':'y-bg']" v-for="(item,index) in cardList">
@@ -33,7 +33,7 @@
 					</scroller>
 				</swiper-item>
 				<swiper-item>
-					<scroller lock-x height="-120" @on-scroll-bottom="onScrollBottom" ref="scrollerBottom" :scroll-bottom-offst="200">
+					<scroller lock-x height="-80" @on-scroll-bottom="onScrollBottom" ref="scrollerBottom" :scroll-bottom-offst="200">
 						<div class="box2">
 							<div class="card-list">
 								<div class="card-item2">
@@ -187,6 +187,9 @@
 			align-items: center;
 			.tab {
 				flex: 1;
+				.vux-tab-item{
+					background: transparent!important;
+				}
 			}
 			.shaix {
 				padding-left: 0.5rem;

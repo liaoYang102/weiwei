@@ -1,13 +1,13 @@
 <template>
 	<div>
 		<settingHeader :title="title"></settingHeader>
-		<div class="purse-box1">
+		<div class="scoreDetail-box">
 			<div class="purse-box">
 				<div class="box-h">
 					<div class="top">
 						<div>
 							<p>1000000.00</p>
-							<p>余额</p>
+							<p>积分金额</p>
 						</div>
 					</div>
 					<div class="bottom">
@@ -32,12 +32,20 @@
 			<section>
 				<group gutter="0">
 					<cell class="info-item" title="当前状态" value="已收入"></cell>
-					<cell class="info-item" title="余额说明" value="充值"></cell>
-					<cell class="info-item" title="账单类型" value="后台充值"></cell>
-					<cell class="info-item" title="创建时间" value="2018.04.19 11:30"></cell>
+					<cell class="info-item" title="来源" value="体验 威伐光11014"></cell>
+					<cell class="info-item" title="完成时间" value="2018.04.19 11:30"></cell>
 					<cell class="info-item" title="编号" value="2018041017080385390"></cell>
 				</group>
 			</section>
+			<div class="lw-box">
+				<div class="all-h">
+					<img src="../../../../static/member/lw1.png" />
+					<div>
+						<p>更多惊喜礼品兑换</p>
+						<p>点击进入积分商城</p>
+					</div>
+				</div>
+			</div>
 			<div v-transfer-dom>
 				<x-dialog v-model="showDialogStyle" hide-on-blur :dialog-style="{'max-width': '100%', width: '100%', height: '50%', 'background-color': 'transparent'}">
 					<p class="gz-box" @click="showDialogStyle = false">
@@ -58,7 +66,7 @@
 	export default {
 		data() {
 			return {
-				title: '余额详情',
+				title: '积分详情',
 				showDialogStyle: false
 			}
 		},
@@ -81,7 +89,36 @@
 <style lang="less">
 	@import '~vux/src/styles/1px.less';
 	@import '~vux/src/styles/close';
-	.purse-box1 {
+	.scoreDetail-box {
+		.lw-box {
+			margin-top: 0.6rem;
+			.all-h {
+				width: 6.04rem;
+				height: 0.99rem;
+				background: url(../../../../static/member/score-bg.png) no-repeat;
+				background-size: 100%;
+				margin: 0 auto;
+				display: flex;
+				align-items: center;
+				padding: 0 1.41rem;
+				box-sizing: border-box;
+				img {
+					width: 0.63rem;
+					height: auto;
+					margin-right: 0.18rem;
+				}
+				div {
+					p:nth-child(1) {
+						font-size: 0.24rem;
+						color: rgba(55, 171, 254, 1);
+					}
+					p:nth-child(2) {
+						font-size: 0.20rem;
+						color:rgba(255,99,99,1);
+					}
+				}
+			}
+		}
 		.info-item {
 			font-family: PingFangSC-Regular;
 			font-size: 0.28rem;

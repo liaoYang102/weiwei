@@ -23,6 +23,11 @@ import banlance from '@/views/member/purse/banlance'
 import recharge from '@/views/member/purse/recharge'
 import card from '@/views/member/card/index'
 import setting from '@/views/member/setting/index'
+import follow from '@/views/member/follow/index'
+import earnings from '@/views/member/earnings/index'
+import logs from '@/views/member/earnings/logs'
+import strategy from '@/views/member/score/strategy'
+import scoreDetail from '@/views/member/score/detail'
 
 const memberModule = [
 	{
@@ -148,6 +153,31 @@ const memberModule = [
 		path: '/member/purse/banlance',
 		name: 'banlance',
 		component: banlance
+	},
+	{
+		path: '/member/follow/index',
+		name: 'follow',
+		component: follow
+	},
+	{
+		path: '/member/earnings/index',
+		name: 'earnings',
+		component: earnings
+	},
+	{
+		path: '/member/earnings/logs',
+		name: 'logs',
+		component: logs
+	},
+	{
+		path: '/member/score/strategy',
+		name: 'strategy',
+		component: strategy
+	},
+	{
+		path: '/member/score/detail',
+		name: 'scoreDetail',
+		component: scoreDetail
 	}
 ]
 
