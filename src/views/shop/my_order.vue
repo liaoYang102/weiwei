@@ -22,7 +22,7 @@
 			    				<div class="fr">等待买家付款</div>
 			    				<div class="clear"></div>
 			    			</div>
-			    			<div class="box-detail">
+			    			<div class="box-detail" @click="goOrderdetails">
 			    				<div class="shop-detail">
 			    					<img src="../../assets/images/shop/order_detail1.png" alt="" class='fl'>
 			    					<div class="fl shop-details">
@@ -53,7 +53,7 @@
 			    				<div class="fr">买家已付款</div>
 			    				<div class="clear"></div>
 			    			</div>
-			    			<div class="box-detail">
+			    			<div class="box-detail" @click="goOrderdetails">
 			    				<div class="shop-detail">
 			    					<img src="../../assets/images/shop/order_detail2.png" alt="" class='fl'>
 			    					<div class="fl shop-details">
@@ -84,7 +84,7 @@
 			    				<div class="fr">卖家已发货</div>
 			    				<div class="clear"></div>
 			    			</div>
-			    			<div class="box-detail">
+			    			<div class="box-detail" @click="goOrderdetails">
 			    				<div class="shop-detail">
 			    					<img src="../../assets/images/shop/order_detail2.png" alt="" class='fl'>
 			    					<div class="fl shop-details">
@@ -115,7 +115,7 @@
 			    				<div class="fr">交易成功</div>
 			    				<div class="clear"></div>
 			    			</div>
-			    			<div class="box-detail">
+			    			<div class="box-detail" @click="goOrderdetails">
 			    				<div class="shop-detail">
 			    					<img src="../../assets/images/shop/order_detail2.png" alt="" class='fl'>
 			    					<div class="fl shop-details">
@@ -148,7 +148,7 @@
 	            				<div class="fr">交易成功</div>
 	            				<div class="clear"></div>
 	            			</div>
-	            			<div class="box-detail">
+	            			<div class="box-detail" @click="goOrderdetails">
 	            				<div class="shop-detail">
 	            					<img src="../../assets/images/shop/order_detail2.png" alt="" class='fl'>
 	            					<div class="fl shop-details">
@@ -254,6 +254,9 @@
 		    },
 		    goRefund(){
 		    	this.$router.push({ path: '/shop/refund'})
+		    },
+		    goOrderdetails(){
+		    	this.$router.push({ path: '/shop/order_details'})
 		    }
 		}
 	}
