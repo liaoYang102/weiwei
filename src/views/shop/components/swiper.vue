@@ -1,6 +1,6 @@
 <template>
 	<div v-model="imgList">
-		<swiper :options="swiperOption">
+		<swiper :options="swiperOption" class="swiper">
 	        <swiper-slide v-for="item in demoList">
 	        	<img :src="item">
 	        </swiper-slide>
@@ -22,7 +22,7 @@
 					pagination:{
 						el:'.swiper-pagination'
 					},
-					autoplay: true,
+					// autoplay: true,
 					loop:true
 				},
 			}
@@ -43,8 +43,12 @@
 </script>
 
 <style lang='less' scoped>
+	@img:2.2rem;
+	.swiper{
+		height: @img;
+	}
 	img{
 		width: 7.5rem;
-		height: 2.2rem;
+		height: @img;
 	}
 </style>

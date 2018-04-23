@@ -14,7 +14,7 @@
 								</p>
 		    					<div class="sp-gray">库存7282件</div>
 		    					<div>已选
-		    						<span v-for="(item,index) in list3">“{{ item.options}}” </span>
+		    						<span v-for="item in list3">“{{item}}” </span>
 		    					</div>
 		    				</div>
 		    			</div>
@@ -54,13 +54,13 @@ export default {
 	data(){
 		return {
 			show1: false,
-			act1: 0,
-			act2: 0,
+			act1: -1,
+			act2: -1,
 			list1:[
-				{ name: '粉色尊贵版'},
-				{ name: '粉色尊贵版'},
-				{ name: '粉色尊贵版'},
-				{ name: '粉色尊贵版'}
+				{ name: '粉色尊贵版0'},
+				{ name: '粉色尊贵版1'},
+				{ name: '粉色尊贵版2'},
+				{ name: '粉色尊贵版3'}
 			],
 			list2:[
 				{ num: '1'},
@@ -68,24 +68,19 @@ export default {
 				{ num: '3'}
 			],
 			num: 1,
-			list3: [
-				{ options: '粉色尊贵版'},
-				{ options: '1'}
-			]
+			list3: []
 		}
 	},
 	methods: {
 		active:function (index) {
-	        this.act1 = index
-	        let vm = this;
-	        let option = vm.list1[index].name
-	        let obj = { options: option}
-	        console.log('-=-=', vm.list3)
-	        vm.list3.push(obj)
-	        
+	        this.act1 = index;
+	        let option = this.list1[index].name;
+	        this.list3[0] = option;
 	    },
 	    active2:function (index) {
-	        this.act2 = index
+	        this.act2 = index;
+	        let option = this.list2[index].num;
+	        this.list3[1] = option;
 	    },
 	    add:function(){
 	    	this.num++;

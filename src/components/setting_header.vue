@@ -1,6 +1,7 @@
 <template>
+
 	<div v-if='show' style="height:46px;">
-		<x-header :left-options="{backText: '',preventGoBack:'true'}" style="background:#fff;" class="header" @on-click-back="goBack">{{ title }}</x-header>
+		<x-header :left-options="{backText: ''}" style="background:#fff;" class="header">{{ title }}</x-header>
 	</div>
 </template>
 
@@ -26,10 +27,6 @@
 			title: String //定义传值的类型<br>    }
 		},
 		methods: {
-			goBack() {
-				this.$store.state.page.show = true;
-				window.history.go(-1);
-			}
 		}
 	}
 </script>
@@ -42,7 +39,8 @@
 	#app .vux-header .vux-header-title {
 		color: #333;
 	}
-	.header{
+	
+	.header {
 		position: fixed!important;
 		top: 0;
 		left: 0;

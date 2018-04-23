@@ -63,6 +63,7 @@
 		padding-top: 0.09rem;
 		padding-bottom: 0.11rem;
 		padding-left: 0.54rem;
+		background: #fff;
 		img{
 			width: 2.82rem;
 			height: 2.2rem;
@@ -82,6 +83,7 @@
 		}
 	}
 	.center{
+		background: #fff;
 		padding-bottom: 0.3rem;
 		padding-left: 0.2rem;
 		/*border-bottom: 0.21rem solid #f5f8f9;*/
@@ -100,7 +102,6 @@
 			}
 		}
 		.money{
-			padding-left: 0.2rem;
 			padding-top: 0.12rem;
 			.realPayment{
 				font-size: 0.24rem;
@@ -111,7 +112,6 @@
 				}
 			}
 			.btn{
-				width: 100%;
 				padding-left: 0.55rem;
 				margin-top: 0.45rem;
 				.redeemDetails,.exchangeCenter{
@@ -131,6 +131,7 @@
 	}
 	.bottom{
 		overflow: auto;
+		clear: both;
 		.recommend{
 			padding-left: 0.18rem;
 			font-size: 0.3rem;

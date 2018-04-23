@@ -13,22 +13,29 @@
     	    	    </div>
 				</div>
 			</div>
-			<!-- <div class="content-left">
-				<scroller lock-x>
-					<div class="box1">
-						<div class="box1-item" v-for="(item,index) in listData" :class="{'border-left':index == itemActive}" @click.active="boxItemActive(index)">
-							<span>{{item}}</span>
-						</div>
-					</div>
-				</scroller>
-			</div> -->
 			<div class="content-right">
-				<swiper :aspect-ratio="300/800" height="aspect-ratio">
-					<swiper-item class="swiper-demo-img" v-for="(item, index) in demo04_list" :key="index">
-						<img :src="item">
-					</swiper-item>
-				</swiper>
-				<scroller lock-x height="-110">
+				<div class="imglist">
+					<swiper :options="swiperOption">
+				        <swiper-slide v-for="item in imgList" class="img">
+				        	<img :src="item">
+				        </swiper-slide>
+				        <div class="swiper-pagination" slot="pagination"></div>
+			        </swiper>
+				</div>
+
+				<!-- <div class="wrapper1" ref="wrapper1">
+					<div class="content">
+						<div class="content-left">
+	    			    	<div class="box1">
+								<div class="box1-item" v-for="(item,index) in listData" :class="{'border-left':index == itemActive}" @click.active="boxItemActive(index)">
+									<span>{{item}}</span>
+								</div>
+							</div>
+	    	    	    </div>
+					</div>
+				</div> -->
+
+				<scroller lock-x height="-100">
 					<div class="box2">
 						<div class="title">热门品牌</div>
 						<div class="type-box clearfix">
@@ -53,7 +60,7 @@
 
 <script>
 	import BScroll from 'better-scroll'
-	import { Scroller, Swiper, SwiperItem } from 'vux'
+	import { swiper, swiperSlide } from 'vue-awesome-swiper'
 	import settingHeader from '../../components/setting_header'
 	export default {
 		data() {
@@ -61,7 +68,7 @@
 				title: '商品分类',
 				itemActive: 0,
 				listData: ['海外购', '中国臻品', '外套', 'T恤', '裤子', '鞋子', '饰品', '生活用品', '珠宝', '日用品', '保暖内衣', '女士裙子', '潮牌', '运动鞋', '休闲系列'],
-				demo04_list: ['https://img1.360buyimg.com/pop/jfs/t16792/328/1497480399/93929/c0d0fbb1/5ac9f290N29a3ad9d.jpg', 'https://img1.360buyimg.com/pop/jfs/t16792/328/1497480399/93929/c0d0fbb1/5ac9f290N29a3ad9d.jpg'],
+				imgList: ['https://img1.360buyimg.com/pop/jfs/t16792/328/1497480399/93929/c0d0fbb1/5ac9f290N29a3ad9d.jpg', 'https://img1.360buyimg.com/pop/jfs/t16792/328/1497480399/93929/c0d0fbb1/5ac9f290N29a3ad9d.jpg'],
 				item:[{
 					"img":"http://www.logoids.com/upload/image/201804/15240382172248838.jpg",
 					"name":"苹果"
@@ -101,7 +108,14 @@
 				},{
 					"img":"http://www.logoids.com/upload/image/201611/2016112117161830872.jpg",
 					"name":'小米'
-				}]
+				}],
+				swiperOption :{
+					pagination:{
+						el:'.swiper-pagination'
+					},
+					autoplay: true,
+					loop:true
+				},
 			}
 		},
 		mounted() {
@@ -130,7 +144,7 @@
 			boxItemActive(index) {
 				this.itemActive = index
 				if(index === 0 || index === 1){
-					this.$router.push({ path: '/shop/theme_goods'})
+					this.$router.push({ name: 'theme_goods', params: { themeTitle: this.listData[index]}})
 				}
 			},
 			goAllshop(){
@@ -139,8 +153,8 @@
 		},
 		components: {
 			settingHeader,
-			Swiper,
-			SwiperItem
+			swiper,
+			swiperSlide
 		}
 	}
 </script>
@@ -202,7 +216,7 @@
 			box-sizing: content-box;
 			img {
 				width: 100%;
-				height: auto;
+				height: 1.84rem;
 				display: block;
 			}
 			.title {
@@ -238,4 +252,11 @@
 			}
 		}
 	}
+</style>
+
+<style lang="less" scoped>
+.imglist{
+	width: 5.126rem;
+	height: 1.84rem;
+}
 </style>
