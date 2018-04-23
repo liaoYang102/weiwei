@@ -28,12 +28,11 @@
 		      <cell title="上传凭证" :border-intent="false"></cell>
 		    </group>
 		</div>
-		<div class="confirm">
+		<div class="confirm" @click="goRefunddetails">
 			确定
 		</div>
 		<div v-transfer-dom>
 	      <popup v-model="show1">
-	        <!-- group already has a top border, so we need to hide header's bottom border-->
 	        <popup-header title="退款原因" :show-bottom-border="false"></popup-header>
 	        <group gutter="0">
 	        	<scroller lock-x height="200px" ref="scrollerEvent">
@@ -41,7 +40,7 @@
 			        <radio :options="['1', '2', '3', '4','5','6','7','8']"></radio>
 			      </div>
 			    </scroller>
-	          <div class="pay-box" @click="goRefunddetails">
+	          <div class="pay-box">
 				<x-button class="add-btn" :gradients="['#1D62F0', '#19D5FD']" >确定</x-button>
 			  </div>
 	        </group>

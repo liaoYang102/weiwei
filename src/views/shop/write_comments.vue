@@ -56,9 +56,10 @@
 
 <script>
 import settingHeader from '../../components/setting_header'
+import { CheckIcon } from 'vux'
 export default {
 	components: {
-		settingHeader
+		settingHeader,CheckIcon
 	},
 	data() {
 		return {

@@ -4,12 +4,11 @@
 		<div class="list">
 			<group gutter="0">
 				<cell class="list-item" title="个人信息" is-link></cell>
-				<cell class="list-item" title="消息设置" is-link></cell>
-				<cell class="list-item" title="更换手机号" is-link></cell>
-				<cell class="list-item" title="重置登录密码" is-link></cell>
+				<cell class="list-item" title="消息设置" is-link link="/member/message/setting"></cell>
+				<cell class="list-item" title="重置登录密码" is-link link="/user/change"></cell>
 				<cell class="list-item" title="关于我们" is-link></cell>
 			</group>
-			<div class="logout-btn">退出登录</div>
+			<router-link to="/user/reg"><div class="logout-btn">退出登录</div></router-link>
 		</div>
 	</div>
 </template>

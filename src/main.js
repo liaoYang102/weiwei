@@ -11,13 +11,13 @@ import axios from 'axios'
 import './assets/icons_font/iconfont.css'
 import 'mint-ui/lib/style.css'
 import './style/global.css'
+import 'swiper/dist/css/swiper.css'
 import './config/wy_rem'
 import { Group, DatetimeRange, Cell, Tab, TabItem, CellBox, XHeader, Scroller, LoadMore,TransferDom, Confirm, Popup, Toast, Swiper, InlineXNumber, CheckIcon, CellFormPreview, XSwitch, XNumber, Badge, Previewer, Timeline, TimelineItem, Rater, XTextarea,Radio } from 'vux'
 import FastClick from 'fastclick'
 
-
-
 FastClick.attach(document.body);
+
 Vue.use(Vuex)
 Vue.use(Mint)
 Vue.directive('transfer-dom', TransferDom)
@@ -47,16 +47,107 @@ Vue.component('rater', Rater)
 Vue.component('x-textarea', XTextarea)
 Vue.component('radio', Radio)
 
-Vue.prototype.$http = axios  //定义axios组件用法  this.$http(opt).then(fn)
+Vue.prototype.$http = axios //定义axios组件用法  this.$http(opt).then(fn)
 axios.defaults.baseURL = '/api';
 Vue.config.productionTip = false
 
 //引用动画库
 import animate from 'animate.css'
 Vue.use(animate)
-
-import  { LoadingPlugin } from 'vux'
+//全局load
+import { LoadingPlugin, DatetimePlugin } from 'vux'
 Vue.use(LoadingPlugin)
+Vue.use(DatetimePlugin)
+//echart
+import echarts from 'echarts'
+Vue.prototype.$echarts = echarts
+
+import { BusPlugin } from 'vux'
+Vue.use(BusPlugin)
+
+//动画ios修复
+const shouldUseTransition = !/transition=none/.test(location.href)
+store.registerModule('vux', {
+	state: {
+		direction: shouldUseTransition ? 'forward' : ''
+	},
+	mutations: {
+		UPDATE_DIRECTION(state, payload) {
+			if(!shouldUseTransition) {
+				return
+			}
+			state.direction = payload.direction
+			console.log(payload.direction)
+		}
+	}
+})
+
+const history = window.sessionStorage;
+let historyCount = history.getItem('count') * 1;
+
+let isPush = false
+let endTime = Date.now()
+let methods = ['push', 'go', 'replace', 'forward', 'back']
+
+document.addEventListener('touchend', () => {
+	endTime = Date.now()
+})
+methods.forEach(key => {
+	let method = router[key].bind(router)
+	router[key] = function(...args) {
+		isPush = true
+		method.apply(null, args)
+	}
+})
+
+router.beforeEach(function(to, from, next) {
+	const toIndex = history.getItem(to.path)
+	const fromIndex = history.getItem(from.path)
+
+	if(toIndex) {
+		if(!fromIndex || parseInt(toIndex, 10) > parseInt(fromIndex, 10) || (toIndex === '0' && fromIndex === '0')) {
+			store.commit('UPDATE_DIRECTION', {
+				direction: 'forward'
+			})
+		} else {
+			store.commit('UPDATE_DIRECTION', {
+				direction: 'reverse'
+			})
+			// 判断是否是ios左滑返回
+			if(!isPush && (Date.now() - endTime) < 377) {
+				store.commit('UPDATE_DIRECTION', {
+					direction: ''
+				})
+			} else {
+				store.commit('UPDATE_DIRECTION', {
+					direction: 'reverse'
+				})
+			}
+		}
+	} else {
+		++historyCount
+		history.setItem('count', historyCount)
+		to.path !== '/' && history.setItem(to.path, historyCount)
+		store.commit('UPDATE_DIRECTION', {
+			direction: 'forward'
+		})
+	}
+
+	if(/\/http/.test(to.path)) {
+		let url = to.path.split('http')[1]
+		window.location.href = `http${url}`
+	} else {
+		next()
+	}
+})
+
+router.afterEach(function(to) {
+	isPush = false
+	if(process.env.NODE_ENV === 'production') {
+		ga && ga('set', 'page', to.fullPath)
+		ga && ga('send', 'pageview')
+	}
+})
 
 //const whiteList = ['/user/login', '/index', '/user/reg','/','/member/index'];// 不重定向白名单
 // router.beforeEach((to, from, next) => {
@@ -84,12 +175,13 @@ Vue.use(LoadingPlugin)
 //     }   
 // });
 
-
 /* eslint-disable no-new */
 new Vue({
-  el: '#app',
-  router,
-  store,
-  components: { App },
-  template: '<App/>'
+	el: '#app',
+	router,
+	store,
+	components: {
+		App
+	},
+	template: '<App/>'
 })

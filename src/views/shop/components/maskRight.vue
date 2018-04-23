@@ -1,36 +1,39 @@
 <template>
-	<div>
-		<div v-transfer-dom>
-		  <popup v-model='show1' position="right">
-		    <div class="screening">
-		    	<div class="logo">
-		    		<span>品牌</span>
-		    		<img src="../../../assets/images/shop/dropdown.png" @click="down()">
-		    		<div class="logolist">
-		    			<li class="item" v-for="(item, index) in logolist" @click="active($event)">{{ item.name}}</li>
-		    		</div>
-		    	</div>
+	<div style="height: 100%;">
+		<div v-transfer-dom class="maskright">
+			<popup v-model='show1' position="right" style="padding-top: 0.6rem;">
+				<div class="wrapper" ref="wrapper">
+					<div class="content">
+					    <div class="screening">
+					    	<div class="logo">
+					    		<span>品牌</span>
+					    		<img src="../../../assets/images/shop/dropdown.png" @click="down()">
+					    		<div class="logolist">
+					    			<li class="item" v-for="(item, index) in logolist" @click="active($event)">{{ item.name}}</li>
+					    		</div>
+					    	</div>
 
-		    	<div class="list" v-for="(screen) in screening">
-			    	<div class="category">{{ screen.title}}</div>
-			    	
-	    			<li class="item" v-for="(item, index) in screen.options" @click="active($event)">
-	    				{{ item.name}}
-	    			</li>
-		    		
-		    	</div>
-
-		    	<div class="bottom">
-		    		<div class="reset">重置</div>
-		    		<div class="complete">完成</div>
-		    	</div>
-		    </div>
-		  </popup>
+					    	<div class="list" v-for="(screen) in screening">
+						    	<div class="category">{{ screen.title}}</div>
+						    	
+				    			<li class="item" v-for="(item, index) in screen.options" @click="active($event)">
+				    				{{ item.name}}
+				    			</li>
+					    	</div>
+					    </div>
+					 </div>
+					<div class="bottom">
+			    		<div class="reset">重置</div>
+			    		<div class="complete">完成</div>
+			    	</div>
+				</div>
+			</popup>
 		</div>
 	</div>
 </template>
 
 <script>
+import BScroll from 'better-scroll'
 export default {
     data(){
     	return {
@@ -53,7 +56,34 @@ export default {
     		]
     	}
     },
+    mounted() {
+		this.InitScroll()
+	},
     methods: {
+        InitScroll() {
+			this.$nextTick(() => {
+				if(!this.scroll) {
+					this.scroll = new BScroll(this.$refs.wrapper, {
+						click: true,
+						scrollY: true,
+						pullUpLoad: {
+							threshold: -30, // 负值是当上拉到超过低部 70px；正值是距离底部距离 时，                    
+						}
+					})
+					this.scroll.on('pullingUp', (pos) => {
+						this.show = true;
+						// this.LoadData()
+						this.$nextTick(function() {
+							this.scroll.finishPullUp();
+							this.scroll.refresh();
+						});
+					})
+				} else {
+					this.scroll.refresh()
+				}
+			})
+
+		},
     	// 下拉
     	down: function() {
     		let list = this.logolist;
@@ -88,7 +118,11 @@ export default {
 </script>
 
 <style lang="less" scoped>
-.vux-popup-dialog{
+.wrapper {
+	height: 11.78rem;
+	overflow: hidden;
+}
+.maskright .vux-popup-dialog{
 	background: #fff;
 }
 li{
@@ -107,7 +141,7 @@ li{
 	list-style: none;
 	.logo{
 		overflow: hidden;
-		margin-top: 0.63rem;
+		/*margin-top: 0.63rem;*/
 		margin-left: 0.25rem;
 		margin-bottom: 0.45rem;
 		img{
@@ -145,26 +179,36 @@ li{
 			margin-bottom: 0.18rem;
 		}
 	}
-	.bottom{
-		position: fixed;
-		bottom: 0;
-		font-size: 0.28rem;
-		text-align: center;
-		.reset{
-			float: left;
-			width: 2.64rem;
-			padding: 0.3rem 0;
-			background: #F5F6FA;
-			color: #336FFF;
-		}
-		.complete{
-			float: left;
-			width: 3.96rem;
-			padding: 0.3rem 0;
-			background: #336FFF;
-			color: #fff;
-		}
+}
+.bottom{
+	position: fixed;
+	bottom: 0;
+	font-size: 0.28rem;
+	text-align: center;
+	.reset{
+		float: left;
+		width: 2.64rem;
+		padding: 0.3rem 0;
+		background: #F5F6FA;
+		color: #336FFF;
 	}
+	.complete{
+		float: left;
+		width: 3.96rem;
+		padding: 0.3rem 0;
+		background: #336FFF;
+		color: #fff;
+	}
+}
+</style>
 
+<style lang="less">
+.maskright .vux-popup-dialog{
+	min-height: 100%;
+	height: auto;
+	max-height: auto;
+}
+.maskright .vux-popup-dialog.vux-popup-right{
+	height: auto;
 }
 </style>
