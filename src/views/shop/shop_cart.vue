@@ -110,7 +110,7 @@
 	    </scroller>
 	    <div class="position">
 			<div class="fl total">
-				<check-icon :value.sync="demo" style='width:0.88rem;text-align:center;line-height:0.9rem;' class='fl'></check-icon>
+				<check-icon :value.sync="all" style='width:0.88rem;text-align:center;line-height:0.9rem;' class='fl'></check-icon>
 				<span class="selectAll">全选</span>
 				<p class="shop-price fr">总计：<span class="priceNum">￥3598</span> <span class="shopAcount">+266积分</span></p>
 			</div>
@@ -129,7 +129,9 @@
 				title:'兑换详情',
 				demo1: false,
 				item:true,
-				demo:false,
+				shopList:[],
+				storeList:[],
+				all:false,
 			}
 		},
 		components:{
