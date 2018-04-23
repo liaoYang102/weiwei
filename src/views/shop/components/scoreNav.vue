@@ -54,8 +54,8 @@
 				vm.title = vm.scoreTitle;
 			},
 			goAllshop(){
-				let title = this.title
-				this.$router.push({ path: '/shop/all_shops', params: { title }})
+				let title = this.title.slice(2);
+				this.$router.push({ name: 'all_shops', params: { title }})
 			},
 			goShopdetails(){
 				this.$router.push({ path: '/shop/shop_details'})
@@ -147,13 +147,14 @@ li{
 						margin-right: 0.22rem;
 					}
 					.coupons{
-						float: left;
+						float: right;
 						background: rgba(56,137,255,0.20);
 						font-size: 0.2rem;
 						color: #3889FF;
-						margin-top: 0.12rem;
+						margin-top: 0.13rem;
 						padding-left: 0.07rem;
 						padding-right: 0.06rem;
+						padding-top: 0.02rem;
 						margin-right: 0.12rem;
 					}
 				}

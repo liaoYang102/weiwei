@@ -1,186 +1,248 @@
 <template>
-	<section class='myOrder'>
-		<settingHeader :title="title"></settingHeader>
-		<tab :line-width="1" :scroll-threshold="5" custom-bar-width="30px">
-	      <tab-item selected @on-item-click="onItemClick">全部</tab-item>
-	      <tab-item @on-item-click="onItemClick">待付款</tab-item>
-	      <tab-item @on-item-click="onItemClick">待收货</tab-item>
-	      <tab-item @on-item-click="onItemClick">已完成</tab-item>
-	      <tab-item @on-item-click="onItemClick">已取消</tab-item>
-	    </tab>
-	    <scroller lock-x height="+50" @on-scroll-bottom="onScrollBottom" ref="scrollerBottom" style="background-color:#efeff4" v-if='test'>
-	      <div class="box2">
-	        <div class="shop-box">
-				<div class="box-head">
-					<div class="fl">
-						<img src="../../assets/images/shop/UNIQLO.png" alt="" class='shop-logo'>
-						<span class="box-name">优衣库冒牌店</span>
-						<img src="../../assets/images/shop/turn_right.png" alt="" class='turn-right'>
-					</div>
-					<div class="fr">等待买家付款</div>
-					<div class="clear"></div>
-				</div>
-				<div class="box-detail">
-					<div class="shop-detail">
-						<img src="../../assets/images/shop/order_detail1.png" alt="" class='fl'>
-						<div class="fl shop-details">
-							<p class="shop-name">女装U宽腿牛仔裤(水洗产品)</p>
-							<p class="shop-size">颜色:蓝色；尺码:L/170修身</p>
-						</div>
-						<div class="clear"></div>
-					</div>
-					<div class="shop-total">
-						<p class="fr">
-							共 1 件 合计：<span class="shop-price">100积分+30元</span>
-						</p>
-						<div class="clear"></div>
-					</div>
-				</div>
-				<div class="box-bottom">
-					<div class="shop-btn btn-status1 fr" @click="goConfirm">付款</div>
-					<div class="shop-btn fr">取消订单</div>
-				</div>
-	        </div>
-	        <div class="shop-box">
-				<div class="box-head">
-					<div class="fl">
-						<img src="../../assets/images/shop/UNIQLO.png" alt="" class='shop-logo'>
-						<span class="box-name">优衣库专卖店</span>
-						<img src="../../assets/images/shop/turn_right.png" alt="" class='turn-right'>
-					</div>
-					<div class="fr">买家已付款</div>
-					<div class="clear"></div>
-				</div>
-				<div class="box-detail">
-					<div class="shop-detail">
-						<img src="../../assets/images/shop/order_detail2.png" alt="" class='fl'>
-						<div class="fl shop-details">
-							<p class="shop-name">女装U宽腿牛仔裤(水洗产品)</p>
-							<p class="shop-size">颜色:蓝色；尺码:L/170修身</p>
-						</div>
-						<div class="clear"></div>
-					</div>
-					<div class="shop-total">
-						<p class="fr">
-							共 1 件 合计：<span class="shop-price">100积分+30元</span>
-						</p>
-						<div class="clear"></div>
-					</div>
-				</div>
-				<div class="box-bottom">
-					<!-- <div class="shop-btn btn-status1 fr">付款</div> -->
-					<div class="shop-btn fr">提醒发货</div>
-				</div>
-	        </div>
-	        <div class="shop-box">
-				<div class="box-head">
-					<div class="fl">
-						<img src="../../assets/images/shop/UNIQLO.png" alt="" class='shop-logo'>
-						<span class="box-name">优衣库专卖店</span>
-						<img src="../../assets/images/shop/turn_right.png" alt="" class='turn-right'>
-					</div>
-					<div class="fr">卖家已发货</div>
-					<div class="clear"></div>
-				</div>
-				<div class="box-detail">
-					<div class="shop-detail">
-						<img src="../../assets/images/shop/order_detail2.png" alt="" class='fl'>
-						<div class="fl shop-details">
-							<p class="shop-name">女装U宽腿牛仔裤(水洗产品)</p>
-							<p class="shop-size">颜色:蓝色；尺码:L/170修身</p>
-						</div>
-						<div class="clear"></div>
-					</div>
-					<div class="shop-total">
-						<p class="fr">
-							共 1 件 合计：<span class="shop-price">100积分+30元</span>
-						</p>
-						<div class="clear"></div>
-					</div>
-				</div>
-				<div class="box-bottom">
-					<div class="shop-btn btn-status1 fr" @click="goTsuccess">确认收货</div>
-					<div class="shop-btn fr" @click="goLogistics">查看物流</div>
-				</div>
-	        </div>
-	        <div class="shop-box">
-				<div class="box-head">
-					<div class="fl">
-						<img src="../../assets/images/shop/UNIQLO.png" alt="" class='shop-logo'>
-						<span class="box-name">优衣库专卖店</span>
-						<img src="../../assets/images/shop/turn_right.png" alt="" class='turn-right'>
-					</div>
-					<div class="fr">交易成功</div>
-					<div class="clear"></div>
-				</div>
-				<div class="box-detail">
-					<div class="shop-detail">
-						<img src="../../assets/images/shop/order_detail2.png" alt="" class='fl'>
-						<div class="fl shop-details">
-							<p class="shop-name">女装U宽腿牛仔裤(水洗产品)</p>
-							<p class="shop-size">颜色:蓝色；尺码:L/170修身</p>
-						</div>
-						<div class="clear"></div>
-					</div>
-					<div class="shop-total">
-						<p class="fr">
-							共 1 件 合计：<span class="shop-price">100积分+30元</span>
-						</p>
-						<div class="clear"></div>
-					</div>
-				</div>
-				<div class="box-bottom">
-					<div class="shop-btn btn-status1 fr" @click="goTsuccess">确认收货</div>
-					<div class="shop-btn fr" @clcik="goRefund">退货</div>
-					<div class="shop-btn fr" @click="goLogistics">查看物流</div>
-				</div>
-	        </div>
-	        <load-more tip="loading" id='loading'></load-more>
-	      </div>
-	    </scroller>
-	    <div class="wrap no_orders none-data" v-else>
-			<img src="../../assets/images/sorder/none_03.png" alt=""> 
-			<p>啊噢！什么订单也没有</p> 
-			<span class="guang">到处逛逛</span>
-	    </div>
+	<section class='myOrder' style="height: 100%">
+		<div class="wrapper" ref="wrapper">
+			<div class="content">
+				<settingHeader :title="title"></settingHeader>
+				<tab :line-width="1" :scroll-threshold="5" custom-bar-width="30px">
+			      <tab-item selected @on-item-click="onItemClick">全部</tab-item>
+			      <tab-item @on-item-click="onItemClick">待付款</tab-item>
+			      <tab-item @on-item-click="onItemClick">待收货</tab-item>
+			      <tab-item @on-item-click="onItemClick">已完成</tab-item>
+			      <tab-item @on-item-click="onItemClick">已取消</tab-item>
+			    </tab>
+			    <div class="box" v-if="test">
+			        <div class="box2">
+			            <div class="shop-box">
+			    			<div class="box-head">
+			    				<div class="fl" @click="goOrderdetails">
+			    					<img src="../../assets/images/shop/UNIQLO.png" alt="" class='shop-logo'>
+			    					<span class="box-name">优衣库冒牌店</span>
+			    					<img src="../../assets/images/shop/turn_right.png" alt="" class='turn-right'>
+			    				</div>
+			    				<div class="fr">等待买家付款</div>
+			    				<div class="clear"></div>
+			    			</div>
+			    			<div class="box-detail" @click="goOrderdetails">
+			    				<div class="shop-detail">
+			    					<img src="../../assets/images/shop/order_detail1.png" alt="" class='fl'>
+			    					<div class="fl shop-details">
+			    						<p class="shop-name">女装U宽腿牛仔裤(水洗产品)</p>
+			    						<p class="shop-size">颜色:蓝色；尺码:L/170修身</p>
+			    					</div>
+			    					<div class="clear"></div>
+			    				</div>
+			    				<div class="shop-total">
+			    					<p class="fr">
+			    						共 1 件 合计：<span class="shop-price">100积分+30元</span>
+			    					</p>
+			    					<div class="clear"></div>
+			    				</div>
+			    			</div>
+			    			<div class="box-bottom">
+			    				<div class="shop-btn btn-status1 fr" @click="goConfirm">付款</div>
+			    				<div class="shop-btn fr">取消订单</div>
+			    			</div>
+			            </div>
+			            <div class="shop-box">
+			    			<div class="box-head">
+			    				<div class="fl">
+			    					<img src="../../assets/images/shop/UNIQLO.png" alt="" class='shop-logo'>
+			    					<span class="box-name">优衣库专卖店</span>
+			    					<img src="../../assets/images/shop/turn_right.png" alt="" class='turn-right'>
+			    				</div>
+			    				<div class="fr">买家已付款</div>
+			    				<div class="clear"></div>
+			    			</div>
+			    			<div class="box-detail" @click="goOrderdetails">
+			    				<div class="shop-detail">
+			    					<img src="../../assets/images/shop/order_detail2.png" alt="" class='fl'>
+			    					<div class="fl shop-details">
+			    						<p class="shop-name">女装U宽腿牛仔裤(水洗产品)</p>
+			    						<p class="shop-size">颜色:蓝色；尺码:L/170修身</p>
+			    					</div>
+			    					<div class="clear"></div>
+			    				</div>
+			    				<div class="shop-total">
+			    					<p class="fr">
+			    						共 1 件 合计：<span class="shop-price">100积分+30元</span>
+			    					</p>
+			    					<div class="clear"></div>
+			    				</div>
+			    			</div>
+			    			<div class="box-bottom">
+			    				<!-- <div class="shop-btn btn-status1 fr">付款</div> -->
+			    				<div class="shop-btn fr">提醒发货</div>
+			    			</div>
+			            </div>
+			            <div class="shop-box">
+			    			<div class="box-head">
+			    				<div class="fl">
+			    					<img src="../../assets/images/shop/UNIQLO.png" alt="" class='shop-logo'>
+			    					<span class="box-name">优衣库专卖店</span>
+			    					<img src="../../assets/images/shop/turn_right.png" alt="" class='turn-right'>
+			    				</div>
+			    				<div class="fr">卖家已发货</div>
+			    				<div class="clear"></div>
+			    			</div>
+			    			<div class="box-detail" @click="goOrderdetails">
+			    				<div class="shop-detail">
+			    					<img src="../../assets/images/shop/order_detail2.png" alt="" class='fl'>
+			    					<div class="fl shop-details">
+			    						<p class="shop-name">女装U宽腿牛仔裤(水洗产品)</p>
+			    						<p class="shop-size">颜色:蓝色；尺码:L/170修身</p>
+			    					</div>
+			    					<div class="clear"></div>
+			    				</div>
+			    				<div class="shop-total">
+			    					<p class="fr">
+			    						共 1 件 合计：<span class="shop-price">100积分+30元</span>
+			    					</p>
+			    					<div class="clear"></div>
+			    				</div>
+			    			</div>
+			    			<div class="box-bottom">
+			    				<div class="shop-btn btn-status1 fr" @click="goTsuccess">确认收货</div>
+			    				<div class="shop-btn fr" @click="goLogistics">查看物流</div>
+			    			</div>
+			            </div>
+			            <div class="shop-box">
+			    			<div class="box-head">
+			    				<div class="fl">
+			    					<img src="../../assets/images/shop/UNIQLO.png" alt="" class='shop-logo'>
+			    					<span class="box-name">优衣库专卖店</span>
+			    					<img src="../../assets/images/shop/turn_right.png" alt="" class='turn-right'>
+			    				</div>
+			    				<div class="fr">交易成功</div>
+			    				<div class="clear"></div>
+			    			</div>
+			    			<div class="box-detail" @click="goOrderdetails">
+			    				<div class="shop-detail">
+			    					<img src="../../assets/images/shop/order_detail2.png" alt="" class='fl'>
+			    					<div class="fl shop-details">
+			    						<p class="shop-name">女装U宽腿牛仔裤(水洗产品)</p>
+			    						<p class="shop-size">颜色:蓝色；尺码:L/170修身</p>
+			    					</div>
+			    					<div class="clear"></div>
+			    				</div>
+			    				<div class="shop-total">
+			    					<p class="fr">
+			    						共 1 件 合计：<span class="shop-price">100积分+30元</span>
+			    					</p>
+			    					<div class="clear"></div>
+			    				</div>
+			    			</div>
+			    			<div class="box-bottom">
+			    				<div class="shop-btn btn-status1 fr" @click="goTsuccess">确认收货</div>
+			    				<div class="shop-btn fr" @clcik="goRefund">退货</div>
+			    				<div class="shop-btn fr" @click="goLogistics">查看物流</div>
+			    			</div>
+			            </div>
+
+	                    <div class="shop-box" v-for="item in 3">
+	            			<div class="box-head">
+	            				<div class="fl">
+	            					<img src="../../assets/images/shop/UNIQLO.png" alt="" class='shop-logo'>
+	            					<span class="box-name">优衣库专卖店</span>
+	            					<img src="../../assets/images/shop/turn_right.png" alt="" class='turn-right'>
+	            				</div>
+	            				<div class="fr">交易成功</div>
+	            				<div class="clear"></div>
+	            			</div>
+	            			<div class="box-detail" @click="goOrderdetails">
+	            				<div class="shop-detail">
+	            					<img src="../../assets/images/shop/order_detail2.png" alt="" class='fl'>
+	            					<div class="fl shop-details">
+	            						<p class="shop-name">女装U宽腿牛仔裤(水洗产品)</p>
+	            						<p class="shop-size">颜色:蓝色；尺码:L/170修身</p>
+	            					</div>
+	            					<div class="clear"></div>
+	            				</div>
+	            				<div class="shop-total">
+	            					<p class="fr">
+	            						共 1 件 合计：<span class="shop-price">100积分+30元</span>
+	            					</p>
+	            					<div class="clear"></div>
+	            				</div>
+	            			</div>
+	            			<div class="box-bottom">
+	            				<div class="shop-btn btn-status1 fr" @click="goTsuccess">确认收货</div>
+	            				<div class="shop-btn fr" @clcik="goRefund">退货</div>
+	            				<div class="shop-btn fr" @click="goLogistics">查看物流</div>
+	            			</div>
+	                    </div>
+			           <div class="clear"></div>
+			        </div>
+			        <loading v-if="show"></loading>
+			    </div>
+		        <div class="wrap no_orders none-data" v-else>
+		    		<img src="../../assets/images/sorder/none_03.png" alt=""> 
+		    		<p>啊噢！什么订单也没有</p> 
+		    		<span class="guang">到处逛逛</span>
+		        </div>
+			</div>
+		</div>
+	    
 	</section>
 </template>
 
 <script>
 	import settingHeader from '../../components/setting_header'
+	import BScroll from 'better-scroll'
+	import Loading from '../../components/loading'
 	export default {
 		data(){
 			return {
 				title:'我的订单',
 				test: true,
-				show9: false
+				show9: false,
+				show: false,
 			}
 		},
 		components: {
-	        settingHeader
+	        settingHeader,Loading
 	    },
+	    mounted() {
+			this.InitScroll()
+		},
 		methods:{
 		  	onItemClick (index) {
 		  		this.test = false;
 		        console.log('on item click:', index);
 		    },
-		    onScrollBottom(){
-		    	var load = document.getElementById("loading");
-		    	load.style.display = 'block'
-		    	if (this.onFetching) {
-			        // do nothing
-			      } else {
-			        this.onFetching = true
-			        setTimeout(() => {
-			        	load.style.display = 'none'
-			        	console.log(123);
-			          	this.$nextTick(() => {
-			            this.$refs.scrollerBottom.reset()
-			          })
-			          this.onFetching = false
-			        }, 2000)
-			      }
-		    },
+		    InitScroll() {
+    			this.$nextTick(() => {
+    				if(!this.scroll) {
+    					this.scroll = new BScroll(this.$refs.wrapper, {
+    						click: true,
+    						scrollY: true,
+    						pullUpLoad: {
+    							threshold: -30, // 负值是当上拉到超过低部 70px；正值是距离底部距离 时，                    
+    						}
+    					})
+    					this.scroll.on('pullingUp', (pos) => {
+    						this.show = true;
+    						this.LoadData()
+    						this.$nextTick(function() {
+    							this.scroll.finishPullUp();
+    							this.scroll.refresh();
+    						});
+    					})
+    				} else {
+    					this.scroll.refresh()
+    				}
+    			})
+
+    		},
+    		LoadData() {
+    			var _this = this
+    			setTimeout(function(){
+    				_this.show = false;
+    				// let obj = [{ shopname: 'VANS Old Skool lite黑白超轻鞋款 黑色38.5', money: '3598', score: '266'},
+    				// { shopname: 'VANS Old Skool lite黑白超轻鞋款 黑色38.5', money: '3598', score: '266'}];
+    				// _this.shopList = _this.shopList.concat(obj);
+    				// console.log(_this.shopList);
+    			},3000)
+    		},
 		    goConfirm(){
 		    	this.$router.push({ path: '/shop/confirm'})
 		    },
@@ -192,14 +254,19 @@
 		    },
 		    goRefund(){
 		    	this.$router.push({ path: '/shop/refund'})
+		    },
+		    goOrderdetails(){
+		    	this.$router.push({ path: '/shop/order_details'})
 		    }
 		}
 	}
 </script>
 
 <style lang="less" scoped>
-	.vux-loadmore{
-		display: none;
+	.wrapper {
+		height: 100%;
+		background-color: #F5F6FA;
+		overflow: hidden;
 	}
 	.none-data {
 	    /* display: none; */

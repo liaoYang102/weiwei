@@ -22,8 +22,8 @@
 						<img src="../../assets/images/shop/order_detail1.png">
 					</div>
 					<div class="text-right">
-						<span>女装U宽腿牛仔裤(水洗产品)</span><br>
-						<span class="text-gray">颜色:蓝色; 尺码:L/170修身</span>
+						<span>女装U宽腿牛仔裤(水洗产品)</span>
+						<p class="text-gray">颜色:蓝色；尺码:L/170修身 <span class="fr">X4</span></p>
 					</div>
 				</div>
 				<div class="order-btn">
@@ -39,12 +39,12 @@
 					</div>
 					<div class="text-right">
 						<span>女装U宽腿牛仔裤(水洗产品)</span><br>
-						<span class="text-gray">颜色:蓝色; 尺码:L/170修身</span>
+						<p class="text-gray">颜色:蓝色；尺码:L/170修身 <span class="fr">X4</span></p>
 					</div>
 				</div>
 				<div class="order-btn">
-					<div class="comments commen">评价</div>
-					<div class="giveup commen">退货</div>
+					<div class="comments commen" @click="goWritecomments">评价</div>
+					<div class="giveup commen" @click="goRefund">退货</div>
 				</div>
 			</li>
 		</div>
@@ -120,7 +120,7 @@ import recommended from './components/recommended'
 					{ label: '订单状态', value:'买家已收货'},
 					{ label: '完成时间', value:'2018-03-17 11:44:21'}
 				],
-				value: 4
+				value: 3
 			}
 		},
 		components: {
@@ -164,7 +164,7 @@ li{
 				float: left;
 			}
 			.left-text{
-				margin-top: -0.05rem;
+				margin-top: -0.02rem;
 				float: left;
 			}
 			.icon{
@@ -207,12 +207,17 @@ li{
 			}
 			.text-right{
 				float: left;
-				font-size: 0.28rem;
+				font-size: 0.3rem;
 				color: #1A2642;
 				margin-top: 0.18rem;
+				width: 70%;
 				.text-gray{
 					font-size: 0.24rem;
 					color: #90A2C7;
+					margin-top: 0.05rem;
+				}
+				.fr{
+					float: right;
 				}
 			}
 		}
@@ -225,18 +230,18 @@ li{
 				margin-right: 0.2rem;
 				margin-bottom: 0.12rem;
 				text-align: center;
+				height: 0.5rem;
+				line-height: 0.54rem;
 				width: 1.5rem;
 			}
 			.comments{
 				border: 0.01rem solid #336FFF;
 				border-radius: 0.04rem;
-				padding: 0.08rem 0;
 				color: #336FFF;
 			}
 			.giveup{
 				border: 0.01rem solid #90A2C7;
 				border-radius: 0.04rem;
-				padding: 0.08rem 0;
 			}
 		}
 		
@@ -310,20 +315,19 @@ li{
 			margin-right: 0.2rem;
 			text-align: center;
 			width: 1.5rem;
+			height: 0.56rem;
+			line-height: 0.6rem;
 		}
 		.view{
 			border: 0.01rem solid #90A2C7;
 			border-radius: 0.04rem;
-			padding: 0.08rem 0;
 		}
 		.comments{
 			border: 0.01rem solid #F23030;
 			border-radius: 0.04rem;
-			padding: 0.08rem 0;
 			color: #F23030;
 		}
 		.canel{
-			padding: 0.08rem 0;
 			border: 0.01rem solid #336FFF;
 			border-radius: 0.04rem;
 			color: #336FFF;
@@ -334,6 +338,9 @@ li{
 </style>
 
 <style lang="less">
+.ul-content{
+	margin-bottom: 0.2rem;
+}
 .ul-content .weui-cells{
 	margin-top: 0 !important;
 }

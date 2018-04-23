@@ -13,31 +13,19 @@
 				<span class="arrow fr">></span>
 			</div>
 		</div>
+
 		<div v-transfer-dom>
-	      <popup v-model="show9" position="bottom">
-	        <div style="height:5.38rem;background-color:white" class='popup'>
-	        	<div class="popupTop">
-					<span class="fl">X</span>
-					<span class="fr">选择支付方式</span>
-	        	</div>
-	        	<ul>
-					<li>
-						<div class='fl wechat'></div>
-						<span class="fl">微信支付</span>
-						<check-icon :value.sync="demo1" class='fr'></check-icon>
-						<div class="clear"></div>
-					</li>
-					<li>
-						<div class='fl wechat'></div>
-						<span class="fl">余额支付</span>
-						<check-icon :value.sync="demo2" class='fr'></check-icon>
-						<div class="clear"></div>
-					</li>
-	        	</ul>
-	        	<div class="btn" @click="goShopsuccess">立即支付</div>
-	        </div>
-	      </popup>
-	    </div>
+			<popup v-model="show9">
+				<popup-header left-text="取消" right-text="确定" title="选择支付方式" :show-bottom-border="false" @on-click-left="show9 = false" @on-click-right="show9 = false"></popup-header>
+				<group gutter="0">
+					<radio :options="list" @on-change="change"></radio>
+					<div class="pay-box">
+						<x-button class="add-btn" :gradients="['#1D62F0', '#19D5FD']" @click.native="goShopsuccess">立即支付</x-button>
+					</div>
+				</group>
+			</popup>
+		</div>
+
 		<div class="shops">
 			<group style='margin-bottom:0.38rem;'>
                 <cell title="优衣库旗舰店" is-link :border-intent="false" >
@@ -64,20 +52,23 @@
                 <cell title="现金" value="20元" :border-intent="false"></cell>
                 <div class="leave">
 					<span class="message">卖家留言</span>
-					<input type="text" placeholder='选填:填写内容已和卖家协商确认'>
+					<input type="text" placeholder='选填:填写内容已和卖家协商确认' style="width: 55%;font-size: 0.24rem">
                 </div>
             </group>
 		</div>
+		
 		<div class="submit">
 			<div class="total fl">
 				共 <span class='color'>1</span> 件，总计：<span class="totalNum">¥3598</span><span class="totalAccount">+266积分</span>
 			</div>
 			<div class="confirmSumbit fr" @click='popup'>确认提交</div>
+			<div class="clear"></div>
 		</div>
 	</section>
 </template>
 
 <script>
+import { Group, CellBox, XButton, PopupHeader, Radio,Checklist } from 'vux'
 import settingHeader from '../../components/setting_header'
 export default {
 	data(){
@@ -87,10 +78,30 @@ export default {
 			show9:false,
 			demo1: true,
 			demo2: false,
+			list: [{
+				icon: '../../../static/member/bandCard.png',
+				key: '1',
+				value: '银行卡支付'
+			}, {
+				icon: '../../../static/member/treasure.png',
+				key: '2',
+				value: '支付宝支付'
+			}, {
+				icon: '../../../static/member/wechapaid.png',
+				key: '3',
+				value: '微信支付'
+			}],
+
 		}
 	},
 	components:{
-		settingHeader
+		settingHeader,
+		Group,
+		CellBox,
+		XButton,
+		PopupHeader,
+		Radio,
+		Checklist 
 	},
 	methods:{
 		popup(){
@@ -98,6 +109,9 @@ export default {
 		},
 		goShopsuccess(){
 			this.$router.push({ path:'/shop/o_success'})
+		},
+		change(value, label) {
+			console.log('change:', value, label)
 		}
 	}
 }
@@ -256,7 +270,6 @@ export default {
 	}
 	.submit{
 		width: 100%;
-		height: 1.05em;
 		.total{
 			background-color: #fff;
 			width: 4.4rem;
@@ -298,40 +311,46 @@ export default {
 	}
 </style>
 <style lang='less'>
-	.weui-cell_switch{
+.shops .weui-cells{
+	margin-top: 0 !important;
+}
+.shops .vux-no-group-title{
+	margin-top: 0 !important;
+}
+.shops .weui-cell_switch{
 	    padding-right: 0!important;
 	}
-	.weui-label{
+.shops .weui-label{
 		width: 8em!important;
 		margin-right: 0.2rem;
 	}
-	.weui-icon-success{
+.shops .weui-icon-success{
 		float: right;
 		margin-right: 0.25rem;
 	}
-	.weui-icon-circle{
+.shops .weui-icon-circle{
 		float: right;
 		margin-right: 0.25rem;
 	}
-	.vux-number-input{
+.shops .vux-number-input{
 		border: none!important;
 		font-size: 0.28rem!important;
 		color:#333!important;
 	}
-	.vux-number-selector{
+.shops .vux-number-selector{
 		color:#222!important;
 		background: #F5F5F5!important;
 	}
-	.vux-number-selector svg{
+.shops .vux-number-selector svg{
 		fill:#222!important;
 	}
-	.vux-label{
+.shops .vux-label{
 		color:#222;
 	}
-	.weui-cell__ft{
+.shops .weui-cell__ft{
 		color: #1A2642!important;
 	}
-	.weui-cell{
-		padding: 0.12rem 0.15rem;
+.shops .weui-cell{
+		padding: 0.15rem 0.15rem;
 	}
 </style>

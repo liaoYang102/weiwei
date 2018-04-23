@@ -2,9 +2,9 @@
 	<section>
 		<settingHeader :title="title"></settingHeader>
 		<div class="head">
-			<img src="../../assets/images/shop/payment_successful.png" alt="" class='fl'>
+			<img src="../../assets/images/shop/t_successful.png" alt="" class='fl'>
 			<div class="message fl">
-				<p class="success">支付成功</p>
+				<p class="success">交易成功</p>
 				<p class="prompt">宝贝会很快送到您手里~</p>
 			</div>
 			<div class="clear"></div>
@@ -59,11 +59,12 @@
 		border-top: 1px solid #E1E1E1;
 		border-bottom: 1px solid #E1E1E1;
 		padding-top: 0.09rem;
-		padding-bottom: 0.11rem;
+		padding-bottom: 0.33rem;
 		padding-left: 0.54rem;
+		background: #fff;
 		img{
-			width: 2.82rem;
-			height: 2.2rem;
+			width: 2.81rem;
+			height: 1.75rem;
 		}
 		.message{
 			margin-left: 0.2rem;
