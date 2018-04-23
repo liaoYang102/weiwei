@@ -3,7 +3,7 @@
 		<div class="searchBox">
 			<div class="search">
 				<img src="../../../assets/images/shop/search.png">
-				<input type="search" placeholder="搜索商品" @click="goSearch">
+				<input type="search" placeholder="搜索商品">
 			</div>
 		</div>
 	</div>
@@ -21,9 +21,6 @@
 			
 		},
 		methods:{
-			goSearch(){
-				this.$router.push({ path: '/'})
-			},
 		}
 	}
 </script>
@@ -49,7 +46,7 @@
 			width: 100%;
 			background: #F5F6FA;
 			border-radius: 0.06rem;
-			color: #fff;
+			color: #1A2642;
 			padding: 0.14rem 0.1rem 0.12rem 0.78rem;
 		}
 		input::-webkit-input-placeholder {

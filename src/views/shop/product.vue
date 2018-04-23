@@ -23,18 +23,6 @@
 			        </swiper>
 				</div>
 
-				<!-- <div class="wrapper1" ref="wrapper1">
-					<div class="content">
-						<div class="content-left">
-	    			    	<div class="box1">
-								<div class="box1-item" v-for="(item,index) in listData" :class="{'border-left':index == itemActive}" @click.active="boxItemActive(index)">
-									<span>{{item}}</span>
-								</div>
-							</div>
-	    	    	    </div>
-					</div>
-				</div> -->
-
 				<scroller lock-x height="-100">
 					<div class="box2">
 						<div class="title">热门品牌</div>

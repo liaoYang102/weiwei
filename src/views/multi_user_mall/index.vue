@@ -11,7 +11,7 @@
 			</div>
 		</div>
 
-		<search></search>
+		<search @click.native="goSearch"></search>
 
 		<div class="tab">
 			<tab :line-width="3" :scroll-threshold="4">
@@ -79,6 +79,9 @@
 			onItemClick(){
 
 			},
+			goSearch(){
+				this.$router.push({ name: 'search'})
+			}
 		}
 	}
 </script>

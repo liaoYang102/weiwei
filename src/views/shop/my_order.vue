@@ -173,6 +173,7 @@
 			           <div class="clear"></div>
 			        </div>
 			        <loading v-if="show"></loading>
+			        <noMore v-if="showNomore"></noMore>
 			    </div>
 		        <div class="wrap no_orders none-data" v-else>
 		    		<img src="../../assets/images/sorder/none_03.png" alt=""> 
@@ -189,6 +190,7 @@
 	import settingHeader from '../../components/setting_header'
 	import BScroll from 'better-scroll'
 	import Loading from '../../components/loading'
+	import noMore from '../../components/noMore'
 	export default {
 		data(){
 			return {
@@ -196,10 +198,11 @@
 				test: true,
 				show9: false,
 				show: false,
+				showNomore: false
 			}
 		},
 		components: {
-	        settingHeader,Loading
+	        settingHeader,Loading,noMore
 	    },
 	    mounted() {
 			this.InitScroll()

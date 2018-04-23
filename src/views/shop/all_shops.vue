@@ -71,6 +71,7 @@
                     </div>
                     
                     <loading v-if="show"></loading>
+                    <noMore v-if="showNomore"></noMore>
                 </div>
 
             </div>
@@ -87,13 +88,15 @@ import maskRight from './components/maskRight'
 import Swiper from './components/swiper'
 import BScroll from 'better-scroll'
 import Loading from '../../components/loading'
+import noMore from '../../components/noMore'
 
 export default {
     components: {
         settingHeader,
         maskRight,
         Swiper,
-        Loading
+        Loading,
+        noMore
     },
     data(){
         return {
@@ -126,7 +129,8 @@ export default {
             score: true,
             scorelist: [],
             moneylist: [],
-            show: false
+            show: false,
+            showNomore: false
         }
     },
     mounted:function(){

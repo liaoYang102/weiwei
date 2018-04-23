@@ -108,6 +108,7 @@
 					</div>
 					<div class="clear"></div>
 					<loading v-if="show"></loading>
+					<noMore v-if="showNomore"></noMore>
 				</div>
 			</div>
 			<div class="position">
@@ -128,6 +129,7 @@
 	import settingHeader from '../../components/setting_header'
 	import BScroll from 'better-scroll'
 	import Loading from '../../components/loading'
+	import noMore from '../../components/noMore'
 	export default{
 		data(){
 			return{
@@ -138,11 +140,12 @@
 				storeList:[],
 				all:false,
 				demo:false,
-				show: false
+				show: false,
+				showNomore: false
 			}
 		},
 		components:{
-			settingHeader,Loading
+			settingHeader,Loading,noMore
 		},
 		mounted() {
 			this.InitScroll()
