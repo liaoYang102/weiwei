@@ -14,7 +14,7 @@
 			        <div class="box2">
 			            <div class="shop-box">
 			    			<div class="box-head">
-			    				<div class="fl" @click="goOrderdetails">
+			    				<div class="fl">
 			    					<img src="../../assets/images/shop/UNIQLO.png" alt="" class='shop-logo'>
 			    					<span class="box-name">优衣库冒牌店</span>
 			    					<img src="../../assets/images/shop/turn_right.png" alt="" class='turn-right'>
