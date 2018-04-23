@@ -1,7 +1,7 @@
 <template>
 	<section style="height: 100%;">
 		<div class="wrapper" ref="wrapper">
-			<div class="content">
+			<div class="content" style="padding-top:46px;">
 				<div class="tab-title">商品评价</div>
 
 		        <div class="commentsList">

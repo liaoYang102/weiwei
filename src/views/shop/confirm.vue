@@ -52,7 +52,7 @@
                 <cell title="现金" value="20元" :border-intent="false"></cell>
                 <div class="leave">
 					<span class="message">卖家留言</span>
-					<input type="text" placeholder='选填:填写内容已和卖家协商确认' style="width: 55%;font-size: 0.24rem">
+					<input type="text" placeholder='选填:填写内容已和卖家协商确认' style="width: 60%;font-size: 0.24rem;padding:0.2rem 0">
                 </div>
             </group>
 		</div>
@@ -261,9 +261,9 @@ export default {
 	}
 	.leave{
 		border-top: 1px solid #D9D9D9;
-		padding: 12px 15px;
+		padding: 0.12rem 0.15rem;
 		.message{
-			font-size: 0.3rem;
+			font-size: 0.32rem;
 			color: #222222;
 			margin-right: 0.27rem;
 		}

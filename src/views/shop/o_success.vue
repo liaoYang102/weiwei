@@ -25,6 +25,7 @@
 				</div>
 			</div>
 		</div>
+		<cashBack></cashBack>
 		<div class="bottom">
 			<recommended></recommended>
 		</div>			
@@ -33,6 +34,7 @@
 
 <script>
 	import settingHeader from '../../components/setting_header'
+	import cashBack from './components/cashBack'
 	import recommended from './components/recommended'
 	export default{
 		data(){
@@ -41,7 +43,7 @@
 			}
 		},
 		components:{
-			settingHeader,recommended
+			settingHeader,recommended,cashBack
 		},
 		methods:{
 			goOrderdetails(){
@@ -84,11 +86,11 @@
 		background: #fff;
 		padding-bottom: 0.3rem;
 		padding-left: 0.2rem;
-		border-bottom: 0.21rem solid #f5f8f9;
+		/*border-bottom: 0.21rem solid #f5f8f9;*/
 		.personInfo{
 			border-bottom: 1px solid #E1E1E1;
 			font-size: 0.24rem;
-			color: #666666;
+			color: #90A2C7;
 			line-height: 0.65rem;
 			padding-bottom: 0.2rem;
 			span{
@@ -100,11 +102,10 @@
 			}
 		}
 		.money{
-			padding-left: 0.2rem;
 			padding-top: 0.12rem;
 			.realPayment{
 				font-size: 0.24rem;
-				color: #666666;
+				color: #90A2C7;
 				.totalMoney{
 					font-size: 0.24rem;
 					color: #222222;
@@ -117,12 +118,12 @@
 					float: left;
 					width: 2.4rem;
 					height: 0.7rem;
-					border: 2px solid #A0A0A0;
+					border: 2px solid #90A2C7;
 					border-radius: 0.1rem;
 					text-align: center;
 					line-height: 0.7rem;
 					font-size: 0.34rem;
-					color: #666;
+					color: #90A2C7;
 					margin-left: 0.36rem;
 				}
 			}

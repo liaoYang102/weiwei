@@ -3,7 +3,7 @@
     	<div class="wrapper" ref="wrapper">
 			<div class="content">
 				<settingHeader :title="title"></settingHeader>
-				<img :src="imgSrc" style="width: 100%; border-top: 0.01rem solid #E1E1E1">
+				<img :src="imgSrc" style="width: 100%;">
 				<div class="theme"  id="theme">
 					<tab :line-width="0" custom-bar-width="30px">
 				      <tab-item selected @on-item-click="onItemClick">精选</tab-item>
@@ -160,7 +160,7 @@ li:nth-child(odd){
 	background-color: #f72d61;
 	height: auto;
 	padding-top: 0.21rem;
-	margin-top: -0.09rem;
+	margin-top: -0.12rem;
 	.swiper{
 		margin-top: 0.12rem;
 	}
@@ -174,7 +174,7 @@ li:nth-child(odd){
 		.list{
 			width: 96.5%;
 			margin: 0 auto;
-			background-color: #f72d61;
+			/*background-color: #f72d61;*/
 			.li{
 				float: left;
 				.img{
@@ -237,4 +237,9 @@ li:nth-child(odd){
 	.theme .vux-tab .vux-tab-item.vux-tab-selected{
 		color: #7687D9;
 	}
+
+	.theme .vux-tab .vux-tab-item{
+		color:#222;
+	}
+
 </style>

@@ -134,6 +134,9 @@
 				title:'兑换详情',
 				demo1: false,
 				item:true,
+				shopList:[],
+				storeList:[],
+				all:false,
 				demo:false,
 				show: false
 			}

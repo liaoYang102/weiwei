@@ -61,6 +61,7 @@
 	
 	#app {
 		height: 100%;
+		background-color: #F5F6FA;
 		font-family: 'Avenir', Helvetica, Arial, sans-serif;
 		-webkit-font-smoothing: antialiased;
 		-moz-osx-font-smoothing: grayscale;

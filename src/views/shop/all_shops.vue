@@ -318,11 +318,18 @@ li:nth-child(odd) .list{
 .masKTop .vux-popup-dialog{
     background: #fff;
 }
-.masKTop .vux-popup-dialog.vux-popup-top{
+/*.masKTop .vux-popup-dialog.vux-popup-top{
     top: 1.815rem;
-}
+}*/
 .masKTop .vux-popup-mask{
     top: 1.8rem;
+}
+#shops .vux-tab .vux-tab-item{
+    color:#1A2642;
+}
+#shops .vux-tab .vux-tab-item.vux-tab-selected{
+    color:#256fff;
+    border-bottom:3px solid #256fff;
 }
 </style>
 

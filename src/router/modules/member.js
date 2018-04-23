@@ -1,3 +1,4 @@
+import index from '@/views/index'
 import login from '@/views/user/login'
 import reg from '@/views/user/reg'
 import change from '@/views/user/change'
@@ -30,6 +31,16 @@ import strategy from '@/views/member/score/strategy'
 import scoreDetail from '@/views/member/score/detail'
 
 const memberModule = [
+	{
+	  path: '/index',
+      name:'index',
+      component: index
+	},
+	{
+	  path: '/',
+      name:'index',
+      component: index
+	},
 	{
       path: '/member/setting/index',
       name:'setting',
