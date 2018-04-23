@@ -3,13 +3,13 @@
 		<settingHeader :title="title"></settingHeader>
 		<div class="nav">
 			<div class="area" @click="onArea()">
-				<p>区域<i class="iconfont" :class="areaShang ? 'icon-shixinjiantou' : 'icon-shixinjiantou-copy'"></i></p>
+				<p>{{region}}<i class="iconfont" :class="areaShang ? 'icon-shixinjiantou' : 'icon-shixinjiantou-copy'"></i></p>
 			</div>
 			<div class="type" @click="onType()">
-				<p>类型<i class="iconfont" :class="typeShang ? 'icon-shixinjiantou' : 'icon-shixinjiantou-copy'"></i></p>
+				<p>{{indType}}<i class="iconfont" :class="typeShang ? 'icon-shixinjiantou' : 'icon-shixinjiantou-copy'"></i></p>
 			</div>
 			<div class="price" @click="onPrice()">
-				<p>价格<i class="iconfont" :class="priceShang ? 'icon-shixinjiantou' : 'icon-shixinjiantou-copy'"></i></p>
+				<p>{{priceType}}<i class="iconfont" :class="priceShang ? 'icon-shixinjiantou' : 'icon-shixinjiantou-copy'"></i></p>
 			</div>
 			
 		</div>
@@ -105,7 +105,7 @@
 	        	<div class="list">
 	        		<ul class="clearfix">
 	        			<!-- <li class="first">不限</li> -->
-	        			<li v-for="(item,index) in adList" @click="toggle(index,event)" :class="{current:index==active}">{{item}}</li>
+	        			<li v-for="(item,index) in adList" @click="toggle(index,$event)" :class="{current:index==active}">{{item}}</li>
 	        		</ul>
 	        	</div>
 	        </div>
@@ -116,16 +116,16 @@
     	<div v-transfer-dom class="aa">
 	      <popup v-model="typeShang" position="top">
 	        	<group>
-			    	<radio title="title" :options="options"></radio>
+			    	<radio title="title" :options="options" value="002" @on-change="changeType"></radio>
 			  	</group>
 	      </popup>
 	    </div>
 
 	    <!-- 价格/距离框 -->
 	    <div v-transfer-dom class="aa">
-	      <popup v-model="typeShang" position="top">
+	      <popup v-model="priceShang" position="top">
 	        	<group>
-			    	<radio title="title" :options="opPrice"></radio>
+			    	<radio title="title" :options="opPrice" value="01" @on-change="changePrice"></radio>
 			  	</group>
 	      </popup>
 	    </div>
@@ -143,24 +143,44 @@
 			return {
 				title: '门店列表',
 				data:[],
+				region:'区域',//区域
+				indType:'类型',//类型
+				priceType:'价格',//价格
 				areaShang:false,//区域箭头
-				typeShang:true,//类型箭头
+				typeShang:false,//类型箭头
 				priceShang:false,//价格箭头
 				active:1,//列表选中样式（地址）
-				options:['美容院','老人院','月子中心'],//类型筛选
-				/*options2:[
+				// options:['美容院','老人院','月子中心'],//类型筛选
+				// value3:true,
+				options:[
 					{
-						icon: 'http://dn-placeholder.qbox.me/110x110/FF2D55/000',
-  						key: '001',
-  						value: 'radio001'
+						// icon: 'http://dn-placeholder.qbox.me/110x110/FF2D55/000',
+  						key: '001', //input的value值
+  						value: '美容院'
 					},
 					{
-						icon: 'http://dn-placeholder.qbox.me/110x110/FF2D55/000',
+						// icon: 'http://dn-placeholder.qbox.me/110x110/FF2D55/000',
   						key: '002',
-  						value: 'radio002'
+  						value: '老人院'
+					},
+					{
+						// icon: 'http://dn-placeholder.qbox.me/110x110/FF2D55/000',
+  						key: '003',
+  						value: '月子中心'
 					}
-				]*/
-				
+				],
+				opPrice:[
+					/*'离我最近',
+					'价格最低'*/
+					{
+						key:'01',
+						value:'离我最近'
+					},
+					{
+						key:'02',
+						value:'价格最低'
+					}
+				],
 
 				adList:[
 					"不限", 
@@ -168,7 +188,8 @@
 					"番禺区",
 					"天河区",
 					"越秀区"
-				]
+				],
+
 			}
 		},
 		components:{
@@ -217,8 +238,31 @@
 					this.priceShang=true
 				}
 			},
-			toggle(index){
+			toggle(index,e){
 				this.active=index;
+				console.log(e.target.innerText)
+				var _this=this;
+				setTimeout(function(){
+					_this.region = e.target.innerText;
+					_this.areaShang=false;
+				},50);
+			},
+			changePrice(value,label){//改变价格，距离
+				var _this=this;
+				console.log(value,label);
+				setTimeout(function(){
+					_this.priceType=label;
+					_this.priceShang=false;
+				},50);
+			},
+			changeType(value,label){//改变类型
+
+				var _this=this;
+				setTimeout(function(){
+					_this.indType=label;
+					_this.typeShang=false;
+
+				},50);
 			}
 		}
 	}
