@@ -13,20 +13,22 @@
 				<button-tab-item selected @on-item-click="lookCard()">全部</button-tab-item>
 				<button-tab-item @on-item-click="lookCard()"><span class="vux-reddot-s">我的</span></button-tab-item>
 			</button-tab>-->
-				<span class="shaix" @click.active="showDrawer">筛选<img src="../../../../static/member/shaixuanIcon.png" alt="" /></span>
+				<span class="shaix" @click.active="showRight">筛选<img src="../../../../static/member/shaixuanIcon.png" alt="" /></span>
 			</div>
 			<swiper v-model="cardLook" height="800px" :show-dots="false">
 				<swiper-item>
 					<scroller lock-x height="-80" @on-scroll-bottom="onScrollBottom" ref="scrollerBottom" :scroll-bottom-offst="200">
 						<div class="box2">
 							<div class="card-list">
-								<div class="card-ltem" :class="[item.type ==1 ? 'b-bg':'y-bg']" v-for="(item,index) in cardList">
-									<div class="card-f">{{item.store}}</div>
-									<div class="card-m">
-										<div>{{item.tip}}</div>
-										<div>{{item.typename}}</div>
+								<router-link to="/member/card/detail">
+									<div class="card-ltem" :class="[item.type ==1 ? 'b-bg':'y-bg']" v-for="(item,index) in cardList">
+										<div class="card-f">{{item.store}}</div>
+										<div class="card-m">
+											<div style="text-align: right;">{{item.tip}}</div>
+											<div>{{item.typename}}</div>
+										</div>
 									</div>
-								</div>
+								</router-link>
 							</div>
 							<load-more tip="loading" v-if="onFetching"></load-more>
 						</div>
@@ -53,7 +55,7 @@
 					</scroller>
 				</swiper-item>
 			</swiper>
-			<div class="drawer-box" @click.active="showDrawer">
+			<!--<div class="drawer-box" @click.active="showDrawer">
 				<masker :fullscreen="drawerShow">
 					<div slot="content">
 						<drawer :show.sync="drawerShow" show-mode="overlay" placement="right" :drawer-style="{'background-color':'white', width: '200px',height:'100vh'}">
@@ -63,6 +65,30 @@
 						</drawer>
 					</div>
 				</masker>
+			</div>-->
+			<!--筛选菜单栏-->
+			<div v-transfer-dom>
+				<popup v-model="show9" position="top">
+					<div class="position-vertical-demo">
+						<!--<card>
+							<div slot="content" class="card-demo-flex oneClass">
+								<div class="vux-1px-r" :class="{'typeActive':typeIndex === 0}" @click="typeChange(0)">
+									<div><i class="iconfont icon-riqi shijian"></i>时间</div>
+								</div>
+								<div class="vux-1px-r" :class="{'typeActive':typeIndex === 1}" @click="typeChange(1)">
+									分类
+									<img class="ren-jt" :class="[jtFalg?'xia':'top']" v-if="typeIndex == 1" src="../../../assets/images/member/jiantou.png" alt="" />
+									<img class="gyay-jt" v-else src="../../../assets/images/member/jiantou1.png" alt="" />
+								</div>
+							</div>
+						</card>-->
+						<div class="twoClass">
+							<div class="type-item" v-for="(item,index) in twoClass">
+								<span :class="{'twoActive':twoIndex == index}" @click="twoChange(index,item)">{{item}}</span>
+							</div>
+						</div>
+					</div>
+				</popup>
 			</div>
 		</div>
 	</div>
@@ -79,7 +105,11 @@
 				drawerShow: false,
 				typeItemActive: 0,
 				cardLook: 0,
-				typeList: ['所有优惠券', '体验券', '满减券', '折扣券'],
+				twoClass: ['所有优惠券', '体验券', '满减券', '折扣券'],
+				show9: false,
+				data1: '',
+				twoIndex: '',
+				typeText: '全部',
 				cardList: [{
 						store: '威伐光番禺门店',
 						type: '1',
@@ -159,6 +189,14 @@
 			lookCard(index) {
 				console.log(this.cardLook)
 				this.cardLook = index
+			},
+			showRight() {
+				this.show9 = true
+			},
+			twoChange(index, item) {
+				this.twoIndex = index
+				this.typeText = item
+				this.show9 = false
 			}
 		},
 		components: {
@@ -178,6 +216,69 @@
 </script>
 
 <style lang="less" scoped>
+	.position-vertical-demo {
+		background: white;
+		.card-demo-flex {
+			display: flex;
+			align-items: center;
+		}
+		.oneClass {
+			height: 0.9rem;
+			.shijian {
+				margin-right: 0.1rem;
+			}
+			img {
+				width: 0.3rem;
+				vertical-align: middle;
+			}
+			.xia {
+				transform: rotate(180deg);
+				transition: all 0.2s linear;
+			}
+			.top {
+				transform: rotate(0deg);
+				transition: all 0.2s linear;
+			}
+		}
+		.twoClass {
+			display: flex;
+			flex-wrap: wrap;
+			padding: 0.2rem 0;
+			.type-item {
+				width: 25%;
+				padding: 0.08rem 0.25rem;
+				text-align: center;
+				box-sizing: border-box;
+				span {
+					display: inline-block;
+					width: 100%;
+					height: 0.5rem;
+					line-height: 0.5rem;
+					background: #eaeaea;
+					border-radius: 2px;
+					font-size: 0.20rem;
+				}
+				.twoActive {
+					background: #10aeff;
+					color: white;
+				}
+			}
+		}
+		.typeActive {
+			color: red;
+		}
+		.card-padding {
+			padding: 15px;
+		}
+		.card-demo-flex>div {
+			flex: 1;
+			text-align: center;
+		}
+		.card-demo-flex span {
+			font-size: 0.2rem;
+		}
+	}
+	
 	.card-box {
 		padding: 0 15px;
 		position: relative;
@@ -187,7 +288,7 @@
 			align-items: center;
 			.tab {
 				flex: 1;
-				.vux-tab-item{
+				.vux-tab-item {
 					background: transparent!important;
 				}
 			}
@@ -269,6 +370,7 @@
 			}
 		}
 	}
+	
 	.card-box:before {
 		content: " ";
 		position: absolute;

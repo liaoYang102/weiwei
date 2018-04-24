@@ -13,7 +13,7 @@ import 'mint-ui/lib/style.css'
 import './style/global.css'
 import 'swiper/dist/css/swiper.css'
 import './config/wy_rem'
-import { Group, DatetimeRange, Cell, Tab, TabItem, CellBox, XHeader, Scroller, LoadMore,TransferDom, Confirm, Popup, Toast, Swiper, InlineXNumber, CheckIcon, CellFormPreview, XSwitch, XNumber, Badge, Previewer, Timeline, TimelineItem, Rater, XTextarea } from 'vux'
+import { Group, DatetimeRange, Cell, Tab, TabItem, CellBox, XHeader, Scroller, LoadMore, TransferDom, Confirm, Popup, Toast, Swiper, InlineXNumber, CheckIcon, CellFormPreview, XSwitch, XNumber, Badge, Previewer, Timeline, TimelineItem, Rater, XTextarea } from 'vux'
 import FastClick from 'fastclick'
 
 FastClick.attach(document.body);
@@ -103,7 +103,6 @@ methods.forEach(key => {
 router.beforeEach(function(to, from, next) {
 	const toIndex = history.getItem(to.path)
 	const fromIndex = history.getItem(from.path)
-	console.log(history)
 	if(toIndex) {
 		if(!fromIndex || parseInt(toIndex, 10) > parseInt(fromIndex, 10) || (toIndex === '0' && fromIndex === '0')) {
 			store.commit('UPDATE_DIRECTION', {

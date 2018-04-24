@@ -3,6 +3,7 @@
 		<settingHeader :title="title"></settingHeader>
 		<div class="banlanceLog-box">
 			<div class="top">
+				<div class="gary">{{typeText}}</div>
 				<div @click="showRight"><i class="iconfont icon-caidan"></i>筛选</div>
 			</div>
 			<div class="wrapper" ref="wrapper">
@@ -29,7 +30,7 @@
 			<div v-transfer-dom>
 				<popup v-model="show9" position="top">
 					<div class="position-vertical-demo">
-						<card>
+						<!--<card>
 							<div slot="content" class="card-demo-flex oneClass">
 								<div class="vux-1px-r" :class="{'typeActive':typeIndex === 0}" @click="typeChange(0)">
 									<div><i class="iconfont icon-riqi shijian"></i>时间</div>
@@ -40,10 +41,10 @@
 									<img class="gyay-jt" v-else src="../../../assets/images/member/jiantou1.png" alt="" />
 								</div>
 							</div>
-						</card>
-						<div class="twoClass slideInDown animated" v-if="shaixuanFalg && typeIndex == 1">
+						</card>-->
+						<div class="twoClass">
 							<div class="type-item" v-for="(item,index) in twoClass">
-								<span :class="{'twoActive':twoIndex == index}" @click="twoChange(index)">{{item}}</span>
+								<span :class="{'twoActive':twoIndex == index}" @click="twoChange(index,item)">{{item}}</span>
 							</div>
 						</div>
 					</div>
@@ -64,11 +65,12 @@
 				show: false,
 				show9: false,
 				data1: '',
-				twoClass: ['全部', '充值', '消费', '返现', '推荐返现'],
-				typeIndex: '',
-				twoIndex: 0,
-				jtFalg: false,
-				shaixuanFalg: false
+				twoClass: ['全部', '充值', '消费', '返现', '推荐返现', '时间'],
+				//				typeIndex: '',
+				twoIndex: '',
+				typeText: '全部',
+				//				jtFalg: false,
+				//				shaixuanFalg: false
 			}
 		},
 		created() {
@@ -109,19 +111,21 @@
 			showRight() {
 				this.show9 = true
 			},
-			typeChange(index) {
-				this.typeIndex = index
-				if(this.typeIndex == 1) {
-					this.shaixuanFalg = !this.shaixuanFalg
-					if(this.shaixuanFalg == true) {
-						this.jtFalg = false
-					} else {
-						this.jtFalg = true
-					}
-				}
-			},
-			twoChange(index) {
+			//			typeChange(index) {
+			//				this.typeIndex = index
+			//				if(this.typeIndex == 1) {
+			//					this.shaixuanFalg = !this.shaixuanFalg
+			//					if(this.shaixuanFalg == true) {
+			//						this.jtFalg = false
+			//					} else {
+			//						this.jtFalg = true
+			//					}
+			//				}
+			//			},
+			twoChange(index, item) {
 				this.twoIndex = index
+				this.typeText = item
+				this.show9 = false
 			}
 		},
 		components: {
@@ -132,9 +136,9 @@
 			Card
 		},
 		watch: {
-			typeIndex() {
+			twoIndex() {
 				var _this = this
-				if(this.typeIndex == 0) {
+				if(this.twoIndex == 5) {
 					this.jtFalg = false
 					this.shaixuanFalg = false
 					this.$vux.datetime.show({
@@ -149,9 +153,7 @@
 						onShow() {
 							console.log('plugin show')
 						},
-						onHide() {
-							_this.typeIndex = '' //重置
-						}
+						onHide() {}
 					})
 
 				}
@@ -200,12 +202,15 @@
 					width: 100%;
 					height: 0.5rem;
 					line-height: 0.5rem;
-					border: 1px solid #eaeaea;
+					/*border: 1px solid #eaeaea;*/
+					background: #eaeaea;
 					border-radius: 2px;
 					font-size: 0.20rem;
 				}
 				.twoActive {
-					border: 1px solid #ff00006b!important;
+					/*border: 1px solid #ff00006b!important;*/
+					background: #10aeff;
+					color: white;
 				}
 			}
 		}
@@ -239,6 +244,10 @@
 			background: #eaeaea99;
 			.iconfont {
 				margin-right: 0.1rem;
+			}
+			.gary {
+				font-size: 0.32rem;
+				color: #888;
 			}
 		}
 		/*.top:after {
