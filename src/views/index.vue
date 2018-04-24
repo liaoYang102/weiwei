@@ -1,4 +1,5 @@
 <template>
+
 	<section id="appIndex">
 		<div class="wrapper" ref="wrapper">
 			<div class="content">
@@ -87,12 +88,14 @@
 						
 					</ul>
 		        </div>
+
 			</div>
 		</div>
 	</section>
 </template>
 
 <script>
+
 import { swiper, swiperSlide } from 'vue-awesome-swiper'
 export default{
 	data(){
@@ -127,10 +130,12 @@ export default{
 		swiperSlide
 	},
 }
+
 </script>
 
 
 <style lang="less" scoped>
+
 	#appIndex{
 		/*banner顶部*/
 		.swiperTop{
@@ -377,4 +382,5 @@ export default{
 			
 		}
 	}
+
 </style>

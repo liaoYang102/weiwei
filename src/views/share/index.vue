@@ -13,25 +13,25 @@
 		        	<img :src="item">
 		        </swiper-slide>
 		        <div class="swiper-pagination" slot="pagination"></div>
-		      </swiper>
+		     </swiper>
 		</div>
 		<div class="wrap">
 			<div class="nav clearfix">
 				<ul class="fl">
 					<a href="javascript:;">
-						<li>
+						<li @click="showProduct">
 							<img src="../../assets/images/share/product.png">
 							<p>产品介绍</p>
 						</li>
 					</a>
 					<a href="javascript:;">
-						<li>
+						<li @click="treatment">
 							<img src="../../assets/images/share/question.png">
-							<p>使用指引</p>
+							<p>治疗指导</p>
 						</li>
 					</a>
 					<a href="javascript:;">
-						<li>
+						<li @click="join">
 							<img src="../../assets/images/share/join.png">
 							<p>招商加盟</p>
 						</li>
@@ -260,6 +260,17 @@
 			XButton,
 			swiper,
 			swiperSlide
+		},
+		methods:{
+			showProduct(){
+				this.$router.push('/share/pintroduce')
+			},
+			join(){
+				this.$router.push('/share/join')
+			},
+			treatment(){
+				this.$router.push('/share/treatment')
+			}
 		}
 	}
 </script>
@@ -279,6 +290,9 @@
 	.info-box {
 		.content-head{
 			position: relative;
+			width: 100%;
+			height: 3.4rem;
+			/*border: 1px solid #333;*/
 			img{
 				height: 100%;
 				width: 100%;
@@ -303,8 +317,9 @@
 			background: #fff;
 			border-radius: 10px 10px 0 0;
 			position: relative;
-			top: -.2rem;
+			top: -.15rem;
 			width: 100%;
+			z-index: 4;
 			.nav{
 				ul{
 					width: 100%;
@@ -537,6 +552,7 @@
 								}
 								.num{
 									float: right;
+									margin-top: .1rem;
 								}
 							}
 							.zhekou{

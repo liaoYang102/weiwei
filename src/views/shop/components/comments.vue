@@ -165,6 +165,7 @@ li{
 	overflow: hidden;
 }
 .tab-title{
+	background: #FFF;
 	padding-left: 0.19rem;
 	height: 0.99rem;
 	border-bottom: 0.01rem solid #D8DFF0;

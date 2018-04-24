@@ -1,4 +1,5 @@
 <template>
+
 	<section class="search">
 		<settingHeader :title="title"></settingHeader>
 		<search style="border-top: 0.01rem solid #D8DFF0;"></search>
@@ -15,6 +16,19 @@
 
 <script>
 	import settingHeader from '../../components/setting_header'
+
+	export default{
+		data(){
+			return{
+				title:"店铺内搜索"
+			}
+		},
+		components:{
+			settingHeader
+		}
+	}
+</script>
+
 	import search from './components/search'
 	export default{
 		data(){
@@ -68,3 +82,4 @@
 }
 	
 </style>
+

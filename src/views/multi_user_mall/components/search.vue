@@ -3,7 +3,7 @@
 		<div class="searchBox">
 			<div class="search">
 				<img src="../../../assets/images/shop/search.png">
-				<input type="search" placeholder="搜索商品">
+				<input type="search" placeholder="搜索商品" @click="goSearch">
 			</div>
 		</div>
 	</div>
@@ -21,6 +21,10 @@
 			
 		},
 		methods:{
+
+			goSearch(){
+				this.$router.push({ path: '/'})
+			},
 		}
 	}
 </script>

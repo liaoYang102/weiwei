@@ -106,6 +106,7 @@ const shopModule = [
 	},
 	{
 	  path: '/multi_user_mall/search',//多用户商城搜索页
+
 	  name: 'search',
 	  component: search
 	},
