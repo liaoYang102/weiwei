@@ -104,7 +104,8 @@ const shopModule = [
 	  component: multi_user_mall
 	},
 	{
-	  path: '/multi_user_mall/search',//多用户商城首页
+	  path: '/multi_user_mall/search',//多用户商城搜索页
+
 	  name: 'search',
 	  component: search
 	}
