@@ -41,6 +41,7 @@
 	    			    	</div>
 	    		    	</div>
 		    		    <loading v-if="show"></loading>
+		    		    <noMore v-if="showNomore"></noMore>
 		        	</div>
 				</div>
 			</div>
@@ -53,6 +54,7 @@ import settingHeader from '../../components/setting_header'
 import Swiper from './components/swiper'
 import BScroll from 'better-scroll'
 import Loading from '../../components/loading'
+import noMore from '../../components/noMore'
 	export default {
 		data() {
 			return {
@@ -72,11 +74,12 @@ import Loading from '../../components/loading'
 					{ goodsname: 'Vivo X21 屏幕指纹版全面', price: '3598', oldprice: '4355'},
 					{ goodsname: 'Vivo X21 屏幕指纹版全面', price: '3598', oldprice: '4355'},
 					{ goodsname: 'Vivo X21 屏幕指纹版全面', price: '3598', oldprice: '4355'}
-				]
+				],
+				showNomore: false
 			}
 		},
 		components:{
-			settingHeader,Swiper,Loading
+			settingHeader,Swiper,Loading,noMore
 		},
 		mounted:function(){
 		    this.modifyTheme()

@@ -1,10 +1,6 @@
 <template>
 	<section class="multi_user_mall">
 		<div class="top">
-			<div class="search">
-				<input type="search" placeholder="搜索商品">
-			</div>
-
 			<div class="store">
 				<img src="../../assets/images/shop/UNIQLO.png">
 				<p class="name">
@@ -14,6 +10,8 @@
 				<div class="btn">关注</div>
 			</div>
 		</div>
+
+		<search @click.native="goSearch"></search>
 
 		<div class="tab">
 			<tab :line-width="3" :scroll-threshold="4">
@@ -43,7 +41,6 @@
 			    </tab-item>
 		    </tab>
 		</div>
-		
 
 	    <img src="../../assets/images/shop/theme_banner0.png" style="width: 100%">
 
@@ -63,6 +60,7 @@
 
 <script>
 	import mallTheme from './components/mall_theme'
+	import search from './components/search'
 	export default {
 		data(){
 			return {
@@ -71,7 +69,8 @@
 			}
 		},
 		components:{
-			mallTheme
+			mallTheme,
+			search
 		},
 		mounted() {
 			
@@ -80,6 +79,9 @@
 			onItemClick(){
 
 			},
+			goSearch(){
+				this.$router.push({ name: 'search'})
+			}
 		}
 	}
 </script>
@@ -94,31 +96,8 @@
 	width: 100%;
 	height: 2.36rem;
 	background: url('../../assets/images/shop/scorebg.png') no-repeat;
-	.search{
-		width: 63.5%;
-		margin: 0 auto 0.42rem auto;
-		padding-top: 0.14rem;
-		input{
-			width: 100%;
-			background:rgba(245,246,250,0.4);
-			border-radius: 0.3rem; 
-			color: #fff;
-			padding: 0.15rem 0.1rem 0.12rem 0.71rem;
-		}
-		input::-webkit-input-placeholder {
-		    color: #fff !important; // WebKit browsers 
-		}
-		input:-moz-placeholder {
-		    color: #fff !important; // Mozilla Firefox 4 to 18 
-		}
-		input::-moz-placeholder {
-		    color: #fff !important; //Mozilla Firefox 19+ /
-		}
-		input:-ms-input-placeholder {
-		    color: #fff !important; //Internet Explorer 10+ */
-		}
-	}
 	.store{
+		padding-top: 1.15rem;
 		img{
 			width: 16.5%;
 			float: left;
