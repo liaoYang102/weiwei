@@ -14,5 +14,10 @@
 </script>
 
 <style lang="less">
-
+.loading .weui-loadmore{
+  margin-top: 0.1rem;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 0.5rem;
+}
 </style>
