@@ -22,7 +22,9 @@
 			</div>
 		</scroller>
 		<div class="add-btn-box">
-			<x-button class="add-btn" :gradients="['#1D62F0', '#19D5FD']">添加地址</x-button>
+			<router-link to="/member/index">
+				<x-button class="add-btn" :gradients="['#1D62F0', '#19D5FD']">添加地址</x-button>
+			</router-link>
 		</div>
 	</div>
 </template>
@@ -89,7 +91,12 @@
 	.content {
 		background: #F5F6FA;
 	}
-	.box2{padding-bottom: 180px;padding-top: 0.21rem;}
+	
+	.box2 {
+		padding-bottom: 180px;
+		padding-top: 0.21rem;
+	}
+	
 	.list {
 		box-sizing: border-box;
 		margin-bottom: 0.21rem;
@@ -126,12 +133,13 @@
 			span {
 				display: inline-block;
 				width: 1rem;
-				height: 0.55rem;
-				line-height: 0.6rem;
+				height: 0.5rem;
+				line-height: 0.5rem;
 				border: 1px solid #90A2C7;
 				border-radius: 4px;
 				margin-left: 0.18rem;
 				text-align: center;
+				box-sizing: border-box;
 			}
 		}
 	}
@@ -143,7 +151,7 @@
 		position: fixed;
 		bottom: 0%;
 		box-sizing: border-box;
-		.add-btn{
+		.add-btn {
 			height: 100%;
 			font-size: 0.32rem;
 			border-radius: 0;

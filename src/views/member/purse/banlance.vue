@@ -86,7 +86,7 @@
 			font-family: PingFangSC-Regular;
 			font-size: 0.28rem;
 			color: #464646;
-			height: 0.8rem;
+			height: 0.6rem;
 			.vux-label {
 				color: #90A2C7;
 			}

@@ -61,6 +61,7 @@
 			    		<div class="clear"></div>
 			    	</div>
 			    	<loading v-if="show"></loading>
+			    	<noMore v-if="showNomore"></noMore>
 	    	    </div>
 			</div>
 		</div>
@@ -75,9 +76,10 @@ import theme from './components/theme'
 import swiper from './components/swiper'
 import BScroll from 'better-scroll'
 import Loading from '../../components/loading'
+import noMore from '../../components/noMore'
 export default {
 	components: {
-		settingHeader,navindex,scorenav,theme,swiper,Loading
+		settingHeader,navindex,scorenav,theme,swiper,Loading,noMore
 	},
 	data(){
 		return {
@@ -99,6 +101,7 @@ export default {
 			],
 			test: true,
 			show:false,
+			showNomore: false,
 			shopList: [
 				{ shopname: 'VANS Old Skool lite黑白超轻鞋款 黑色38.5', money: '3598', score: '266', tag: '满减'},
 				{ shopname: 'VANS Old Skool lite黑白超轻鞋款 黑色38.5', money: '3598', score: '266', tag: '新品'},

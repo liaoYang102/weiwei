@@ -2,7 +2,7 @@
 	<div class="content">
 		<settingHeader :title="title"></settingHeader>
 		<div class="couponTab">
-			<tab class="tab" :line-width="2" active-color="#397df8">
+			<tab class="tab" :line-width="2" active-color="#397df8" custom-bar-width="0.56rem">
 				<tab-item v-for="(item,index) in couponType" :selected="typeActive == index" @on-item-click="onItemClick(index)">{{item}}</tab-item>
 			</tab>
 			<i id="menu" class="iconfont" @click.active="showDrawer"></i>
@@ -24,7 +24,7 @@
 		<div class="drawer-box" @click.active="showDrawer">
 			<masker :fullscreen="drawerShow">
 				<div slot="content">
-					<drawer :show.sync="drawerShow" show-mode="overlay" placement="right" :drawer-style="{'background-color':'white', width: '200px',height:'100vh'}">
+					<drawer :show.sync="drawerShow" show-mode="overlay" placement="right" :drawer-style="{'background-color':'white', width: '200px',height:'100vh',marginTop:'46px'}">
 						<div slot="drawer">
 							<div class="typeItem" :class="{'typeItem-bg':typeItemActive == index}" v-for="(item,index) in typeList" @click.active="type(index)">{{item}}</div>
 						</div>
@@ -183,7 +183,7 @@
 					span {
 						font-size: 0.2rem;
 						vertical-align: middle;
-						line-height: 0.6rem;
+						line-height: 0.7rem;
 					}
 				}
 			}

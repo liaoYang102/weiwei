@@ -25,13 +25,13 @@
 						</li>
 					</a>
 					<a href="javascript:;">
-						<li>
+						<li @click="treatment">
 							<img src="../../assets/images/share/question.png">
-							<p>使用指引</p>
+							<p>治疗指导</p>
 						</li>
 					</a>
 					<a href="javascript:;">
-						<li>
+						<li @click="join">
 							<img src="../../assets/images/share/join.png">
 							<p>招商加盟</p>
 						</li>
@@ -264,6 +264,12 @@
 		methods:{
 			showProduct(){
 				this.$router.push('/share/pintroduce')
+			},
+			join(){
+				this.$router.push('/share/join')
+			},
+			treatment(){
+				this.$router.push('/share/treatment')
 			}
 		}
 	}

@@ -35,7 +35,7 @@
 					</div>
 				</div> -->
 
-				<scroller lock-x height="-110">
+				<scroller lock-x height="-100">
 					<div class="box2">
 						<div class="title">热门品牌</div>
 						<div class="type-box clearfix">

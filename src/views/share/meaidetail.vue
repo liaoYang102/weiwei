@@ -44,12 +44,13 @@
 		            	<div class="clear"></div>
 		            </div>
 		            <loading v-if="showLoading"></loading>
+		            <noMore v-if="showNomore"></noMore>
 		        </div>
 
 				<!-- <Comments style=""></Comments> -->
 			</div>
 			<div class="footer">
-				<div class="btn">
+				<div class="btn" @click="saoma">
 					<span>开启设备</span>
 				</div>
 			</div>
@@ -68,6 +69,7 @@
 	import Loading from '../../components/loading'
 	import {swiper,swiperSlide } from 'vue-awesome-swiper'
 	import 'swiper/dist/css/swiper.css'
+	import noMore from '../../components/noMore'
 
 	export default {
 		data() {
@@ -117,7 +119,8 @@
 			          let rect = thumbnail.getBoundingClientRect()
 			          return {x: rect.left, y: rect.top + pageYScroll, w: rect.width}
 			        }
-		      	}
+		      	},
+		      	showNomore: false
 			}
 				
 		},
@@ -125,7 +128,8 @@
 			settingHeader,
 			Loading,
 			swiper,
-			swiperSlide
+			swiperSlide,
+			noMore
 		},
 		/*created(){
 
@@ -173,11 +177,15 @@
 				var _this = this
 				setTimeout(function(){
 					_this.showLoading = false;
+					_this.showNomore = true;
 					// let obj = [{ shopname: 'VANS Old Skool lite黑白超轻鞋款 黑色38.5', money: '3598', score: '266'},
 					// { shopname: 'VANS Old Skool lite黑白超轻鞋款 黑色38.5', money: '3598', score: '266'}];
 					// _this.shopList = _this.shopList.concat(obj);
 					// console.log(_this.shopList);
 				},3000)
+			},
+			saoma(){//扫码
+				this.$router.push('/share/comfirmOrder');
 			}
 			
 		}

@@ -83,6 +83,7 @@ store.registerModule('vux', {
 })
 
 const history = window.sessionStorage;
+history.clear()
 let historyCount = history.getItem('count') * 1;
 
 let isPush = false
@@ -103,16 +104,13 @@ methods.forEach(key => {
 router.beforeEach(function(to, from, next) {
 	const toIndex = history.getItem(to.path)
 	const fromIndex = history.getItem(from.path)
-
+	console.log(history)
 	if(toIndex) {
 		if(!fromIndex || parseInt(toIndex, 10) > parseInt(fromIndex, 10) || (toIndex === '0' && fromIndex === '0')) {
 			store.commit('UPDATE_DIRECTION', {
 				direction: 'forward'
 			})
 		} else {
-			store.commit('UPDATE_DIRECTION', {
-				direction: 'reverse'
-			})
 			// 判断是否是ios左滑返回
 			if(!isPush && (Date.now() - endTime) < 377) {
 				store.commit('UPDATE_DIRECTION', {
