@@ -1,6 +1,6 @@
 <template>
 	<section class="shop_details">
-		<x-header :left-options="{backText: '',preventGoBack:'true'}" title="slot:overwrite-title" @on-click-back="goBack" style="background:#fff;" class="tab_shop">
+		<x-header :left-options="{backText: '',preventGoBack: true}" title="slot:overwrite-title" style="background:#fff;" @on-click-back="changeBack" class="tab_shop">
 		    <div class="overwrite-title-demo" slot="overwrite-title">
 		        <tab bar-position="bottom" custom-bar-width="40px">	
 			      <tab-item :selected="tabTitle == '商品'" @on-item-click="onShop">商品</tab-item>
@@ -167,9 +167,10 @@ export default {
 	    goConfirm(){
 	    	this.$router.push({ path: '/shop/confirm'})
 	    },
-	    goBack() {
-			this.$store.state.page.show = true
-			window.history.go(-1)
+	    changeBack(){
+			this.$store.state.vux.back= false;
+			console.log('111',this.$store.state.vux.back)
+			this.$router.go(-1)
 		}
 	}
 }	

@@ -1,7 +1,7 @@
 <template>
+	<div v-if='show' style="height:46px;" class="settingHeader">
+		<x-header :left-options="{backText: '',preventGoBack: true}" style="background:#fff;" class="header" @on-click-back="changeBack">{{ title }}</x-header>
 
-	<div v-if='show' style="height:46px;" class="app-header">
-		<x-header :left-options="{backText: ''}" style="background:#fff;" class="header">{{ title }}</x-header>
 	</div>
 </template>
 
@@ -27,20 +27,25 @@
 			title: String //定义传值的类型<br>    }
 		},
 		methods: {
+			changeBack(){
+				this.$store.state.vux.back= false;
+				console.log('111',this.$store.state.vux.back)
+				this.$router.go(-1)
+			}
 		}
 	}
 </script>
 <style lang='less'>
-	#app .app-header .vux-header .vux-header-left .left-arrow:before {
+	#app .settingHeader .app-header .vux-header .vux-header-left .left-arrow:before {
 		border: 1px solid #222;
 		border-width: 1px 0 0 1px;
 	}
 	
-	#app .app-header .vux-header .vux-header-title {
+	#app .settingHeader .app-header .vux-header .vux-header-title {
 		color: #333;
 	}
 	
-	#app .app-header .header {
+	#app .settingHeader .app-header .header {
 		position: fixed!important;
 		top: 0;
 		left: 0;

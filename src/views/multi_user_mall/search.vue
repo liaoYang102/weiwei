@@ -1,5 +1,4 @@
 <template>
-
 	<section class="search">
 		<settingHeader :title="title"></settingHeader>
 		<search style="border-top: 0.01rem solid #D8DFF0;"></search>
