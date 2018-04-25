@@ -13,7 +13,7 @@
 			</div>
 		</div>
 
-		<scroller lock-x height='-160' @on-scroll-bottom="onScrollBottom" ref="scrollerBottom" style="background-color:#fff">
+		<scroller lock-x height='-1rem' @on-scroll-bottom="onScrollBottom" ref="scrollerBottom" style="background-color:#fff">
 			<div class="box">
 				<router-link to="/member/score/detail">
 					<div class="log-box" v-for="(item, index) in logList" :key="index">

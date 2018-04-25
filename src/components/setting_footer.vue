@@ -1,0 +1,130 @@
+<template>
+	<div class="footer-box" v-if='$store.state.page.footerFalg'>
+		<div class="b-top">
+			<router-link v-for="(item,index) in barList" :to="item.url">
+				<div :class="{'factive':factivei == index}" @click="fchange(index)">
+					<img class="icon" :class="{'zqm':index == 2}" :src="[factivei == index?item.iconIn:item.icon]" />
+					<p v-if="index != 2">{{item.title}}</p>
+				</div>
+			</router-link>
+		</div>
+	</div>
+</template>
+
+<script>
+	export default {
+		data() {
+			return {
+				factivei: 0,
+
+			}
+		},
+		created() {
+
+		},
+		props: {
+			show: Boolean,
+			barList: {
+				default: function() {
+					return [{
+							icon: '../../static/images/e.png',
+							iconIn: '../../static/images/e_active.png',
+							title: 'e消费',
+							url: '/index'
+						},
+						{
+							icon: '../../static/images/xysc.png',
+							iconIn: '../../static/images/xysc_active.png',
+							title: '信用商城',
+							url: ''
+						},
+						{
+							icon: '../../static/images/zqm.png',
+							iconIn: '../../static/images/zqm.png',
+							url: ''
+						},
+						{
+							icon: '../../static/images/cylm.png',
+							iconIn: '../../static/images/cylm_active.png',
+							title: '产业联盟',
+							url: ''
+						},
+						{
+							icon: '../../static/images/glzx.png',
+							iconIn: '../../static/images/glzx_active.png',
+							title: '管理中心',
+							url: '/member/index'
+						},
+					]
+				}
+			}
+		},
+		methods: {
+			fchange(index) {
+				console.log(index)
+				this.factivei = index
+			}
+		}
+	}
+</script>
+<style lang='less'>
+	.footer-box {
+		position: fixed;
+		bottom: 0;
+		width: 100%;
+		z-index: 9999;
+		background: rgba(255, 255, 255, 1);
+		font-family: PingFangSC-Regular;
+		.b-top {
+			height: 1rem;
+			position: relative;
+			display: flex;
+			justify-content: space-between;
+			a {
+				flex: 1;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				div {
+					display: flex;
+					align-items: center;
+					flex-direction: column;
+					justify-content: center;
+					color: rgba(144, 162, 199, 1);
+					img {
+						width: 0.5rem;
+						height: 0.5rem;
+					}
+					p {
+						font-size: 0.2rem;
+					}
+					.zqm {
+						width: 1rem;
+						height: 1rem;
+					}
+				}
+				.factive {
+					color: rgba(56, 137, 255, 1)!important;
+					img {
+						fill: rgba(56, 137, 255, 1)!important;
+					}
+				}
+			}
+		}
+		.b-top:before {
+			content: " ";
+			position: absolute;
+			left: 0;
+			top: 0;
+			right: 0;
+			height: 1px;
+			border-top: 1px solid #979797;
+			color: #D9D9D9;
+			-webkit-transform-origin: 0 0;
+			transform-origin: 0 0;
+			-webkit-transform: scaleY(0.5);
+			transform: scaleY(0.5);
+			left: 0px;
+		}
+	}
+</style>

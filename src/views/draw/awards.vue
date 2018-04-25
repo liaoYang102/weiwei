@@ -19,23 +19,35 @@
 			<div class="photos">
 				<h4>上传身份证</h4>
 				<div class="positive left">
-					<img src="../../assets/images/draw/lottery_awards3.png" alt="">
-					<input id="file1" name="file" type="file" class="file" accept="image/*" />
+					<img src="../../../static/images/lottery_awards3.png" alt="" >
+					<input id="file1" name="file" type="file" class="file" accept="image/*" @change="pic1($event)"/>
 					<p class="text_positive">身份证正面</p>
+
+					<div class="bigPic" v-show="[images1? images1: null]">
+						<img :src="images1">
+					</div>
 				</div>
+
 				<div class="negative left">
-					<img src="../../assets/images/draw/lottery_awards3.png" alt="">
-					<input id="file2" name="file" type="file" class="file" accept="image/*" />
+					<img :src="[images2? images2 : '../../../static/images/lottery_awards3.png']" alt="">
+					<input id="file2" name="file" type="file" class="file" accept="image/*" @change="pic2($event)" />
 					<p class="text_negative">身份证反面</p>
+
+					<div class="bigPic" v-show="[images2? images2: null]">
+						<img :src="images2">
+					</div>
 				</div>
 				<div class="clear"></div>
 			</div>
 			<div class="photos">
 				<h4>上传生活照</h4>
 				<div class="life left">
-					<img src="../../assets/images/draw/lottery_awards3.png" alt="">
-					<input id="file3" name="file" type="file" class="file" accept="image/*" />
+					<img :src="[images3? images3 : '../../../static/images/lottery_awards3.png']" alt="">
+					<input id="file3" name="file" type="file" class="file" accept="image/*" @change="pic3($event)"/>
 					<p class="text_positive">生活照</p>
+					<div class="bigPic" v-show="[images3? images3: null]">
+						<img :src="images3">
+					</div>
 				</div>
 				<div class="clear"></div>
 			</div>
@@ -47,7 +59,7 @@
 			    </group>
 
 			    <div class="radio">
-			    	<input type="radio" name="field_name" value="'value">
+			    	<input type="radio" name="">
 			    	
 			    	<span class="read">
 			    		阅读<span class="preposition">《易消费中奖协议》</span>
@@ -72,8 +84,49 @@
 	  data(){
 	  	return {
 	  		title: '我要领奖',
-	  		demo2: true
+	  		demo2: true,
+	  		images1: null,
+	  		images2: null,
+	  		images3: null
 	  	}
+	  },
+	  methods:{
+	  	pic1(e){
+			var _this = this
+			var reader = new FileReader();
+			var file = e.target.files[0];
+			reader.readAsDataURL(file); // 读出 base64
+			reader.onloadend = function(e) {
+				// 图片的 base64 格式, 可以直接当成 img 的 src 属性值        
+				var dataURL = reader.result;
+				_this.images1 = e.target.result
+				console.log("1111", _this.images1)
+			};
+	  	},
+  	  	pic2(e){
+  			var _this = this
+  			var reader = new FileReader();
+  			var file = e.target.files[0];
+  			reader.readAsDataURL(file); // 读出 base64
+  			reader.onloadend = function(e) {
+  				// 图片的 base64 格式, 可以直接当成 img 的 src 属性值        
+  				var dataURL = reader.result;
+  				_this.images2 = e.target.result
+  				console.log("222", _this.images2)
+  			};
+  	  	},
+  	  	pic3(e){
+  			var _this = this
+  			var reader = new FileReader();
+  			var file = e.target.files[0];
+  			reader.readAsDataURL(file); // 读出 base64
+  			reader.onloadend = function(e) {
+  				// 图片的 base64 格式, 可以直接当成 img 的 src 属性值        
+  				var dataURL = reader.result;
+  				_this.images3 = e.target.result
+  				console.log("333", _this.images3)
+  			};
+  	  	}
 	  }
 	}
 </script>
@@ -142,7 +195,25 @@
 		       left:0;
 		       top:0;
 		       opacity: 0;
+		       z-index: 999;
 		     }
+        	.bigPic{
+        		position: absolute;
+     			width: 95%;
+     			height: 95%;
+     			left: 50%;
+     			top: 50%;
+     			transform: translate(-50%,-50%);
+     			overflow: hidden;
+	     		img{
+	     			width: 100%;
+	     			height: auto;
+	     			position: absolute;
+	     			left: 50%;
+	     			top: 50%;
+	     			transform: translate(-50%,-50%);
+	     		}
+	     	}
 		   }
 		   .negative {
 		    width: 45%;
@@ -164,7 +235,25 @@
 		       left:0;
 		       top:0;
 		       opacity: 0;
+		       z-index: 999;
 		     }
+         	.bigPic{
+         		position: absolute;
+      			width: 95%;
+      			height: 95%;
+      			left: 50%;
+     			top: 50%;
+     			transform: translate(-50%,-50%);
+      			overflow: hidden;
+ 	     		img{
+ 	     			width: 100%;
+ 	     			height: auto;
+ 	     			position: absolute;
+ 	     			left: 50%;
+ 	     			top: 50%;
+ 	     			transform: translate(-50%,-50%);
+ 	     		}
+ 	     	}
 		   }
 		   .life {
 		     width: 45%;
@@ -187,15 +276,37 @@
 		       left:0;
 		       top:0;
 		       opacity: 0;
+		       z-index: 999;
 		     }
+         	.bigPic{
+         		position: absolute;
+      			width: 95%;
+      			height: 95%;
+      			left: 50%;
+     			top: 50%;
+     			transform: translate(-50%,-50%);
+      			overflow: hidden;
+ 	     		img{
+ 	     			width: 100%;
+ 	     			height: auto;
+ 	     			position: absolute;
+ 	     			left: 50%;
+ 	     			top: 50%;
+ 	     			transform: translate(-50%,-50%);
+ 	     		}
+ 	     	}
 		   }
 		   .preposition {
 		     color: #1a5ae2;
 		   }
 		   .radio{
-		   	margin-top: 0.15rem;
+		   		margin-top: 0.15rem;
+		   		input{
+		   			vertical-align: middle;
+		   		}
 		   }
 		}
+		
 	}
 
 	.foot {

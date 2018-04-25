@@ -15,8 +15,15 @@ import 'swiper/dist/css/swiper.css'
 import './config/wy_rem'
 import { Group, DatetimeRange, Cell, Tab, TabItem, CellBox, XHeader, Scroller, LoadMore,TransferDom, Confirm, Popup, Toast, Swiper, InlineXNumber, CheckIcon, CellFormPreview, XSwitch, XNumber, Badge, Previewer, Timeline, TimelineItem, Rater, XTextarea,Radio } from 'vux'
 import FastClick from 'fastclick'
+import VueVideoPlayer from 'vue-video-player'
+import 'video.js/dist/video-js.css'
 
 FastClick.attach(document.body);
+
+Vue.use(VueVideoPlayer, /* {
+  options: global default options,
+  events: global videojs events
+} */)
 
 Vue.use(Vuex)
 Vue.use(Mint)
@@ -69,7 +76,8 @@ Vue.use(BusPlugin)
 const shouldUseTransition = !/transition=none/.test(location.href)
 store.registerModule('vux', {
 	state: {
-		direction: shouldUseTransition ? 'forward' : ''
+		direction: shouldUseTransition ? 'forward' : '',
+		back:true
 	},
 	mutations: {
 		UPDATE_DIRECTION(state, payload) {
@@ -100,26 +108,57 @@ methods.forEach(key => {
 		method.apply(null, args)
 	}
 })
-
+ window.addEventListener("popstate", function(e) {
+// 新版中使用wx.closeWindow()方法
+    store.state.vux.back = false;
+}, false);
 router.beforeEach(function(to, from, next) {
 	const toIndex = history.getItem(to.path)
 	const fromIndex = history.getItem(from.path)
-	console.log(history)
 	if(toIndex) {
 		if(!fromIndex || parseInt(toIndex, 10) > parseInt(fromIndex, 10) || (toIndex === '0' && fromIndex === '0')) {
-			store.commit('UPDATE_DIRECTION', {
-				direction: 'forward'
-			})
+			if(!isPush && (Date.now() - endTime) < 377) {
+				store.commit('UPDATE_DIRECTION', {
+					direction: ''
+				})
+				store.state.vux.back = true;
+			} else{
+				store.commit('UPDATE_DIRECTION', {
+					direction: 'forward'
+				})
+			}
+			if(!store.state.vux.back){
+				store.commit('UPDATE_DIRECTION', {
+					direction: 'reverse'
+				})
+				store.state.vux.back = true;
+			}
 		} else {
 			// 判断是否是ios左滑返回
 			if(!isPush && (Date.now() - endTime) < 377) {
 				store.commit('UPDATE_DIRECTION', {
 					direction: ''
-				})
+				});
+				store.state.vux.back = true;
 			} else {
-				store.commit('UPDATE_DIRECTION', {
-					direction: 'reverse'
-				})
+				if(store.state.vux.back){
+					store.commit('UPDATE_DIRECTION', {
+						direction: 'forward'
+					});
+					// var ua = navigator.userAgent.toLowerCase();
+					// var isWeixin = ua.indexOf('micromessenger') != -1;
+					// if (isWeixin) { 
+					// 	store.commit('UPDATE_DIRECTION', {
+					// 		direction: 'reverse'
+					// 	});
+					// }
+				}else{
+					alert(123);
+					store.commit('UPDATE_DIRECTION', {
+						direction: 'reverse'
+					})
+					store.state.vux.back = true;
+				}
 			}
 		}
 	} else {

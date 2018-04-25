@@ -15,7 +15,7 @@
                     <ul class="commodity">
                     	<group v-for="(item,index) in drawList">
 							<cell is-link>
-								<li>
+								<li @click="goPastevents">
 									<img src="../../assets/images/draw/lottery_index7.png" alt="" class="left">
 									<img src="../../assets/images/draw/lottery_index8.png" alt="" class="arrow">
 									<div class="left container">
@@ -111,6 +111,9 @@
 					_this.showNomore = true;
 				},3000)
 			},
+			goPastevents(){
+				this.$router.push({ path: '/draw/pastevents'})
+			}
 		}
 	}
 </script>

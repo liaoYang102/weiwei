@@ -9,7 +9,11 @@
 					<span>商品评价</span>
 				</div>
 				<div class="star">
+<<<<<<< HEAD
+					<rater v-model="data" :max="5" active-color="#336FFF" class="center"></rater>
+=======
 					<rater v-model="data" :max="5" active-color="#336FFF" class="center" :margin="5"></rater>
+>>>>>>> 24945a06fbb31645aed0b7e65df1d0731a12f444
 				</div>
 			</div>
 
@@ -34,11 +38,19 @@
 			</div>
 			<div class="store-star">
 				<div class="s-text">商品打分</div>
+<<<<<<< HEAD
+				<rater v-model="data2" :max="5" active-color="#336FFF" class="s-star"></rater>
+			</div>
+			<div class="store-star">
+				<div class="s-text">物流服务</div>
+				<rater v-model="data3" :max="5" active-color="#336FFF" class="s-star"></rater>
+=======
 				<rater v-model="data2" :max="5" active-color="#336FFF" class="s-star" :margin="5"></rater>
 			</div>
 			<div class="store-star">
 				<div class="s-text">物流服务</div>
 				<rater v-model="data3" :max="5" active-color="#336FFF" class="s-star" :margin="5"></rater>
+>>>>>>> 24945a06fbb31645aed0b7e65df1d0731a12f444
 			</div>
 		</div>
 

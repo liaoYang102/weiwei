@@ -24,17 +24,6 @@
 		},
 		props: {
 			title: String //定义传值的类型<br>    }
-		},
-		mounted: function(){
-			this.change();
-		},
-		methods: {
-			change(){
-				if(this.title == '中奖记录'){
-					let h = document.getElementById('header');
-					h.style.color='#000;'
-				}
-			}
 		}
 	}
 </script>

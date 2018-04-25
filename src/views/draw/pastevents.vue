@@ -1,8 +1,20 @@
 <template>
 	<section style="background: #fff;">
 
-
 		<settingHeader :title="title"></settingHeader>
+
+		<div class="item">
+			<div class="periodVideo">{{ periodVideo}}</div>
+	        <div class="player">
+	          	<video-player  class="video-player vjs-custom-skin"
+                     ref="videoPlayer"
+                     :playsinline="true"
+                     :options="playerOptions"
+                     @play="onPlayerPlay($event)"
+                     @pause="onPlayerPause($event)">
+      			</video-player>
+	        </div>
+	     </div>
 		<div class="show-down">
 			<group>
 				<cell is-link :border-intent="false" :arrow-direction="showContent ? 'up' : 'down'" @click.native="showContent = !showContent">
@@ -33,8 +45,8 @@
 
 		<div class="period">
 			<swiper :options="swiperOption1">
-		       	<swiper-slide v-for="(item,index) in data3" @click="periodActive(index)">
-		       		<div class="btn0" :class="{'btn-active':act3==index}">
+		       	<swiper-slide v-for="(item,index) in data3" >
+		       		<div class="btn0" :class="{'btn-active':act3==index}" @click="periodActive(index)">
                        {{item}}
                     </div>
 		       	</swiper-slide>
@@ -45,8 +57,8 @@
         <div class="win-person">
             <div class="wz-period">中奖人员</div>
 			<swiper :options="swiperOption2">
-		       	<swiper-slide v-for="(item,index) in data1" @click="actice(index)" >
-		       		 <div class="wz-award" :class="{'wz-award-active':act1==index}">{{item}}</div>
+		       	<swiper-slide v-for="(item,index) in data1">
+		       		<div class="wz-award" :class="{'wz-award-active':act1==index}" @click="actice(index)">{{item}}</div>
 		       	</swiper-slide>
 		    </swiper>
         </div>
@@ -57,22 +69,25 @@
 				<div class="web">
 				    <!--数据列表-->
 				    <ul>
-				        <li v-for="(item,index) in personList">
-				            <div class="personlist">
-				                <div class="img-left">
-				                    <img src="../../assets/images/draw/photo0.png" alt="">
-				                </div>
+                    	<group v-for="(item,index) in personList">
+							<cell>
+								<li>
+									<div class="personlist">
+						                <div class="img-left">
+						                    <img src="../../assets/images/draw/photo0.png" alt="">
+						                </div>
 
-				                <div class="user-right">
-				                    <div>手机用户</div>
-				                    <div class="wz-red fr">{{item.bonus}}</div>
-				                    <span class="wz-red">{{item.phoneNum}}</span>
-				                    <div class="wz-gray2">{{item.speech}}</div>
-				                </div>
-				            </div>
-				        </li>
-
-
+						                <div class="user-right">
+						                    <div>手机用户</div>
+						                    <div class="wz-red fr">{{item.bonus}}</div>
+						                    <span class="wz-red">{{item.phoneNum}}</span>
+						                    <div class="wz-gray2">{{item.speech}}</div>
+						                </div>
+						            </div>
+						            <div class="clear"></div>
+			                    </li>
+							</cell>
+						</group>
 				    </ul>
 				    <loading v-if="show"></loading>
                     <noMore v-if="showNomore"></noMore>    
@@ -80,13 +95,11 @@
 			</div>
 		</div>
 
-        
-		
-		
 	</section>
 </template>
 
 <script>
+	import videojs from 'video.js'
 	import BScroll from 'better-scroll'
 	import {swiper,swiperSlide } from 'vue-awesome-swiper'
 	import settingHeader from '../../components/setting_header'
@@ -98,6 +111,25 @@
 		},
 		data(){
 			return {
+				periodVideo: '第1235期 抽奖视频',
+				playerOptions: {
+		          height: '200',
+		          controlBar: {
+				    volumePanel: {
+				      inline: false
+				    }
+				  },
+		          width: document.documentElement.clientWidth,
+		          muted: true,
+		          language: 'zh-CN',
+		          controls: true,
+		          loop: true,
+		          sources: [{
+		            type: "video/mp4",
+		            src: "http://vjs.zencdn.net/v/oceans.mp4",
+		          }],
+		          poster: "../../../static/images/video.jpg",
+		        },
 				show:false,
 				showNomore: false,
 				swiperOption: {
@@ -136,20 +168,49 @@
     	          	slidesPerView: 'auto',
                   	spaceBetween: 10
     	        },
-
 			}
 		},
+	    computed: {
+	      player() {
+	        return this.$refs.videoPlayer.player
+	      }
+	    },
 		mounted() {
+			setTimeout(() => {
+				// let videoId= ;
+				document.getElementById('vjs_video_3').className = 'video-js vjs_video_3-dimensions vjs-controls-enabled vjs-v6 vjs-has-started vjs-paused vjs-user-active';
+			  console.log('dynamic change options', this.player)
+			}, 0)
 			this.InitScroll()
 		},
 		methods:{
 			periodActive(index) {
+				console.log('[][', index)
                 this.act3 = index
             },
             //中奖人员 一等奖
             actice(index) {
                 this.act1 = index
             },
+            playerReadied(player) {
+		        const track = new videojs.AudioTrack({
+		          id: 'my-spanish-audio-track',
+		          kind: 'translation',
+		          label: 'Spanish',
+		          language: 'zh-CN'
+		        })
+		        player.audioTracks().addTrack(track)
+		        const audioTrackList = player.audioTracks()
+		        audioTrackList.addEventListener('change', function() {
+		          for (let i = 0; i < audioTrackList.length; i++) {
+		            const track = audioTrackList[i]
+		            if (track.enabled) {
+		              videojs.log(track.label)
+		              return
+		            }
+		          }
+		        })
+		    },
             InitScroll() {
     			this.$nextTick(() => {
     				if(!this.scroll) {
@@ -186,6 +247,7 @@
 </script>
 
 <style lang="less" scoped>
+
 	.wrapper {
 		height: 8rem;
 		overflow: hidden;
@@ -198,36 +260,19 @@
 		    width: 2rem;
 		    margin-left: 0.3rem;
 		}
-	}
-	.period{
-		.swiper-slide {
-		    width: 1.1rem;
-		    margin-left: 0.3rem;
+		.award0{
+		    width: 1.92rem;
+		    height: 2.5rem;
+		    background: url('../../assets/images/draw/pink.jpg') no-repeat;
+		    background-size: contain;
+		    text-align: center;
+		    img {
+    		    width: 35%;
+    		    margin-top: 0.1rem;
+    		    margin-bottom: 0.05rem;
+    		}
+    		
 		}
-	}
-	.win-person{
-		.swiper-slide {
-		    width: 1.3rem;
-		    margin-left: 0.3rem;
-		}
-	} 
-	.wz1{
-	    color: #dd2c40;
-	    font-size: 0.4rem;
-	    display: block;
-	    margin: 0.1rem 0 0.2rem 0;
-	}
-	.award0{
-	    width: 1.92rem;
-	    height: 2.5rem;
-	    background: url('../../assets/images/draw/pink.jpg') no-repeat;
-	    background-size: contain;
-	    text-align: center;
-	}
-	.award0 img {
-	    width: 35%;
-	    margin-top: 0.1rem;
-	    margin-bottom: 0.05rem;
 	}
 	.wz-red{
 	    color: #dd2c40;
@@ -244,63 +289,85 @@
 	    font-size: 0.2rem;
 	    line-height: 0.1rem;
 	}
+	.period{
+		border-bottom: 0.01rem solid #ccc;
+		padding-bottom: 0.2rem;
+		.swiper-slide {
+		    width: 0.9rem;
+		    margin-left: 0.2rem;
+		}
+		/* 抽奖期数*/
+		.btn0{
+		    width: 0.8rem;
+		    height: 0.8rem;
+		    border-radius: 50%;
+		    border: solid 1px #e7e7e7;
+		    text-align: center;
+		    color: #e7e7e7;
+		    font-size: 0.3rem;
+		    line-height: 0.8rem;
+		}
+		.btn-active{
+		    border: solid 1px #dd2c40;
+		    color: #dd2c40;
+		}
+	}
 	.wz-period{
 	    margin: 0.3rem 0 0.2rem 0.2rem;
 	    font-size: 0.32rem;
 	}
-	/* 抽奖期数*/
-	.btn0{
-	    width: 0.8rem;
-	    height: 0.8rem;
-	    border-radius: 50%;
-	    border: solid 1px #e7e7e7;
-	    text-align: center;
-	    color: #e7e7e7;
-	    font-size: 0.3rem;
-	    line-height: 0.75rem;
-	}
-	.btn-active{
-	    border: solid 1px #dd2c40;
+	.win-person{
+		border-bottom: 0.01rem solid #ccc;
+		.swiper-slide {
+		    width: 1.3rem;
+		    height: 0.75rem;
+		    margin-left: 0.3rem;
+		}
+		.wz-award{
+		    width: 0.9rem;
+		    height: 0.7rem;
+		    color: black;
+		    font-size: 0.3rem;
+		    line-height: 0.7rem;
+		}
+		.wz-award-active{
+		    color: #dd2c40;
+		    border-bottom: solid 0.05rem #dd2c40;
+		}
+	} 
+	.wz1{
 	    color: #dd2c40;
-	}
-	.wz-award{
-	    width: 0.9rem;
-	    height: 0.7rem;
-	    color: black;
-	    font-size: 0.3rem;
-	    line-height: 0.7rem;
-	}
-	.wz-award-active{
-	    color: #dd2c40;
-	    border-bottom: solid 0.05rem #dd2c40;
+	    font-size: 0.4rem;
+	    display: block;
+	    margin: 0.1rem 0 0.2rem 0;
 	}
 
-	/*中奖人员*/
 	.personlist{
 	   width: 100%;
-	   overflow: hidden;
+	   /*overflow: hidden;*/
+	   .img-left {
+	       width: 23%;
+	       float: left;
+	       margin: 0.1rem 0.1rem 0.1rem 0;
+	       img{
+	       	    width: 100%;
+	       	}
+	   }
+	   .user-right{
+	       margin: 0.3rem 0 0 0;
+	       color: #000;
+	       .wz-gray2{
+	           color:#a9a3a4;
+	           font-size: 0.3rem;
+	           margin-top: 0.1rem;
+	       }
+	   }
 	}
-	.img-left {
-	    width: 23%;
-	    float: left;
-	    margin: 0.1rem 0.1rem 0.1rem 0;
-	}
-	.img-left img{
-	    width: 100%;
-	}
-	.user-right{
-	    margin: 0.3rem 0 0 0
-	}
+	
 	.fr{
 	    float: right;
 	    margin-right: 0.15rem;
 	}
-	.wz-gray2{
-	    color:#a9a3a4;
-	    font-size: 0.3rem;
-	    margin-top: 0.1rem;
-	}
-
 </style>
 
 <style lang="less">
@@ -333,4 +400,70 @@
 			border-bottom: none !important;
 		}
 	}
-</style>
+	.item{
+	    width: 100%;
+	    position: relative;
+	    .periodVideo{
+	    	background-color: rgba(0,0,0,0);
+	    	height: 0.5rem;
+	    	color: #bdbdbd;
+	    	position: absolute;
+	    	top: 0;
+	    	left: 0.1rem;
+	    	z-index: 222;
+	    	font-size: 0.3rem;
+	    	line-height: 0.5rem;
+	    }
+	    .player{
+	    	width: 100%;
+	    	.vjs_video_2786-dimensions{
+	    		width: 7.5rem !important;
+	    	}
+	    	.vjs-paused .vjs-big-play-button,.vjs-paused.vjs-has-started .vjs-big-play-button {
+	    		display: block !important;
+	    	}
+	    	.video-js .vjs-big-play-button, .vjs-playing.vjs-has-started .vjs-big-play-button {
+	    		display: none !important;
+	    		border-radius: 50% !important;
+	    		border-radius: 50% !important;
+	    		-moz-border-radius: 50% !important;
+	    		-webkit-border-radius: 50% !important;
+	    	}
+	    	.video-js .vjs-big-play-button {
+	    		height: 1rem !important;
+	    		width: 1rem !important;
+	    		top: 35% !important;
+	    		left: 43% !important;
+	    	}
+	    }
+	}
+	.web{
+		.weui-cells{
+			margin-top: 0 !important;
+		}
+		.vux-no-group-title{
+			margin-top: 0 !important;
+		}
+		.weui-cells:before{
+			border-top: none !important;
+		}
+		.weui-cell{
+			padding: 0 !important;
+		}
+		.weui-cell__ft{
+			text-align: left !important;
+			width: 93% !important;
+			margin-right: 0.3rem !important;
+			border-bottom: solid 0.01rem #ccc !important;
+		}
+		.weui-cells:after{
+			border-bottom: none !important;
+		}
+		.weui-cell_access .weui-cell__ft:after{
+			width: 0.2rem !important;
+			height: 0.2rem !important;
+			right: 0.2rem !important;
+			border-width: 0.04rem 0.04rem 0 0 !important;
+		}
+	}	
+</style>	
