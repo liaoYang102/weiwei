@@ -10,7 +10,11 @@
 		<div class="couponList">
 			<div class="rollOne bgImgThree">
 				<a href="#">
-					<div class="left"><span>购物券1</span> <span class="mt20">(仅限威伐光门店使用)</span> <span>2018.03.29-2018.04.08</span></div>
+					<div class="left">
+						<p>购物券1</p>
+						<p class="mt20">(仅限威伐光门店使用)</p>
+						<p>2018.03.29-2018.04.08</p>
+					</div>
 				</a>
 				<div class="right fontOne"><span>满减券</span>
 					<a href="#">
@@ -124,33 +128,25 @@
 			margin: 0 auto;
 			.left {
 				width: 60%;
-				height: 1.9rem;
+				height: 100%;
 				margin-left: 0.15rem;
-				display: inline-block;
 				position: relative;
-				span:nth-of-type(1) {
-					position: absolute;
-					top: 0.25rem;
-					left: 0.3rem;
+				display: flex;
+				flex-direction: column;
+				justify-content: space-between;
+				padding: 0.4rem 0.2rem;
+				box-sizing: border-box;
+				p:nth-of-type(1) {
 					font-size: 0.3rem;
 					color: #ffffff;
 				}
-				span:nth-of-type(2) {
-					position: absolute;
-					top: 0.55rem;
+				p:nth-of-type(2) {
 					font-size: 0.2rem;
-					left: 0.3rem;
 					color: #ffffff;
-					margin-top: 0.3rem;
 				}
-				span:nth-of-type(3) {
-					position: absolute;
-					bottom: 0.2rem;
-					left: 0.3rem;
-					width: 100%;
+				p:nth-of-type(3) {
 					font-size: 0.2rem;
 					color: #ffffff;
-					text-align: left;
 					padding-right: 0.2rem;
 				}
 			}

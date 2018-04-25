@@ -98,7 +98,7 @@
 					},
 				],
 				ptList: [{
-						img: '../../../../static/member/traval.png',
+						img: '../../../../static/member/hairdressing1.png',
 						name: '美容平台'
 					},
 					{
@@ -106,11 +106,11 @@
 						name: '旅游平台'
 					},
 					{
-						img: '../../../../static/member/traval.png',
+						img: '../../../../static/member/shopping1.png',
 						name: '餐饮平台'
 					},
 					{
-						img: '../../../../static/member/traval.png',
+						img: '../../../../static/member/catering.png',
 						name: '购物平台'
 					},
 				]
@@ -204,7 +204,7 @@
 						flex-direction: column;
 						width: 1.91rem;
 						height: 1.1rem;
-						background: #d5d5d6;
+						background: #e5e5e5;
 						border-radius: 3px;
 						color: #8b45139c;
 						p:nth-child(1) {

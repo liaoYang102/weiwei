@@ -5,7 +5,7 @@
 			<group gutter="0">
 				<cell class="list-item user-img" title="头像编辑" is-link>
 					<div class="up-box">
-						<img class="tx" :src="images" />
+						<img class="tx" :src="images?images:'../../../../static/images/mrtx.png'" />
 						<input class="upinput" type="file" name="" id="" value="" @change="up" ref="input" />
 						<!--<uploader :max="varmax" :showHeader="false" :images="images" :handle-click="false" :autoUpload="false" :capture="camera" :show-header="false" :readonly="true" :upload-url="uploadUrl" name="img" :params="params" size="small" @preview="previewMethod" :upload-image="up" @add-image="addImageMethod" @remove-image="removeImageMethod">
 						</uploader>-->
@@ -16,7 +16,7 @@
 				</cell>
 				<cell class="list-item" title="我的二维码" is-link link="/member/purse/qrcode"><img class="code" src="../../../assets/images/member/code@2x.png" /></cell>
 				<cell class="list-item user-address" title="地址管理" is-link link="/member/address/index"></cell>
-				<cell class="list-item" title="实名认证" :value="sureName" is-link></cell>
+				<cell class="list-item" title="实名认证" :value="sureName" is-link link='/member/setting/real'></cell>
 			</group>
 		</div>
 	</div>
@@ -52,6 +52,7 @@
 				var _this = this
 				var reader = new FileReader();
 				var file = e.target.files[0];
+				console.log(file)
 				reader.readAsDataURL(file); // 读出 base64
 				reader.onloadend = function(e) {
 					// 图片的 base64 格式, 可以直接当成 img 的 src 属性值        

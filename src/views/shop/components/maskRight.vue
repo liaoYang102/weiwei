@@ -89,7 +89,6 @@ export default {
     		let list = this.logolist;
     		let length= list.length;
     		let obj = { name: 'logo'};
-			
 			if(length == 9) {
 				for(let i =0; i<6;i++){
 					list.push(obj)
@@ -121,6 +120,9 @@ export default {
 .wrapper {
 	height: 11.78rem;
 	overflow: hidden;
+	.content{
+		height: calc(100% + 15);
+	}
 }
 .maskright .vux-popup-dialog{
 	background: #fff;

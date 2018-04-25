@@ -10,14 +10,7 @@
 			<div class="clear"></div>
 		</div>
 		<div class="center">
-			<!-- <div class="personInfo">
-				<p class="basic">收件人：张生 185****6787</p>
-				<p class="address">收货地址：<span class='fr'>广东佛山市南海区桂城街道佛平路与宝翠路交界万科金色领域界</span><div class="clear"></div></p>
-			</div> -->
 			<div class="money">
-				<!-- <p class="realPayment">
-					实付款：<span class="totalMoney">100积分+20.00元</span>
-				</p> -->
 				<div class="btn">
 					<div class="redeemDetails" @click="goMyorder">兑换中心</div>
 					<div class="exchangeCenter" @click="goComment">评价商品</div>

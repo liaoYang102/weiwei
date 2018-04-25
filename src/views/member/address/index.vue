@@ -75,6 +75,9 @@
 				}]
 			}
 		},
+		created(){
+			this.$store.state.page.footerFalg = false
+		},
 		methods: {
 
 		},

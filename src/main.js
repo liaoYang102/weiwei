@@ -109,12 +109,16 @@ router.beforeEach(function(to, from, next) {
 				direction: 'forward'
 			})
 		} else {
+
 			// 判断是否是ios左滑返回
 			if(!isPush && (Date.now() - endTime) < 377) {
 				store.commit('UPDATE_DIRECTION', {
 					direction: ''
 				})
 			} else {
+				if(to.path) {
+					console.log(to.path)
+				}
 				store.commit('UPDATE_DIRECTION', {
 					direction: 'reverse'
 				})

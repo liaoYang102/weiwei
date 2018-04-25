@@ -1,7 +1,7 @@
 <template>
 	<section style="height: 100%;">
 		<div class="wrapper" ref="wrapper">
-			<div class="content">
+			<div class="content" style="padding-top:46px;">
 				<div class="tab-title">商品评价</div>
 
 		        <div class="commentsList">
@@ -29,6 +29,7 @@
 		            	<div class="clear"></div>
 		            </div>
 		            <loading v-if="showLoading"></loading>
+		            <noMore v-if="showNomore"></noMore>
 		        </div>
 			</div>
 		</div>
@@ -41,17 +42,19 @@
 <script>
 import BScroll from 'better-scroll'
 import Loading from '../../../components/loading'
+import noMore from '../../../components/noMore'
 import {swiper,swiperSlide } from 'vue-awesome-swiper'
 import 'swiper/dist/css/swiper.css'
 export default {
 	components: {
-		Loading,swiper,swiperSlide
+		Loading,swiper,swiperSlide,noMore
 	},
 
 	data(){
 		return {
 			test: true,
 			showLoading: false,
+			showNomore: false,
 			swiperOption: {
 				autoHeight: true,
 	          slidesPerView: 'auto',
@@ -137,10 +140,11 @@ export default {
 			var _this = this
 			setTimeout(function(){
 				_this.showLoading = false;
+				_this.showNomore = true;
 				// let obj = [{ shopname: 'VANS Old Skool lite黑白超轻鞋款 黑色38.5', money: '3598', score: '266'},
 				// { shopname: 'VANS Old Skool lite黑白超轻鞋款 黑色38.5', money: '3598', score: '266'}];
 				// _this.shopList = _this.shopList.concat(obj);
-				console.log(_this.shopList);
+				// console.log(_this.shopList);
 			},3000)
 		}
 	}
@@ -169,11 +173,13 @@ li{
 	color: #1A2642;
 }
 .commentsList{
+	padding-bottom: 1rem;
 	.list{
 		.li-comments{
 			padding-left: 0.19rem;
 			padding-top: 0.29rem;
 			padding-bottom: 0.25rem;
+			border-bottom: 0.01rem solid #D8DFF0;
 			.comments_author{
 				margin-bottom: 0.23rem;
 				img{

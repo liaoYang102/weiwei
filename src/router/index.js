@@ -1,12 +1,11 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import anni from '@/router/modules/anni'
-import qiang from '@/router/modules/qiang'
-import liaoy from '@/router/modules/liaoy'
-import inygl from  '@/router/modules/inygl'
+import shopModule from '@/router/modules/shop'
+import memberModule from '@/router/modules/member'
+import inygl from '@/router/modules/inygl'
 
 Vue.use(Router)
-var all=anni.concat(qiang,liaoy,inygl);
+var all=shopModule.concat(memberModule,inygl);
 
 export default new Router({
   routes: all

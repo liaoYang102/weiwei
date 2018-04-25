@@ -117,14 +117,17 @@ export default {
 	},
 	data(){
 		return {
-			tabTitle: '商品'
+			tabTitle: '商品',
+			obj:null
 		}
 	},
 	create: function(){
-
+		
 	},
-	mounted: function(){
-		this.onRouter()
+	mounted(){
+		this.onRouter();
+		let top = parseInt(document.getElementById('details').offsetTop);
+		this.obj = top -40;
 	},
 	methods: {
 		showMask: function() {
@@ -143,10 +146,12 @@ export default {
 		},
 		scrollTo(){
 			this.tabTitle = '详情';
+			var that = this;
 			window.setTimeout(function(){
-				let obj = document.getElementById('details')
-				window.scrollTo(0, obj.offsetTop-46);
-			},0)
+				let top = parseInt(document.getElementById('details').offsetTop);
+				that.obj = top - 40;
+				window.scrollTo(0,that.obj);
+			},200)
 		},
 		onItemClick () {
 			this.tabTitle = '评价';
@@ -312,7 +317,7 @@ export default {
 		.details_text{
 			width: 100%;
 			border-top: 0.01rem solid #eeeeee;
-			padding-bottom: 0.54rem;
+			padding-bottom: 1.2rem;
 			.text{
 				width: 77%;
 				margin: 0 auto;
