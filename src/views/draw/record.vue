@@ -1,8 +1,8 @@
 <template>
 	<section style="background: #eaeaea;height: 100%;">
-		<drawHeader :title="title"></drawHeader>
+		<drawHeader :title="title" id="changeBlock"></drawHeader>
 
-		<div class="top">
+		<div class="record">
             <div class="btn-large">
                	<button-tab>
 	               	<button-tab-item selected @on-item-click="showNumber">参与记录</button-tab-item>
@@ -11,6 +11,7 @@
             </div>
         </div>
 
+        <!-- tab切换 -->
         <div class="time-line" v-if="tab2 == true">
         	<timeline>
         		<timeline-item v-for="(i, index) in count" :key="index">
@@ -27,63 +28,78 @@
         </div>
 
         <div class="recordList" v-else>
-            <ul class="commodity">
-            	<group v-for="(item,index) in 5" class="li-item">
-					<cell>
-						<li>
-							<p class="title">
-								国美番禺店大抽奖
-								<span class="frequency right">1234期</span>
-							</p>
-							<p class="time">开奖时间:2018-03-20 20:00:00</p>
-							<p class="bonusPool">
-								奖金池：<span class="num">￥800.00</span> 奖金池：600.00人
-							</p>
-                        </li>
-					</cell>
-					<cell is-link>
-						<p class="status" @click="showDialogs">
-							<span class="wait" v-if="status == 0">等待开奖</span>
-							<span class="start" v-else-if="status == 1">已开奖</span>
-							<span class="win" v-else>已中奖</span>
-							<span class="right mui-icon mui-icon-forward"></span>
-						</p>
-					</cell>
-				</group>
-            </ul>
-            <loading v-if="show"></loading>
-            <noMore v-if="showNomore"></noMore>
-        </div>
+        	<div v-if="recordList.length==0">
+        		<div class="noRecord">
+        			<div class="img">
+        				<img src="../../assets/images/draw/norecord.png">
+        				<p>暂无中奖记录</p>
+        				<p class="text">买单报电机号赢<span>5000元</span>大奖</p>
+        			</div>
+        		</div>
+        	</div>
 
-        <div v-transfer-dom class="dialog">
-          	<x-dialog v-model="showDialog" hide-on-blur="true">
-          		<div class="dia_top">
-					<p class="title">番禺国美店周末幸运大抽奖</p>
-					<span class="dia_times">第12356期</span>
-					<p class="text">买单报手机号<span class="text_red">5000元</span>大奖</p>
-					<p class="vivid">恭喜您中了一等级5000元</p>
-					<router-link to="/draw/awards">
-						<div class="btn">
-							立即领奖
-						</div>
-					</router-link>
+        	<div v-else>
+        		<div class="wrapper" ref="wrapper">
+					<div class="content">
+			            <ul class="commodity">
+			            	<group v-for="(item,index) in recordList" class="li-item">
+								<cell>
+									<li>
+										<p class="title">
+											{{ item.drawTtile}}
+											<span class="frequency right">{{ item.period}}期</span>
+										</p>
+										<p class="time">开奖时间:{{ item.awardDate}}</p>
+										<p class="bonusPool">
+											奖金池：<span class="num">￥{{ item.money}}</span> 奖金池：{{ item.num}}人
+										</p>
+			                        </li>
+								</cell>
+								<cell is-link>
+									<p class="status" @click="showDialogs">
+										<span class="wait" v-if="status == 0">等待开奖</span>
+										<span class="start" v-else-if="status == 1">已开奖</span>
+										<span class="win" v-else>已中奖</span>
+										<span class="right mui-icon mui-icon-forward"></span>
+									</p>
+								</cell>
+							</group>
+			            </ul>
+			            <loading v-if="show"></loading>
+			            <noMore v-if="showNomore"></noMore>
+					</div>
 				</div>
-				<div  class="time-line" style="height: 5rem;">
-					<timeline>
-						<timeline-item v-for="(item, index) in process" :key="index">
-							<h4 :class="[index === 1 ? 'recent' : '']" style="text-align: left">
-								<span>{{ item.step}}</span>
-							</h4>
-							<p :class="[index === 1 ? 'recent' : '']" class='bottom'  style="text-align: left;color: #000">
-								<span>{{ item.date}}</span>
-							</p>
-						</timeline-item>
-					</timeline>
-				</div>
-				
-          	</x-dialog>
-        </div>
+        	</div>
 
+	        <!-- 弹出框 -->
+	        <div v-transfer-dom class="dialog">
+	          	<x-dialog v-model="showDialog" :hide-on-blur="true">
+	          		<div class="dia_top">
+						<p class="title">番禺国美店周末幸运大抽奖</p>
+						<span class="dia_times">第12356期</span>
+						<p class="text">买单报手机号<span class="text_red">5000元</span>大奖</p>
+						<p class="vivid">恭喜您中了一等级5000元</p>
+						<router-link to="/draw/awards">
+							<div class="btn">
+								立即领奖
+							</div>
+						</router-link>
+					</div>
+					<div  class="time-line" style="height: 5rem;">
+						<timeline>
+							<timeline-item v-for="(item, index) in process" :key="index">
+								<h4 :class="[index === 1 ? 'recent' : '']" style="text-align: left">
+									<span>{{ item.step}}</span>
+								</h4>
+								<p :class="[index === 1 ? 'recent' : '']" class='bottom'  style="text-align: left;color: #000">
+									<span>{{ item.date}}</span>
+								</p>
+							</timeline-item>
+						</timeline>
+					</div>
+	          	</x-dialog>
+	        </div>
+        </div>
 	</section>
 </template>
 
@@ -111,8 +127,21 @@
 					{step: '开奖时间2019-08-08 18:00:00', date: '2018-02-09 18:20:10'},
 					{step: '成功参与“周末幸运大抽奖”', date: '2018-02-09 18:20:10'},
 					{step: '你花了￥1,256购买了一双耐克KD10广州万国奥特广场负一层', date: '2018-02-09 18:20:10'},
+				],
+				recordList:[
+					{ drawTitle: '国美番禺店大抽奖', period: '1234', awardDate: '2018-03-20 20:00:00', money: '800.00', num:'600.00'},
+					{ drawTitle: '国美番禺店大抽奖', period: '1234', awardDate: '2018-03-20 20:00:00', money: '800.00', num:'600.00'},
+					{ drawTitle: '国美番禺店大抽奖', period: '1234', awardDate: '2018-03-20 20:00:00', money: '800.00', num:'600.00'},
+					{ drawTitle: '国美番禺店大抽奖', period: '1234', awardDate: '2018-03-20 20:00:00', money: '800.00', num:'600.00'},
+					{ drawTitle: '国美番禺店大抽奖', period: '1234', awardDate: '2018-03-20 20:00:00', money: '800.00', num:'600.00'},
+					{ drawTitle: '国美番禺店大抽奖', period: '1234', awardDate: '2018-03-20 20:00:00', money: '800.00', num:'600.00'},
+					{ drawTitle: '国美番禺店大抽奖', period: '1234', awardDate: '2018-03-20 20:00:00', money: '800.00', num:'600.00'},
+					{ drawTitle: '国美番禺店大抽奖', period: '1234', awardDate: '2018-03-20 20:00:00', money: '800.00', num:'600.00'}
 				]
 			}
+		},
+		mounted() {
+			this.InitScroll()
 		},
 		methods:{
 			showNumber(){
@@ -125,7 +154,47 @@
 			},
 			showDialogs(){
 				this.showDialog= true
-			}
+			},
+	        InitScroll() {
+				this.$nextTick(() => {
+					if(!this.scroll) {
+						this.scroll = new BScroll(this.$refs.wrapper, {
+							click: true,
+							scrollY: true,
+							pullUpLoad: {
+								threshold: -30, // 负值是当上拉到超过低部 70px；正值是距离底部距离 时，                    
+							}
+						})
+						this.scroll.on('pullingUp', (pos) => {
+							this.show = true;
+							this.LoadData()
+							this.$nextTick(function() {
+								this.scroll.finishPullUp();
+								this.scroll.refresh();
+							});
+						})
+					} else {
+						this.scroll.refresh()
+					}
+				})
+
+			},
+			LoadData() {
+				var _this = this
+				setTimeout(function(){
+					_this.show = false;
+					let leng = _this.recordList.length;
+					if(_this.recordList.length == 11){
+						_this.showNomore = true;
+					}else{
+						let obj = [{ drawTitle: '国美番禺店大抽奖', period: '1234', awardDate: '2018-03-20 20:00:00', money: '800.00', num:'600.00'},
+						{ drawTitle: '国美番禺店大抽奖', period: '1234', awardDate: '2018-03-20 20:00:00', money: '800.00', num:'600.00'}];
+						_this.recordList = _this.recordList.concat(obj);
+						console.log(_this.recordList);
+					}
+					
+				},3000)
+			},
 		}
 	}
 </script>
@@ -137,7 +206,7 @@
 	.right{
 		float: right;
 	}
-	.top{
+	.record{
 	    background-color: #eaeaea;
 	    padding-top: 1rem;
 	    padding-bottom: 0.2rem;
@@ -147,12 +216,45 @@
 	        margin: auto;
 	    }
 	}
+	.wrapper {
+		height: 11.2rem;
+		overflow: hidden;
+	}
+	.noRecord{
+		background: #fff;
+		width: 90%;
+		margin: 0.2rem auto;
+		border-radius: 0.1rem;
+		height: 10rem;
+		.img{
+			width: 100%;
+			padding-top: 3rem;
+			text-align: center;
+			img{
+				width: 50%;
+				margin: 0 auto;
+				display: block;
+			}
+			p{
+				font-size: 0.32rem;
+				color: #666;
+			}
+			.text{
+				font-size: 0.3rem;
+				line-height: 0.5rem;
+				span{
+					color: #dd1633;
+				}
+			}
+		}
+		
+	}
 	.time-line{
 		background: #fff;
 		width: 90%;
 		margin: 0.2rem auto;
 		border-radius: 0.1rem;
-		height: 8rem;
+		height: 10rem;
 		.winMoney{
 			font-size: 0.32rem;
 			color: #000;
@@ -275,7 +377,7 @@
 
 <style lang="less">
 @button-tab-border-radius: 0.6rem;
-	.top{
+	.record{
 		.vux-button-group > a.vux-button-group-current{
 			color: #fff !important;
 			background: #dd1633 !important;
@@ -385,5 +487,14 @@
 			max-width: 25rem !important;
 			width: 90% !important;
 		}
+	}
+
+	#changeBlock .vux-header .vux-header-left .left-arrow:before {
+		border: 0.02rem solid #000;
+		border-width: 0.02rem 0 0 0.02rem;
+	}
+	
+	#changeBlock .vux-header .vux-header-title {
+		color: #000;
 	}
 </style>

@@ -15,8 +15,15 @@ import 'swiper/dist/css/swiper.css'
 import './config/wy_rem'
 import { Group, DatetimeRange, Cell, Tab, TabItem, CellBox, XHeader, Scroller, LoadMore,TransferDom, Confirm, Popup, Toast, Swiper, InlineXNumber, CheckIcon, CellFormPreview, XSwitch, XNumber, Badge, Previewer, Timeline, TimelineItem, Rater, XTextarea,Radio } from 'vux'
 import FastClick from 'fastclick'
+import VueVideoPlayer from 'vue-video-player'
+import 'video.js/dist/video-js.css'
 
 FastClick.attach(document.body);
+
+Vue.use(VueVideoPlayer, /* {
+  options: global default options,
+  events: global videojs events
+} */)
 
 Vue.use(Vuex)
 Vue.use(Mint)

@@ -10,7 +10,13 @@
 				<div class="btn">关注</div>
 			</div>
 		</div>
+<<<<<<< HEAD
+
 		<search @click.native="goSearch"></search>
+
+=======
+		<search @click.native="goSearch"></search>
+>>>>>>> ec9fc19b17a264004b1a2aab19dc1fac808062a7
 		<div class="tab">
 			<tab :line-width="3" :scroll-threshold="4">
 		      	<tab-item selected @on-item-click="onItemClick">

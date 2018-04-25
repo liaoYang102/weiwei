@@ -31,6 +31,9 @@
 	}
 </script>
 
+	
+</script>
+
 <style lang="less" scoped>
 .search{
 	height: 100%;
