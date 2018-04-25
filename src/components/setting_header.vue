@@ -1,6 +1,6 @@
 <template>
 
-	<div v-if='show' style="height:46px;">
+	<div v-if='show' style="height:46px;" class="app-header">
 		<x-header :left-options="{backText: ''}" style="background:#fff;" class="header">{{ title }}</x-header>
 	</div>
 </template>
@@ -31,16 +31,16 @@
 	}
 </script>
 <style lang='less'>
-	#app .vux-header .vux-header-left .left-arrow:before {
+	#app .app-header .vux-header .vux-header-left .left-arrow:before {
 		border: 1px solid #222;
 		border-width: 1px 0 0 1px;
 	}
 	
-	#app .vux-header .vux-header-title {
+	#app .app-header .vux-header .vux-header-title {
 		color: #333;
 	}
 	
-	.header {
+	#app .app-header .header {
 		position: fixed!important;
 		top: 0;
 		left: 0;
