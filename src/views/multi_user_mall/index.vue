@@ -11,7 +11,11 @@
 			</div>
 		</div>
 
+<<<<<<< HEAD
+		<search></search>
+=======
 		<search @click.native="goSearch"></search>
+>>>>>>> 324fdfdd9d720330a4f8e9294acfd8948ffbd42a
 
 		<div class="tab">
 			<tab :line-width="3" :scroll-threshold="4">

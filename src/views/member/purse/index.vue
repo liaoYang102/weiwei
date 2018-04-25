@@ -52,25 +52,18 @@
 					</div>
 				</router-link>
 			</div>
-			<div class="pur-row">
-				<div class="row-item">
+			<div class="pur-row2">
+				<!--<div class="row-item" v-for="i in 3">
 					<div>
 						<p>累计收益</p>
 						<p>0.00</p>
 					</div>
-				</div>
-				<div class="row-item">
-					<div>
-						<p>累计收益</p>
-						<p>0.00</p>
-					</div>
-				</div>
-				<div class="row-item">
-					<div>
-						<p>累计收益</p>
-						<p>0.00</p>
-					</div>
-				</div>
+				</div>-->
+				<group gutter="0">
+					<cell class="item" title='累计收益' value="200.0"></cell>
+					<cell class="item" title='返现余额' value="88.0"></cell>
+					<cell class="item" title='返现积分' value="150.0"></cell>
+				</group>
 			</div>
 			<div class="chart-box">
 				<div class="banlance">
@@ -97,7 +90,7 @@
 </template>
 
 <script>
-	import { Card } from 'vux'
+	import { Card, Cell, Group, } from 'vux'
 	import settingHeader from '../../../components/setting_header'
 	export default {
 		data() {
@@ -292,6 +285,9 @@
 				});
 			}
 		},
+		created() {
+			this.$store.state.page.footerFalg = true
+		},
 		components: {
 			settingHeader,
 			Card
@@ -303,6 +299,7 @@
 	@import '~vux/src/styles/1px.less';
 	.purse-box {
 		background-color: #f5f6fa;
+		padding-bottom: 1rem;
 		.box-h {
 			width: 100%;
 			height: 2.8rem;
@@ -370,7 +367,7 @@
 			display: flex;
 			height: 1.1rem;
 			background: white;
-			margin: 0.1rem 0;
+			/*margin: 0.1rem 0;*/
 			padding: 0.26rem 0.65rem;
 			a {
 				flex: 1;
@@ -418,8 +415,21 @@
 				}
 			}
 		}
+		.pur-row2 {
+			.item {
+				height: 0.6rem;
+				font-size: 0.24rem;
+				font-family: MicrosoftYaHei;
+				color: rgba(144, 162, 199, 1);
+				.weui-cell__ft {
+					font-size: 0.28rem;
+					color: rgba(26, 38, 66, 1);
+				}
+			}
+		}
 		.chart-box {
 			padding: 0.3rem;
+			background-color: white;
 			.pieChart {
 				width: 100%;
 				height: 5rem;

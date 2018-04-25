@@ -308,6 +308,9 @@
 				]
 			}
 		},
+		created(){
+			this.$store.state.page.footerFalg = true
+		},
 		mouted() {
 			console.log(settingFooter)
 		},

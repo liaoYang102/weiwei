@@ -97,7 +97,7 @@
 	.couponTab {
 		display: flex;
 		align-items: center;
-		background: white;
+		background-color: white;
 		z-index: 11111;
 		.tab {
 			flex: 1;

@@ -46,10 +46,10 @@
 		<div v-transfer-dom>
 			<popup v-model="show1">
 				<popup-header left-text="取消" right-text="确定" title="选择支付方式" :show-bottom-border="false" @on-click-left="show1 = false" @on-click-right="show1 = false"></popup-header>
-				<group gutter="0">
+				<group style="padding-bottom: 1rem;" gutter="0">
 					<radio :options="list" @on-change="change"></radio>
 					<div class="pay-box">
-						<x-button class="add-btn" :gradients="['#1D62F0', '#19D5FD']" >立即支付</x-button>
+						<div class="add-btn">立即支付</div>
 					</div>
 				</group>
 			</popup>
@@ -58,7 +58,7 @@
 </template>
 
 <script>
-	import { Group, CellBox, XButton, PopupHeader, Radio,Checklist } from 'vux'
+	import { Group, CellBox, XButton, PopupHeader, Radio, Checklist } from 'vux'
 	import settingHeader from '../../../components/setting_header'
 	export default {
 		data() {
@@ -139,7 +139,7 @@
 			XButton,
 			PopupHeader,
 			Radio,
-			Checklist 
+			Checklist
 		}
 	}
 </script>
@@ -151,8 +151,6 @@
 		.item {
 			padding: 0 0.25rem;
 			height: 1.13rem;
-			border-top: 1px solid #D9D9D9;
-			border-bottom: 1px solid #D9D9D9;
 			display: flex;
 			align-items: center;
 			justify-content: space-between;
@@ -238,18 +236,34 @@
 		}
 		.btn-box {
 			position: fixed;
-			bottom: 0;
+			bottom: 1rem;
 			width: 100%;
 			padding: 0.25rem;
 			box-sizing: border-box;
 			.add-btn {
-				background:rgba(51,111,255,1)!important;
-				color: white;
+				height: 0.88rem;
+				line-height: 0.88rem;
+				background: rgba(51, 111, 255, 1);
+				font-size: 0.28rem;
+				text-align: center;
+				font-family: MicrosoftYaHei;
+				color: rgba(255, 255, 255, 1);
+				border-radius: 2px;
 			}
 		}
 	}
 	
 	.pay-box {
 		padding: 10px 15px;
+		.add-btn {
+			height: 0.88rem;
+			line-height: 0.88rem;
+			background: rgba(51, 111, 255, 1);
+			font-size: 0.28rem;
+			text-align: center;
+			font-family: MicrosoftYaHei;
+			color: rgba(255, 255, 255, 1);
+			border-radius: 2px;
+		}
 	}
 </style>

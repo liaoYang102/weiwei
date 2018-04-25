@@ -22,8 +22,8 @@
 			</div>
 		</scroller>
 		<div class="add-btn-box">
-			<router-link to="/member/index">
-				<x-button class="add-btn" :gradients="['#1D62F0', '#19D5FD']">添加地址</x-button>
+			<router-link to="/member/address/edit">
+				<div class="add-btn">添加地址</div>
 			</router-link>
 		</div>
 	</div>
@@ -75,7 +75,7 @@
 				}]
 			}
 		},
-		created(){
+		created() {
 			this.$store.state.page.footerFalg = false
 		},
 		methods: {
@@ -93,10 +93,10 @@
 <style lang="less" scoped>
 	.content {
 		background: #F5F6FA;
+		padding-bottom: 1rem;
 	}
 	
 	.box2 {
-		padding-bottom: 180px;
 		padding-top: 0.21rem;
 	}
 	
@@ -149,15 +149,18 @@
 	
 	.add-btn-box {
 		width: 100%;
-		height: 1rem;
 		background: white;
 		position: fixed;
 		bottom: 0%;
 		box-sizing: border-box;
 		.add-btn {
-			height: 100%;
-			font-size: 0.32rem;
-			border-radius: 0;
+			height: 0.88rem;
+			line-height: 0.88rem;
+			background: rgba(51, 111, 255, 1);
+			font-size: 0.28rem;
+			text-align: center;
+			font-family: MicrosoftYaHei;
+			color: rgba(255, 255, 255, 1);
 		}
 	}
 </style>

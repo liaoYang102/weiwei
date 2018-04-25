@@ -69,7 +69,7 @@
 					<check-icon v-if="isBj" class="check-btn" :value.sync="allCheck">全选</check-icon>
 				</div>
 				<div class="qx-box">
-					<x-button :gradients="['#1D62F0', '#19D5FD']">取消关注</x-button>
+					<div class="add-btn">取消关注</div>
 				</div>
 			</div>
 		</transition>
@@ -111,7 +111,7 @@
 			}
 		},
 		created() {
-
+			this.$store.state.page.footerFalg = true
 		},
 		mouted() {
 
@@ -223,7 +223,7 @@
 		}
 		.bjBtn-box {
 			position: fixed;
-			bottom: 0;
+			bottom: 1rem;
 			display: flex;
 			align-items: center;
 			width: 100%;
@@ -236,8 +236,18 @@
 				flex: 1;
 				height: 100%;
 				text-align: center;
-				padding: 0.24rem 0.8rem;
+				padding: 0.24rem 0.4rem;
 				box-sizing: border-box;
+				.add-btn {
+					height: 0.7rem;
+					line-height: 0.7rem;
+					background: rgba(51, 111, 255, 1);
+					font-size: 0.28rem;
+					text-align: center;
+					font-family: MicrosoftYaHei;
+					color: rgba(255, 255, 255, 1);
+					border-radius: 2px;
+				}
 			}
 		}
 		.bjBtn-box:before {
@@ -267,6 +277,7 @@
 			align-items: center;
 			justify-content: space-between;
 			position: relative;
+			background-color: white;
 			.bj-box {
 				height: 0.98rem;
 				line-height: 0.98rem;

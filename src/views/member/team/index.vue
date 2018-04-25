@@ -73,7 +73,9 @@
 				}]
 			}
 		},
-		created() {},
+		created() {
+			this.$store.state.page.footerFalg = true
+		},
 		mounted() {
 			//第一次加载
 			this.$nextTick(() => {

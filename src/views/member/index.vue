@@ -154,8 +154,8 @@
 
 <style lang="less" scoped>
 	.info-box {
-		height: 100%;
 		background-color: #F5F6FA;
+		padding-bottom: 1rem;
 		.info-bg {
 			height: 4.47rem;
 			background: url(../../assets/images/member/index-bg.png) no-repeat;

@@ -1,20 +1,20 @@
 <template>
 	<div class="info-box">
 		<settingHeader :title="title"></settingHeader>
-		<div class="card-box">
-			<div class="card-header">
-				<div class="tab">
-					<tab v-model="cardLook" custom-bar-width="0.56rem">
-						<tab-item selected @on-item-click="lookCard">全部</tab-item>
-						<tab-item @on-item-click="lookCard">我的</tab-item>
-					</tab>
-				</div>
-				<!--<button-tab class="change-box" :height="34" v-model="cardLook">
+		<div class="card-header">
+			<div class="tab">
+				<tab v-model="cardLook" custom-bar-width="0.56rem">
+					<tab-item selected @on-item-click="lookCard">全部</tab-item>
+					<tab-item @on-item-click="lookCard">我的</tab-item>
+				</tab>
+			</div>
+			<!--<button-tab class="change-box" :height="34" v-model="cardLook">
 				<button-tab-item selected @on-item-click="lookCard()">全部</button-tab-item>
 				<button-tab-item @on-item-click="lookCard()"><span class="vux-reddot-s">我的</span></button-tab-item>
 			</button-tab>-->
-				<span class="shaix" @click.active="showRight">筛选<img src="../../../../static/member/shaixuanIcon.png" alt="" /></span>
-			</div>
+			<span class="shaix" @click.active="showRight">筛选<img src="../../../../static/member/shaixuanIcon.png" alt="" /></span>
+		</div>
+		<div class="card-box">
 			<swiper v-model="cardLook" height="800px" :show-dots="false">
 				<swiper-item>
 					<scroller lock-x height="-80" @on-scroll-bottom="onScrollBottom" ref="scrollerBottom" :scroll-bottom-offst="200">
@@ -279,31 +279,33 @@
 		}
 	}
 	
+	.card-header {
+		padding: 0.17rem 0.6rem;
+		display: flex;
+		align-items: center;
+		background-color: white;
+		.tab {
+			flex: 1;
+			.vux-tab-item {
+				background: transparent!important;
+			}
+		}
+		.shaix {
+			padding-left: 0.5rem;
+			display: flex;
+			align-items: center;
+			color: #328bff;
+			font-size: 0.24rem;
+			img {
+				margin-left: 0.1rem;
+				width: 0.4rem;
+			}
+		}
+	}
+	
 	.card-box {
 		padding: 0 15px;
 		position: relative;
-		.card-header {
-			padding: 0.17rem;
-			display: flex;
-			align-items: center;
-			.tab {
-				flex: 1;
-				.vux-tab-item {
-					background: transparent!important;
-				}
-			}
-			.shaix {
-				padding-left: 0.5rem;
-				display: flex;
-				align-items: center;
-				color: #328bff;
-				font-size: 0.24rem;
-				img {
-					margin-left: 0.1rem;
-					width: 0.4rem;
-				}
-			}
-		}
 		.card-ltem {
 			height: 1.82rem;
 			border-radius: 2px;
@@ -337,6 +339,7 @@
 			background: url(../../../../static/member/cardBg1.png) no-repeat;
 			background-size: 100%;
 			padding: 0.3rem;
+			margin-top: 0.13rem;
 			box-sizing: border-box;
 			display: flex;
 			flex-direction: column;
