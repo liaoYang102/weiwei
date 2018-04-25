@@ -10,13 +10,7 @@
 				<div class="btn">关注</div>
 			</div>
 		</div>
-
-<<<<<<< HEAD
-		<search></search>
-=======
 		<search @click.native="goSearch"></search>
->>>>>>> 324fdfdd9d720330a4f8e9294acfd8948ffbd42a
-
 		<div class="tab">
 			<tab :line-width="3" :scroll-threshold="4">
 		      	<tab-item selected @on-item-click="onItemClick">
@@ -40,48 +34,52 @@
 			    <tab-item @on-item-click="onItemClick">
 			    	<div class="tab-item">
 			    		<img src="../../assets/images/shop/address.png"><br>
-			    		<span>活动</span>
+			    		<span>简介</span>
 			    	</div>
 			    </tab-item>
 		    </tab>
 		</div>
+		<div class="index">
+			<img src="../../assets/images/shop/theme_banner0.png" style="width: 100%">
 
-	    <img src="../../assets/images/shop/theme_banner0.png" style="width: 100%">
+		    <div class="imgList">
+		    	<div class="img" v-for="(item, index) in 3" >
+		    		<img src="../../assets/images/multi_user_mall/1.png">
+		    	</div>
+		    </div>
 
-	    <div class="imgList">
-	    	<div class="img" v-for="(item, index) in 3" >
-	    		<img src="../../assets/images/multi_user_mall/1.png">
-	    	</div>
-	    </div>
+		    <img src="../../assets/images/shop/theme_banner0.png" style="width: 100%;">
 
-	    <img src="../../assets/images/shop/theme_banner0.png" style="width: 100%;">
-
-	    <mallTheme :themeTitle="themeTitle"></mallTheme>
-	    <mallTheme :themeTitle="themeTitle1"></mallTheme>
-
+		    <mallTheme :themeTitle="themeTitle"></mallTheme>
+		    <mallTheme :themeTitle="themeTitle1"></mallTheme>
+		</div>
+	    <!-- <shop v-else></shop> -->
 	</section>
 </template>
 
 <script>
 	import mallTheme from './components/mall_theme'
 	import search from './components/search'
+	// import shop from './productList'
 	export default {
 		data(){
 			return {
+				show:true,
 				themeTitle: '女子休闲',
 				themeTitle1: '男子休闲'
 			}
 		},
 		components:{
 			mallTheme,
-			search
+			search,
+			// shop
 		},
 		mounted() {
 			
 		},
 		methods:{
 			onItemClick(){
-
+				// this.show = false;
 			},
 			goSearch(){
 				this.$router.push({ name: 'search'})

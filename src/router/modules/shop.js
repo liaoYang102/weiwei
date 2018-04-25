@@ -17,6 +17,7 @@ import multi_user_mall from '@/views/multi_user_mall/index'
 import search from '@/views/multi_user_mall/search'
 import productList from '@/views/multi_user_mall/productList'
 import store from '@/views/multi_user_mall/store'
+import service from '@/views/multi_user_mall/service'
 
 const shopModule = [
 	// 商城模块
@@ -107,7 +108,6 @@ const shopModule = [
 	},
 	{
 	  path: '/multi_user_mall/search',//多用户商城搜索页
-
 	  name: 'search',
 	  component: search
 	},
@@ -120,6 +120,11 @@ const shopModule = [
 	  path: '/multi_user_mall/store',//多用户商城店铺页
 	  name: 'store',
 	  component: store
+	},
+	{
+	  path: '/multi_user_mall/service',//多用户商城店铺页
+	  name: 'store',
+	  component: service
 	}
 ];
 
