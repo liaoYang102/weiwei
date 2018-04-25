@@ -40,7 +40,7 @@
 		</div>
 
 		<div class="footer">
-			<div class="canel commen">评价</div>
+			<div class="canel commen" @click="eval">评价</div>
 			<div class="view commen">删除订单</div>
 		</div>
 
@@ -82,7 +82,12 @@
 			
 		},
 		methods:{
-			 
+			 eval(){//评价
+			 	this.$router.push({
+			 		name:'orderEval',
+			 		params:{id:1}
+			 	});
+			 }
 
 		}
 	}
