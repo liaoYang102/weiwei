@@ -119,6 +119,7 @@ router.beforeEach(function(to, from, next) {
 				store.commit('UPDATE_DIRECTION', {
 					direction: ''
 				})
+				store.state.vux.back = true;
 			} else{
 				store.commit('UPDATE_DIRECTION', {
 					direction: 'forward'
@@ -135,13 +136,13 @@ router.beforeEach(function(to, from, next) {
 			if(!isPush && (Date.now() - endTime) < 377) {
 				store.commit('UPDATE_DIRECTION', {
 					direction: ''
-				})
+				});
+				store.state.vux.back = true;
 			} else {
 				if(store.state.vux.back){
 					store.commit('UPDATE_DIRECTION', {
 						direction: 'forward'
 					});
-					
 					// var ua = navigator.userAgent.toLowerCase();
 					// var isWeixin = ua.indexOf('micromessenger') != -1;
 					// if (isWeixin) { 
@@ -150,6 +151,7 @@ router.beforeEach(function(to, from, next) {
 					// 	});
 					// }
 				}else{
+					alert(123);
 					store.commit('UPDATE_DIRECTION', {
 						direction: 'reverse'
 					})
