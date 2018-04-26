@@ -1,6 +1,7 @@
 const page = {
 	state: {
-		direction: 'forward'
+		direction: 'forward',
+		footerFalg:false //控制底部栏是否显示
 	},
 	mutations: {
 		UPDATE_DIRECTION(state, payload) {

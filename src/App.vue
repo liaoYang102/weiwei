@@ -1,12 +1,14 @@
 <template>
-	<div id="app" v-cloak>
+	<div id="app" ref="fBox" v-cloak>
 		<transition :name="viewTransition" :css="!!direction">
 			<router-view class="router-view"></router-view>
 		</transition>
+		<settingFooter  v-if="$store.state.page.footerFalg"></settingFooter>
 	</div>
 </template>
 
 <script>
+	import settingFooter from '@/components/setting_footer'
 	import { ButtonTab, ButtonTabItem } from 'vux'
 	import { mapState } from 'vuex'
 	export default {
@@ -38,7 +40,8 @@
 		},
 		components: {
 			ButtonTab,
-			ButtonTabItem
+			ButtonTabItem,
+			settingFooter
 		},
 		methods: {
 			handleClick: function() {
@@ -47,6 +50,7 @@
 		},
 		watch: {
 			'$route' (to, from) {
+//				alert(this.direction)
 				document.body.scrollTop = 0
 				document.documentElement.scrollTop = 0
 			}　

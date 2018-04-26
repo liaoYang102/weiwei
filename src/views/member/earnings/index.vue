@@ -279,7 +279,7 @@
 			display: flex;
 			height: 1.1rem;
 			background: white;
-			margin: 0.1rem 0;
+			/*margin: 0.1rem 0;*/
 			padding: 0.26rem 0.65rem;
 			position: relative;
 			a {

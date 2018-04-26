@@ -9,6 +9,7 @@ import ComfirmOrder from '@/views/share/comfirmOrder'
 import OrderSuccess from '@/views/share/orderSuccess'
 import OrderDetail from '@/views/share/orderDetail'
 import OrderEval from '@/views/share/orderEval'
+import UseTime from '@/views/share/usetime'
 
 
 const inygl =[
@@ -66,6 +67,11 @@ const inygl =[
 		path:'/share/orderEval',//订单评价
 		name:'orderEval',
 		component:OrderEval
+	},
+	{
+		path:'/share/usetime',//使用时间
+		name:'usetime',
+		component:UseTime
 	}
 ]
 

@@ -90,6 +90,8 @@
 	@import '~vux/src/styles/1px.less';
 	@import '~vux/src/styles/close';
 	.scoreDetail-box {
+		height:100vh;
+		background-color:white;
 		.lw-box {
 			margin-top: 0.6rem;
 			.all-h {

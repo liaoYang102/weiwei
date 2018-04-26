@@ -16,6 +16,8 @@ import team from '@/views/member/team/index'
 import info from '@/views/member/info/index'
 import changeCode from '@/views/member/setting/changeCode'
 import code from '@/views/member/setting/code'
+import about from '@/views/member/setting/about'
+import real from '@/views/member/setting/real'
 import resetCode from '@/views/member/setting/resetCode'
 import purse from '@/views/member/purse/index'
 import qrcode from '@/views/member/purse/qrcode'
@@ -23,6 +25,7 @@ import banlancelog from '@/views/member/purse/banlancelog'
 import banlance from '@/views/member/purse/banlance'
 import recharge from '@/views/member/purse/recharge'
 import card from '@/views/member/card/index'
+import carddetail from '@/views/member/card/detail'
 import setting from '@/views/member/setting/index'
 import follow from '@/views/member/follow/index'
 import earnings from '@/views/member/earnings/index'
@@ -136,6 +139,15 @@ const memberModule = [
 		component: resetCode
 	},
 	{
+		path: '/member/setting/about',
+		name: 'about',
+		component: about
+	},{
+		path: '/member/setting/real',
+		name: 'real',
+		component: real
+	},
+	{
 		path: '/member/purse/index',
 		name: 'purse',
 		component: purse
@@ -154,6 +166,10 @@ const memberModule = [
 		path: '/member/card/index',
 		name: 'card',
 		component: card
+	},{
+		path: '/member/card/detail',
+		name: 'carddetail',
+		component: carddetail
 	},
 	{
 		path: '/member/purse/banlancelog',

@@ -115,13 +115,8 @@ methods.forEach(key => {
 router.beforeEach(function(to, from, next) {
 	const toIndex = history.getItem(to.path)
 	const fromIndex = history.getItem(from.path)
-	console.log(history)
-	
 	if(toIndex) {
 		if(!fromIndex || parseInt(toIndex, 10) > parseInt(fromIndex, 10) || (toIndex === '0' && fromIndex === '0')) {
-			// store.commit('UPDATE_DIRECTION', {
-			// 	direction: 'forward'
-			// })
 			if(!isPush && (Date.now() - endTime) < 377) {
 				store.commit('UPDATE_DIRECTION', {
 					direction: ''
