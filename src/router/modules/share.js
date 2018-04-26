@@ -12,7 +12,7 @@ import OrderEval from '@/views/share/orderEval'
 import UseTime from '@/views/share/usetime'
 
 
-const inygl =[
+const share =[
 	{
 		path:'/share',
 		name:'shareIndex',
@@ -75,4 +75,4 @@ const inygl =[
 	}
 ]
 
-export default inygl
+export default share
