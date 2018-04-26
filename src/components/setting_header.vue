@@ -1,5 +1,5 @@
 <template>
-	<div v-if='show' style="height:46px;" id="settingHeader">
+	<div v-if='show' style="height:46px;" class="settingHeader">
 		<x-header :left-options="{backText: '',preventGoBack: true}" style="background:#fff;" class="header" @on-click-back="changeBack">{{ title }}</x-header>
 
 	</div>
