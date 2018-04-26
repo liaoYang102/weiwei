@@ -47,7 +47,7 @@
 			<popup v-model="show1">
 				<popup-header left-text="取消" right-text="确定" title="选择支付方式" :show-bottom-border="false" @on-click-left="show1 = false" @on-click-right="show1 = false"></popup-header>
 				<group style="padding-bottom: 1rem;" gutter="0">
-					<radio :options="list" @on-change="change"></radio>
+					<radio :options="list" value="1" @on-change="change"></radio>
 					<div class="pay-box">
 						<div class="add-btn">立即支付</div>
 					</div>
@@ -116,7 +116,9 @@
 				]
 			}
 		},
-		created() {},
+		created() {
+			this.$store.state.page.footerFalg = true
+		},
 		mounted() {},
 		methods: {
 			changeMoney(index) {

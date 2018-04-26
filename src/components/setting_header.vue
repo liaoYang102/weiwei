@@ -1,5 +1,5 @@
 <template>
-	<div v-if='show' style="height:46px;" class="settingHeader">
+	<div v-if='show' style="height:46px;" id="settingHeader">
 		<x-header :left-options="{backText: '',preventGoBack: true}" style="background:#fff;" class="header" @on-click-back="changeBack">{{ title }}</x-header>
 
 	</div>
@@ -36,16 +36,16 @@
 	}
 </script>
 <style lang='less'>
-	#app .settingHeader .app-header .vux-header .vux-header-left .left-arrow:before {
+	#settingHeader .app-header .vux-header .vux-header-left .left-arrow:before {
 		border: 1px solid #222;
 		border-width: 1px 0 0 1px;
 	}
 	
-	#app .settingHeader .app-header .vux-header .vux-header-title {
+	#settingHeader .app-header .vux-header .vux-header-title {
 		color: #333;
 	}
 	
-	#app .settingHeader .app-header .header {
+	#settingHeader .app-header .header {
 		position: fixed!important;
 		top: 0;
 		left: 0;

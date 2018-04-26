@@ -8,20 +8,25 @@
 			<i id="menu" class="iconfont" @click.active="showDrawer"></i>
 		</div>
 		<div class="couponList">
-			<div class="rollOne bgImgThree">
-				<a href="#">
-					<div class="left">
-						<p>购物券1</p>
-						<p class="mt20">(仅限威伐光门店使用)</p>
-						<p>2018.03.29-2018.04.08</p>
-					</div>
-				</a>
-				<div class="right fontOne"><span>满减券</span>
-					<a href="#">
-						<div class="rightBtn mt20 btnImgThree">
-							<span>立即使用</span>
+			<div class="wrapper" ref="wrapper">
+				<div class="content">
+					<div class="rollOne bgImgThree" v-for="i in 15">
+						<a href="#">
+							<div class="left">
+								<p>购物券1</p>
+								<p class="mt20">(仅限威伐光门店使用)</p>
+								<p>2018.03.29-2018.04.08</p>
+							</div>
+						</a>
+						<div class="right fontOne"><span>满减券</span>
+							<a href="#">
+								<div class="rightBtn mt20 btnImgThree">
+									<span>立即使用</span>
+								</div>
+							</a>
 						</div>
-					</a>
+					</div>
+					<load-more v-if="show" tip="正在加载"></load-more>
 				</div>
 			</div>
 		</div>
@@ -43,6 +48,7 @@
 </template>
 
 <script>
+	import BScroll from 'better-scroll'
 	import { Tab, TabItem, Masker, Drawer } from 'vux'
 	import settingHeader from '../../../components/setting_header'
 	export default {
@@ -53,8 +59,12 @@
 				couponType: ['全部', '未使用', '已使用', '已过期'],
 				typeList: ['所有优惠券', '体验券', '满减券', '折扣券'],
 				title: '我的优惠券',
-				drawerShow: false
+				drawerShow: false,
+				show: false
 			}
+		},
+		created(){
+			this.$store.state.page.footerFalg = true
 		},
 		methods: {
 			onItemClick(index) {
@@ -99,6 +109,9 @@
 		align-items: center;
 		background-color: white;
 		z-index: 11111;
+		position: fixed;
+		top: 44px;
+		width: 100%;
 		.tab {
 			flex: 1;
 			.vux-tab-item {
@@ -116,6 +129,10 @@
 	}
 	
 	.couponList {
+		.wrapper {
+			height: 80%;
+			overflow: hidden;
+		}
 		.bgImgThree {
 			background: url(../../../assets/images/user/rollBg4.png) no-repeat;
 			background-size: 100% 100%;

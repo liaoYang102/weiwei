@@ -153,7 +153,6 @@ router.beforeEach(function(to, from, next) {
 					// 	});
 					// }
 				}else{
-					alert(123);
 					store.commit('UPDATE_DIRECTION', {
 						direction: 'reverse'
 					})
