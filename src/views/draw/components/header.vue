@@ -28,20 +28,20 @@
 	}
 </script>
 <style lang='less'>
-	.drawHeader .vux-header .vux-header-left .left-arrow:before {
-		border: 0.02rem solid #fff;
-		border-width: 0.02rem 0 0 0.02rem;
-	}
-	
-	.drawHeader .vux-header .vux-header-title {
-		color: #fff;
-	}
-	
-	.drawHeader .header {
-		position: absolute !important;
-		top: 0;
-		left: 0;
-		width: 100%;
-		z-index: 2;
-	}
+	.drawHeader{
+		.vux-header .vux-header-left .left-arrow:before {
+			border: 0.02rem solid #fff;
+			border-width: 0.02rem 0 0 0.02rem;
+		}
+		.vux-header .vux-header-title {
+			color: #fff;
+		}
+		.header {
+			position: absolute !important;
+			top: 0;
+			left: 0;
+			width: 100%;
+			z-index: 2;
+		}
+	} 
 </style>
