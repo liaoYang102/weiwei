@@ -3,8 +3,8 @@
 		<settingHeader :title="title"></settingHeader>
 		<div class="banlanceLog-box">
 			<div class="top">
-				<div class="gary">{{typeText}}</div>
 				<div @click="showRight"><i class="iconfont icon-caidan"></i>筛选</div>
+				<div class="gary">{{typeText}}</div>
 			</div>
 			<div class="wrapper" ref="wrapper">
 				<div class="content">
@@ -74,7 +74,7 @@
 			}
 		},
 		created() {
-
+			this.$store.state.page.footerFalg = true
 		},
 		mounted() {
 			this.InitScroll()
@@ -246,8 +246,8 @@
 				margin-right: 0.1rem;
 			}
 			.gary {
-				font-size: 0.32rem;
-				color: #888;
+				font-size: 0.30rem;
+				color: #1a2642;
 			}
 		}
 		/*.top:after {
@@ -266,7 +266,7 @@
 			left: 0px;
 		}*/
 		.wrapper {
-			height: 11rem;
+			height: 10.5rem;
 			overflow: hidden;
 		}
 		.banlanceLog-list {

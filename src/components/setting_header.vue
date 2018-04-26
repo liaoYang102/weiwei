@@ -29,7 +29,6 @@
 		methods: {
 			changeBack(){
 				this.$store.state.vux.back= false;
-				console.log('111',this.$store.state.vux.back)
 				this.$router.go(-1)
 			}
 		}
