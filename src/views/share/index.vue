@@ -21,13 +21,13 @@
 					<a href="javascript:;">
 						<li @click="showProduct">
 							<img src="../../assets/images/share/product.png">
-							<p>产品介绍</p>
+							<p>产品指引</p>
 						</li>
 					</a>
 					<a href="javascript:;">
 						<li @click="treatment">
-							<img src="../../assets/images/share/question.png">
-							<p>治疗指导</p>
+							<img src="../../assets/images/share/order.png">
+							<p>我的订单</p>
 						</li>
 					</a>
 					<a href="javascript:;">
@@ -269,7 +269,8 @@
 				this.$router.push('/share/join')
 			},
 			treatment(){
-				this.$router.push('/share/treatment')
+				// this.$router.push('/share/treatment')
+				this.$router.push('/shop/my_order')
 			}
 		}
 	}
