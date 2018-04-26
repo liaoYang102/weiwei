@@ -237,11 +237,17 @@
                 },998);
 			},
 			countDown(overtime){//当前设备的倒计时
-				
+
 				var _this=this;
 				_this.setTime(overtime);
 
 				_this.clearTime = setInterval(function(){
+
+					if(overtime==0){
+						useend();
+						return;
+					}
+
 						--overtime;
 						_this.setTime(overtime);
 						
@@ -257,6 +263,9 @@
                 sec=sec > 9 ? sec : '0' + sec;
 
                 this.remainTime = hour + ":" + min + ":" + sec;
+			},
+			useend(){
+				clearInterval(this.clearTime);
 			}
 
 			
