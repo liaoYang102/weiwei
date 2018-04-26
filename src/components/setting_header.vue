@@ -36,20 +36,20 @@
 	}
 </script>
 <style lang='less'>
-	#settingHeader .app-header .vux-header .vux-header-left .left-arrow:before {
-		border: 1px solid #222;
-		border-width: 1px 0 0 1px;
-	}
-	
-	#settingHeader .app-header .vux-header .vux-header-title {
-		color: #333;
-	}
-	
-	#settingHeader .app-header .header {
-		position: fixed!important;
-		top: 0;
-		left: 0;
-		width: 100%;
-		z-index: 111;
+	.settingHeader{
+		.vux-header .vux-header-left .left-arrow:before {
+			border: 1px solid #222;
+			border-width: 1px 0 0 1px;
+		}
+		.vux-header .vux-header-title {
+			color: #333;
+		}
+		.header {
+			position: fixed!important;
+			top: 0;
+			left: 0;
+			width: 100%;
+			z-index: 111;
+		}
 	}
 </style>
