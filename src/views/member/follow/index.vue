@@ -11,10 +11,10 @@
 			</div>
 			<img @click="sousShow" src="../../../assets/images/member/sous.png" />
 		</div>
-		<swiper v-model="index" height="800px" :show-dots="false">
+		<swiper v-model="index" height="10.3rem" :show-dots="false" threshold='100'>
 			<swiper-item>
 				<div class="pro-list">
-					<scroller lock-x height="-120" @on-scroll-bottom="onScrollBottom" ref="scrollerBottom" :scroll-bottom-offst="200">
+					<scroller lock-x height="-110" @on-scroll-bottom="onScrollBottom" ref="scrollerBottom" :scroll-bottom-offst="50">
 						<div class="box2">
 							<router-link to="">
 								<div class="list-item" v-for="(item,index) in proList" @click="changePr()">
@@ -36,7 +36,7 @@
 			</swiper-item>
 			<swiper-item>
 				<div class="store-list">
-					<scroller lock-x height="-120" @on-scroll-bottom="onScrollBottom" ref="scrollerBottom" :scroll-bottom-offst="200">
+					<scroller lock-x height="-110" @on-scroll-bottom="onScrollBottom" ref="scrollerBottom" :scroll-bottom-offst="50">
 						<div class="box2">
 							<router-link to="">
 								<div class="list-item" v-for="(item,index) in proList" @click="changePr()">
@@ -63,7 +63,7 @@
 				</div>
 			</popup>
 		</div>
-		<transition enter-active-class="slideInUp animated" leave-active-class="leave">
+		<transition leave-active-class="leave">
 			<div class="bjBtn-box" v-if="isBj">
 				<div @click="isallcheck">
 					<check-icon v-if="isBj" class="check-btn" :value.sync="allCheck">全选</check-icon>
@@ -100,6 +100,30 @@
 						id: 1
 					},
 					{
+						img: '../../../../static/member/login-img.png',
+						name: '热风2018年小清新女士星星休闲双肩包拉链方形背包B52W8201',
+						money: '50.0',
+						ischeck: false,
+						id: 2
+					},{
+						img: '../../../../static/member/login-img.png',
+						name: '热风2018年小清新女士星星休闲双肩包拉链方形背包B52W8201',
+						money: '50.0',
+						ischeck: false,
+						id: 2
+					},{
+						img: '../../../../static/member/login-img.png',
+						name: '热风2018年小清新女士星星休闲双肩包拉链方形背包B52W8201',
+						money: '50.0',
+						ischeck: false,
+						id: 2
+					},{
+						img: '../../../../static/member/login-img.png',
+						name: '热风2018年小清新女士星星休闲双肩包拉链方形背包B52W8201',
+						money: '50.0',
+						ischeck: false,
+						id: 2
+					},{
 						img: '../../../../static/member/login-img.png',
 						name: '热风2018年小清新女士星星休闲双肩包拉链方形背包B52W8201',
 						money: '50.0',
@@ -332,6 +356,7 @@
 		}
 		.pro-list,
 		.store-list {
+			background-color: white ;
 			.list-item {
 				height: 2.22rem;
 				position: relative;
@@ -339,6 +364,7 @@
 				display: flex;
 				align-items: center;
 				box-sizing: border-box;
+				
 				.check-btn {
 					margin-right: 0.24rem;
 				}
@@ -417,7 +443,7 @@
 				transform-origin: 0 0;
 				-webkit-transform: scaleY(0.5);
 				transform: scaleY(0.5);
-				left: 0px;
+				left: 0.21rem;
 			}
 		}
 	}
