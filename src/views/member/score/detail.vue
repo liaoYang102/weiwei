@@ -2,7 +2,7 @@
 	<div>
 		<settingHeader :title="title"></settingHeader>
 		<div class="scoreDetail-box">
-			<div class="purse-box">
+			<div class="purse-box1">
 				<div class="box-h">
 					<div class="top">
 						<div>
@@ -133,7 +133,7 @@
 				color: #1A2642;
 			}
 		}
-		.purse-box {
+		.purse-box1 {
 			background-color: #f5f6fa;
 			position: relative;
 			.box-h {
@@ -209,8 +209,8 @@
 				font-size: 0.20rem;
 				color: white;
 				img {
-					width: 0.24rem;
-					height: 0.24rem;
+					width: 0.28rem;
+					height: 0.28rem;
 					margin-right: 0.1rem;
 				}
 			}

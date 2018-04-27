@@ -1,31 +1,38 @@
 <template>
 	<div class="content">
 		<settingHeader :title="title"></settingHeader>
-		<div class="couponTab">
-			<tab class="tab" :line-width="2" active-color="#397df8" custom-bar-width="0.56rem">
-				<tab-item v-for="(item,index) in couponType" :selected="typeActive == index" @on-item-click="onItemClick(index)">{{item}}</tab-item>
-			</tab>
-			<i id="menu" class="iconfont" @click.active="showDrawer"></i>
+		<div class="couponTab" :class="{'couponTabH':hShow == false}">
+			<div class="bnf">
+				<tab class="tab" :line-width="2" active-color="#397df8" custom-bar-width="0.56rem">
+					<tab-item v-for="(item,index) in couponType" :selected="typeActive == index" @on-item-click="onItemClick(index)">{{item}}</tab-item>
+				</tab>
+				<i id="menu" class="iconfont" @click.active="showDrawer"></i>
+			</div>
 		</div>
 		<div class="couponList">
-			<div class="rollOne bgImgThree">
-				<a href="#">
-					<div class="left">
-						<p>购物券1</p>
-						<p class="mt20">(仅限威伐光门店使用)</p>
-						<p>2018.03.29-2018.04.08</p>
-					</div>
-				</a>
-				<div class="right fontOne"><span>满减券</span>
-					<a href="#">
-						<div class="rightBtn mt20 btnImgThree">
-							<span>立即使用</span>
+			<div class="wrapper" ref="wrapper">
+				<div class="content">
+					<div class="rollOne bgImgThree" v-for="item in couponList">
+						<a href="#">
+							<div class="left">
+								<p>{{item.title}}</p>
+								<p class="mt20">{{item.tip}}</p>
+								<p>{{item.time}}</p>
+							</div>
+						</a>
+						<div class="right fontOne"><span>{{item.type}}</span>
+							<a href="#">
+								<div class="rightBtn mt20 btnImgThree">
+									<span>立即使用</span>
+								</div>
+							</a>
 						</div>
-					</a>
+					</div>
+					<load-more v-if="show" tip="正在加载"></load-more>
 				</div>
 			</div>
 		</div>
-		<div class="drawer-box" @click.active="showDrawer">
+		<!--<div class="drawer-box" @click.active="showDrawer">
 			<masker :fullscreen="drawerShow">
 				<div slot="content">
 					<drawer :show.sync="drawerShow" show-mode="overlay" placement="right" :drawer-style="{'background-color':'white', width: '200px',height:'100vh',marginTop:'46px'}">
@@ -36,35 +43,105 @@
 				</div>
 
 			</masker>
-
+		</div>-->
+		<!--筛选菜单栏-->
+		<div v-transfer-dom>
+			<popup v-model="show9" position="top">
+				<div class="position-vertical-demo">
+					<div class="twoClass">
+						<div class="type-item" v-for="(item,index) in twoClass">
+							<span :class="{'twoActive':twoIndex == index}" @click="twoChange(index,item)">{{item}}</span>
+						</div>
+					</div>
+				</div>
+			</popup>
 		</div>
 
 	</div>
 </template>
 
 <script>
+	import BScroll from 'better-scroll'
 	import { Tab, TabItem, Masker, Drawer } from 'vux'
 	import settingHeader from '../../../components/setting_header'
 	export default {
 		data() {
 			return {
 				typeActive: 0,
-				typeItemActive: 0,
+				twoIndex: 0,
+				drawerShow: false,
+				show: false,
 				couponType: ['全部', '未使用', '已使用', '已过期'],
-				typeList: ['所有优惠券', '体验券', '满减券', '折扣券'],
+				twoClass: ['所有优惠券', '体验券', '满减券', '折扣券'],
 				title: '我的优惠券',
-				drawerShow: false
+				hShow: '',
+				show9: false,
+				couponList:[
+					{title:'购物券1',tip:'仅限威伐光门店使用',time:'2018.03.29-2018.04.08',type:'满减券'},
+					{title:'购物券1',tip:'仅限威伐光门店使用',time:'2018.03.29-2018.04.08',type:'满减券'},
+					{title:'购物券1',tip:'仅限威伐光门店使用',time:'2018.03.29-2018.04.08',type:'满减券'},
+					{title:'购物券1',tip:'仅限威伐光门店使用',time:'2018.03.29-2018.04.08',type:'满减券'},
+					{title:'购物券1',tip:'仅限威伐光门店使用',time:'2018.03.29-2018.04.08',type:'满减券'},
+					{title:'购物券1',tip:'仅限威伐光门店使用',time:'2018.03.29-2018.04.08',type:'满减券'},
+				]
 			}
+		},
+		created() {
+			this.$store.state.page.footerFalg = true
+			//判断是否微信端
+			var ua = navigator.userAgent.toLowerCase();
+			var isWeixin = ua.indexOf('micromessenger') != -1;
+			if(isWeixin) {
+				this.hShow = true;
+			} else {
+				this.hShow = false;
+			}
+		},
+		mounted: function() {
+			this.InitScroll() //初始化下拉组件
 		},
 		methods: {
 			onItemClick(index) {
 				this.typeActive = index
 			},
 			showDrawer() {
-				this.drawerShow = !this.drawerShow
+				//				this.drawerShow = !this.drawerShow
+				this.show9 = true
 			},
 			type(index) {
 				this.typeItemActive = index
+			},
+			twoChange(index, item) {
+				this.twoIndex = index
+				this.show9 = false
+			},
+			InitScroll() {
+				this.$nextTick(() => {
+					if(!this.scroll) {
+						this.scroll = new BScroll(this.$refs.wrapper, {
+							click: true,
+							scrollY: true,
+							pullUpLoad: {
+								threshold: -30, // 负值是当上拉到超过低部 70px；正值是距离底部距离 时，                    
+							}
+						})
+						this.scroll.on('pullingUp', (pos) => {
+							this.show = true;
+							this.LoadData()
+							this.$nextTick(function() {
+								this.scroll.finishPullUp();
+								this.scroll.refresh();
+							});
+						})
+					} else {
+						this.scroll.refresh()
+					}
+				})
+
+			},
+			LoadData(){
+				this.couponList = this.couponList.concat(this.couponList)
+				setTimeout(function(){this.show = false;},1500)
 			}
 		},
 		components: {
@@ -94,28 +171,86 @@
 		}
 	}
 	
-	.couponTab {
+	.twoClass {
 		display: flex;
-		align-items: center;
-		background-color: white;
-		z-index: 11111;
-		.tab {
-			flex: 1;
-			.vux-tab-item {
-				background-color: transparent;
+		flex-wrap: wrap;
+		padding: 0.2rem 0;
+		.type-item {
+			width: 25%;
+			padding: 0.08rem 0.25rem;
+			text-align: center;
+			box-sizing: border-box;
+			span {
+				display: inline-block;
+				width: 100%;
+				height: 0.5rem;
+				line-height: 0.5rem;
+				/*border: 1px solid #eaeaea;*/
+				background: #eaeaea;
+				border-radius: 2px;
+				font-size: 0.20rem;
+			}
+			.twoActive {
+				/*border: 1px solid #ff00006b!important;*/
+				background-color:#336fff;
+				color: white;
 			}
 		}
-		i {
-			display: inline-block;
-			width: 15%;
-			text-align: center;
-			line-height: 0.8rem;
-			color: #397df8;
-			font-size: 0.35rem;
+	}
+	
+	.couponTabH {
+		top: 46px!important;
+	}
+	
+	.couponTab {
+		background-color: white;
+		position: fixed;
+		top: 0;
+		width: 100%;
+		z-index: 111;
+		.bnf {
+			display: flex;
+			align-items: center;
+			position: relative;
+			.tab {
+				flex: 1;
+				.vux-tab-item {
+					background: transparent;
+				}
+			}
+			i {
+				display: inline-block;
+				width: 15%;
+				text-align: center;
+				line-height: 0.8rem;
+				color: #397df8;
+				font-size: 0.35rem;
+			}
+		}
+		.bnf:before {
+			content: " ";
+			position: absolute;
+			left: 0;
+			top: -1px;
+			right: 0;
+			height: 1px;
+			border-top: 1px solid #D9D9D9;
+			color: #D9D9D9;
+			-webkit-transform-origin: 0 0;
+			transform-origin: 0 0;
+			-webkit-transform: scaleY(0.5);
+			transform: scaleY(0.5);
+			left: 0px;
 		}
 	}
 	
 	.couponList {
+		padding-top: 55px;
+		.wrapper {
+			height: 9.5rem;
+			overflow: hidden;
+			padding-bottom: 1rem;
+		}
 		.bgImgThree {
 			background: url(../../../assets/images/user/rollBg4.png) no-repeat;
 			background-size: 100% 100%;
@@ -126,6 +261,7 @@
 			height: 2rem;
 			width: 95%;
 			margin: 0 auto;
+			margin-left: 0.5rem;
 			.left {
 				width: 60%;
 				height: 100%;
@@ -161,6 +297,7 @@
 					display: block;
 					font-size: 0.35rem;
 					color: #82a6ee;
+					margin-top: 0.1rem;
 				}
 				.btnImgThree {
 					background: url(../../../assets/images/user/rollBtn4.png) no-repeat;
@@ -169,17 +306,16 @@
 					span {
 						color: #fc705d;
 					}
-					;
 				}
 				.rightBtn {
 					width: 1.5rem;
 					padding-bottom: 0.08rem;
 					display: inline-block;
-					margin-top: 0.2rem;
+					margin-top: 0.1rem;
 					span {
 						font-size: 0.2rem;
 						vertical-align: middle;
-						line-height: 0.7rem;
+						line-height: 0.5rem;
 					}
 				}
 			}

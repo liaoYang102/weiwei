@@ -176,9 +176,9 @@
 		position: relative;
 		.log-wrap {
 			margin-left: 0.3rem;
-			border-bottom: 1px solid #D8DFF0;
 			height: 1.32rem;
 			font-size: 0.28rem;
+			position: relative;
 			.contentOne {
 				position: relative;
 				top: 0.27rem;
@@ -198,6 +198,21 @@
 				color: #90A2C7;
 				line-height: 0.4rem;
 			}
+		}
+		.log-wrap:after{
+			content: " ";
+					position: absolute;
+					left: 0;
+					top: 0;
+					right: 0;
+					height: 1px;
+					border-top: 1px solid #D9D9D9;
+					color: #D9D9D9;
+					-webkit-transform-origin: 0 0;
+					transform-origin: 0 0;
+					-webkit-transform: scaleY(0.5);
+					transform: scaleY(0.5);
+					left: 0;
 		}
 	}
 	

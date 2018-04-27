@@ -2,9 +2,9 @@
 	<div>
 		<settingHeader :title="title"></settingHeader>
 		<div class="content">
-			<div class="login-box">
+			<!--<div class="login-box">
 				<img src="../../assets/images/user/change.png" />
-			</div>
+			</div>-->
 			<group gutter="0" class="input-div">
 				<x-input class="input-item" ref="phone" v-model="phone" placeholder="输入手机号码" type="number" :max="11" :required="true" @on-change="nameChange"></x-input>
 				<x-input class="input-item" ref="password" v-model="password" placeholder="输入新密码" type="password" :required="true"></x-input>
@@ -13,7 +13,7 @@
 				</x-input>
 			</group>
 			<div class="tip">
-				<x-button class="add-btn" @click.native="submit" :show-loading="showLoading" :gradients="['#1D62F0', '#19D5FD']" :disabled="isClick">{{btnText}}</x-button>
+				<x-button class="add-btn" @click.native="submit" :show-loading="showLoading" :disabled="isClick">{{btnText}}</x-button>
 			</div>
 		</div>
 	</div>
@@ -139,8 +139,9 @@
 		margin-top: 0.55rem;
 		ont-family: PingFangSC-Regular;
 		font-size: 0.28rem;
-		color: #FFFFFF;
+		color: #FFFFFF!important;
 		letter-spacing: 0;
+		background-color: #336FFF!important;
 	}
 	.login-re{
 		padding: 10px 15px;

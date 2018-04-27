@@ -1,12 +1,12 @@
 <template>
 	<div class="footer-box" v-if='$store.state.page.footerFalg'>
 		<div class="b-top">
-			<router-link v-for="(item,index) in barList" :to="item.url">
-				<div :class="{'factive':factivei == index}" @click="fchange(index)">
+			<div class="item" v-for="(item,index) in barList" :class="{'factive':factivei == index}" @click="fchange(index)">
+				<router-link  :to="item.url">
 					<img class="icon" :class="{'zqm':index == 2}" :src="[factivei == index?item.iconIn:item.icon]" />
 					<p v-if="index != 2">{{item.title}}</p>
-				</div>
-			</router-link>
+				</router-link>
+			</div>
 		</div>
 	</div>
 </template>
@@ -80,12 +80,14 @@
 			position: relative;
 			display: flex;
 			justify-content: space-between;
-			a {
+			.item {
 				flex: 1;
 				display: flex;
 				align-items: center;
 				justify-content: center;
-				div {
+				a {
+					width: 100%;
+					height: 100%;
 					display: flex;
 					align-items: center;
 					flex-direction: column;

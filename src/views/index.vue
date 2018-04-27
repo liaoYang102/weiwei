@@ -157,6 +157,7 @@
 <script>
 	import { swiper, swiperSlide } from 'vue-awesome-swiper'
 	import { Card } from 'vux'
+	import BScroll from 'better-scroll'
 	export default {
 		data() {
 			return {

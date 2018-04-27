@@ -12,7 +12,7 @@
 				<button-tab-item selected @on-item-click="lookCard()">全部</button-tab-item>
 				<button-tab-item @on-item-click="lookCard()"><span class="vux-reddot-s">我的</span></button-tab-item>
 			</button-tab>-->
-			<span class="shaix" @click.active="showRight">筛选<img src="../../../../static/member/shaixuanIcon.png" alt="" /></span>
+			<span class="shaix" @click.active="showRight"><img src="../../../../static/member/shaixuanIcon.png" alt="" /></span>
 		</div>
 		<div class="card-box">
 			<swiper v-model="cardLook" height="800px" :show-dots="false">
@@ -44,7 +44,7 @@
 										<span>查看详情</span>
 									</div>
 									<div class="name">威伐光25分钟体验套餐卡</div>
-									<div class="top">
+									<div class="top2">
 										<span>仅支持威伐光设备</span>
 										<span>可用次数： 10</span>
 									</div>
@@ -259,7 +259,7 @@
 					font-size: 0.20rem;
 				}
 				.twoActive {
-					background: #10aeff;
+					background: #336FFF;
 					color: white;
 				}
 			}
@@ -350,6 +350,15 @@
 				display: flex;
 				align-content: center;
 				justify-content: space-between;
+			}
+			.top2{
+				font-size: 0.24rem;
+				color: #ffffff;
+				display: flex;
+				align-content: center;
+				span{
+					margin-right: 0.4rem;
+				}
 			}
 			.name {
 				color: white;
