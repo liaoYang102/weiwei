@@ -3,8 +3,8 @@
 		<div class="content">
 			<div class="theme-goods">
 				<div class="theme-goods-top">
-					<div class="goods-left" @click="goThemegoods">
-						<div class="text-img"><img src="../../../assets/images/shop/purchase.png"></div>
+					<div class="goods-left" @click="goThemegoods" :class="{'changeTheme' : theme == '中国臻品'}">
+						<div class="text-img"><img :src="imgSrc"></div>
 						<div class="goods-border"></div>
 						<div>{{ list.title}}</div>
 						<div class="img"><img src="../../../assets/images/shop/12.png"></div>
@@ -48,8 +48,9 @@
 					dataList:[
 						{ goodsname:'COACH女士贝壳包', tag: [ { name:'时尚大牌'}, { name: '方便百搭'}]},
 						{ goodsname:'COACH女士贝壳包', tag: [ { name:'时尚大牌'}, { name: '方便百搭'}]}
-					]
-				}
+					],
+				},
+				imgSrc: '../../../../static/shop/purchase.png'
 			}
 		},
 		mounted:function(){
@@ -66,6 +67,7 @@
 							{ goodsname:'COACH女士贝壳包', tag: [ { name:'时尚大牌'}, { name: '方便百搭'}]}
 						]
 					}
+					vm.imgSrc = '../../../../static/shop/purchase.png'
 				} else {
 					vm.list = {
 						title: '好东西,中国造', 
@@ -74,6 +76,7 @@
 							{ goodsname:'COACH女士贝壳包', tag: [ { name:'时尚大牌'}, { name: '方便百搭'}]}
 						]
 					}
+					vm.imgSrc = '../../../../static/shop/best.png'
 				}
 				console.log('---', vm.theme)
 			},
@@ -121,9 +124,10 @@ li{
 				padding-top: 0.27rem;
 				background: url('../../../assets/images/shop/Group6.png') no-repeat;
 				.text-img{
-					width: 38%;
+					/*width: 25%;*/
 					img{
-						width: 100%;
+						width: auto;
+						height: 0.31rem;
 					}
 				}
 				.goods-border{
@@ -142,6 +146,9 @@ li{
 						vertical-align:middle;
 					}
 				}
+			}
+			.changeTheme{
+				background: url('../../../assets/images/shop/Group7.png') no-repeat;
 			}
 			.goods-right{
 				flex: 1;
