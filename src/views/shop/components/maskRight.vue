@@ -6,11 +6,16 @@
 					<div class="content">
 					    <div class="screening">
 					    	<div class="logo">
-					    		<span>品牌</span>
-					    		<img src="../../../assets/images/shop/dropdown.png" @click="down()">
-					    		<div class="logolist">
-					    			<li class="item" v-for="(item, index) in logolist" @click="active($event)">{{ item.name}}</li>
-					    		</div>
+			    				<group>
+			    					<cell is-link :title="logoTitle" :border-intent="false" :arrow-direction="showContent ? 'up' : 'down'" @click.native="down()">
+			    						<!-- <span></span> -->
+			    					</cell>
+			    					<div>
+			    						<div class="logolist">
+			    							<li class="item" v-for="(item, index) in logolist" @click="active($event)">{{ item.name}}</li>
+			    						</div>
+			    				    </div>
+			    				</group>
 					    	</div>
 
 					    	<div class="list" v-for="(screen) in screening">
@@ -38,6 +43,7 @@ export default {
     data(){
     	return {
     		show1:false,
+    		logoTitle: '品牌',
     		logolist: [
     			{ name:'logo'},
     			{ name:'logo'},
@@ -53,7 +59,8 @@ export default {
     			{ title: '类别', options: [ {name: '女士双肩包'},{name: '女士双肩包'},{name: '女士双肩包'}]},
     			{ title: '店铺类型', options: [ {name: '旗舰店'},{name: '专卖店'},{name: '专营店'}]},
     			{ title: '服务折扣', options: [ {name: '积分全额兑'},{name: '积分+现金'},{name: '包邮'},{ name: '积分赠送'}]}
-    		]
+    		],
+    		showContent: true
     	}
     },
     mounted() {
@@ -89,12 +96,15 @@ export default {
     		let list = this.logolist;
     		let length= list.length;
     		let obj = { name: 'logo'};
+
 			if(length == 9) {
 				for(let i =0; i<6;i++){
 					list.push(obj)
+					this.showContent = false;
 				}
 			}else{
 				list.splice(9,6)
+				this.showContent = true;
 			}
     	},
     	// 切换样式
@@ -143,7 +153,6 @@ li{
 	list-style: none;
 	.logo{
 		overflow: hidden;
-		/*margin-top: 0.63rem;*/
 		margin-left: 0.25rem;
 		margin-bottom: 0.45rem;
 		img{
@@ -205,6 +214,26 @@ li{
 </style>
 
 <style lang="less">
+.logo{
+	.weui-cells{
+		margin-top: 0;
+	}
+	.weui-cell{
+		padding: 0 0.24rem 0 0;
+	}
+	.vux-no-group-title{
+		margin-top: 0;
+	}
+	.weui-cells:before{
+		border-top: none;
+	}
+	.weui-cells:after{
+		border-bottom: none;
+	}
+	.vux-label{
+		font-size: 0.28rem;
+	}
+} 
 .maskright .vux-popup-dialog{
 	min-height: 100%;
 	height: auto;

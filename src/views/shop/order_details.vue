@@ -242,6 +242,7 @@ li{
 			.giveup{
 				border: 0.01rem solid #90A2C7;
 				border-radius: 0.04rem;
+				color: #90A2C7;
 			}
 		}
 		
