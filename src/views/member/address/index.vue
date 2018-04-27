@@ -99,7 +99,6 @@
 			}
 		},
 		created() {
-			this.$store.state.page.footerFalg = false
 		},
 		mounted: function() {
 			this.InitScroll() //初始化下拉组件
