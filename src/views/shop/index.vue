@@ -222,7 +222,7 @@ export default {
 	}
 }
 .wrapper {
-	height: 100%;
+	height: 90%;
 	overflow: hidden;
 }
 li{
