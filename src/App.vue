@@ -3,7 +3,7 @@
 		<transition :name="viewTransition" :css="!!direction">
 			<router-view class="router-view"></router-view>
 		</transition>
-		<settingFooter  v-if="$store.state.page.footerFalg"></settingFooter>
+		<settingFooter v-if="$route.meta.navShow"></settingFooter>
 	</div>
 </template>
 

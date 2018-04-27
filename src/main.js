@@ -56,9 +56,10 @@ Vue.config.productionTip = false
 import animate from 'animate.css'
 Vue.use(animate)
 //全局load
-import { LoadingPlugin, DatetimePlugin } from 'vux'
+import { LoadingPlugin, DatetimePlugin ,ToastPlugin } from 'vux'
 Vue.use(LoadingPlugin)
 Vue.use(DatetimePlugin)
+Vue.use(ToastPlugin)
 //echart
 import echarts from 'echarts'
 Vue.prototype.$echarts = echarts
