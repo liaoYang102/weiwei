@@ -40,13 +40,13 @@
 
 				<div class="shop_cell">
 					<group>
-					    <cell title="店铺名" is-link>
+					    <cell title="店铺名" is-link :border-intent="false">
 					    	<div class="cell_item">
 					    		<img src="../../assets/images/shop/UNIQLO.png">
 					    		<span>优衣库旗舰店</span>
 					    	</div>
 					    </cell>
-					    <cell title="支付方式">
+					    <cell title="支付方式" :border-intent="false">
 					    	<div class="pr">积分加现金</div>
 					    </cell>
 					</group>
@@ -257,7 +257,8 @@ export default {
 			}
 			.comments{
 				background: #FFF;
-				margin: 0.2rem 0;
+				margin-top: 0.2rem;
+				border-bottom: 0.2rem solid #F5F8F9;
 				font-size: 0.28rem;
 				padding-left: 0.19rem;
 				padding-bottom: 0.32rem;
@@ -342,6 +343,7 @@ export default {
 		background: #FFF;
 		border-top: 0.01rem solid #eeeeee;
 		.footer_icon{
+			box-sizing: border-box;
 			width: 18%;
 			float: left;
 			font-size: 0.2rem;
@@ -356,12 +358,14 @@ export default {
 			}
 		}
 		.footer-btn{
-			width: 31.6%;
+			width: 32%;
+			height: 100%;
+			line-height: 1rem;
 			text-align: center;
 			font-size: 0.32rem;
 			color: #FFFFFF;
 			float: left;
-			padding: 0.26rem 0 0.29rem 0;
+			/*padding: 0.26rem 0 0.29rem 0;*/
 		}
 		.btn_green{
 			background: #00DB83;
@@ -378,10 +382,10 @@ export default {
 	padding: 0.3rem 0.15rem !important;
 }
 .shop_cell .weui-cells:before{
-	border-top: 0.01rem solid #F5F6FA !important;
+	border-top: 1px solid #D8DFF0 !important;
 }
 .shop_cell  .weui-cell:before{
-	border-top: 0.01rem solid #F5F6FA !important;
+	border-top: 1px solid #D8DFF0 !important;
 }
 .shop_cell .vux-label{
 	color: #90A2C7 !important;

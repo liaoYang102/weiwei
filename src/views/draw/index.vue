@@ -57,8 +57,8 @@
                     	<group v-for="(item,index) in drawList">
 							<cell is-link>
 								<li @click="goPastevents">
-									<img src="../../assets/images/draw/lottery_index7.png" alt="" class="left">
-									<img src="../../assets/images/draw/lottery_index8.png" alt="" class="arrow">
+									<div class="left img"><img src="../../assets/images/draw/lottery_index7.png" alt=""></div>
+									<div class="arrow"><img src="../../assets/images/draw/lottery_index8.png" alt=""></div>
 									<div class="left container">
 										<p class="lucky">{{ item.title}}</p>
 										<p class="num">参加人数:{{ item.num}}</p>
@@ -221,19 +221,25 @@
 	  padding-top: 0.28rem;
 	  position: relative;
 	  padding-bottom: 0.28rem;
-	  img{
-	    width: 1.54rem;
-	    height: 1.12rem;
-	  }
 	  .left{
 	  	float: left;
 	  }
+	  .img{
+	  	width: 1.54rem;
+	    height: 1.12rem;
+	    img{
+	    	width: 100%;
+	    }
+	  }
 	  .arrow {
+	    position: absolute;
 	    width: 0.33rem;
 	    height: 0.41rem;
-	    position: absolute;
 	    left: 0.8rem;
-	    bottom: 0.68rem;
+	    top: 0.6rem;
+	    img{
+	  		width: 100%;
+	  	}
 	  }
 	  .container {
 	    margin-left: 0.25rem;

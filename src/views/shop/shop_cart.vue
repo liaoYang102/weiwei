@@ -194,7 +194,7 @@
 
 <style lang="less" scoped>
 	.wrapper {
-		height: 86%;
+		height: 92%;
 		overflow: hidden;
 	}
 	section{

@@ -91,15 +91,14 @@ export default {
 			purchase: '海外购',
 			best: '中国臻品',
 			imgList:[
-				'https://m.360buyimg.com/mobilecms/s750x366_jfs/t18775/221/1737433669/102730/f366197/5ad58a68N264b153b.jpg!cr_1125x549_0_72!q70.jpg.dpg',
-				'https://img20.360buyimg.com/da/jfs/t18169/49/1676902787/199684/abf88174/5ad405d6N903b6152.jpg.webp',
-				'https://m.360buyimg.com/mobilecms/s750x366_jfs/t17776/57/1707882480/210974/217399d5/5ad6b797N78d99799.jpg!cr_1125x549_0_72!q70.jpg.dpg'
+				'../../../../static/images/banner1.png',
+				'../../../../static/images/banner2.png',
+				'../../../../static/images/banner1.png',
 			],
 			imgList2:[
-				'https://img20.360buyimg.com/da/jfs/t18169/49/1676902787/199684/abf88174/5ad405d6N903b6152.jpg.webp',
-				'https://img20.360buyimg.com/da/jfs/t18169/49/1676902787/199684/abf88174/5ad405d6N903b6152.jpg.webp',
-				'https://img20.360buyimg.com/da/jfs/t18169/49/1676902787/199684/abf88174/5ad405d6N903b6152.jpg.webp',
-				'https://img20.360buyimg.com/da/jfs/t18169/49/1676902787/199684/abf88174/5ad405d6N903b6152.jpg.webp'
+				'../../../../static/images/banner1.png',
+				'../../../../static/images/banner2.png',
+				'../../../../static/images/banner1.png',
 			],
 			test: true,
 			show:false,
@@ -204,7 +203,7 @@ export default {
 			position: relative;
 			top: 0.16rem;
 			left: -0.73rem;
-			height: 0.01rem;
+			height: 1px;
 			width: 0.68rem;
 			background-image: linear-gradient(238deg, #5EC3FF 0%, #106FE3 100%);
 		}
@@ -215,14 +214,14 @@ export default {
 			position: relative;
 			top: -0.15rem;
     		left: 3.65rem;
-			height: 0.01rem;
+			height: 1px;
 			width: 0.68rem;
 			background-image: linear-gradient(238deg, #5EC3FF 0%, #106FE3 100%);
 		}
 	}
 }
 .wrapper {
-	height: 90%;
+	height: 92%;
 	overflow: hidden;
 }
 li{
@@ -232,18 +231,18 @@ li{
 	color: #1A2642;
 }
 li:nth-child(odd){
-	margin-right: 0.01rem;
+	margin-right: 1px;
 }
 .mt{
 	margin-top: 0.2rem;
 }
 .tab-list{
-	margin-bottom: 0.02rem;
+	margin-bottom: 1px;
 	background: #f5f6fa;
 	.tab-li{
 		float: left;
 		width: 49.8%;
-		margin-bottom: 0.02rem;
+		margin-bottom: 1px;
 		img{
 			width: 100%;
 		}

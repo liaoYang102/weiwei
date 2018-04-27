@@ -267,7 +267,7 @@
 
 <style lang="less" scoped>
 	.wrapper {
-		height: 100%;
+		height: 93%;
 		background-color: #F5F6FA;
 		overflow: hidden;
 	}
@@ -360,7 +360,7 @@
 					color: #1A2642;
 					.shop-price{
 						font-size: 0.28rem;
-						color: #000000;
+						color: #141C33;
 					}
 				}
 			}	
@@ -373,10 +373,11 @@
 			background-color: #fff;
 			padding-top: 0.2rem;
 			.shop-btn{
+				box-sizing: border-box;
 				display: inline-block;
 				width: 1.5rem;
 				height: 0.56rem;
-				line-height: 0.58rem;
+				line-height: 0.56rem;
 				text-align: center;
 				font-size: 0.28rem;
 				color: #90A2C7;
