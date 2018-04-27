@@ -1,10 +1,10 @@
 <template>
 	<section class="shopIndex">
 		<settingHeader :title="title"></settingHeader>
-
+        <settingFooter :show="true"></settingFooter>
 		<div class="wrapper" ref="wrapper">
 			<div class="content">
-
+				
 				<swiper :imgList="imgList"></swiper>
 				
 				<navindex></navindex>  
@@ -71,6 +71,7 @@
 
 <script>
 import settingHeader from '../../components/setting_header'
+import settingFooter from '@/components/setting_footer'
 import navindex from './components/nav_index'
 import scorenav from './components/scoreNav'
 import theme from './components/theme'
@@ -78,7 +79,6 @@ import swiper from './components/swiper'
 import BScroll from 'better-scroll'
 import Loading from '../../components/loading'
 import noMore from '../../components/noMore'
-import settingFooter from '../../components/setting_footer'
 export default {
 	components: {
 		settingHeader,navindex,scorenav,theme,swiper,Loading,noMore,settingFooter
@@ -91,15 +91,15 @@ export default {
 			purchase: '海外购',
 			best: '中国臻品',
 			imgList:[
-				'../../../static/images/banner1.png',
-				'../../../static/images/banner1.png',
-				'../../../static/images/banner1.png'
+				'https://m.360buyimg.com/mobilecms/s750x366_jfs/t18775/221/1737433669/102730/f366197/5ad58a68N264b153b.jpg!cr_1125x549_0_72!q70.jpg.dpg',
+				'https://img20.360buyimg.com/da/jfs/t18169/49/1676902787/199684/abf88174/5ad405d6N903b6152.jpg.webp',
+				'https://m.360buyimg.com/mobilecms/s750x366_jfs/t17776/57/1707882480/210974/217399d5/5ad6b797N78d99799.jpg!cr_1125x549_0_72!q70.jpg.dpg'
 			],
 			imgList2:[
-				'../../../static/images/banner1.png',
-				'../../../static/images/banner1.png',
-				'../../../static/images/banner1.png',
-				'../../../static/images/banner1.png'
+				'https://img20.360buyimg.com/da/jfs/t18169/49/1676902787/199684/abf88174/5ad405d6N903b6152.jpg.webp',
+				'https://img20.360buyimg.com/da/jfs/t18169/49/1676902787/199684/abf88174/5ad405d6N903b6152.jpg.webp',
+				'https://img20.360buyimg.com/da/jfs/t18169/49/1676902787/199684/abf88174/5ad405d6N903b6152.jpg.webp',
+				'https://img20.360buyimg.com/da/jfs/t18169/49/1676902787/199684/abf88174/5ad405d6N903b6152.jpg.webp'
 			],
 			test: true,
 			show:false,
@@ -111,9 +111,6 @@ export default {
 				{ shopname: 'VANS Old Skool lite黑白超轻鞋款 黑色38.5', money: '3598', score: '', tag: '新品'}
 			]
 		}
-	},
-	created(){
-		// this.$store.state.page.footerFalg = true;
 	},
 	mounted() {
 		this.InitScroll()
@@ -225,7 +222,7 @@ export default {
 	}
 }
 .wrapper {
-	height: 92%;
+	height: 100%;
 	overflow: hidden;
 }
 li{

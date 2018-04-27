@@ -18,10 +18,7 @@ import 'video.js/dist/video-js.css'
 
 FastClick.attach(document.body);
 
-Vue.use(VueVideoPlayer, /* {
-  options: global default options,
-  events: global videojs events
-} */)
+Vue.use(VueVideoPlayer)
 
 Vue.use(Vuex)
 Vue.directive('transfer-dom', TransferDom)

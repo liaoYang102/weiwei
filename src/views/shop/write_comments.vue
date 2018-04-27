@@ -41,8 +41,7 @@
 				<rater v-model="data3" :max="5" active-color="#336FFF" class="s-star" :margin="5"></rater>
 			</div>
 		</div>
-
-
+		
 		<div class="footer">
 			<div class="left">
 				<check-icon :value.sync="demo1">匿名</check-icon>

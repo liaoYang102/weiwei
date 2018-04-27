@@ -1,6 +1,7 @@
 <template>
 	<div class="info-box">
 		<settingHeader :title="title"></settingHeader>
+		<settingFooter :show="true"></settingFooter>
 		<div class="content">
 			<section>
 				<div class="info-bg">
@@ -95,6 +96,7 @@
 <script>
 	import { Badge, Cell, Group } from 'vux'
 	import settingHeader from '../../components/setting_header'
+	import settingFooter from '../../components/setting_footer'
 	export default {
 		data() {
 			return {
@@ -141,10 +143,10 @@
 			}
 		},
 		created(){
-			this.$store.state.page.footerFalg = true
 		},
 		components: {
 			settingHeader,
+			settingFooter,
 			Badge,
 			Cell,
 			Group

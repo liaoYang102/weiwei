@@ -61,7 +61,6 @@
 		},
 		methods: {
 			fchange(index) {
-				console.log(index)
 				this.factivei = index
 			}
 		}
