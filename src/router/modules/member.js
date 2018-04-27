@@ -3,6 +3,7 @@ import login from '@/views/user/login'
 import reg from '@/views/user/reg'
 import change from '@/views/user/change'
 import coupon from '@/views/member/coupon/coupon'
+import coupondetail from '@/views/member/coupon/detail'
 import member from '@/views/member/index'
 import newphone from '@/views/member/setting/newphone'
 import oldphone from '@/views/member/setting/oldphone'
@@ -33,85 +34,94 @@ import logs from '@/views/member/earnings/logs'
 import strategy from '@/views/member/score/strategy'
 import scoreDetail from '@/views/member/score/detail'
 
-const memberModule = [
-	{
-	  path: '/index',
-      name:'index',
-      component: index
+const memberModule = [{
+		path: '/index',
+		name: 'index',
+		component: index,
+		meta: {
+			navShow: true
+		}
 	},
 	{
-	  path: '/',
-      name:'index',
-      component: index
+		path: '/',
+		name: 'index',
+		component: index
 	},
 	{
-      path: '/member/setting/index',
-      name:'setting',
-      component: setting
-    },
-	{
-	  path: '/user/login',
-	  name: 'login',
-	  component: login
+		path: '/member/setting/index',
+		name: 'setting',
+		component: setting
 	},
 	{
-	  path: '/user/reg',
-	  name: 'reg',
-	  component: reg
+		path: '/user/login',
+		name: 'login',
+		component: login
 	},
 	{
-	  path: '/user/change',
-	  name: 'change',
-	  component: change
-	},{
-	  path: '/member/coupon/coupon',
-	  name: 'coupon',
-	  component: coupon
+		path: '/user/reg',
+		name: 'reg',
+		component: reg
 	},
 	{
-	  path: '/member/index',
-	  name: 'member',
-	  component: member
+		path: '/user/change',
+		name: 'change',
+		component: change
+	}, {
+		path: '/member/coupon/coupon',
+		name: 'coupon',
+		component: coupon
+	}, {
+		path: '/member/coupon/detail',
+		name: 'coupon',
+		component: coupondetail
 	},
 	{
-	  path: '/sorder/index',
-	  name:'sorder',
-	  component: sorder
+		path: '/member/index',
+		name: 'member',
+		component: member,
+		meta: {
+			navShow: true
+		}
 	},
 	{
-	  path: '/member/setting/newphone',
-	  name:'newphone',
-	  component: newphone
+		path: '/sorder/index',
+		name: 'sorder',
+		component: sorder
 	},
 	{
-	  path: '/member/setting/oldphone',
-	  name:'oldphone',
-	  component: oldphone
+		path: '/member/setting/newphone',
+		name: 'newphone',
+		component: newphone
 	},
 	{
-	  path: '/member/message/setting',
-	  name:'msg_setting',
-	  component: msg_setting
+		path: '/member/setting/oldphone',
+		name: 'oldphone',
+		component: oldphone
 	},
 	{
-	  path: '/member/address/index',
-	  name:'address',
-	  component: address
+		path: '/member/message/setting',
+		name: 'msg_setting',
+		component: msg_setting
 	},
 	{
-	  path: '/member/address/edit',
-	  name:'address_edit',
-	  component: address_edit
+		path: '/member/address/index',
+		name: 'address',
+		component: address
 	},
 	{
-	  path: '/member/score/index',
-	  name:'score',
-	  component: score
+		path: '/member/address/edit',
+		name: 'address_edit',
+		component: address_edit
 	},
 	{
-	  path: '/member/score/log',
-	  name:'score_log',
-	  component: score_log
+		path: '/member/score/index',
+		name: 'score',
+		component: score
+	},
+	{
+		path: '/member/score/log',
+		name: 'score_log',
+		component: score_log
 	},
 	{
 		path: '/member/team/index',
@@ -142,7 +152,7 @@ const memberModule = [
 		path: '/member/setting/about',
 		name: 'about',
 		component: about
-	},{
+	}, {
 		path: '/member/setting/real',
 		name: 'real',
 		component: real
@@ -166,7 +176,7 @@ const memberModule = [
 		path: '/member/card/index',
 		name: 'card',
 		component: card
-	},{
+	}, {
 		path: '/member/card/detail',
 		name: 'carddetail',
 		component: carddetail

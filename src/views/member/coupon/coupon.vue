@@ -1,7 +1,7 @@
 <template>
 	<div class="content">
 		<settingHeader :title="title"></settingHeader>
-		<div class="couponTab" :class="{'couponTabH':hShow == false}">
+		<div class="couponTab" :class="{'top46':hShow == false}">
 			<div class="bnf">
 				<tab class="tab" :line-width="2" active-color="#397df8" custom-bar-width="0.56rem">
 					<tab-item v-for="(item,index) in couponType" :selected="typeActive == index" @on-item-click="onItemClick(index)">{{item}}</tab-item>
@@ -10,16 +10,16 @@
 			</div>
 		</div>
 		<div class="couponList">
-			<div class="wrapper" ref="wrapper">
+			<div class="wrapper" :class="{'top46':hShow}" ref="wrapper">
 				<div class="content">
 					<div class="rollOne bgImgThree" v-for="item in couponList">
-						<a href="#">
+						<router-link to="/member/coupon/detail">
 							<div class="left">
 								<p>{{item.title}}</p>
 								<p class="mt20">{{item.tip}}</p>
 								<p>{{item.time}}</p>
 							</div>
-						</a>
+						</router-link>
 						<div class="right fontOne"><span>{{item.type}}</span>
 							<a href="#">
 								<div class="rightBtn mt20 btnImgThree">
@@ -28,7 +28,7 @@
 							</a>
 						</div>
 					</div>
-					<load-more v-if="show" tip="正在加载"></load-more>
+					<load-more v-if="show" tip="正在加载"> </load-more>
 				</div>
 			</div>
 		</div>
@@ -62,7 +62,7 @@
 
 <script>
 	import BScroll from 'better-scroll'
-	import { Tab, TabItem, Masker, Drawer } from 'vux'
+	import { Tab, TabItem, Masker, Drawer, Spinner } from 'vux'
 	import settingHeader from '../../../components/setting_header'
 	export default {
 		data() {
@@ -76,13 +76,42 @@
 				title: '我的优惠券',
 				hShow: '',
 				show9: false,
-				couponList:[
-					{title:'购物券1',tip:'仅限威伐光门店使用',time:'2018.03.29-2018.04.08',type:'满减券'},
-					{title:'购物券1',tip:'仅限威伐光门店使用',time:'2018.03.29-2018.04.08',type:'满减券'},
-					{title:'购物券1',tip:'仅限威伐光门店使用',time:'2018.03.29-2018.04.08',type:'满减券'},
-					{title:'购物券1',tip:'仅限威伐光门店使用',time:'2018.03.29-2018.04.08',type:'满减券'},
-					{title:'购物券1',tip:'仅限威伐光门店使用',time:'2018.03.29-2018.04.08',type:'满减券'},
-					{title:'购物券1',tip:'仅限威伐光门店使用',time:'2018.03.29-2018.04.08',type:'满减券'},
+				couponList: [{
+						title: '购物券1',
+						tip: '仅限威伐光门店使用',
+						time: '2018.03.29-2018.04.08',
+						type: '满减券'
+					},
+					{
+						title: '购物券1',
+						tip: '仅限威伐光门店使用',
+						time: '2018.03.29-2018.04.08',
+						type: '满减券'
+					},
+					{
+						title: '购物券1',
+						tip: '仅限威伐光门店使用',
+						time: '2018.03.29-2018.04.08',
+						type: '满减券'
+					},
+					{
+						title: '购物券1',
+						tip: '仅限威伐光门店使用',
+						time: '2018.03.29-2018.04.08',
+						type: '满减券'
+					},
+					{
+						title: '购物券1',
+						tip: '仅限威伐光门店使用',
+						time: '2018.03.29-2018.04.08',
+						type: '满减券'
+					},
+					{
+						title: '购物券1',
+						tip: '仅限威伐光门店使用',
+						time: '2018.03.29-2018.04.08',
+						type: '满减券'
+					},
 				]
 			}
 		},
@@ -124,6 +153,7 @@
 								threshold: -30, // 负值是当上拉到超过低部 70px；正值是距离底部距离 时，                    
 							}
 						})
+						console.log(this.scroll)
 						this.scroll.on('pullingUp', (pos) => {
 							this.show = true;
 							this.LoadData()
@@ -138,9 +168,11 @@
 				})
 
 			},
-			LoadData(){
-				this.couponList = this.couponList.concat(this.couponList)
-				setTimeout(function(){this.show = false;},1500)
+			LoadData() {
+				//				this.couponList = this.couponList.concat(this.couponList)
+				setTimeout(function() {
+					this.show = false;
+				}, 5500)
 			}
 		},
 		components: {
@@ -148,7 +180,8 @@
 			TabItem,
 			settingHeader,
 			Drawer,
-			Masker
+			Masker,
+			Spinner
 		}
 	}
 </script>
@@ -191,13 +224,13 @@
 			}
 			.twoActive {
 				/*border: 1px solid #ff00006b!important;*/
-				background-color:#336fff;
+				background-color: #336fff;
 				color: white;
 			}
 		}
 	}
 	
-	.couponTabH {
+	.top46 {
 		top: 46px!important;
 	}
 	
@@ -246,9 +279,15 @@
 	.couponList {
 		padding-top: 55px;
 		.wrapper {
-			height: 9.5rem;
+			position: absolute;
+			top: 90px;
+			bottom: 0px;
 			overflow: hidden;
-			padding-bottom: 1rem;
+			width: 100%;
+			.vux-loadmore {
+				display: inline-block;
+				width: 100%;
+			}
 		}
 		.bgImgThree {
 			background: url(../../../assets/images/user/rollBg4.png) no-repeat;
