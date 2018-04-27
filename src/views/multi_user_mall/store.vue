@@ -1,6 +1,6 @@
 <template>
 	<section class='store'>
-		<settingHeader :title='title'></settingHeader>
+		<!-- <settingHeader :title='title'></settingHeader> -->
 		<div class="shop">
 			<div class="fl">
 				<img src="../../assets/images/shop/UNIQLO.png" alt="">
@@ -35,7 +35,7 @@
 </template>
 
 <script>
-	import settingHeader from '../../components/setting_header'
+	// import settingHeader from '../../components/setting_header'
 	import { PopupHeader } from 'vux'
 	import { Radio } from 'vux'
 	export default{
@@ -47,7 +47,7 @@
 			}
 		},
 		components:{
-			settingHeader,PopupHeader,Radio
+			PopupHeader,Radio
 		},
 		created(){
 			document.title = '店铺信息';

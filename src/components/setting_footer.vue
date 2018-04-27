@@ -36,7 +36,7 @@
 							icon: '../../static/images/xysc.png',
 							iconIn: '../../static/images/xysc_active.png',
 							title: '信用商城',
-							url: ''
+							url: '/shop'
 						},
 						{
 							icon: '../../static/images/zqm.png',

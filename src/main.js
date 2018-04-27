@@ -4,7 +4,6 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import store from './store'
-import Mint from 'mint-ui'
 import Vuex from 'vuex'
 import echatrs from 'echarts'
 import axios from 'axios'
@@ -26,7 +25,6 @@ Vue.use(VueVideoPlayer, /* {
 } */)
 
 Vue.use(Vuex)
-Vue.use(Mint)
 Vue.directive('transfer-dom', TransferDom)
 Vue.component('group', Group)
 Vue.component('datetime-range', DatetimeRange)
@@ -153,7 +151,6 @@ router.beforeEach(function(to, from, next) {
 					// 	});
 					// }
 				}else{
-					alert(123);
 					store.commit('UPDATE_DIRECTION', {
 						direction: 'reverse'
 					})
