@@ -1,20 +1,18 @@
 <template>
     <div id="shops" style="height: 100%;">
+        <settingHeader :title="title"></settingHeader>
+        <tab :line-width='0' style="border-top: 1px solid #E1E1E1;">
+            <tab-item selected @on-item-click="showPanel">
+              {{ tabItem}} <img src="../../assets/images/shop/xiaActive.png" alt="" width="6%">
+            </tab-item>
+            <tab-item class='vux-center' @on-item-click="onItemClick">销量</tab-item>
+            <tab-item @on-item-click="onItemClick">价格</tab-item>
+            <tab-item @on-item-click="onMenuClick">
+                筛选
+            </tab-item>
+        </tab>
         <div class="wrapper" ref="wrapper">
             <div class="content">
-                <settingHeader :title="title"></settingHeader>
-
-                <tab :line-width='0' style="border-top: 1px solid #E1E1E1;">
-                    <tab-item selected @on-item-click="showPanel">
-                      {{ tabItem}} <img src="../../assets/images/shop/xiaActive.png" alt="" width="6%">
-                    </tab-item>
-                    <tab-item class='vux-center' @on-item-click="onItemClick">销量</tab-item>
-                    <tab-item @on-item-click="onItemClick">价格</tab-item>
-                    <tab-item @on-item-click="onMenuClick">
-                        筛选
-                    </tab-item>
-                </tab>
-
                 <div v-transfer-dom class="masKTop">
                     <popup v-model="showMaskTop" position="top">
                         <div class="panel">
@@ -100,7 +98,7 @@ export default {
     },
     data(){
         return {
-            title: '手机',
+            title: '商品分类',
             tabItem: '综合',
             imgList: [
               'https://img1.360buyimg.com/da/s750x366_jfs/t15823/359/2502172528/255972/995371c1/5ab39a3aNc707d11c.jpg!cr_1125x549_0_72.dpg',
@@ -171,7 +169,7 @@ export default {
                         click: true,
                         scrollY: true,
                         pullUpLoad: {
-                            threshold: -30, // 负值是当上拉到超过低部 70px；正值是距离底部距离 时，                    
+                            // threshold: -30, // 负值是当上拉到超过低部 70px；正值是距离底部距离 时，                    
                         }
                     })
                     this.scroll.on('pullingUp', (pos) => {
@@ -235,7 +233,7 @@ export default {
     }
 }
 .wrapper {
-    height: 100%;
+    height: 86.5%;
     overflow: hidden;
 }
 li:nth-child(odd) .list{

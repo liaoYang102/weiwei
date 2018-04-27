@@ -1,8 +1,8 @@
 <template>
 	<section class='cart'>
+		<settingHeader :title="title"></settingHeader>
 		<div class="wrapper" ref="wrapper">
 			<div class="content">
-				<settingHeader :title="title"></settingHeader>
 				<div class="box2">
 			      	<div class="list">
 						<div class="storeName">
@@ -194,7 +194,7 @@
 
 <style lang="less" scoped>
 	.wrapper {
-		height: 100%;
+		height: 86%;
 		overflow: hidden;
 	}
 	section{

@@ -24,7 +24,6 @@
 
 <script>
 	//上传组件
-	import Uploader from 'vux-uploader'
 	import { Cell, Group, XInput } from 'vux'
 	import settingHeader from '../../../components/setting_header'
 	export default {
@@ -64,7 +63,6 @@
 		components: {
 			settingHeader,
 			XInput,
-			Uploader
 		}
 	}
 </script>
