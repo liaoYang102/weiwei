@@ -84,13 +84,12 @@
 				    },
 				    on:{
 				    	slideChangeTransitionEnd:function(e){
-				    		// console.log(_this.data);
-				    		// console.log(_this)
+
 				    		var info = _this.data[this.activeIndex];
 				    		_this.changeEquiDate=info;
-				    		_this.sliChange(this.activeIndex);
 
 				    		_this.onIndex = this.activeIndex;
+
 				    		clearInterval(_this.clearTime);
 				    		
 				    		//检查设备是否已开启
@@ -186,13 +185,6 @@
 		},
 		methods:{
 			 startEquipment(){//开启设备
-			 	/*var _this=this;
-			 	this.shBtn = true;
-			 	setTimeout(function(){
-			 		_this.startUp = true;
-			 		_this.shBtn = false;
-			 	},500);*/
-
 
 			 	this.startUp=true;
 			 	this.slideStatus = true;
@@ -219,18 +211,6 @@
 				this.data[this.onIndex].isopen = 0;
 
 			 },
-			 overTime(){
-			 	// this.data[0]
-			 },
-			 sliChange(_index){
-			 	// console.log(this.title)
-			 	console.log(this.changeEquiDate);
-			 	var _this=this;
-			 	var changeEquiDate=this.changeEquiDate;
-			 	console.log(_index)
-			 	// if()
-
-			},
 			outTime(info){//计算所有设备的剩余时间
 				setInterval(function(){
                 	--info.overtime;
@@ -244,12 +224,11 @@
 				_this.clearTime = setInterval(function(){
 
 					if(overtime==0){
-						useend();
+						_this.useend();
 						return;
 					}
-
-						--overtime;
-						_this.setTime(overtime);
+					--overtime;
+					_this.setTime(overtime);
 						
                 },998);
 			},
@@ -268,7 +247,6 @@
 				clearInterval(this.clearTime);
 			}
 
-			
 		}
 	}
 </script>
