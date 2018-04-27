@@ -1,7 +1,6 @@
 <template>
 	<section class="shopIndex">
 		<settingHeader :title="title"></settingHeader>
-        <settingFooter :show="true"></settingFooter>
 		<div class="wrapper" ref="wrapper">
 			<div class="content">
 				
@@ -71,7 +70,6 @@
 
 <script>
 import settingHeader from '../../components/setting_header'
-import settingFooter from '@/components/setting_footer'
 import navindex from './components/nav_index'
 import scorenav from './components/scoreNav'
 import theme from './components/theme'
@@ -81,7 +79,7 @@ import Loading from '../../components/loading'
 import noMore from '../../components/noMore'
 export default {
 	components: {
-		settingHeader,navindex,scorenav,theme,swiper,Loading,noMore,settingFooter
+		settingHeader,navindex,scorenav,theme,swiper,Loading,noMore
 	},
 	data(){
 		return {

@@ -1,7 +1,6 @@
 <template>
 	<div class="info-box">
 		<settingHeader :title="title"></settingHeader>
-		<settingFooter :show="true"></settingFooter>
 		<div class="content">
 			<section>
 				<div class="info-bg">
@@ -80,6 +79,7 @@
 			<section>
 				<div class="banner">
 					<img src="../../assets/images/member/member_banner.png" alt="">
+					<img src="static/images/alliance1.png"/>
 				</div>
 			</section>
 			<section>
@@ -96,45 +96,44 @@
 <script>
 	import { Badge, Cell, Group } from 'vux'
 	import settingHeader from '../../components/setting_header'
-	import settingFooter from '../../components/setting_footer'
 	export default {
 		data() {
 			return {
 				title: '个人中心',
 				infoList: [{
-						img: '../../../static/member/member_1.png',
+						img: './static/member/member_1.png',
 						text: '我的优惠券',
 						url: '/member/coupon/coupon'
 					},
 					{
-						img: '../../../static/member/member_2.png',
+						img: './static/member/member_2.png',
 						text: '我的订单',
 						url: '/member/address/index'
 					},
 					{
-						img: '../../../static/member/member_3.png',
+						img: './static/member/member_3.png',
 						text: '我的关注',
 						url: '/member/follow/index'
 					},
 					{
-						img: '../../../static/member/member_4.png',
+						img: './static/member/member_4.png',
 						text: '收货地址',
 						url: '/member/address/index'
 					},
 					{
-						img: '../../../static/member/member_5.png',
+						img: './static/member/member_5.png',
 						text: '门禁系统'
 					},
 					{
-						img: '../../../static/member/m_index17.png',
+						img: './static/member/m_index17.png',
 						text: '幸运抽奖'
 					},
 					{
-						img: '../../../static/member/m_index12.png',
+						img: './static/member/m_index12.png',
 						text: '积分商城'
 					},
 					{
-						img: '../../../static/member/m_index13.png',
+						img: './static/member/m_index13.png',
 						text: '我的卡包',
 						url: '/member/card/index'
 					},
@@ -146,7 +145,6 @@
 		},
 		components: {
 			settingHeader,
-			settingFooter,
 			Badge,
 			Cell,
 			Group

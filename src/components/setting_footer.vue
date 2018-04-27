@@ -1,5 +1,5 @@
 <template>
-	<div class="footer-box" v-if='show'>
+	<div class="footer-box">
 		<div class="b-top">
 			<div class="item" v-for="(item,index) in barList" :class="{'factive':factivei == index}" @click="fchange(index)">
 				<router-link  :to="item.url">
@@ -27,31 +27,31 @@
 			barList: {
 				default: function() {
 					return [{
-							icon: '../../static/images/e.png',
-							iconIn: '../../static/images/e_active.png',
+							icon: './static/images/e.png',
+							iconIn: './static/images/e_active.png',
 							title: 'e消费',
 							url: '/index'
 						},
 						{
-							icon: '../../static/images/xysc.png',
-							iconIn: '../../static/images/xysc_active.png',
+							icon: './static/images/xysc.png',
+							iconIn: './static/images/xysc_active.png',
 							title: '信用商城',
 							url: '/shop'
 						},
 						{
-							icon: '../../static/images/zqm.png',
-							iconIn: '../../static/images/zqm.png',
+							icon: './static/images/zqm.png',
+							iconIn: './static/images/zqm.png',
 							url: ''
 						},
 						{
-							icon: '../../static/images/cylm.png',
-							iconIn: '../../static/images/cylm_active.png',
+							icon: './static/images/cylm.png',
+							iconIn: './static/images/cylm_active.png',
 							title: '产业联盟',
 							url: ''
 						},
 						{
-							icon: '../../static/images/glzx.png',
-							iconIn: '../../static/images/glzx_active.png',
+							icon: './static/images/glzx.png',
+							iconIn: './static/images/glzx_active.png',
 							title: '管理中心',
 							url: '/member/index'
 						},
@@ -61,6 +61,7 @@
 		},
 		methods: {
 			fchange(index) {
+				console.log(index)
 				this.factivei = index
 			}
 		}

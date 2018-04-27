@@ -11,11 +11,11 @@
 			</div>
 			<img @click="sousShow" src="../../../assets/images/member/sous.png" />
 		</div>
-		<swiper v-model="index" height="10.3rem" :show-dots="false" :threshold='100'>
+		<swiper v-model="index" height="100vh" :show-dots="false" :threshold='100'>
 			<swiper-item>
 				<div class="pro-list">
-					<scroller lock-x height="-110" @on-scroll-bottom="onScrollBottom" ref="scrollerBottom" :scroll-bottom-offst="50" :use-pulldown="false">
-						<div class="box2">
+					<div class="wrapper" ref="wrapper">
+						<div class="content">
 							<router-link to="">
 								<div class="list-item" v-for="(item,index) in proList" @click="changePr()">
 									<check-icon v-if="proShow" class="check-btn" :value.sync="item.ischeck"></check-icon>
@@ -29,15 +29,15 @@
 									</div>
 								</div>
 							</router-link>
-							<load-more tip="loading" v-if="onFetching"></load-more>
+							<load-more v-if="show" tip="正在加载"> </load-more>
 						</div>
-					</scroller>
+					</div>
 				</div>
 			</swiper-item>
 			<swiper-item>
 				<div class="store-list">
-					<scroller lock-x height="-110" @on-scroll-bottom="onScrollBottom" ref="scrollerBottom" :scroll-bottom-offst="50" :use-pulldown="false">
-						<div class="box2">
+					<div class="wrapper2" ref="wrapper2">
+						<div class="content">
 							<router-link to="">
 								<div class="list-item" v-for="(item,index) in storeList" @click="changeStore()">
 									<check-icon v-if="storeShow" class="check-btn" :value.sync="item.ischeck"></check-icon>
@@ -50,9 +50,9 @@
 									</div>
 								</div>
 							</router-link>
-							<load-more tip="loading" v-if="onFetching"></load-more>
+							<load-more v-if="show2" tip="正在加载"> </load-more>
 						</div>
-					</scroller>
+					</div>
 				</div>
 			</swiper-item>
 		</swiper>
@@ -79,6 +79,7 @@
 </template>
 
 <script>
+	import BScroll from 'better-scroll'
 	import { Tab, TabItem, Swiper, SwiperItem, CheckIcon, Scroller, Search, Popup, XButton } from 'vux'
 	import settingHeader from '../../../components/setting_header'
 	export default {
@@ -107,7 +108,43 @@
 						money: '50.0',
 						ischeck: false,
 						id: 2
-					}
+					}, {
+						img: '../../../../static/member/login-img.png',
+						name: '热风2018年小清新女士星星休闲双肩包拉链方形背包B52W8201',
+						money: '50.0',
+						ischeck: false,
+						id: 2
+					}, {
+						img: '../../../../static/member/login-img.png',
+						name: '热风2018年小清新女士星星休闲双肩包拉链方形背包B52W8201',
+						money: '50.0',
+						ischeck: false,
+						id: 2
+					}, {
+						img: '../../../../static/member/login-img.png',
+						name: '热风2018年小清新女士星星休闲双肩包拉链方形背包B52W8201',
+						money: '50.0',
+						ischeck: false,
+						id: 2
+					}, {
+						img: '../../../../static/member/login-img.png',
+						name: '热风2018年小清新女士星星休闲双肩包拉链方形背包B52W8201',
+						money: '50.0',
+						ischeck: false,
+						id: 2
+					}, {
+						img: '../../../../static/member/login-img.png',
+						name: '热风2018年小清新女士星星休闲双肩包拉链方形背包B52W8201',
+						money: '50.0',
+						ischeck: false,
+						id: 2
+					}, {
+						img: '../../../../static/member/login-img.png',
+						name: '热风2018年小清新女士星星休闲双肩包拉链方形背包B52W8201',
+						money: '50.0',
+						ischeck: false,
+						id: 2
+					},
 				],
 				storeList: [{
 						img: 'https://ss0.bdstatic.com/-0U0bnSm1A5BphGlnYG/tam-ogel/299c55e31d7f50ae4dc85faa90d6f445_121_121.jpg',
@@ -126,20 +163,70 @@
 				],
 				proidList: [],
 				storeidList: [],
+				show: false,
+				show2:false
 			}
 		},
-		created() {
-			this.$store.state.page.footerFalg = true
-		},
-		mouted() {
-
+		created() {},
+		mounted() {
+			this.InitScroll()
 		},
 		methods: {
+			InitScroll() {
+				this.$nextTick(() => {
+					if(!this.scroll) {
+						this.scroll = new BScroll(this.$refs.wrapper, {
+							click: true,
+							scrollY: true,
+							pullUpLoad: {
+								threshold: -30, // 负值是当上拉到超过低部 70px；正值是距离底部距离 时，                    
+							}
+						})
+						this.scroll.on('pullingUp', (pos) => {
+							this.show = true;
+							this.LoadData()
+							this.$nextTick(function() {
+								this.scroll.finishPullUp();
+								this.scroll.refresh();
+							});
+						})
+						
+						this.scroll2 = new BScroll(this.$refs.wrapper2, {
+							click: true,
+							scrollY: true,
+							pullUpLoad: {
+								threshold: -30, // 负值是当上拉到超过低部 70px；正值是距离底部距离 时，                    
+							}
+						})
+						this.scroll2.on('pullingUp', (pos) => {
+							this.show = true;
+							this.LoadData2()
+							this.$nextTick(function() {
+								this.scroll2.finishPullUp();
+								this.scroll2.refresh();
+							});
+						})
+					} else {
+						this.scroll2.refresh()
+					}
+				})
+
+			},
+			LoadData() {
+				setTimeout(function() {
+					this.show = false;
+				}, 5500)
+			},
+			LoadData2() {
+				setTimeout(function() {
+					this.show2 = false;
+				}, 5500)
+			},
 			//点击全选
 			isallcheck() {
 				this.proidList = [] //重置商品id数组
 				this.storeidList = [] //重置店铺id数组
-									
+
 				if(this.index == 0) {
 					if(this.allprCheck == true) {
 						for(var i = 0; i < this.proList.length; i++) {
@@ -184,7 +271,7 @@
 				this.storeidList = [] //重置店铺id列表
 				this.allprCheck = false //重置全选
 				this.allstCheck = false
-				
+
 				//重置原始数据
 				for(var i = 0; i < this.proList.length; i++) {
 					this.proList[i].ischeck = false
@@ -192,7 +279,7 @@
 				for(var i = 0; i < this.storeList.length; i++) {
 					this.storeList[i].ischeck = false
 				}
-				
+
 				this.isBj = !this.isBj
 				if(this.index == 0) {
 					this.proShow = !this.proShow
@@ -264,6 +351,15 @@
 				} else {
 					this.allstCheck = false
 				}
+			},
+			index() {
+				this.isBj = false //重置编辑
+				this.storeShow = false //重置商品选择框
+				this.proShow = false //重置店铺选择框
+				this.allprCheck = false
+				this.allstCheck = false
+				this.proidList = []
+				this.storeidList = []
 			}
 		},
 		components: {
@@ -291,12 +387,13 @@
 		}
 		.bjBtn-box {
 			position: fixed;
-			bottom: 1rem;
+			bottom: 0;
 			display: flex;
 			align-items: center;
 			width: 100%;
 			padding-left: 0.24rem;
 			box-sizing: border-box;
+			background-color: white;
 			.check-btn {
 				margin-right: 0.24rem;
 			}
@@ -401,6 +498,17 @@
 		.pro-list,
 		.store-list {
 			background-color: white;
+			.wrapper {
+				position: absolute;
+				top: 0px;
+				bottom: 1rem;
+				overflow: hidden;
+				width: 100%;
+				.vux-loadmore {
+					display: inline-block;
+					width: 100%;
+				}
+			}
 			.list-item {
 				height: 2.22rem;
 				position: relative;
