@@ -1,16 +1,16 @@
 <template>
 	<section class='myOrder' style="height: 100%">
+		<settingHeader :title="title"></settingHeader>
+		<tab :line-width="1" :scroll-threshold="5" custom-bar-width="30px">
+	      <tab-item selected @on-item-click="onItemClick">全部</tab-item>
+	      <tab-item @on-item-click="onItemClick">待付款</tab-item>
+	      <tab-item @on-item-click="onItemClick">待收货</tab-item>
+	      <tab-item @on-item-click="onItemClick">已完成</tab-item>
+	      <tab-item @on-item-click="onItemClick">已取消</tab-item>
+	    </tab>
 		<div class="wrapper" ref="wrapper">
 			<div class="content">
-				<settingHeader :title="title"></settingHeader>
-				<tab :line-width="1" :scroll-threshold="5" custom-bar-width="30px">
-			      <tab-item selected @on-item-click="onItemClick">全部</tab-item>
-			      <tab-item @on-item-click="onItemClick">待付款</tab-item>
-			      <tab-item @on-item-click="onItemClick">待收货</tab-item>
-			      <tab-item @on-item-click="onItemClick">已完成</tab-item>
-			      <tab-item @on-item-click="onItemClick">已取消</tab-item>
-			    </tab>
-			    <div class="box" v-if="test">
+			    <div class="box">
 			        <div class="box2">
 			            <div class="shop-box">
 			    			<div class="box-head">
@@ -175,11 +175,11 @@
 			        <loading v-if="show"></loading>
 			        <noMore v-if="showNomore"></noMore>
 			    </div>
-		        <div class="wrap no_orders none-data" v-else>
+		        <!-- <div class="wrap no_orders none-data" v-else>
 		    		<img src="../../assets/images/sorder/none_03.png" alt=""> 
 		    		<p>啊噢！什么订单也没有</p> 
 		    		<span class="guang">到处逛逛</span>
-		        </div>
+		        </div> -->
 			</div>
 		</div>
 	    
@@ -195,7 +195,7 @@
 		data(){
 			return {
 				title:'我的订单',
-				test: true,
+				// test: true,
 				show9: false,
 				show: false,
 				showNomore: false
@@ -209,7 +209,7 @@
 		},
 		methods:{
 		  	onItemClick (index) {
-		  		this.test = false;
+		  		// this.test = false;
 		        console.log('on item click:', index);
 		    },
 		    InitScroll() {
@@ -376,7 +376,7 @@
 				display: inline-block;
 				width: 1.5rem;
 				height: 0.56rem;
-				line-height: 0.56rem;
+				line-height: 0.58rem;
 				text-align: center;
 				font-size: 0.28rem;
 				color: #90A2C7;
@@ -398,5 +398,8 @@
 	}
 	.myOrder .vux-tab-item{
 		font-size: 0.28rem !important;
+	}
+	.myOrder .vux-tab .vux-tab-item.vux-tab-selected{
+		border-bottom: 4px solid #256fff ;
 	}
 </style>

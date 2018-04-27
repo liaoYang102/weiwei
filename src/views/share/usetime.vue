@@ -124,7 +124,7 @@
 				data:[
 					{
 						name:'设备1',
-						logo:'../../../static/images/sb_logo.png',
+						logo:'./static/images/sb_logo.png',
 						num:'威伐光-60005',
 						sbnum:'60005',
 						status:1,	//设备已开启过
@@ -134,7 +134,7 @@
 					},
 					{
 						name:'设备2',
-						logo:'../../../static/images/sb_logo.png',
+						logo:'./static/images/sb_logo.png',
 						num:'威伐光-60006',
 						sbnum:'60006',
 						status:0,	//设备未开启过
