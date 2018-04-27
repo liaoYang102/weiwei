@@ -11,10 +11,10 @@
 			</div>
 			<img @click="sousShow" src="../../../assets/images/member/sous.png" />
 		</div>
-		<swiper v-model="index" height="10.3rem" :show-dots="false" threshold='100'>
+		<swiper v-model="index" height="10.3rem" :show-dots="false" :threshold='100'>
 			<swiper-item>
 				<div class="pro-list">
-					<scroller lock-x height="-110" @on-scroll-bottom="onScrollBottom" ref="scrollerBottom" :scroll-bottom-offst="50">
+					<scroller lock-x height="-110" @on-scroll-bottom="onScrollBottom" ref="scrollerBottom" :scroll-bottom-offst="50" :use-pulldown="false">
 						<div class="box2">
 							<router-link to="">
 								<div class="list-item" v-for="(item,index) in proList" @click="changePr()">
@@ -36,10 +36,10 @@
 			</swiper-item>
 			<swiper-item>
 				<div class="store-list">
-					<scroller lock-x height="-110" @on-scroll-bottom="onScrollBottom" ref="scrollerBottom" :scroll-bottom-offst="50">
+					<scroller lock-x height="-110" @on-scroll-bottom="onScrollBottom" ref="scrollerBottom" :scroll-bottom-offst="50" :use-pulldown="false">
 						<div class="box2">
 							<router-link to="">
-								<div class="list-item" v-for="(item,index) in proList" @click="changePr()">
+								<div class="list-item" v-for="(item,index) in storeList" @click="changeStore()">
 									<check-icon v-if="storeShow" class="check-btn" :value.sync="item.ischeck"></check-icon>
 									<div class="img-box"><img :src="item.img" /></div>
 									<div class="pro-box">
@@ -66,7 +66,8 @@
 		<transition leave-active-class="leave">
 			<div class="bjBtn-box" v-if="isBj">
 				<div @click="isallcheck">
-					<check-icon v-if="isBj" class="check-btn" :value.sync="allCheck">全选</check-icon>
+					<check-icon v-if="isBj && index==0" class="check-btn" :value.sync="allprCheck">全部商品</check-icon>
+					<check-icon v-if="isBj && index==1" class="check-btn" :value.sync="allstCheck">全部店铺</check-icon>
 				</div>
 				<div class="qx-box">
 					<div class="add-btn">取消关注</div>
@@ -90,7 +91,8 @@
 				storeShow: false, //点击店铺编辑
 				onFetching: false,
 				show10: false,
-				allCheck: false, //全选
+				allprCheck: false, //全选商品
+				allstCheck: false, //全选店铺
 				results: [], //搜索值
 				proList: [{
 						img: 'https://ss0.bdstatic.com/-0U0bnSm1A5BphGlnYG/tam-ogel/299c55e31d7f50ae4dc85faa90d6f445_121_121.jpg',
@@ -105,33 +107,25 @@
 						money: '50.0',
 						ischeck: false,
 						id: 2
-					},{
-						img: '../../../../static/member/login-img.png',
-						name: '热风2018年小清新女士星星休闲双肩包拉链方形背包B52W8201',
-						money: '50.0',
-						ischeck: false,
-						id: 2
-					},{
-						img: '../../../../static/member/login-img.png',
-						name: '热风2018年小清新女士星星休闲双肩包拉链方形背包B52W8201',
-						money: '50.0',
-						ischeck: false,
-						id: 2
-					},{
-						img: '../../../../static/member/login-img.png',
-						name: '热风2018年小清新女士星星休闲双肩包拉链方形背包B52W8201',
-						money: '50.0',
-						ischeck: false,
-						id: 2
-					},{
-						img: '../../../../static/member/login-img.png',
-						name: '热风2018年小清新女士星星休闲双肩包拉链方形背包B52W8201',
-						money: '50.0',
-						ischeck: false,
-						id: 2
-					},
+					}
 				],
-				proidList: []
+				storeList: [{
+						img: 'https://ss0.bdstatic.com/-0U0bnSm1A5BphGlnYG/tam-ogel/299c55e31d7f50ae4dc85faa90d6f445_121_121.jpg',
+						name: '热风2018年小清新女士星星休闲双肩包拉链方形背包B52W8201',
+						money: '50.0',
+						ischeck: false,
+						id: 1
+					},
+					{
+						img: '../../../../static/member/login-img.png',
+						name: '热风2018年小清新女士星星休闲双肩包拉链方形背包B52W8201',
+						money: '50.0',
+						ischeck: false,
+						id: 2
+					}
+				],
+				proidList: [],
+				storeidList: [],
 			}
 		},
 		created() {
@@ -141,9 +135,13 @@
 
 		},
 		methods: {
+			//点击全选
 			isallcheck() {
+				this.proidList = [] //重置商品id数组
+				this.storeidList = [] //重置店铺id数组
+									
 				if(this.index == 0) {
-					if(this.allCheck == true) {
+					if(this.allprCheck == true) {
 						for(var i = 0; i < this.proList.length; i++) {
 							this.proList[i].ischeck = true
 							this.proidList.push(this.proList[i].id)
@@ -154,26 +152,55 @@
 							this.proidList = []
 						}
 					}
-					console.log(this.proidList)
-				}
-			},
-			active(index) {
-				this.isBj = false
-				if(index == 0) {
-					this.storeShow = false
+					console.log(this.proidList, 'pro')
 				} else {
-					this.proShow = false
+					if(this.allstCheck == true) {
+						for(var i = 0; i < this.storeList.length; i++) {
+							this.storeList[i].ischeck = true
+							this.storeidList.push(this.storeList[i].id)
+						}
+					} else {
+						for(var i = 0; i < this.storeList.length; i++) {
+							this.storeList[i].ischeck = false
+							this.storeidList = []
+						}
+					}
+					console.log(this.storeidList, 'store')
 				}
 			},
+			//商品  店铺切换
+			active(index) {
+				this.isBj = false //重置编辑
+				this.storeShow = false //重置商品选择框
+				this.proShow = false //重置店铺选择框
+				this.allprCheck = false
+				this.allstCheck = false
+				this.proidList = []
+				this.storeidList = []
+			},
+			//点击编辑
 			edit() {
+				this.proidList = [] //重置商品id列表
+				this.storeidList = [] //重置店铺id列表
+				this.allprCheck = false //重置全选
+				this.allstCheck = false
+				
+				//重置原始数据
+				for(var i = 0; i < this.proList.length; i++) {
+					this.proList[i].ischeck = false
+				}
+				for(var i = 0; i < this.storeList.length; i++) {
+					this.storeList[i].ischeck = false
+				}
+				
 				this.isBj = !this.isBj
-				this.allCheck = false
 				if(this.index == 0) {
 					this.proShow = !this.proShow
 				} else {
 					this.storeShow = !this.storeShow
 				}
 			},
+			//商品选择
 			changePr() {
 				var idList = []
 				for(var i = 0; i < this.proList.length; i++) {
@@ -182,11 +209,21 @@
 					}
 				}
 				this.proidList = idList
-				console.log(this.proidList)
+				console.log(this.proidList, 'pro')
+			},
+			//店铺选择
+			changeStore() {
+				var idList = []
+				for(var i = 0; i < this.storeList.length; i++) {
+					if(this.storeList[i].ischeck == true) {
+						idList.push(this.storeList[i].id)
+					}
+				}
+				this.storeidList = idList
+				console.log(this.storeidList, 'store')
 			},
 			onScrollBottom() {
-				if(this.onFetching) {
-					// do nothing
+				if(this.onFetching) { // do nothing
 				} else {
 					this.onFetching = true
 					setTimeout(() => {
@@ -216,9 +253,16 @@
 		watch: {
 			proidList() {
 				if(this.proidList.length == this.proList.length) {
-					this.allCheck = true
+					this.allprCheck = true
 				} else {
-					this.allCheck = false
+					this.allprCheck = false
+				}
+			},
+			storeidList() {
+				if(this.storeidList.length == this.storeList.length) {
+					this.allstCheck = true
+				} else {
+					this.allstCheck = false
 				}
 			}
 		},
@@ -356,7 +400,7 @@
 		}
 		.pro-list,
 		.store-list {
-			background-color: white ;
+			background-color: white;
 			.list-item {
 				height: 2.22rem;
 				position: relative;
@@ -364,7 +408,6 @@
 				display: flex;
 				align-items: center;
 				box-sizing: border-box;
-				
 				.check-btn {
 					margin-right: 0.24rem;
 				}

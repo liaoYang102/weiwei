@@ -2,7 +2,7 @@
 	<div>
 		<settingHeader :title="title"></settingHeader>
 		<div class="purse-box1">
-			<div class="purse-box">
+			<div class="purse-box2">
 				<div class="box-h">
 					<div class="top">
 						<div>
@@ -48,7 +48,7 @@
 			<div class="af-box">
 				<p class="title">兑换公告</p>
 				<div>
-					<marquee :duration='3000'>
+					<marquee :duration='9000'>
 						<marquee-item v-for="i in 5" :key="i" @click.native="onClick(i)" class="align-middle">
 							<div>
 								<p>恭喜130*******0045 用户兑换三亚三天两夜游旅游票</p>
@@ -151,13 +151,13 @@
 		.af-box {
 			padding: 0 15px;
 			.title {
-				height: 0.92rem;
-				line-height: 0.92rem;
+				height: 0.7rem;
+				line-height: 0.7rem;
 				font-size: 0.28rem;
 				color: rgba(26, 38, 66, 1);
 			}
 			.align-middle {
-				height: 100px;
+				height: 80px;
 				display: flex;
 				align-items: center;
 				color: rgba(144, 162, 199, 1);
@@ -192,7 +192,7 @@
 				}
 			}
 		}
-		.purse-box {
+		.purse-box2 {
 			background-color: #f5f6fa;
 			position: relative;
 			.box-h {
