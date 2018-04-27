@@ -8,7 +8,7 @@
 					    	<div class="logo">
 			    				<group>
 			    					<cell is-link :title="logoTitle" :border-intent="false" :arrow-direction="showContent ? 'up' : 'down'" @click.native="down()">
-			    						<!-- <span></span> -->
+			    					
 			    					</cell>
 			    					<div>
 			    						<div class="logolist">
