@@ -426,6 +426,9 @@
 					color: rgba(26, 38, 66, 1);
 				}
 			}
+			.weui-cell:before{
+				left: 0!important;
+			}
 		}
 		.chart-box {
 			padding: 0.3rem;

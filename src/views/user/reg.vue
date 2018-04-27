@@ -15,7 +15,7 @@
 			</group>
 			<!--			<div class="tip">每个手机号只能作为一个账号注册</div>-->
 			<div class="tip">
-				<x-button class="add-btn" @click.native="submit" :show-loading="showLoading" :gradients="['#1D62F0', '#19D5FD']" :disabled="isClick">{{btnText}}</x-button>
+				<x-button class="add-btn" @click.native="submit" :show-loading="showLoading" :disabled="isClick">{{btnText}}</x-button>
 			</div>
 			<div class="login-re">
 				<span>忘记密码?</span>
@@ -161,8 +161,10 @@
 		margin-top: 0.55rem;
 		ont-family: PingFangSC-Regular;
 		font-size: 0.28rem;
-		color: #FFFFFF;
+		color: #FFFFFF!important;
 		letter-spacing: 0;
+		background-color: #336FFF!important;
+		border-radius: 2px!important;
 	}
 	.login-re{
 		padding: 10px 15px;

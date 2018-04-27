@@ -209,7 +209,7 @@
 				}
 				.twoActive {
 					/*border: 1px solid #ff00006b!important;*/
-					background: #10aeff;
+					background: #336FFF;
 					color: white;
 				}
 			}
