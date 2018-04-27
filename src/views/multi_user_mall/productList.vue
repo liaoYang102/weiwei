@@ -1,8 +1,8 @@
 <template>
     <div id="shops" style="height: 100%;">
-        <div class="wrapper" ref="wrapper">
-            <div class="content">
-                <settingHeader :title="title"></settingHeader>
+        <!-- <div class="wrapper" ref="wrapper"> -->
+            <!-- <div class="content"> -->
+                <!-- <settingHeader :title="title"></settingHeader> -->
 
                 <tab :line-width='0' style="border-top: 1px solid #E1E1E1;">
                     <tab-item selected @on-item-click="showPanel">
@@ -10,9 +10,9 @@
                     </tab-item>
                     <tab-item class='vux-center' @on-item-click="onItemClick">销量</tab-item>
                     <tab-item @on-item-click="onItemClick">价格</tab-item>
-                    <!-- <tab-item @on-item-click="onMenuClick">
+                    <tab-item @on-item-click="onMenuClick">
                         筛选
-                    </tab-item> -->
+                    </tab-item>
                 </tab>
 
                 <div v-transfer-dom class="masKTop">
@@ -52,9 +52,9 @@
                                     <img src="../../assets/images/shop/shop1.png" alt="">
                                     <div class="text-box">
                                         <span>{{ item.name }}</span>
-                                        <div>
-                                            <span class="money-red">{{ item.presentprice}}</span>
-                                            <div class="score-num" style="display:inline-block;">+{{ item.score}}</div>
+                                        <div class='money-box'>
+                                            <span class="money-red">{{item.presentprice}}</span>
+                                            <!-- <div class="score-num" style="display:inline-block;">+{{ item.score}}</div> -->
                                         </div>
                                         <span class="remaining">
                                             <span class="delete">{{ item.orprice}}</span>
@@ -68,12 +68,12 @@
                         <div class="clear"></div>
                     </div>
                     
-                    <loading v-if="show"></loading>
-                    <noMore v-if="showNomore"></noMore>
+                    <!-- <loading v-if="show"></loading> -->
+                    <!-- <noMore v-if="showNomore"></noMore> -->
                 </div>
 
-            </div>
-        </div>
+            <!-- </div> -->
+        <!-- </div> -->
         
 
     
@@ -84,15 +84,15 @@
 import settingHeader from '../../components/setting_header'
 import Swiper from '../shop/components/swiper'
 import BScroll from 'better-scroll'
-import Loading from '../../components/loading'
-import noMore from '../../components/noMore'
+// import Loading from '../../components/loading'
+// import noMore from '../../components/noMore'
 
 export default {
     components: {
         settingHeader,
         Swiper,
-        Loading,
-        noMore
+        // Loading,
+        // noMore
     },
     data(){
         return {
@@ -116,14 +116,14 @@ export default {
             list: [
                 { name: 'Vivo X21 屏幕指纹版全面...', score: '26554积分', remaining: '剩余24件', status: 1},
                 { name: 'Vivo X21 屏幕指纹版全面...', score: '26554积分', remaining: '剩余24件', status: 1},
-                { name: 'Vivo X21 屏幕指纹版全面...', presentprice: '￥3598' ,orprice: '￥4355', pin: '月销4714', score: '265积分', status: 2},
-                { name: 'Vivo X21 屏幕指纹版全面...', presentprice: '￥3598' ,orprice: '￥4355', pin: '月销4714', score: '265积分', status: 2},
-                { name: 'Vivo X21 屏幕指纹版全面...', presentprice: '￥3598' ,orprice: '￥4355', pin: '月销4714', score: '265积分', status: 2},
-                { name: 'Vivo X21 屏幕指纹版全面...', presentprice: '￥3598' ,orprice: '￥4355', pin: '月销4714', score: '265积分', status: 2},
-                { name: 'Vivo X21 屏幕指纹版全面...', presentprice: '￥3598' ,orprice: '￥4355', pin: '月销4714', score: '265积分', status: 2},
-                { name: 'Vivo X21 屏幕指纹版全面...', presentprice: '￥3598' ,orprice: '￥4355', pin: '月销4714', score: '265积分', status: 2},
-                { name: 'Vivo X21 屏幕指纹版全面...', presentprice: '￥3598' ,orprice: '￥4355', pin: '月销4714', score: '265积分', status: 2},
-                { name: 'Vivo X21 屏幕指纹版全面...', presentprice: '￥3598' ,orprice: '￥4355', pin: '月销4714', score: '265积分', status: 2},
+                { name: 'Vivo X21 屏幕指纹版全面...', presentprice: '￥3598' ,orprice: '￥4355', pin: '月销4714', status: 2},
+                { name: 'Vivo X21 屏幕指纹版全面...', presentprice: '￥3598' ,orprice: '￥4355', pin: '月销4714', status: 2},
+                { name: 'Vivo X21 屏幕指纹版全面...', presentprice: '￥3598' ,orprice: '￥4355', pin: '月销4714', status: 2},
+                { name: 'Vivo X21 屏幕指纹版全面...', presentprice: '￥3598' ,orprice: '￥4355', pin: '月销4714', status: 2},
+                { name: 'Vivo X21 屏幕指纹版全面...', presentprice: '￥3598' ,orprice: '￥4355', pin: '月销4714', status: 2},
+                { name: 'Vivo X21 屏幕指纹版全面...', presentprice: '￥3598' ,orprice: '￥4355', pin: '月销4714', status: 2},
+                { name: 'Vivo X21 屏幕指纹版全面...', presentprice: '￥3598' ,orprice: '￥4355', pin: '月销4714', status: 2},
+                { name: 'Vivo X21 屏幕指纹版全面...', presentprice: '￥3598' ,orprice: '￥4355', pin: '月销4714', status: 2},
             ],
             status: 0,
             score: true,
@@ -135,7 +135,7 @@ export default {
     },
     mounted:function(){
         this.init()
-        this.InitScroll()
+        // this.InitSc  roll()
     },
     created:function(){
         this.filterData();
@@ -164,40 +164,40 @@ export default {
         onItemClick: function() {
 
         },
-        InitScroll() {
-            this.$nextTick(() => {
-                if(!this.scroll) {
-                    this.scroll = new BScroll(this.$refs.wrapper, {
-                        click: true,
-                        scrollY: true,
-                        pullUpLoad: {
-                            threshold: -30, // 负值是当上拉到超过低部 70px；正值是距离底部距离 时，                    
-                        }
-                    })
-                    this.scroll.on('pullingUp', (pos) => {
-                        this.show = true;
-                        this.LoadData()
-                        this.$nextTick(function() {
-                            this.scroll.finishPullUp();
-                            this.scroll.refresh();
-                        });
-                    })
-                } else {
-                    this.scroll.refresh()
-                }
-            })
+        // InitScroll() {
+        //     this.$nextTick(() => {
+        //         if(!this.scroll) {
+        //             this.scroll = new BScroll(this.$refs.wrapper, {
+        //                 click: true,
+        //                 scrollY: true,
+        //                 pullUpLoad: {
+        //                     threshold: -30, // 负值是当上拉到超过低部 70px；正值是距离底部距离 时，                    
+        //                 }
+        //             })
+        //             this.scroll.on('pullingUp', (pos) => {
+        //                 this.show = true;
+        //                 this.LoadData()
+        //                 this.$nextTick(function() {
+        //                     this.scroll.finishPullUp();
+        //                     this.scroll.refresh();
+        //                 });
+        //             })
+        //         } else {
+        //             this.scroll.refresh()
+        //         }
+        //     })
 
-        },
-        LoadData() {
-            var _this = this
-            setTimeout(function(){
-                _this.show = false;
-                let obj = [{ name: 'Vivo X21 屏幕指纹版全面...', presentprice: '￥3598' ,orprice: '￥4355', pin: '月销4714', score: '265积分', status: 2},
-                { name: 'Vivo X21 屏幕指纹版全面...', presentprice: '￥3598' ,orprice: '￥4355', pin: '月销4714', score: '265积分', status: 2}];
-                _this.moneylist = _this.moneylist.concat(obj);
-                console.log(_this.moneylist);
-            },3000)
-        },
+        // },
+        // LoadData() {
+        //     var _this = this
+        //     setTimeout(function(){
+        //         _this.show = false;
+        //         let obj = [{ name: 'Vivo X21 屏幕指纹版全面...', presentprice: '￥3598' ,orprice: '￥4355', pin: '月销4714', score: '265积分', status: 2},
+        //         { name: 'Vivo X21 屏幕指纹版全面...', presentprice: '￥3598' ,orprice: '￥4355', pin: '月销4714', score: '265积分', status: 2}];
+        //         _this.moneylist = _this.moneylist.concat(obj);
+        //         console.log(_this.moneylist);
+        //     },3000)
+        // },
         filterData(){
             let vm = this
             for (var i = 0; i<vm.list.length;i++) {
@@ -234,10 +234,10 @@ export default {
         }
     }
 }
-.wrapper {
+/*.wrapper {
     height: 100%;
     overflow: hidden;
-}
+}*/
 /*li:nth-child(odd) .list{
     margin-right: 0.04rem;
 }*/
@@ -249,7 +249,7 @@ export default {
             list-style: none;
             float: left;
             width: 50%;
-            height: 4.35rem;
+            height: 4.28rem;
             font-size: 0.24rem;
             color: #1A2642;
             margin-bottom: 0.04rem;
@@ -278,6 +278,10 @@ export default {
                     }
                     .text-box{
                         margin-left: 0.3rem;
+                        .money-box{
+                            padding: 0.1rem 0;
+                            margin-left: -0.04rem;
+                        }
                         .money-red{
                             font-size: 0.32rem;
                             color: #F23030;

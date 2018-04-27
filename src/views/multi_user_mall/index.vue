@@ -1,95 +1,154 @@
 <template>
 	<section class="multi_user_mall">
-		<div class="top">
-			<div class="store">
-				<img src="../../assets/images/shop/UNIQLO.png">
-				<p class="name">
-					<span>优衣库官方旗舰店</span><br>
-					<span class="small">224万人关注</span>
-				</p>
-				<div class="btn">关注</div>
+		<div class="wrapper" ref="wrapper">
+			<div class="content">
+				<div class="top">
+					<div class="store">
+						<img src="../../assets/images/shop/UNIQLO.png">
+						<p class="name">
+							<span>优衣库官方旗舰店</span><br>
+							<span class="small">224万人关注</span>
+						</p>
+						<div class="btn">关注</div>
+					</div>
+				</div>
+				<search @click.native="goSearch"></search>
+				<div class="tab">
+					<tab :line-width="3" :scroll-threshold="4">
+				      	<tab-item selected @on-item-click="index">
+				      		<div class="tab-item">
+				      			<img src="../../assets/images/multi_user_mall/index1.png" v-if='pyy==1'>
+				      			<img src="../../assets/images/multi_user_mall/index.png" v-else><br>
+				      			<span>首页</span>
+				      		</div>
+				  		</tab-item>
+					    <tab-item @on-item-click="onItemClick">
+					    	<div class="tab-item">
+					    		<img src="../../assets/images/multi_user_mall/shop1.png" v-if='pyy==2'>
+					    		<img src="../../assets/images/multi_user_mall/shop.png" v-else><br>
+					    		<span>商品</span>
+					    	</div>
+						</tab-item>
+					    <tab-item @on-item-click="service">
+					    	<div class="tab-item">
+					    		<img src="../../assets/images/multi_user_mall/service1.png" v-if='pyy==3'>
+					    		<img src="../../assets/images/multi_user_mall/service.png" v-else><br>
+					    		<span>服务</span>
+					    	</div>
+					    </tab-item>
+					    <tab-item @on-item-click="store">
+					    	<div class="tab-item">
+					    		<img src="../../assets/images/multi_user_mall/store1.png" v-if='pyy==4'>
+					    		<img src="../../assets/images/multi_user_mall/store.png" v-else><br>
+					    		<span>简介</span>
+					    	</div>
+					    </tab-item>
+				    </tab>
+				</div>
+				<div class="index" v-if='pyy==1'>
+					<img src="../../assets/images/shop/theme_banner0.png" style="width: 100%">
+
+				    <div class="imgList">
+				    	<div class="img" v-for="(item, index) in 3" >
+				    		<img src="../../assets/images/multi_user_mall/1.png">
+				    	</div>
+				    </div>
+
+				    <img src="../../assets/images/shop/theme_banner0.png" style="width: 100%;">
+
+				    <mallTheme :themeTitle="themeTitle"></mallTheme>
+				    <mallTheme :themeTitle="themeTitle1"></mallTheme>
+				</div>
+				<shop v-else-if="pyy==2"></shop>
+				<service v-else-if="pyy==3"></service>
+				<store v-else-if="pyy==4"></store>
+				<loading v-if="show"></loading>
+                <noMore v-if="showNomore"></noMore>
 			</div>
 		</div>
-<<<<<<< HEAD
-
-		<search @click.native="goSearch"></search>
-
-=======
-		<search @click.native="goSearch"></search>
->>>>>>> ec9fc19b17a264004b1a2aab19dc1fac808062a7
-		<div class="tab">
-			<tab :line-width="3" :scroll-threshold="4">
-		      	<tab-item selected @on-item-click="onItemClick">
-		      		<div class="tab-item">
-		      			<img src="../../assets/images/shop/address.png"><br>
-		      			<span>首页</span>
-		      		</div>
-		  		</tab-item>
-			    <tab-item @on-item-click="onItemClick">
-			    	<div class="tab-item">
-			    		<img src="../../assets/images/shop/address.png"><br>
-			    		<span>商品</span>
-			    	</div>
-				</tab-item>
-			    <tab-item @on-item-click="onItemClick">
-			    	<div class="tab-item">
-			    		<img src="../../assets/images/shop/address.png"><br>
-			    		<span>服务</span>
-			    	</div>
-			    </tab-item>
-			    <tab-item @on-item-click="onItemClick">
-			    	<div class="tab-item">
-			    		<img src="../../assets/images/shop/address.png"><br>
-			    		<span>简介</span>
-			    	</div>
-			    </tab-item>
-		    </tab>
-		</div>
-		<div class="index">
-			<img src="../../assets/images/shop/theme_banner0.png" style="width: 100%">
-
-		    <div class="imgList">
-		    	<div class="img" v-for="(item, index) in 3" >
-		    		<img src="../../assets/images/multi_user_mall/1.png">
-		    	</div>
-		    </div>
-
-		    <img src="../../assets/images/shop/theme_banner0.png" style="width: 100%;">
-
-		    <mallTheme :themeTitle="themeTitle"></mallTheme>
-		    <mallTheme :themeTitle="themeTitle1"></mallTheme>
-		</div>
-	    <!-- <shop v-else></shop> -->
 	</section>
 </template>
 
 <script>
 	import mallTheme from './components/mall_theme'
 	import search from './components/search'
-	// import shop from './productList'
+	import BScroll from 'better-scroll'
+	import Loading from '../../components/loading'
+	import noMore from '../../components/noMore'
+	import shop from './productList'
+	import service from './service'
+	import store from './store'
 	export default {
 		data(){
 			return {
-				show:true,
+				pyy:1,
 				themeTitle: '女子休闲',
-				themeTitle1: '男子休闲'
+				themeTitle1: '男子休闲',
+				show: false,
+            	showNomore: false
 			}
 		},
 		components:{
 			mallTheme,
 			search,
-			// shop
+			Loading,
+       		noMore,
+			shop,
+			service,
+			store
 		},
 		mounted() {
-			
+			this.InitScroll()
 		},
 		methods:{
 			onItemClick(){
-				// this.show = false;
+				this.pyy = 2;
+			},
+			index(){
+				this.pyy = 1;
+			},
+			service(){
+				this.pyy = 3;
+			},
+			store(){
+				this.pyy = 4;
 			},
 			goSearch(){
 				this.$router.push({ name: 'search'})
-			}
+			},
+			InitScroll() {
+	            this.$nextTick(() => {
+	                if(!this.scroll) {
+	                    this.scroll = new BScroll(this.$refs.wrapper, {
+	                        click: true,
+	                        scrollY: true,
+	                        pullUpLoad: {
+	                            threshold: -30, // 负值是当上拉到超过低部 70px；正值是距离底部距离 时，                    
+	                        }
+	                    })
+	                    this.scroll.on('pullingUp', (pos) => {
+	                        this.show = true;
+	                        this.LoadData()
+	                        this.$nextTick(function() {
+	                            this.scroll.finishPullUp();
+	                            this.scroll.refresh();
+	                        });
+	                    })
+	                } else {
+	                    this.scroll.refresh()
+	                }
+	            })
+	        },
+	        LoadData() {
+	            // var _this = this
+	            // setTimeout(function(){
+	            //     _this.show = false;
+	            //     let obj = [{ name: 'Vivo X21 屏幕指纹版全面...', presentprice: '￥3598' ,orprice: '￥4355', pin: '月销4714', score: '265积分', status: 2},
+	            //     { name: 'Vivo X21 屏幕指纹版全面...', presentprice: '￥3598' ,orprice: '￥4355', pin: '月销4714', score: '265积分', status: 2}];
+	            //     _this.moneylist = _this.moneylist.concat(obj);
+	            //     console.log(_this.moneylist);
+	            // },3000)
+	        },
 		}
 	}
 </script>
@@ -97,8 +156,15 @@
 <style lang="less" scoped>
 .multi_user_mall{
 	width: 100%;
-	height: auto;
+	height: 100%;
 	background: #F5F6FA;
+}
+.wrapper {
+    height: 100%;
+    overflow: hidden;
+    .content{
+    	background: #F5F6FA;
+    }
 }
 .top{
 	width: 100%;

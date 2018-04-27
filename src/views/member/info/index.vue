@@ -63,7 +63,6 @@
 		components: {
 			settingHeader,
 			XInput,
-			// Uploader
 		}
 	}
 </script>

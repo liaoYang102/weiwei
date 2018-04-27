@@ -1,6 +1,6 @@
 <template>
 	<section class="service">
-		<settingHeader :title="title"></settingHeader>
+		<!-- <settingHeader :title="title"></settingHeader> -->
 		<div class="fujin">
 			
 			<!-- <h2>套餐类型</h2> -->
