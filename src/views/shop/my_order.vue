@@ -376,7 +376,7 @@
 				display: inline-block;
 				width: 1.5rem;
 				height: 0.56rem;
-				line-height: 0.56rem;
+				line-height: 0.58rem;
 				text-align: center;
 				font-size: 0.28rem;
 				color: #90A2C7;
