@@ -8,7 +8,6 @@ import Vuex from 'vuex'
 import echatrs from 'echarts'
 import axios from 'axios'
 import './assets/icons_font/iconfont.css'
-import 'mint-ui/lib/style.css'
 import './style/global.css'
 import 'swiper/dist/css/swiper.css'
 import './config/wy_rem'
@@ -19,10 +18,7 @@ import 'video.js/dist/video-js.css'
 
 FastClick.attach(document.body);
 
-Vue.use(VueVideoPlayer, /* {
-  options: global default options,
-  events: global videojs events
-} */)
+Vue.use(VueVideoPlayer)
 
 Vue.use(Vuex)
 Vue.directive('transfer-dom', TransferDom)
