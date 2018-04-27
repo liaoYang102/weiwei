@@ -1,5 +1,5 @@
 <template>
-	<div class="footer-box" v-if='$store.state.page.footerFalg'>
+	<div class="footer-box" v-if='show'>
 		<div class="b-top">
 			<div class="item" v-for="(item,index) in barList" :class="{'factive':factivei == index}" @click="fchange(index)">
 				<router-link  :to="item.url">
@@ -36,7 +36,7 @@
 							icon: '../../static/images/xysc.png',
 							iconIn: '../../static/images/xysc_active.png',
 							title: '信用商城',
-							url: ''
+							url: '/shop'
 						},
 						{
 							icon: '../../static/images/zqm.png',
@@ -61,7 +61,6 @@
 		},
 		methods: {
 			fchange(index) {
-				console.log(index)
 				this.factivei = index
 			}
 		}

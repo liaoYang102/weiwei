@@ -15,20 +15,18 @@
 			<span class="shaix" @click.active="showRight"><img src="../../../../static/member/shaixuanIcon.png" alt="" /></span>
 		</div>
 		<div class="card-box">
-			<swiper v-model="cardLook" height="800px" :show-dots="false">
+			<swiper v-model="cardLook" height="800px" :show-dots="false" :threshold='100'>
 				<swiper-item>
 					<scroller lock-x height="-80" @on-scroll-bottom="onScrollBottom" ref="scrollerBottom" :scroll-bottom-offst="200">
 						<div class="box2">
 							<div class="card-list">
-								<router-link to="/member/card/detail">
-									<div class="card-ltem" :class="[item.type ==1 ? 'b-bg':'y-bg']" v-for="(item,index) in cardList">
-										<div class="card-f">{{item.store}}</div>
-										<div class="card-m">
-											<div style="text-align: right;">{{item.tip}}</div>
-											<div>{{item.typename}}</div>
-										</div>
+								<div class="card-ltem" :class="[item.type ==1 ? 'b-bg':'y-bg']" v-for="(item,index) in cardList">
+									<div class="card-f">{{item.store}}</div>
+									<div class="card-m">
+										<div style="text-align: right;">{{item.tip}}</div>
+										<div>{{item.typename}}</div>
 									</div>
-								</router-link>
+								</div>
 							</div>
 							<load-more tip="loading" v-if="onFetching"></load-more>
 						</div>
@@ -38,17 +36,19 @@
 					<scroller lock-x height="-80" @on-scroll-bottom="onScrollBottom" ref="scrollerBottom" :scroll-bottom-offst="200">
 						<div class="box2">
 							<div class="card-list">
-								<div class="card-item2">
-									<div class="top">
-										<span>适用所有联营门店</span>
-										<span>查看详情</span>
+								<router-link to="/member/card/detail">
+									<div class="card-item2">
+										<div class="top">
+											<span>适用所有联营门店</span>
+											<span>查看详情</span>
+										</div>
+										<div class="name">威伐光25分钟体验套餐卡</div>
+										<div class="top2">
+											<span>仅支持威伐光设备</span>
+											<span>可用次数： 10</span>
+										</div>
 									</div>
-									<div class="name">威伐光25分钟体验套餐卡</div>
-									<div class="top2">
-										<span>仅支持威伐光设备</span>
-										<span>可用次数： 10</span>
-									</div>
-								</div>
+								</router-link>
 							</div>
 							<load-more tip="loading" v-if="onFetching"></load-more>
 						</div>
@@ -351,12 +351,12 @@
 				align-content: center;
 				justify-content: space-between;
 			}
-			.top2{
+			.top2 {
 				font-size: 0.24rem;
 				color: #ffffff;
 				display: flex;
 				align-content: center;
-				span{
+				span {
 					margin-right: 0.4rem;
 				}
 			}

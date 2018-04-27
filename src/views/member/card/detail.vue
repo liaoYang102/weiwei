@@ -88,8 +88,8 @@
 			position: fixed;
 			width: 100%;
 			bottom: 0;
-			height: 0.98rem;
-			line-height: 0.98rem;
+			height: 0.88rem;
+			line-height: 0.88rem;
 			text-align: center;
 			background: rgba(51, 111, 255, 1);
 			font-size: 0.32rem;
