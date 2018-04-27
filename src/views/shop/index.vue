@@ -78,9 +78,10 @@ import swiper from './components/swiper'
 import BScroll from 'better-scroll'
 import Loading from '../../components/loading'
 import noMore from '../../components/noMore'
+import settingFooter from '../../components/setting_footer'
 export default {
 	components: {
-		settingHeader,navindex,scorenav,theme,swiper,Loading,noMore
+		settingHeader,navindex,scorenav,theme,swiper,Loading,noMore,settingFooter
 	},
 	data(){
 		return {
@@ -112,7 +113,7 @@ export default {
 		}
 	},
 	created(){
-		this.$store.state.page.footerFalg = true;
+		// this.$store.state.page.footerFalg = true;
 	},
 	mounted() {
 		this.InitScroll()
