@@ -9,15 +9,15 @@
 				<p class="status">物流状态：<span>已签收</span></p>
 				<p class="courier">承运来源：申通快递</p>
 				<p class="courier">运单编号：3352342313334</p>
-				<p class="courier">官方电话：<span class='official'>95543</span></p>
+				<p class="courier">官方电话：<route-link @click="call" class='official'>95543</route-link></p>
 			</div>
 			<div class="clear"></div>
 		</div>
 		<div class="time-line">
 			<timeline>
-				<timeline-item v-for="(i, index) in count" :key="index">
-					<h4 :class="[i === 1 ? 'recent' : '']" >Timeline Node {{i + 1}}</h4>
-					<p :class="[i === 1 ? 'recent' : '']" class='bottom'>index {{i + 1}}</p>
+				<timeline-item v-for="(i, index) in item" :key="index">
+					<h4 :class="[index === 0 ? 'recent' : 'default']" >{{i.Node}}</h4>
+					<p :class="[index === 0 ? 'recent' : 'default']" class='bottom'>{{i.Time}}</p>
 				</timeline-item>
 			</timeline>
 		</div>
@@ -40,7 +40,33 @@
 		data(){
 			return{
 				title:'物流动态',
-				count: 4
+				count: 4,
+				item:[
+					{
+						Node:'已签收，签收人是签收',
+						Time:'2018-04-15 12:42:12'
+					},
+					{
+						Node:'【广州市】广东广州番禺南浦分部派件员：黄兵',
+						Time:'2018-04-15 12:42:12'
+					},
+					{
+						Node:'【广东广州番禺南浦分部】已收入',
+						Time:'2018-04-15 12:42:12'
+					},
+					{
+						Node:'快件已到达【广东广州番禺南浦分部】扫码员是【严进】',
+						Time:'2018-04-15 12:42:12'
+					},
+					{
+						Node:'快件已到达【广东广州番禺南浦分部】扫码员是【严进】',
+						Time:'2018-04-15 12:42:12'
+					},
+					{
+						Node:'快件已到达【广东广州番禺南浦分部】扫码员是【严进】',
+						Time:'2018-04-15 12:42:12'
+					}
+				]
 			}
 		},
 		components: {
@@ -49,6 +75,9 @@
 	    methods:{
 	    	goWritecomments(){
 	    		this.$router.push({path: '/shop/write_comments'})
+	    	},
+	    	call(){
+	    		window.location.href = 'tel://95543'
 	    	}
 	    }
 	}
@@ -144,7 +173,10 @@
 			border-bottom: 2px solid #D8DFF0;
 		}
 		.recent{
-			color: #FF7B11;
+			color:#FF7B11;
+		}
+		.default{
+			color:#7E90BB;
 		}
 		.vux-timeline-item-color{
 			background-color:#90A2C7;

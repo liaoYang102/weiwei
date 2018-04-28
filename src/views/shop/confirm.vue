@@ -15,8 +15,8 @@
 		</div>
 
 		<div v-transfer-dom>
-			<popup v-model="show9">
-				<popup-header left-text="取消" right-text="确定" title="选择支付方式" :show-bottom-border="false" @on-click-left="show9 = false" @on-click-right="show9 = false"></popup-header>
+			<popup v-model="show9" class="shops">
+				<popup-header left-text="取消" title="选择支付方式" :show-bottom-border="false" @on-click-left="show9 = false" @on-click-right="show9 = false"></popup-header>
 				<group gutter="0">
 					<radio :options="list" @on-change="change"></radio>
 					<div class="pay-box">
@@ -27,7 +27,7 @@
 		</div>
 
 		<div class="shops">
-			<group style='margin-bottom:0.38rem;'>
+			<group style='padding-bottom:1.42rem;'>
                 <cell title="优衣库旗舰店" is-link :border-intent="false" >
 			        <img slot="icon" width="20" style="display:block;margin-right:5px;" >
 			    </cell>
@@ -52,7 +52,7 @@
                 <cell title="现金" value="20元" :border-intent="false"></cell>
                 <div class="leave">
 					<span class="message">卖家留言</span>
-					<input type="text" placeholder='选填:填写内容已和卖家协商确认' style="width: 60%;font-size: 0.24rem;padding:0.2rem 0">
+					<input type="text" placeholder='选填:填写内容已和卖家协商确认' style="width: 76%;font-size: 0.24rem;padding:0.2rem 0">
                 </div>
             </group>
 		</div>
@@ -79,15 +79,15 @@ export default {
 			demo1: true,
 			demo2: false,
 			list: [{
-				icon: '../../../static/member/bandCard.png',
+				icon: './static/member/bandCard.png',
 				key: '1',
 				value: '银行卡支付'
 			}, {
-				icon: '../../../static/member/treasure.png',
+				icon: './static/member/treasure.png',
 				key: '2',
 				value: '支付宝支付'
 			}, {
-				icon: '../../../static/member/wechapaid.png',
+				icon: './static/member/wechapaid.png',
 				key: '3',
 				value: '微信支付'
 			}],
@@ -263,20 +263,22 @@ export default {
 		border-top: 1px solid #D9D9D9;
 		padding: 0.12rem 0.15rem;
 		.message{
-			font-size: 0.32rem;
-			color: #222222;
+			font-size: 0.28rem;
+			color: #1A2642;
 			margin-right: 0.27rem;
 		}
 	}
 	.submit{
 		width: 100%;
+		position: fixed;
+		bottom:0;
 		.total{
 			background-color: #fff;
 			width: 4.4rem;
 			padding-left: 0.7rem;
 			line-height: 1.05rem;
 			font-size: 0.28rem;
-			color:#222;
+			color:##1A1A1A;
 			.color{
 				color:#f45656;
 			}
@@ -345,12 +347,16 @@ export default {
 		fill:#222!important;
 	}
 .shops .vux-label{
-		color:#222;
+		color:#1A2642;
+		font-size:0.28rem!important;
 	}
 .shops .weui-cell__ft{
 		color: #1A2642!important;
+		font-size:0.3rem;
 	}
 .shops .weui-cell{
-		padding: 0.15rem 0.15rem;
+		padding: 0.28rem 0.18rem;
+		font-size: 0.32rem;
+		color:#1A2642!important;
 	}
 </style>

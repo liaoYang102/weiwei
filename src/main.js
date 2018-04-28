@@ -56,9 +56,10 @@ Vue.config.productionTip = false
 import animate from 'animate.css'
 Vue.use(animate)
 //全局load
-import { LoadingPlugin, DatetimePlugin } from 'vux'
+import { LoadingPlugin, DatetimePlugin ,ToastPlugin } from 'vux'
 Vue.use(LoadingPlugin)
 Vue.use(DatetimePlugin)
+Vue.use(ToastPlugin)
 //echart
 import echarts from 'echarts'
 Vue.prototype.$echarts = echarts
@@ -173,10 +174,10 @@ router.beforeEach(function(to, from, next) {
 
 router.afterEach(function(to) {
 	isPush = false
-	if(process.env.NODE_ENV === 'production') {
+	/*if(process.env.NODE_ENV === 'production') {
 		ga && ga('set', 'page', to.fullPath)
 		ga && ga('send', 'pageview')
-	}
+	}*/
 })
 
 //const whiteList = ['/user/login', '/index', '/user/reg','/','/member/index'];// 不重定向白名单

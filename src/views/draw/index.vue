@@ -57,12 +57,17 @@
                     	<group v-for="(item,index) in drawList">
 							<cell is-link>
 								<li @click="goPastevents">
+<<<<<<< HEAD
 									<div class="left img">
 										<img src="../../assets/images/draw/lottery_index7.png" alt="">
 									</div>
 									<div class="arrow">
 										<img src="../../assets/images/draw/lottery_index8.png" alt="" >
 									</div>
+=======
+									<div class="left img"><img src="../../assets/images/draw/lottery_index7.png" alt=""></div>
+									<div class="arrow"><img src="../../assets/images/draw/lottery_index8.png" alt=""></div>
+>>>>>>> 56892eec990e1930e0281e29a9909dd25eb33385
 									<div class="left container">
 										<p class="lucky">{{ item.title}}</p>
 										<p class="num">参加人数:{{ item.num}}</p>
@@ -225,23 +230,43 @@
 	  padding-top: 0.28rem;
 	  position: relative;
 	  padding-bottom: 0.28rem;
+<<<<<<< HEAD
 	  .img{
 	    width: 1.54rem;
 	    img{
 	    	width: 100%;
 	    }
 	  }
+=======
+>>>>>>> 56892eec990e1930e0281e29a9909dd25eb33385
 	  .left{
 	  	float: left;
 	  }
+	  .img{
+	  	width: 1.54rem;
+	    height: 1.12rem;
+	    img{
+	    	width: 100%;
+	    }
+	  }
 	  .arrow {
+	    position: absolute;
 	    width: 0.33rem;
+<<<<<<< HEAD
 	    position: absolute;
 	    left: 0.8rem;
 	    top: 0.6rem;
 	    img{
 	    	width: 100%;
 	    }
+=======
+	    height: 0.41rem;
+	    left: 0.8rem;
+	    top: 0.6rem;
+	    img{
+	  		width: 100%;
+	  	}
+>>>>>>> 56892eec990e1930e0281e29a9909dd25eb33385
 	  }
 	  .container {
 	    margin-left: 0.25rem;

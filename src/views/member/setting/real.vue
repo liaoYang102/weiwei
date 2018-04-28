@@ -8,7 +8,7 @@
 		<div class="img-box">
 			<div class="one">
 				<div class="">
-					<p>身份证正面照片</p>
+					<p v-if="justImages == ''">身份证正面照片</p>
 					<img v-if="justImages" :src="justImages" alt="" />
 				</div>
 				<input class="upinput" type="file" name="" id="" value="" @change="just" multiple ref="just" />
@@ -16,25 +16,30 @@
 			<div class="one">
 				<div class="">
 					<p>身份证反面照片</p>
+					<img v-if="backImages" :src="backImages" alt="" />
 				</div>
 				<input class="upinput" type="file" name="" id="" value="" @change="back" ref="back" />
 			</div>
 			<div class="one">
 				<div class="">
 					<p>本人手持身份证正面照</p>
+					<img v-if="userImages" :src="userImages" alt="" />
 				</div>
 				<input class="upinput" type="file" name="" id="" value="" @change="user" ref="user" />
 			</div>
 		</div>
 		<div class="tip">
 			<p>（文字清晰，四角齐全）</p>
-			<div class="add-btn">保存</div>
+			<div class="add-btn" @click="submit">保存</div>
+		</div>
+		<div v-transfer-dom>
+			<loading :show="showDialogStyle" :text="text1"></loading>
 		</div>
 	</div>
 </template>
 
 <script>
-	import { XInput, Group, XButton, Cell } from 'vux'
+	import { XInput, Group, XButton, Cell, Loading, XCircle, Range, Icon, XDialog } from 'vux'
 	import scoreheader from '../../../components/setting_header'
 	export default {
 		components: {
@@ -42,19 +47,30 @@
 			XInput,
 			Group,
 			XButton,
-			Cell
+			Cell,
+			XCircle,
+			Range,
+			Icon,
+			XDialog,
+			Loading
 		},
 		data() {
 			return {
 				title: '实名认证',
+				showDialogStyle: false,
+				text1: 'Processing',
 				name: '',
 				idNum: '',
-				justImages: ''
+				justImages: '',
+				backImages: '',
+				userImages: '',
 			}
 		},
 		methods: {
 			just(e) {
 				var _this = this
+				_this.justImages = ''
+				_this.justPr = 0
 				var reader = new FileReader();
 				var file = e.target.files[0];
 				reader.readAsDataURL(file); // 读出 base64
@@ -62,11 +78,63 @@
 					// 图片的 base64 格式, 可以直接当成 img 的 src 属性值        
 					var dataURL = reader.result;
 					_this.justImages = e.target.result
+
+				};
+
+				var total = file.size;
+				reader.onprogress = function(e) {
+					_this.justPr = (e.loaded / total) * 100
+				}
+			},
+			back(e) {
+				var _this = this
+				var reader = new FileReader();
+				var file = e.target.files[0];
+				reader.readAsDataURL(file); // 读出 base64
+				reader.onloadend = function(e) {
+					// 图片的 base64 格式, 可以直接当成 img 的 src 属性值        
+					var dataURL = reader.result;
+					_this.backImages = e.target.result
 				};
 			},
-			back() {},
-			user() {},
+			user(e) {
+				var _this = this
+				var reader = new FileReader();
+				var file = e.target.files[0];
+				reader.readAsDataURL(file); // 读出 base64
+				reader.onloadend = function(e) {
+					// 图片的 base64 格式, 可以直接当成 img 的 src 属性值        
+					var dataURL = reader.result;
+					_this.userImages = e.target.result
+				};
+			},
+			submit() {
+				var _this = this
+				_this.showDialogStyle = true
+				tick(0, (percent) => {
+					if(percent === 100) {
+						_this.showDialogStyle = false
+						this.$vux.toast.show({
+							text: '实名成功',
+							type:'text'
+						})
+						return
+					} else {
+						_this.text1 = `${percent}%`
+					}
+				})
+			}
 		}
+	}
+
+	function tick(i, cb) {
+		setTimeout(function() {
+			i++
+			cb(i)
+			if(i < 100) {
+				tick(i, cb)
+			}
+		}, 20)
 	}
 </script>
 
@@ -130,7 +198,7 @@
 						top: 50%;
 						left: 50%;
 						transform: translate(-50%, -50%);
-						width: 100%;
+						width: 90%;
 						height: auto;
 					}
 				}

@@ -108,7 +108,7 @@
 				color: #90A2C7;
 				.totalMoney{
 					font-size: 0.24rem;
-					color: #222222;
+					color: #1A2642;
 				}
 			}
 			.btn{
@@ -117,14 +117,14 @@
 				.redeemDetails,.exchangeCenter{
 					float: left;
 					width: 2.4rem;
-					height: 0.7rem;
+					padding: 0.1rem 0;
 					border: 2px solid #90A2C7;
 					border-radius: 0.1rem;
 					text-align: center;
-					line-height: 0.7rem;
-					font-size: 0.34rem;
+					font-size: 0.32rem;
 					color: #90A2C7;
 					margin-left: 0.36rem;
+					box-sizing: border-box;
 				}
 			}
 		}

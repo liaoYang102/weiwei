@@ -1,6 +1,5 @@
 <template>
 	<section id="appIndex">
-		<settingFooter :show="true"></settingFooter>
 		<div class="wrapper" ref="wrapper">
 			<div class="content">
 				<swiper :options="swiperOption" class="swiper">
@@ -159,7 +158,6 @@
 	import { swiper, swiperSlide } from 'vue-awesome-swiper'
 	import { Card } from 'vux'
 	import BScroll from 'better-scroll'
-	import settingFooter from '../components/setting_footer' 
 	export default {
 		data() {
 			return {
@@ -314,13 +312,11 @@
 		created(){
 		},
 		mouted() {
-			console.log(settingFooter)
 		},
 		components: {
 			swiper,
 			swiperSlide,
-			Card,
-			settingFooter
+			Card
 		},
 	}
 </script>

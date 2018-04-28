@@ -45,7 +45,7 @@
 							</div>
 						</div>
 						<div class="title">热门品牌</div>
-						<div class="type-box clearfix">
+						<div class="type-circle clearfix">
 							<div v-for="i in item">
 								<span><img :src="i.img"/></span>
 								<p>{{i.name}}</p>
@@ -119,10 +119,7 @@
 			}
 		},
 		mounted() {
-			// this.$nextTick(() => {
-			this.InitScroll()
-
-			// })
+				this.InitScroll();
 		},
 		methods: {
 			InitScroll() {
@@ -181,7 +178,7 @@
 	.list {
 		display: flex;
 		.wrapper {
-			height: 12.45rem;
+			height: 12.2rem;
 			overflow: hidden;
 		}
 		.content-left {
@@ -206,7 +203,7 @@
 				letter-spacing: 0;
 			}
 			.border-left {
-				border-left: 0.03rem solid #3889FF;
+				border-left: 3px solid #3889FF;
 				background: #fff;
 			}
 		}
@@ -214,6 +211,7 @@
 			flex: 1;
 			padding: 0.11rem 0.09rem 0 0.11rem;
 			box-sizing: content-box;
+			background-color: #fff;
 			img {
 				width: 100%;
 				height: 1.84rem;
@@ -242,6 +240,32 @@
 						img{
 							width: 100%;
 							height: 0.8rem;
+						}
+					}
+					p {
+						margin-top: 0.06rem;
+						text-align: center;
+					}
+				}
+			}
+			.type-circle{
+				div{
+					width: 33.33%;
+					margin-bottom: 0.2rem;
+					padding: 0 0.1rem;
+					box-sizing: border-box;
+					float: left;
+					span {
+						display: inline-block;
+						width: 100%;
+						height: 1.5rem;
+						text-align: center;
+						border: 0.02rem solid #D8DFF0;
+						border-radius: 50%;
+						overflow: hidden;
+						img{
+							width: 100%;
+							height: 1.5rem;
 						}
 					}
 					p {

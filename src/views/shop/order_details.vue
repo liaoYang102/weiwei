@@ -311,6 +311,7 @@ li{
 		font-size: 0.28rem;
 		color: #90A2C7;
 		padding: 0.22rem 0;
+		border-top: 1px solid #E1E1E1;
 		.commen{
 			float: right;
 			margin-right: 0.2rem;
