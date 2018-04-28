@@ -1,6 +1,6 @@
 <template>
 	<section>
-		<drawHeader :title="title"></drawHeader>
+		<drawHeader :title="title" ></drawHeader>
 
 		<div class="top">
             <div class="btn-large">
@@ -178,12 +178,12 @@
 
 <style lang="less" scoped>
 	.wrapper{
-		height: 7.5rem;
+		height: 7rem;
 		overflow: hidden;
 	}
 	.top{
 	    background-color: #dd1633;
-	    padding-top: 1rem;
+	    padding-top: 0.8rem;
 	    padding-bottom: 0.2rem;
 	    .btn-large {
 	        width: 90%;

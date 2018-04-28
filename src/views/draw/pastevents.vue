@@ -128,7 +128,7 @@
 		            type: "video/mp4",
 		            src: "../../../static/video/movie.mp4",
 		          }],
-		          poster: "../../../static/images/video.jpg",
+		          poster: "./static/images/video.jpg",
 		          notSupportedMessage: '此视频暂无法播放，请稍后再试',
 		          controlBar:{
 		          	fullscreenToggle: true
@@ -322,17 +322,19 @@
 	}
 	.win-person{
 		border-bottom: 0.01rem solid #ccc;
+		
 		.swiper-slide {
 		    width: 1.3rem;
 		    height: 0.75rem;
-		    margin-left: 0.3rem;
 		}
 		.wz-award{
-		    width: 0.9rem;
+		    width: 1.1rem;
 		    height: 0.7rem;
 		    color: black;
 		    font-size: 0.3rem;
 		    line-height: 0.7rem;
+		    margin-left: 0.3rem;
+		    text-align: center;
 		}
 		.wz-award-active{
 		    color: #dd2c40;
@@ -348,7 +350,6 @@
 
 	.personlist{
 	   width: 100%;
-	   /*overflow: hidden;*/
 	   .img-left {
 	       width: 23%;
 	       float: left;
