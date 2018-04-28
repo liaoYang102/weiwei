@@ -43,7 +43,7 @@
 					<div class="content">
 			            <ul class="commodity">
 			            	<group v-for="(item,index) in recordList" class="li-item">
-								<cell>
+								<cell  link="/draw/draw_details">
 									<li>
 										<p class="title">
 											{{ item.drawTtile}}
@@ -56,7 +56,7 @@
 			                        </li>
 								</cell>
 								<cell is-link>
-									<p class="status" @click="showDialogs">
+									<p class="status" >
 										<span class="wait" v-if="status == 0">等待开奖</span>
 										<span class="start" v-else-if="status == 1">已开奖</span>
 										<span class="win" v-else>已中奖</span>
@@ -72,7 +72,7 @@
         	</div>
 
 	        <!-- 弹出框 -->
-	        <div v-transfer-dom class="dialog">
+	        <!-- <div v-transfer-dom class="dialog">
 	          	<x-dialog v-model="showDialog" :hide-on-blur="true">
 	          		<div class="dia_top">
 						<p class="title">番禺国美店周末幸运大抽奖</p>
@@ -98,7 +98,7 @@
 						</timeline>
 					</div>
 	          	</x-dialog>
-	        </div>
+	        </div> -->
         </div>
 	</section>
 </template>
@@ -116,7 +116,7 @@
 		data(){
 			return {
 				title: '中奖记录',
-				count: 4,
+				count: 5,
 				tab1: true,
 				tab2: false,
 				show: false,
@@ -208,7 +208,7 @@
 	}
 	.record{
 	    background-color: #eaeaea;
-	    padding-top: 1rem;
+	    padding-top: 0.8rem;
 	    padding-bottom: 0.2rem;
 	    .btn-large {
 	        width: 90%;
@@ -225,10 +225,10 @@
 		width: 90%;
 		margin: 0.2rem auto;
 		border-radius: 0.1rem;
-		height: 10rem;
+		padding-top: 2.5rem;
+		padding-bottom: 3rem;
 		.img{
 			width: 100%;
-			padding-top: 3rem;
 			text-align: center;
 			img{
 				width: 50%;
@@ -252,9 +252,9 @@
 	.time-line{
 		background: #fff;
 		width: 90%;
-		margin: 0.2rem auto;
+		margin: 0.2rem auto 0.3rem auto;
 		border-radius: 0.1rem;
-		height: 10rem;
+		height: 75%;
 		.winMoney{
 			font-size: 0.32rem;
 			color: #000;

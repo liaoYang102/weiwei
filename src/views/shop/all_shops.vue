@@ -233,27 +233,34 @@ export default {
     }
 }
 .wrapper {
-    height: 86.5%;
+    height: 93%;
     overflow: hidden;
 }
-li:nth-child(odd) .list{
-    margin-right: 0.04rem;
+/*li:nth-child(odd){
+    border-right: 1px solid #F5F8F9;
 }
+li:nth-child(odd){
+    border-right: 1px solid #F5F8F9;
+}*/
 .shopList{
     width: 100%;
     background-color: #F5F6FA;
     .all-shop{
         li{
+            border-bottom: 1px solid  #F5F8F9;
+            border-right: 1px solid #F5F8F9;
+            box-sizing: border-box;
             list-style: none;
             float: left;
             width: 50%;
-            height: 4.35rem;
+            /*height: 4.35rem;*/
             font-size: 0.24rem;
             color: #1A2642;
-            margin-bottom: 0.04rem;
+            /*margin-bottom: 0.04rem;*/
             .list{
+                padding-bottom: 0.1rem;
                 background: #fff;
-                padding-bottom: 0.04rem;
+                /*padding-bottom: 0.04rem;*/
                 .score-exchange{
                     position: absolute;
                     left: -0.05rem;

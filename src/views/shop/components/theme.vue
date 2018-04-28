@@ -50,7 +50,7 @@
 						{ goodsname:'COACH女士贝壳包', tag: [ { name:'时尚大牌'}, { name: '方便百搭'}]}
 					],
 				},
-				imgSrc: '../../../../static/shop/purchase.png'
+				imgSrc: './static/shop/purchase.png'
 			}
 		},
 		mounted:function(){
@@ -76,7 +76,7 @@
 							{ goodsname:'COACH女士贝壳包', tag: [ { name:'时尚大牌'}, { name: '方便百搭'}]}
 						]
 					}
-					vm.imgSrc = '../../../../static/shop/best.png'
+					vm.imgSrc = './static/shop/best.png'
 				}
 				console.log('---', vm.theme)
 			},

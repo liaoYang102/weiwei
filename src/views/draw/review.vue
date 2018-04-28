@@ -16,8 +16,12 @@
                     	<group v-for="(item,index) in drawList">
 							<cell is-link>
 								<li @click="goPastevents">
-									<img src="../../assets/images/draw/lottery_index7.png" alt="" class="left">
-									<img src="../../assets/images/draw/lottery_index8.png" alt="" class="arrow">
+									<div class="left img">
+										<img src="../../assets/images/draw/lottery_index7.png" alt="">
+									</div>
+									<div class="arrow">
+										<img src="../../assets/images/draw/lottery_index8.png" alt="" >
+									</div>
 									<div class="left container">
 										<p class="lucky">{{ item.title}}</p>
 										<p class="num">参加人数:{{ item.num}}</p>
@@ -63,9 +67,9 @@
 					{ title: '第1263期周末幸运大抽奖', num: '1000000', money: '80000'}
 				],
 				imgList:[
-					'../../../static/images/lottery_review1.png',
-					'../../../static/images/lottery_review1.png',
-					'../../../static/images/lottery_review1.png'
+					'./static/images/lottery_review1.png',
+					'./static/images/lottery_review1.png',
+					'./static/images/lottery_review1.png'
 				],
 				swiperOption :{
 					pagination:{
@@ -147,19 +151,25 @@
 	  padding-top: 0.28rem;
 	  position: relative;
 	  padding-bottom: 0.28rem;
-	  img{
+	  .img{
 	    width: 1.54rem;
-	    height: 1.12rem;
+	    img{
+	    	width: 100%;
+	    	height: 100%;
+	    }
 	  }
 	  .left{
 	  	float: left;
 	  }
 	  .arrow {
 	    width: 0.33rem;
-	    height: 0.41rem;
 	    position: absolute;
 	    left: 0.8rem;
-	    bottom: 0.68rem;
+	    top: 0.6rem;
+	    img{
+	    	width: 100%;
+	    	height: 100%;
+	    }
 	  }
 	  .container {
 	    margin-left: 0.25rem;
@@ -212,7 +222,7 @@
 		text-align: left !important;
 	}
 	.weui-cell_access .weui-cell__ft{
-		padding-right: 1.75rem !important;
+		width: 100%;
 	}
 	.weui-cell_access .weui-cell__ft:after{
 		width: 0.2rem !important;

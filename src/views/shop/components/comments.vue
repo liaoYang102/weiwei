@@ -212,6 +212,7 @@ li{
 				  float: left;
 				  img{
 				  	width: 100%;
+				  	height: 100%;
 				  }
 				}
 				.box1-item:first-child {
