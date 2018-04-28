@@ -20,7 +20,7 @@
 				<!-- <h2>附近商家 <span class="fr">更多<i class="iconfont icon-arrow-right"></i></span></h2> -->
 				<div class="list">
 					<ul>
-						<li class="clearfix">
+						<li class="clearfix" @click="goDetail(1)">
 							<div class="left">
 								<img src="../../assets/images/share/md_logo.png" alt="">
 							</div>
@@ -31,7 +31,7 @@
 								<p class="zhekou">8折</p>
 							</div>
 						</li>
-						<li class="clearfix">
+						<li class="clearfix" @click="goDetail(1)">
 							<div class="left">
 								<img src="../../assets/images/share/md_logo.png" alt="">
 							</div>
@@ -42,7 +42,7 @@
 								<p class="zhekou">8折</p>
 							</div>
 						</li>
-						<li class="clearfix">
+						<li class="clearfix" @click="goDetail(1)">
 							<div class="left">
 								<img src="../../assets/images/share/md_logo.png" alt="">
 							</div>
@@ -53,7 +53,7 @@
 								<p class="zhekou">8折</p>
 							</div>
 						</li>
-						<li class="clearfix">
+						<li class="clearfix" @click="goDetail(1)">
 							<div class="left">
 								<img src="../../assets/images/share/md_logo.png" alt="">
 							</div>
@@ -64,7 +64,7 @@
 								<p class="zhekou">8折</p>
 							</div>
 						</li>
-						<li class="clearfix">
+						<li class="clearfix" @click="goDetail(1)">
 							<div class="left">
 								<img src="../../assets/images/share/md_logo.png" alt="">
 							</div>
@@ -75,7 +75,7 @@
 								<p class="zhekou">8折</p>
 							</div>
 						</li>
-						<li class="clearfix">
+						<li class="clearfix" @click="goDetail(1)">
 							<div class="left">
 								<img src="../../assets/images/share/md_logo.png" alt="">
 							</div>
@@ -86,6 +86,9 @@
 								<p class="zhekou">8折</p>
 							</div>
 						</li>
+						
+
+
 					</ul>
 				</div>
 			</div>
@@ -137,6 +140,7 @@
 <script>
 	import settingHeader from '../../components/setting_header'
 	import BScroll from 'better-scroll'
+	import scroll from '../../components/scroll.vue'
 
 	export default {
 		data() {
@@ -189,11 +193,16 @@
 					"天河区",
 					"越秀区"
 				],
-
+				zhekou:[
+					{
+						zhe:'8折'
+					}
+				]
 			}
 		},
 		components:{
-			settingHeader
+			settingHeader,
+			scroll
 		},
 		/*created(){
 
@@ -207,8 +216,33 @@
 		methods:{
 			InitScroll(){
 				this.$nextTick(() => {
-			        this.scroll = new BScroll(this.$refs.wrapper, {})
+			        this.scroll = new BScroll(this.$refs.wrapper, {
+			        	scrollY:true,
+			        	click:true,
+			        	tap :true
+			        });
 			      })
+			      /*this.$nextTick(() => {
+				if(!this.scroll) {
+					this.scroll = new BScroll(this.$refs.wrapper, {
+						click: true,
+						scrollY: true,
+						pullUpLoad: {
+							threshold: -30, // 负值是当上拉到超过低部 70px；正值是距离底部距离 时，                    
+						}
+					})
+					this.scroll.on('pullingUp', (pos) => {
+						this.show = true;
+						this.LoadData()
+						this.$nextTick(function() {
+							this.scroll.finishPullUp();
+							this.scroll.refresh();
+						});
+					})
+				} else {
+					this.scroll.refresh()
+				}
+			})*/
 			},
 			onLoadData(){
 
@@ -263,18 +297,23 @@
 					_this.typeShang=false;
 
 				},50);
+			},
+			goDetail(id){//门店详情
+				this.$router.push({path:'/share/sdetail'});
+				// this.$router.push({ path: '/shop/product' });
+				// consloe.log(9)
 			}
 		}
 	}
 </script>
 <style>
 
-		.aa .weui-cells_radio .weui-check:checked + .weui-icon-checked:before{
-			color: #336FFF !important;
-		}
-		.aa .vux-radio-label{
-			color: #336FFF !important;
-		}
+	.aa .weui-cells_radio .weui-check:checked + .weui-icon-checked:before{
+		color: #336FFF !important;
+	}
+	.aa .vux-radio-label{
+		color: #336FFF !important;
+	}
 
 </style>
 <style lang="less" scoped>
@@ -284,10 +323,10 @@
 
 	.wrapper{
 		 height:11.15rem;
-		overflow:hidden; 
+		overflow:hidden;  
 	}
 	.storelist{
-
+		background: #fff;
 	}
 	.header{
 		/*position:relative !important;*/
@@ -317,6 +356,7 @@
 	.content{
 		width: 95%;
 		margin:0 auto;
+		/*background: #fff;*/
 		/*margin:1rem auto 0;*/
 		/*border-top:1px solid #D8DFF0;*/
 		/*padding-bottom: .4rem;*/
@@ -343,6 +383,7 @@
 			li{
 				padding: .3rem .05rem .3rem 0;
 				border-bottom: 1px solid #D8DFF0;
+				/*background: #fff;*/
 				.left{
 					float: left;
 					width: 2.04rem;
