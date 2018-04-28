@@ -119,10 +119,7 @@
 			}
 		},
 		mounted() {
-			// this.$nextTick(() => {
-			this.InitScroll()
-
-			// })
+				this.InitScroll();
 		},
 		methods: {
 			InitScroll() {
@@ -181,7 +178,7 @@
 	.list {
 		display: flex;
 		.wrapper {
-			height: 12.45rem;
+			height: 12.2rem;
 			overflow: hidden;
 		}
 		.content-left {
