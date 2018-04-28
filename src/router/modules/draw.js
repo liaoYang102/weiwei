@@ -5,6 +5,7 @@ import luckyrank from '@/views/draw/luckyrank'
 import awards from '@/views/draw/awards'
 import record from '@/views/draw/record'
 import pastevents from '@/views/draw/pastevents'
+import draw_details from '@/views/draw/draw_details'
 
 const drawModule = [
 	{
@@ -41,6 +42,11 @@ const drawModule = [
 		path: '/draw/pastevents',//往期回顾
 		name: 'pastevents',
 		component: pastevents
+	},
+	{
+		path: '/draw/draw_details',//抽奖详情
+		name: 'details',
+		component: draw_details
 	}
 ]
 
