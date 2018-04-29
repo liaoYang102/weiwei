@@ -1,6 +1,5 @@
 <template>
 	<section style="background: #fff;color: #1A2642;">
-
 		<settingHeader :title="title"></settingHeader>
 
 		<div class="item">
@@ -10,7 +9,6 @@
                      ref="videoPlayer"
                      :playsinline="true"
                      :options="playerOptions"
-                     @play="onPlayerPlay($event)"
                      @pause="onPlayerPause($event)">
       			</video-player>
 	        </div>
@@ -127,10 +125,13 @@
 		          fluid: true, 
 		          sources: [{
 		            type: "video/mp4",
-		            src: "./static/video/movie.ogg",
+		            src: "../../../static/video/movie.mp4",
 		          }],
 		          poster: "./static/images/video.jpg",
 		          notSupportedMessage: '此视频暂无法播放，请稍后再试',
+		          controlBar:{
+		          	fullscreenToggle: true
+		          }
 		        },
 				show:false,
 				showNomore: false,
@@ -470,4 +471,4 @@
 			border-color: #D8DFF0;
 		}
 	}	
-</style>	
+</style>
