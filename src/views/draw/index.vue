@@ -68,7 +68,6 @@
 										<p class="num">参加人数:{{ item.num}}</p>
 										<p class="bonusPool">奖金池:<span>￥{{ item.money}}</span></p>
 									</div>
-									<span class="right"></span>
 									<div class="clear"></div>
 			                    </li>
 							</cell>
@@ -177,11 +176,11 @@
 	      .money {
 	        font-size: .4rem;
 	        font-weight: 700;
-	        color: #dd1633;
+	        color: #F23030;
 	      }
 	      .status {
 	        font-size: 0.28rem;
-	        color: #333;
+	        color: #1A2642;
 	      }
 	    }
 	    li:nth-child(3) {
@@ -207,7 +206,7 @@
 	    }
 	    p {
 	      font-size: 0.28rem;
-	      color: #333;
+	       color: #1A2642;
 	    }
 	}
   }
@@ -217,7 +216,7 @@
 	.wonderful {
 	  padding-left: 0.18rem;
 	  font-size: 0.32rem;
-	  color: #333;
+	  color: #1A2642;
 	  line-height: 0.7rem;
 	}
 	li {
@@ -250,26 +249,20 @@
 	    line-height: .36rem;
 	    .lucky {
 	      font-size: .32rem;
-	      color: #000;
+	      color: #1A2642;
 	      margin-bottom: 0.12rem;
 	    }
 	    .num {
 	      font-size: .26rem;
-	      color: #333;
+	      color: #90A2C7;
 	    }
 	    .bonusPool {
 	      font-size: .26rem;
-	      color: #333;
+	      color: #90A2C7;
 	      span {
-	        color: #dc1b33;
+	        color: #F23030;
 	      }
 	    }
-	  }
-	  .right {
-	    margin-right: 0.18rem;
-	    font-size: .36rem;
-	    color: #999;
-	    line-height: 1.12rem;
 	  }
 	}
 }
@@ -278,28 +271,32 @@
 <style lang="less">
 .commodity{
 	.weui-cells{
-		margin-top: 0 !important;
+		margin-top: 0;
 	}
 	.vux-no-group-title{
-		margin-top: 0 !important;
+		margin-top: 0;
 	}
 	.weui-cells:before{
-		border-top: none !important;
+		border-top: none;
 	}
 	.weui-cell{
-		padding: 0 !important;
+		padding: 0;
 	}
 	.weui-cell__ft{
-		text-align: left !important;
+		text-align: left;
 	}
 	.weui-cell_access .weui-cell__ft{
 		width: 100%;
 	}
 	.weui-cell_access .weui-cell__ft:after{
-		width: 0.2rem !important;
-		height: 0.2rem !important;
-		right: 0.2rem !important;
-		border-width: 0.04rem 0.04rem 0 0 !important;
+		width: 0.2rem;
+		height: 0.2rem;
+		right: 0.2rem;
+		border-width: 0.04rem 0.04rem 0 0;
+		border-color: #D8DFF0;
+	}
+	.weui-cells:after{
+		border-bottom: solid 1px #D8DFF0;
 	}
 }	
 </style>

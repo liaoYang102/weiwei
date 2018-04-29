@@ -44,7 +44,7 @@ const drawModule = [
 		component: pastevents
 	},
 	{
-		path: '/draw/draw_details',//抽奖详情
+		path: '/draw/details',//抽奖详情
 		name: 'details',
 		component: draw_details
 	}

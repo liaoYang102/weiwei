@@ -3,53 +3,31 @@
 		<drawHeader :title="title"></drawHeader>
 		<div class="head">
 			<div class="receive">
-				<p class="receiveText">待领取金额</p>
-				<p class="receiveMoney">￥2000.00</p>
+				<p class="receiveText">中奖信息</p>
+				<p class="receiveMoney">张三先生恭喜您获得一等奖五千元。</p>
 			</div>
-		</div>
-		<div class="awards-input">
-			<group>
-		      	<x-input title="姓名" name="username" placeholder="请输入您的真实姓名" is-type="china-name"></x-input>
-		      	<x-input title="手机" name="mobile" placeholder="请输入您的手机号码" keyboard="number" is-type="china-mobile"></x-input>
-		      	<x-input title="身份证" name="mobile" placeholder="请输入您的身份证号码" keyboard="number" is-type="china-mobile"></x-input>
-		    </group>
 		</div>
 
 		<div class="awards-main">
 			<div class="photos">
-				<h4>上传身份证</h4>
-				<div class="positive left">
-					<img src="../../../static/images/lottery_awards3.png" alt="" >
-					<input id="file1" name="file" type="file" class="file" accept="image/*" @change="pic1($event)"/>
-					<p class="text_positive">身份证正面</p>
-
-					<div class="bigPic" v-show="[images1? images1: null]">
-						<img :src="images1">
-					</div>
-				</div>
-
-				<div class="negative left">
-					<img :src="[images2? images2 : '../../../static/images/lottery_awards3.png']" alt="">
-					<input id="file2" name="file" type="file" class="file" accept="image/*" @change="pic2($event)" />
-					<p class="text_negative">身份证反面</p>
-
-					<div class="bigPic" v-show="[images2? images2: null]">
-						<img :src="images2">
-					</div>
-				</div>
-				<div class="clear"></div>
-			</div>
-			<div class="photos">
 				<h4>上传生活照</h4>
-				<div class="life left">
-					<img :src="[images3? images3 : '../../../static/images/lottery_awards3.png']" alt="">
-					<input id="file3" name="file" type="file" class="file" accept="image/*" @change="pic3($event)"/>
-					<p class="text_positive">生活照</p>
-					<div class="bigPic" v-show="[images3? images3: null]">
-						<img :src="images3">
+			    
+		    	<div class="life"  v-for="(item,index) in imgList">
+		    		<p class='quxiao' @click="imgDelete(index)">
+                        <i class='iconfont icon-quxiao1'></i>
+                    </p>
+		    		<div class="bigPic" v-show="[imgList.length ? imgList.length >0 : imgList.length =0]">
+						<img :src="item">
 					</div>
-				</div>
-				<div class="clear"></div>
+		    	</div>
+
+		    	<div class="life" v-if="imgList.length!=5">
+		    		<i class="iconfont icon-zhaoxiangji icon"></i>
+		    		<p class="length">{{ imgList.length}}/5</p>
+		    		<input type="file" accept="image/*" multiple="multiple" @change="test($event)">
+		    	</div>
+		    	<div class="clear"></div>
+			    
 			</div>
 			<div class="photos" style="text-align:center">
 				<h4 class="left">中奖感言</h4>
@@ -60,73 +38,65 @@
 
 			    <div class="radio">
 			    	<input type="radio" name="">
-			    	
 			    	<span class="read">
 			    		阅读<span class="preposition">《易消费中奖协议》</span>
 			    	</span>
 			    </div>
-				
 			</div>
 		</div>
+		<div class="foot" @click="showToast">立即提交</div>
 
-		<div class="foot">立即提交</div>
-		
+        <!-- 弹出框 -->
+        <div v-transfer-dom class="dialog">
+          	<x-dialog v-model="showDialog" :hide-on-blur="true">
+          		<div class="dia_top">
+					<p class="title">{{ toast}}</p>
+				</div>
+          	</x-dialog>
+        </div>
 	</section>
 </template>
 
 <script>
-	import { XInput } from 'vux'
+	import { XInput, XDialog} from 'vux'
 	import drawHeader from './components/header'
 	export default {
 	  components: {
-	    XInput,drawHeader
+	    XInput,drawHeader,XDialog
 	  },
 	  data(){
 	  	return {
-	  		title: '我要领奖',
+	  		title: '获奖感言',
 	  		demo2: true,
-	  		images1: null,
-	  		images2: null,
-	  		images3: null
+	  		imgList: [],
+	  		showDialog: false,
+	  		toast: '请您耐心等待审核'
 	  	}
 	  },
 	  methods:{
-	  	pic1(e){
+		test:function (e) {
 			var _this = this
-			var reader = new FileReader();
-			var file = e.target.files[0];
-			reader.readAsDataURL(file); // 读出 base64
-			reader.onloadend = function(e) {
-				// 图片的 base64 格式, 可以直接当成 img 的 src 属性值        
-				var dataURL = reader.result;
-				_this.images1 = e.target.result
-				console.log("1111", _this.images1)
-			};
+  			var reader = new FileReader();
+  			var file = e.target.files[0];
+  			reader.readAsDataURL(file); // 读出 base64
+  			reader.onloadend = function(e) {
+  				// 图片的 base64 格式, 可以直接当成 img 的 src 属性值        
+  				var dataURL = reader.result;
+  				if(_this.imgList.length<5){
+  					_this.imgList.push(e.target.result) 
+  				}
+  			};
+       	},
+	  	imgDelete(index){
+	  			this.imgList.splice(index, 1);
 	  	},
-  	  	pic2(e){
-  			var _this = this
-  			var reader = new FileReader();
-  			var file = e.target.files[0];
-  			reader.readAsDataURL(file); // 读出 base64
-  			reader.onloadend = function(e) {
-  				// 图片的 base64 格式, 可以直接当成 img 的 src 属性值        
-  				var dataURL = reader.result;
-  				_this.images2 = e.target.result
-  				console.log("222", _this.images2)
-  			};
-  	  	},
-  	  	pic3(e){
-  			var _this = this
-  			var reader = new FileReader();
-  			var file = e.target.files[0];
-  			reader.readAsDataURL(file); // 读出 base64
-  			reader.onloadend = function(e) {
-  				// 图片的 base64 格式, 可以直接当成 img 的 src 属性值        
-  				var dataURL = reader.result;
-  				_this.images3 = e.target.result
-  				console.log("333", _this.images3)
-  			};
-  	  	}
+	  	showToast(){
+			var that = this;
+			this.showDialog = true;
+			setTimeout(function(){
+				that.showDialog = false
+			},3000)
+		},
 	  }
 	}
 </script>
@@ -145,17 +115,20 @@
 	    margin: 0 auto;
 	    text-align: center;
 	    width: 4rem;
-	    height: 2.14rem;
+	    height: 2.54rem;
 	    background-image: url(../../assets/images/draw/lottery_awards2.png);
 	    background-size: 100% 100%;
-	    padding-top: 1.3rem;
+	    padding-top: 0.9rem;
 	    .receiveText {
-    	  font-size: 0.36rem;
-    	  margin-bottom: 0.12rem;
+    	  font-size: 0.32rem;
+    	  margin-bottom: 0.35rem;
     	}
     	.receiveMoney {
-		  text-indent: -0.23rem;
-		  font-size: 0.45rem;
+		  /*text-indent: -0.23rem;*/
+		  width: 60%;
+		  margin:0 auto;
+		  font-size: 0.26rem;
+		  word-wrap:break-word;
 		}
 	    p {
 		  color: #fff;
@@ -165,137 +138,83 @@
 
 	.awards-main{
 		background-color: #fff;
-		margin-top: 0.2rem;
 		.photos {
-		   border-top: 0.01rem solid #ccc;
+		   border-top: 0.01rem solid #D8DFF0;
 		   padding: 0.2rem 0.25rem;
+		   color: #1A2642;
 		   h4 {
 		     font-size: 0.28rem;
 		     font-weight: normal;
 		     margin-bottom: 0.2rem;
 		   }
-		   .positive {
-		     width: 45%;
-		     height: 1.5rem;
-		     border: 0.01rem solid #d2d2d2;
-		     border-radius: 0.05rem;
-		     background: #fafafa;
-		     padding-top: 0.6rem;
-		     text-align: center;
-		     margin-right: 0.16rem;
-		     position: relative;
-		     img {
-		       width: 0.5rem;
-		       height: 0.5rem;
-		     }
-		     input {
-		       width: 100%;
-		       height: 100%;
-		       position: absolute;
-		       left:0;
-		       top:0;
-		       opacity: 0;
-		       z-index: 999;
-		     }
-        	.bigPic{
-        		position: absolute;
-     			width: 95%;
-     			height: 95%;
-     			left: 50%;
-     			top: 50%;
-     			transform: translate(-50%,-50%);
-     			overflow: hidden;
-	     		img{
-	     			width: 100%;
-	     			height: auto;
-	     			position: absolute;
-	     			left: 50%;
-	     			top: 50%;
-	     			transform: translate(-50%,-50%);
-	     		}
-	     	}
-		   }
-		   .negative {
-		    width: 45%;
-		    height: 1.5rem;
-		    border: 0.01rem solid #d2d2d2;
-		    border-radius: 0.05rem;
-		    background: #fafafa;
-		    padding-top: 0.6rem;
-		    text-align: center;
-		    position: relative;
-		     img {
-		       width: 0.5rem;
-		       height: 0.5rem;
-		     }
-		     input {
-		       width: 100%;
-		       height: 100%;
-		       position: absolute;
-		       left:0;
-		       top:0;
-		       opacity: 0;
-		       z-index: 999;
-		     }
-         	.bigPic{
-         		position: absolute;
-      			width: 95%;
-      			height: 95%;
-      			left: 50%;
-     			top: 50%;
-     			transform: translate(-50%,-50%);
-      			overflow: hidden;
- 	     		img{
- 	     			width: 100%;
- 	     			height: auto;
- 	     			position: absolute;
- 	     			left: 50%;
- 	     			top: 50%;
- 	     			transform: translate(-50%,-50%);
- 	     		}
- 	     	}
-		   }
-		   .life {
-		     width: 45%;
-		     height: 1.5rem;
-		     border: 0.01rem solid #d2d2d2;
-		     border-radius: 0.05rem;
-		     background: #fafafa;
-		     padding-top: 0.6rem;
-		     text-align: center;
-		     margin-right: 0.16rem;
-		     position: relative;
-		     img {
-		       width: 0.5rem;
-		       height: 0.5rem;
-		     }
-		     input {
-		       width: 100%;
-		       height: 100%;
-		       position: absolute;
-		       left:0;
-		       top:0;
-		       opacity: 0;
-		       z-index: 999;
-		     }
-         	.bigPic{
-         		position: absolute;
-      			width: 95%;
-      			height: 95%;
-      			left: 50%;
-     			top: 50%;
-     			transform: translate(-50%,-50%);
-      			overflow: hidden;
- 	     		img{
- 	     			width: 100%;
- 	     			height: auto;
- 	     			position: absolute;
- 	     			left: 50%;
- 	     			top: 50%;
- 	     			transform: translate(-50%,-50%);
- 	     		}
- 	     	}
-		   }
+	   		.life{
+	   			background: #F5F6FA;
+	   			width: 1.6rem;
+	   			height: 1.6rem;
+	   			text-align: center;
+	   			position: relative;
+	   			float: left;
+	   			margin-right: 0.2rem;
+	   			margin-bottom: 0.15rem;
+	   			.quxiao{
+	   				position: absolute;
+	   			    top: -0.1rem;
+	   			    right: -0.1rem;
+	   			    background-color: #000;
+	   			    border-radius: 50%;
+	   			    opacity: .5;
+	   			    width: 0.35rem;
+	   			    height: 0.35rem;
+	   			    text-align: center;
+	   			    z-index: 222;
+	   				i{
+	   					font-size: 0.2rem;
+	   					color: #fff;
+	   				}
+	   			}
+	   			.length{
+	   				font-size: .3rem;
+	   				color: #bcbbc0;
+	   				margin-top: -0.22rem;
+	   			}
+	           	.bigPic{
+	           		position: absolute;
+        			width: 95%;
+        			height: 95%;
+        			left: 50%;
+        			top: 50%;
+        			transform: translate(-50%,-50%);
+        			overflow: hidden;
+	   	     		img{
+	   	     			width: 100%;
+	   	     			height: auto;
+	   	     			position: absolute;
+	   	     			left: 50%;
+	   	     			top: 50%;
+	   	     			transform: translate(-50%,-50%);
+	   	     		}
+	   	     	}
+	   			.icon{
+	   				font-size: 0.73rem;
+	   				color: #90A2C7;
+	   				line-height: 1.3rem;
+	   			}
+	   			input{
+	   			    position: absolute;
+	   			    top:0;
+	   			    left:0;
+	   			    width:100%;
+	   			    height: 100%;
+	   			    opacity: 0;
+	   			    z-index: 111;
+	   			}
+	   		}
+	   		.clear{
+	   		    clear:both;
+	   		}
+		   	
+
+
 		   .preposition {
 		     color: #1a5ae2;
 		   }
@@ -312,61 +231,80 @@
 	.foot {
 	  width: 100%;
 	  height: 0.78rem;
-	  background-color: #e42d48;
+	  background-color: #F23030;
 	  color: #fff;
 	  font-size: 0.3rem;
 	  text-align: center;
 	  line-height: 0.78rem;
+	}
+
+	.dia_top {
+		width: 90%;
+		height: 1.78rem;
+		margin: auto;
+	  	border-radius: 0.1rem;
+	  	background-color: #fff;
+	  	color: #000;
+	  	.title {
+	  	  font-size: 0.32rem;
+	  	  margin-top: 1rem;
+	  	  line-height: 0.48rem;
+	  	  text-align: center;
+	  	}
 	}
 </style>
 
 <style lang="less">
 	.awards-input{
 		.vux-no-group-title{
-			margin-top: 0 !important;
+			margin-top: 0;
 		}
 		.weui-cells{
-			margin-top: 0 !important;
+			margin-top: 0;
 		}
 		.weui-cell:before{
-			border-top: none !important;
+			border-top: none;
 		}
 		.weui-cell{
-			border-bottom: 0.01rem solid #ccc !important;
+			border-bottom: 0.01rem solid #D8DFF0;
 		}
 		.weui-label{
-			width: 1.4rem !important;
-			font-size: 0.3rem !important;
+			width: 1.4rem;
+			font-size: 0.3rem;
 		}
 		.weui-input::-webkit-input-placeholder {
-		    color: #d9d9d9 !important; // WebKit browsers 
-		    font-size: 0.32rem !important;
+		    color: #d9d9d9; // WebKit browsers 
+		    font-size: 0.32rem;
 		}
 		.weui-input:-moz-placeholder {
-		    color: #d9d9d9 !important; // Mozilla Firefox 4 to 18 
-		    font-size: 0.32rem !important;
+		    color: #d9d9d9; // Mozilla Firefox 4 to 18 
+		    font-size: 0.32rem;
 		}
 		.weui-input::-moz-placeholder {
-		    color: #d9d9d9 !important; //Mozilla Firefox 19+ /
-		    font-size: 0.32rem !important;
+		    color: #d9d9d9; //Mozilla Firefox 19+ /
+		    font-size: 0.32rem;
 		}
 		.weui-input:-ms-input-placeholder {
-		    color: #d9d9d9 !important; //Internet Explorer 10+ */
-		    font-size: 0.32rem !important;
+		    color: #d9d9d9; //Internet Explorer 10+ */
+		    font-size: 0.32rem;
 		}
 	}
 	.photos{
 		.weui-cells{
-			margin-top: 0 !important;
+			margin-top: 0;
 		}
 		.weui-textarea{
-			color: #1A2642 !important;
-			font-size: 0.28rem !important;
+			color: #1A2642;
+			font-size: 0.28rem;
 		}
 		.vux-x-textarea.weui-cell {
 			border-radius: 0.1rem;
-			border: 0.01rem solid #ccc;
+			border: 0.01rem solid #D8DFF0;
 		}
 	} 
-	
+	.dialog{
+		.weui-dialog{
+			width: 60%;
+		}
+	}
 </style>
