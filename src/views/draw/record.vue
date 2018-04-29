@@ -60,7 +60,7 @@
 								<cell>
 									<div class="status">
 										<span class="wait" v-if="item.status == 0">等待开奖</span>
-										<span class="start" v-else-if="item.status == 1">已开奖</span>
+										<span class="start" v-else-if="item.status == 1">未中奖</span>
 										<div v-else-if="item.status == 2">
 											<span class="win">已中奖</span>
 											<div class="btn" @click="goWinningSpeech">立即领奖</div>
@@ -240,7 +240,7 @@
 				font-size: 0.3rem;
 				line-height: 0.5rem;
 				span{
-					color: #F23030;
+					color: #FF5365;
 				}
 			}
 		}
@@ -265,7 +265,7 @@
 			color: #90A2C7;
 		}
 		.ranks{
-			color: #F23030;
+			color: #FF5365;
 		}
 		.winStatus{
 			color: #90A2C7;
@@ -301,7 +301,7 @@
 		    line-height: 0.35rem;
 		    color: #90A2C7;
 		    .num {
-		      color: #F23030;
+		      color: #FF5365;
 		    }
 		  }
 		  
@@ -313,13 +313,13 @@
 		  	padding-bottom: 0.2rem;
 		  	font-size: 0.32rem;
 		  	.wait {
-		  	  color: #fabc00;
+		  	  color: #FF811C;
 		  	}
 		  	.start {
-		    	color: #666;
+		    	color: #7386AD;
 		  	}
 		  	.win {
-		    	color: #F23030;
+		    	color: #FF5365;
 		  	}
 	    	.btn {
 		    	position: absolute;
@@ -328,7 +328,7 @@
 		  	  	height: 0.45rem;
 		  	  	color: #fff;
 		  	  	line-height: 0.45rem;
-		  	  	background-color: #F23030;
+		  	  	background-color: #FF5365;
 		  	  	font-size: 0.26rem;
 		  	  	text-align: center;
 		  	  	right: -0.2rem;
@@ -358,7 +358,7 @@
 	  		margin: 0.35rem auto;
 	  		width: 2.17rem;
 	  		height: 0.54rem;
-	  		background-color: #F23030;
+	  		background-color: #FF5365;
 	  		text-align: center;
 	  		line-height: 0.54rem;
 	  		color: #fff;
@@ -372,7 +372,7 @@
 	.record{
 		.vux-button-group > a.vux-button-group-current{
 			color: #fff !important;
-			background: #F23030 !important;
+			background: #FF5365 !important;
 		}
 		.vux-button-group{
 			height: 0.8rem !important;
@@ -381,12 +381,12 @@
 			height: 0.8rem !important;
 			line-height: 0.8rem !important;
 			font-size: 0.36rem !important;
-			color: #F23030 !important;
+			color: #FF5365 !important;
 			background: rgba(0,0,0,0) !important;
 			
 		}
 		.vux-button-group > a.vux-button-tab-item-first:after, .vux-button-group > a.vux-button-tab-item-last:after{
-			border: 0.02rem solid #F23030;
+			border: 0.02rem solid #FF5365;
 		}
 		.vux-button-group > a.vux-button-tab-item-first{
 			border-top-left-radius: @button-tab-border-radius !important;
@@ -424,13 +424,13 @@
 			color: #000;
 		}
 		.vux-timeline-item-color{
-			background-color:#F23030;
+			background-color:#FF5365;
 		}
 		.vux-timeline-item-tail{
-			background-color:#F23030;
+			background-color:#FF5365;
 		}
 		.vux-timeline-item-head-first{
-			background-color:#F23030;
+			background-color:#FF5365;
 			i{
 				display: none;
 			}

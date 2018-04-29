@@ -51,7 +51,7 @@
 
         <div class="wrapper" ref="wrapper">
 			<div class="content">
-				<div class="web">
+				<div class="luckyrank">
 				<!--数据列表 -->
 			        <ul  v-if="tab2 == true">
 		            	<group v-for="(item,index) in rankList" v-if="index>2">
@@ -182,7 +182,7 @@
 		overflow: hidden;
 	}
 	.top{
-	    background-color: #F23030;
+	    background-color: #FF5365;
 	    padding-top: 0.8rem;
 	    padding-bottom: 0.2rem;
 	    .btn-large {
@@ -197,7 +197,7 @@
 	    margin: auto;
 	    padding: 0.2rem;
 	    overflow: hidden;
-	    background-color: #F23030;
+	    background-color: #FF5365;
 	    .rank-left {
 	        width: 33%;
 	        margin: 0.25rem auto 0.1rem auto;
@@ -275,7 +275,7 @@
 	    .rankList-right{
 	    	padding-right: 0.2rem;
 	        text-align: right;
-	        color: #F23030;
+	        color: #FF5365;
 	    }
 	}
 	
@@ -285,7 +285,7 @@
 @button-tab-border-radius: 0.6rem;
 	.top{
 		.vux-button-group > a.vux-button-group-current{
-			color: #F23030;
+			color: #FF5365;
 			background: #fff;
 		}
 		.vux-button-group{
@@ -296,7 +296,7 @@
 			line-height: 0.8rem;
 			font-size: 0.36rem;
 			color: #fff;
-			background: #F23030;
+			background: #FF5365;
 		}
 		.vux-button-group > a.vux-button-tab-item-first:after, .vux-button-group > a.vux-button-tab-item-last:after{
 			border: 0.02rem solid #fff;
@@ -321,7 +321,7 @@
 </style>
 
 <style lang="less">
-.web{
+.luckyrank{
 	.weui-cells{
 		margin-top: 0;
 	}

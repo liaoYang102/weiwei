@@ -231,7 +231,7 @@
 	.foot {
 	  width: 100%;
 	  height: 0.78rem;
-	  background-color: #F23030;
+	  background-color: #FF5365;
 	  color: #fff;
 	  font-size: 0.3rem;
 	  text-align: center;

@@ -187,7 +187,7 @@
 	      font-size: .26rem;
 	      color: #90A2C7;
 	      span {
-	        color: #F23030;
+	        color: #FF5365;
 	      }
 	    }
 	  }

@@ -43,7 +43,7 @@
 <style lang="less" scoped>
 .content{
 	/*height: 2.36rem;*/
-	background-color: #F23030;
+	background-color: #FF5365;
 	color: #fff;
 	padding: 0.25rem 0 0.41rem 0.39rem;
 	.title{
@@ -70,7 +70,7 @@
 	}
 	.text{
 		text-align: right;
-		color: #F23030;
+		color: #FF5365;
 		font-size: 0.32rem;
 	}
 }

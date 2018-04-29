@@ -278,7 +278,7 @@
 		}
 	}
 	.wz-red{
-	    color: #F23030;
+	    color: #FF5365;
 	    font-size: 0.3rem;
 	    line-height: 0.2rem;
 	}
@@ -296,13 +296,13 @@
 		border-bottom: 0.01rem solid #D8DFF0;
 		padding-bottom: 0.2rem;
 		.swiper-slide {
-		    width: 0.9rem;
+		    width: 1rem;
 		    margin-left: 0.2rem;
 		}
 		/* 抽奖期数*/
 		.btn0{
 		    width: 0.8rem;
-		    height: 0.8rem;
+		    height: 0.81rem;
 		    border-radius: 50%;
 		    border: solid 1px #D8DFF0;
 		    text-align: center;
@@ -311,8 +311,8 @@
 		    line-height: 0.8rem;
 		}
 		.btn-active{
-		    border: solid 1px #F23030;
-		    color: #F23030;
+		    border: solid 1px #FF5365;
+		    color: #FF5365;
 		}
 	}
 	.wz-period{
@@ -336,12 +336,12 @@
 		    text-align: center;
 		}
 		.wz-award-active{
-		    color: #F23030;
-		    border-bottom: solid 0.05rem #F23030;
+		    color: #FF5365;
+		    border-bottom: solid 0.05rem #FF5365;
 		}
 	} 
 	.wz1{
-	    color: #F23030;
+	    color: #FF5365;
 	    font-size: 0.4rem;
 	    display: block;
 	    margin: 0.1rem 0 0.2rem 0;

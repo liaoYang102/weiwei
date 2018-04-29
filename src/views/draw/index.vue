@@ -176,7 +176,7 @@
 	      .money {
 	        font-size: .4rem;
 	        font-weight: 700;
-	        color: #F23030;
+	        color: #FF5365;
 	      }
 	      .status {
 	        font-size: 0.28rem;
@@ -260,7 +260,7 @@
 	      font-size: .26rem;
 	      color: #90A2C7;
 	      span {
-	        color: #F23030;
+	        color: #FF5365;
 	      }
 	    }
 	  }
