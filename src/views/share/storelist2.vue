@@ -14,38 +14,32 @@
 			
 		</div>
 
-		<div class="wrapper">
+		<div class="ss">
+			<div class="wrapper">
 
-			<scroll :data="disclick">
-
-				
-
-
-			
-				<div class="content">
-					<!-- <h2>附近商家 <span class="fr">更多<i class="iconfont icon-arrow-right"></i></span></h2> -->
-					<div class="list">
-						<ul>
-							<li class="clearfix" v-for="item in disclick">
-								<div class="left">
-									<img src="../../assets/images/share/md_logo.png" alt="">
-								</div>
-								<div class="right">
-									<p class="title">{{item.title}}<span class="juli">{{item.juli}}</span></p>
-									<p class="content ellipise">{{item.cont}}</p>
-									<p class="nr"><span class="momey">￥{{item.money}}</span><span class="ms_price">门市价:￥{{item.price}}</span><span class="num">已售：{{item.num}}</span></p>
-									<p class="zhekou">{{item.zhekou}}折</p>
-								</div>
-							</li>
-						</ul>
+				<scroll :data="disclick" class="w_cont">
+					<div class="content">
+						<!-- <h2>附近商家 <span class="fr">更多<i class="iconfont icon-arrow-right"></i></span></h2> -->
+						<div class="list">
+							<ul>
+								<li class="clearfix" v-for="item in disclick">
+									<div class="left">
+										<img src="../../assets/images/share/md_logo.png" alt="">
+									</div>
+									<div class="right">
+										<p class="title">{{item.title}}<span class="juli">{{item.juli}}</span></p>
+										<p class="content ellipise">{{item.cont}}</p>
+										<p class="nr"><span class="momey">￥{{item.money}}</span><span class="ms_price">门市价:￥{{item.price}}</span><span class="num">已售：{{item.num}}</span></p>
+										<p class="zhekou">{{item.zhekou}}折</p>
+									</div>
+								</li>
+							</ul>
+						</div>
 					</div>
-				</div>
-
-			</scroll>
-			
+				</scroll>
+			</div>
 
 		</div>
-
 		
 		<!-- //区域框 -->
 		<div v-transfer-dom>
@@ -281,21 +275,35 @@
 		.aa .vux-radio-label{
 			color: #336FFF !important;
 		}
-
+		/* body,html{
+			width: 100%;
+			height: 100%;
+		} */
 </style>
 <style lang="less" scoped>
 	@import url('../../../static/css/global'); 
 
 	.storelist{}
-
+	.ss{
+		width: 100%;
+		height: 8rem;
+		position: relative;
+	}
 	.wrapper{
-		 height:11.15rem;
-		/*overflow:hidden; */
+		height:8rem;
+		overflow:hidden;
 		border:1px solid #333;
 		width:100%;
-		/*height:100%;*/
-		position:fixed;
-		overflow:hidden;
+		height:100%;
+		position:absolute;
+		top: 0;
+		left: 0;
+		// overflow:hidden;
+		.w_cont{
+			width: 100%;
+			height: 100%;
+			overflow: hidden;
+		}
 	}
 	.storelist{
 
