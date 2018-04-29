@@ -17,7 +17,10 @@ const share =[
 	{
 		path:'/share',
 		name:'shareIndex',
-		component:ShareIndex
+		component:ShareIndex,
+		meta: {
+			navShow: true
+		}
 	},
 	{
 		path:'/share/sdetail',//门店详情

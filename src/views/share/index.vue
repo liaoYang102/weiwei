@@ -232,9 +232,9 @@
 				demo04_list:[
 					// 'https://img1.360buyimg.com/pop/jfs/t16792/328/1497480399/93929/c0d0fbb1/5ac9f290N29a3ad9d.jpg'
 					// '@/assets/images/share/banner1.png'
-					'../../static/images/banner1.png',
-					'../../static/images/banner1.png',
-					'../../static/images/banner1.png'
+					'./static/images/banner1.png',
+					'./static/images/banner1.png',
+					'./static/images/banner1.png'
 			
 				],
 				swiperOption:{
