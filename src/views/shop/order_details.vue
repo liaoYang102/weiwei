@@ -344,25 +344,25 @@ li{
 	margin-bottom: 0.2rem;
 }
 .ul-content .weui-cells{
-	margin-top: 0 !important;
+	margin-top: 0;
 }
 .vux-no-group-title{
-	margin-top: 0 !important;
+	margin-top: 0;
 }
 .ul-content .weui-form-preview__bd{
-	color: #1A2642 !important;
+	color: #1A2642;
 }
 .ul-content .weui-form-preview__bd div:nth-child(3){
-	color: #336FFF !important;
+	color: #336FFF;
 }
 .ul-content .weui-cells:before{
-	border-top: none !important;
+	border-top: none;
 }
 .ul-content .weui-form-preview__label{
-	color: #90A2C7 !important;
+	color: #90A2C7;
 	margin-left: 0.15rem;
-	text-align: left !important;
-	text-align-last: left !important;
+	text-align: left;
+	text-align-last: left;
 }
 .ul-content .weui-form-preview__value{
 	margin-right: 0.44rem;

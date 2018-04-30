@@ -284,7 +284,7 @@ li:nth-child(odd){
 
 	.themeTab{
 		.swiper{
-			height: 1rem !important;
+			height: 1rem;
 		}
 	}
 

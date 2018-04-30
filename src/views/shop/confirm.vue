@@ -45,7 +45,7 @@
                 <cell title="店铺优惠" value="省10元：100减5" :border-intent="false"></cell>
                 <cell :border-intent="false">
 					<span slot="title" style="color:#F23030;">CGC通用余额抵扣</span>
-					<span class="banlance" style='font-size: 0.24rem;color: #90A2C7;'><x-switch title="余额: ￥23400" sytle="padding-right: 0 !important;"></x-switch></span>
+					<span class="banlance" style='font-size: 0.24rem;color: #90A2C7;'><x-switch title="余额: ￥23400" sytle="padding-right: 0 ;"></x-switch></span>
 
                 </cell>
                 <cell title="兑换方式" value="积分+现金" :border-intent="false"></cell>
@@ -274,8 +274,9 @@ export default {
 		width: 100%;
 		position: fixed;
 		bottom:0;
+		background-color: #fff;
 		.total{
-			background-color: #fff;
+			/*background-color: #fff;*/
 			width: 4.4rem;
 			padding-left: 0.7rem;
 			line-height: 1.05rem;
@@ -316,16 +317,16 @@ export default {
 </style>
 <style lang='less'>
 .shops .weui-cells{
-	margin-top: 0 !important;
+	margin-top: 0;
 }
 .shops .vux-no-group-title{
-	margin-top: 0 !important;
+	margin-top: 0;
 }
 .shops .weui-cell_switch{
-	    padding-right: 0!important;
+	    padding-right: 0;
 	}
 .shops .weui-label{
-		width: 8em!important;
+		width: 8em;
 		margin-right: 0.2rem;
 	}
 .shops .weui-icon-success{
@@ -337,28 +338,28 @@ export default {
 		margin-right: 0.25rem;
 	}
 .shops .vux-number-input{
-		border: none!important;
-		font-size: 0.28rem!important;
-		color:#333!important;
+		border: none;
+		font-size: 0.28rem;
+		color:#333;
 	}
 .shops .vux-number-selector{
-		color:#222!important;
-		background: #F5F5F5!important;
+		color:#222;
+		background: #F5F5F5;
 	}
 .shops .vux-number-selector svg{
-		fill:#222!important;
+		fill:#222;
 	}
 .shops .vux-label{
 		color:#1A2642;
-		font-size:0.28rem!important;
+		font-size:0.28rem;
 	}
 .shops .weui-cell__ft{
-		color: #1A2642!important;
+		color: #1A2642;
 		font-size:0.3rem;
 	}
 .shops .weui-cell{
 		padding: 0.28rem 0.18rem;
 		font-size: 0.32rem;
-		color:#1A2642!important;
+		color:#1A2642;
 	}
 </style>

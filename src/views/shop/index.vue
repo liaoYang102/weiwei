@@ -322,6 +322,6 @@ body{
 	color: #90A2C7;
 }
 .tab .vux-tab .vux-tab-item .vux-tab-selected{
-	color: #3889FF !important;
+	color: #3889FF;
 }
 </style>

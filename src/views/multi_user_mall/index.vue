@@ -2,14 +2,19 @@
 	<section class="multi_user_mall">
 		<div class="wrapper" ref="wrapper">
 			<div class="content">
+				<settingHeader :title="title"></settingHeader>
 				<div class="top">
 					<div class="store">
 						<img src="../../assets/images/shop/UNIQLO.png">
-						<p class="name">
-							<span>优衣库官方旗舰店</span><br>
-							<span class="small">224万人关注</span>
-						</p>
-						<div class="btn">关注</div>
+						<div class="name">
+							<div @click="store"><span>优衣库官方旗舰店</span></div>
+							<div class="positionImg">
+								<img src="../../assets/images/multi_user_mall/position.png">
+								<span class="small">距离正佳广场0.2km</span>
+								<img src="../../assets/images/multi_user_mall/right.png" class="rightImg">
+							</div>
+						</div>
+						<div class="btn" @click="focus" :class="{'btnActive': focusStatus == '已关注'}">{{focusStatus}}</div>
 					</div>
 				</div>
 				<search @click.native="goSearch"></search>
@@ -46,7 +51,7 @@
 				    </tab>
 				</div>
 				<div class="index" v-if='pyy==1'>
-					<img src="../../assets/images/shop/theme_banner0.png" style="width: 100%">
+					<img src="../../assets/images/multi_user_mall/banner0.png" style="width: 100%">
 
 				    <div class="imgList">
 				    	<div class="img" v-for="(item, index) in 3" >
@@ -54,7 +59,7 @@
 				    	</div>
 				    </div>
 
-				    <img src="../../assets/images/shop/theme_banner0.png" style="width: 100%;">
+				    <img src="../../assets/images/multi_user_mall/Bitmap.png" style="width: 100%;">
 
 				    <mallTheme :themeTitle="themeTitle"></mallTheme>
 				    <mallTheme :themeTitle="themeTitle1"></mallTheme>
@@ -70,6 +75,7 @@
 </template>
 
 <script>
+	import settingHeader from '../../components/setting_header'
 	import mallTheme from './components/mall_theme'
 	import search from './components/search'
 	import BScroll from 'better-scroll'
@@ -81,11 +87,13 @@
 	export default {
 		data(){
 			return {
+				title: '商城首页',
 				pyy:1,
 				themeTitle: '女子休闲',
 				themeTitle1: '男子休闲',
 				show: false,
-            	showNomore: false
+            	showNomore: false,
+            	focusStatus: '关注'
 			}
 		},
 		components:{
@@ -95,7 +103,8 @@
        		noMore,
 			shop,
 			service,
-			store
+			store,
+			settingHeader
 		},
 		mounted() {
 			this.InitScroll()
@@ -149,6 +158,14 @@
 	            //     console.log(_this.moneylist);
 	            // },3000)
 	        },
+	        focus(){
+	        	if( this.focusStatus == '关注'){
+	        		this.focusStatus = '已关注'
+	        	}else{
+	        		this.focusStatus = '关注'
+	        	}
+	        	
+	        }
 		}
 	}
 </script>
@@ -169,7 +186,7 @@
 .top{
 	width: 100%;
 	height: 2.36rem;
-	background: url('../../assets/images/shop/scorebg.png') no-repeat;
+	background: url('../../assets/images/multi_user_mall/Mask.png') no-repeat;
 	.store{
 		padding-top: 1.15rem;
 		img{
@@ -182,22 +199,40 @@
 			font-size: 0.32rem;
 			color: #fff;
 			padding-top: 0.15rem;
-			.small{
-				font-size: 0.24rem;
+			.positionImg{
+				float: left;
+				img{
+					width: 10%;
+					float: left;
+					vertical-align: middle;
+					margin-top: 0.07rem;
+				}
+				.small{
+					display: inline-block;
+					float: left;
+					font-size: 0.24rem;
+					line-height: 0.55rem;
+				}
+				.rightImg{
+					width: 5%;
+					margin-top:0.19rem;
+					margin-left: 0.05rem;
+				}
 			}
 		}
 		.btn{
 			float: right;
 			text-align: center;
-			width:1.72rem;
+			width:1.16rem;
 			background:#336FFF;
-			border-radius: 0.04rem; 
-			border: 0.02rem solid #FFFFFF;
 			color: #fff;
-			font-size: 0.28rem;
+			font-size: 0.32rem;
 			margin-right: 0.2rem;
-			padding: 0.1rem 0;
-			margin-top: 0.3rem;
+			padding: 0.22rem 0;
+			margin-top: 0.13rem;
+		}
+		.btnActive{
+			background-color: #90A2C7;
 		}
 	}
 }

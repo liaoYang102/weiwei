@@ -15,7 +15,7 @@
 								<div class="fr edit" @click='edit($event)'>编辑</div>
 							</div>
 						</div>
-						<div class="store-shop" v-for="item in 2">
+						<div class="store-shop">
 							<check-icon :value.sync="demo" style="width:0.88rem;height:2.24rem;text-align:center;line-height:2.24rem;" class='fl'></check-icon>
 							<div class="fr" style="width:6.62rem;padding-bottom:0.2rem;border-bottom:1px solid #D8DFF0;padding-top:0.2rem;">
 								<div class="fl">
@@ -41,7 +41,7 @@
 							</div>
 							<div class="clear"></div>
 						</div>
-						<!-- <div class="store-shop">
+						<div class="store-shop">
 							<check-icon :value.sync="demo" style="width:0.88rem;height:2.24rem;text-align:center;line-height:2.24rem;" class='fl'></check-icon>
 							<div class="fr" style="width:6.62rem;padding-bottom:0.2rem;border-bottom:1px solid #D8DFF0;padding-top:0.2rem;">
 								<div class="fl">
@@ -66,7 +66,7 @@
 								</div>
 							</div>
 							<div class="clear"></div>
-						</div> -->
+						</div>
 					</div>
 					<div class="list" v-for="item in 2">
 						<div class="storeName">
