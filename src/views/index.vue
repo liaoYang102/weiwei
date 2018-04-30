@@ -37,7 +37,9 @@
 						<p class="infoText">
 							<img src="../assets/images/index/time.png" alt="" class="fl">
 							<span class="core fl">恭喜500人获得<span class="orange">5000元</span>大奖</span>
-							<span class="past fr">往期</span>
+							<router-link to="/draw/review">
+								<span class="past fr">往期</span>
+							</router-link>
 						</p>
 						<div class="avatar">
 							<div class="row" v-for="item in num">
@@ -71,13 +73,15 @@
 				</div>
 				<div class="plate">
 					<div class="item" v-for="item in plateList">
-						<div class="b-w">
-							<img :src="item.img" />
-							<div>
-								<p>{{item.title}}</p>
-								<p>{{item.tip}}</p>
+						<router-link :to="item.url">
+							<div class="b-w">
+								<img :src="item.img" />
+								<div>
+									<p>{{item.title}}</p>
+									<p>{{item.tip}}</p>
+								</div>
 							</div>
-						</div>
+						</router-link>
 					</div>
 				</div>
 				<img style="width: 100%;height: auto;display: block;" src="../../static/images/jiam.png" alt="" />
@@ -193,22 +197,26 @@
 				plateList: [{
 						title: '邀请有奖',
 						tip: '送200信用积分',
-						img: './static/images/plate1.png'
+						img: './static/images/plate1.png',
+						url:'/member/purse/qrcode'
 					},
 					{
 						title: '积分商城',
 						tip: '积分任意兑',
-						img: './static/images/plate2.png'
+						img: './static/images/plate2.png',
+						url:'/shop'
 					},
 					{
 						title: '我的钱包',
 						tip: '消费增值管理',
-						img: './static/images/plate3.png'
+						img: './static/images/plate3.png',
+						url:'/member/purse/index'
 					},
 					{
 						title: '积分充值',
 						tip: '百万豪礼等你来',
-						img: './static/images/plate4.png'
+						img: './static/images/plate4.png',
+						url:'/member/purse/recharge'
 					},
 				],
 				allianceList: [{

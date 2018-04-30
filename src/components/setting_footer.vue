@@ -41,13 +41,13 @@
 						{
 							icon: './static/images/zqm.png',
 							iconIn: './static/images/zqm.png',
-							url: ''
+							url: '/member/purse/qrcode'
 						},
 						{
 							icon: './static/images/cylm.png',
 							iconIn: './static/images/cylm_active.png',
 							title: '产业联盟',
-							url: ''
+							url: '/share/storelist'
 						},
 						{
 							icon: './static/images/glzx.png',

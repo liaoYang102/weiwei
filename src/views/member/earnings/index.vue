@@ -27,7 +27,8 @@
 						</card>
 					</div>
 				</div>
-				<div class="gz" @click="showDialogStyle = true">
+				<!-- @click="showDialogStyle = true" -->
+				<div class="gz" @click="goJfshop">
 					<img src="../../../assets/images/member/thao.png" alt="" /> 兑换更多
 				</div>
 			</div>
@@ -80,7 +81,7 @@
 		data() {
 			return {
 				title: '通用积分',
-				showDialogStyle: false,
+				// showDialogStyle: false,
 				bottomList: [{
 						img: './static/member/follow1.png',
 						tip: '幸运抽奖（元）',
@@ -119,7 +120,9 @@
 		},
 		mounted() {},
 		methods: {
-
+			goJfshop(){
+				this.$router.push('/shop');
+			}
 		},
 		components: {
 			settingHeader,

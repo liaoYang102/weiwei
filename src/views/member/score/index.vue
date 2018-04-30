@@ -14,7 +14,9 @@
 			<p class="integral">
 				<span>15526 <img src="../../../assets/images/member/score_2.png" alt=""></span>
 			</p>
-			<p class="prompt"><span>去积分商城兑换商品</span></p>
+			<router-link to="/shop">
+				<p class="prompt"><span>去积分商城兑换商品</span></p>
+			</router-link>
 		</div>
 		<div class="earings">
 			<p class="recent">
