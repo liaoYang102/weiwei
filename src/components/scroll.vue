@@ -17,15 +17,15 @@
         type: Boolean,
         default: true
       },
-      /*listenScroll: {
+      listenScroll: {
         type: Boolean,
         default: false
-      },*/
+      },
       data: {
         type: Array,
         default: null
       },
-      /*pullup: {
+      pullup: {
         type: Boolean,
         default: false
       },
@@ -36,7 +36,7 @@
       refreshDelay: {
         type: Number,
         default: 20
-      }*/
+      }
     },
     mounted() {
       setTimeout(() => {
@@ -53,9 +53,9 @@
           click: this.click
         })
 
-        console.log(this.scroll) 
+        console.log(this.scroll)
 
-        /*if (this.listenScroll) {
+        if (this.listenScroll) {
           let me = this
           this.scroll.on('scroll', (pos) => {
             me.$emit('scroll', pos)
@@ -74,8 +74,7 @@
           this.scroll.on('beforeScrollStart', () => {
             this.$emit('beforeScroll')
           })
-        }*/
-
+        }
       },
       disable() {
         this.scroll && this.scroll.disable()
@@ -95,19 +94,14 @@
     },
     watch: {
       data() {
-        /*setTimeout(() => {
-          this.refresh()
-        }, this.refreshDelay)*/
-
         setTimeout(() => {
           this.refresh()
-        }, 20)
-
+        }, this.refreshDelay)
       }
     }
   }
 </script>
 
-<style scoped>
+<style scoped lang="less">
 
 </style>

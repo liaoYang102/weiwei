@@ -1,8 +1,9 @@
 <template>
 	<div class="meai_detail">
+		<settingHeader :title="title"></settingHeader>
 		<div class="wrapper" ref="wrapper">
 			<div class="content">
-				<settingHeader :title="title"></settingHeader>
+				
 				<div class="head">
 					<p class="time">30分钟<span class="">德国进口</span></p>
 					<p class="type">深部炎症治疗仪HD2400</p>
@@ -15,7 +16,7 @@
 				<div class="nr">
 					<p class="contnt">WIRA（威伐）是由德国的生物物理学家G.Hoffman发明的。他首先将31种介质按照不同的比例、不同的数量经过7种不同的程序反应后获得了一种混合物。</p>
 				</div>
-				<div class="more">查看详情</div>
+				<div class="more" @click="searchDetail">查看详情</div>
 
 				<div class="tab-title">商品评价</div>
 				
@@ -186,6 +187,9 @@
 			},
 			saoma(){//扫码
 				this.$router.push('/share/comfirmOrder');
+			},
+			searchDetail(){
+				this.$router.push('/share/pintroduce')
 			}
 			
 		}
@@ -201,7 +205,7 @@
 		height: 100%;
 		overflow: hidden;
 	}
-	li{
+	.commentsList li{
 		list-style: none;
 		margin-top: 0.01rem;
 		background: #FFF;

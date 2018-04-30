@@ -90,6 +90,8 @@
 
 
 					</ul>
+
+
 				</div>
 			</div>
 
@@ -322,8 +324,10 @@
 	.storelist{}
 
 	.wrapper{
-		 height:11.15rem;
-		overflow:hidden;  
+
+		height:11.5rem;
+		overflow:hidden; 
+
 	}
 	.storelist{
 		background: #fff;
@@ -380,6 +384,7 @@
 			/*border-bottom: 1px solid #D8DFF0;*/
 			/*margin-top: .22rem;*/
 			margin-bottom: 2rem;
+			padding-bottom: 1rem;
 			li{
 				padding: .3rem .05rem .3rem 0;
 				border-bottom: 1px solid #D8DFF0;
