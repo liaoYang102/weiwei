@@ -45,7 +45,10 @@ const memberModule = [{
 	{
 		path: '/',
 		name: 'index',
-		component: index
+		component: index,
+		meta: {
+			navShow: true
+		}
 	},
 	{
 		path: '/member/setting/index',

@@ -28,10 +28,10 @@
 					</div>
 					<div class="shop_right">
 						<div class="shop_collection">
-							<img src="../../assets/images/shop/collection.png"><br>
-							<span>收藏</span>
+							<img :src="collectImg" @click="collection"><br>
+							<span>{{ collectText}}</span>
 						</div>
-						<div class="shop_share">
+						<div class="shop_share" @click="showShareDialog">
 							<img src="../../assets/images/shop/share.png"><br>
 							<span>分享</span>
 						</div>
@@ -104,6 +104,16 @@
 			<div class="footer-btn btn_green" @click="goShopcart">加入购物车</div>
 			<div class="footer-btn btn_blue" @click="goConfirm">立即购买</div>
 		</div>
+
+        <div v-transfer-dom class="shareDialog">
+          	<x-dialog v-model="showDialog" :hide-on-blur="true">
+          		<div class="dialogs">
+					<img src="../../assets/images/shop/rightShare.png" class="right">
+					<div class="clear"></div>
+					<img src="../../assets/images/shop/Rectangle.png" class="mt10" @click="hideDialog">
+				</div>
+          	</x-dialog>
+        </div>
 		
 	</section>
 </template>
@@ -111,14 +121,18 @@
 <script>
 import specifications from './components/specifications' 
 import comments from './components/comments'
+import {XDialog} from 'vux'
 export default {
 	components: {
-		specifications, comments
+		specifications, comments,XDialog
 	},
 	data(){
 		return {
 			tabTitle: '商品',
-			obj:null
+			obj:null,
+			collectImg:'../../../static/shop/collection.png',
+			collectText: '收藏',
+			showDialog: false,
 		}
 	},
 	create: function(){
@@ -171,6 +185,21 @@ export default {
 			this.$store.state.vux.back= false;
 			console.log('111',this.$store.state.vux.back)
 			this.$router.go(-1)
+		},
+		collection(){
+			if(this.collectImg == '../../../static/shop/collection.png'){
+				this.collectImg = '../../../static/shop/collectAction.png'
+				this.collectText = '已收藏'
+			}else{
+				this.collectImg = '../../../static/shop/collection.png'
+				this.collectText = '收藏'
+			}
+		},
+		showShareDialog(){
+			this.showDialog = true;
+		},
+		hideDialog(){
+			this.showDialog = false;
 		}
 	}
 }	
@@ -238,7 +267,11 @@ export default {
 				}
 				.shop_collection{
 					float: right;
-					margin-left: 0.27rem;
+					/*width: 50%;*/
+					padding-left: 0.27rem;
+					span{
+						text-align: center;
+					}
 				}
 			}
 		}
@@ -375,9 +408,34 @@ export default {
 		}
 	}
 }
+.dialogs{
+	width: 100%;
+	padding-top: 1.28rem;
+	img{
+		width: 3.33rem;
+	}
+	.right{
+		float: right;
+		margin-right: 0.41rem;
+	}
+	.mt10{
+		margin-top: 8.3rem;
+	}
+}
 </style>
 
 <style lang="less">
+.shareDialog{
+	.weui-mask{
+		z-index: 100;
+	}
+	.weui-dialog{
+		background-color: rgba(255,255,255,0);
+		width: 100%;
+		height: 100%;
+		max-width: 100%;
+	}
+}
 .shop_cell .weui-cell{
 	padding: 0.3rem 0.15rem !important;
 }

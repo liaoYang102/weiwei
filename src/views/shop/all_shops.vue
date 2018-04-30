@@ -3,12 +3,19 @@
         <settingHeader :title="title"></settingHeader>
         <tab :line-width='0' style="border-top: 1px solid #E1E1E1;">
             <tab-item selected @on-item-click="showPanel">
-              {{ tabItem}} <img src="../../assets/images/shop/xiaActive.png" alt="" width="6%">
+              {{ tabItem}} <img :src="downImg" alt="" width="13%">
             </tab-item>
             <tab-item class='vux-center' @on-item-click="onItemClick">销量</tab-item>
-            <tab-item @on-item-click="onItemClick">价格</tab-item>
+            <tab-item @on-item-click="onItemClick">
+                <span>价格</span>
+                <div class="iconImg">
+                    <img :src="topImg" alt="" width="11%" class="top" @click="ascending">
+                    <img :src="downImg1" alt="" width="11%" class="down" @click="descending">
+                </div>
+                
+            </tab-item>
             <tab-item @on-item-click="onMenuClick">
-                筛选
+                筛选 <img src="../../assets/images/shop/screen.png" alt="" width="12%">
             </tab-item>
         </tab>
         <div class="wrapper" ref="wrapper">
@@ -128,7 +135,10 @@ export default {
             scorelist: [],
             moneylist: [],
             show: false,
-            showNomore: false
+            showNomore: false,
+            downImg:'../../../static/shop/down.png',
+            downImg1:'../../../static/shop/down.png',
+            topImg: '../../../static/shop/topicon.png'
         }
     },
     mounted:function(){
@@ -145,6 +155,11 @@ export default {
             }
         },
         showPanel: function(){
+            if(this.downImg == '../../../static/shop/down1.png'){
+                this.downImg = '../../../static/shop/down.png'
+            }else{
+                this.downImg = '../../../static/shop/down1.png'
+            }
             if(this.showMaskTop == false){
                 this.showMaskTop = true;
             }else {
@@ -174,7 +189,7 @@ export default {
                     })
                     this.scroll.on('pullingUp', (pos) => {
                         this.show = true;
-                        this.LoadData()
+                        // this.LoadData()
                         this.$nextTick(function() {
                             this.scroll.finishPullUp();
                             this.scroll.refresh();
@@ -208,6 +223,20 @@ export default {
         },
         goShopdetails(){
             this.$router.push({ path: '/shop/shop_details'})
+        },
+        ascending(){
+            if(this.topImg == '../../../static/shop/topicon.png'){
+                this.topImg = '../../../static/shop/topactive.png'
+            }else{
+                this.topImg = '../../../static/shop/topicon.png'
+            }
+        },
+        descending(){
+            if(this.downImg1 == '../../../static/shop/down1.png'){
+                this.downImg1 = '../../../static/shop/down.png'
+            }else{
+                this.downImg1 = '../../../static/shop/down1.png'
+            }
         }
 
     }
@@ -236,12 +265,6 @@ export default {
     height: 93%;
     overflow: hidden;
 }
-/*li:nth-child(odd){
-    border-right: 1px solid #F5F8F9;
-}
-li:nth-child(odd){
-    border-right: 1px solid #F5F8F9;
-}*/
 .shopList{
     width: 100%;
     background-color: #F5F6FA;
@@ -253,14 +276,11 @@ li:nth-child(odd){
             list-style: none;
             float: left;
             width: 50%;
-            /*height: 4.35rem;*/
             font-size: 0.24rem;
             color: #1A2642;
-            /*margin-bottom: 0.04rem;*/
             .list{
                 padding-bottom: 0.1rem;
                 background: #fff;
-                /*padding-bottom: 0.04rem;*/
                 .score-exchange{
                     position: absolute;
                     left: -0.05rem;
@@ -321,15 +341,26 @@ li:nth-child(odd){
         }
     }
 }
+
+.iconImg{
+    position: relative;
+    .top{
+        position: absolute;
+        top: -0.6rem;
+        left: 1.3rem;
+    }
+    .down{
+        position: absolute;
+        top: -0.45rem;
+        left: 1.3rem;
+    }
+}
 </style>
 
 <style lang="less">
 .masKTop .vux-popup-dialog{
     background: #fff;
 }
-/*.masKTop .vux-popup-dialog.vux-popup-top{
-    top: 1.815rem;
-}*/
 .masKTop .vux-popup-mask{
     top: 1.8rem;
 }

@@ -223,10 +223,10 @@
 </style>
 
 <style lang="less">
-.tab .vux-tab-warp{
+.multi_user_mall .tab .vux-tab-warp{
 	padding-top: 1.2rem;
 }
-.tab .vux-tab .vux-tab-item{
+.multi_user_mall .tab .vux-tab .vux-tab-item{
 	color: #1A2642;
 	font-size: 0.24rem;
 	line-height: normal;
@@ -235,13 +235,13 @@
 		display: inline-block;
 	}
 }
-.tab .vux-tab-selected{
+.multi_user_mall .tab .vux-tab-selected{
 	color: #336FFF !important;
 }
-.tab .vux-tab-container{
+.multi_user_mall .tab .vux-tab-container{
 	height: 1.2rem;
 }
-.tab .vux-tab{
+.multi_user_mall .tab .vux-tab{
 	height: 1.2rem;
 }
 </style>

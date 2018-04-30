@@ -1,6 +1,5 @@
 <template>
-	<section style="background: #fff;">
-                     <!-- @play="onPlayerPlay($event)" -->
+	<section style="background: #fff;color: #1A2642;">
 		<settingHeader :title="title"></settingHeader>
 
 		<div class="item">
@@ -19,7 +18,7 @@
 				<cell is-link :border-intent="false" :arrow-direction="showContent ? 'up' : 'down'" @click.native="showContent = !showContent">
 					<div>
 	                    <span class="wz1">国美白云店第1期(已揭晓)</span>
-	                    <span style="letter-spacing:0.02rem;">奖金池共￥800,000</span>
+	                    <span style="letter-spacing:0.02rem;color: #90A2C7;">奖金池共￥800,000</span>
 	                </div>
 				</cell>
 				<div v-if="showContent">
@@ -279,41 +278,41 @@
 		}
 	}
 	.wz-red{
-	    color: #dd2c40;
+	    color: #FF5365;
 	    font-size: 0.3rem;
 	    line-height: 0.2rem;
 	}
 	.wz-black{
-	    color: black;
+	    color: #1A2642;
 	    font-size: 0.25rem;
 	    line-height: 0.6rem;
 	}
 	.wz-gray{
-	    color:#a9a3a4;
+	    color:#90A2C7;
 	    font-size: 0.2rem;
 	    line-height: 0.1rem;
 	}
 	.period{
-		border-bottom: 0.01rem solid #ccc;
+		border-bottom: 0.01rem solid #D8DFF0;
 		padding-bottom: 0.2rem;
 		.swiper-slide {
-		    width: 0.9rem;
+		    width: 1rem;
 		    margin-left: 0.2rem;
 		}
 		/* 抽奖期数*/
 		.btn0{
 		    width: 0.8rem;
-		    height: 0.8rem;
+		    height: 0.81rem;
 		    border-radius: 50%;
-		    border: solid 1px #e7e7e7;
+		    border: solid 1px #D8DFF0;
 		    text-align: center;
-		    color: #e7e7e7;
+		    color: #D8DFF0;
 		    font-size: 0.3rem;
 		    line-height: 0.8rem;
 		}
 		.btn-active{
-		    border: solid 1px #dd2c40;
-		    color: #dd2c40;
+		    border: solid 1px #FF5365;
+		    color: #FF5365;
 		}
 	}
 	.wz-period{
@@ -321,7 +320,7 @@
 	    font-size: 0.32rem;
 	}
 	.win-person{
-		border-bottom: 0.01rem solid #ccc;
+		border-bottom: 0.01rem solid #D8DFF0;
 		
 		.swiper-slide {
 		    width: 1.3rem;
@@ -330,19 +329,19 @@
 		.wz-award{
 		    width: 1.1rem;
 		    height: 0.7rem;
-		    color: black;
+		    color: #1A2642;
 		    font-size: 0.3rem;
 		    line-height: 0.7rem;
 		    margin-left: 0.3rem;
 		    text-align: center;
 		}
 		.wz-award-active{
-		    color: #dd2c40;
-		    border-bottom: solid 0.05rem #dd2c40;
+		    color: #FF5365;
+		    border-bottom: solid 0.05rem #FF5365;
 		}
 	} 
 	.wz1{
-	    color: #dd2c40;
+	    color: #FF5365;
 	    font-size: 0.4rem;
 	    display: block;
 	    margin: 0.1rem 0 0.2rem 0;
@@ -360,9 +359,9 @@
 	   }
 	   .user-right{
 	       margin: 0.3rem 0 0 0;
-	       color: #000;
+	       color: #1A2642;
 	       .wz-gray2{
-	           color:#a9a3a4;
+	           color:#90A2C7;
 	           font-size: 0.3rem;
 	           margin-top: 0.1rem;
 	       }
@@ -378,31 +377,31 @@
 <style lang="less">
 	.show-down{
 		.weui-cells{
-			margin-top: 0 !important;
+			margin-top: 0;
 		}
 		.vux-no-group-title{
-			margin-top: 0 !important;
+			margin-top: 0;
 		}
 		.weui-cells:before{
-			border-top: none !important;
+			border-top: none;
 		}
 		.weui-cell{
-			padding: 0 !important;
+			padding: 0;
 		}
 		.weui-cell__ft{
-			text-align: left !important;
+			text-align: left;
 		}
 		.weui-cell_access .weui-cell__ft{
-			padding-right: 2.7rem !important;
+			padding-right: 2.7rem;
 		}
 		.weui-cell_access .weui-cell__ft:after{
-			width: 0.2rem !important;
-			height: 0.2rem !important;
-			right: 0.2rem !important;
-			border-width: 0.04rem 0.04rem 0 0 !important;
+			width: 0.2rem;
+			height: 0.2rem;
+			right: 0.2rem;
+			border-width: 0.04rem 0.04rem 0 0;
 		}
 		.weui-cells:after{
-			border-bottom: none !important;
+			border-bottom: none;
 		}
 	}
 	.item{
@@ -415,60 +414,61 @@
 	    	position: absolute;
 	    	top: 0;
 	    	left: 0.1rem;
-	    	z-index: 222;
+	    	z-index: 11;
 	    	font-size: 0.3rem;
 	    	line-height: 0.5rem;
 	    }
 	    .player{
 	    	width: 100%;
 	    	.vjs_video_2786-dimensions{
-	    		width: 7.5rem !important;
+	    		width: 7.5rem;
 	    	}
 	    	.vjs-paused .vjs-big-play-button,.vjs-paused.vjs-has-started .vjs-big-play-button {
-	    		display: block !important;
+	    		display: block;
 	    	}
 	    	.video-js .vjs-big-play-button, .vjs-playing.vjs-has-started .vjs-big-play-button {
-	    		display: none !important;
-	    		border-radius: 50% !important;
-	    		border-radius: 50% !important;
-	    		-moz-border-radius: 50% !important;
-	    		-webkit-border-radius: 50% !important;
+	    		display: none;
+	    		border-radius: 50%;
+	    		border-radius: 50%;
+	    		-moz-border-radius: 50%;
+	    		-webkit-border-radius: 50%;
 	    	}
 	    	.video-js .vjs-big-play-button {
-	    		height: 1rem !important;
-	    		width: 1rem !important;
-	    		top: 35% !important;
-	    		left: 43% !important;
+	    		height: 1rem;
+	    		width: 1rem;
+	    		top: 35%;
+	    		left: 43%;
 	    	}
 	    }
 	}
 	.web{
 		.weui-cells{
-			margin-top: 0 !important;
+			margin-top: 0;
 		}
 		.vux-no-group-title{
-			margin-top: 0 !important;
+			margin-top: 0;
 		}
 		.weui-cells:before{
-			border-top: none !important;
+			border-top: none;
 		}
 		.weui-cell{
-			padding: 0 !important;
+			padding: 0;
 		}
 		.weui-cell__ft{
-			text-align: left !important;
-			width: 93% !important;
-			margin-right: 0.3rem !important;
-			border-bottom: solid 0.01rem #ccc !important;
+			text-align: left;
+			width: 93%;
+			margin-right: 0.3rem;
+			border-bottom: solid 0.01rem #D8DFF0;
 		}
 		.weui-cells:after{
-			border-bottom: none !important;
+			border-bottom: none;
 		}
 		.weui-cell_access .weui-cell__ft:after{
-			width: 0.2rem !important;
-			height: 0.2rem !important;
-			right: 0.2rem !important;
-			border-width: 0.04rem 0.04rem 0 0 !important;
+			width: 0.2rem;
+			height: 0.2rem;
+			right: 0.2rem;
+			border-width: 0.04rem 0.04rem 0 0;
+			border-color: #D8DFF0;
 		}
 	}	
-</style>	
+</style>

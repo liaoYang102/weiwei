@@ -1,6 +1,7 @@
 import ShareIndex from '@/views/share/index'
 import Sdetail from '@/views/share/sdetail'
 import StoreList from '@/views/share/storelist'
+import StoreList2 from '@/views/share/storelist2'
 import MeaiDetail from '@/views/share/meaidetail'
 import PIntroduce from '@/views/share/pintroduce'
 import Join from '@/views/share/join'
@@ -16,7 +17,10 @@ const share =[
 	{
 		path:'/share',
 		name:'shareIndex',
-		component:ShareIndex
+		component:ShareIndex,
+		meta: {
+			navShow: true
+		}
 	},
 	{
 		path:'/share/sdetail',//门店详情
@@ -27,6 +31,11 @@ const share =[
 		path:'/share/storelist',//门店列表
 		name:'storelist',
 		component:StoreList
+	},
+	{
+		path:'/share/storelist2',//门店列表2
+		name:'storelist2',
+		component:StoreList2
 	},
 	{
 		path:'/share/meaidetail',//套餐详情

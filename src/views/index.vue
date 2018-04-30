@@ -175,10 +175,10 @@
 					loop: true
 				},
 				caiList:[
-					{img:'../../static/images/cai1.png',title:'VANS Old Skool lite黑白超轻鞋款 黑色38.5',tip:'100积分+199.67元'},
-					{img:'../../static/images/cai2.png',title:'VANS Old Skool lite黑白超轻鞋款 黑色38.5',tip:'100积分+199.67元'},
-					{img:'../../static/images/cai2.png',title:'VANS Old Skool lite黑白超轻鞋款 黑色38.5',tip:'100积分+199.67元'},
-					{img:'../../static/images/cai1.png',title:'VANS Old Skool lite黑白超轻鞋款 黑色38.5',tip:'100积分+199.67元'},
+					{img:'./static/images/cai1.png',title:'VANS Old Skool lite黑白超轻鞋款 黑色38.5',tip:'100积分+199.67元'},
+					{img:'./static/images/cai2.png',title:'VANS Old Skool lite黑白超轻鞋款 黑色38.5',tip:'100积分+199.67元'},
+					{img:'./static/images/cai2.png',title:'VANS Old Skool lite黑白超轻鞋款 黑色38.5',tip:'100积分+199.67元'},
+					{img:'./static/images/cai1.png',title:'VANS Old Skool lite黑白超轻鞋款 黑色38.5',tip:'100积分+199.67元'},
 				],
 				demoList: [
 					'https://img1.360buyimg.com/da/s750x366_jfs/t17776/179/1756407821/231537/470e3442/5ad9b0a3N5573c82c.jpg!cr_1125x549_0_72.dpg',
@@ -193,116 +193,116 @@
 				plateList: [{
 						title: '邀请有奖',
 						tip: '送200信用积分',
-						img: '../../static/images/plate1.png'
+						img: './static/images/plate1.png'
 					},
 					{
 						title: '积分商城',
 						tip: '积分任意兑',
-						img: '../../static/images/plate2.png'
+						img: './static/images/plate2.png'
 					},
 					{
 						title: '我的钱包',
 						tip: '消费增值管理',
-						img: '../../static/images/plate3.png'
+						img: './static/images/plate3.png'
 					},
 					{
 						title: '积分充值',
 						tip: '百万豪礼等你来',
-						img: '../../static/images/plate4.png'
+						img: './static/images/plate4.png'
 					},
 				],
 				allianceList: [{
 						title: '本地服务',
-						img: '../../static/images/alliance1.png'
+						img: './static/images/alliance1.png'
 					},
 					{
 						title: '本地商圈',
-						img: '../../static/images/alliance2.png'
+						img: './static/images/alliance2.png'
 					},
 					{
 						title: '加盟合作',
-						img: '../../static/images/alliance3.png'
+						img: './static/images/alliance3.png'
 					},
 				],
 				proList: [{
 						title: '积分热兑',
-						img: '../../static/images/rdui.png',
+						img: './static/images/rdui.png',
 						pro: [{
 								name: '红五千',
 								tip: '送给生命中的爱人',
-								img: '../../static/images/pro1.png'
+								img: './static/images/pro1.png'
 							},
 							{
 								name: '长城葡萄酒',
 								tip: '送给生命中的爱人',
-								img: '../../static/images/pro2.png'
+								img: './static/images/pro2.png'
 							},
 							{
 								name: '五粮液',
 								tip: '送给生命中的爱人',
-								img: '../../static/images/pro3.png'
+								img: './static/images/pro3.png'
 							}
 						]
 					},
 					{
 						title: '海外购',
-						img: '../../static/images/fq.png',
+						img: './static/images/fq.png',
 						pro: [{
 								name: 'JAYJUN面膜',
 								tip: '樱花三部曲',
-								img: '../../static/images/pro4.png'
+								img: './static/images/pro4.png'
 							},
 							{
 								name: '德运脱脂奶粉',
 								tip: '到港澳洲进口',
-								img: '../../static/images/pro5.png'
+								img: './static/images/pro5.png'
 							},
 							{
 								name: 'JBL 无线音箱',
 								tip: '送给生命中的爱人',
-								img: '../../static/images/pro6.png'
+								img: './static/images/pro6.png'
 							}
 						]
 					}, {
 						title: '千万家庭健康计划',
-						img: '../../static/images/jk.png',
-						twoimg: '../../static/images/wfg.png',
+						img: './static/images/jk.png',
+						twoimg: './static/images/wfg.png',
 						pro: [{
 								name: '立即体验',
 								tip: '高品质 良心价',
-								img: '../../static/images/pro7.png',
+								img: './static/images/pro7.png',
 								color: 'yollow'
 							},
 							{
 								name: '领取优惠券',
 								tip: '商家体验卷',
-								img: '../../static/images/pro8.png',
+								img: './static/images/pro8.png',
 								color: 'red'
 							},
 							{
 								name: '招商加盟',
 								tip: '千万家庭健康',
-								img: '../../static/images/pro9.png',
+								img: './static/images/pro9.png',
 								color: 'blue'
 							}
 						]
 					}, {
 						title: '积分购买',
-						img: '../../static/images/jf1.png',
+						img: './static/images/jf1.png',
 						pro: [{
 								name: 'RK 机械键盘',
 								tip: '竞技游戏有线键盘',
-								img: '../../static/images/jf2.png'
+								img: './static/images/jf2.png'
 							},
 							{
 								name: '斗牛犬音箱',
 								tip: '重低音立体声',
-								img: '../../static/images/jf3.png'
+								img: './static/images/jf3.png'
 							},
 							{
 								name: 'Polo男士包',
 								tip: '轻盈包身大容量',
-								img: '../../static/images/jf4.png'
+								img: './static/images/jf4.png'
 							}
 						]
 					}

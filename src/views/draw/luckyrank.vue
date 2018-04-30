@@ -51,7 +51,7 @@
 
         <div class="wrapper" ref="wrapper">
 			<div class="content">
-				<div class="web">
+				<div class="luckyrank">
 				<!--数据列表 -->
 			        <ul  v-if="tab2 == true">
 		            	<group v-for="(item,index) in rankList" v-if="index>2">
@@ -182,7 +182,7 @@
 		overflow: hidden;
 	}
 	.top{
-	    background-color: #dd1633;
+	    background-color: #FF5365;
 	    padding-top: 0.8rem;
 	    padding-bottom: 0.2rem;
 	    .btn-large {
@@ -197,7 +197,7 @@
 	    margin: auto;
 	    padding: 0.2rem;
 	    overflow: hidden;
-	    background-color: #dd1633;
+	    background-color: #FF5365;
 	    .rank-left {
 	        width: 33%;
 	        margin: 0.25rem auto 0.1rem auto;
@@ -253,7 +253,7 @@
 	    line-height: 1rem;
 	    font-size: 0.32rem;
 	    font-weight: bold;
-	    color: #000;
+	    color: #1A2642;
 	    .rankList-left{
 	        width: 12%;
 	        float: left;
@@ -275,7 +275,7 @@
 	    .rankList-right{
 	    	padding-right: 0.2rem;
 	        text-align: right;
-	        color: #dd1633;
+	        color: #FF5365;
 	    }
 	}
 	
@@ -285,59 +285,62 @@
 @button-tab-border-radius: 0.6rem;
 	.top{
 		.vux-button-group > a.vux-button-group-current{
-			color: #dd1633 !important;
-			background: #fff !important;
+			color: #FF5365;
+			background: #fff;
 		}
 		.vux-button-group{
-			height: 0.8rem !important;
+			height: 0.8rem;
 		}
 		.vux-button-group > a{
-			height: 0.8rem !important;
-			line-height: 0.8rem !important;
-			font-size: 0.36rem !important;
-			color: #fff !important;
-			background: #dd1633 !important;
+			height: 0.8rem;
+			line-height: 0.8rem;
+			font-size: 0.36rem;
+			color: #fff;
+			background: #FF5365;
 		}
 		.vux-button-group > a.vux-button-tab-item-first:after, .vux-button-group > a.vux-button-tab-item-last:after{
 			border: 0.02rem solid #fff;
 		}
 		.vux-button-group > a.vux-button-tab-item-first{
-			border-top-left-radius: @button-tab-border-radius !important;
-			border-bottom-left-radius: @button-tab-border-radius !important;
+			border-top-left-radius: @button-tab-border-radius;
+			border-bottom-left-radius: @button-tab-border-radius;
 		}
 		.vux-button-group > a.vux-button-tab-item-last{
-			border-top-right-radius: @button-tab-border-radius !important;
-			border-bottom-right-radius: @button-tab-border-radius !important;
+			border-top-right-radius: @button-tab-border-radius;
+			border-bottom-right-radius: @button-tab-border-radius;
 		}
 		.vux-button-group > a.vux-button-tab-item-first:after{
-			border-top-left-radius: 0.7rem !important;
-			border-bottom-left-radius: 0.7rem !important;
+			border-top-left-radius: 0.7rem;
+			border-bottom-left-radius: 0.7rem;
 		}
 		.vux-button-group > a.vux-button-tab-item-last:after{
-			border-top-right-radius: 0.7rem !important;
-			border-bottom-right-radius: 0.7rem !important;
+			border-top-right-radius: 0.7rem;
+			border-bottom-right-radius: 0.7rem;
 		}
 	}
 </style>
 
 <style lang="less">
-.web{
+.luckyrank{
 	.weui-cells{
-		margin-top: 0 !important;
+		margin-top: 0;
 	}
 	.vux-no-group-title{
-		margin-top: 0 !important;
+		margin-top: 0;
 	}
 	.weui-cells:before{
-		border-top: none !important;
+		border-top: none;
 	}
 	.weui-cell{
-		padding: 0 !important;
-		padding-top: 0.15rem !important;
-		padding-bottom: 0.15rem !important;
+		padding: 0;
+		padding-top: 0.15rem;
+		padding-bottom: 0.15rem;
 	}
 	.weui-cell__ft{
-		text-align: left !important;
+		text-align: left;
+	}
+	.weui-cells:after{
+		border-color: #D8DFF0;
 	}
 }	
 </style>
