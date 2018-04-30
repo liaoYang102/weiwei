@@ -19,7 +19,7 @@
 			<div class="photos">
 				<h4>上传身份证</h4>
 				<div class="positive left">
-					<img src="./static/images/lottery_awards3.png" alt="" >
+					<img src="../../../static/images/lottery_awards3.png" alt="" >
 					<input id="file1" name="file" type="file" class="file" accept="image/*" @change="pic1($event)"/>
 					<p class="text_positive">身份证正面</p>
 
@@ -29,7 +29,7 @@
 				</div>
 
 				<div class="negative left">
-					<img :src="[images2? images2 : './static/images/lottery_awards3.png']" alt="">
+					<img :src="[images2? images2 : '../../../static/images/lottery_awards3.png']" alt="">
 					<input id="file2" name="file" type="file" class="file" accept="image/*" @change="pic2($event)" />
 					<p class="text_negative">身份证反面</p>
 
@@ -42,7 +42,7 @@
 			<div class="photos">
 				<h4>上传生活照</h4>
 				<div class="life left">
-					<img :src="[images3? images3 : './static/images/lottery_awards3.png']" alt="">
+					<img :src="[images3? images3 : '../../../static/images/lottery_awards3.png']" alt="">
 					<input id="file3" name="file" type="file" class="file" accept="image/*" @change="pic3($event)"/>
 					<p class="text_positive">生活照</p>
 					<div class="bigPic" v-show="[images3? images3: null]">
