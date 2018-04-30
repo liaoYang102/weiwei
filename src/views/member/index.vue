@@ -5,11 +5,13 @@
 			<section>
 				<div class="info-bg">
 					<router-link to="/member/setting/index"><img class="setting-img" src="../../assets/images/member/shezi.png" /></router-link>
-					<div class="avatar">
-						<img src="../../assets/images/member/score_1.png" alt="" />
-						<p class="nickname">yang</p>
-						<p class="status">1级会员</p>
-					</div>
+					<router-link to="/member/info/index">
+						<div class="avatar">
+							<img src="../../assets/images/member/score_1.png" alt="" />
+							<p class="nickname">yang</p>
+							<p class="status">1级会员</p>
+						</div>
+					</router-link>
 					<div class="account">
 						<router-link to="/member/earnings/index">
 							<div class="universal">
@@ -22,7 +24,7 @@
 								<p class="universalAccount">CGC通用积分</p>
 							</div>
 						</router-link>
-						<router-link to="">
+						<router-link to="/member/earnings/index">
 							<div class="universal">
 								<div class="num">
 									<span class="money">2800.01 </span>
@@ -77,10 +79,12 @@
 				</div>
 			</section>
 			<section>
-				<div class="banner">
-					<img src="../../assets/images/member/member_banner.png" alt="">
-					<img src="static/images/alliance1.png"/>
-				</div>
+				<router-link to="/draw">
+					<div class="banner">
+						<img src="../../assets/images/member/member_banner.png" alt="">
+						<!-- <img src="static/images/alliance1.png"/> -->
+					</div>
+				</router-link>
 			</section>
 			<section>
 				<group gutter="0">
@@ -106,9 +110,14 @@
 						url: '/member/coupon/coupon'
 					},
 					{
+						img: './static/member/m_index12.png',
+						text: '多商户商城',
+						url:'/multi_user_mall'
+					},
+					{
 						img: './static/member/member_2.png',
 						text: '我的订单',
-						url: '/member/address/index'
+						url: '/shop/my_order'
 					},
 					{
 						img: './static/member/member_3.png',
@@ -120,17 +129,14 @@
 						text: '收货地址',
 						url: '/member/address/index'
 					},
-					{
+					/*{
 						img: './static/member/member_5.png',
 						text: '门禁系统'
-					},
+					},*/
 					{
 						img: './static/member/m_index17.png',
-						text: '幸运抽奖'
-					},
-					{
-						img: './static/member/m_index12.png',
-						text: '积分商城'
+						text: '幸运抽奖',
+						url:'/draw'
 					},
 					{
 						img: './static/member/m_index13.png',

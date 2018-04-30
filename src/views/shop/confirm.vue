@@ -7,16 +7,18 @@
 				<span class="phone fl">18520496787</span>
 				<div class="clear"></div>
 			</div>
-			<div class="address">
-				<img src="../../assets/images/shop/address.png" alt="">
-				<span class='details'>广东佛山市南海区桂城街道佛平路与宝翠路交界万科金色领域界</span>
-				<span class="arrow fr">></span>
-			</div>
+			<router-link to="/member/address/index">
+				<div class="address">
+					<img src="../../assets/images/shop/address.png" alt="">
+					<span class='details'>广东佛山市南海区桂城街道佛平路与宝翠路交界万科金色领域界</span>
+					<span class="arrow fr">></span>
+				</div>
+			</router-link>
 		</div>
 
 		<div v-transfer-dom>
 			<popup v-model="show9" class="shops">
-				<popup-header left-text="取消" title="选择支付方式" :show-bottom-border="false" @on-click-left="show9 = false" @on-click-right="show9 = false"></popup-header>
+				<popup-header right-text="取消" title="选择支付方式" :show-bottom-border="false" @on-click-left="show9 = false" @on-click-right="show9 = false"></popup-header>
 				<group gutter="0">
 					<radio :options="list" @on-change="change"></radio>
 					<div class="pay-box">

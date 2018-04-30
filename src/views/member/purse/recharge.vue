@@ -45,7 +45,7 @@
 
 		<div v-transfer-dom>
 			<popup v-model="show1">
-				<popup-header left-text="取消" right-text="确定" title="选择支付方式" :show-bottom-border="false" @on-click-left="show1 = false" @on-click-right="show1 = false"></popup-header>
+				<popup-header right-text="取消" title="选择支付方式" :show-bottom-border="false" @on-click-left="show1 = false" @on-click-right="show1 = false"></popup-header>
 				<group style="padding-bottom: 1rem;" gutter="0">
 					<radio :options="list" value="1" @on-change="change"></radio>
 					<div class="pay-box">
