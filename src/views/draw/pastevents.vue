@@ -125,7 +125,7 @@
 		          fluid: true, 
 		          sources: [{
 		            type: "video/mp4",
-		            src: "../../../static/video/movie.mp4",
+		            src: "./static/video/movie.mp4",
 		          }],
 		          poster: "./static/images/video.jpg",
 		          notSupportedMessage: '此视频暂无法播放，请稍后再试',
