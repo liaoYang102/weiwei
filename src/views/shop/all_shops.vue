@@ -129,8 +129,7 @@ export default {
             moneylist: [],
             show: false,
             showNomore: false,
-            downImg:'./static/shop/down.png',
-            downImg1:'./static/shop/down.png',
+            downImg:'./static/shop/down1.png',
             topImg: './static/shop/topicon.png',
             priceImg: './static/shop/default.png',
             priceSort: 0

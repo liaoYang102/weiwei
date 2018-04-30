@@ -306,7 +306,7 @@
 				
 			}
 			.delete{
-				width: 1.2rem;
+				width: 1.1rem;
 				background: #F23030;
 				text-align: center;
 				line-height: 1.94rem;

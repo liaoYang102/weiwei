@@ -107,10 +107,10 @@
 
         <div v-transfer-dom class="shareDialog">
           	<x-dialog v-model="showDialog" :hide-on-blur="true">
-          		<div class="dialogs">
+          		<div class="dialogs" @click="hideDialog">
 					<img src="../../assets/images/shop/rightShare.png" class="right">
 					<div class="clear"></div>
-					<img src="../../assets/images/shop/Rectangle.png" class="mt10" @click="hideDialog">
+					<img src="../../assets/images/shop/Rectangle.png" class="mt10">
 				</div>
           	</x-dialog>
         </div>
@@ -419,7 +419,7 @@ export default {
 		margin-right: 0.41rem;
 	}
 	.mt10{
-		margin-top: 8.3rem;
+		margin-top: 7rem;
 	}
 }
 </style>
