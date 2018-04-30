@@ -4,18 +4,19 @@
 			<div class="content">
 				<settingHeader :title="title"></settingHeader>
 				<img :src="imgSrc" style="width: 100%;">
-				<div class="theme"  id="theme">
-					<tab :line-width="0" custom-bar-width="30px">
-				      <tab-item selected @on-item-click="onItemClick">精选</tab-item>
-				      <tab-item @on-item-click="onItemClick">食品酒水</tab-item>
-				      <tab-item @on-item-click="onItemClick">经典腕表</tab-item>
-				      <tab-item @on-item-click="onItemClick">炫酷墨镜</tab-item>
-				      <tab-item @on-item-click="onItemClick">母婴玩</tab-item>
-				      <tab-item @on-item-click="onItemClick">母婴</tab-item>
-				      <tab-item @on-item-click="onItemClick">母婴</tab-item>
-				      <tab-item @on-item-click="onItemClick">母婴</tab-item>
-				    </tab>
-				    <Swiper :imgList="imgList" class="swiper"></Swiper>
+				<div class="theme" id="theme">
+					
+				    <div class="themeTab">
+            			<swiper :options="swiperOption">
+        			       	<swiper-slide v-for="(item,index) in tablist">
+        			       		<div class="tab-item" :class="{'tab-active':act0==index}" @click="tabActive(index)">
+		                        	<span :class="{'tab-change': title == '海外购' && act0==index}">{{ item}}</span>
+        			       		</div>
+        			       	</swiper-slide>
+        			    </swiper>
+				    </div>
+
+				    <SwiperImg :imgList="imgList" class="swiper"></SwiperImg>
 
 				    <div class="themeList">
 				    	<div class="themeTitle">精选</div>
@@ -51,14 +52,20 @@
 
 <script>
 import settingHeader from '../../components/setting_header'
-import Swiper from './components/swiper'
+import SwiperImg from './components/swiper'
 import BScroll from 'better-scroll'
 import Loading from '../../components/loading'
 import noMore from '../../components/noMore'
+import {swiper,swiperSlide } from 'vue-awesome-swiper'
 	export default {
 		data() {
 			return {
 				title: '海外购',
+				swiperOption: {
+					autoHeight: true,
+		          	slidesPerView: 'auto',
+	              	spaceBetween: 0
+		        },
 				imgSrc: 'https://m.360buyimg.com/mobilecms/s750x366_jfs/t18199/89/1740907398/275155/d8efc7b3/5ad47af2N47fb76cd.jpg!cr_1125x549_0_72!q70.jpg.dpg',
 				imgList:[
 					'https://m.360buyimg.com/mobilecms/s750x366_jfs/t18775/221/1737433669/102730/f366197/5ad58a68N264b153b.jpg!cr_1125x549_0_72!q70.jpg.dpg',
@@ -75,19 +82,22 @@ import noMore from '../../components/noMore'
 					{ goodsname: 'Vivo X21 屏幕指纹版全面', price: '3598', oldprice: '4355'},
 					{ goodsname: 'Vivo X21 屏幕指纹版全面', price: '3598', oldprice: '4355'}
 				],
-				showNomore: false
+				showNomore: false,
+				tablist:[ '精选','食品酒水','经典腕表','炫酷墨镜','母婴玩','母婴','母婴'],
+				act0: 0,
+				
 			}
 		},
 		components:{
-			settingHeader,Swiper,Loading,noMore
+			settingHeader,SwiperImg,Loading,noMore,swiper,swiperSlide
 		},
 		mounted:function(){
 		    this.modifyTheme()
 		    this.InitScroll()
 		},
 		methods: {
-			onItemClick(){
-
+			tabActive(index){
+				this.act0 = index
 			},
 	        InitScroll() {
     			this.$nextTick(() => {
@@ -126,9 +136,13 @@ import noMore from '../../components/noMore'
 		    modifyTheme(){
 		    	let themeId = document.getElementById('theme');
 		    	let vm =this;
-		    	if(this.$route.params != {} && this.$route.params.themeTitle != null){
-		    		vm.title = this.$route.params.themeTitle
+		    	console.log('--', vm.title)
+		    	console.log('000', vm.$route.params.themeTitle)
+		    	
+		    	if(vm.$route.params != {} && vm.$route.params.themeTitle != null){
+		    		vm.title = vm.$route.params.themeTitle
 		    	}
+
 		    	if (vm.title == '中国臻品') {
 		    		themeId.style.background = '#f72d61';
 		    		vm.imgSrc = 'https://img1.360buyimg.com/da/s750x366_jfs/t19528/85/1729807378/779243/da0497ec/5ad57144N2ba1f62d.jpg!cr_1125x549_0_72.dpg'
@@ -136,6 +150,7 @@ import noMore from '../../components/noMore'
 		    		themeId.style.background = '#7688d9';
 		    		vm.imgSrc = 'https://m.360buyimg.com/mobilecms/s750x366_jfs/t18199/89/1740907398/275155/d8efc7b3/5ad47af2N47fb76cd.jpg!cr_1125x549_0_72!q70.jpg.dpg'
 		    	}
+		    	
 		    },
 		    goShopdetails(){
 		    	this.$router.push({ path: '/shop/shop_details'})
@@ -164,6 +179,28 @@ li:nth-child(odd){
 	height: auto;
 	padding-top: 0.21rem;
 	margin-top: -0.12rem;
+	.themeTab{
+		height: 1rem;
+		background-color: #fff;
+		line-height: 1rem;
+		.swiper-slide {
+		    width: 1.28rem;
+		    margin-right: 0.2rem;
+		    margin-left: 0.2rem;
+		}
+		.tab-item{
+			height: 100%;
+			color: #1A2642;
+			font-size: 0.32rem;
+			text-align: center;
+		}
+		.tab-active{
+			color: #f72d61;
+		}
+		.tab-change{
+			color: #7687D9;
+		}
+	}
 	.swiper{
 		margin-top: 0.12rem;
 	}
@@ -243,6 +280,12 @@ li:nth-child(odd){
 
 	.theme .vux-tab .vux-tab-item{
 		color:#222;
+	}
+
+	.themeTab{
+		.swiper{
+			height: 1rem !important;
+		}
 	}
 
 </style>

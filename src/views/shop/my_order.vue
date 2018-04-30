@@ -10,7 +10,7 @@
 	    </tab>
 		<div class="wrapper" ref="wrapper">
 			<div class="content">
-			    <div class="box">
+			    <div class="box" v-if=" test == true">
 			        <div class="box2">
 			            <div class="shop-box">
 			    			<div class="box-head">
@@ -175,11 +175,10 @@
 			        <loading v-if="show"></loading>
 			        <noMore v-if="showNomore"></noMore>
 			    </div>
-		        <!-- <div class="wrap no_orders none-data" v-else>
-		    		<img src="../../assets/images/sorder/none_03.png" alt=""> 
-		    		<p>啊噢！什么订单也没有</p> 
-		    		<span class="guang">到处逛逛</span>
-		        </div> -->
+		        <div class="wrap no_orders none-data" v-else>
+		    		<img src="../../assets/images/shop/noOrder.png" alt=""> 
+		    		<p>暂无订单</p> 
+		        </div>
 			</div>
 		</div>
 	    
@@ -195,7 +194,7 @@
 		data(){
 			return {
 				title:'我的订单',
-				// test: true,
+				test: true,
 				show9: false,
 				show: false,
 				showNomore: false
@@ -209,7 +208,7 @@
 		},
 		methods:{
 		  	onItemClick (index) {
-		  		// this.test = false;
+		  		this.test = false;
 		        console.log('on item click:', index);
 		    },
 		    InitScroll() {
@@ -273,23 +272,22 @@
 	}
 	.none-data {
 	    /* display: none; */
-	    position: absolute;
-	    height: 8.8rem;
+	    /*position: absolute;*/
 	    background: #fff;
 	    width: 100%;
-	    height: 100%;
-	    max-width: 480px;
+	    padding-bottom: 0.66rem;
+	    /*max-width: 480px;*/
 	    text-align: center;
 	    z-index: 10;
 	    img{
-    	    width: 40%;
-    		margin-top: 26%;
+    	    width: 100%;
+    		/*margin-top: 26%;*/
 	    }
 	    p{
-	    	font-size: 14px;
-    		color: #8f8f94;
+	    	font-size: 0.32rem;
+    		color: #1A2642;
 	    }
-	    .guang{
+	    /*.guang{
 	    	display: inline-block;
 		    border-radius: 0.3rem;
 		    border: 1px solid #3eabff;
@@ -297,7 +295,7 @@
 		    font-size: 0.24rem;
 		    padding: 0.1rem 0.3rem;
 		    margin-top: 0.3rem;
-	    }
+	    }*/
 	}
 	.box2{
 		background-color: #F5F6FA;

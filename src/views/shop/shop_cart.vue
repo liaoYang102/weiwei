@@ -15,13 +15,13 @@
 								<div class="fr edit" @click='edit($event)'>编辑</div>
 							</div>
 						</div>
-						<div class="store-shop">
+						<div class="store-shop" v-for="item in 2">
 							<check-icon :value.sync="demo" style="width:0.88rem;height:2.24rem;text-align:center;line-height:2.24rem;" class='fl'></check-icon>
 							<div class="fr" style="width:6.62rem;padding-bottom:0.2rem;border-bottom:1px solid #D8DFF0;padding-top:0.2rem;">
 								<div class="fl">
 									<img src="../../assets/images/shop/order_detail1.png" alt="">
 								</div>
-								<div class="fl shop-content" v-if='item'>
+								<div class="fl shop-content" v-if='item'  @click="goShopDetails">
 									<p class="shop-name">女装U宽腿牛仔裤(水洗产品)女装U宽腿牛仔裤(水洗产品)</p>
 									<p class="shop-size">颜色:蓝色；尺码:L/170修身 <span class="fr">X4</span></p>
 									<p class="shop-price"><span class="priceNum">￥3598</span> <span class="shopAcount">+266积分</span></p>
@@ -29,7 +29,7 @@
 								<div class="fr shopEdit" v-else>
 									<div class="fl">
 										<inline-x-number width="1.8rem" :min='0'></inline-x-number>
-										<div class="editSize">
+										<div class="editSize" @click="showMask">
 											<div class="fl">蓝色；165/S</div>
 											<div class="fr"><img src="../../assets/images/shop/modify.png" alt=""></div>
 										</div>
@@ -41,13 +41,13 @@
 							</div>
 							<div class="clear"></div>
 						</div>
-						<div class="store-shop">
+						<!-- <div class="store-shop">
 							<check-icon :value.sync="demo" style="width:0.88rem;height:2.24rem;text-align:center;line-height:2.24rem;" class='fl'></check-icon>
 							<div class="fr" style="width:6.62rem;padding-bottom:0.2rem;border-bottom:1px solid #D8DFF0;padding-top:0.2rem;">
 								<div class="fl">
 									<img src="../../assets/images/shop/order_detail1.png" alt="">
 								</div>
-								<div class="fl shop-content" v-if='item'>
+								<div class="fl shop-content" v-if='item'  @click="goShopDetails">
 									<p class="shop-name">女装U宽腿牛仔裤(水洗产品)女装U宽腿牛仔裤(水洗产品)</p>
 									<p class="shop-size">颜色:蓝色；尺码:L/170修身 <span class="fr">X4</span></p>
 									<p class="shop-price"><span class="priceNum">￥3598</span> <span class="shopAcount">+266积分</span></p>
@@ -55,7 +55,7 @@
 								<div class="fr shopEdit"  v-else>
 									<div class="fl">
 										<inline-x-number width="1.8rem" :min='0'></inline-x-number>
-										<div class="editSize">
+										<div class="editSize" @click="showMask">
 											<div class="fl">蓝色；165/S</div>
 											<div class="fr"><img src="../../assets/images/shop/modify.png" alt=""></div>
 										</div>
@@ -66,7 +66,7 @@
 								</div>
 							</div>
 							<div class="clear"></div>
-						</div>
+						</div> -->
 					</div>
 					<div class="list" v-for="item in 2">
 						<div class="storeName">
@@ -85,7 +85,7 @@
 								<div class="fl">
 									<img src="../../assets/images/shop/order_detail1.png" alt="">
 								</div>
-								<div class="fl shop-content" v-if='item'>
+								<div class="fl shop-content" v-if='item' @click="goShopDetails">
 									<p class="shop-name">女装U宽腿牛仔裤(水洗产品)女装U宽腿牛仔裤(水洗产品)</p>
 									<p class="shop-size">颜色:蓝色；尺码:L/170修身 <span class="fr">X4</span></p>
 									<p class="shop-price"><span class="priceNum">￥3598</span> <span class="shopAcount">+266积分</span></p>
@@ -93,7 +93,7 @@
 								<div class="fr shopEdit" v-else>
 									<div class="fl">
 										<inline-x-number width="1.8rem" :min='0'></inline-x-number>
-										<div class="editSize">
+										<div class="editSize" @click="showMask">
 											<div class="fl">蓝色；165/S</div>
 											<div class="fr"><img src="../../assets/images/shop/modify.png" alt=""></div>
 										</div>
@@ -104,11 +104,13 @@
 								</div>
 							</div>
 							<div class="clear"></div>
+
 						</div>
 					</div>
 					<div class="clear"></div>
 					<loading v-if="show"></loading>
 					<noMore v-if="showNomore"></noMore>
+					<specifications ref='sp'></specifications>
 				</div>
 			</div>
 			<div class="position">
@@ -130,10 +132,11 @@
 	import BScroll from 'better-scroll'
 	import Loading from '../../components/loading'
 	import noMore from '../../components/noMore'
+	import specifications from './components/specifications' 
 	export default{
 		data(){
 			return{
-				title:'兑换详情',
+				title:'购物车',
 				demo1: false,
 				item:true,
 				shopList:[],
@@ -145,7 +148,7 @@
 			}
 		},
 		components:{
-			settingHeader,Loading,noMore
+			settingHeader,Loading,noMore,specifications
 		},
 		mounted() {
 			this.InitScroll()
@@ -158,7 +161,7 @@
 							click: true,
 							scrollY: true,
 							pullUpLoad: {
-								threshold: -30, // 负值是当上拉到超过低部 70px；正值是距离底部距离 时，                    
+								threshold: -50, // 负值是当上拉到超过低部 70px；正值是距离底部距离 时，                    
 							}
 						})
 						this.scroll.on('pullingUp', (pos) => {
@@ -186,6 +189,12 @@
 		    },
 		    goConfirm(){
 		    	this.$router.push({ path:'/shop/confirm'})
+		    },
+		    showMask(){
+		    	this.$refs.sp.show1 = true;
+		    },
+		    goShopDetails(){
+		    	this.$router.push({ path: '/shop/shop_details'})
 		    }
 		}
 	}
@@ -200,6 +209,9 @@
 	section{
 		background-color: #F5F6FA;
 		height: 100%;
+	}
+	.box2{
+		padding-bottom: 0.3rem;
 	}
 	.storeName{
 		width: 100%;

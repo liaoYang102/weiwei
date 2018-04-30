@@ -6,13 +6,13 @@
               {{ tabItem}} <img :src="downImg" alt="" width="13%">
             </tab-item>
             <tab-item class='vux-center' @on-item-click="onItemClick">销量</tab-item>
-            <tab-item @on-item-click="onItemClick">
+            <tab-item @on-item-click="sort">
                 <span>价格</span>
-                <div class="iconImg">
+                <!-- <div class="iconImg">
                     <img :src="topImg" alt="" width="11%" class="top" @click="ascending">
                     <img :src="downImg1" alt="" width="11%" class="down" @click="descending">
-                </div>
-                
+                </div> -->
+                <img :src="priceImg" alt="" width="12%">
             </tab-item>
             <tab-item @on-item-click="onMenuClick">
                 筛选 <img src="../../assets/images/shop/screen.png" alt="" width="12%">
@@ -136,9 +136,11 @@ export default {
             moneylist: [],
             show: false,
             showNomore: false,
-            downImg:'../../../static/shop/down.png',
-            downImg1:'../../../static/shop/down.png',
-            topImg: '../../../static/shop/topicon.png'
+            downImg:'./static/shop/down.png',
+            downImg1:'./static/shop/down.png',
+            topImg: './static/shop/topicon.png',
+            priceImg: './static/shop/default.png',
+            priceSort: 0
         }
     },
     mounted:function(){
@@ -155,10 +157,10 @@ export default {
             }
         },
         showPanel: function(){
-            if(this.downImg == '../../../static/shop/down1.png'){
-                this.downImg = '../../../static/shop/down.png'
+            if(this.downImg == './static/shop/down1.png'){
+                this.downImg = './static/shop/down.png'
             }else{
-                this.downImg = '../../../static/shop/down1.png'
+                this.downImg = './static/shop/down1.png'
             }
             if(this.showMaskTop == false){
                 this.showMaskTop = true;
@@ -224,20 +226,19 @@ export default {
         goShopdetails(){
             this.$router.push({ path: '/shop/shop_details'})
         },
-        ascending(){
-            if(this.topImg == '../../../static/shop/topicon.png'){
-                this.topImg = '../../../static/shop/topactive.png'
+        sort(){
+            let a = this.priceSort;
+            a ++;
+            this.priceSort = a;
+            if(a == 0){
+                this.priceImg = './static/shop/default.png'
+            }else if(a%2 != 0){
+                this.priceImg = './static/shop/ascending.png'
             }else{
-                this.topImg = '../../../static/shop/topicon.png'
+                this.priceImg = './static/shop/descending.png'
             }
+            console.log('--', this.priceSort)
         },
-        descending(){
-            if(this.downImg1 == '../../../static/shop/down1.png'){
-                this.downImg1 = '../../../static/shop/down.png'
-            }else{
-                this.downImg1 = '../../../static/shop/down1.png'
-            }
-        }
 
     }
 }
@@ -268,6 +269,7 @@ export default {
 .shopList{
     width: 100%;
     background-color: #F5F6FA;
+    padding-bottom: 0.2rem;
     .all-shop{
         li{
             border-bottom: 1px solid  #F5F8F9;

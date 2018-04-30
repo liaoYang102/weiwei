@@ -135,7 +135,7 @@ export default {
 						click: true,
 						scrollY: true,
 						pullUpLoad: {
-							threshold: -100, // 负值是当上拉到超过低部 70px；正值是距离底部距离 时，                    
+							threshold: -50, // 负值是当上拉到超过低部 70px；正值是距离底部距离 时，                    
 						}
 					})
 					this.scroll.on('pullingUp', (pos) => {
@@ -160,6 +160,7 @@ export default {
 				{ shopname: 'VANS Old Skool lite黑白超轻鞋款 黑色38.5', money: '3598', score: '266'}];
 				_this.shopList = _this.shopList.concat(obj);
 				console.log(_this.shopList);
+				// _this.showNomore = true;
 			},3000)
 		},
 	    goShopdetails(){
@@ -249,6 +250,7 @@ li:nth-child(odd){
 .tab-list{
 	margin-bottom: 1px;
 	background: #f5f6fa;
+	padding-bottom: 0.8rem;
 	.tab-li{
 		float: left;
 		width: 49.8%;

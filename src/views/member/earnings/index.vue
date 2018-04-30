@@ -82,32 +82,32 @@
 				title: '通用积分',
 				showDialogStyle: false,
 				bottomList: [{
-						img: '../../../../static/member/follow1.png',
+						img: './static/member/follow1.png',
 						tip: '幸运抽奖（元）',
 						money: '5000.0'
 					},
 					{
-						img: '../../../../static/member/follow2.png',
+						img: './static/member/follow2.png',
 						tip: '可用余额（元）',
 						money: '5000.0'
 					},
 					{
-						img: '../../../../static/member/follow3.png',
+						img: './static/member/follow3.png',
 						tip: '中奖次数（次）',
 						money: '5000.0'
 					},
 					{
-						img: '../../../../static/member/follow4.png',
+						img: './static/member/follow4.png',
 						tip: '冻结余额（元）',
 						money: '5000.0'
 					},
 					{
-						img: '../../../../static/member/follow5.png',
+						img: './static/member/follow5.png',
 						tip: '消费返现（元）',
 						money: '5000.0'
 					},
 					{
-						img: '../../../../static/member/follow6.png',
+						img: './static/member/follow6.png',
 						tip: '推荐返现（元）',
 						money: '5000.0'
 					},

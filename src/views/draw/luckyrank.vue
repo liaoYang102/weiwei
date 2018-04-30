@@ -318,29 +318,26 @@
 			border-bottom-right-radius: 0.7rem;
 		}
 	}
-</style>
-
-<style lang="less">
-.luckyrank{
-	.weui-cells{
-		margin-top: 0;
-	}
-	.vux-no-group-title{
-		margin-top: 0;
-	}
-	.weui-cells:before{
-		border-top: none;
-	}
-	.weui-cell{
-		padding: 0;
-		padding-top: 0.15rem;
-		padding-bottom: 0.15rem;
-	}
-	.weui-cell__ft{
-		text-align: left;
-	}
-	.weui-cells:after{
-		border-color: #D8DFF0;
-	}
-}	
+	.luckyrank{
+		.weui-cells{
+			margin-top: 0;
+		}
+		.vux-no-group-title{
+			margin-top: 0;
+		}
+		.weui-cells:before{
+			border-top: none;
+		}
+		.weui-cell{
+			padding: 0;
+			padding-top: 0.15rem;
+			padding-bottom: 0.15rem;
+		}
+		.weui-cell__ft{
+			text-align: left;
+		}
+		.weui-cells:after{
+			border-color: #D8DFF0;
+		}
+	}	
 </style>
