@@ -31,7 +31,7 @@
 			<h2>套餐类型</h2>
 			<div class="list">
 				<ul>
-					<li class="clearfix">
+					<li class="clearfix" @click="goMeaidetail(1)">
 						<div class="left">
 							<img src="../../assets/images/share/md_logo.png" alt="">
 						</div>
@@ -42,7 +42,7 @@
 							<!-- <p class="zhekou">8折</p> -->
 						</div>
 					</li>
-					<li class="clearfix">
+					<li class="clearfix" @click="goMeaidetail(1)">
 						<div class="left">
 							<img src="../../assets/images/share/md_logo.png" alt="">
 						</div>
@@ -53,7 +53,7 @@
 							<!-- <p class="zhekou">8折</p> -->
 						</div>
 					</li>
-					<li class="clearfix">
+					<li class="clearfix" @click="goMeaidetail(1)">
 						<div class="left">
 							<img src="../../assets/images/share/md_logo.png" alt="">
 						</div>
@@ -102,7 +102,13 @@
 			settingHeader,
 			swiper,
 			swiperSlide
+		},
+		methods:{
+			goMeaidetail(id){
+				this.$router.push({path:'/share/meaidetail',params:id})
+			}
 		}
+
 	}
 </script>
 
@@ -116,6 +122,9 @@
 			width: 100%;
 			height: 100%;
 		}
+	}
+	.sdetail{
+		background: #fff;
 	}
 	.shoucang{
 		width: 95%;

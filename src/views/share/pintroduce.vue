@@ -9,19 +9,23 @@
 			</ul>
 		</div>
 
-		<div class="pro" v-show="nowIndex==0">
-			<img src="../../assets/images/share/producted.png" alt="">
-		</div>
-		<div class="zhiliao" v-show="nowIndex==1">
-			<img src="../../assets/images/share/treatment.png" alt="">
-		</div>
+		<scroll class="scroll">
+			<div>
+				<div class="pro" v-show="nowIndex==0">
+					<img src="../../assets/images/share/producted.png" alt="">
+				</div>
+				<div class="zhiliao" v-show="nowIndex==1">
+					<img src="../../assets/images/share/treatment.png" alt="">
+				</div>
+			</div>
+		</scroll>
 
 	</div>
 </template>
 
 <script>
 	import settingHeader from '../../components/setting_header'
-
+	import scroll from '../../components/scroll.vue'
 
 	export default {
 		data() {
@@ -34,6 +38,7 @@
 		},
 		components:{
 			settingHeader,
+			scroll
 		},
 		/*created(){
 
@@ -60,6 +65,9 @@
 		.tab{
 			height: .88rem;
 			box-sizing: border-box;
+			position: relative;
+			background: #f5f6fa !important;
+			z-index: 5;
 			li{
 				float: left;
 				height: .88rem;
@@ -91,6 +99,11 @@
 			img{
 				width: 100%;
 			}
+		}
+		.scroll{
+			width: 100%;
+			height: 600px;
+			/*.border;*/
 		}
 	}
 </style>
