@@ -5,7 +5,7 @@
 			<group gutter="0">
 				<cell class="list-item user-img" title="头像编辑" is-link>
 					<div class="up-box">
-						<img class="tx" :src="images?images:'../../../../static/images/mrtx.png'" />
+						<img class="tx" :src="images?images:'./static/images/mrtx.png'" />
 						<input class="upinput" type="file" name="" id="" value="" @change="up" ref="input" />
 						<!--<uploader :max="varmax" :showHeader="false" :images="images" :handle-click="false" :autoUpload="false" :capture="camera" :show-header="false" :readonly="true" :upload-url="uploadUrl" name="img" :params="params" size="small" @preview="previewMethod" :upload-image="up" @add-image="addImageMethod" @remove-image="removeImageMethod">
 						</uploader>-->

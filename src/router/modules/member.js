@@ -168,7 +168,10 @@ const memberModule = [{
 	{
 		path: '/member/purse/qrcode',
 		name: 'qrcode',
-		component: qrcode
+		component: qrcode,
+		meta: {
+			navShow: true
+		}
 	},
 	{
 		path: '/member/purse/recharge',
