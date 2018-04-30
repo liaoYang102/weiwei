@@ -8,10 +8,6 @@
             <tab-item class='vux-center' @on-item-click="onItemClick">销量</tab-item>
             <tab-item @on-item-click="sort">
                 <span>价格</span>
-                <!-- <div class="iconImg">
-                    <img :src="topImg" alt="" width="11%" class="top" @click="ascending">
-                    <img :src="downImg1" alt="" width="11%" class="down" @click="descending">
-                </div> -->
                 <img :src="priceImg" alt="" width="12%">
             </tab-item>
             <tab-item @on-item-click="onMenuClick">
@@ -81,9 +77,6 @@
 
             </div>
         </div>
-        
-
-    
     </div>
 </template>
 

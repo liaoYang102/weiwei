@@ -290,28 +290,28 @@ export default {
 
 <style lang="less">
 .ul-contents .weui-cells{
-	margin-top: 0 !important;
+	margin-top: 0;
 }
 .ul-contents .vux-no-group-title{
-	margin-top: 0 !important;
+	margin-top: 0;
 }
 .ul-contents .weui-form-preview__item{
-	margin-top: 0.18rem !important;
+	margin-top: 0.18rem;
 }
 .ul-contents .weui-form-preview__bd{
-	color: #1A2642 !important;
+	color: #1A2642;
 }
 .ul-contents .weui-cells:before{
-	border-top: none !important;
+	border-top: none;
 }
 .ul-contents .weui-form-preview__label{
-	color: #90A2C7 !important;
-	text-align: left !important;
-	text-align-last: left !important;
-	font-size: 0.28rem !important;
+	color: #90A2C7;
+	text-align: left;
+	text-align-last: left;
+	font-size: 0.28rem;
 }
 .ul-contents .weui-form-preview__value{
 	margin-right: 0.44rem;
-	font-size: 0.28rem !important;
+	font-size: 0.28rem;
 }
 </style>

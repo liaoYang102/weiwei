@@ -281,19 +281,19 @@ export default {
 
 <style lang="less">
 .textarea .weui-cells{
-	margin-top: 0 !important;
+	margin-top: 0;
 }
 .textarea .weui-textarea{
-	color: #1A2642 !important;
-	font-size: 0.28rem !important;
+	color: #1A2642;
+	font-size: 0.28rem;
 }
 .textarea .vux-no-group-title{
-	margin-top: 0 !important;
+	margin-top: 0;
 }
 .textarea .weui-cells:before{
-	border-top: none !important;
+	border-top: none;
 }
 .textarea .weui-cells:after{
-	border-bottom: none !important;
+	border-bottom: none;
 }
 </style>

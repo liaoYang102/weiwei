@@ -437,44 +437,44 @@ export default {
 	}
 }
 .shop_cell .weui-cell{
-	padding: 0.3rem 0.15rem !important;
+	padding: 0.3rem 0.15rem;
 }
 .shop_cell .weui-cells:before{
-	border-top: 1px solid #D8DFF0 !important;
+	border-top: 1px solid #D8DFF0;
 }
 .shop_cell  .weui-cell:before{
-	border-top: 1px solid #D8DFF0 !important;
+	border-top: 1px solid #D8DFF0;
 }
 .shop_cell .vux-label{
-	color: #90A2C7 !important;
-	font-size: 0.28rem !important;
+	color: #90A2C7;
+	font-size: 0.28rem;
 }
 .shop_cell .weui-cell__ft{
-	font-size: 0.3rem !important;
-	color: #1A2642 !important;
+	font-size: 0.3rem;
+	color: #1A2642;
 }
 .shop_cell .weui-cell_access .weui-cell__ft{
-	padding-right: 0.79rem !important;
+	padding-right: 0.79rem;
 }
 .shop_cell .weui-cell_access .weui-cell__ft:after{
-	right: 0.45rem !important;
-	border-color: #90A2C7 !important;
+	right: 0.45rem;
+	border-color: #90A2C7;
 }
 .shop_cell .weui-cells:after{
-	border-bottom: 0.01rem solid #F5F6FA !important;
+	border-bottom: 0.01rem solid #F5F6FA;
 }
 .shop_cell .vux-no-group-title{
 	margin-top: 0.22rem;
 }
-#app .vux-header .vux-header-left .left-arrow:before {
+.shop_details .vux-header .vux-header-left .left-arrow:before {
 	border: 1px solid #222;
 	border-width: 1px 0 0 1px;
 }
 
-#app .vux-header .vux-header-title {
+.shop_details.vux-header .vux-header-title {
 	color: #333;
 }
-.vux-header{
+.shop_details .vux-header{
 	position: fixed!important;
 	top: 0;
 	width: 100%;

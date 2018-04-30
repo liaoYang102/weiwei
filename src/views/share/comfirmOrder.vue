@@ -62,15 +62,15 @@
 				numberValue:1,  //默认数量
 				paytype:false,
 				list: [{
-					icon: '../../../static/member/bandCard.png',
+					icon: './static/member/bandCard.png',
 					key: '1',
 					value: '银行卡支付'
 				}, {
-					icon: '../../../static/member/treasure.png',
+					icon: './static/member/treasure.png',
 					key: '2',
 					value: '支付宝支付'
 				}, {
-					icon: '../../../static/member/wechapaid.png',
+					icon: './static/member/wechapaid.png',
 					key: '3',
 					value: '微信支付'
 				}],

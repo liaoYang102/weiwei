@@ -8,9 +8,9 @@
 	      <tab-item @on-item-click="onItemClick">已完成</tab-item>
 	      <tab-item @on-item-click="onItemClick">已取消</tab-item>
 	    </tab>
-		<div class="wrapper" ref="wrapper">
+		<div class="wrapper" ref="wrapper"  v-if=" test == true">
 			<div class="content">
-			    <div class="box" v-if=" test == true">
+			    <div class="box">
 			        <div class="box2">
 			            <div class="shop-box">
 			    			<div class="box-head">
@@ -175,12 +175,17 @@
 			        <loading v-if="show"></loading>
 			        <noMore v-if="showNomore"></noMore>
 			    </div>
-		        <div class="wrap no_orders none-data" v-else>
-		    		<img src="../../assets/images/shop/noOrder.png" alt=""> 
-		    		<p>暂无订单</p> 
-		        </div>
 			</div>
 		</div>
+
+		<div class="wrap no_orders" v-else>
+        	<div class="none-data">
+        		<img src="../../assets/images/shop/noOrder.png" alt=""> 
+    			<p>暂无订单</p>
+        	</div>
+    		
+    		<recommended></recommended>
+        </div>
 	    
 	</section>
 </template>
@@ -190,6 +195,7 @@
 	import BScroll from 'better-scroll'
 	import Loading from '../../components/loading'
 	import noMore from '../../components/noMore'
+	import recommended from './components/recommended'
 	export default {
 		data(){
 			return {
@@ -201,7 +207,7 @@
 			}
 		},
 		components: {
-	        settingHeader,Loading,noMore
+	        settingHeader,Loading,noMore,recommended
 	    },
 	    mounted() {
 			this.InitScroll()
@@ -266,36 +272,33 @@
 
 <style lang="less" scoped>
 	.wrapper {
-		height: 93%;
+		height: 95%;
 		background-color: #F5F6FA;
 		overflow: hidden;
 	}
-	.none-data {
-	    /* display: none; */
-	    /*position: absolute;*/
-	    background: #fff;
-	    width: 100%;
-	    padding-bottom: 0.66rem;
-	    /*max-width: 480px;*/
-	    text-align: center;
-	    z-index: 10;
-	    img{
-    	    width: 100%;
-    		/*margin-top: 26%;*/
-	    }
-	    p{
-	    	font-size: 0.32rem;
-    		color: #1A2642;
-	    }
-	    /*.guang{
-	    	display: inline-block;
-		    border-radius: 0.3rem;
-		    border: 1px solid #3eabff;
-		    color: #3eabff;
-		    font-size: 0.24rem;
-		    padding: 0.1rem 0.3rem;
-		    margin-top: 0.3rem;
-	    }*/
+	.no_orders{
+		padding-bottom: 0.2rem;
+		background-color: #F5F6FA;
+		.none-data {
+		    /* display: none; */
+		    /*position: absolute;*/
+		    background: #fff;
+		    width: 100%;
+		    padding-bottom: 0.66rem;
+		    margin-bottom: 0.2rem;
+		    text-align: center;
+		    z-index: 10;
+		    img{
+	    	    width: 100%;
+		    }
+		    p{
+		    	font-size: 0.32rem;
+	    		color: #1A2642;
+		    }
+		}
+	}
+	.box{
+		padding-bottom: 0.5rem;
 	}
 	.box2{
 		background-color: #F5F6FA;
@@ -392,11 +395,11 @@
 </style>
 <style lang="less">
 	.myOrder .vux-tab-item-badge{
-		font-size: 0.16rem !important;
-		margin:auto 0 auto 0.04rem !important;
+		font-size: 0.16rem;
+		margin:auto 0 auto 0.04rem;
 	}
 	.myOrder .vux-tab-item{
-		font-size: 0.28rem !important;
+		font-size: 0.28rem;
 	}
 	.myOrder .vux-tab .vux-tab-item.vux-tab-selected{
 		border-bottom: 4px solid #256fff ;
