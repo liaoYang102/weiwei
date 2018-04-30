@@ -6,17 +6,21 @@
 
                 <tab :line-width='0' style="border-top: 1px solid #E1E1E1;">
                     <tab-item selected @on-item-click="showPanel">
-                      {{ tabItem}} <img src="../../assets/images/shop/xiaActive.png" alt="" width="6%">
+                      {{ tabItem}} <img :src="downImg" alt="" width="13%">
                     </tab-item>
                     <tab-item class='vux-center' @on-item-click="onItemClick">销量</tab-item>
-                    <tab-item @on-item-click="onItemClick">价格</tab-item>
+                    <tab-item @on-item-click="sort">
+                        <span>价格</span>
+                        <img :src="priceImg" alt="" width="12%">
+                    </tab-item>
                     <tab-item @on-item-click="onMenuClick">
-                        筛选
+                        筛选 <img src="../../assets/images/shop/screen.png" alt="" width="12%">
                     </tab-item>
                 </tab>
 
-                <div v-transfer-dom class="masKTop">
-                    <popup v-model="showMaskTop" position="top">
+                <!-- 综合弹出框 -->
+                <div v-transfer-dom class="dialogTop">
+                    <x-dialog v-model="showDialog" :hide-on-blur="true">
                         <div class="panel">
                             <li v-for="(item, index) in panel"  @click="select(item,index)">
                                 <div :class="{'selected':act1==index}">
@@ -25,8 +29,10 @@
                                 </div>
                             </li>
                         </div>
-                    </popup>
-                </div> 
+                    </x-dialog>
+                </div>
+
+                <maskRight ref='xioaqiang'></maskRight>
 
                 <Swiper :imgList="imgList"></Swiper>
 
@@ -81,9 +87,11 @@
 </template>
 
 <script>
+import { XDialog} from 'vux'
 import settingHeader from '../../components/setting_header'
 import Swiper from '../shop/components/swiper'
 import BScroll from 'better-scroll'
+import maskRight from '../shop/components/maskRight'
 // import Loading from '../../components/loading'
 // import noMore from '../../components/noMore'
 
@@ -91,6 +99,8 @@ export default {
     components: {
         settingHeader,
         Swiper,
+        XDialog,
+        maskRight
         // Loading,
         // noMore
     },
@@ -108,7 +118,7 @@ export default {
                 { title: '积分兑', status: 1}, 
                 { title: '积分购', status: 2}
             ],
-            showMaskTop: false,
+            showDialog: false,
             sMaskRight: false,
             act1: 0,
             shopTitle: '',
@@ -130,7 +140,12 @@ export default {
             scorelist: [],
             moneylist: [],
             show: false,
-            showNomore: false
+            showNomore: false,
+            downImg:'./static/shop/down.png',
+            downImg1:'./static/shop/down.png',
+            topImg: './static/shop/topicon.png',
+            priceImg: './static/shop/default.png',
+            priceSort: 0
         }
     },
     mounted:function(){
@@ -147,15 +162,20 @@ export default {
             }
         },
         showPanel: function(){
-            if(this.showMaskTop == false){
-                this.showMaskTop = true;
+            if(this.downImg == './static/shop/down1.png'){
+                this.downImg = './static/shop/down.png'
+            }else{
+                this.downImg = './static/shop/down1.png'
+            }
+            if(this.showDialog == false){
+                this.showDialog = true;
             }else {
-                this.showMaskTop = false
+                this.showDialog = false
             }
         },
         select: function(obj,i){
             this.act1 = i;
-            this.showMaskTop = false;
+            this.showDialog = false;
             this.tabItem = obj.title;
         },
         onMenuClick: function() {
@@ -210,7 +230,20 @@ export default {
         },
         goShopdetails(){
             this.$router.push({ path: '/shop/shop_details'})
-        }
+        },
+        sort(){
+            let a = this.priceSort;
+            a ++;
+            this.priceSort = a;
+            if(a == 0){
+                this.priceImg = './static/shop/default.png'
+            }else if(a%2 != 0){
+                this.priceImg = './static/shop/ascending.png'
+            }else{
+                this.priceImg = './static/shop/descending.png'
+            }
+            console.log('--', this.priceSort)
+        },
 
     }
 }
@@ -225,6 +258,7 @@ export default {
         list-style: none;
         margin: 0.18rem 0.29rem 0.06rem 0.46rem;
         font-size: 0.28rem;
+        text-align: left;
         .selected{
            color: #336FFF;
            img{
@@ -324,14 +358,20 @@ export default {
 </style>
 
 <style lang="less">
-.masKTop .vux-popup-dialog{
-    background: #fff;
-}
-/*.masKTop .vux-popup-dialog.vux-popup-top{
-    top: 1.815rem;
-}*/
-.masKTop .vux-popup-mask{
-    top: 1.8rem;
+.dialogTop {
+    .weui-mask{
+        top: 50%;
+        z-index: 10;
+    }
+    .weui-dialog{
+        top: 54.1%;
+        width: 101%;
+        left: 49.5%;
+        background: #fff;
+        max-width: 101%;
+        z-index: 11;
+        border-radius: 0;
+    }
 }
 #shops .vux-tab .vux-tab-item{
     color:#1A2642;
@@ -340,6 +380,7 @@ export default {
     color:#256fff;
     border-bottom:3px solid #256fff;
 }
+
 </style>
 
 
