@@ -30,7 +30,10 @@ const share =[
 	{
 		path:'/share/storelist',//门店列表
 		name:'storelist',
-		component:StoreList
+		component:StoreList,
+		meta: {
+			navShow: true
+		}
 	},
 	{
 		path:'/share/storelist2',//门店列表2

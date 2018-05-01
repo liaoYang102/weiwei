@@ -1,5 +1,5 @@
 <template>
-	<section style="background: #fff;color: #1A2642;">
+	<section style="background: #fff;color: #1A2642;" class="pastwrap">
 		<settingHeader :title="title"></settingHeader>
 
 		<div class="item">
@@ -404,7 +404,8 @@
 			border-bottom: none;
 		}
 	}
-	.item{
+	.pastwrap{
+		.item{
 	    width: 100%;
 	    position: relative;
 	    .periodVideo{
@@ -441,6 +442,8 @@
 	    	}
 	    }
 	}
+	}
+	
 	.web{
 		.weui-cells{
 			margin-top: 0;
