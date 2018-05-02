@@ -39,7 +39,8 @@ const memberModule = [{
 		name: 'index',
 		component: index,
 		meta: {
-			navShow: true
+			navShow: true,
+			navIndex:0
 		}
 	},
 	{
@@ -83,7 +84,8 @@ const memberModule = [{
 		name: 'member',
 		component: member,
 		meta: {
-			navShow: true
+			navShow: true,
+			navIndex:4
 		}
 	},
 	{

@@ -32,7 +32,8 @@ const share =[
 		name:'storelist',
 		component:StoreList,
 		meta: {
-			navShow: true
+			navShow: true,
+			navIndex:3
 		}
 	},
 	{
