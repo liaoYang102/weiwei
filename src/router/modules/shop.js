@@ -33,7 +33,8 @@ const shopModule = [
 		name: 'shop',
 		component: shop,
 		meta: {
-			navShow: true
+			navShow: true,
+			navIndex:1
 		}
 	},
 	{

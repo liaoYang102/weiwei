@@ -50,7 +50,6 @@
 		},
 		watch: {
 			'$route' (to, from) {
-//				alert(this.direction)
 				document.body.scrollTop = 0
 				document.documentElement.scrollTop = 0
 			}　

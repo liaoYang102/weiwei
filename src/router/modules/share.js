@@ -26,7 +26,11 @@ const share =[
 	{
 		path:'/share/storelist',//门店列表
 		name:'storelist',
-		component:StoreList
+		component:StoreList,
+		meta: {
+			navShow: true,
+			navIndex:3
+		}
 	},
 	{
 		path:'/share/meaidetail',//套餐详情
