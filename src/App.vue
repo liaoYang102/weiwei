@@ -13,7 +13,7 @@
 	import { mapState } from 'vuex'
 	export default {
 		name: 'App',
-		computed: {
+		computed: {	
 			...mapState({
 				direction: state => state.page.direction,
 			}),

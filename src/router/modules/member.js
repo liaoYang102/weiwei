@@ -40,7 +40,13 @@ const memberModule = [{
 		component: index,
 		meta: {
 			navShow: true
-		}
+		},
+		/*children:[
+			{
+				path:'',
+				component:index,
+			}
+		]*/
 	},
 	{
 		path: '/',
