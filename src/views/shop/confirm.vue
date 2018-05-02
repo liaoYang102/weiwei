@@ -11,7 +11,8 @@
 				<div class="address">
 					<img src="../../assets/images/shop/address.png" alt="">
 					<span class='details'>广东佛山市南海区桂城街道佛平路与宝翠路交界万科金色领域界</span>
-					<span class="arrow fr">></span>
+					<img src="../../assets/images/shop/right.png" class="fr" style="margin-right: 0.44rem;width: 4%">
+					<!-- <span class="arrow fr">></span> -->
 				</div>
 			</router-link>
 		</div>
@@ -275,6 +276,7 @@ export default {
 		position: fixed;
 		bottom:0;
 		background-color: #fff;
+		border-top: 1px solid #E1E1E1;
 		.total{
 			/*background-color: #fff;*/
 			width: 4.4rem;
@@ -328,6 +330,8 @@ export default {
 .shops .weui-label{
 		width: 8em;
 		margin-right: 0.2rem;
+		color: #90A2C7;
+		font-size: 0.24rem;
 	}
 .shops .weui-icon-success{
 		float: right;

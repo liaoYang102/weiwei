@@ -1,5 +1,5 @@
 <template>
-	<section class='refund'>
+	<section class='write_logistics'>
 		<settingHeader :title='title'></settingHeader>
 		<div class="shop">
 			<div class="fl">
@@ -13,24 +13,15 @@
 		</div>
 		<div class="select">
 			<group>
-		      <cell title="货物状态" value="请选择" :border-intent="false" is-link></cell>
-		      <cell title="退款原因" value="请选择" :border-intent="false" @click.native='test' is-link></cell>
+		      	<cell title="物流公司" value="请选择物流公司" @click.native='test' is-link></cell>
+		      	<div>
+		      		<x-input title="物流单号" v-model="inputnum" placeholder="请填写物流单号" :show-clear="false"></x-input>
+		      	</div>
+		      
 		    </group>
 		    <group class="center">
-		    	<div @click="showMoneyInput" v-show="!showInputMoney" class="red">
-		    		<cell title="退款金额" :value="'￥'+money" :border-intent="false"></cell>
-		    	</div>
-		      
-			    <div class="money-input" v-show="showInputMoney">
-			    	<div class="symbol">￥</div>
-			    	<x-input title="退款金额" placeholder="请填写" type="number" :max="9" :show-clear="false" v-model="inputMoney" @on-blur="changeMoney(inputMoney)" @on-focus="showMoneyInput">
-			    	</x-input>
-			    </div>
-
-		      	<cell title="退款积分" value="2400" :border-intent="false"></cell>
+    	    	<x-input title="手机号码" name="mobile" v-model="inputMobile" placeholder="请输入手机号码" keyboard="number" is-type="china-mobile" :show-clear="false"></x-input>
 		    </group>
-
-		    <span class="prompt">最多¥624.00，含发货邮费¥0.00</span>
 
 		    <group>
 		    	<div @click="optional" v-show="!showInputOption" class="widthOption">
@@ -62,16 +53,16 @@
   			    </div>
 		    </group>
 		</div>
-		<div class="confirm" @click="goRefunddetails">
+		<div class="confirm" @click="goLogistics">
 			确定
 		</div>
 		<div v-transfer-dom>
 	      <popup v-model="show1">
-	        <popup-header title="退款原因" :show-bottom-border="false"></popup-header>
+	        <popup-header title="物流公司" :show-bottom-border="false"></popup-header>
 	        <group gutter="0">
 	        	<scroller lock-x height="200px" ref="scrollerEvent">
 			      <div class="box2">
-			        <radio :options="['1', '2', '3', '4','5','6','7','8']"></radio>
+			        <radio :options="['顺丰', '圆通', '申通', '中通','韵达','天天','百世','优速']"></radio>
 			      </div>
 			    </scroller>
 	          <div class="pay-box">
@@ -81,7 +72,6 @@
 	      </popup>
 	    </div>
 
-	    <vuedialog ref='vDialog' :dialogConfig="dialogConfig" :confirm="confirm" :canel="canel"></vuedialog>
 	</section>
 </template>
 
@@ -89,68 +79,32 @@
 	import settingHeader from '../../components/setting_header'
 	import { PopupHeader } from 'vux'
 	import { Radio } from 'vux'
-	import { XButton,XInput } from 'vux'
-	import vuedialog from '../../components/dialog'
+	import { XButton, XInput } from 'vux'
 	export default{
 		data(){
 			return{
-				title:"申请退款",
+				title:"填写退货物流",
 				show1: false,
-				dialogConfig:{
-					buttons:['确定','取消'],
-					type:"warning",
-					delay:1000,
-					message:'输入错误请重新输入',
-					headMessage:'提示',
-				},
-				showInputMoney: false,
 				imgList: [],
-				money: '624.00',
-				inputMoney: '624.00',
 				showInputOption: false,
+				option: '选填',
 				inputOption: '',
-				option: '选填'
-				// timer: '',
+				inputnum: null,
+				inputMobile: null
 			}
 		},
 		components:{
-			settingHeader,PopupHeader,Radio,XButton,vuedialog,XInput
+			settingHeader,PopupHeader,Radio,XButton,XInput
 		},
 		created(){
-			document.title = '申请退款';
-			// var int1 = window.setInterval(this.time,1000);
+			document.title = '填写退货物流';
 		},
 		methods:{
-			time(){
-				// var nowreduce = new Date();
-				// var endreduce = new Date(Date.parse("2018/4/24 18:00:00"));
-				// var leftTimereduce = parseInt((endreduce-nowreduce)/1000);
-				// var day = Math.floor((leftTimereduce)/3600/24);
-				// var hour = Math.floor((leftTimereduce-day*3600*24)/3600);
-				// var minute = Math.floor((leftTimereduce-day*3600*24-hour*60*60)/60);
-				// this.timer = day + '天' + hour + '时' + minute + '分';
-				// console.log(this.timer);
-				// if(day==0&&hour==0&&minute==0){
-				// 	window.clearInterval(int1);
-				// }
-			},
 			test(){
 				this.show1 = true;
 			},
-			goRefunddetails(){
-				this.$router.push({ path: '/shop/refund_details'})
-			},
-			showMoneyInput(){
-				// this.$refs.vDialog.showDialog = true;
-				// this.autoclose()
-				this.showInputMoney = true
-				this.inputMoney = this.money
-			},
-			confirm(){
-				alert(1);
-			},
-			canel(){
-				this.$refs.vDialog.showDialog = false;
+			goLogistics(){
+				this.$router.push({ path: '/shop/logistics'})
 			},
 			upload:function (e) {
 				var _this = this
@@ -168,36 +122,8 @@
 	        imgDelete(index){
 	       		this.imgList.splice(index, 1);
 	        },
-	        autoclose(){
-				let _this = this
-	       		let delay = _this.dialogConfig.delay;
-	       		if(delay && delay!=0 && _this.$refs.vDialog.showDialog){
-       				setTimeout(function(){
-       					_this.$refs.vDialog.showDialog = false
-       				},delay);
-	       		}
-	        },
 	        optional(){
 	        	this.showInputOption = true;
-	        },
-	        changeMoney(money){
-	        	var reg = /^\d+(?=\.{0,1}\d+$|$)/;
-	        	console.log('000',reg.test(money));
-	        	if(reg.test(money)){
-		        	let m = parseFloat(money)
-		        	if(m&&m>=0){
-		        		if(parseInt(m)==m){
-			        		this.money = m+'.00';
-			        	}else{
-		        			this.money = m + 0.00;
-		        			console.log('---', this.money)
-			        	}
-		        	}else{
-		        		this.money = 0+'.00'
-		        	}
-	        	}
-	        	
-	        	this.showInputMoney = false;
 	        },
 	        changeOption(option){
 	        	console.log('--', option)
@@ -208,17 +134,17 @@
 	        	}
 	        	
 	        	this.showInputOption = false;
-	        }
+	        },
+	        
 		}
 	}
 </script>
 
 <style lang="less" scoped>
- .refund{
- 	/*height: 100%;*/
+ .write_logistics{
  	background-color: #F5F8F9;
  	.select{
- 		padding-bottom: 1.4rem;
+ 		padding-bottom: 1.5rem;
  	}
  	.shop{
  		border-top: 1px solid #90A2C7;
@@ -330,7 +256,7 @@
  }
 </style>
 <style lang="less">
-	.refund{
+	.write_logistics{
 		.weui-input::-webkit-input-placeholder {
 		    color: #90A2C7 !important; // WebKit browsers 
 		}
@@ -344,14 +270,15 @@
 		    color: #90A2C7 !important; //Internet Explorer 10+ */
 		}
 		.vux-label{
-			height:auto; 
+			height:auto;  
 			font-size:0.28rem;
 			font-family:PingFangSC-Regular;
 			color:rgba(26,38,66,1);
 			line-height:0.4rem;
 		}
 		.weui-cell__ft{
-			height:auto; 
+			height:auto;
+			/*width: 80%;*/
 			font-size:0.28rem;
 			font-family:PingFangSC-Regular;
 			color:rgba(144,162,199,1);
@@ -363,35 +290,26 @@
 		.weui-cell{
 			padding:15px 15px;
 		}
+		.weui-input{
+			text-align: right;
+			font-size: 0.28rem;
+			color: #90A2C7;
+		}
+		.weui-label{
+			font-size: 0.28rem;
+			color: #1A2642;
+		}
 		.center{
 			margin-top: 0.2rem;
 			position: relative;
-
+			margin-bottom: 0.2rem;
 			.weui-label{
 				font-size: 0.28rem;
 				color: #1A2642;
 			}
-			
-			.weui-input{
-				font-size: 0.28rem;
-				color: #F23030;
-				padding-left: 0.43rem;
-			}
-			.red{
-				.weui-cell__ft{
-					color:#F23030;
-				}
-			}
-			
-			.money-input{
-				position: relative;
-				font-size: 0.28rem;
-				.symbol{
-					position: absolute;
-					color:#F23030;
-					top: 32%;
-					left: 25%;
-				}
+
+			.weui-cell__ft{
+				text-align: left;
 			}
 		}
 		.widthOption{
@@ -400,17 +318,13 @@
 				word-wrap: break-word; 
 			}
 		}
-		.prompt{
-			padding-left: 15px;
-			display: inline-block;
-			height:0.53rem; 
-			font-size:0.24rem;
-			font-family:PingFangSC-Regular;
-			color:rgba(144,162,199,1);
-			line-height:0.53rem;
-		}
 		.option-input{
 			font-size: 0.28rem;
+			.weui-input{
+				text-align: left;
+				font-size: 0.28rem;
+				color: #90A2C7;
+			}
 		}
 	}
 </style>

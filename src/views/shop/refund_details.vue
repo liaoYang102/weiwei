@@ -27,7 +27,7 @@
 				</li>
 
 				<div class="msg-btn" v-if="view == true">
-					<div class="li-btn public">我已寄出</div>
+					<div class="li-btn public" @click="goWriteLogistics">我已寄出</div>
 					<div class="li-text">点击填写物流单号</div>
 				</div>
 
@@ -109,6 +109,9 @@ export default {
 				this.view = false
 				window.clearInterval(int1);
 			}
+		},
+		goWriteLogistics(){
+			this.$router.push({ path:'/shop/write_logistics'})
 		}
 	}
 }
