@@ -45,7 +45,7 @@
 
 		<div v-transfer-dom>
 			<popup v-model="show1">
-				<popup-header left-text="取消" right-text="确定" title="选择支付方式" :show-bottom-border="false" @on-click-left="show1 = false" @on-click-right="show1 = false"></popup-header>
+				<popup-header right-text="取消" title="选择支付方式" :show-bottom-border="false" @on-click-left="show1 = false" @on-click-right="show1 = false"></popup-header>
 				<group style="padding-bottom: 1rem;" gutter="0">
 					<radio :options="list" value="1" @on-change="change"></radio>
 					<div class="pay-box">
@@ -67,15 +67,15 @@
 				moneyIndex: 0, //套餐默认选中
 				ptIndex: 0,
 				list: [{
-					icon: '../../../../static/member/bandCard.png',
+					icon: './static/member/bandCard.png',
 					key: '1',
 					value: '银行卡支付'
 				}, {
-					icon: '../../../../static/member/treasure.png',
+					icon: './static/member/treasure.png',
 					key: '2',
 					value: '支付宝支付'
 				}, {
-					icon: '../../../../static/member/wechapaid.png',
+					icon: './static/member/wechapaid.png',
 					key: '3',
 					value: '微信支付'
 				}],
@@ -98,19 +98,19 @@
 					},
 				],
 				ptList: [{
-						img: '../../../../static/member/hairdressing1.png',
+						img: './static/member/hairdressing1.png',
 						name: '美容平台'
 					},
 					{
-						img: '../../../../static/member/traval.png',
+						img: './static/member/traval.png',
 						name: '旅游平台'
 					},
 					{
-						img: '../../../../static/member/shopping1.png',
+						img: './static/member/shopping1.png',
 						name: '餐饮平台'
 					},
 					{
-						img: '../../../../static/member/catering.png',
+						img: './static/member/catering.png',
 						name: '购物平台'
 					},
 				]

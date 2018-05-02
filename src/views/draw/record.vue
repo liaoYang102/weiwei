@@ -1,5 +1,5 @@
 <template>
-	<section style="background: #eaeaea;height: 100%;">
+	<section style="background: #F5F6FA;height: 100%;">
 		<drawHeader :title="title" id="changeBlock"></drawHeader>
 
 		<div class="record">
@@ -44,24 +44,29 @@
 			            <ul class="commodity">
 			            	<group v-for="(item,index) in recordList" class="li-item">
 								<cell>
-									<li>
-										<p class="title">
-											{{ item.drawTtile}}
-											<span class="frequency right">{{ item.period}}期</span>
-										</p>
-										<p class="time">开奖时间:{{ item.awardDate}}</p>
-										<p class="bonusPool">
-											奖金池：<span class="num">￥{{ item.money}}</span> 奖金池：{{ item.num}}人
-										</p>
-			                        </li>
+									<router-link to="/draw/details">
+										<li>
+											<p class="title">
+												<span>{{ item.drawTitle}}</span>
+												<span class="frequency right">{{ item.period}}期</span>
+											</p>
+											<p class="time">开奖时间:{{ item.awardDate}}</p>
+											<p class="bonusPool">
+												奖金池：<span class="num">￥{{ item.money}}</span> 奖金池：{{ item.num}}人
+											</p>
+				                        </li>
+			                    	</router-link>
 								</cell>
-								<cell is-link>
-									<p class="status" @click="showDialogs">
-										<span class="wait" v-if="status == 0">等待开奖</span>
-										<span class="start" v-else-if="status == 1">已开奖</span>
-										<span class="win" v-else>已中奖</span>
-										<span class="right mui-icon mui-icon-forward"></span>
-									</p>
+								<cell>
+									<div class="status">
+										<span class="wait" v-if="item.status == 0">等待开奖</span>
+										<span class="start" v-else-if="item.status == 1">未中奖</span>
+										<div v-else-if="item.status == 2">
+											<span class="win">已中奖</span>
+											<div class="btn" @click="goWinningSpeech">立即领奖</div>
+										</div>
+										
+									</div>
 								</cell>
 							</group>
 			            </ul>
@@ -75,27 +80,9 @@
 	        <div v-transfer-dom class="dialog">
 	          	<x-dialog v-model="showDialog" :hide-on-blur="true">
 	          		<div class="dia_top">
-						<p class="title">番禺国美店周末幸运大抽奖</p>
-						<span class="dia_times">第12356期</span>
-						<p class="text">买单报手机号<span class="text_red">5000元</span>大奖</p>
-						<p class="vivid">恭喜您中了一等级5000元</p>
-						<router-link to="/draw/awards">
-							<div class="btn">
-								立即领奖
-							</div>
-						</router-link>
-					</div>
-					<div  class="time-line" style="height: 5rem;">
-						<timeline>
-							<timeline-item v-for="(item, index) in process" :key="index">
-								<h4 :class="[index === 1 ? 'recent' : '']" style="text-align: left">
-									<span>{{ item.step}}</span>
-								</h4>
-								<p :class="[index === 1 ? 'recent' : '']" class='bottom'  style="text-align: left;color: #000">
-									<span>{{ item.date}}</span>
-								</p>
-							</timeline-item>
-						</timeline>
+						<p class="title">{{ toast}}</p>
+						<!-- <span class="note">{{ note}}</span> -->
+						<router-link to=""><div class="btn">实名验证</div></router-link>
 					</div>
 	          	</x-dialog>
 	        </div>
@@ -116,12 +103,11 @@
 		data(){
 			return {
 				title: '中奖记录',
-				count: 4,
+				count: 5,
 				tab1: true,
 				tab2: false,
 				show: false,
 				showNomore: false,
-				status:0,
 				showDialog: false,
 				process: [
 					{step: '开奖时间2019-08-08 18:00:00', date: '2018-02-09 18:20:10'},
@@ -129,15 +115,22 @@
 					{step: '你花了￥1,256购买了一双耐克KD10广州万国奥特广场负一层', date: '2018-02-09 18:20:10'},
 				],
 				recordList:[
-					{ drawTitle: '国美番禺店大抽奖', period: '1234', awardDate: '2018-03-20 20:00:00', money: '800.00', num:'600.00'},
-					{ drawTitle: '国美番禺店大抽奖', period: '1234', awardDate: '2018-03-20 20:00:00', money: '800.00', num:'600.00'},
-					{ drawTitle: '国美番禺店大抽奖', period: '1234', awardDate: '2018-03-20 20:00:00', money: '800.00', num:'600.00'},
-					{ drawTitle: '国美番禺店大抽奖', period: '1234', awardDate: '2018-03-20 20:00:00', money: '800.00', num:'600.00'},
-					{ drawTitle: '国美番禺店大抽奖', period: '1234', awardDate: '2018-03-20 20:00:00', money: '800.00', num:'600.00'},
-					{ drawTitle: '国美番禺店大抽奖', period: '1234', awardDate: '2018-03-20 20:00:00', money: '800.00', num:'600.00'},
-					{ drawTitle: '国美番禺店大抽奖', period: '1234', awardDate: '2018-03-20 20:00:00', money: '800.00', num:'600.00'},
-					{ drawTitle: '国美番禺店大抽奖', period: '1234', awardDate: '2018-03-20 20:00:00', money: '800.00', num:'600.00'}
-				]
+					{ drawTitle: '国美番禺店大抽奖', period: '1234', awardDate: '2018-03-20 20:00:00', money: '800.00', num:'600.00',status:0},
+					{ drawTitle: '国美番禺店大抽奖', period: '1234', awardDate: '2018-03-20 20:00:00', money: '800.00', num:'600.00',status:0},
+					{ drawTitle: '国美番禺店大抽奖', period: '1234', awardDate: '2018-03-20 20:00:00', money: '800.00', num:'600.00',status:1},
+					{ drawTitle: '国美番禺店大抽奖', period: '1234', awardDate: '2018-03-20 20:00:00', money: '800.00', num:'600.00',status:1},
+					{ drawTitle: '国美番禺店大抽奖', period: '1234', awardDate: '2018-03-20 20:00:00', money: '800.00', num:'600.00',status:2},
+					{ drawTitle: '国美番禺店大抽奖', period: '1234', awardDate: '2018-03-20 20:00:00', money: '800.00', num:'600.00',status:1},
+					{ drawTitle: '国美番禺店大抽奖', period: '1234', awardDate: '2018-03-20 20:00:00', money: '800.00', num:'600.00',status:0},
+					{ drawTitle: '国美番禺店大抽奖', period: '1234', awardDate: '2018-03-20 20:00:00', money: '800.00', num:'600.00',status:0}
+				],
+				toast: '审核未通过',
+				note: '(请你检查身份验证是否通过)',
+				// 恭喜您成功领取奖金  您已成功领取奖金  请您耐心等待审核
+				// 审核未通过 （请你检查身份验证是否通过）
+				// 领取奖金失败（请你检查身份验证是否通过）
+				// 您还未实名验证  按钮实名验证
+
 			}
 		},
 		mounted() {
@@ -151,9 +144,6 @@
 			showAward(){
 				this.tab1 = false;
 				this.tab2 = true;
-			},
-			showDialogs(){
-				this.showDialog= true
 			},
 	        InitScroll() {
 				this.$nextTick(() => {
@@ -195,6 +185,13 @@
 					
 				},3000)
 			},
+			goWinningSpeech(){
+				var that = this;
+				this.showDialog = true;
+				setTimeout(function(){
+					that.showDialog = false
+				},3000)
+			},
 		}
 	}
 </script>
@@ -207,8 +204,8 @@
 		float: right;
 	}
 	.record{
-	    background-color: #eaeaea;
-	    padding-top: 1rem;
+	    background-color: #F5F6FA;
+	    padding-top: 0.8rem;
 	    padding-bottom: 0.2rem;
 	    .btn-large {
 	        width: 90%;
@@ -225,10 +222,10 @@
 		width: 90%;
 		margin: 0.2rem auto;
 		border-radius: 0.1rem;
-		height: 10rem;
+		padding-top: 2.5rem;
+		padding-bottom: 3rem;
 		.img{
 			width: 100%;
-			padding-top: 3rem;
 			text-align: center;
 			img{
 				width: 50%;
@@ -237,13 +234,13 @@
 			}
 			p{
 				font-size: 0.32rem;
-				color: #666;
+				color: #90A2C7;
 			}
 			.text{
 				font-size: 0.3rem;
 				line-height: 0.5rem;
 				span{
-					color: #dd1633;
+					color: #FF5365;
 				}
 			}
 		}
@@ -252,27 +249,26 @@
 	.time-line{
 		background: #fff;
 		width: 90%;
-		margin: 0.2rem auto;
+		margin: 0.2rem auto 0.3rem auto;
 		border-radius: 0.1rem;
-		height: 10rem;
+		height: 75%;
+		color: #1A2642;
 		.winMoney{
-			font-size: 0.32rem;
-			color: #000;
+			font-size: 0.36rem;
 			font-weight: 700;
 		}
 		.weekend{
-			font-size: 0.28rem;
-  			color: #333;
+			font-size: 0.32rem;
 		}
 		.rank{
 			font-size: 0.26rem;
-			color: #666666;
+			color: #90A2C7;
 		}
 		.ranks{
-			color: #db0928;
+			color: #FF5365;
 		}
 		.winStatus{
-			color: #9d9d9d;
+			color: #90A2C7;
 			text-align: right;
 		}
 	}
@@ -287,91 +283,87 @@
 		  width: 100%;
 		  padding-top: 0.22rem;
 		  margin-left: 0.3rem;
-		  border-bottom: 0.01rem dashed #ccc;
+		  font-size: 0.26rem;
+		  border-bottom: 0.01rem dashed #D8DFF0;
 		  .title {
 		    font-size: 0.32rem;
-		    color: #333;
+		    color: #1A2642;
+		    font-weight: 400;
 		    .frequency {
-		      font-size: 0.26rem;
-		      color: #999;
+		      color: #90A2C7;
 		    }
 		  }
 		  .time {
 		    line-height: 0.45rem;
-		    font-size: 0.26rem;
-		    color: #999;
+		    color: #90A2C7;
 		  }
 		  .bonusPool {
 		    line-height: 0.35rem;
-		    font-size: 0.26rem;
-		    color: #999;
+		    color: #90A2C7;
 		    .num {
-		      color: #db0928;
+		      color: #FF5365;
 		    }
 		  }
 		  
 		}
 		.status {
-		  margin-top: 0.1rem;
-		  padding-left: 0.3rem;
-		  padding-bottom: 0.1rem;
-		  font-size: 0.26rem;
-		  .wait {
-		    color: #fabc00;
-		  }
-		  .start {
-		    color: #666;
-		  }
-		  .win {
-		    color: #db0928;
-		  }
+			position: relative;
+		  	margin-top: 0.17rem;
+		  	padding-left: 0.3rem;
+		  	padding-bottom: 0.2rem;
+		  	font-size: 0.32rem;
+		  	.wait {
+		  	  color: #FF811C;
+		  	}
+		  	.start {
+		    	color: #7386AD;
+		  	}
+		  	.win {
+		    	color: #FF5365;
+		  	}
+	    	.btn {
+		    	position: absolute;
+		  	  	width: 1.5rem;
+		  	  	border-radius: 0.23rem;
+		  	  	height: 0.45rem;
+		  	  	color: #fff;
+		  	  	line-height: 0.45rem;
+		  	  	background-color: #FF5365;
+		  	  	font-size: 0.26rem;
+		  	  	text-align: center;
+		  	  	right: -0.2rem;
+		  	  	top: 0rem;
+	  		}
 		}
+	  
 	}
 
 	.dia_top {
-	  border-top-left-radius: 5px;
-	  border-top-right-radius: 5px;
-	  background-color: #ffeff1;
-	  text-align: center;
-	  padding-top: 0.3rem;
-	  padding-left: 0.4rem;
-	  padding-right: 0.4rem;
-	  padding-bottom: 0.3rem;
+		width: 90%;
+		height: 1.78rem;
+		margin: auto;
+	  	border-radius: 0.1rem;
+	  	background-color: #fff;
+	  	color: #1A2642;
 	  	.title {
-	  	  font-size: 0.36rem;
-	  	  color: #333;
-	  	  margin-bottom: 0.16rem;
+	  	  font-size: 0.32rem;
+	  	  margin-top: 0.8rem;
+	  	  line-height: 0.48rem;
+	  	  text-align: center;
 	  	}
-	  	.dia_times {
-  		  font-size: 0.3rem;
-  		  color: #666;
-  		}
-  		.text {
-		  margin-top: 0.24rem;
-		  line-height: 0.32rem;
-		  font-size: 0.26rem;
-		  color: #494949;
-		  	.text_red {
-		  	  color: #db0928;
-		  	}
-		}
-		.vivid {
-		  width: 3rem;
-		  margin: 0.4rem auto;
-		  font-size: 0.34rem;
-		  color: #db0928;
-		}
-		.btn {
-		  width: 3.2rem;
-		  border-radius: 5px;
-		  height: 0.76rem;
-		  line-height: 0.76rem;
-		  color: #fff;
-		  background-color: #f1425c;
-		  font-size: 0.34rem;
-		  text-align: center;
-		  margin: 0 auto;
-		}
+	  	.note{
+	  		font-size: 0.2rem;
+	  	}
+	  	.btn{
+	  		margin: 0.35rem auto;
+	  		width: 2.17rem;
+	  		height: 0.54rem;
+	  		background-color: #FF5365;
+	  		text-align: center;
+	  		line-height: 0.54rem;
+	  		color: #fff;
+	  		border-radius: 0.23rem;
+	  	}
 	}
 </style>
 
@@ -380,7 +372,7 @@
 	.record{
 		.vux-button-group > a.vux-button-group-current{
 			color: #fff !important;
-			background: #dd1633 !important;
+			background: #FF5365 !important;
 		}
 		.vux-button-group{
 			height: 0.8rem !important;
@@ -389,12 +381,12 @@
 			height: 0.8rem !important;
 			line-height: 0.8rem !important;
 			font-size: 0.36rem !important;
-			color: #dd1633 !important;
+			color: #FF5365 !important;
 			background: rgba(0,0,0,0) !important;
 			
 		}
 		.vux-button-group > a.vux-button-tab-item-first:after, .vux-button-group > a.vux-button-tab-item-last:after{
-			border: 0.02rem solid #dd1633;
+			border: 0.02rem solid #FF5365;
 		}
 		.vux-button-group > a.vux-button-tab-item-first{
 			border-top-left-radius: @button-tab-border-radius !important;
@@ -426,19 +418,19 @@
 			padding-bottom: 0.3rem;
 			border-bottom: none;
 			margin-top: 0.1rem;
-			color: #9d9d9d;
+			color: #1A2642;
 		}
 		.recent{
 			color: #000;
 		}
 		.vux-timeline-item-color{
-			background-color:#e42d48;
+			background-color:#FF5365;
 		}
 		.vux-timeline-item-tail{
-			background-color:#e42d48;
+			background-color:#FF5365;
 		}
 		.vux-timeline-item-head-first{
-			background-color:#e42d48;
+			background-color:#FF5365;
 			i{
 				display: none;
 			}
@@ -459,12 +451,9 @@
 			padding: 0 !important;
 		}
 		.weui-cell__ft{
-			text-align: left !important;
-			width: 92% !important;
-			padding-right: 0.6rem !important;
-		}
-		.weui-cell_access .weui-cell__ft{
-			padding-right: 1.75rem !important;
+			text-align: left;
+			width: 95%;
+			padding-right: 0.5rem;
 		}
 		.weui-cell_access .weui-cell__ft:after{
 			width: 0.2rem !important;
@@ -484,8 +473,7 @@
 	}
 	.dialog{
 		.weui-dialog{
-			max-width: 25rem !important;
-			width: 90% !important;
+			width: 60%;
 		}
 	}
 

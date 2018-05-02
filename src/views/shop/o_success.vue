@@ -19,8 +19,8 @@
 					实付款：<span class="totalMoney">100积分+20.00元</span>
 				</p>
 				<div class="btn">
-					<div class="redeemDetails" @click="goOrderdetails">兑换详情</div>
-					<div class="exchangeCenter" @click="goMyorder">兑换中心</div>
+					<div class="redeemDetails" @click="goOrderdetails">订单详情</div>
+					<div class="exchangeCenter" @click="goShop">商城首页</div>
 					<div class="clear"></div>
 				</div>
 			</div>
@@ -49,8 +49,8 @@
 			goOrderdetails(){
 				this.$router.push({ path: '/shop/order_details'})
 			},
-			goMyorder(){
-				this.$router.push({ path: '/shop/my_order'})
+			goShop(){
+				this.$router.push({ path: '/shop'})
 			}
 		}
 	}
@@ -108,7 +108,7 @@
 				color: #90A2C7;
 				.totalMoney{
 					font-size: 0.24rem;
-					color: #222222;
+					color: #1A2642;
 				}
 			}
 			.btn{
@@ -117,14 +117,14 @@
 				.redeemDetails,.exchangeCenter{
 					float: left;
 					width: 2.4rem;
-					height: 0.7rem;
+					padding: 0.1rem 0;
 					border: 2px solid #90A2C7;
 					border-radius: 0.1rem;
 					text-align: center;
-					line-height: 0.7rem;
-					font-size: 0.34rem;
+					font-size: 0.32rem;
 					color: #90A2C7;
 					margin-left: 0.36rem;
+					box-sizing: border-box;
 				}
 			}
 		}

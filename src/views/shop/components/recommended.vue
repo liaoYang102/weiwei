@@ -130,13 +130,13 @@
 
 <style lang="less">
 .ul-recommended .vux-no-group-title,.ul-recommended .weui-cells{
-	margin-top: 0 !important;
+	margin-top: 0;
 }
 .ul-recommended .weui-cell{
-	padding: 0 !important;
+	padding: 0;
 }
 .ul-recommended .weui-cell_access .weui-cell__ft:after{
-	border-color: #90A2C7 !important;
-	right: 0.202rem !important;
+	border-color: #90A2C7;
+	right: 0.202rem;
 }
 </style>

@@ -7,16 +7,18 @@
 				<span class="phone fl">18520496787</span>
 				<div class="clear"></div>
 			</div>
-			<div class="address">
-				<img src="../../assets/images/shop/address.png" alt="">
-				<span class='details'>广东佛山市南海区桂城街道佛平路与宝翠路交界万科金色领域界</span>
-				<span class="arrow fr">></span>
-			</div>
+			<router-link to="/member/address/index">
+				<div class="address">
+					<img src="../../assets/images/shop/address.png" alt="">
+					<span class='details'>广东佛山市南海区桂城街道佛平路与宝翠路交界万科金色领域界</span>
+					<span class="arrow fr">></span>
+				</div>
+			</router-link>
 		</div>
 
 		<div v-transfer-dom>
-			<popup v-model="show9">
-				<popup-header left-text="取消" right-text="确定" title="选择支付方式" :show-bottom-border="false" @on-click-left="show9 = false" @on-click-right="show9 = false"></popup-header>
+			<popup v-model="show9" class="shops">
+				<popup-header right-text="取消" title="选择支付方式" :show-bottom-border="false" @on-click-left="show9 = false" @on-click-right="show9 = false"></popup-header>
 				<group gutter="0">
 					<radio :options="list" @on-change="change"></radio>
 					<div class="pay-box">
@@ -27,7 +29,7 @@
 		</div>
 
 		<div class="shops">
-			<group style='margin-bottom:0.38rem;'>
+			<group style='padding-bottom:1.42rem;'>
                 <cell title="优衣库旗舰店" is-link :border-intent="false" >
 			        <img slot="icon" width="20" style="display:block;margin-right:5px;" >
 			    </cell>
@@ -43,7 +45,7 @@
                 <cell title="店铺优惠" value="省10元：100减5" :border-intent="false"></cell>
                 <cell :border-intent="false">
 					<span slot="title" style="color:#F23030;">CGC通用余额抵扣</span>
-					<span class="banlance" style='font-size: 0.24rem;color: #90A2C7;'><x-switch title="余额: ￥23400" sytle="padding-right: 0 !important;"></x-switch></span>
+					<span class="banlance" style='font-size: 0.24rem;color: #90A2C7;'><x-switch title="余额: ￥23400" sytle="padding-right: 0 ;"></x-switch></span>
 
                 </cell>
                 <cell title="兑换方式" value="积分+现金" :border-intent="false"></cell>
@@ -52,7 +54,7 @@
                 <cell title="现金" value="20元" :border-intent="false"></cell>
                 <div class="leave">
 					<span class="message">卖家留言</span>
-					<input type="text" placeholder='选填:填写内容已和卖家协商确认' style="width: 60%;font-size: 0.24rem;padding:0.2rem 0">
+					<input type="text" placeholder='选填:填写内容已和卖家协商确认' style="width: 76%;font-size: 0.24rem;padding:0.2rem 0">
                 </div>
             </group>
 		</div>
@@ -79,15 +81,15 @@ export default {
 			demo1: true,
 			demo2: false,
 			list: [{
-				icon: '../../../static/member/bandCard.png',
+				icon: './static/member/bandCard.png',
 				key: '1',
 				value: '银行卡支付'
 			}, {
-				icon: '../../../static/member/treasure.png',
+				icon: './static/member/treasure.png',
 				key: '2',
 				value: '支付宝支付'
 			}, {
-				icon: '../../../static/member/wechapaid.png',
+				icon: './static/member/wechapaid.png',
 				key: '3',
 				value: '微信支付'
 			}],
@@ -263,20 +265,23 @@ export default {
 		border-top: 1px solid #D9D9D9;
 		padding: 0.12rem 0.15rem;
 		.message{
-			font-size: 0.32rem;
-			color: #222222;
+			font-size: 0.28rem;
+			color: #1A2642;
 			margin-right: 0.27rem;
 		}
 	}
 	.submit{
 		width: 100%;
+		position: fixed;
+		bottom:0;
+		background-color: #fff;
 		.total{
-			background-color: #fff;
+			/*background-color: #fff;*/
 			width: 4.4rem;
 			padding-left: 0.7rem;
 			line-height: 1.05rem;
 			font-size: 0.28rem;
-			color:#222;
+			color:##1A1A1A;
 			.color{
 				color:#f45656;
 			}
@@ -312,16 +317,16 @@ export default {
 </style>
 <style lang='less'>
 .shops .weui-cells{
-	margin-top: 0 !important;
+	margin-top: 0;
 }
 .shops .vux-no-group-title{
-	margin-top: 0 !important;
+	margin-top: 0;
 }
 .shops .weui-cell_switch{
-	    padding-right: 0!important;
+	    padding-right: 0;
 	}
 .shops .weui-label{
-		width: 8em!important;
+		width: 8em;
 		margin-right: 0.2rem;
 	}
 .shops .weui-icon-success{
@@ -333,24 +338,28 @@ export default {
 		margin-right: 0.25rem;
 	}
 .shops .vux-number-input{
-		border: none!important;
-		font-size: 0.28rem!important;
-		color:#333!important;
+		border: none;
+		font-size: 0.28rem;
+		color:#333;
 	}
 .shops .vux-number-selector{
-		color:#222!important;
-		background: #F5F5F5!important;
+		color:#222;
+		background: #F5F5F5;
 	}
 .shops .vux-number-selector svg{
-		fill:#222!important;
+		fill:#222;
 	}
 .shops .vux-label{
-		color:#222;
+		color:#1A2642;
+		font-size:0.28rem;
 	}
 .shops .weui-cell__ft{
-		color: #1A2642!important;
+		color: #1A2642;
+		font-size:0.3rem;
 	}
 .shops .weui-cell{
-		padding: 0.15rem 0.15rem;
+		padding: 0.28rem 0.18rem;
+		font-size: 0.32rem;
+		color:#1A2642;
 	}
 </style>

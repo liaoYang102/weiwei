@@ -46,7 +46,10 @@ const memberModule = [{
 	{
 		path: '/',
 		name: 'index',
-		component: index
+		component: index,
+		meta: {
+			navShow: true
+		}
 	},
 	{
 		path: '/member/setting/index',
@@ -167,7 +170,10 @@ const memberModule = [{
 	{
 		path: '/member/purse/qrcode',
 		name: 'qrcode',
-		component: qrcode
+		component: qrcode,
+		meta: {
+			navShow: true
+		}
 	},
 	{
 		path: '/member/purse/recharge',

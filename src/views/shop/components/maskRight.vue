@@ -101,10 +101,12 @@ export default {
 				for(let i =0; i<6;i++){
 					list.push(obj)
 					this.showContent = false;
+					this.scroll.refresh();
 				}
 			}else{
 				list.splice(9,6)
 				this.showContent = true;
+				this.InitScroll()
 			}
     	},
     	// 切换样式
@@ -131,7 +133,7 @@ export default {
 	height: 11.78rem;
 	overflow: hidden;
 	.content{
-		height: calc(100% + 15);
+		padding-bottom: 1rem;
 	}
 }
 .maskright .vux-popup-dialog{

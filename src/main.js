@@ -174,10 +174,10 @@ router.beforeEach(function(to, from, next) {
 
 router.afterEach(function(to) {
 	isPush = false
-	if(process.env.NODE_ENV === 'production') {
+	/*if(process.env.NODE_ENV === 'production') {
 		ga && ga('set', 'page', to.fullPath)
 		ga && ga('send', 'pageview')
-	}
+	}*/
 })
 
 //const whiteList = ['/user/login', '/index', '/user/reg','/','/member/index'];// 不重定向白名单

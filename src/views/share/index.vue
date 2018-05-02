@@ -37,13 +37,13 @@
 						</li>
 					</a>
 					<a href="javascript:;">
-						<li>
+						<li @click="seeStore">
 							<img src="../../assets/images/share/shop.png">
 							<p>查看门店</p>
 						</li>
 					</a>
 					<a href="javascript:;">
-						<li>
+						<li @click="goCoupon">
 							<img src="../../assets/images/share/coupon.png">
 							<p>优惠券</p>
 						</li>
@@ -55,78 +55,53 @@
 				<img src="../../assets/images/share/xbanner.png" alt="">
 			</div>
 
-			<div class="hot_product">
-				<h2>热门产品 <span class="fr">全部28台<i class="iconfont icon-arrow-right"></i></span></h2>
+			<!-- <div class="hot_product">
+				<h2>热门产品</h2>
+				<span class="fr">全部28台<i class="iconfont icon-arrow-right"></i></span>
 				<div class="product">
-				      <!-- <ul class="clearfix">
-				      						<li>
-				      							<img src="../../assets/images/share/yiqi1.png" alt="">
-				      							<p>高级治疗仪</p>
-				      							<x-button :gradients="['#1D62F0', '#19D5FD']" mini>查看</x-button>
-				      						</li>
-				      						<li>
-				      							<img src="../../assets/images/share/yiqi2.png" alt="">
-				      							<p>高级治疗仪</p>
-				      							<x-button :gradients="['#1D62F0', '#19D5FD']" mini>查看</x-button>
-				      						</li>
-				      						<li>
-				      							<img src="../../assets/images/share/yiqi1.png" alt="">
-				      							<p>高级治疗仪</p>
-				      							<x-button :gradients="['#1D62F0', '#19D5FD']" mini>查看</x-button>
-				      						</li>
-				      						<li>
-				      							<img src="../../assets/images/share/yiqi1.png" alt="">
-				      							<p>高级治疗仪</p>
-				      							<x-button :gradients="['#1D62F0', '#19D5FD']" mini>查看</x-button>
-				      						</li>
-				      						<li>
-				      							<img src="../../assets/images/share/yiqi1.png" alt="">
-				      							<p>高级治疗仪</p>
-				      							<x-button :gradients="['#1D62F0', '#19D5FD']" mini>查看</x-button>
-				      						</li>
-				      					</ul> -->
+				      
 				      	<swiper :options="swiperOption2">
-					        <swiper-slide>
-					        	<li>
-	      							<img src="../../assets/images/share/yiqi1.png" alt="">
-	      							<p>高级治疗仪</p>
-	      							<x-button :gradients="['#1D62F0', '#19D5FD']" mini>查看</x-button>
-	      						</li>
-					        </swiper-slide>
-					        <swiper-slide>
-					        	<li>
-	      							<img src="../../assets/images/share/yiqi2.png" alt="">
-	      							<p>高级治疗仪</p>
-	      							<x-button :gradients="['#1D62F0', '#19D5FD']" mini>查看</x-button>
-	      						</li>
-					        </swiper-slide>
-					        <swiper-slide>
-					        	<li>
-	      							<img src="../../assets/images/share/yiqi1.png" alt="">
-	      							<p>高级治疗仪</p>
-	      							<x-button :gradients="['#1D62F0', '#19D5FD']" mini>查看</x-button>
-	      						</li>
-					        </swiper-slide>
-					        <swiper-slide>
-					        	<li>
-	      							<img src="../../assets/images/share/yiqi1.png" alt="">
-	      							<p>高级治疗仪</p>
-	      							<x-button :gradients="['#1D62F0', '#19D5FD']" mini>查看</x-button>
-	      						</li>
-					        </swiper-slide>
-					        <swiper-slide>
-					        	<li>
-	      							<img src="../../assets/images/share/yiqi1.png" alt="">
-	      							<p>高级治疗仪</p>
-	      							<x-button :gradients="['#1D62F0', '#19D5FD']" mini>查看</x-button>
-	      						</li>
-					        </swiper-slide>
-					        <!-- <div class="swiper-pagination" slot="pagination"></div> -->
-					    </swiper>
+				      						        <swiper-slide>
+				      						        	<li>
+				      		      							<img src="../../assets/images/share/yiqi1.png" alt="">
+				      		      							<p>高级治疗仪</p>
+				      		      							<x-button :gradients="['#1D62F0', '#19D5FD']" mini>查看</x-button>
+				      		      						</li>
+				      						        </swiper-slide>
+				      						        <swiper-slide>
+				      						        	<li>
+				      		      							<img src="../../assets/images/share/yiqi2.png" alt="">
+				      		      							<p>高级治疗仪</p>
+				      		      							<x-button :gradients="['#1D62F0', '#19D5FD']" mini>查看</x-button>
+				      		      						</li>
+				      						        </swiper-slide>
+				      						        <swiper-slide>
+				      						        	<li>
+				      		      							<img src="../../assets/images/share/yiqi1.png" alt="">
+				      		      							<p>高级治疗仪</p>
+				      		      							<x-button :gradients="['#1D62F0', '#19D5FD']" mini>查看</x-button>
+				      		      						</li>
+				      						        </swiper-slide>
+				      						        <swiper-slide>
+				      						        	<li>
+				      		      							<img src="../../assets/images/share/yiqi1.png" alt="">
+				      		      							<p>高级治疗仪</p>
+				      		      							<x-button :gradients="['#1D62F0', '#19D5FD']" mini>查看</x-button>
+				      		      						</li>
+				      						        </swiper-slide>
+				      						        <swiper-slide>
+				      						        	<li>
+				      		      							<img src="../../assets/images/share/yiqi1.png" alt="">
+				      		      							<p>高级治疗仪</p>
+				      		      							<x-button :gradients="['#1D62F0', '#19D5FD']" mini>查看</x-button>
+				      		      						</li>
+				      						        </swiper-slide>
+				      						        <div class="swiper-pagination" slot="pagination"></div>
+				      						    </swiper>
 				</div>
-			</div>
+			</div> -->
 
-			<div class="youhui">
+			<!-- <div class="youhui">
 				<h2>优惠专区</h2>
 				<div class="pro_wrap">
 					<div class="pro">
@@ -162,13 +137,13 @@
 						</li>
 					</ul>
 				</div>
-			</div>
+			</div> -->
 
 			<div class="fujin">
-				<h2>附近商家 <span class="fr">更多<i class="iconfont icon-arrow-right"></i></span></h2>
+				<h2>附近商家 <span class="fr" @click="seeStore">更多<i class="iconfont icon-arrow-right"></i></span></h2>
 				<div class="list">
 					<ul>
-						<li class="clearfix">
+						<li class="clearfix" @click="goStoreDetail(1)">
 							<div class="left">
 								<img src="../../assets/images/share/md_logo.png" alt="">
 							</div>
@@ -179,7 +154,7 @@
 								<p class="zhekou">8折</p>
 							</div>
 						</li>
-						<li class="clearfix">
+						<li class="clearfix" @click="goStoreDetail(1)">
 							<div class="left">
 								<img src="../../assets/images/share/md_logo.png" alt="">
 							</div>
@@ -190,7 +165,7 @@
 								<p class="zhekou">8折</p>
 							</div>
 						</li>
-						<li class="clearfix">
+						<li class="clearfix" @click="goStoreDetail(1)">
 							<div class="left">
 								<img src="../../assets/images/share/md_logo.png" alt="">
 							</div>
@@ -201,7 +176,7 @@
 								<p class="zhekou">8折</p>
 							</div>
 						</li>
-						<li class="clearfix">
+						<li class="clearfix" @click="goStoreDetail(1)">
 							<div class="left">
 								<img src="../../assets/images/share/md_logo.png" alt="">
 							</div>
@@ -232,9 +207,9 @@
 				demo04_list:[
 					// 'https://img1.360buyimg.com/pop/jfs/t16792/328/1497480399/93929/c0d0fbb1/5ac9f290N29a3ad9d.jpg'
 					// '@/assets/images/share/banner1.png'
-					'../../static/images/banner1.png',
-					'../../static/images/banner1.png',
-					'../../static/images/banner1.png'
+					'./static/images/banner1.png',
+					'./static/images/banner1.png',
+					'./static/images/banner1.png'
 			
 				],
 				swiperOption:{
@@ -271,6 +246,17 @@
 			treatment(){
 				// this.$router.push('/share/treatment')
 				this.$router.push('/shop/my_order')
+			},
+			seeStore(){
+				this.$router.push('/share/storelist')
+			},
+			goCoupon(){
+				this.$router.push('/member/coupon/coupon')
+			},
+			goStoreDetail(id){//go门店详情
+				this.$router.push({name:'sdetail',params:{
+					id:id
+				}});
 			}
 		}
 	}

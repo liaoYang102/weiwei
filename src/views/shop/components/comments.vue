@@ -161,7 +161,7 @@ li{
 	background: #FFF;
 }
 .wrapper {
-	height: 100%;
+	height:100%;
 	overflow: hidden;
 }
 .tab-title{
@@ -174,7 +174,7 @@ li{
 	color: #1A2642;
 }
 .commentsList{
-	padding-bottom: 1rem;
+	padding-bottom: 0.95rem;
 	.list{
 		.li-comments{
 			padding-left: 0.19rem;
@@ -212,6 +212,7 @@ li{
 				  float: left;
 				  img{
 				  	width: 100%;
+				  	height: 100%;
 				  }
 				}
 				.box1-item:first-child {

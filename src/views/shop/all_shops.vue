@@ -3,12 +3,15 @@
         <settingHeader :title="title"></settingHeader>
         <tab :line-width='0' style="border-top: 1px solid #E1E1E1;">
             <tab-item selected @on-item-click="showPanel">
-              {{ tabItem}} <img src="../../assets/images/shop/xiaActive.png" alt="" width="6%">
+              {{ tabItem}} <img :src="downImg" alt="" width="13%">
             </tab-item>
             <tab-item class='vux-center' @on-item-click="onItemClick">销量</tab-item>
-            <tab-item @on-item-click="onItemClick">价格</tab-item>
+            <tab-item @on-item-click="sort">
+                <span>价格</span>
+                <img :src="priceImg" alt="" width="12%">
+            </tab-item>
             <tab-item @on-item-click="onMenuClick">
-                筛选
+                筛选 <img src="../../assets/images/shop/screen.png" alt="" width="12%">
             </tab-item>
         </tab>
         <div class="wrapper" ref="wrapper">
@@ -74,9 +77,6 @@
 
             </div>
         </div>
-        
-
-    
     </div>
 </template>
 
@@ -128,7 +128,11 @@ export default {
             scorelist: [],
             moneylist: [],
             show: false,
-            showNomore: false
+            showNomore: false,
+            downImg:'./static/shop/down1.png',
+            topImg: './static/shop/topicon.png',
+            priceImg: './static/shop/default.png',
+            priceSort: 0
         }
     },
     mounted:function(){
@@ -145,6 +149,11 @@ export default {
             }
         },
         showPanel: function(){
+            if(this.downImg == './static/shop/down1.png'){
+                this.downImg = './static/shop/down.png'
+            }else{
+                this.downImg = './static/shop/down1.png'
+            }
             if(this.showMaskTop == false){
                 this.showMaskTop = true;
             }else {
@@ -174,7 +183,7 @@ export default {
                     })
                     this.scroll.on('pullingUp', (pos) => {
                         this.show = true;
-                        this.LoadData()
+                        // this.LoadData()
                         this.$nextTick(function() {
                             this.scroll.finishPullUp();
                             this.scroll.refresh();
@@ -208,7 +217,20 @@ export default {
         },
         goShopdetails(){
             this.$router.push({ path: '/shop/shop_details'})
-        }
+        },
+        sort(){
+            let a = this.priceSort;
+            a ++;
+            this.priceSort = a;
+            if(a == 0){
+                this.priceImg = './static/shop/default.png'
+            }else if(a%2 != 0){
+                this.priceImg = './static/shop/ascending.png'
+            }else{
+                this.priceImg = './static/shop/descending.png'
+            }
+            console.log('--', this.priceSort)
+        },
 
     }
 }
@@ -233,27 +255,26 @@ export default {
     }
 }
 .wrapper {
-    height: 86.5%;
+    height: 93%;
     overflow: hidden;
-}
-li:nth-child(odd) .list{
-    margin-right: 0.04rem;
 }
 .shopList{
     width: 100%;
     background-color: #F5F6FA;
+    padding-bottom: 0.2rem;
     .all-shop{
         li{
+            border-bottom: 1px solid  #F5F8F9;
+            border-right: 1px solid #F5F8F9;
+            box-sizing: border-box;
             list-style: none;
             float: left;
             width: 50%;
-            height: 4.35rem;
             font-size: 0.24rem;
             color: #1A2642;
-            margin-bottom: 0.04rem;
             .list{
+                padding-bottom: 0.1rem;
                 background: #fff;
-                padding-bottom: 0.04rem;
                 .score-exchange{
                     position: absolute;
                     left: -0.05rem;
@@ -314,15 +335,26 @@ li:nth-child(odd) .list{
         }
     }
 }
+
+.iconImg{
+    position: relative;
+    .top{
+        position: absolute;
+        top: -0.6rem;
+        left: 1.3rem;
+    }
+    .down{
+        position: absolute;
+        top: -0.45rem;
+        left: 1.3rem;
+    }
+}
 </style>
 
 <style lang="less">
 .masKTop .vux-popup-dialog{
     background: #fff;
 }
-/*.masKTop .vux-popup-dialog.vux-popup-top{
-    top: 1.815rem;
-}*/
 .masKTop .vux-popup-mask{
     top: 1.8rem;
 }

@@ -22,7 +22,8 @@
 
 			<div class="msg-li">
 				<li v-for="(item,index) in msglist">
-					<span>{{ item.text}}</span>
+					<span class="dian"></span>
+					<span class="text">{{ item.text}}</span>
 				</li>
 
 				<div class="msg-btn" v-if="view == true">
@@ -41,7 +42,7 @@
 		</div>
 
 		<div class="content">
-			<ul class="ul-content">
+			<ul class="ul-contents">
 				<div class="ul-top">
 					<div class="ul-left"><img src="../../assets/images/shop/product.png"></div>
 					<div class="ul-right">
@@ -95,7 +96,7 @@ export default {
 	methods:{
 		changeDate(){
 			var nowreduce = new Date();
-			var endreduce = new Date(Date.parse("2018/4/24 18:00:00"));
+			var endreduce = new Date(Date.parse("2018/6/24 18:00:00"));
 			var leftTimereduce = parseInt((endreduce-nowreduce)/1000);
 			var day = Math.floor((leftTimereduce)/3600/24);
 			var hour = Math.floor((leftTimereduce-day*3600*24)/3600);
@@ -170,11 +171,21 @@ export default {
 				color: #90A2C7;
 				font-size: 0.3rem;
 				margin-bottom: 0.12rem;
-				span{
-					position: relative;
-					left: -0.18rem;
-					font-size: 0.24rem;
+				list-style: none;
+				.dian{
 					display: inline-block;
+					width: 0.12rem;
+					height: 0.12rem;
+					background-color: #90A2C7;
+					border-radius: 50%;
+					content: '';
+					margin-right: 0.1rem;
+				}
+				.text{
+					/*position: relative;*/
+					/*left: -0.18rem;*/
+					font-size: 0.24rem;
+					/*display: inline-block;*/
 				}
 			}
 			.msg-btn{
@@ -221,9 +232,8 @@ export default {
 	.content{
 		clear: both;
 		width: 100%;
-		margin-bottom: 0.2rem;
 		overflow: auto;
-		padding-bottom: 1rem;
+		padding-bottom: 0.48rem;
 		ul{
 			background: #fff;
 			.ul-top{
@@ -279,29 +289,29 @@ export default {
 </style>
 
 <style lang="less">
-.ul-content .weui-cells{
-	margin-top: 0 !important;
+.ul-contents .weui-cells{
+	margin-top: 0;
 }
-.vux-no-group-title{
-	margin-top: 0 !important;
+.ul-contents .vux-no-group-title{
+	margin-top: 0;
 }
-.ul-content .weui-form-preview__item{
-	margin-top: 0.18rem !important;
+.ul-contents .weui-form-preview__item{
+	margin-top: 0.18rem;
 }
-.ul-content .weui-form-preview__bd{
-	color: #1A2642 !important;
+.ul-contents .weui-form-preview__bd{
+	color: #1A2642;
 }
-.ul-content .weui-cells:before{
-	border-top: none !important;
+.ul-contents .weui-cells:before{
+	border-top: none;
 }
-.ul-content .weui-form-preview__label{
-	color: #90A2C7 !important;
-	text-align: left !important;
-	text-align-last: left !important;
-	font-size: 0.28rem !important;
+.ul-contents .weui-form-preview__label{
+	color: #90A2C7;
+	text-align: left;
+	text-align-last: left;
+	font-size: 0.28rem;
 }
-.ul-content .weui-form-preview__value{
+.ul-contents .weui-form-preview__value{
 	margin-right: 0.44rem;
-	font-size: 0.28rem !important;
+	font-size: 0.28rem;
 }
 </style>

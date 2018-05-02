@@ -12,7 +12,7 @@
 		<div class="center">
 			<div class="money">
 				<div class="btn">
-					<div class="redeemDetails" @click="goMyorder">兑换中心</div>
+					<div class="redeemDetails" @click="goShop">商城首页</div>
 					<div class="exchangeCenter" @click="goComment">评价商品</div>
 					<div class="clear"></div>
 				</div>
@@ -37,8 +37,8 @@
 			settingHeader,recommended
 		},
 		methods:{
-			goMyorder(){
-				this.$router.push({ path: '/shop/my_order'})
+			goShop(){
+				this.$router.push({ path: '/shop'})
 			},
 			goComment(){
 				this.$router.push({ path: '/shop/write_comments'})

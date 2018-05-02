@@ -28,10 +28,10 @@
 					</div>
 					<div class="shop_right">
 						<div class="shop_collection">
-							<img src="../../assets/images/shop/collection.png"><br>
-							<span>收藏</span>
+							<img :src="collectImg" @click="collection"><br>
+							<span>{{ collectText}}</span>
 						</div>
-						<div class="shop_share">
+						<div class="shop_share" @click="showShareDialog">
 							<img src="../../assets/images/shop/share.png"><br>
 							<span>分享</span>
 						</div>
@@ -40,13 +40,13 @@
 
 				<div class="shop_cell">
 					<group>
-					    <cell title="店铺名" is-link>
+					    <cell title="店铺名" is-link :border-intent="false">
 					    	<div class="cell_item">
 					    		<img src="../../assets/images/shop/UNIQLO.png">
 					    		<span>优衣库旗舰店</span>
 					    	</div>
 					    </cell>
-					    <cell title="支付方式">
+					    <cell title="支付方式" :border-intent="false">
 					    	<div class="pr">积分加现金</div>
 					    </cell>
 					</group>
@@ -104,6 +104,16 @@
 			<div class="footer-btn btn_green" @click="goShopcart">加入购物车</div>
 			<div class="footer-btn btn_blue" @click="goConfirm">立即购买</div>
 		</div>
+
+        <div v-transfer-dom class="shareDialog">
+          	<x-dialog v-model="showDialog" :hide-on-blur="true">
+          		<div class="dialogs" @click="hideDialog">
+					<img src="../../assets/images/shop/rightShare.png" class="right">
+					<div class="clear"></div>
+					<img src="../../assets/images/shop/Rectangle.png" class="mt10">
+				</div>
+          	</x-dialog>
+        </div>
 		
 	</section>
 </template>
@@ -111,14 +121,18 @@
 <script>
 import specifications from './components/specifications' 
 import comments from './components/comments'
+import {XDialog} from 'vux'
 export default {
 	components: {
-		specifications, comments
+		specifications, comments,XDialog
 	},
 	data(){
 		return {
 			tabTitle: '商品',
-			obj:null
+			obj:null,
+			collectImg:'../../../static/shop/collection.png',
+			collectText: '收藏',
+			showDialog: false,
 		}
 	},
 	create: function(){
@@ -171,6 +185,21 @@ export default {
 			this.$store.state.vux.back= false;
 			console.log('111',this.$store.state.vux.back)
 			this.$router.go(-1)
+		},
+		collection(){
+			if(this.collectImg == '../../../static/shop/collection.png'){
+				this.collectImg = '../../../static/shop/collectAction.png'
+				this.collectText = '已收藏'
+			}else{
+				this.collectImg = '../../../static/shop/collection.png'
+				this.collectText = '收藏'
+			}
+		},
+		showShareDialog(){
+			this.showDialog = true;
+		},
+		hideDialog(){
+			this.showDialog = false;
 		}
 	}
 }	
@@ -238,7 +267,11 @@ export default {
 				}
 				.shop_collection{
 					float: right;
-					margin-left: 0.27rem;
+					/*width: 50%;*/
+					padding-left: 0.27rem;
+					span{
+						text-align: center;
+					}
 				}
 			}
 		}
@@ -257,7 +290,8 @@ export default {
 			}
 			.comments{
 				background: #FFF;
-				margin: 0.2rem 0;
+				margin-top: 0.2rem;
+				border-bottom: 0.2rem solid #F5F8F9;
 				font-size: 0.28rem;
 				padding-left: 0.19rem;
 				padding-bottom: 0.32rem;
@@ -342,6 +376,7 @@ export default {
 		background: #FFF;
 		border-top: 0.01rem solid #eeeeee;
 		.footer_icon{
+			box-sizing: border-box;
 			width: 18%;
 			float: left;
 			font-size: 0.2rem;
@@ -356,12 +391,14 @@ export default {
 			}
 		}
 		.footer-btn{
-			width: 31.6%;
+			width: 32%;
+			height: 100%;
+			line-height: 1rem;
 			text-align: center;
 			font-size: 0.32rem;
 			color: #FFFFFF;
 			float: left;
-			padding: 0.26rem 0 0.29rem 0;
+			/*padding: 0.26rem 0 0.29rem 0;*/
 		}
 		.btn_green{
 			background: #00DB83;
@@ -371,48 +408,73 @@ export default {
 		}
 	}
 }
+.dialogs{
+	width: 100%;
+	padding-top: 1.28rem;
+	img{
+		width: 3.33rem;
+	}
+	.right{
+		float: right;
+		margin-right: 0.41rem;
+	}
+	.mt10{
+		margin-top: 7rem;
+	}
+}
 </style>
 
 <style lang="less">
+.shareDialog{
+	.weui-mask{
+		z-index: 100;
+	}
+	.weui-dialog{
+		background-color: rgba(255,255,255,0);
+		width: 100%;
+		height: 100%;
+		max-width: 100%;
+	}
+}
 .shop_cell .weui-cell{
-	padding: 0.3rem 0.15rem !important;
+	padding: 0.3rem 0.15rem;
 }
 .shop_cell .weui-cells:before{
-	border-top: 0.01rem solid #F5F6FA !important;
+	border-top: 1px solid #D8DFF0;
 }
 .shop_cell  .weui-cell:before{
-	border-top: 0.01rem solid #F5F6FA !important;
+	border-top: 1px solid #D8DFF0;
 }
 .shop_cell .vux-label{
-	color: #90A2C7 !important;
-	font-size: 0.28rem !important;
+	color: #90A2C7;
+	font-size: 0.28rem;
 }
 .shop_cell .weui-cell__ft{
-	font-size: 0.3rem !important;
-	color: #1A2642 !important;
+	font-size: 0.3rem;
+	color: #1A2642;
 }
 .shop_cell .weui-cell_access .weui-cell__ft{
-	padding-right: 0.79rem !important;
+	padding-right: 0.79rem;
 }
 .shop_cell .weui-cell_access .weui-cell__ft:after{
-	right: 0.45rem !important;
-	border-color: #90A2C7 !important;
+	right: 0.45rem;
+	border-color: #90A2C7;
 }
 .shop_cell .weui-cells:after{
-	border-bottom: 0.01rem solid #F5F6FA !important;
+	border-bottom: 0.01rem solid #F5F6FA;
 }
 .shop_cell .vux-no-group-title{
 	margin-top: 0.22rem;
 }
-#app .vux-header .vux-header-left .left-arrow:before {
+.shop_details .vux-header .vux-header-left .left-arrow:before {
 	border: 1px solid #222;
 	border-width: 1px 0 0 1px;
 }
 
-#app .vux-header .vux-header-title {
+.shop_details.vux-header .vux-header-title {
 	color: #333;
 }
-.vux-header{
+.shop_details .vux-header{
 	position: fixed!important;
 	top: 0;
 	width: 100%;
