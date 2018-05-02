@@ -2,7 +2,7 @@
 	<div class="footer-box">
 		<div class="b-top">
 			<div class="item" v-for="(item,index) in barList" :class="{'factive':factivei == index}" @click="fchange(index)">
-				<router-link  :to="item.url">
+				<router-link :to="item.url">
 					<img class="icon" :class="{'zqm':index == 2}" :src="[factivei == index?item.iconIn:item.icon]" />
 					<p v-if="index != 2">{{item.title}}</p>
 				</router-link>
@@ -61,9 +61,13 @@
 		},
 		methods: {
 			fchange(index) {
-				console.log(index)
 				this.factivei = index
 			}
+		},
+		watch: {
+			'$route' (to, from) {
+				this.factivei = this.$route.meta.navIndex
+			}　
 		}
 	}
 </script>
