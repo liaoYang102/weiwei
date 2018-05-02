@@ -17,7 +17,11 @@
 		      <cell title="退款原因" value="请选择" :border-intent="false" @click.native='test' is-link></cell>
 		    </group>
 		    <group class="center">
-		      <cell title="退款金额" value="￥624.00" :border-intent="false"></cell>
+		      <cell title="退款金额" value="￥624.00" :border-intent="false" @click.native="showMoneyInput"></cell>
+		      <div class="money-input">
+		      		<span>退款金额</span>
+		      	 	<input type="text" name="">
+		      </div>
 		      <cell title="退款积分" value="2400" :border-intent="false"></cell>
 		    </group>
 		    <span class="prompt">最多¥624.00，含发货邮费¥0.00</span>
@@ -46,6 +50,8 @@
 	        </group>
 	      </popup>
 	    </div>
+
+	    <vuedialog ref='dialogs' :dialogConfig="dialogConfig"></vuedialog>
 	</section>
 </template>
 
@@ -54,16 +60,24 @@
 	import { PopupHeader } from 'vux'
 	import { Radio } from 'vux'
 	import { XButton } from 'vux'
+	import vuedialog from '../../components/dialog'
 	export default{
 		data(){
 			return{
 				title:"申请退款",
 				show1: false,
+				dialogConfig:{
+					buttons:['我知道了'],
+					type:"failure",
+					delay:null,
+					message:'CGC通用积分',
+					headMessage:'充值失败！'
+				},
 				// timer: '',
 			}
 		},
 		components:{
-			settingHeader,PopupHeader,Radio,XButton
+			settingHeader,PopupHeader,Radio,XButton,vuedialog
 		},
 		created(){
 			document.title = '申请退款';
@@ -88,6 +102,9 @@
 			},
 			goRefunddetails(){
 				this.$router.push({ path: '/shop/refund_details'})
+			},
+			showMoneyInput(){
+				this.$refs.dialogs.showDialog = true;
 			}
 		}
 	}
@@ -164,6 +181,13 @@
 			position: relative;
 			.weui-cell__ft{
 				color:#F23030;
+			}
+			.money-input{
+				padding:0.3rem 0.3rem;
+				font-size: 0.28rem;
+				input{
+					float: right;
+				}
 			}
 		}
 		.prompt{
