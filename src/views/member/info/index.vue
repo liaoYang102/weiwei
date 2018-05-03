@@ -17,6 +17,7 @@
 				<cell class="list-item" title="我的二维码" is-link link="/member/purse/qrcode"><img class="code" src="../../../assets/images/member/code@2x.png" /></cell>
 				<cell class="list-item user-address" title="地址管理" is-link link="/member/address/index"></cell>
 				<cell class="list-item" title="实名认证" :value="sureName" is-link link='/member/setting/real'></cell>
+				<cell class="list-item" title="个人档案" is-link link='/member/info/data' primary="content"> <range v-model="data5" disabled :max="100"></range></cell>
 			</group>
 		</div>
 	</div>
@@ -24,7 +25,7 @@
 
 <script>
 	//上传组件
-	import { Cell, Group, XInput } from 'vux'
+	import { Cell, Group, XInput, Range } from 'vux'
 	import settingHeader from '../../../components/setting_header'
 	export default {
 		data() {
@@ -34,6 +35,7 @@
 				sureName: '张广', //实名认证
 				varmax: 1, //图片最大张数
 				images: '', //图片数组
+				data5:88
 			}
 		},
 		created() {},
@@ -63,6 +65,7 @@
 		components: {
 			settingHeader,
 			XInput,
+			Range
 		}
 	}
 </script>
@@ -101,7 +104,7 @@
 					top: 0;
 					right: 0;
 					width: 100%;
-					height:100%;
+					height: 100%;
 				}
 				img {
 					z-index: 1;

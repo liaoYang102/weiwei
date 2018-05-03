@@ -118,7 +118,7 @@
 	/*地址选择框 完成按钮 颜色*/
 	
 	.vux-popup-header-right {
-		color: #FF9900!important;
+		color: #336fff!important;
 	}
 	/*input框架  高度100%*/
 	

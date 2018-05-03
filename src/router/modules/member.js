@@ -15,10 +15,12 @@ import score from '@/views/member/score/index'
 import score_log from '@/views/member/score/log'
 import team from '@/views/member/team/index'
 import info from '@/views/member/info/index'
+import infodata from '@/views/member/info/data'
 import changeCode from '@/views/member/setting/changeCode'
 import code from '@/views/member/setting/code'
 import about from '@/views/member/setting/about'
 import real from '@/views/member/setting/real'
+import realoading from '@/views/member/setting/realoading'
 import resetCode from '@/views/member/setting/resetCode'
 import purse from '@/views/member/purse/index'
 import qrcode from '@/views/member/purse/qrcode'
@@ -40,7 +42,7 @@ const memberModule = [{
 		component: index,
 		meta: {
 			navShow: true,
-			navIndex:0
+			navIndex: 0
 		}
 	},
 	{
@@ -85,7 +87,7 @@ const memberModule = [{
 		component: member,
 		meta: {
 			navShow: true,
-			navIndex:4
+			navIndex: 4
 		}
 	},
 	{
@@ -137,6 +139,10 @@ const memberModule = [{
 		path: '/member/info/index',
 		name: 'info',
 		component: info
+	},{
+		path: '/member/info/data',
+		name: 'infodata',
+		component: infodata
 	},
 	{
 		path: '/member/setting/changeCode',
@@ -161,6 +167,10 @@ const memberModule = [{
 		path: '/member/setting/real',
 		name: 'real',
 		component: real
+	}, {
+		path: '/member/setting/realoading',
+		name: 'realoading',
+		component: realoading
 	},
 	{
 		path: '/member/purse/index',

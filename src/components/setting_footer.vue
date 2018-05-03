@@ -1,9 +1,9 @@
 <template>
 	<div class="footer-box">
 		<div class="b-top">
-			<div class="item" v-for="(item,index) in barList" :class="{'factive':factivei == index}" @click="fchange(index)">
+			<div class="item" v-for="(item,index) in barList" :class="{'factive':$route.meta.navIndex == index}">
 				<router-link :to="item.url">
-					<img class="icon" :class="{'zqm':index == 2}" :src="[factivei == index?item.iconIn:item.icon]" />
+					<img class="icon" :class="{'zqm':index == 2}" :src="[$route.meta.navIndex == index?item.iconIn:item.icon]" />
 					<p v-if="index != 2">{{item.title}}</p>
 				</router-link>
 			</div>
@@ -15,15 +15,13 @@
 	export default {
 		data() {
 			return {
-				factivei: 0,
-
 			}
 		},
 		created() {
-
 		},
 		props: {
 			show: Boolean,
+			findex: Number,
 			barList: {
 				default: function() {
 					return [{
@@ -60,14 +58,7 @@
 			}
 		},
 		methods: {
-			fchange(index) {
-				this.factivei = index
-			}
-		},
-		watch: {
-			'$route' (to, from) {
-				this.factivei = this.$route.meta.navIndex
-			}　
+			
 		}
 	}
 </script>
@@ -109,11 +100,10 @@
 						height: 1rem;
 					}
 				}
-				.factive {
-					color: rgba(56, 137, 255, 1)!important;
-					img {
-						fill: rgba(56, 137, 255, 1)!important;
-					}
+			}
+			.factive {
+				p{
+					color: rgba(51, 111, 255, 1)!important;
 				}
 			}
 		}
