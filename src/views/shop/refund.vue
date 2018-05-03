@@ -23,12 +23,14 @@
 		      
 			    <div class="money-input" v-show="showInputMoney">
 			    	<div class="symbol">￥</div>
-			    	<x-input title="退款金额" placeholder="请填写" type="number" :max="9" :show-clear="false" v-model="inputMoney" @on-blur="changeMoney(inputMoney)" @on-focus="showMoneyInput">
+			    	<x-input title="退款金额" placeholder="请填写(只能输入数字)" :should-toast-error="false" type="number" :max="9" :show-clear="false" v-model="inputMoney" @on-blur="changeMoney(inputMoney)">
 			    	</x-input>
 			    </div>
 
 		      	<cell title="退款积分" value="2400" :border-intent="false"></cell>
 		    </group>
+
+		    <toast v-model="showToast" type="text" width="70%" :time="3000" position="middle">{{toast}}</toast>
 
 		    <span class="prompt">最多¥624.00，含发货邮费¥0.00</span>
 
@@ -99,7 +101,7 @@
 				dialogConfig:{
 					buttons:['确定','取消'],
 					type:"warning",
-					delay:1000,
+					delay:null,
 					message:'输入错误请重新输入',
 					headMessage:'提示',
 				},
@@ -109,7 +111,9 @@
 				inputMoney: '624.00',
 				showInputOption: false,
 				inputOption: '',
-				option: '选填'
+				option: '选填',
+				showToast: false,
+				toast:'退款金额必须为数字'
 				// timer: '',
 			}
 		},
@@ -182,25 +186,30 @@
 	        },
 	        changeMoney(money){
 	        	var reg = /^\d+(?=\.{0,1}\d+$|$)/;
-	        	console.log('000',reg.test(money));
 	        	if(reg.test(money)){
 		        	let m = parseFloat(money)
-		        	if(m&&m>=0){
-		        		if(parseInt(m)==m){
-			        		this.money = m+'.00';
-			        	}else{
-		        			this.money = m + 0.00;
-		        			console.log('---', this.money)
-			        	}
+		        	if(m.toString().length<=9){
+    		        	if(m&&m>=0){
+    		        		if(parseInt(m)==m){
+    			        		this.money = m+'.00';
+    			        	}else{
+    		        			this.money = m + 0.00;
+    			        	}
+    		        	}else{
+    		        		this.money = 0+'.00'
+    		        	}
 		        	}else{
-		        		this.money = 0+'.00'
+		        		this.showToast = true
+		        		this.toast = '最多可输入9个字符'
 		        	}
+		        	
+	        	}else{
+	        		this.showToast = true
 	        	}
 	        	
 	        	this.showInputMoney = false;
 	        },
 	        changeOption(option){
-	        	console.log('--', option)
 	        	if(option && option.length!=0){
 	        		this.option = option;
 	        	}else{
@@ -272,8 +281,8 @@
 			margin-bottom: 0.15rem;
 			.delete{
 				position: absolute;
-			    top: -0.2rem;
-			    right: -0.2rem;
+			    top: -0.1rem;
+			    right: -0.1rem;
 			    background-color: #000;
 			    border-radius: 50%;
 			    opacity: .5;
@@ -411,6 +420,9 @@
 		}
 		.option-input{
 			font-size: 0.28rem;
+		}
+		.weui-toast{
+			width: 80%;
 		}
 	}
 </style>

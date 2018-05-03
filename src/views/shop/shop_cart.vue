@@ -30,7 +30,12 @@
 									<div class="fl">
 										<inline-x-number width="1.8rem" :min='0'></inline-x-number>
 										<div class="editSize" @click="showMask">
-											<div class="fl">蓝色；165/S</div>
+											<div class="fl">
+												<span v-for="(item,index) in content">
+													<span v-if="index== content.length-1">{{item}}</span>
+													<span v-else>{{item}};</span>
+												</span>
+											</div>
 											<div class="fr"><img src="../../assets/images/shop/modify.png" alt=""></div>
 										</div>
 									</div>
@@ -52,7 +57,7 @@
 									<p class="shop-size">颜色:蓝色；尺码:L/170修身 <span class="fr">X4</span></p>
 									<p class="shop-price"><span class="priceNum">￥3598</span> <span class="shopAcount">+266积分</span></p>
 								</div>
-								<div class="fr shopEdit"  v-else>
+								<div class="fr shopEdit" v-else>
 									<div class="fl">
 										<inline-x-number width="1.8rem" :min='0'></inline-x-number>
 										<div class="editSize" @click="showMask">
@@ -110,7 +115,7 @@
 					<div class="clear"></div>
 					<loading v-if="show"></loading>
 					<noMore v-if="showNomore"></noMore>
-					<specifications ref='sp'></specifications>
+					<specifications ref='sp' :router="router" :confirm="confirm"></specifications>
 				</div>
 			</div>
 			<div class="position">
@@ -144,7 +149,9 @@
 				all:false,
 				demo:false,
 				show: false,
-				showNomore: false
+				showNomore: false,
+				router: 'shop_cart',
+				content: ['蓝色','165/S']
 			}
 		},
 		components:{
@@ -195,6 +202,13 @@
 		    },
 		    goShopDetails(){
 		    	this.$router.push({ path: '/shop/shop_details'})
+		    },
+		    confirm(){
+		    	if (this.$refs.sp.router == 'shop_cart') {
+		    		this.content = this.$refs.sp.list3;
+		    		this.$refs.sp.show1 = false;
+		    	}
+		    	console.log(this.content )
 		    }
 		}
 	}

@@ -68,14 +68,14 @@
 
 		<!-- 买家已收货 无返积分-->
 		<div class="footer" v-if="value == 0">  
-			<div class="comments commen">评价</div>
-			<div class="view commen">查看物流</div>
+			<div class="comments commen" @click="goWritecomments">评价</div>
+			<div class="view commen" @click="goLogistics">查看物流</div>
 			<div class="view commen">申请售后</div>
 		</div>
 
 		<!-- 卖家已发货 有返积分-->
 		<div class="footer" v-else-if="value == 1">
-			<div class="canel commen">确认收货</div>
+			<div class="canel commen" @click="goTsuccess">确认收货</div>
 			<div class="view commen">取消订单</div>
 		</div>
 
@@ -95,9 +95,6 @@
 			<div class="view commen">删除订单</div>
 		</div>
 
-		
-
-			
 	</div>
 </template>
 
@@ -135,7 +132,13 @@ import recommended from './components/recommended'
 			},
 			goRefund(){
 				this.$router.push({ path: '/shop/refund'})
-			}
+			},
+			goLogistics(){
+		    	this.$router.push({ path: '/shop/logistics'})
+		    },
+		    goTsuccess(){
+		    	this.$router.push({ path: '/shop/t_success'})
+		    },
 		}
 	}
 </script>

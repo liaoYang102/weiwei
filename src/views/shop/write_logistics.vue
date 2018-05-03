@@ -15,7 +15,7 @@
 			<group>
 		      	<cell title="物流公司" value="请选择物流公司" @click.native='test' is-link></cell>
 		      	<div>
-		      		<x-input title="物流单号" v-model="inputnum" placeholder="请填写物流单号" :show-clear="false"></x-input>
+		      		<x-input title="物流单号" v-model="inputnum" placeholder="请填写物流单号"></x-input>
 		      	</div>
 		      
 		    </group>
