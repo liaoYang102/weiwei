@@ -6,7 +6,7 @@
 				<div @click="showRight"><i class="iconfont icon-caidan"></i>筛选</div>
 				<div class="gary">{{typeText}}</div>
 			</div>
-			<div class="wrapper" ref="wrapper">
+			<div class="wrapper" :class="{'top46':hShow}" ref="wrapper">
 				<div class="content">
 					<div class="banlanceLog-list">
 						<router-link to="/member/purse/banlance">
@@ -64,6 +64,7 @@
 				title: '余额日志',
 				show: false,
 				show9: false,
+				hShow: false,
 				data1: '',
 				twoClass: ['全部', '充值', '消费', '返现', '推荐返现', '时间'],
 				//				typeIndex: '',
@@ -74,7 +75,14 @@
 			}
 		},
 		created() {
-			this.$store.state.page.footerFalg = true
+			//判断是否微信端
+			var ua = navigator.userAgent.toLowerCase();
+			var isWeixin = ua.indexOf('micromessenger') != -1;
+			if(isWeixin) {
+				this.hShow = true;
+			} else {
+				this.hShow = false;
+			}
 		},
 		mounted() {
 			this.InitScroll()
@@ -231,17 +239,17 @@
 	
 	.banlanceLog-box {
 		position: relative;
-		/*background-color: #F5F6FA;*/
+		background-color: white;
 		font-family: MicrosoftYaHei;
 		.top {
-			height: 0.98rem;
+			height: 46px;
 			display: flex;
 			align-items: center;
 			justify-content: space-between;
 			color: #6099ff;
 			position: relative;
 			padding: 0px 15px;
-			background: #eaeaea99;
+			position: relative;
 			.iconfont {
 				margin-right: 0.1rem;
 			}
@@ -249,6 +257,21 @@
 				font-size: 0.30rem;
 				color: #1a2642;
 			}
+		}
+		.top:after {
+			content: " ";
+			position: absolute;
+			left: 0;
+			bottom: 0;
+			right: 0;
+			height: 1px;
+			border-top: 1px solid #D9D9D9;
+			color: #D9D9D9;
+			-webkit-transform-origin: 0 0;
+			transform-origin: 0 0;
+			-webkit-transform: scaleY(0.5);
+			transform: scaleY(0.5);
+			left: 0px;
 		}
 		/*.top:after {
 			content: " ";
@@ -266,8 +289,19 @@
 			left: 0px;
 		}*/
 		.wrapper {
-			height: 10.5rem;
+			position: fixed;
+			top: 92px;
+			bottom: 0px;
 			overflow: hidden;
+			width: 100%;
+			background: white;
+			.vux-loadmore {
+				display: inline-block;
+				width: 100%;
+			}
+		}
+		.top46 {
+			top: 46px!important;
 		}
 		.banlanceLog-list {
 			padding: 10px 0px 10px 15px;

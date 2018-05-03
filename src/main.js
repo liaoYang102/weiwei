@@ -179,7 +179,6 @@ router.afterEach(function(to) {
 		ga && ga('send', 'pageview')
 	}*/
 })
-
 //const whiteList = ['/user/login', '/index', '/user/reg','/','/member/index'];// 不重定向白名单
 // router.beforeEach((to, from, next) => {
 //     if (store.getters.userstate) { // 

@@ -7,23 +7,29 @@
 		</group>
 		<div class="img-box">
 			<div class="one">
-				<div class="">
+				<div class="t">
 					<p v-if="justImages == ''">身份证正面照片</p>
-					<img v-if="justImages" :src="justImages" alt="" />
+					<div class="img-bg" v-if="justImages">
+						<img :src="justImages" alt="" />
+					</div>
 				</div>
 				<input class="upinput" type="file" name="" id="" value="" @change="just" multiple ref="just" />
 			</div>
 			<div class="one">
-				<div class="">
+				<div class="t">
 					<p>身份证反面照片</p>
-					<img v-if="backImages" :src="backImages" alt="" />
+					<div class="img-bg" v-if="backImages">
+						<img :src="backImages" alt="" />
+					</div>
 				</div>
 				<input class="upinput" type="file" name="" id="" value="" @change="back" ref="back" />
 			</div>
 			<div class="one">
-				<div class="">
+				<div class="t">
 					<p>本人手持身份证正面照</p>
-					<img v-if="userImages" :src="userImages" alt="" />
+					<div class="img-bg" v-if="userImages">
+						<img :src="userImages" alt="" />
+					</div>
 				</div>
 				<input class="upinput" type="file" name="" id="" value="" @change="user" ref="user" />
 			</div>
@@ -115,9 +121,14 @@
 					if(percent === 100) {
 						_this.showDialogStyle = false
 						this.$vux.toast.show({
-							text: '实名成功',
-							type:'text'
+							text: '上传成功',
+							type: 'text'
 						})
+						setTimeout(function() {
+							_this.$router.push({
+								path: '/member/setting/realoading'
+							})
+						}, 2100)
 						return
 					} else {
 						_this.text1 = `${percent}%`
@@ -181,7 +192,7 @@
 				padding: 0.1rem;
 				box-sizing: border-box;
 				position: relative;
-				div {
+				.t {
 					display: flex;
 					align-items: center;
 					justify-content: center;
@@ -192,14 +203,20 @@
 					z-index: 11;
 					position: relative;
 					overflow: hidden;
-					img {
+					.img-bg {
 						z-index: 13;
+						width: 100%;
+						height: 100%;
 						position: absolute;
-						top: 50%;
-						left: 50%;
-						transform: translate(-50%, -50%);
-						width: 90%;
-						height: auto;
+						top: 0;
+						left: 0;
+						background-color: white;
+						img {
+							position: absolute;
+							top: 50%;
+							left: 50%;
+							transform: translate(-50%, -50%);
+						}
 					}
 				}
 				input {
