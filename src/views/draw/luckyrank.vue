@@ -191,6 +191,9 @@
 	        margin: auto;
 	    }
 	}
+	.luckyrank{
+		padding-bottom: 0.5rem;
+	}
 
 	/* 排行前3名 */
 	.former-three {
