@@ -16,7 +16,7 @@
 					<img src="../../../assets/images/member/icon-paid.png" alt="" /> 选择支付套餐 :</div>
 				<div class="change-row">
 					<div v-for="(item,index) in moneyList" class="row-item" :class="{'moneyActive':index == moneyIndex}" @click="changeMoney(index)">
-						<div>
+						<div class="box">
 							<p>{{item.old}}元</p>
 							<p>售价{{item.now}}元</p>
 						</div>
@@ -25,9 +25,9 @@
 			</div>
 			<div class="change-box">
 				<div class="change-tip">
-					<img src="../../../assets/images/member/icon-more.png" alt="" /> 选择支付平台 :</div>
+					<img src="../../../assets/images/member/icon-more.png" alt="" /> 可用消费平台 :</div>
 				<div class="change-row">
-					<div v-for="(item,index) in ptList" class="row-item" :class="{'moneyActive':index == ptIndex}" @click="changePt(index)">
+					<div v-for="item in ptList" class="row-item">
 						<div>
 							<p>
 								<img :src="item.img" />
@@ -45,8 +45,8 @@
 
 		<div v-transfer-dom>
 			<popup v-model="show1">
-				<popup-header right-text="取消" title="选择支付方式" :show-bottom-border="false" @on-click-left="show1 = false" @on-click-right="show1 = false"></popup-header>
-				<group style="padding-bottom: 1rem;" gutter="0">
+				<popup-header right-text="取消" title="请选择支付方式" :show-bottom-border="false" @on-click-left="show1 = false" @on-click-right="show1 = false"></popup-header>
+				<group gutter="0">
 					<radio :options="list" value="1" @on-change="change"></radio>
 					<div class="pay-box">
 						<div class="add-btn">立即支付</div>
@@ -178,7 +178,7 @@
 		.change-box {
 			padding: 0.25rem;
 			background-color: white;
-			margin: 0.21rem 0;
+			margin-bottom: 0.21rem;
 			.change-tip {
 				color: #555555;
 				font-size: 0.24rem;
@@ -202,9 +202,7 @@
 						align-items: center;
 						justify-content: center;
 						flex-direction: column;
-						width: 1.91rem;
 						height: 1.1rem;
-						background: #e5e5e5;
 						border-radius: 3px;
 						color: #8b45139c;
 						p:nth-child(1) {
@@ -218,11 +216,15 @@
 							height: 0.4rem;
 						}
 					}
+					.box {
+						width: 1.91rem;
+						background: #e5e5e5;
+					}
 				}
 				.moneyActive {
-					div {
+					.box {
 						color: white;
-						background: #26a2ffcf;
+						background: #336fff;
 						transition: all 0.3s linear;
 					}
 				}
@@ -238,7 +240,7 @@
 		}
 		.btn-box {
 			position: fixed;
-			bottom: 1rem;
+			bottom: 0;
 			width: 100%;
 			padding: 0.25rem;
 			box-sizing: border-box;

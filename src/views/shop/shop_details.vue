@@ -53,7 +53,12 @@
 
 					<group>
 						<cell title="规格">
-							<div class="pr" @click="showMask">请选择尺码</div>
+							<div class="pr" @click="showMask">
+								<span v-for="(item,index) in content">
+									<span v-if="index == content.length-1">{{item}}</span>
+									<span v-else>{{item}},</span>
+								</span>
+							</div>
 						</cell>
 					</group>
 
@@ -88,7 +93,7 @@
 				</div>
 			</div>
 
-			<specifications ref='sp'></specifications>
+			<specifications ref='sp' :confirm="confirm" :router="router"></specifications>
 		</div>
 
 		<div class="footer">
@@ -133,6 +138,8 @@ export default {
 			collectImg:'../../../static/shop/collection.png',
 			collectText: '收藏',
 			showDialog: false,
+			content:['请选择尺码'],
+			router: ''
 		}
 	},
 	create: function(){
@@ -176,7 +183,12 @@ export default {
 	    	window.scrollTo(0, 0);
 	    },
 	    goShopcart(){
-	    	this.$router.push({ path: '/shop/shop_cart'})
+	    	if(this.content[0] == '请选择尺码'){
+	    		this.$refs.sp.show1 = true;
+	    		this.router = 'goShopcart'
+	    	}else{
+	    		this.$router.push({ path: '/shop/shop_cart'})
+	    	}
 	    },
 	    goConfirm(){
 	    	this.$router.push({ path: '/shop/confirm'})
@@ -200,6 +212,18 @@ export default {
 		},
 		hideDialog(){
 			this.showDialog = false;
+		},
+		confirm(){
+			if (this.$refs.sp.router != 'shop_cart') {
+				this.content = this.$refs.sp.list3;
+				let num = 'x'+this.$refs.sp.num
+				this.content.push(num)
+				this.$refs.sp.show1 = false;
+				console.log('---', this.content)
+	    	}
+	    	if(this.$refs.sp.router == 'goShopcart'){
+	    		this.$router.push({ path: '/shop/shop_cart'})
+	    	}
 		}
 	}
 }	

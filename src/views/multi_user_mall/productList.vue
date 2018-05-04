@@ -5,7 +5,7 @@
                 <!-- <settingHeader :title="title"></settingHeader> -->
 
                 <tab :line-width='0' style="border-top: 1px solid #E1E1E1;">
-                    <tab-item selected @on-item-click="showPanel">
+                    <tab-item selected @on-item-click="showPanel" id="showPanel">
                       {{ tabItem}} <img :src="downImg" alt="" width="13%">
                     </tab-item>
                     <tab-item class='vux-center' @on-item-click="onItemClick">销量</tab-item>
@@ -21,7 +21,7 @@
                 <!-- 综合弹出框 -->
                 <div v-transfer-dom class="dialogTop">
                     <x-dialog v-model="showDialog" :hide-on-blur="true">
-                        <div class="panel">
+                        <div class="panel" id="panel">
                             <li v-for="(item, index) in panel"  @click="select(item,index)">
                                 <div :class="{'selected':act1==index}">
                                     <span>{{ item.title}}</span> 
@@ -145,7 +145,8 @@ export default {
             downImg1:'./static/shop/down.png',
             topImg: './static/shop/topicon.png',
             priceImg: './static/shop/default.png',
-            priceSort: 0
+            priceSort: 0,
+            obj: null
         }
     },
     mounted:function(){
@@ -172,6 +173,14 @@ export default {
             }else {
                 this.showDialog = false
             }
+
+            let top = parseInt(document.getElementById('showPanel').offsetTop);
+            console.log('--00', top)
+            this.obj = top + 40;
+            console.log('---', this.obj)
+            let panel = document.getElementById('panel');
+            let dialog = panel.parentNode
+            
         },
         select: function(obj,i){
             this.act1 = i;
@@ -364,6 +373,7 @@ export default {
         z-index: 10;
     }
     .weui-dialog{
+        position: absolute;
         top: 54.1%;
         width: 101%;
         left: 49.5%;

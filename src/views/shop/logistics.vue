@@ -9,7 +9,7 @@
 				<p class="status">物流状态：<span>已签收</span></p>
 				<p class="courier">承运来源：申通快递</p>
 				<p class="courier">运单编号：3352342313334</p>
-				<p class="courier">官方电话：<route-link @click="call" class='official'>95543</route-link></p>
+				<p class="courier">官方电话：<span @click="call" class='official'>95543</span></p>
 			</div>
 			<div class="clear"></div>
 		</div>

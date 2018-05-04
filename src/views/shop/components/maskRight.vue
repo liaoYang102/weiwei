@@ -28,7 +28,7 @@
 					    </div>
 					 </div>
 					<div class="bottom">
-			    		<div class="reset">重置</div>
+			    		<div class="reset" @click="reset()">重置</div>
 			    		<div class="complete">完成</div>
 			    	</div>
 				</div>
@@ -120,7 +120,11 @@ export default {
     	},
     	// 重置
     	reset: function(){
-
+    		var classList = document.getElementsByClassName('li-selected');
+    		let listLength = classList.length
+    		for(let i=0;i<listLength;i++){
+    			classList[0].className = 'item';
+    		}
     	},
     	// 完成
     	

@@ -8,15 +8,16 @@
 	          		<div class="dia_top">
 						<p class="title">{{ dialogConfig.headMessage}}</p>
 						<span class="note">{{ dialogConfig.message}}</span>
-						<div class="btnList" @click="hide">
-							<div class="canel" v-if="dialogConfig.buttons.length ==2">{{ dialogConfig.buttons[1]}}</div>
-							<div class="btn">{{ dialogConfig.buttons[0]}}</div>
+						<div class="btnList">
+							<div class="canel" v-if="dialogConfig.buttons.length ==2" @click="canel">{{ dialogConfig.buttons[1]}}</div>
+							<div class="btn" @click="confirm">{{ dialogConfig.buttons[0]}}</div>
 						</div>
 					</div>
           		</div>
           		
           	</x-dialog>
         </div>
+			
 	</section>
 </template>
 
@@ -24,15 +25,17 @@
 	import { XDialog} from 'vux'
 	export default{
 		props:{
-			dialogConfig: Object
+			dialogConfig: Object,  //type: failure/success/warning  //buttons: 确定、取消、我知道了、
+			confirm: Function,
+			canel: Function
 		},
 		components:{
 			XDialog
 		},
 		data(){
 			return{
-				showDialog: true,
-				imgSrc: './static/images/prompt.png'
+				showDialog: false,
+				imgSrc: './static/images/success.png'
 			}
 		},
 		mounted(){
@@ -40,16 +43,7 @@
 		},
 		methods:{
 			show(){
-				if(this.dialogConfig.type == 'warning'){
-					this.imgSrc = './static/images/prompt.png'
-				}else if(this.dialogConfig.type == 'success'){
-					this.imgSrc = './static/images/success.png'
-				}else{
-					this.imgSrc = './static/images/failure.png'
-				}
-			},
-			hide(){
-				this.showDialog = false
+				this.imgSrc = `./static/images/${this.dialogConfig.type}.png`;
 			}
 		}
 	}
