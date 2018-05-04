@@ -11,7 +11,7 @@
 				<div class="swiperTop">
 					<span class="position fl">
 						<img src="../assets/images/index/position.png" alt="">
-						<span class="city">广州</span>
+						<span class="city">{{address}}</span>
 					</span>
 					<div class="search fl">
 						<input type="text" placeholder='搜索你想要的' />
@@ -157,6 +157,7 @@
 				</div>
 			</div>
 		</div>
+		<div id='container'></div>
 	</section>
 </template>
 
@@ -164,10 +165,12 @@
 	import { swiper, swiperSlide } from 'vue-awesome-swiper'
 	import { Card } from 'vux'
 	import BScroll from 'better-scroll'
+	//	import AMap from 'AMap'
 	export default {
 		data() {
 			return {
 				num: 5,
+				address:'',
 				swiperOption: {
 					pagination: {
 						el: '.swiper-pagination'
@@ -180,11 +183,26 @@
 					autoplay: true,
 					loop: true
 				},
-				caiList:[
-					{img:'./static/images/cai1.png',title:'VANS Old Skool lite黑白超轻鞋款 黑色38.5',tip:'100积分+199.67元'},
-					{img:'./static/images/cai2.png',title:'VANS Old Skool lite黑白超轻鞋款 黑色38.5',tip:'100积分+199.67元'},
-					{img:'./static/images/cai2.png',title:'VANS Old Skool lite黑白超轻鞋款 黑色38.5',tip:'100积分+199.67元'},
-					{img:'./static/images/cai1.png',title:'VANS Old Skool lite黑白超轻鞋款 黑色38.5',tip:'100积分+199.67元'},
+				caiList: [{
+						img: './static/images/cai1.png',
+						title: 'VANS Old Skool lite黑白超轻鞋款 黑色38.5',
+						tip: '100积分+199.67元'
+					},
+					{
+						img: './static/images/cai2.png',
+						title: 'VANS Old Skool lite黑白超轻鞋款 黑色38.5',
+						tip: '100积分+199.67元'
+					},
+					{
+						img: './static/images/cai2.png',
+						title: 'VANS Old Skool lite黑白超轻鞋款 黑色38.5',
+						tip: '100积分+199.67元'
+					},
+					{
+						img: './static/images/cai1.png',
+						title: 'VANS Old Skool lite黑白超轻鞋款 黑色38.5',
+						tip: '100积分+199.67元'
+					},
 				],
 				demoList: [
 					'https://img1.360buyimg.com/da/s750x366_jfs/t17776/179/1756407821/231537/470e3442/5ad9b0a3N5573c82c.jpg!cr_1125x549_0_72.dpg',
@@ -200,25 +218,25 @@
 						title: '邀请有奖',
 						tip: '送200信用积分',
 						img: './static/images/plate1.png',
-						url:'/member/purse/qrcode'
+						url: '/member/purse/qrcode'
 					},
 					{
 						title: '积分商城',
 						tip: '积分任意兑',
 						img: './static/images/plate2.png',
-						url:'/shop'
+						url: '/shop'
 					},
 					{
 						title: '我的钱包',
 						tip: '消费增值管理',
 						img: './static/images/plate3.png',
-						url:'/member/purse/index'
+						url: '/member/purse/index'
 					},
 					{
 						title: '积分充值',
 						tip: '百万豪礼等你来',
 						img: './static/images/plate4.png',
-						url:'/member/purse/recharge'
+						url: '/member/purse/recharge'
 					},
 				],
 				allianceList: [{
@@ -319,9 +337,33 @@
 				]
 			}
 		},
-		created(){
+		created() {
+			this.loc()
 		},
 		mouted() {
+
+		},
+		methods: {
+			loc() {
+				var _this = this
+				var map, geolocation;
+				//加载地图，调用浏览器定位服务
+				map = new AMap.Map('container', {
+					resizeEnable: true
+				});
+				map.plugin('AMap.Geolocation', function() {
+					geolocation = new AMap.Geolocation({
+						enableHighAccuracy: true, //是否使用高精度定位，默认:true
+						timeout: 10000, //超过10秒后停止定位，默认：无穷大
+					});
+					map.addControl(geolocation);
+					geolocation.getCurrentPosition();
+					console.log(geolocation)
+					AMap.event.addListener(geolocation, 'complete', function(data) {
+						_this.address = data.addressComponent.city //返回城市定位
+					}); 
+				});
+			}
 		},
 		components: {
 			swiper,
@@ -336,7 +378,7 @@
 	#appIndex {
 		background-color: #F5F6FA;
 		overflow-x: hidden;
-		padding-bottom:1rem;
+		padding-bottom: 1rem;
 		/*banner顶部*/
 		.swiperTop {
 			z-index: 1000;
@@ -673,7 +715,7 @@
 					display: flex;
 					align-items: center;
 					justify-content: space-between;
-					padding:0 0.2rem;
+					padding: 0 0.2rem;
 					box-sizing: border-box;
 					background: white;
 					div {

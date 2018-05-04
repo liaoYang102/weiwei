@@ -56,7 +56,7 @@
 
 <style lang="less" scoped>
 	.cardDetail-box {
-		background-color: #F5F6FA;
+		background-color: white;
 		font-family: MicrosoftYaHei;
 		.btn {
 			position: fixed;
@@ -70,7 +70,6 @@
 			color: rgba(255, 255, 255, 1);
 		}
 		.b-w {
-			background-color: white;
 			margin: 0.24rem 0.24rem 0 0.24rem;
 			.top {
 				display: flex;
