@@ -52,7 +52,7 @@
 			</div>
 			<div class="footer">
 				<div class="btn" @click="saoma">
-					<span>开启设备</span>
+					<span>购买套餐</span>
 				</div>
 			</div>
 		</div>

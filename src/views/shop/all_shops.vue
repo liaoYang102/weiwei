@@ -74,7 +74,6 @@
                     <loading v-if="show"></loading>
                     <noMore v-if="showNomore"></noMore>
                 </div>
-
             </div>
         </div>
     </div>
@@ -183,7 +182,7 @@ export default {
                     })
                     this.scroll.on('pullingUp', (pos) => {
                         this.show = true;
-                        // this.LoadData()
+                        this.LoadData()
                         this.$nextTick(function() {
                             this.scroll.finishPullUp();
                             this.scroll.refresh();
@@ -255,7 +254,7 @@ export default {
     }
 }
 .wrapper {
-    height: 93%;
+    height: 95%;
     overflow: hidden;
 }
 .shopList{

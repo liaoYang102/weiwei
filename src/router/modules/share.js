@@ -31,6 +31,7 @@ const share =[
 		path:'/share/storelist',//门店列表
 		name:'storelist',
 		component:StoreList,
+		props:true,
 		meta: {
 			navShow: true,
 			navIndex:3

@@ -84,7 +84,9 @@
 						</router-link>
 					</div>
 				</div>
-				<img style="width: 100%;height: auto;display: block;" src="../../static/images/jiam.png" alt="" />
+				<router-link to="/share">
+					<img style="width: 100%;height: auto;display: block;" src="../../static/images/jiam.png" alt="" />
+				</router-link>
 				<div class="alliance">
 					<card>
 						<div slot="content" class="card-demo-flex">

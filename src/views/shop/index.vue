@@ -47,7 +47,7 @@
 
 				<div class="tab-list">
 			    	<div class="list">
-			    		<li class="tab-li" v-for="(item, index) in shopList">
+			    		<li class="tab-li" v-for="(item, index) in shopList" @click="goShopdetails">
 			    			<img src="../../assets/images/shop/shop3.png">
 			    			<div class="tab-text"><span>{{ item.shopname}}</span></div>
 			    			<div class="tab-tag">
@@ -250,7 +250,6 @@ li:nth-child(odd){
 .tab-list{
 	margin-bottom: 1px;
 	background: #f5f6fa;
-	padding-bottom: 0.8rem;
 	.tab-li{
 		float: left;
 		width: 49.8%;

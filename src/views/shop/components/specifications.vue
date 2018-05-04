@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<div v-model="router">
 		<div v-transfer-dom class="popup">
 		  	<popup v-model='show1' position="bottom" style="background: #fff">
 		    	<div class="specifications">
@@ -33,7 +33,7 @@
 		    				</div>
 		    			</div>
 
-		    			<div class="sp-buynum">
+		    			<div class="sp-buynum" v-if="router != 'shop_cart'">
 		    				<div class="sp-buyname">购买数量</div>
 		    				<div class="sp-number">
 		    					<div class="minus" @click="minus">-</div>
@@ -42,7 +42,7 @@
 		    				</div>
 		    			</div>
 		    		</div>
-		    		<div class="sp-btn" @click="goConfirm">确定</div>
+		    		<div class="sp-btn" @click="confirm">确定</div>
 		    	</div>
 		  	</popup>
 		</div>
@@ -51,6 +51,10 @@
 
 <script>
 export default {
+	props: {
+		router: String,
+		confirm: Function
+	},
 	data(){
 		return {
 			show1: false,
@@ -70,6 +74,8 @@ export default {
 			num: 1,
 			list3: []
 		}
+	},
+	mounted() {
 	},
 	methods: {
 		active:function (index) {
@@ -94,10 +100,6 @@ export default {
 	    close: function(){
 	    	this.show1 = false
 	    },
-	    goConfirm(){
-	    	this.$router.push({ path: '/shop/confirm'})
-	    }
-
 	}
 }	
 </script>

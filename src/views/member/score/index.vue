@@ -5,7 +5,7 @@
 			<div class="position">
 				<router-link to="/member/score/strategy">
 					<img src="../../../assets/images/member/score_3.png" alt="">
-					<span class='fr'>积分说明</span>
+					<span class='fr'>积分明细</span>
 				</router-link>
 			</div>
 			<div class="avatar">
@@ -106,6 +106,7 @@
 
 <style lang='less' scoped>
 	.score-box {
+		background-color: #fff;
 		.vux-loadmore {
 			display: none;
 		}
@@ -224,7 +225,7 @@
 					top: 0;
 					right: 0;
 					height: 1px;
-					border-top: 1px solid #D9D9D9;
+					border-bottom: 1px solid #D9D9D9;
 					color: #D9D9D9;
 					-webkit-transform-origin: 0 0;
 					transform-origin: 0 0;
