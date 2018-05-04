@@ -1,5 +1,5 @@
 <template>
-    <div id="shops" style="height: 100%;">
+    <div id="shops">
         <!-- <div class="wrapper" ref="wrapper"> -->
             <!-- <div class="content"> -->
                 <!-- <settingHeader :title="title"></settingHeader> -->

@@ -153,6 +153,7 @@
 		}
 		.af-box {
 			padding: 0 15px;
+			background-color: #fff;
 			.title {
 				height: 0.7rem;
 				line-height: 0.7rem;
