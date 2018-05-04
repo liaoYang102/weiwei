@@ -80,16 +80,13 @@
 			          		<div class="dia_top">
 								<p class="title">{{ toast}}</p>
 								<!-- <span class="note">{{ note}}</span> -->
-								<router-link to=""><div class="btn">实名验证</div></router-link>
+								<router-link to="/member/setting/real"><div class="btn">实名验证</div></router-link>
 							</div>
 			          	</x-dialog>
 			        </div>
 		        </div>
 			</div>
 		</div>
-        
-
-       
 	</section>
 </template>
 
@@ -193,7 +190,7 @@
 				this.showDialog = true;
 				setTimeout(function(){
 					that.showDialog = false
-				},3000)
+				},5000)
 			},
 		}
 	}

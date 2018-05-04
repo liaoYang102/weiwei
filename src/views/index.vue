@@ -35,7 +35,7 @@
 					<img src="../assets/images/index/group.png" alt="">
 					<div class="info">
 						<p class="infoText">
-							<img src="../assets/images/index/time.png" alt="" class="fl">
+							<router-link to="/draw"><img src="../assets/images/index/time.png" alt="" class="fl"></router-link>
 							<span class="core fl">恭喜500人获得<span class="orange">5000元</span>大奖</span>
 							<router-link to="/draw/review">
 								<span class="past fr">往期</span>

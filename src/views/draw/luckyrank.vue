@@ -76,7 +76,7 @@
 				                        <img src="../../assets/images/draw/photo1.png" alt="">
 				                        <div>{{item.phone}}</div>
 				                    </div>
-				                    <div class="rankList-right" >{{ item.num}}</div>
+				                    <div class="rankList-right">{{ item.num}}</div>
 				                </div>
 			            	</cell>
 						</group>
@@ -191,10 +191,6 @@
 	        margin: auto;
 	    }
 	}
-	.luckyrank{
-		padding-bottom: 0.5rem;
-	}
-
 	/* 排行前3名 */
 	.former-three {
 	    margin: auto;

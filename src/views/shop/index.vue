@@ -232,7 +232,7 @@ export default {
 	}
 }
 .wrapper {
-	height: 92%;
+	height: 88%;
 	overflow: hidden;
 }
 li{
@@ -249,6 +249,7 @@ li:nth-child(odd){
 }
 .tab-list{
 	margin-bottom: 1px;
+	padding-bottom: 0.2rem;
 	background: #f5f6fa;
 	.tab-li{
 		float: left;

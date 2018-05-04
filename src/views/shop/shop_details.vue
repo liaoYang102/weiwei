@@ -14,7 +14,7 @@
 			<comments></comments>
 		</div>
 
-		<div v-else  style="margin-top: 1rem;">
+		<div v-else style="margin-top: 1rem;">
 			<div><img src="../../assets/images/shop/theme_banner0.png" style="width: 100%;"></div>
 			<div class="shop_content">
 				<div class="shop">
@@ -56,7 +56,7 @@
 							<div class="pr" @click="showMask">
 								<span v-for="(item,index) in content">
 									<span v-if="index == content.length-1">{{item}}</span>
-									<span v-else>{{item}},</span>
+									<span v-else>{{item}}, </span>
 								</span>
 							</div>
 						</cell>
@@ -149,7 +149,7 @@ export default {
 	mounted(){
 		this.onRouter();
 		let top = parseInt(document.getElementById('details').offsetTop);
-		this.obj = top -40;
+		this.obj = top -47;
 	},
 	methods: {
 		showMask: function() {
@@ -171,7 +171,7 @@ export default {
 			var that = this;
 			window.setTimeout(function(){
 				let top = parseInt(document.getElementById('details').offsetTop);
-				that.obj = top - 40;
+				that.obj = top - 47;
 				window.scrollTo(0,that.obj);
 			},200)
 		},

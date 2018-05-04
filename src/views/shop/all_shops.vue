@@ -364,6 +364,9 @@ export default {
     color:#256fff;
     border-bottom:3px solid #256fff;
 }
+/*#shops .vux-tab-warp{
+    z-index: 110;
+}*/
 </style>
 
 
