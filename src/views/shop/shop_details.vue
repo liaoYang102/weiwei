@@ -27,8 +27,8 @@
 						<span>运费:10.00</span>
 					</div>
 					<div class="shop_right">
-						<div class="shop_collection">
-							<img :src="collectImg" @click="collection"><br>
+						<div class="shop_collection" @click="collection">
+							<img :src="collectImg"><br>
 							<span>{{ collectText}}</span>
 						</div>
 						<div class="shop_share" @click="showShareDialog">
@@ -92,9 +92,9 @@
 					</div>
 				</div>
 			</div>
-
-			<specifications ref='sp' :confirm="confirm" :router="router"></specifications>
 		</div>
+
+		<specifications ref='sp' :confirm="confirm" :router="router"></specifications>
 
 		<div class="footer">
 			<div class="footer_icon">
@@ -112,10 +112,11 @@
 
         <div v-transfer-dom class="shareDialog">
           	<x-dialog v-model="showDialog" :hide-on-blur="true">
-          		<div class="dialogs" @click="hideDialog">
+          		<div class="dialogs">
 					<img src="../../assets/images/shop/rightShare.png" class="right">
 					<div class="clear"></div>
-					<img src="../../assets/images/shop/Rectangle.png" class="mt10">
+					<div class="btn" @click="hideDialog">我知道了</div>
+					<!-- <img src="../../assets/images/shop/Rectangle.png" class="mt10" @click="hideDialog"> -->
 				</div>
           	</x-dialog>
         </div>
@@ -442,8 +443,19 @@ export default {
 		float: right;
 		margin-right: 0.41rem;
 	}
-	.mt10{
-		margin-top: 7rem;
+	.btn{
+		width: 3.32rem;
+		height: 1.15rem;
+		border-radius: 0.32rem;
+		background-color: rgba(255,255,255,0);
+		color: #fff;
+		border: 1px solid #fff;
+		font-size: 0.32rem;
+		margin: auto;
+		text-align: center;
+		line-height: 1.15rem;
+		letter-spacing: 0.08rem;
+		margin-top: 85%;
 	}
 }
 </style>

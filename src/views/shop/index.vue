@@ -250,7 +250,6 @@ li:nth-child(odd){
 .tab-list{
 	margin-bottom: 1px;
 	background: #f5f6fa;
-	padding-bottom: 0.8rem;
 	.tab-li{
 		float: left;
 		width: 49.8%;
