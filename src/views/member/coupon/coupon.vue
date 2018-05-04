@@ -333,7 +333,7 @@
 				top: 0.2rem;
 				span:nth-of-type(1) {
 					display: block;
-					font-size: 0.35rem;
+					font-size: 0.3rem;
 					color: #82a6ee;
 					margin-top: 0.1rem;
 				}
