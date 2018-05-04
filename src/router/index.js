@@ -10,5 +10,7 @@ var all=shopModule.concat(memberModule,share,draw);
 
 export default new Router({
   // base:'/new/',
-  routes: all
+  routes: all,
+  /*mode:'history',
+  fallback:true*/
 })
