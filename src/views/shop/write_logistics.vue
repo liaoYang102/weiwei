@@ -13,7 +13,7 @@
 		</div>
 		<div class="select">
 			<group>
-		      	<cell title="物流公司" value="请选择物流公司" @click.native='test' is-link></cell>
+		      	<cell title="物流公司" :value="logisticsText" @click.native='logistics' is-link></cell>
 		      	<div>
 		      		<x-input title="物流单号" v-model="inputnum" placeholder="请填写物流单号"></x-input>
 		      	</div>
@@ -62,11 +62,11 @@
 	        <group gutter="0">
 	        	<scroller lock-x height="200px" ref="scrollerEvent">
 			      <div class="box2">
-			        <radio :options="['顺丰', '圆通', '申通', '中通','韵达','天天','百世','优速']"></radio>
+			        <radio :options="['顺丰', '圆通', '申通', '中通','韵达','天天','百世','优速']" @click.native="logisticsSeclect($event)"></radio>
 			      </div>
 			    </scroller>
 	          <div class="pay-box">
-				<x-button class="add-btn" :gradients="['#1D62F0', '#19D5FD']" >确定</x-button>
+				<x-button class="add-btn" :gradients="['#1D62F0', '#19D5FD']" @click.native="logisticsCancel">取消</x-button>
 			  </div>
 	        </group>
 	      </popup>
@@ -84,6 +84,7 @@
 		data(){
 			return{
 				title:"填写退货物流",
+				logisticsText:"请选择物流公司",
 				show1: false,
 				imgList: [],
 				showInputOption: false,
@@ -100,8 +101,15 @@
 			document.title = '填写退货物流';
 		},
 		methods:{
-			test(){
+			logistics(){
 				this.show1 = true;
+			},
+			logisticsSeclect(e){
+				this.logisticsText = e.target.value;
+				this.show1 = false;
+			},
+			logisticsCancel(){
+				this.show1 = false;
 			},
 			goLogistics(){
 				this.$router.push({ path: '/shop/logistics'})
