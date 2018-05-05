@@ -1,4 +1,4 @@
-import ShareIndex from '@/views/share/index'
+// import ShareIndex from '@/views/share/index'
 import Sdetail from '@/views/share/sdetail'
 import StoreList from '@/views/share/storelist'
 import StoreList2 from '@/views/share/storelist2'
@@ -17,7 +17,8 @@ const share =[
 	{
 		path:'/share',
 		name:'shareIndex',
-		component:ShareIndex,
+		// component:ShareIndex,
+		component:()=>import('@/views/share/index'),//异步组件
 		meta: {
 			navShow: true
 		}
@@ -25,7 +26,11 @@ const share =[
 	{
 		path:'/share/sdetail',//门店详情
 		name:'sdetail',
-		component:Sdetail
+		component:Sdetail,
+		/*beforeEnter(to,from,next){
+			console.log(9);
+			next()
+		}*/
 	},
 	{
 		path:'/share/storelist',//门店列表
