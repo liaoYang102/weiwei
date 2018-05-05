@@ -73,7 +73,6 @@
 
 <style lang="less" scoped>
  .store{
- 	height: 100%;
  	background-color: #F5F8F9;
  	.shop{
  		border-top: 1px solid #E1E1E1;

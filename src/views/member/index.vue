@@ -142,6 +142,10 @@
 						img: './static/member/m_index13.png',
 						text: '我的卡包',
 						url: '/member/card/index'
+					},{
+						img: './static/member/m_index13.png',
+						text: '门禁系统',
+						url: '/lock/index'
 					},
 				],
 				yhqTip: '5张快过期'

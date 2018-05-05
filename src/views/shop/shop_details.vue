@@ -14,7 +14,7 @@
 			<comments></comments>
 		</div>
 
-		<div v-else  style="margin-top: 1rem;">
+		<div v-else style="margin-top: 1rem;">
 			<div><img src="../../assets/images/shop/theme_banner0.png" style="width: 100%;"></div>
 			<div class="shop_content">
 				<div class="shop">
@@ -27,8 +27,8 @@
 						<span>运费:10.00</span>
 					</div>
 					<div class="shop_right">
-						<div class="shop_collection">
-							<img :src="collectImg" @click="collection"><br>
+						<div class="shop_collection" @click="collection">
+							<img :src="collectImg"><br>
 							<span>{{ collectText}}</span>
 						</div>
 						<div class="shop_share" @click="showShareDialog">
@@ -54,9 +54,11 @@
 					<group>
 						<cell title="规格">
 							<div class="pr" @click="showMask">
-								<span v-for="(item,index) in content">
-									<span v-if="index == content.length-1">{{item}}</span>
-									<span v-else>{{item}},</span>
+								<!-- <span v-for="(item,index) in content">
+									<span>"{{item}}" </span>
+								</span> -->
+								<span>
+									{{content}}
 								</span>
 							</div>
 						</cell>
@@ -92,9 +94,9 @@
 					</div>
 				</div>
 			</div>
-
-			<specifications ref='sp' :confirm="confirm" :router="router"></specifications>
 		</div>
+
+		<specifications ref='sp' :confirm="confirm" :router="router"></specifications>
 
 		<div class="footer">
 			<div class="footer_icon">
@@ -112,10 +114,11 @@
 
         <div v-transfer-dom class="shareDialog">
           	<x-dialog v-model="showDialog" :hide-on-blur="true">
-          		<div class="dialogs" @click="hideDialog">
+          		<div class="dialogs">
 					<img src="../../assets/images/shop/rightShare.png" class="right">
 					<div class="clear"></div>
-					<img src="../../assets/images/shop/Rectangle.png" class="mt10">
+					<div class="btn" @click="hideDialog">我知道了</div>
+					<!-- <img src="../../assets/images/shop/Rectangle.png" class="mt10" @click="hideDialog"> -->
 				</div>
           	</x-dialog>
         </div>
@@ -138,7 +141,7 @@ export default {
 			collectImg:'../../../static/shop/collection.png',
 			collectText: '收藏',
 			showDialog: false,
-			content:['请选择尺码'],
+			content:'"请选择尺码"',
 			router: ''
 		}
 	},
@@ -148,7 +151,7 @@ export default {
 	mounted(){
 		this.onRouter();
 		let top = parseInt(document.getElementById('details').offsetTop);
-		this.obj = top -40;
+		this.obj = top -47;
 	},
 	methods: {
 		showMask: function() {
@@ -170,7 +173,7 @@ export default {
 			var that = this;
 			window.setTimeout(function(){
 				let top = parseInt(document.getElementById('details').offsetTop);
-				that.obj = top - 40;
+				that.obj = top - 47;
 				window.scrollTo(0,that.obj);
 			},200)
 		},
@@ -216,9 +219,8 @@ export default {
 		confirm(){
 			if (this.$refs.sp.router != 'shop_cart') {
 				this.content = this.$refs.sp.list3;
-				let num = 'x'+this.$refs.sp.num
-				this.content.push(num)
 				this.$refs.sp.show1 = false;
+				this.content ='"' + this.content.join('" "') +'"';
 				console.log('---', this.content)
 	    	}
 	    	if(this.$refs.sp.router == 'goShopcart'){
@@ -422,7 +424,6 @@ export default {
 			font-size: 0.32rem;
 			color: #FFFFFF;
 			float: left;
-			/*padding: 0.26rem 0 0.29rem 0;*/
 		}
 		.btn_green{
 			background: #00DB83;
@@ -442,8 +443,19 @@ export default {
 		float: right;
 		margin-right: 0.41rem;
 	}
-	.mt10{
-		margin-top: 7rem;
+	.btn{
+		width: 3.32rem;
+		height: 1.15rem;
+		border-radius: 0.32rem;
+		background-color: rgba(255,255,255,0);
+		color: #fff;
+		border: 1px solid #fff;
+		font-size: 0.32rem;
+		margin: auto;
+		text-align: center;
+		line-height: 1.15rem;
+		letter-spacing: 0.08rem;
+		margin-top: 85%;
 	}
 }
 </style>
@@ -460,50 +472,46 @@ export default {
 		max-width: 100%;
 	}
 }
-.shop_cell .weui-cell{
-	padding: 0.3rem 0.15rem;
-}
-.shop_cell .weui-cells:before{
-	border-top: 1px solid #D8DFF0;
-}
-.shop_cell  .weui-cell:before{
-	border-top: 1px solid #D8DFF0;
-}
-.shop_cell .vux-label{
-	color: #90A2C7;
-	font-size: 0.28rem;
-}
-.shop_cell .weui-cell__ft{
-	font-size: 0.3rem;
-	color: #1A2642;
-}
-.shop_cell .weui-cell_access .weui-cell__ft{
-	padding-right: 0.79rem;
-}
-.shop_cell .weui-cell_access .weui-cell__ft:after{
-	right: 0.45rem;
-	border-color: #90A2C7;
-}
-.shop_cell .weui-cells:after{
-	border-bottom: 0.01rem solid #F5F6FA;
-}
-.shop_cell .vux-no-group-title{
-	margin-top: 0.22rem;
-}
-.shop_details .vux-header .vux-header-left .left-arrow:before {
-	border: 1px solid #222;
-	border-width: 1px 0 0 1px;
-}
-
-.shop_details.vux-header .vux-header-title {
-	color: #333;
-}
-.shop_details .vux-header{
-	position: fixed!important;
-	top: 0;
-	width: 100%;
-	z-index: 111;
-}
+.shop_cell{
+	.weui-cells:before{
+		border-top: 1px solid #D8DFF0;
+	}
+	.weui-cell:before{
+		border-top: 1px solid #D8DFF0;
+	}
+	.vux-label{
+		color: #90A2C7;
+		font-size: 0.28rem;
+	}
+	.weui-cell__ft{
+		font-size: 0.28rem;
+		color: #1A2642;
+	}
+	.weui-cell_access .weui-cell__ft:after{
+		border-color: #90A2C7;
+	}
+	.weui-cells:after{
+		border-bottom: 0.01rem solid #F5F6FA;
+	}
+	.vux-no-group-title{
+		margin-top: 0.22rem;
+	}
+} 
+.shop_details{
+	.vux-header .vux-header-left .left-arrow:before {
+		border: 1px solid #222;
+		border-width: 1px 0 0 1px;
+	}
+	.vux-header .vux-header-title {
+		color: #333;
+	}
+	.vux-header{
+		position: fixed!important;
+		top: 0;
+		width: 100%;
+		z-index: 111;
+	}
+} 
 .tab_shop .vux-tab-ink-bar{
 	bottom:4px;
 }

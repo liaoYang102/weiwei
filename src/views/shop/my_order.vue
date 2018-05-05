@@ -8,9 +8,9 @@
 	      <tab-item @on-item-click="onItemClick">已完成</tab-item>
 	      <tab-item @on-item-click="onItemClick">已取消</tab-item>
 	    </tab>
-		<div class="wrapper" ref="wrapper"  v-if=" test == true">
+		<div class="wrapper" ref="wrapper" >
 			<div class="content">
-			    <div class="box">
+			    <div class="box" v-if=" test == true">
 			        <div class="box2">
 			            <div class="shop-box">
 			    			<div class="box-head">
@@ -40,7 +40,7 @@
 			    			</div>
 			    			<div class="box-bottom">
 			    				<div class="shop-btn btn-status1 fr" @click="goConfirm">付款</div>
-			    				<div class="shop-btn fr">取消订单</div>
+			    				<div class="shop-btn fr" @click="showAlert">取消订单</div>
 			    			</div>
 			            </div>
 			            <div class="shop-box">
@@ -175,17 +175,25 @@
 			        <loading v-if="show"></loading>
 			        <noMore v-if="showNomore"></noMore>
 			    </div>
+
+			    <div class="wrap no_orders" v-else>
+		        	<div class="none-data">
+		        		<img src="../../assets/images/shop/noOrder.png" alt=""> 
+		    			<p>暂无订单</p>
+		        	</div>
+		    		
+		    		<recommended></recommended>
+        		</div>
+        		<div v-transfer-dom>
+			      <confirm v-model="alert"
+			      title="确认删除订单？"
+			      @on-cancel="onCancel"
+			      @on-confirm="onConfirm">
+			        <p style="text-align:center;">删除之后可以从电脑端订单回收站恢复</p>
+			      </confirm>
+			    </div>
 			</div>
 		</div>
-
-		<div class="wrap no_orders" v-else>
-        	<div class="none-data">
-        		<img src="../../assets/images/shop/noOrder.png" alt=""> 
-    			<p>暂无订单</p>
-        	</div>
-    		
-    		<recommended></recommended>
-        </div>
 	    
 	</section>
 </template>
@@ -203,7 +211,8 @@
 				test: true,
 				show9: false,
 				show: false,
-				showNomore: false
+				showNomore: false,
+				alert:false
 			}
 		},
 		components: {
@@ -265,6 +274,15 @@
 		    },
 		    goOrderdetails(){
 		    	this.$router.push({ path: '/shop/order_details'})
+		    },
+		    onCancel () {
+		      	console.log('on cancel')
+		    },
+		    onConfirm () {
+		      	console.log('on confirm');
+		    },
+		    showAlert(){
+		    	this.alert = true;
 		    }
 		}
 	}

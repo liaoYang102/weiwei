@@ -1,7 +1,7 @@
 <template>
 	<div class="logs-box">
 		<settingHeader :title="title"></settingHeader>
-		<div class="purse-box1">
+		<div class="purse-box2">
 			<div class="box-h">
 				<div class="top">
 					<div>
@@ -221,7 +221,7 @@
 	}
 	
 	.logs-box {
-		.purse-box1 {
+		.purse-box2 {
 			background-color: #f5f6fa;
 			position: relative;
 			.box-h {

@@ -11,36 +11,36 @@
             </div>
         </div>
 
-        <!-- tab切换 -->
-        <div class="time-line" v-if="tab2 == true">
-        	<timeline>
-        		<timeline-item v-for="(i, index) in count" :key="index">
-        			<h4 :class="[i === 1 ? 'recent' : '']" >
-        				<span class="weekend">周末幸运大抽奖</span>
-        				<span class="winMoney right">5000元</span>
-        			</h4>
-        			<p :class="[i === 1 ? 'recent' : '']" class='bottom'>
-        				<span class="rank">1234期<span class='ranks'>一等奖</span></span>
-        				<span class="winStatus right">已领取</span>
-        			</p>
-        		</timeline-item>
-        	</timeline>
-        </div>
+        <div class="wrapper" ref="wrapper">
+			<div class="content">
+				<!-- tab切换 -->
+				<div class="time-line" v-if="tab2 == true">
+					<timeline>
+						<timeline-item v-for="(i, index) in count" :key="index">
+							<h4 :class="[i === 1 ? 'recent' : '']" >
+								<span class="weekend">周末幸运大抽奖</span>
+								<span class="winMoney right">5000元</span>
+							</h4>
+							<p :class="[i === 1 ? 'recent' : '']" class='bottom'>
+								<span class="rank">1234期<span class='ranks'>一等奖</span></span>
+								<span class="winStatus right">已领取</span>
+							</p>
+						</timeline-item>
+					</timeline>
+				</div>
 
-        <div class="recordList" v-else>
-        	<div v-if="recordList.length==0">
-        		<div class="noRecord">
-        			<div class="img">
-        				<img src="../../assets/images/draw/norecord.png">
-        				<p>暂无中奖记录</p>
-        				<p class="text">买单报电机号赢<span>5000元</span>大奖</p>
-        			</div>
-        		</div>
-        	</div>
+		        <div class="recordList" v-else>
+		        	<div v-if="recordList.length==0">
+		        		<div class="noRecord">
+		        			<div class="img">
+		        				<img src="../../assets/images/draw/norecord.png">
+		        				<p>暂无中奖记录</p>
+		        				<p class="text">买单报电机号赢<span>5000元</span>大奖</p>
+		        			</div>
+		        		</div>
+		        	</div>
 
-        	<div v-else>
-        		<div class="wrapper" ref="wrapper">
-					<div class="content">
+		        	<div v-else style="padding-bottom: 0rem;">
 			            <ul class="commodity">
 			            	<group v-for="(item,index) in recordList" class="li-item">
 								<cell>
@@ -72,21 +72,21 @@
 			            </ul>
 			            <loading v-if="show"></loading>
 			            <noMore v-if="showNomore"></noMore>
-					</div>
-				</div>
-        	</div>
+		        	</div>
 
-	        <!-- 弹出框 -->
-	        <div v-transfer-dom class="dialog">
-	          	<x-dialog v-model="showDialog" :hide-on-blur="true">
-	          		<div class="dia_top">
-						<p class="title">{{ toast}}</p>
-						<!-- <span class="note">{{ note}}</span> -->
-						<router-link to=""><div class="btn">实名验证</div></router-link>
-					</div>
-	          	</x-dialog>
-	        </div>
-        </div>
+			        <!-- 弹出框 -->
+			        <div v-transfer-dom class="dialog">
+			          	<x-dialog v-model="showDialog" :hide-on-blur="true">
+			          		<div class="dia_top">
+								<p class="title">{{ toast}}</p>
+								<!-- <span class="note">{{ note}}</span> -->
+								<router-link to="/member/setting/real"><div class="btn">实名验证</div></router-link>
+							</div>
+			          	</x-dialog>
+			        </div>
+		        </div>
+			</div>
+		</div>
 	</section>
 </template>
 
@@ -190,7 +190,7 @@
 				this.showDialog = true;
 				setTimeout(function(){
 					that.showDialog = false
-				},3000)
+				},5000)
 			},
 		}
 	}
@@ -214,7 +214,7 @@
 	    }
 	}
 	.wrapper {
-		height: 11.2rem;
+		height: 100%;
 		overflow: hidden;
 	}
 	.noRecord{
@@ -274,6 +274,7 @@
 	}
 
 	.recordList{
+		background-color: #F5F6FA;
 		.li-item{
 			margin-bottom: 0.2rem;
 		}

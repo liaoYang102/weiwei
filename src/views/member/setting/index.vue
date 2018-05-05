@@ -48,8 +48,11 @@
 		}
 		.logout-btn{
 			width: 100%;
-			margin: 0.8rem 0;
+			margin: 0.21rem 0;
 			text-align: center;
+			background-color: #fff;
+			height: 1.02rem;
+			line-height: 1.02rem;
 		}
 	}
 </style>

@@ -74,7 +74,6 @@
                     <loading v-if="show"></loading>
                     <noMore v-if="showNomore"></noMore>
                 </div>
-
             </div>
         </div>
     </div>
@@ -149,15 +148,17 @@ export default {
             }
         },
         showPanel: function(){
-            if(this.downImg == './static/shop/down1.png'){
-                this.downImg = './static/shop/down.png'
-            }else{
-                this.downImg = './static/shop/down1.png'
-            }
+            // if(this.downImg == './static/shop/down1.png'){
+            //     this.downImg = './static/shop/down.png'
+            // }else{
+            //     this.downImg = './static/shop/down1.png'
+            // }
             if(this.showMaskTop == false){
                 this.showMaskTop = true;
+                this.downImg = './static/shop/down.png'
             }else {
                 this.showMaskTop = false
+                this.downImg = './static/shop/down1.png'
             }
         },
         select: function(obj,i){
@@ -183,7 +184,7 @@ export default {
                     })
                     this.scroll.on('pullingUp', (pos) => {
                         this.show = true;
-                        // this.LoadData()
+                        this.LoadData()
                         this.$nextTick(function() {
                             this.scroll.finishPullUp();
                             this.scroll.refresh();
@@ -255,7 +256,7 @@ export default {
     }
 }
 .wrapper {
-    height: 93%;
+    height: 95%;
     overflow: hidden;
 }
 .shopList{
@@ -365,6 +366,9 @@ export default {
     color:#256fff;
     border-bottom:3px solid #256fff;
 }
+/*#shops .vux-tab-warp{
+    z-index: 110;
+}*/
 </style>
 
 

@@ -120,7 +120,7 @@
 		},
 		mounted() {},
 		methods: {
-			goJfshop(){
+			goJfshop() {
 				this.$router.push('/shop');
 			}
 		},
@@ -139,6 +139,8 @@
 	@import '~vux/src/styles/1px.less';
 	@import '~vux/src/styles/close';
 	.purse-box1 {
+		background-color: white;
+		height:100vh;
 		.info-item {
 			font-family: PingFangSC-Regular;
 			font-size: 0.28rem;
@@ -153,6 +155,7 @@
 		}
 		.af-box {
 			padding: 0 15px;
+			background-color: #fff;
 			.title {
 				height: 0.7rem;
 				line-height: 0.7rem;

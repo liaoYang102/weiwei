@@ -17,7 +17,7 @@
 						<div class="btn" @click="focus" :class="{'btnActive': focusStatus == '已关注'}">{{focusStatus}}</div>
 					</div>
 				</div>
-				<search @click.native="goSearch"></search>
+				<search :goSearch="goSearch"></search>
 				<div class="tab">
 					<tab :line-width="3" :scroll-threshold="4">
 				      	<tab-item selected @on-item-click="index">
@@ -165,7 +165,10 @@
 	        		this.focusStatus = '关注'
 	        	}
 	        	
-	        }
+	        },
+	        goSearch(){
+				this.$router.push({ path: '/multi_user_mall/search'})
+			},
 		}
 	}
 </script>

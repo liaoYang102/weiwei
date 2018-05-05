@@ -204,7 +204,7 @@
 						flex-direction: column;
 						height: 1.1rem;
 						border-radius: 3px;
-						color: #8b45139c;
+						color: #C6CCDA;
 						p:nth-child(1) {
 							font-size: 0.28rem;
 						}
@@ -218,7 +218,7 @@
 					}
 					.box {
 						width: 1.91rem;
-						background: #e5e5e5;
+						background: #F4F4F4;
 					}
 				}
 				.moneyActive {

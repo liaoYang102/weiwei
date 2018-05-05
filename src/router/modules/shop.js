@@ -16,6 +16,7 @@ import refund_details from '@/views/shop/refund_details'
 import multi_user_mall from '@/views/multi_user_mall/index'
 import search from '@/views/multi_user_mall/search'
 import write_logistics from '@/views/shop/write_logistics'
+import multi_shop_details from '@/views/multi_user_mall/shop_details'
 
 const shopModule = [
 	// 商城模块
@@ -118,6 +119,11 @@ const shopModule = [
 		name: 'write_logistics',
 		component: write_logistics
 	},
+	{
+		path: '/multi_user_mall/shop_details',//多用户商城商品详情页
+		name: 'multi_shop_details',
+		component: multi_shop_details
+	}
 ];
 
 export default shopModule

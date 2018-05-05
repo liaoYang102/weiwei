@@ -29,7 +29,7 @@
 					 </div>
 					<div class="bottom">
 			    		<div class="reset" @click="reset()">重置</div>
-			    		<div class="complete">完成</div>
+			    		<div class="complete" @click="complete">完成</div>
 			    	</div>
 				</div>
 			</popup>
@@ -78,8 +78,6 @@ export default {
 						}
 					})
 					this.scroll.on('pullingUp', (pos) => {
-						this.show = true;
-						// this.LoadData()
 						this.$nextTick(function() {
 							this.scroll.finishPullUp();
 							this.scroll.refresh();
@@ -127,7 +125,9 @@ export default {
     		}
     	},
     	// 完成
-    	
+    	complete(){
+    		this.show1 = false
+    	}
     }
 }	
 </script>
