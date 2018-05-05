@@ -232,7 +232,7 @@ export default {
 	}
 }
 .wrapper {
-	height: 88%;
+	height: 92%;
 	overflow: hidden;
 }
 li{

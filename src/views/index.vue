@@ -35,7 +35,7 @@
 					<img src="../assets/images/index/group.png" alt="">
 					<div class="info">
 						<p class="infoText">
-							<router-link to="/draw"><img src="../assets/images/index/time.png" alt="" class="fl"></router-link>
+							<img src="../assets/images/index/time.png" alt="" class="fl">
 							<span class="core fl">恭喜500人获得<span class="orange">5000元</span>大奖</span>
 							<router-link to="/draw/review">
 								<span class="past fr">往期</span>
@@ -773,11 +773,12 @@
 				font-size: 0.24rem;
 				color: #90A2C7;
 				.label {
+					width: 0.56rem;
 					margin-right: 0.2rem;
 					display: inline-block;
 					border-radius: 2px;
 					border: 2px solid #F23030;
-					padding: 0.02rem 8px;
+					padding: 0.02rem 0;
 					text-align: center;
 					font-size: 0.2rem;
 					color: #F23030;
