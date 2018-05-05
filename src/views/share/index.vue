@@ -254,7 +254,7 @@
 				this.$router.push('/member/coupon/coupon')
 			},
 			goStoreDetail(id){//go门店详情
-				this.$router.push({name:'sdetail',params:{
+				this.$router.push({path:'/multi_user_mall',params:{
 					id:id
 				}});
 			}

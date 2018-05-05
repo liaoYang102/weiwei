@@ -6,7 +6,7 @@
 			<!-- <h2>套餐类型</h2> -->
 			<div class="list">
 				<ul>
-					<li class="clearfix">
+					<li class="clearfix" @click="goDetail(1)">
 						<div class="left">
 							<img src="../../assets/images/share/md_logo.png" alt="">
 						</div>
@@ -17,7 +17,7 @@
 							<!-- <p class="zhekou">8折</p> -->
 						</div>
 					</li>
-					<li class="clearfix">
+					<li class="clearfix" @click="goDetail(1)">
 						<div class="left">
 							<img src="../../assets/images/share/md_logo.png" alt="">
 						</div>
@@ -28,7 +28,7 @@
 							<!-- <p class="zhekou">8折</p> -->
 						</div>
 					</li>
-					<li class="clearfix">
+					<li class="clearfix" @click="goDetail(1)">
 						<div class="left">
 							<img src="../../assets/images/share/md_logo.png" alt="">
 						</div>
@@ -56,6 +56,14 @@ export default{
 	},
 	components:{
 		settingHeader
+	},
+	methods:{
+		goDetail(id){
+			this.$router.push({
+				path:'/share/meaidetail',
+				params:id
+			});
+		}
 	}
 }
 </script>
