@@ -50,7 +50,8 @@ const memberModule = [{
 		name: 'index',
 		component: index,
 		meta: {
-			navShow: true
+			navShow: true,
+			navIndex: 0
 		}
 	},
 	{
