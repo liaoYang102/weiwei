@@ -46,6 +46,7 @@
 						<input class="upinput" type="file" multiple @change="back" ref="back" />
 					</div>
 				</div>
+
 				<div class="tip">
 					<div class="add-btn" @click="submit">保存</div>
 				</div>
@@ -135,13 +136,18 @@
 						})
 						return
 					} else {
-						_this.backImages = []
+						if(file.length != 1){
+	  						_this.backImages = []
+	  					}
+						
 						var reader = new FileReader();
 						reader.readAsDataURL(file[i]); // 读出 base64
 						reader.onloadend = function(e) {
 							// 图片的 base64 格式, 可以直接当成 img 的 src 属性值        
 							var dataURL = reader.result;
-							_this.backImages.push(e.target.result)
+							if(_this.backImages.length<3){
+								_this.backImages.push(e.target.result)
+							}
 						};
 					}
 				}

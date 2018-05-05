@@ -15,8 +15,20 @@
 			<div class="gary">{{typeText}}</div>
 			<div @click="showRight"><i class="iconfont icon-caidan"></i>筛选</div>
 		</div>
+
 		<div class="logs-list">
-			<scroller lock-x height="-250" @on-scroll-bottom="onScrollBottom" ref="scrollerBottom" :scroll-bottom-offst="200">
+			<div class="wrapper" ref="wrapper">
+				<div class="content">
+					<div class="box" v-for="(item,index) in dataList">
+						<div class="item" :class="{'h':index == 0}" :style="{width:item.w + '%'}">
+							<span>{{item.date}}</span>
+							<span>+{{item.sy}}</span>
+						</div>
+					</div>
+					<Loading v-if="onFetching"></Loading>
+				</div>
+			</div>
+			<!-- <scroller lock-x height="-250" @on-scroll-bottom="onScrollBottom" ref="scrollerBottom" :scroll-bottom-offst="200">
 				<div class="box">
 					<div class="item" v-for="(item,index) in dataList" :class="{'h':index == 0}" :style="{width:item.w + '%'}">
 						<span>{{item.date}}</span>
@@ -24,7 +36,7 @@
 					</div>
 					<load-more tip="loading" v-if="onFetching"></load-more>
 				</div>
-			</scroller>
+			</scroller> -->
 			<!--<div class="wrapper" ref="wrapper">
 				<div class="content">
 					<div class="item" v-for="i in 15">
@@ -54,6 +66,7 @@
 	import BScroll from 'better-scroll'
 	import { Datetime, XProgress, Box, Scroller, Card } from 'vux'
 	import settingHeader from '../../../components/setting_header'
+	import Loading from '../../../components/loading'
 	export default {
 		data() {
 			return {
@@ -72,11 +85,21 @@
 					},
 					{
 						date: '2018-4-21',
-						sy: '1.0709',
+						sy: '0',
 						w: '60'
 					},
 					{
 						date: '2018-4-22',
+						sy: '0',
+						w: '60'
+					},
+					{
+						date: '2018-4-23',
+						sy: '1.0709',
+						w: '70'
+					},
+					{
+						date: '2018-4-24',
 						sy: '10',
 						w: '70'
 					}, {
@@ -84,11 +107,11 @@
 						sy: '0',
 						w: '80'
 					}, {
-						date: '2018-4-24',
+						date: '2018-4-25',
 						sy: '0',
 						w: '90'
 					}, {
-						date: '2018-4-25',
+						date: '2018-4-26',
 						sy: '0',
 						w: '100'
 					}
@@ -98,7 +121,9 @@
 		created() {
 
 		},
-		mounted() {},
+		mounted() {
+			this.InitScroll()
+		},
 		methods: {
 			showRight() {
 				this.show8 = true
@@ -121,6 +146,31 @@
 					}, 2000)
 				}
 			},
+	        InitScroll() {
+				this.$nextTick(() => {
+					if(!this.scroll) {
+						this.scroll = new BScroll(this.$refs.wrapper, {
+							click: true,
+							scrollY: true,
+							pullUpLoad: {
+								threshold: -50, // 负值是当上拉到超过低部 70px；正值是距离底部距离 时，                    
+							}
+						})
+						this.scroll.on('pullingUp', (pos) => {
+							this.show = true;
+							this.onFetching = true;
+							// this.LoadData()
+							this.$nextTick(function() {
+								this.scroll.finishPullUp();
+								this.scroll.refresh();
+							});
+						})
+					} else {
+						this.scroll.refresh()
+					}
+				})
+
+			},
 		},
 		components: {
 			settingHeader,
@@ -128,7 +178,8 @@
 			XProgress,
 			Box,
 			Scroller,
-			Card
+			Card,
+			Loading
 		},
 		watch: {
 			twoIndex() {
@@ -195,12 +246,13 @@
 					width: 100%;
 					height: 0.5rem;
 					line-height: 0.5rem;
-					background: #eaeaea;
+					background: #F5F6FA;
 					border-radius: 2px;
 					font-size: 0.20rem;
+					color: #1A2642;
 				}
 				.twoActive {
-					background: #10aeff;
+					background: #336FFF;
 					color: white;
 				}
 			}
@@ -221,6 +273,7 @@
 	}
 	
 	.logs-box {
+		height: 100%;
 		.purse-box2 {
 			background-color: #f5f6fa;
 			position: relative;
@@ -259,16 +312,16 @@
 			display: flex;
 			align-items: center;
 			justify-content: space-between;
-			color: #6099ff;
+			color: #90A2C7;
 			position: relative;
 			padding: 0px 15px;
-			background: #eaeaea99;
+			background: #fff;
 			.iconfont {
 				margin-right: 0.1rem;
 			}
 			.gary {
 				font-size: 0.32rem;
-				color: #888;
+				color: #1A2642;
 			}
 		}
 		.logs-list {
@@ -276,6 +329,11 @@
 			.wrapper {
 				height: 8rem;
 				overflow: hidden;
+			}
+			.box{
+				width: 100%;
+				background-color: #fff;
+				margin-bottom: 0.36rem;
 			}
 			.item {
 				min-width: 50%;
@@ -297,4 +355,9 @@
 			}
 		}
 	}
+
+	/*.wrapper {
+		height: 92%;
+		overflow: hidden;
+	}*/
 </style>

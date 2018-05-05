@@ -1,5 +1,5 @@
 <template>
-	<div class="content">
+	<div class="team">
 		<settingHeader :title="title"></settingHeader>
 		<div class="top">
 			<div class="middle">
@@ -13,7 +13,35 @@
 				</div>
 			</router-link>
 		</div>
-		<scroller class="scroller-box" lock-x height="-100" :use-pullup="showUp" :pullup-config="upConf" @on-pullup-loading="selPullUp" ref="scrollerBottom">
+
+		<div class="wrapper" ref="wrapper">
+			<div class="content">
+				<div class="box2">
+					<div class="list" v-for="(item,index) in list" :key="index">
+						<div class="he">
+							<div class="user-img">
+								<img :src="item.img" />
+							</div>
+							<div class="user-text">
+								<p>{{item.name}}</p>
+								<p>手机号码：{{item.phone}}</p>
+								<p>加入时间：{{item.time}}</p>
+							</div>
+						</div>
+						<div class="footer">
+							<grid class="footer-item">
+								<grid-item v-for="i in 2" :key="i">
+									<p>订单数</p>
+									<p>12</p>
+								</grid-item>
+							</grid>
+						</div>
+					</div>
+					<Loading v-if="showloading"></Loading>
+				</div>
+			</div>
+		</div>
+		<!-- <scroller class="scroller-box" lock-x height="-100" :use-pullup="showUp" :pullup-config="upConf" @on-pullup-loading="selPullUp" ref="scrollerBottom">
 			<div class="box2">
 				<div class="list" v-for="(item,index) in list" :key="index">
 					<div class="he">
@@ -35,15 +63,17 @@
 						</grid>
 					</div>
 				</div>
-				<!--<load-more tip="loading" v-model="showloading" :text="textloading"></load-more>-->
+				<load-more tip="loading" v-model="showloading" :text="textloading"></load-more>
 			</div>
-		</scroller>
+		</scroller> -->
 	</div>
 </template>
 
 <script>
 	import { Grid, GridItem, Scroller } from 'vux'
 	import settingHeader from '../../../components/setting_header'
+	import Loading from '../../../components/loading'
+	import BScroll from 'better-scroll'
 	export default {
 		data() {
 			return {
@@ -72,7 +102,28 @@
 					name: '这个合伙人ID最多这么长',
 					phone: '18520496787',
 					time: '2018-01-01 00:00:00'
-				}]
+				},{
+					img: 'https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=3502149281,2119482052&fm=27&gp=0.jpg',
+					name: '这个合伙人ID最多这么长',
+					phone: '18520496787',
+					time: '2018-01-01 00:00:00'
+				}, {
+					img: 'https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=3502149281,2119482052&fm=27&gp=0.jpg',
+					name: '这个合伙人ID最多这么长',
+					phone: '18520496787',
+					time: '2018-01-01 00:00:00'
+				},{
+					img: 'https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=3502149281,2119482052&fm=27&gp=0.jpg',
+					name: '这个合伙人ID最多这么长',
+					phone: '18520496787',
+					time: '2018-01-01 00:00:00'
+				}, {
+					img: 'https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=3502149281,2119482052&fm=27&gp=0.jpg',
+					name: '这个合伙人ID最多这么长',
+					phone: '18520496787',
+					time: '2018-01-01 00:00:00'
+				}],
+				showloading: false
 			}
 		},
 		created() {
@@ -80,11 +131,43 @@
 		},
 		mounted() {
 			//第一次加载
-			this.$nextTick(() => {
-				this.$refs.scrollerBottom.reset()
-			})
+			// this.$nextTick(() => {
+			// 	this.$refs.scrollerBottom.reset()
+			// })
+			this.InitScroll()
 		},
 		methods: {
+	        InitScroll() {
+	        	console.log('0000',this.scroll)
+				this.$nextTick(() => {
+					if(!this.scroll) {
+						this.scroll = new BScroll(this.$refs.wrapper, {
+							click: true,
+							scrollY: true,
+							pullUpLoad: {
+								threshold: -50, // 负值是当上拉到超过低部 70px；正值是距离底部距离 时，                    
+							}
+						})
+						this.scroll.on('pullingUp', (pos) => {
+							this.showloading = true;
+							this.LoadData()
+							this.$nextTick(function() {
+								this.scroll.finishPullUp();
+								this.scroll.refresh();
+							});
+						})
+					} else {
+						this.scroll.refresh()
+					}
+				})
+
+			},
+			LoadData() {
+				var _this = this
+				setTimeout(function(){
+					_this.showloading = false;
+				},3000)
+			},
 			selPullUp() {
 				console.log(123)
 				this.showloading = true
@@ -104,16 +187,21 @@
 			settingHeader,
 			Grid,
 			GridItem,
-			Scroller
+			Scroller,
+			Loading
 		}
 	}
 </script>
 
 <style lang="less" scoped>
-	.content {
+	.team {
 		background: #F5F6FA;
+		height: 100%;
 	}
-	
+	.wrapper{
+		height: 78%;
+		overflow: hidden;
+	}
 	.scroller-box {
 		padding-bottom: 180px;
 	}

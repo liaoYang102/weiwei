@@ -19,7 +19,7 @@
 						</div>
 					</div>
 				</div>
-				<load-more v-if="show" tip="正在加载"></load-more>
+				<Loading v-if="show"></Loading>
 			</div>
 		</div>
 		<!--<scroller lock-x height="-46">
@@ -54,6 +54,7 @@
 	import BScroll from 'better-scroll'
 	import { Scroller, CheckIcon, XButton } from 'vux'
 	import settingHeader from '../../../components/setting_header'
+	import Loading from '../../../components/loading'
 	export default {
 		data() {
 			return {
@@ -139,7 +140,8 @@
 			settingHeader,
 			CheckIcon,
 			XButton,
-			Scroller
+			Scroller,
+			Loading
 		}
 	}
 </script>

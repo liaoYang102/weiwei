@@ -29,7 +29,7 @@
 									</div>
 								</div>
 							</router-link>
-							<load-more v-if="show" tip="正在加载"> </load-more>
+							<Loading v-if="show"> </Loading>
 						</div>
 					</div>
 				</div>
@@ -50,7 +50,7 @@
 									</div>
 								</div>
 							</router-link>
-							<load-more v-if="show2" tip="正在加载"> </load-more>
+							<Loading v-if="show2"> </Loading>
 						</div>
 					</div>
 				</div>
@@ -82,6 +82,7 @@
 	import BScroll from 'better-scroll'
 	import { Tab, TabItem, Swiper, SwiperItem, CheckIcon, Scroller, Search, Popup, XButton } from 'vux'
 	import settingHeader from '../../../components/setting_header'
+	import Loading from '../../../components/loading'
 	export default {
 		data() {
 			return {
@@ -159,6 +160,34 @@
 						money: '50.0',
 						ischeck: false,
 						id: 2
+					},
+					{
+						img: 'https://ss0.bdstatic.com/-0U0bnSm1A5BphGlnYG/tam-ogel/299c55e31d7f50ae4dc85faa90d6f445_121_121.jpg',
+						name: '热风2018年小清新女士星星休闲双肩包拉链方形背包B52W8201',
+						money: '50.0',
+						ischeck: false,
+						id: 3
+					},
+					{
+						img: './static/member/login-img.png',
+						name: '热风2018年小清新女士星星休闲双肩包拉链方形背包B52W8201',
+						money: '50.0',
+						ischeck: false,
+						id: 4
+					},
+					{
+						img: 'https://ss0.bdstatic.com/-0U0bnSm1A5BphGlnYG/tam-ogel/299c55e31d7f50ae4dc85faa90d6f445_121_121.jpg',
+						name: '热风2018年小清新女士星星休闲双肩包拉链方形背包B52W8201',
+						money: '50.0',
+						ischeck: false,
+						id: 5
+					},
+					{
+						img: './static/member/login-img.png',
+						name: '热风2018年小清新女士星星休闲双肩包拉链方形背包B52W8201',
+						money: '50.0',
+						ischeck: false,
+						id: 6
 					}
 				],
 				proidList: [],
@@ -199,7 +228,7 @@
 							}
 						})
 						this.scroll2.on('pullingUp', (pos) => {
-							this.show = true;
+							this.show2 = true;
 							this.LoadData2()
 							this.$nextTick(function() {
 								this.scroll2.finishPullUp();
@@ -207,6 +236,7 @@
 							});
 						})
 					} else {
+						this.scroll.refresh()
 						this.scroll2.refresh()
 					}
 				})
@@ -371,7 +401,8 @@
 			CheckIcon,
 			Search,
 			Popup,
-			XButton
+			XButton,
+			Loading
 		}
 	}
 </script>
@@ -497,11 +528,10 @@
 		}
 		.pro-list,
 		.store-list {
-			background-color: white;
-			.wrapper {
+			.wrapper,.wrapper2 {
 				position: absolute;
 				top: 0px;
-				bottom: 1rem;
+				bottom: 0;
 				overflow: hidden;
 				width: 100%;
 				.vux-loadmore {
@@ -510,6 +540,7 @@
 				}
 			}
 			.list-item {
+				background-color: white;
 				height: 2.22rem;
 				position: relative;
 				padding: 0.26rem 0.24rem;

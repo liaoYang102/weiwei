@@ -14,11 +14,14 @@
 			</button-tab>-->
 			<span class="shaix" @click.active="showRight"><img src="../../../../static/member/shaixuanIcon.png" alt="" /></span>
 		</div>
+		
 		<div class="card-box">
-			<swiper v-model="cardLook" height="800px" :show-dots="false" :threshold='100'>
-				<swiper-item>
-					<scroller lock-x height="-80" @on-scroll-bottom="onScrollBottom" ref="scrollerBottom" :scroll-bottom-offst="200">
-						<div class="box2">
+			<swiper v-model="cardLook"  height="100vh" :show-dots="false" :threshold='100'>
+			<swiper-item>
+				<!-- <scroller lock-x height="-80" @on-scroll-bottom="onScrollBottom" ref="scrollerBottom" :scroll-bottom-offst="200"> -->
+				<div class="box2">
+					<div class="wrapper1" ref="wrapper1">
+						<div class="content">
 							<div class="card-list">
 								<div class="card-ltem" :class="[item.type ==1 ? 'b-bg':'y-bg']" v-for="(item,index) in cardList">
 									<div class="card-f">{{item.store}}</div>
@@ -28,13 +31,17 @@
 									</div>
 								</div>
 							</div>
-							<load-more tip="loading" v-if="onFetching"></load-more>
+							<Loading v-if="onFetching"></Loading>
 						</div>
-					</scroller>
-				</swiper-item>
-				<swiper-item>
-					<scroller lock-x height="-80" @on-scroll-bottom="onScrollBottom" ref="scrollerBottom" :scroll-bottom-offst="200">
-						<div class="box2">
+					</div>
+				</div>
+				<!-- </scroller> -->
+			</swiper-item>
+			<swiper-item>
+				<!-- <scroller lock-x height="-80" @on-scroll-bottom="onScrollBottom" ref="scrollerBottom" :scroll-bottom-offst="200"> -->
+				<div class="box2">
+					<div class="wrapper2" ref="wrapper2">
+						<div class="content">
 							<div class="card-list">
 								<router-link to="/member/card/detail">
 									<div class="card-item2">
@@ -50,10 +57,12 @@
 									</div>
 								</router-link>
 							</div>
-							<load-more tip="loading" v-if="onFetching"></load-more>
+							<Loading v-if="onFetching"></Loading>
 						</div>
-					</scroller>
-				</swiper-item>
+					</div>
+				</div>
+				<!-- </scroller> -->
+			</swiper-item>
 			</swiper>
 			<!--<div class="drawer-box" @click.active="showDrawer">
 				<masker :fullscreen="drawerShow">
@@ -67,6 +76,7 @@
 				</masker>
 			</div>-->
 			<!--筛选菜单栏-->
+			
 			<div v-transfer-dom>
 				<popup v-model="show9" position="top">
 					<div class="position-vertical-demo">
@@ -97,6 +107,8 @@
 <script>
 	import { Badge, Cell, Group, Scroller, Masker, Drawer, Tab, TabItem, Swiper, SwiperItem } from 'vux'
 	import settingHeader from '../../../components/setting_header'
+	import Loading from '../../../components/loading'
+	import BScroll from 'better-scroll'
 	export default {
 		data() {
 			return {
@@ -161,9 +173,61 @@
 
 		},
 		mouted() {
-
+			this.InitScroll()
 		},
 		methods: {
+			InitScroll() {
+				this.$nextTick(() => {
+					if(!this.scroll) {
+						this.scroll = new BScroll(this.$refs.wrapper1, {
+							click: true,
+							scrollY: true,
+							pullUpLoad: {
+								threshold: -30, // 负值是当上拉到超过低部 70px；正值是距离底部距离 时，                    
+							}
+						})
+						this.scroll.on('pullingUp', (pos) => {
+							this.onFetching = true;
+							this.LoadData()
+							this.$nextTick(function() {
+								this.scroll.finishPullUp();
+								this.scroll.refresh();
+							});
+						})
+						
+						this.scroll2 = new BScroll(this.$refs.wrapper2, {
+							click: true,
+							scrollY: true,
+							pullUpLoad: {
+								threshold: -30, // 负值是当上拉到超过低部 70px；正值是距离底部距离 时，                    
+							}
+						})
+						this.scroll2.on('pullingUp', (pos) => {
+							this.onFetching = true;
+							this.LoadData2()
+							this.$nextTick(function() {
+								this.scroll2.finishPullUp();
+								this.scroll2.refresh();
+							});
+						})
+					} else {
+						this.scroll.refresh()
+						this.scroll2.refresh()
+					}
+				})
+				console.log('--', this.scroll)
+
+			},
+			LoadData() {
+				setTimeout(function() {
+					this.onFetching = false;
+				}, 5500)
+			},
+			LoadData2() {
+				setTimeout(function() {
+					this.onFetching = false;
+				}, 5500)
+			},
 			enter(el, done) {
 				console.log(123)
 			},
@@ -210,12 +274,24 @@
 			Tab,
 			TabItem,
 			Swiper,
-			SwiperItem
+			SwiperItem,
+			Loading
 		}
 	}
 </script>
 
 <style lang="less" scoped>
+.box2{
+	height: 50%;
+	.wrapper1,.wrapper2 {
+		position: absolute;
+		top: 0px;
+		bottom: 0.1rem;
+		overflow: hidden;
+		width: 100%;
+	}
+}
+
 	.position-vertical-demo {
 		background: white;
 		.card-demo-flex {
@@ -254,9 +330,10 @@
 					width: 100%;
 					height: 0.5rem;
 					line-height: 0.5rem;
-					background: #eaeaea;
+					background: #F5F6FA;
 					border-radius: 2px;
 					font-size: 0.20rem;
+					color: #1A2642;
 				}
 				.twoActive {
 					background: #336FFF;
@@ -301,6 +378,37 @@
 				width: 0.4rem;
 			}
 		}
+	}
+
+	.card-header:after {
+		content: " ";
+		position: absolute;
+		left: 0;
+		bottom: 0;
+		right: 0;
+		height: 1px;
+		border-top: 1px solid #D9D9D9;
+		color: #D9D9D9;
+		-webkit-transform-origin: 0 0;
+		transform-origin: 0 0;
+		-webkit-transform: scaleY(0.5);
+		transform: scaleY(0.5);
+		left: 0px;
+	}
+	.card-header:before {
+		content: " ";
+		position: absolute;
+		left: 0;
+		top: 0;
+		right: 0;
+		height: 1px;
+		border-top: 1px solid #D9D9D9;
+		color: #D9D9D9;
+		-webkit-transform-origin: 0 0;
+		transform-origin: 0 0;
+		-webkit-transform: scaleY(0.5);
+		transform: scaleY(0.5);
+		left: 0px;
 	}
 	
 	.card-box {

@@ -13,12 +13,14 @@
 				<h4>上传生活照</h4>
 			    
 		    	<div class="life"  v-for="(item,index) in imgList">
-		    		<p class='quxiao' @click="imgDelete(index)">
+		    		<img @click="imgDelete(index)" class="gbx" src="../../assets/images/member/gbx.png"/>
+		    		<!-- <p class='quxiao' @click="imgDelete(index)">
                         <i class='iconfont icon-quxiao1'></i>
-                    </p>
+                    </p> -->
 		    		<div class="bigPic" v-show="[imgList.length ? imgList.length >0 : imgList.length =0]">
 						<img :src="item">
 					</div>
+					<input type="file" accept="image/*" multiple="multiple" @change="cone($event,index)">
 		    	</div>
 
 		    	<div class="life" v-if="imgList.length!=5">
@@ -75,20 +77,34 @@
 	  },
 	  methods:{
 		test:function (e) {
-			var _this = this
-  			var reader = new FileReader();
-  			var file = e.target.files[0];
-  			reader.readAsDataURL(file); // 读出 base64
-  			reader.onloadend = function(e) {
-  				// 图片的 base64 格式, 可以直接当成 img 的 src 属性值        
-  				var dataURL = reader.result;
-  				if(_this.imgList.length<5){
-  					_this.imgList.push(e.target.result) 
+  			var _this = this
+  			var file = e.target.files;
+  			for(var i = 0; i < file.length; i++) {
+  				if(file.length > 5) {
+  					this.$vux.toast.show({
+  						text: '最多只能上传五张照片',
+  						type: 'text'
+  					})
+  					return
+  				} else {
+  					if(file.length != 1){
+  						_this.imgList = []
+  					}
+  					
+  					var reader = new FileReader();
+  					reader.readAsDataURL(file[i]); // 读出 base64
+  					reader.onloadend = function(e) {
+  						// 图片的 base64 格式, 可以直接当成 img 的 src 属性值        
+  						var dataURL = reader.result;
+  						if(_this.imgList.length<5){
+  							_this.imgList.push(e.target.result)
+  						}
+  					};
   				}
-  			};
+  			}
        	},
 	  	imgDelete(index){
-	  			this.imgList.splice(index, 1);
+	  		this.imgList.splice(index, 1);
 	  	},
 	  	showToast(){
 			var that = this;
@@ -96,6 +112,16 @@
 			setTimeout(function(){
 				that.showDialog = false
 			},3000)
+		},
+		cone(e,i) {
+			var _this = this
+			var reader = new FileReader();
+			var file = e.target.files[0];
+			reader.readAsDataURL(file);
+			reader.onloadend = function(e) {
+				var dataURL = reader.result;
+				_this.imgList.splice(i, 1, e.target.result)
+			};
 		},
 	  }
 	}
@@ -156,21 +182,13 @@
 	   			float: left;
 	   			margin-right: 0.2rem;
 	   			margin-bottom: 0.15rem;
-	   			.quxiao{
+	   			.gbx{
 	   				position: absolute;
-	   			    top: -0.1rem;
-	   			    right: -0.1rem;
-	   			    background-color: #000;
-	   			    border-radius: 50%;
-	   			    opacity: .5;
-	   			    width: 0.35rem;
-	   			    height: 0.35rem;
-	   			    text-align: center;
-	   			    z-index: 222;
-	   				i{
-	   					font-size: 0.2rem;
-	   					color: #fff;
-	   				}
+	   				right: -0.1rem;
+	   				top: -0.12rem;
+	   				width: 0.38rem;
+	   				height: 0.38rem;
+	   				z-index: 18;
 	   			}
 	   			.length{
 	   				font-size: .3rem;

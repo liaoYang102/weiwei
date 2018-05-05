@@ -13,7 +13,30 @@
 			</div>
 		</div>
 
-		<scroller lock-x height='-1rem' @on-scroll-bottom="onScrollBottom" ref="scrollerBottom" style="background-color:#fff">
+
+		<div class="wrapper" ref="wrapper">
+			<div class="content">
+				<div class="box">
+					<router-link to="/member/score/detail">
+						<div class="log-box" v-for="(item, index) in logList" :key="index">
+							<div class="log-wrap">
+								<p class="contentOne">
+									<span>{{ item.content}}</span>
+									<span class="right" v-if=" item.score<0 ">{{ item.score }}</span>
+									<span class="right red" v-if=" item.score>0 ">{{ item.score }}</span>
+								</p>
+								<p class="contentTwo">
+									<span>{{ item.date }}</span>
+								</p>
+							</div>
+						</div>
+					</router-link>
+
+					<Loading v-if="show"></Loading>
+				</div>
+			</div>
+		</div>
+		<!-- <scroller lock-x height='-1rem' @on-scroll-bottom="onScrollBottom" ref="scrollerBottom" style="background-color:#fff">
 			<div class="box">
 				<router-link to="/member/score/detail">
 					<div class="log-box" v-for="(item, index) in logList" :key="index">
@@ -32,19 +55,22 @@
 
 				<load-more tip="loading" id='loading'></load-more>
 			</div>
-		</scroller>
+		</scroller> -->
 	</div>
 </template>
 
 <script>
 	import scoreheader from '../../../components/setting_header'
+	import BScroll from 'better-scroll'
+	import Loading from '../../../components/loading'
 	export default {
 		components: {
-			scoreheader
+			scoreheader,Loading
 		},
 		data() {
 			return {
 				title: '积分记录',
+				show: false,
 				logList: [{
 						content: '年终积分清零',
 						score: '-720',
@@ -94,28 +120,63 @@
 			}
 		},
 		methods: {
-			onScrollBottom() {
-				var load = document.getElementById("loading");
-				load.style.display = 'block'
-				if(this.onFetching) {
-					// do nothing
-				} else {
-					this.onFetching = true
-					setTimeout(() => {
-						load.style.display = 'none'
-						console.log(123);
-						this.$nextTick(() => {
-							this.$refs.scrollerBottom.reset()
+			// onScrollBottom() {
+			// 	var load = document.getElementById("loading");
+			// 	load.style.display = 'block'
+			// 	if(this.onFetching) {
+			// 		// do nothing
+			// 	} else {
+			// 		this.onFetching = true
+			// 		setTimeout(() => {
+			// 			load.style.display = 'none'
+			// 			console.log(123);
+			// 			this.$nextTick(() => {
+			// 				this.$refs.scrollerBottom.reset()
+			// 			})
+			// 			this.onFetching = false
+			// 		}, 2000)
+			// 	}
+			// }
+	        InitScroll() {
+				this.$nextTick(() => {
+					if(!this.scroll) {
+						this.scroll = new BScroll(this.$refs.wrapper, {
+							click: true,
+							scrollY: true,
+							pullUpLoad: {
+								threshold: -50, // 负值是当上拉到超过低部 70px；正值是距离底部距离 时，                    
+							}
 						})
-						this.onFetching = false
-					}, 2000)
-				}
-			}
+						this.scroll.on('pullingUp', (pos) => {
+							this.show = true;
+							this.LoadData()
+							this.$nextTick(function() {
+								this.scroll.finishPullUp();
+								this.scroll.refresh();
+							});
+						})
+					} else {
+						this.scroll.refresh()
+					}
+				})
+
+			},
+			LoadData() {
+				var _this = this
+				setTimeout(function(){
+					_this.show = false;
+					// _this.showNomore = true;
+				},3000)
+			},
 		}
 	}
 </script>
 
 <style lang="less" scoped>
+.wrapper {
+	height: 92%;
+	overflow: hidden;
+}
 	.top {
 		width: 100%;
 		height: 1.98rem;

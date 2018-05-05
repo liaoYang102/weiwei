@@ -22,7 +22,7 @@
 							</div>
 						</router-link>
 					</div>
-					<load-more v-if="show" tip="正在加载"></load-more>
+					<Loading v-if="show"></Loading>
 				</div>
 
 			</div>
@@ -58,6 +58,7 @@
 	import BScroll from 'better-scroll'
 	import { LoadMore, Datetime, Popup, Card } from 'vux'
 	import settingHeader from '../../../components/setting_header'
+	import Loading from '../../../components/loading'
 	export default {
 		data() {
 			return {
@@ -141,7 +142,7 @@
 			LoadMore,
 			Datetime,
 			Popup,
-			Card
+			Card,Loading
 		},
 		watch: {
 			twoIndex() {
