@@ -18,7 +18,7 @@
 				<x-button class="add-btn" @click.native="submit" :show-loading="showLoading" :disabled="isClick">{{btnText}}</x-button>
 			</div>
 			<div class="login-re">
-				<span>忘记密码?</span>
+				<span @click="resetPass">忘记密码?</span>
 				<!--<span @click.native="codeLogin">验证码登录</span>-->
 			</div>
 			<div v-transfer-dom>
@@ -108,6 +108,11 @@
 			},
 			codeLogin(){
 				
+			},
+			resetPass(){
+				this.$router.push({
+					path:'/user/change'
+				});
 			}
 		},
 		components: {

@@ -140,7 +140,7 @@ export default {
 					})
 					this.scroll.on('pullingUp', (pos) => {
 						this.show = true;
-						this.LoadData()
+						//this.LoadData()
 						this.$nextTick(function() {
 							this.scroll.finishPullUp();
 							this.scroll.refresh();
@@ -232,8 +232,9 @@ export default {
 	}
 }
 .wrapper {
-	height: 92%;
+	height: 93%;
 	overflow: hidden;
+	padding-bottom: 1rem;
 }
 li{
 	list-style: none;
@@ -310,7 +311,7 @@ li:nth-child(odd){
 
 <style lang="less">
 .shopIndex{
-	height: 100%;
+	height: 92%;
 }
 body{
 	background: #f5f6fa;

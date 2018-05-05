@@ -4,7 +4,7 @@
 		<tab :line-width="1" :scroll-threshold="5" custom-bar-width="30px">
 	      <tab-item selected @on-item-click="onItemClick">全部</tab-item>
 	      <tab-item @on-item-click="onItemClick">待付款</tab-item>
-	      <tab-item @on-item-click="onItemClick">待收货</tab-item>
+	      <tab-item @on-item-click="onItemClick">待完成</tab-item>
 	      <tab-item @on-item-click="onItemClick">已完成</tab-item>
 	      <tab-item @on-item-click="onItemClick">已取消</tab-item>
 	    </tab>
@@ -40,7 +40,7 @@
 			    			</div>
 			    			<div class="box-bottom">
 			    				<div class="shop-btn btn-status1 fr" @click="goConfirm">付款</div>
-			    				<div class="shop-btn fr">取消订单</div>
+			    				<div class="shop-btn fr" @click="showAlert">取消订单</div>
 			    			</div>
 			            </div>
 			            <div class="shop-box">
@@ -184,6 +184,14 @@
 		    		
 		    		<recommended></recommended>
         		</div>
+        		<div v-transfer-dom>
+			      <confirm v-model="alert"
+			      title="确认删除订单？"
+			      @on-cancel="onCancel"
+			      @on-confirm="onConfirm">
+			        <p style="text-align:center;">删除之后可以从电脑端订单回收站恢复</p>
+			      </confirm>
+			    </div>
 			</div>
 		</div>
 	    
@@ -203,7 +211,8 @@
 				test: true,
 				show9: false,
 				show: false,
-				showNomore: false
+				showNomore: false,
+				alert:false
 			}
 		},
 		components: {
@@ -265,6 +274,15 @@
 		    },
 		    goOrderdetails(){
 		    	this.$router.push({ path: '/shop/order_details'})
+		    },
+		    onCancel () {
+		      	console.log('on cancel')
+		    },
+		    onConfirm () {
+		      	console.log('on confirm');
+		    },
+		    showAlert(){
+		    	this.alert = true;
 		    }
 		}
 	}

@@ -28,7 +28,7 @@
 								<p class="title">章光101（番禺店）<span class="juli">5.5km</span></p>
 								<p class="content ellipise">[番禺]金牌双人套餐，提供免费WiFi</p>
 								<p class="nr"><span class="momey">￥120</span><span class="ms_price">门市价:￥150</span><span class="num">已售：2414</span></p>
-								<p class="zhekou">8折</p>
+								<!-- <p class="zhekou">8折</p> -->
 							</div>
 						</li>
 						<li class="clearfix" @click="goDetail(1)">
@@ -39,7 +39,7 @@
 								<p class="title">章光101（番禺店）<span class="juli">5.5km</span></p>
 								<p class="content ellipise">[番禺]金牌双人套餐，提供免费WiFi</p>
 								<p class="nr"><span class="momey">￥120</span><span class="ms_price">门市价:￥150</span><span class="num">已售：2414</span></p>
-								<p class="zhekou">8折</p>
+								<!-- <p class="zhekou">8折</p> -->
 							</div>
 						</li>
 						<li class="clearfix" @click="goDetail(1)">
@@ -50,7 +50,7 @@
 								<p class="title">章光101（番禺店）<span class="juli">5.5km</span></p>
 								<p class="content ellipise">[番禺]金牌双人套餐，提供免费WiFi</p>
 								<p class="nr"><span class="momey">￥120</span><span class="ms_price">门市价:￥150</span><span class="num">已售：2414</span></p>
-								<p class="zhekou">8折</p>
+								<!-- <p class="zhekou">8折</p> -->
 							</div>
 						</li>
 						<li class="clearfix" @click="goDetail(1)">
@@ -61,7 +61,7 @@
 								<p class="title">章光101（番禺店）<span class="juli">5.5km</span></p>
 								<p class="content ellipise">[番禺]金牌双人套餐，提供免费WiFi</p>
 								<p class="nr"><span class="momey">￥120</span><span class="ms_price">门市价:￥150</span><span class="num">已售：2414</span></p>
-								<p class="zhekou">8折</p>
+								<!-- <p class="zhekou">8折</p> -->
 							</div>
 						</li>
 						<li class="clearfix" @click="goDetail(1)">
@@ -72,7 +72,7 @@
 								<p class="title">章光101（番禺店）<span class="juli">5.5km</span></p>
 								<p class="content ellipise">[番禺]金牌双人套餐，提供免费WiFi</p>
 								<p class="nr"><span class="momey">￥120</span><span class="ms_price">门市价:￥150</span><span class="num">已售：2414</span></p>
-								<p class="zhekou">8折</p>
+								<!-- <p class="zhekou">8折</p> -->
 							</div>
 						</li>
 						<li class="clearfix" @click="goDetail(1)">
@@ -83,7 +83,7 @@
 								<p class="title">章光101（番禺店）<span class="juli">5.5km</span></p>
 								<p class="content ellipise">[番禺]金牌双人套餐，提供免费WiFi</p>
 								<p class="nr"><span class="momey">￥120</span><span class="ms_price">门市价:￥150</span><span class="num">已售：2414</span></p>
-								<p class="zhekou">8折</p>
+								<!-- <p class="zhekou">8折</p> -->
 							</div>
 						</li>
 						
@@ -301,7 +301,7 @@
 				},50);
 			},
 			goDetail(id){//门店详情
-				this.$router.push({path:'/share/sdetail'});
+				this.$router.push({path:'/multi_user_mall'});
 				// this.$router.push({ path: '/shop/product' });
 				// consloe.log(9)
 			}

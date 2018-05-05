@@ -54,9 +54,11 @@
 					<group>
 						<cell title="规格">
 							<div class="pr" @click="showMask">
-								<span v-for="(item,index) in content">
-									<span v-if="index == content.length-1">{{item}}</span>
-									<span v-else>{{item}}, </span>
+								<!-- <span v-for="(item,index) in content">
+									<span>"{{item}}" </span>
+								</span> -->
+								<span>
+									{{content}}
 								</span>
 							</div>
 						</cell>
@@ -139,7 +141,7 @@ export default {
 			collectImg:'../../../static/shop/collection.png',
 			collectText: '收藏',
 			showDialog: false,
-			content:['请选择尺码'],
+			content:'"请选择尺码"',
 			router: ''
 		}
 	},
@@ -217,9 +219,8 @@ export default {
 		confirm(){
 			if (this.$refs.sp.router != 'shop_cart') {
 				this.content = this.$refs.sp.list3;
-				let num = 'x'+this.$refs.sp.num
-				this.content.push(num)
 				this.$refs.sp.show1 = false;
+				this.content ='"' + this.content.join('" "') +'"';
 				console.log('---', this.content)
 	    	}
 	    	if(this.$refs.sp.router == 'goShopcart'){

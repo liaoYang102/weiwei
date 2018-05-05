@@ -9,6 +9,21 @@ import lock from '@/router/modules/lock'
 Vue.use(Router)
 var all=shopModule.concat(memberModule,share,draw,lock);
 
+
+
+/*router.beforeEach(function(to,from,next){
+	console.log(1);
+	next();
+})
+	
+router.beforeResolve(function(to,from,next){
+	console.log(2);
+	next();
+})
+router.afterEach(function(to,from){
+	console.log(3);
+})*/
+
 export default new Router({
   // base:'/new/',
   routes: all,

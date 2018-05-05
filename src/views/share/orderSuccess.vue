@@ -69,7 +69,10 @@
 			 	});
 			 },
 			 openEquitment(){//开启设备
-
+			 	this.$router.push({
+			 		path:'/share/usetime',
+			 		id:1
+			 	});
 			 }
 			
 		}
