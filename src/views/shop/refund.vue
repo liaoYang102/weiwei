@@ -57,7 +57,7 @@
 
   			    	<div class="imgUpload" v-if="imgList.length!=3">
       		    		<i class="iconfont icon-zhaoxiangji icon"></i>
-      		    		<p class="most">最多3张</p>
+      		    		<p class="most">最多{{3-imgList.length}}张</p>
       		    		<input type="file" accept="image/*" multiple="multiple" @change="upload($event)">
   			    	</div>
   			    	<div class="clear"></div>
@@ -179,17 +179,20 @@
 				this.$refs.vDialog.showDialog = false;
 			},
 			upload:function (e) {
-				var _this = this
-	  			var reader = new FileReader();
-	  			var file = e.target.files[0];
-	  			reader.readAsDataURL(file); // 读出 base64
-	  			reader.onloadend = function(e) {
-	  				// 图片的 base64 格式, 可以直接当成 img 的 src 属性值        
-	  				var dataURL = reader.result;
-	  				if(_this.imgList.length<3){
-	  					_this.imgList.push(e.target.result) 
-	  				}
-	  			};
+				var _this = this;
+	  			var file = e.target.files;
+	  			for(var i in file){
+	  				var reader = new FileReader();
+	  				reader.readAsDataURL(file[i]); // 读出 base64
+		  			reader.onloadend = function(e) {
+		  				// 图片的 base64 格式, 可以直接当成 img 的 src 属性值   
+		  				var dataURL = reader.result;
+		  				if(_this.imgList.length<3){
+		  					_this.imgList.push(e.target.result) 
+		  				}
+		  			};	
+	  			}
+	  			  			
 	        },
 	        imgDelete(index){
 	       		this.imgList.splice(index, 1);

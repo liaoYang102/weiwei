@@ -14,7 +14,7 @@
 			<comments></comments>
 		</div>
 
-		<div v-else style="margin-top: 1rem;">
+		<div v-else style="margin-top: 0.92rem;">
 			<div><img src="../../assets/images/shop/theme_banner0.png" style="width: 100%;"></div>
 			<div class="shop_content">
 				<div class="shop">

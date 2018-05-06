@@ -140,7 +140,7 @@ export default {
 					})
 					this.scroll.on('pullingUp', (pos) => {
 						this.show = true;
-						//this.LoadData()
+						this.LoadData()
 						this.$nextTick(function() {
 							this.scroll.finishPullUp();
 							this.scroll.refresh();
