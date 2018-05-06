@@ -112,7 +112,7 @@
 					{
 						img: './static/member/m_index12.png',
 						text: '多商户商城',
-						url:'/multi_user_mall'
+						url:'/multi_user_mall/summary'
 					},
 					{
 						img: './static/member/member_2.png',
