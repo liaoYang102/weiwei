@@ -8,6 +8,8 @@
 					<img :src="item">
 				</swiper-item>
 			</swiper> -->
+
+			
 			<swiper :options="swiperOption">
 		        <swiper-slide v-for="(item, index) in demo04_list" :key="index">
 		        	<img :src="item">
