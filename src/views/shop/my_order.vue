@@ -71,7 +71,7 @@
 			    			</div>
 			    			<div class="box-bottom">
 			    				<!-- <div class="shop-btn btn-status1 fr">付款</div> -->
-			    				<div class="shop-btn fr">提醒发货</div>
+			    				<div class="shop-btn fr" @click="onRemind">提醒发货</div>
 			    			</div>
 			            </div>
 			            <div class="shop-box">
@@ -101,7 +101,7 @@
 			    				</div>
 			    			</div>
 			    			<div class="box-bottom">
-			    				<div class="shop-btn btn-status1 fr" @click="goTsuccess">确认收货</div>
+			    				<div class="shop-btn btn-status1 fr" @click="onConfirm">确认收货</div>
 			    				<div class="shop-btn fr" @click="goLogistics">查看物流</div>
 			    			</div>
 			            </div>
@@ -184,14 +184,6 @@
 		    		
 		    		<recommended></recommended>
         		</div>
-        		<div v-transfer-dom>
-			      <confirm v-model="alert"
-			      title="确认删除订单？"
-			      @on-cancel="onCancel"
-			      @on-confirm="onConfirm">
-			        <p style="text-align:center;">删除之后可以从电脑端订单回收站恢复</p>
-			      </confirm>
-			    </div>
 			</div>
 		</div>
 	    
@@ -211,8 +203,7 @@
 				test: true,
 				show9: false,
 				show: false,
-				showNomore: false,
-				alert:false
+				showNomore: false
 			}
 		},
 		components: {
@@ -275,14 +266,58 @@
 		    goOrderdetails(){
 		    	this.$router.push({ path: '/shop/order_details'})
 		    },
-		    onCancel () {
-		      	console.log('on cancel')
-		    },
-		    onConfirm () {
-		      	console.log('on confirm');
-		    },
+		    // 取消订单
 		    showAlert(){
-		    	this.alert = true;
+		    	let _this = this;
+		    	_this.$dialog.show({
+		    		type: 'warning',
+		    		headMessage: '确认删除订单？',
+		    		message: '删除之后可以从电脑端订单回收站恢复',
+		    		buttons: ['确定', '取消'],
+		    		canel() {
+		    			_this.$dialog.hide()
+		    		},
+		    		confirm() {
+		    			_this.$dialog.hide()
+		    		}
+		    	})
+		    	console.log(_this.$dialog)
+		    	// this.alert = true;
+		    },
+		    // 提醒发货
+		    onRemind(){
+		    	let _this = this;
+		    	_this.$dialog.show({
+		    		type: 'success',
+		    		headMessage: '温馨提示',
+		    		message: '亲,您的请求卖家已收到,请勿着急!',
+		    		buttons: ['我知道了'],
+		    		canel() {
+		    			_this.$dialog.hide()
+		    		},
+		    		confirm() {
+		    			_this.$dialog.hide()
+		    		}
+		    	})
+		    	console.log(_this.$dialog)
+		    },
+		    // 确认收货
+		    onConfirm(){
+		    	let _this = this;
+		    	_this.$dialog.show({
+		    		type: 'warning',
+		    		headMessage: '确认收货',
+		    		message: '亲,您的快件状态是已到达,是否确定收到货?',
+		    		buttons: ['确定', '取消'],
+		    		canel() {
+		    			_this.$dialog.hide()
+		    		},
+		    		confirm() {
+		    			_this.goTsuccess()
+		    			_this.$dialog.hide()
+		    		}
+		    	})
+		    	console.log(_this.$dialog)
 		    }
 		}
 	}
