@@ -75,6 +75,7 @@
 				text-align: center;
 				font-family: MicrosoftYaHei;
 				color: rgba(255, 255, 255, 1);
+				border-radius: 2px;
 			}
 		}
 </style>

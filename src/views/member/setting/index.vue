@@ -5,7 +5,7 @@
 			<group gutter="0">
 				<cell class="list-item" title="个人信息" is-link link="/member/info/index"></cell>
 				<cell class="list-item" title="消息设置" is-link link="/member/message/setting"></cell>
-				<cell class="list-item" title="重置登录密码" is-link link="/user/change"></cell>
+				<cell class="list-item" title="密码管理" is-link link="/user/changelist"></cell>
 				<cell class="list-item" title="关于我们" is-link link="/member/setting/about"></cell>
 			</group>
 			<router-link to="/user/reg"><div class="logout-btn">退出登录</div></router-link>

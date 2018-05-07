@@ -23,6 +23,7 @@ export default {
 				$dialog.headMessage = obj.headMessage
 				$dialog.message = obj.message
 				$dialog.buttons = obj.buttons
+
 				$dialog.canel = obj.canel
 				$dialog.confirm = obj.confirm
 			},

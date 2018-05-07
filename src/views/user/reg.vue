@@ -8,7 +8,7 @@
 			<group gutter="0" class="input-div">
 				<!--<cell class="input-item" title="国家" value="中国" is-link value-align="right"></cell>-->
 				<x-input class="input-item" ref="phone" v-model="phone" placeholder="用户名" type="number" :max="11" :required="true" @on-change="nameChange"></x-input>
-				<x-input class="input-item" ref="password" v-model="password" placeholder="密码" type="password" :required="true"></x-input>
+				<x-input class="input-item" ref="password" v-model="password" placeholder="登录密码" type="password" :required="true"></x-input>
 				<x-input v-if="!isReg" class="input-item bounceInUp animated" type="number" ref="code" v-model="code" placeholder="验证码" @on-change="codeChange">
 					<x-button slot="right" type="primary" mini @click.native="sendCode" :disabled="sendFlag">{{codeText}}</x-button>
 				</x-input>
@@ -21,11 +21,11 @@
 				<span @click="resetPass">忘记密码?</span>
 				<!--<span @click.native="codeLogin">验证码登录</span>-->
 			</div>
-			<div v-transfer-dom>
+			<!--<div v-transfer-dom>
 				<confirm v-model="show" :title="regText" theme="ios" @on-confirm="onConfirm">
 					<p style="text-align:center;">该账户没有注册,是否立即注册?</p>
 				</confirm>
-			</div>
+			</div>-->
 		</div>
 	</div>
 </template>
@@ -47,8 +47,8 @@
 				isReg: true, //判断是否注册
 				codeText: '发送验证码',
 				num: 60,
-				sendFlag:false,
-				showLoading:false
+				sendFlag: false,
+				showLoading: false
 			}
 		},
 		created() {},
@@ -57,16 +57,49 @@
 		},
 		methods: {
 			submit() {
-				this.showLoading = true
-				if(this.phone == '17520439845' && this.password == '123456') {
-					this.$vux.loading.show({
-						text: '登陆中'
-					})
-					setTimeout(() => {
-						this.$vux.loading.hide()
-					}, 2000)
-				} else if(this.phone.length == 11 && this.phone != '17520439845') {
-					this.show = true
+				var _this = this
+				if(this.isReg) {
+					if(_this.phone == '17520439845' && _this.password == '123456') {
+						this.showLoading = true
+						_this.$vux.loading.show({
+							text: '登陆中'
+						})
+						setTimeout(() => {
+							_this.$vux.loading.hide()
+						}, 2000)
+					} else if(_this.phone.length == 11 && _this.phone != '17520439845') {
+						_this.$dialog.show({
+							type: 'warning',
+							headMessage: '提示',
+							message: '该账户没有注册,是否立即注册?',
+							buttons: ['确定', '取消'],
+							canel() {
+								_this.$dialog.hide()
+							},
+							confirm() {
+								_this.$dialog.hide()
+								_this.isReg = false
+								_this.showLoading = false
+								_this.btnText = "立即注册"
+							}
+						})
+					}
+				} else {
+					if(this.code == '') {
+						this.$vux.toast.show({
+							width: '50%',
+							type: 'text',
+							position: 'middle',
+							text: '验证码错误'
+						})
+					}else{
+						this.$vux.toast.show({
+							width: '50%',
+							type: 'text',
+							position: 'middle',
+							text: '登录成功'
+						})
+					}
 				}
 			},
 			codeChange(val) {
@@ -91,27 +124,37 @@
 			sendCode() {
 				var _this = this
 				_this.$refs.code.focus()
+				this.$vux.toast.show({
+					width: '50%',
+					type: 'text',
+					position: 'middle',
+					text: '验证码发送成功'
+				})
+				this.reduce()
+			},
+			reduce() {
+				var _this = this
 				if(_this.num == 0) {
-					_this.codeText = "发送验证码";
+					_this.codeText = "重新发送验证码";
 					_this.num = 60;
 					_this.sendFlag = false
 					return;
 				} else {
 					_this.num--
-					_this.codeText = '重新发送验证码' + "(" + _this.num + ")"
+						_this.codeText = '重新发送验证码' + "(" + _this.num + ")"
 					_this.sendFlag = true
 				}
-				
+
 				setTimeout(function() {
-					_this.sendCode()
+					_this.reduce()
 				}, 1000)
 			},
-			codeLogin(){
-				
+			codeLogin() {
+
 			},
-			resetPass(){
+			resetPass() {
 				this.$router.push({
-					path:'/user/change'
+					path: '/user/changeLoginPassword'
 				});
 			}
 		},
@@ -171,11 +214,12 @@
 		background-color: #336FFF!important;
 		border-radius: 2px!important;
 	}
-	.login-re{
+	
+	.login-re {
 		padding: 10px 15px;
 		display: flex;
 		justify-content: space-between;
-		span{
+		span {
 			color: #10aeff;
 		}
 	}

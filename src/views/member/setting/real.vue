@@ -140,18 +140,16 @@
 				_this.$dialog.show({
 					type: 'success',
 					headMessage: '提示',
-					message: '实名成功1',
+					message: '实名成功',
 					buttons: ['确定', '取消'],
+					isClosing:true,
 					canel() {
-						_this.$dialog.hide()
 						console.log('--')
 					},
 					confirm() {
 						_this.$dialog.hide()
-						console.log('222')
 					}
 				})
-				console.log(_this.$dialog)
 			}
 		}
 	}

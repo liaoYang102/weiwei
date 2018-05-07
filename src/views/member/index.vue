@@ -5,13 +5,14 @@
 			<section>
 				<div class="info-bg">
 					<router-link to="/member/setting/index"><img class="setting-img" src="../../assets/images/member/shezi.png" /></router-link>
-					<router-link to="/member/info/index">
-						<div class="avatar">
+					<div class="avatar">
+						<router-link to="/member/info/index">
 							<img src="../../assets/images/member/score_1.png" alt="" />
-							<p class="nickname">yang</p>
-							<p class="status">1级会员</p>
-						</div>
-					</router-link>
+						</router-link>
+						<p class="nickname">yang</p>
+						<p class="status">1级会员</p>
+					</div>
+
 					<div class="account">
 						<router-link to="/member/earnings/index">
 							<div class="universal">
@@ -112,7 +113,7 @@
 					{
 						img: './static/member/m_index12.png',
 						text: '多商户商城',
-						url:'/multi_user_mall/summary'
+						url: '/multi_user_mall/summary'
 					},
 					{
 						img: './static/member/member_2.png',
@@ -136,23 +137,22 @@
 					{
 						img: './static/member/m_index17.png',
 						text: '幸运抽奖',
-						url:'/draw'
+						url: '/draw'
 					},
 					{
 						img: './static/member/m_index13.png',
 						text: '我的卡包',
 						url: '/member/card/index'
-					},{
-						img: './static/member/m_index13.png',
+					}, {
+						img: './static/member/menjin.png',
 						text: '门禁系统',
-						url: '/lock/index'
+						url: '/lock/card'
 					},
 				],
 				yhqTip: '5张快过期'
 			}
 		},
-		created(){
-		},
+		created() {},
 		components: {
 			settingHeader,
 			Badge,

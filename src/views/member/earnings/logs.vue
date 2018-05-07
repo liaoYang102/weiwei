@@ -12,8 +12,8 @@
 			</div>
 		</div>
 		<div class="shaixuan">
-			<div class="gary">{{typeText}}</div>
 			<div @click="showRight"><i class="iconfont icon-caidan"></i>筛选</div>
+			<div class="gary">{{typeText}}</div>
 		</div>
 
 		<div class="logs-list">
@@ -320,7 +320,7 @@
 				margin-right: 0.1rem;
 			}
 			.gary {
-				font-size: 0.32rem;
+				font-size: 0.30rem;
 				color: #1A2642;
 			}
 		}

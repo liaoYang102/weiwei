@@ -1,7 +1,11 @@
 import index from '@/views/index'
 import login from '@/views/user/login'
 import reg from '@/views/user/reg'
-import change from '@/views/user/change'
+import changelist from '@/views/user/changelist'
+import changeLoginPassword from '@/views/user/changeLoginPassword'
+import changeLoginPassword2 from '@/views/user/changeLoginPassword2'
+import changePaymentPassword from '@/views/user/changePaymentPassword'
+import changePaymentPassword2 from '@/views/user/changePaymentPassword2'
 import coupon from '@/views/member/coupon/coupon'
 import coupondetail from '@/views/member/coupon/detail'
 import member from '@/views/member/index'
@@ -71,9 +75,25 @@ const memberModule = [{
 		component: reg
 	},
 	{
-		path: '/user/change',
-		name: 'change',
-		component: change
+		path: '/user/changeLoginPassword',
+		name: 'changeLoginPassword',
+		component: changeLoginPassword
+	}, {
+		path: '/user/changeLoginPassword2',
+		name: 'changeLoginPassword2',
+		component: changeLoginPassword2
+	},{
+		path: '/user/changePaymentPassword',
+		name: 'changePaymentPassword',
+		component: changePaymentPassword
+	}, {
+		path: '/user/changePaymentPassword2',
+		name: 'changePaymentPassword2',
+		component: changePaymentPassword2
+	}, {
+		path: '/user/changelist',
+		name: 'changelist',
+		component: changelist
 	}, {
 		path: '/member/coupon/coupon',
 		name: 'coupon',
@@ -141,7 +161,7 @@ const memberModule = [{
 		path: '/member/info/index',
 		name: 'info',
 		component: info
-	},{
+	}, {
 		path: '/member/info/data',
 		name: 'infodata',
 		component: infodata
@@ -183,7 +203,7 @@ const memberModule = [{
 		path: '/member/purse/qrcode',
 		name: 'qrcode',
 		component: qrcode
-	},{
+	}, {
 		path: '/member/purse/hasqrcode',
 		name: 'hasqrcode',
 		component: hasqrcode

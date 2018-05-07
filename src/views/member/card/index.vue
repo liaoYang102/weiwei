@@ -1,68 +1,65 @@
 <template>
-	<div class="info-box">
-		<settingHeader :title="title"></settingHeader>
-		<div class="card-header">
+	<div class="cardindex-box">
+		<x-header class="b-w" :left-options="{backText:''}">
 			<div class="tab">
 				<tab v-model="cardLook" custom-bar-width="0.56rem">
 					<tab-item selected @on-item-click="lookCard">全部</tab-item>
 					<tab-item @on-item-click="lookCard">我的</tab-item>
 				</tab>
 			</div>
-			<!--<button-tab class="change-box" :height="34" v-model="cardLook">
+			<span slot="right" class="shaix" @click="showRight"><img src="../../../../static/member/shaixuanIcon.png" alt="" /></span>
+		</x-header>
+		<!--<div class="card-header">
+			<button-tab class="change-box" :height="34" v-model="cardLook">
 				<button-tab-item selected @on-item-click="lookCard()">全部</button-tab-item>
 				<button-tab-item @on-item-click="lookCard()"><span class="vux-reddot-s">我的</span></button-tab-item>
-			</button-tab>-->
-			<span class="shaix" @click.active="showRight"><img src="../../../../static/member/shaixuanIcon.png" alt="" /></span>
-		</div>
-		
+			</button-tab>
+		</div>-->
+
 		<div class="card-box">
-			<swiper v-model="cardLook"  height="100vh" :show-dots="false" :threshold='100'>
-			<swiper-item>
-				<!-- <scroller lock-x height="-80" @on-scroll-bottom="onScrollBottom" ref="scrollerBottom" :scroll-bottom-offst="200"> -->
-				<div class="box2">
-					<div class="wrapper1" ref="wrapper1">
-						<div class="content">
-							<div class="card-list">
-								<div class="card-ltem" :class="[item.type ==1 ? 'b-bg':'y-bg']" v-for="(item,index) in cardList">
-									<div class="card-f">{{item.store}}</div>
-									<div class="card-m">
-										<div style="text-align: right;">{{item.tip}}</div>
-										<div>{{item.typename}}</div>
+			<swiper v-model="cardLook" height="100vh" :show-dots="false" :threshold='100'>
+				<swiper-item>
+					<div class="box2">
+						<div class="wrapper1" ref="wrapper1">
+							<div class="content">
+								<div class="card-list">
+									<div class="card-ltem" :class="[item.type ==1 ? 'b-bg':'y-bg']" v-for="(item,index) in cardList">
+										<div class="card-f">{{item.store}}</div>
+										<div class="card-m">
+											<div style="text-align: right;">{{item.tip}}</div>
+											<div>{{item.typename}}</div>
+										</div>
 									</div>
 								</div>
+								<Loading v-if="onFetching"></Loading>
 							</div>
-							<Loading v-if="onFetching"></Loading>
 						</div>
 					</div>
-				</div>
-				<!-- </scroller> -->
-			</swiper-item>
-			<swiper-item>
-				<!-- <scroller lock-x height="-80" @on-scroll-bottom="onScrollBottom" ref="scrollerBottom" :scroll-bottom-offst="200"> -->
-				<div class="box2">
-					<div class="wrapper2" ref="wrapper2">
-						<div class="content">
-							<div class="card-list">
-								<router-link to="/member/card/detail">
-									<div class="card-item2">
-										<div class="top">
-											<span>适用所有联营门店</span>
-											<span>查看详情</span>
+				</swiper-item>
+				<swiper-item>
+					<div class="box2">
+						<div class="wrapper2" ref="wrapper2">
+							<div class="content">
+								<div class="card-list">
+									<router-link to="/member/card/detail">
+										<div class="card-item2">
+											<div class="top">
+												<span>适用所有联营门店</span>
+												<span>查看详情</span>
+											</div>
+											<div class="name">威伐光25分钟体验套餐卡</div>
+											<div class="top2">
+												<span>仅支持威伐光设备</span>
+												<span>可用次数： 10</span>
+											</div>
 										</div>
-										<div class="name">威伐光25分钟体验套餐卡</div>
-										<div class="top2">
-											<span>仅支持威伐光设备</span>
-											<span>可用次数： 10</span>
-										</div>
-									</div>
-								</router-link>
+									</router-link>
+								</div>
+								<Loading v-if="onFetching"></Loading>
 							</div>
-							<Loading v-if="onFetching"></Loading>
 						</div>
 					</div>
-				</div>
-				<!-- </scroller> -->
-			</swiper-item>
+				</swiper-item>
 			</swiper>
 			<!--<div class="drawer-box" @click.active="showDrawer">
 				<masker :fullscreen="drawerShow">
@@ -76,7 +73,7 @@
 				</masker>
 			</div>-->
 			<!--筛选菜单栏-->
-			
+
 			<div v-transfer-dom>
 				<popup v-model="show9" position="top">
 					<div class="position-vertical-demo">
@@ -105,8 +102,7 @@
 </template>
 
 <script>
-	import { Badge, Cell, Group, Scroller, Masker, Drawer, Tab, TabItem, Swiper, SwiperItem } from 'vux'
-	import settingHeader from '../../../components/setting_header'
+	import { Badge, Cell, Group, Masker, Drawer, Tab, TabItem, Swiper, SwiperItem, XHeader } from 'vux'
 	import Loading from '../../../components/loading'
 	import BScroll from 'better-scroll'
 	export default {
@@ -172,7 +168,7 @@
 		created() {
 
 		},
-		mouted() {
+		mounted() {
 			this.InitScroll()
 		},
 		methods: {
@@ -194,7 +190,7 @@
 								this.scroll.refresh();
 							});
 						})
-						
+
 						this.scroll2 = new BScroll(this.$refs.wrapper2, {
 							click: true,
 							scrollY: true,
@@ -215,8 +211,6 @@
 						this.scroll2.refresh()
 					}
 				})
-				console.log('--', this.scroll)
-
 			},
 			LoadData() {
 				setTimeout(function() {
@@ -264,34 +258,148 @@
 			}
 		},
 		components: {
-			settingHeader,
 			Badge,
 			Cell,
 			Group,
-			Scroller,
 			Masker,
 			Drawer,
 			Tab,
 			TabItem,
 			Swiper,
 			SwiperItem,
-			Loading
+			Loading,
+			XHeader
 		}
 	}
 </script>
 
-<style lang="less" scoped>
-.box2{
-	height: 50%;
-	.wrapper1,.wrapper2 {
-		position: absolute;
-		top: 0px;
-		bottom: 0.1rem;
-		overflow: hidden;
-		width: 100%;
+<style lang="less">
+	.cardindex-box {
+		.b-w {
+			background-color: white;
+			position: relative;
+			.vux-tab-ink-bar {
+				bottom: 4px!important;
+			}
+			.shaix {
+				img {
+					width: 0.4rem;
+					height: 0.4rem;
+					vertical-align: middle;
+				}
+			}
+			.vux-header-left .left-arrow:before {
+				border: 1px solid #222;
+				border-width: 1px 0 0 1px;
+			}
+		}
+		.b-w:after {
+			content: " ";
+			position: absolute;
+			left: 0;
+			bottom: 0;
+			right: 0;
+			height: 1px;
+			border-top: 1px solid #D9D9D9;
+			color: #D9D9D9;
+			-webkit-transform-origin: 0 0;
+			transform-origin: 0 0;
+			-webkit-transform: scaleY(0.5);
+			transform: scaleY(0.5);
+			left: 0;
+		}
+		.box2 {
+			.wrapper1,
+			.wrapper2 {
+				position: fixed;
+				top: 0;
+				bottom: 47px;
+				overflow: hidden;
+				width: 100%;
+			}
+		}
+		.card-box {
+			padding: 0 15px;
+			background-color: white;
+			position: relative;
+			.card-ltem {
+				height: 1.82rem;
+				border-radius: 2px;
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+				padding-left: 1.65rem;
+				position: relative;
+				margin-bottom: 0.24rem;
+				.card-f {
+					color: #fff;
+					font-size: 0.3rem;
+				}
+				.card-m {
+					color: #fff;
+					font-size: 0.24rem;
+					margin-right: 0.4rem;
+				}
+			}
+			.b-bg {
+				background: url(../../../../static/member/boxBg1.png) no-repeat;
+				background-size: 100%;
+			}
+			.y-bg {
+				background: url(../../../../static/member/boxBg3.png);
+				background-size: 100%;
+			}
+			.card-item2 {
+				height: 2.7rem;
+				border-radius: 2px;
+				background: url(../../../../static/member/cardBg1.png) no-repeat;
+				background-size: 100%;
+				padding: 0.3rem;
+				margin-top: 0.13rem;
+				box-sizing: border-box;
+				display: flex;
+				flex-direction: column;
+				justify-content: space-between;
+				.top {
+					font-size: 0.24rem;
+					color: #ffffff;
+					display: flex;
+					align-content: center;
+					justify-content: space-between;
+				}
+				.top2 {
+					font-size: 0.24rem;
+					color: #ffffff;
+					display: flex;
+					align-content: center;
+					span {
+						margin-right: 0.4rem;
+					}
+				}
+				.name {
+					color: white;
+					font-size: 0.4rem;
+				}
+			}
+			.drawer-box {
+				position: fixed;
+				top: 46px;
+				right: 0;
+				z-index: 1111;
+				.typeItem {
+					text-align: center;
+					height: 1rem;
+					line-height: 1rem;
+					color: #888;
+				}
+				.typeItem-bg {
+					background-color: #26a2ff;
+					color: white;
+				}
+			}
+		}
 	}
-}
-
+	
 	.position-vertical-demo {
 		background: white;
 		.card-demo-flex {
@@ -354,156 +462,5 @@
 		.card-demo-flex span {
 			font-size: 0.2rem;
 		}
-	}
-	
-	.card-header {
-		padding: 0.17rem 0.6rem;
-		display: flex;
-		align-items: center;
-		background-color: white;
-		.tab {
-			flex: 1;
-			.vux-tab-item {
-				background: transparent!important;
-			}
-		}
-		.shaix {
-			padding-left: 0.5rem;
-			display: flex;
-			align-items: center;
-			color: #328bff;
-			font-size: 0.24rem;
-			img {
-				margin-left: 0.1rem;
-				width: 0.4rem;
-			}
-		}
-	}
-
-	.card-header:after {
-		content: " ";
-		position: absolute;
-		left: 0;
-		bottom: 0;
-		right: 0;
-		height: 1px;
-		border-top: 1px solid #D9D9D9;
-		color: #D9D9D9;
-		-webkit-transform-origin: 0 0;
-		transform-origin: 0 0;
-		-webkit-transform: scaleY(0.5);
-		transform: scaleY(0.5);
-		left: 0px;
-	}
-	.card-header:before {
-		content: " ";
-		position: absolute;
-		left: 0;
-		top: 0;
-		right: 0;
-		height: 1px;
-		border-top: 1px solid #D9D9D9;
-		color: #D9D9D9;
-		-webkit-transform-origin: 0 0;
-		transform-origin: 0 0;
-		-webkit-transform: scaleY(0.5);
-		transform: scaleY(0.5);
-		left: 0px;
-	}
-	
-	.card-box {
-		padding: 0 15px;
-		position: relative;
-		.card-ltem {
-			height: 1.82rem;
-			border-radius: 2px;
-			display: flex;
-			align-items: center;
-			justify-content: space-between;
-			padding-left: 1.65rem;
-			position: relative;
-			margin-bottom: 0.24rem;
-			.card-f {
-				color: #fff;
-				font-size: 0.3rem;
-			}
-			.card-m {
-				color: #fff;
-				font-size: 0.24rem;
-				margin-right: 0.4rem;
-			}
-		}
-		.b-bg {
-			background: url(../../../../static/member/boxBg1.png) no-repeat;
-			background-size: 100%;
-		}
-		.y-bg {
-			background: url(../../../../static/member/boxBg3.png);
-			background-size: 100%;
-		}
-		.card-item2 {
-			height: 2.7rem;
-			border-radius: 2px;
-			background: url(../../../../static/member/cardBg1.png) no-repeat;
-			background-size: 100%;
-			padding: 0.3rem;
-			margin-top: 0.13rem;
-			box-sizing: border-box;
-			display: flex;
-			flex-direction: column;
-			justify-content: space-between;
-			.top {
-				font-size: 0.24rem;
-				color: #ffffff;
-				display: flex;
-				align-content: center;
-				justify-content: space-between;
-			}
-			.top2 {
-				font-size: 0.24rem;
-				color: #ffffff;
-				display: flex;
-				align-content: center;
-				span {
-					margin-right: 0.4rem;
-				}
-			}
-			.name {
-				color: white;
-				font-size: 0.4rem;
-			}
-		}
-		.drawer-box {
-			position: fixed;
-			top: 46px;
-			right: 0;
-			z-index: 1111;
-			.typeItem {
-				text-align: center;
-				height: 1rem;
-				line-height: 1rem;
-				color: #888;
-			}
-			.typeItem-bg {
-				background-color: #26a2ff;
-				color: white;
-			}
-		}
-	}
-	
-	.card-box:before {
-		content: " ";
-		position: absolute;
-		left: 0;
-		top: 0;
-		right: 0;
-		height: 1px;
-		border-top: 1px solid #D9D9D9;
-		color: #D9D9D9;
-		-webkit-transform-origin: 0 0;
-		transform-origin: 0 0;
-		-webkit-transform: scaleY(0.5);
-		transform: scaleY(0.5);
-		left: 0px;
 	}
 </style>
