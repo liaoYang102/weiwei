@@ -10,17 +10,14 @@
 
 		<div class="awards-main">
 			<div class="photos">
-				<h4>上传生活照</h4>
-			    
-		    	<div class="life"  v-for="(item,index) in imgList">
+				<h4>上传生活照</h4>			    
+		    	<div class="life"  v-for="(item,index) in imgList" @click="cindex(index)">
 		    		<img @click="imgDelete(index)" class="gbx" src="../../assets/images/member/gbx.png"/>
-		    		<!-- <p class='quxiao' @click="imgDelete(index)">
-                        <i class='iconfont icon-quxiao1'></i>
-                    </p> -->
+		    		
 		    		<div class="bigPic" v-show="[imgList.length ? imgList.length >0 : imgList.length =0]">
 						<img :src="item">
 					</div>
-					<input type="file" accept="image/*" multiple="multiple" @change="cone($event,index)">
+					<input type="file" accept="image/*" multiple="multiple" @change="cone">
 		    	</div>
 
 		    	<div class="life" v-if="imgList.length!=5">
@@ -72,7 +69,8 @@
 	  		demo2: true,
 	  		imgList: [],
 	  		showDialog: false,
-	  		toast: '请您耐心等待审核'
+	  		toast: '请您耐心等待审核',
+	  		pindex:0
 	  	}
 	  },
 	  methods:{
@@ -80,27 +78,15 @@
   			var _this = this
   			var file = e.target.files;
   			for(var i = 0; i < file.length; i++) {
-  				if(file.length > 5) {
-  					this.$vux.toast.show({
-  						text: '最多只能上传五张照片',
-  						type: 'text'
-  					})
-  					return
-  				} else {
-  					if(file.length != 1){
-  						_this.imgList = []
-  					}
-  					
-  					var reader = new FileReader();
-  					reader.readAsDataURL(file[i]); // 读出 base64
-  					reader.onloadend = function(e) {
-  						// 图片的 base64 格式, 可以直接当成 img 的 src 属性值        
-  						var dataURL = reader.result;
-  						if(_this.imgList.length<5){
-  							_this.imgList.push(e.target.result)
-  						}
-  					};
-  				}
+				var reader = new FileReader();
+				reader.readAsDataURL(file[i]); // 读出 base64
+				reader.onloadend = function(e) {
+					// 图片的 base64 格式, 可以直接当成 img 的 src 属性值        
+					var dataURL = reader.result;
+					if(_this.imgList.length<5){
+						_this.imgList.push(e.target.result)
+					}
+				};
   			}
        	},
 	  	imgDelete(index){
@@ -120,9 +106,13 @@
 			reader.readAsDataURL(file);
 			reader.onloadend = function(e) {
 				var dataURL = reader.result;
-				_this.imgList.splice(i, 1, e.target.result)
+				_this.imgList.splice(_this.pindex, 1, e.target.result)
 			};
 		},
+       	cindex(index) {
+			this.pindex = index
+			console.log(this.pindex)
+	   	},
 	  }
 	}
 </script>
@@ -188,7 +178,7 @@
 	   				top: -0.12rem;
 	   				width: 0.38rem;
 	   				height: 0.38rem;
-	   				z-index: 18;
+	   				z-index: 222;
 	   			}
 	   			.length{
 	   				font-size: .3rem;

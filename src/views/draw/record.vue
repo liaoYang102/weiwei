@@ -15,31 +15,39 @@
 			<div class="content">
 				<!-- tab切换 -->
 				<div class="time-line" v-if="tab2 == true">
-					<timeline>
-						<timeline-item v-for="(i, index) in count" :key="index">
-							<h4 :class="[i === 1 ? 'recent' : '']" >
-								<span class="weekend">周末幸运大抽奖</span>
-								<span class="winMoney right">5000元</span>
+					<div v-if="count.length == 0">
+		        		<div class="noRecord">
+		        			<div class="img">
+		        				<img src="../../assets/images/draw/norecord.png">
+		        				<p>暂无{{tabTitle}}</p>
+		        				<p class="text">买单报电机号赢<span>5000元</span>大奖</p>
+		        			</div>
+		        		</div>
+		        	</div>
+					<timeline v-else>
+						<timeline-item v-for="(item, index) in count" :key="index">
+							<h4 :class="[index === 0 ? 'recent' : '']" >
+								<span class="weekend">{{item.weekend}}</span>
+								<span class="winMoney right">{{item.winMoney}}元</span>
 							</h4>
-							<p :class="[i === 1 ? 'recent' : '']" class='bottom'>
-								<span class="rank">1234期<span class='ranks'>一等奖</span></span>
-								<span class="winStatus right">已领取</span>
+							<p :class="[index === 0 ? 'recent' : '']" class='bottom'>
+								<span class="rank">{{item.rank}}<span class='ranks'>{{item.award}}</span></span>
+								<span class="winStatus right">{{item.winStatus}}</span>
 							</p>
 						</timeline-item>
 					</timeline>
 				</div>
 
 		        <div class="recordList" v-else>
-		        	<div v-if="recordList.length==0">
+					<div v-if="recordList.length==0">
 		        		<div class="noRecord">
 		        			<div class="img">
 		        				<img src="../../assets/images/draw/norecord.png">
-		        				<p>暂无中奖记录</p>
+		        				<p>暂无{{tabTitle}}</p>
 		        				<p class="text">买单报电机号赢<span>5000元</span>大奖</p>
 		        			</div>
 		        		</div>
 		        	</div>
-
 		        	<div v-else style="padding-bottom: 0rem;">
 			            <ul class="commodity">
 			            	<group v-for="(item,index) in recordList" class="li-item">
@@ -52,7 +60,7 @@
 											</p>
 											<p class="time">开奖时间:{{ item.awardDate}}</p>
 											<p class="bonusPool">
-												奖金池：<span class="num">￥{{ item.money}}</span> 奖金池：{{ item.num}}人
+												奖金池：<span class="num">￥{{ item.money}}</span> 中奖总人数：{{ item.num}}人
 											</p>
 				                        </li>
 			                    	</router-link>
@@ -85,6 +93,7 @@
 			          	</x-dialog>
 			        </div>
 		        </div>
+	        	
 			</div>
 		</div>
 	</section>
@@ -103,17 +112,18 @@
 		data(){
 			return {
 				title: '中奖记录',
-				count: 5,
+				count: [
+					{weekend: '周末幸运大抽奖', winMoney: '5000', rank: '1234期', award: '一等奖', winStatus: '已领取'},
+					{weekend: '周末幸运大抽奖', winMoney: '1000', rank: '1233期', award: '二等奖', winStatus: '未领取'},
+					{weekend: '周末幸运大抽奖', winMoney: '800', rank: '1232期', award: '三等奖', winStatus: '已领取'},
+					{weekend: '周末幸运大抽奖', winMoney: '5000', rank: '1231期', award: '一等奖', winStatus: '已领取'},
+					{weekend: '周末幸运大抽奖', winMoney: '5000', rank: '1230期', award: '一等奖', winStatus: '已领取'}
+				],
 				tab1: true,
 				tab2: false,
 				show: false,
 				showNomore: false,
 				showDialog: false,
-				process: [
-					{step: '开奖时间2019-08-08 18:00:00', date: '2018-02-09 18:20:10'},
-					{step: '成功参与“周末幸运大抽奖”', date: '2018-02-09 18:20:10'},
-					{step: '你花了￥1,256购买了一双耐克KD10广州万国奥特广场负一层', date: '2018-02-09 18:20:10'},
-				],
 				recordList:[
 					{ drawTitle: '国美番禺店大抽奖', period: '1234', awardDate: '2018-03-20 20:00:00', money: '800.00', num:'600.00',status:0},
 					{ drawTitle: '国美番禺店大抽奖', period: '1234', awardDate: '2018-03-20 20:00:00', money: '800.00', num:'600.00',status:0},
@@ -124,12 +134,13 @@
 					{ drawTitle: '国美番禺店大抽奖', period: '1234', awardDate: '2018-03-20 20:00:00', money: '800.00', num:'600.00',status:0},
 					{ drawTitle: '国美番禺店大抽奖', period: '1234', awardDate: '2018-03-20 20:00:00', money: '800.00', num:'600.00',status:0}
 				],
-				toast: '审核未通过',
+				toast: '您还未实名验证',
 				note: '(请你检查身份验证是否通过)',
 				// 恭喜您成功领取奖金  您已成功领取奖金  请您耐心等待审核
 				// 审核未通过 （请你检查身份验证是否通过）
 				// 领取奖金失败（请你检查身份验证是否通过）
 				// 您还未实名验证  按钮实名验证
+				tabTitle: '参与记录'
 
 			}
 		},
@@ -140,10 +151,12 @@
 			showNumber(){
                 this.tab1 = true;
                 this.tab2 = false;
+                this.tabTitle = '参与记录'
 			},
 			showAward(){
 				this.tab1 = false;
 				this.tab2 = true;
+				this.tabTitle = '中奖记录'
 			},
 	        InitScroll() {
 				this.$nextTick(() => {

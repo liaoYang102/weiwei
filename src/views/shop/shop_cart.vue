@@ -4,123 +4,59 @@
 		<div class="wrapper" ref="wrapper">
 			<div class="content">
 				<div class="box2">
-			      	<div class="list">
+			      	<div class="list" v-for="(item,index) in proList">
 						<div class="storeName">
-							<check-icon :value.sync='demo' style="width:0.88rem;height:0.88rem;text-align:center;line-height:0.88rem;" class='fl'></check-icon>
+							<check-icon :value.sync='item.ischeck' @click.native="storecheck(index)" style="width:0.88rem;height:0.88rem;text-align:center;line-height:0.88rem;" class='fl'></check-icon>
 							<div class="fr" style="width:6.62rem;line-height: 0.88rem;border-bottom:1px solid #D8DFF0">
 								<div class="fl">
-									<img src="../../assets/images/shop/UNIQLO.png" alt="">
-									<span>优衣库旗舰店</span>
+									<img :src="item.storeImg" alt="">
+									<span>{{item.storeName}}</span>
 								</div>
-								<div class="fr edit" @click='edit($event)'>编辑</div>
+								<div class="fr edit" @click='edit($event,index)'>编辑</div>
 							</div>
 						</div>
-						<div class="store-shop">
-							<check-icon :value.sync="demo" style="width:0.88rem;height:2.24rem;text-align:center;line-height:2.24rem;" class='fl'></check-icon>
+						<div class="store-shop" v-for="(children,chIndex) in item.children">
+							<check-icon :value.sync="children.ischeck" @click.native="shopcheck(index)" style="width:0.88rem;height:2.24rem;text-align:center;line-height:2.24rem;" class='fl'></check-icon>
 							<div class="fr" style="width:6.62rem;padding-bottom:0.2rem;border-bottom:1px solid #D8DFF0;padding-top:0.2rem;">
 								<div class="fl">
-									<img src="../../assets/images/shop/order_detail1.png" alt="">
+									<img :src="children.childrenImg" alt="">
 								</div>
-								<div class="fl shop-content" v-if='item'  @click="goShopDetails">
-									<p class="shop-name">女装U宽腿牛仔裤(水洗产品)女装U宽腿牛仔裤(水洗产品)</p>
-									<p class="shop-size">颜色:蓝色；尺码:L/170修身 <span class="fr">X4</span></p>
-									<p class="shop-price"><span class="priceNum">￥3598</span> <span class="shopAcount">+266积分</span></p>
+								<div class="fl shop-content" v-if='item.shopEdit'  @click="goShopDetails">
+									<p class="shop-name">{{children.childrenName}}</p>
+									<p class="shop-size">{{children.childrenSize}}<span class="fr">X{{children.childrenNum}}</span></p>
+									<p class="shop-price"><span class="priceNum">￥{{children.childrenPrice}}</span> <span class="shopAcount">+{{children.childrenAccount}}积分</span></p>
 								</div>
 								<div class="fr shopEdit" v-else>
 									<div class="fl">
-										<inline-x-number width="1.8rem" :min='0'></inline-x-number>
-										<div class="editSize" @click="showMask">
+										<inline-x-number width="1.8rem"  v-model.value="children.childrenNum" :min="1"></inline-x-number>
+										<div class="editSize" @click="showMask(index,chIndex)">
 											<div class="fl">
-												<span v-for="(item,index) in content">
-													<span v-if="index== content.length-1">{{item}}</span>
-													<span v-else>{{item}};</span>
-												</span>
+												<!-- <span v-for="(item,index) in children.childrenContent"> -->
+													<!-- <span v-if="index== children.childrenContent.length-1">{{item}}</span>
+													<span v-else>{{item}};</span> -->
+												<!-- </span> -->
+												<span>{{children.childrenContent}}</span>
 											</div>
 											<div class="fr"><img src="../../assets/images/shop/modify.png" alt=""></div>
 										</div>
 									</div>
-									<div class="fr delete">
+									<div class="fr delete" @click="del(index,chIndex,$event)">
 										删除
 									</div>
 								</div>
 							</div>
 							<div class="clear"></div>
-						</div>
-						<div class="store-shop">
-							<check-icon :value.sync="demo" style="width:0.88rem;height:2.24rem;text-align:center;line-height:2.24rem;" class='fl'></check-icon>
-							<div class="fr" style="width:6.62rem;padding-bottom:0.2rem;border-bottom:1px solid #D8DFF0;padding-top:0.2rem;">
-								<div class="fl">
-									<img src="../../assets/images/shop/order_detail1.png" alt="">
-								</div>
-								<div class="fl shop-content" v-if='item'  @click="goShopDetails">
-									<p class="shop-name">女装U宽腿牛仔裤(水洗产品)女装U宽腿牛仔裤(水洗产品)</p>
-									<p class="shop-size">颜色:蓝色；尺码:L/170修身 <span class="fr">X4</span></p>
-									<p class="shop-price"><span class="priceNum">￥3598</span> <span class="shopAcount">+266积分</span></p>
-								</div>
-								<div class="fr shopEdit" v-else>
-									<div class="fl">
-										<inline-x-number width="1.8rem" :min='0'></inline-x-number>
-										<div class="editSize" @click="showMask">
-											<div class="fl">蓝色；165/S</div>
-											<div class="fr"><img src="../../assets/images/shop/modify.png" alt=""></div>
-										</div>
-									</div>
-									<div class="fr delete">
-										删除
-									</div>
-								</div>
-							</div>
-							<div class="clear"></div>
-						</div>
-					</div>
-					<div class="list" v-for="item in 2">
-						<div class="storeName">
-							<check-icon :value.sync="demo" style="width:0.88rem;height:0.88rem;text-align:center;line-height:0.88rem;" class='fl'></check-icon>
-							<div class="fr" style="width:6.62rem;line-height: 0.88rem;border-bottom:1px solid #D8DFF0">
-								<div class="fl">
-									<img src="../../assets/images/shop/UNIQLO.png" alt="">
-									<span>优衣库旗舰店</span>
-								</div>
-								<div class="fr edit" @click='edit($event)'>编辑</div>
-							</div>
-						</div>
-						<div class="store-shop">
-							<check-icon :value.sync="demo" style="width:0.88rem;height:2.24rem;text-align:center;line-height:2.24rem;" class='fl'></check-icon>
-							<div class="fr" style="width:6.62rem;padding-bottom:0.2rem;border-bottom:1px solid #D8DFF0;padding-top:0.2rem;">
-								<div class="fl">
-									<img src="../../assets/images/shop/order_detail1.png" alt="">
-								</div>
-								<div class="fl shop-content" v-if='item' @click="goShopDetails">
-									<p class="shop-name">女装U宽腿牛仔裤(水洗产品)女装U宽腿牛仔裤(水洗产品)</p>
-									<p class="shop-size">颜色:蓝色；尺码:L/170修身 <span class="fr">X4</span></p>
-									<p class="shop-price"><span class="priceNum">￥3598</span> <span class="shopAcount">+266积分</span></p>
-								</div>
-								<div class="fr shopEdit" v-else>
-									<div class="fl">
-										<inline-x-number width="1.8rem" :min='0'></inline-x-number>
-										<div class="editSize" @click="showMask">
-											<div class="fl">蓝色；165/S</div>
-											<div class="fr"><img src="../../assets/images/shop/modify.png" alt=""></div>
-										</div>
-									</div>
-									<div class="fr delete">
-										删除
-									</div>
-								</div>
-							</div>
-							<div class="clear"></div>
-
 						</div>
 					</div>
 					<div class="clear"></div>
 					<loading v-if="show"></loading>
 					<noMore v-if="showNomore"></noMore>
-					<specifications ref='sp' :router="router" :confirm="confirm"></specifications>
+					<specifications ref='sp' :router="router" :confirm="confirm" :shopList="shopList"></specifications>
 				</div>
 			</div>
 			<div class="position">
 				<div class="fl total">
-					<check-icon :value.sync="demo" style='width:0.88rem;text-align:center;line-height:0.9rem;' class='fl'></check-icon>
+					<check-icon :value.sync="allcheck" style='width:0.88rem;text-align:center;line-height:0.9rem;' class='fl' @click.native="isallcheck"></check-icon>
 					<span class="selectAll">全选</span>
 					<p class="shop-price fr">总计：<span class="priceNum">￥3598</span> <span class="shopAcount">+266积分</span></p>
 				</div>
@@ -141,17 +77,87 @@
 	export default{
 		data(){
 			return{
+				proList:[{
+					storeImg:"./static/shop/UNIQLO.png",
+					storeName:"优衣库旗舰店",
+					ischeck:false,
+					shopEdit:true,
+					allcheck:false,
+					children:[{
+						childrenImg:"./static/shop/order_detail1.png",
+						childrenName:"女装U宽腿牛仔裤(水洗产品)女装U宽腿牛仔裤(水洗产品)",
+						childrenSize:"颜色:蓝色；尺码:L/170修身",
+						childrenNum:"4",
+						childrenPrice:"3598",
+						childrenAccount:"266",
+						childrenContent: "165/S;蓝色",
+						ischeck:false,
+					},{
+						childrenImg:"./static/shop/order_detail1.png",
+						childrenName:"女装U宽腿牛仔裤(水洗产品)女装U宽腿牛仔裤(水洗产品)",
+						childrenSize:"颜色:蓝色；尺码:L/170修身",
+						childrenNum:"1",
+						childrenPrice:"3598",
+						childrenAccount:"266",
+						childrenContent: "165/S;蓝色",
+						ischeck:false,
+					}]
+				},{
+					storeImg:"./static/shop/UNIQLO.png",
+					storeName:"优衣库旗舰店",
+					ischeck:false,
+					shopEdit:true,
+					allcheck:false,
+					children:[{
+						childrenImg:"./static/shop/order_detail1.png",
+						childrenName:"女装U宽腿牛仔裤(水洗产品)女装U宽腿牛仔裤(水洗产品)",
+						childrenSize:"颜色:蓝色；尺码:L/170修身",
+						childrenNum:"1",
+						childrenPrice:"3598",
+						childrenAccount:"266",
+						childrenContent: "165/S;蓝色",
+						ischeck:false
+					}]
+				},{
+					storeImg:"./static/shop/UNIQLO.png",
+					storeName:"优衣库旗舰店",
+					ischeck:false,
+					shopEdit:true,
+					allcheck:false,
+					children:[{
+						childrenImg:"./static/shop/order_detail1.png",
+						childrenName:"女装U宽腿牛仔裤(水洗产品)女装U宽腿牛仔裤(水洗产品)",
+						childrenSize:"颜色:蓝色；尺码:L/170修身",
+						childrenNum:"3",
+						childrenPrice:"3598",
+						childrenAccount:"266",
+						childrenContent: "165/S;蓝色",
+						ischeck:false
+					}]
+				}],
 				title:'购物车',
-				demo1: false,
-				item:true,
-				shopList:[],
-				storeList:[],
-				all:false,
-				demo:false,
+				allcheck:false,
 				show: false,
 				showNomore: false,
 				router: 'shop_cart',
-				content: ['蓝色','165/S']
+				shopList:{
+					shopImg:"./static/shop/order_detail1.png",
+					shopPrice:"3598",
+					shopAccount:"266",
+					shopStock:"7282",
+					list1:[
+						{ name: 'S/165修身'},
+						{ name: 'M/170修身'},
+						{ name: 'L/175修身'},
+						{ name: 'XL/180修身'}
+					],
+					list2:[
+						{ num: '蓝色'},
+						{ num: '白色'},
+						{ num: '黑色'}
+					]
+				},
+				arr:[]
 			}
 		},
 		components:{
@@ -185,30 +191,117 @@
 				})
 
 			},
-		    edit(e){
-		    	if(this.item){
+		    edit(e,index){
+		    	if(this.proList[index].shopEdit){
 		    		e.target.innerHTML = '完成';
-		    		this.item = false;
+		    		this.proList[index].shopEdit = false;
 		    	}else{
 		    		e.target.innerHTML = '编辑';
-		    		this.item = true;
+		    		this.proList[index].shopEdit = true;
+		    		var a = this.arr[0];
+		    		var b = this.arr[1];
+		    		console.log()
+		    		this.proList[a].children[b].childrenSize = this.proList[a].children[b].childrenContent;
+		    		this.$nextTick();
 		    	}
+		    },
+		    del(a,b,e){
+		    	var docu = document.getElementsByClassName("list")[a];
+		    	docu.parentNode.removeChild(docu);
+		    	// this.proList[a].children.splice(b,1);
+		    	// if(this.proList[a].children.length == 0){
+		    	// 	this.proList.splice(a,1);
+		    	// }
 		    },
 		    goConfirm(){
 		    	this.$router.push({ path:'/shop/confirm'})
 		    },
-		    showMask(){
+		    showMask(a,b){
+				this.arr[0] = a;
+				this.arr[1] = b;
 		    	this.$refs.sp.show1 = true;
 		    },
 		    goShopDetails(){
 		    	this.$router.push({ path: '/shop/shop_details'})
 		    },
 		    confirm(){
+		    	var a = this.arr[0];
+		    	var b = this.arr[1];
 		    	if (this.$refs.sp.router == 'shop_cart') {
-		    		this.content = this.$refs.sp.list3;
+		    		this.proList[a].children[b].childrenContent = this.$refs.sp.list3.join();
 		    		this.$refs.sp.show1 = false;
+		    		this.$refs.sp.shopList = this.shopList;
 		    	}
-		    	console.log(this.content )
+		    },
+		    isallcheck(){				//全选
+		    	if(this.allcheck){
+		    		for(var i in this.proList){
+			    		this.proList[i].ischeck = true;
+			    		for(var key in this.proList[i].children){
+			    			this.proList[i].children[key].ischeck = true;
+			    		}
+			    	}
+		    	}else{
+		    		for(var i in this.proList){
+			    		this.proList[i].ischeck = false;
+			    		for(var key in this.proList[i].children){
+			    			this.proList[i].children[key].ischeck = false;
+			    		}
+			    	}
+		    	}
+		    },
+		    storecheck(index){		           //店铺商品全选
+		    	var flag = true;
+		    	for(var i in this.proList){
+		    		if(!this.proList[i].ischeck){
+		    			flag = false;
+		    		}
+		    	}
+		    	if(flag){
+		    		this.allcheck = true;
+		    	}else{
+		    		this.allcheck = false;
+		    	}
+
+		    	if(this.proList[index].ischeck){
+		    		for(var i in this.proList[index].children){
+		    			this.proList[index].children[i].ischeck = true;
+		    		}
+		    	}else{
+		    		for(var i in this.proList[index].children){
+		    			this.proList[index].children[i].ischeck = false;
+		    		}
+		    	}
+		    },
+		    shopcheck(index){					//商品选择
+		    	var storeFlag = true;
+		    	var allFlag = true;
+		    	for(var i in this.proList[index].children){
+	    			if(!this.proList[index].children[i].ischeck){
+	    				storeFlag = false;
+	    			}
+	    		}
+	    		if(storeFlag){
+	    			this.proList[index].ischeck = true;
+	    			for(var i in this.proList){
+		    			for(var key in this.proList[i].children){
+		    				if(!this.proList[i].children[key].ischeck){
+		    					allFlag = false;
+		    				}
+		    				if(!this.proList[i].ischeck){
+			    				allFlag = false;
+			    			}
+		    			}
+		    		}
+	    			if(allFlag){
+	    				this.allcheck = true;
+	    			}else{
+	    				this.allcheck = false;
+	    			}
+	    		}else{
+	    			this.proList[index].ischeck = false;
+	    			this.allcheck = false;
+	    		}
 		    }
 		}
 	}

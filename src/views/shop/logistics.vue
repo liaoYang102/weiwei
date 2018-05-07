@@ -26,7 +26,7 @@
 		</div>
 		<div class="comment">
 			<div class="fr">
-				<div class="fl">在线客服</div>
+				<div class="fl" @click="showToast">在线客服</div>
 				<div class="fl dispatch" @click="goWritecomments">派件评价</div>
 			</div>
 		</div>
@@ -78,7 +78,13 @@
 	    	},
 	    	call(){
 	    		window.location.href = 'tel://95543'
-	    	}
+	    	},
+	    	showToast(){
+				this.$vux.toast.show({
+					text: '暂无客服功能',
+					type: 'text'
+				})
+			}
 	    }
 	}
 </script>

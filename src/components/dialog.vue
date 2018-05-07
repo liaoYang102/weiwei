@@ -71,7 +71,8 @@
 		}
 		.dia_top {
 			width: 100%;
-			height: 3.29rem;
+			height: auto;
+			min-height: 3.29rem;
 			background-color: #fff;
 			text-align: center;
 			padding-top: 1.38rem;
@@ -89,9 +90,10 @@
 				box-sizing: border-box;
 			}
 			.btnList {
-				margin: 0.97rem auto;
+				margin: 0.9rem auto;
 				width: 4.6rem;
 				display: flex;
+				padding-bottom: 0.3rem;
 				.btn {
 					flex: 1;
 					background-color: #336FFF;
@@ -121,8 +123,8 @@
 <style lang="less">
 	.vue-dialog {
 		.weui-dialog {
-			width: 71%;
-			max-width: 71%;
+			width: 73%;
+			max-width: 73%;
 			background-color: rgba(255, 255, 255, 0);
 		}
 	}

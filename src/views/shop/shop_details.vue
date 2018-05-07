@@ -40,7 +40,7 @@
 
 				<div class="shop_cell">
 					<group>
-					    <cell title="店铺名" is-link :border-intent="false">
+					    <cell title="店铺名" :border-intent="false">
 					    	<div class="cell_item">
 					    		<img src="../../assets/images/shop/UNIQLO.png">
 					    		<span>优衣库旗舰店</span>
@@ -99,15 +99,18 @@
 		<specifications ref='sp' :confirm="confirm" :router="router"></specifications>
 
 		<div class="footer">
-			<div class="footer_icon">
+			<div class="footer_icon" @click="showToast">
 				<img src="../../assets/images/shop/customer.png"><br>
 				<span>客服</span>
 			</div>
-			<div class="footer_icon" @click="goShopcart">
-				<img src="../../assets/images/shop/cart.png">
-				<badge text="12"></badge><br>
-				<span>购物车</span>
-			</div>
+			<router-link to="/shop/shop_cart">
+				<div class="footer_icon">
+					<img src="../../assets/images/shop/cart.png">
+					<badge text="12"></badge><br>
+					<span>购物车</span>
+				</div>
+			</router-link>
+			
 			<div class="footer-btn btn_green" @click="goShopcart">加入购物车</div>
 			<div class="footer-btn btn_blue" @click="goConfirm">立即购买</div>
 		</div>
@@ -186,7 +189,7 @@ export default {
 	    	window.scrollTo(0, 0);
 	    },
 	    goShopcart(){
-	    	if(this.content[0] == '请选择尺码'){
+	    	if(this.content == '"请选择尺码"'){
 	    		this.$refs.sp.show1 = true;
 	    		this.router = 'goShopcart'
 	    	}else{
@@ -194,7 +197,13 @@ export default {
 	    	}
 	    },
 	    goConfirm(){
-	    	this.$router.push({ path: '/shop/confirm'})
+	    	if(this.content == '"请选择尺码"'){
+	    		this.$refs.sp.show1 = true;
+	    		this.router = 'goConfirm'
+	    	}else{
+	    		this.$router.push({ path: '/shop/confirm'})
+	    	}
+	    	
 	    },
 	    changeBack(){
 			this.$store.state.vux.back= false;
@@ -226,6 +235,15 @@ export default {
 	    	if(this.$refs.sp.router == 'goShopcart'){
 	    		this.$router.push({ path: '/shop/shop_cart'})
 	    	}
+	    	if(this.$refs.sp.router == 'goConfirm'){
+	    		this.$router.push({ path: '/shop/confirm'})
+	    	}
+		},
+		showToast(){
+			this.$vux.toast.show({
+				text: '暂无客服功能',
+				type: 'text'
+			})
 		}
 	}
 }	

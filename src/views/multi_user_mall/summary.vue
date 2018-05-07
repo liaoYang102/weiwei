@@ -4,7 +4,7 @@
 		<div class="content-head">
 			<div class="address"><i class="iconfont icon-dizhi1"></i>广州
 				<div class="search fr">
-					<input type="text" placeholder='搜索你想要的' />
+					<router-link to="/multi_user_mall/search"><input type="text" placeholder='搜索你想要的' /></router-link>
 					<img src="../../assets/images/index/search.png" alt="">
 				</div>
 			</div>
@@ -21,31 +21,31 @@
 				<ul class="fl">
 					<a href="javascript:;">
 						<li @click="showProduct">
-							<img src="../../assets/images/share/product.png">
+							<img src="../../assets/images/multi_user_mall/product.png">
 							<p>商超连锁</p>
 						</li>
 					</a>
 					<a href="javascript:;">
 						<li @click="treatment">
-							<img src="../../assets/images/share/order.png">
+							<img src="../../assets/images/multi_user_mall/order.png">
 							<p>酒店住宿</p>
 						</li>
 					</a>
 					<a href="javascript:;">
 						<li @click="join">
-							<img src="../../assets/images/share/join.png">
+							<img src="../../assets/images/multi_user_mall/join.png">
 							<p>生活服务</p>
 						</li>
 					</a>
 					<a href="javascript:;">
 						<li @click="seeStore">
-							<img src="../../assets/images/share/shop.png">
+							<img src="../../assets/images/multi_user_mall/beauty.png">
 							<p>美容美发</p>
 						</li>
 					</a>
 					<a href="javascript:;">
 						<li @click="goShare">
-							<img src="../../assets/images/share/coupon.png">
+							<img src="../../assets/images/multi_user_mall/coupon.png">
 							<p>威伐光</p>
 						</li>
 					</a>
@@ -59,26 +59,34 @@
 			<div class="area">
 				<h2>优惠专区</h2>
 				<div class="areaBanner">
-					<img src="../../assets/images/shop/i_banner.png" alt="" class='fl'>
-					<img src="../../assets/images/shop/index_banner.png" alt="" class='fr'>
+					<div class="fl"><img src="../../assets/images/shop/i_banner.png" alt=""><p class="bannerTitle">周五半价日</p></div>
+					<div class="fr"><img src="../../assets/images/shop/index_banner.png" alt=""><p class="bannerTitle">人气好店铺</p></div>
 					<div class="clear"></div>
 				</div>
 				<ul>
 					<li>
 						<p class="areaTitle">免费</p>
 						<span class="areadiscount">消费面单卷</span>
+						<br>
+						<img src="../../assets/images/multi_user_mall/shape.png" alt="" class="fr">
 					</li>
 					<li>
 						<p class="areaTitle">折扣</p>
 						<span class="areadiscount">8.5折</span>
+						<br>
+						<img src="../../assets/images/multi_user_mall/shape2.png" alt="" class="fr">
 					</li>
 					<li>
 						<p class="areaTitle">霸王餐</p>
 						<span class="areadiscount">超级尊贵体验</span>
+						<br>
+						<img src="../../assets/images/multi_user_mall/shape3.png" alt="" class="fr">
 					</li>
 					<li>
 						<p class="areaTitle">足疗按摩</p>
 						<span class="areadiscount">积分大放送</span>
+						<br>
+						<img src="../../assets/images/multi_user_mall/shape4.png" alt="" class="fr">
 					</li>
 				</ul>
 			</div>
@@ -152,14 +160,14 @@
 		},
 		methods:{
 			showProduct(){
-				this.$router.push('/share/pintroduce')
+				this.$router.push('/share/storelist')
 			},
 			join(){
-				this.$router.push('/share/join')
+				this.$router.push('/share/storelist')
 			},
 			treatment(){
 				// this.$router.push('/share/treatment')
-				this.$router.push('/shop/my_order')
+				this.$router.push('/share/storelist')
 			},
 			seeStore(){
 				this.$router.push('/share/storelist')
@@ -285,7 +293,7 @@
 								height: .81rem;
 							}
 							p{
-								font-size: .14rem;
+								font-size: .2rem;
 								color: #7386AD;
 							}
 						}
@@ -311,8 +319,23 @@
 				    color: #141C33;
 				    font-weight: 600;
 				    margin-top: .4rem;
+				    margin-bottom: 0.2rem;
 				}
 				.areaBanner{
+					.fl,.fr{
+						position: relative;
+						.bannerTitle{
+							top: 40%;
+							padding:0.05rem 0.2rem;
+							position: absolute;
+							line-height: 0.44rem;
+							font-size:0.32rem;
+							color: #FFFFFF;
+							line-height: 0.44rem;
+							height:0.44rem; 
+							background:rgba(26,38,66,0.79);
+						}
+					}
 					img{
 						width: 3.4rem;
 						height: 1.7rem;
@@ -336,6 +359,12 @@
 							font-size: 0.22rem;
 							color: #90A2C7;
 						}
+						img{
+							margin-top: 0.2rem;
+							margin-right: 0.2rem;
+							width: 0.46rem;
+							height: 0.46rem;
+						}
 					}
 					li:nth-child(1){
 						background-color: #FEFAF6;
@@ -348,6 +377,7 @@
 					}
 					li:nth-child(4){
 						background-color: #FAF9FF;
+						margin-right: 0;
 					}
 				}
 			}

@@ -48,6 +48,8 @@
 				<div class="tab-list">
 			    	<div class="list">
 			    		<li class="tab-li" v-for="(item, index) in shopList" @click="goShopdetails">
+			    			<!-- <span style="font-size:20px;">Loading123123</span> -->
+			    			<!-- <x-img src="http://dev.hotkidclub.com/ceo/static/images/loading.png" @on-success="success" @on-error="error" class="ximg-demo" error-class="ximg-error" :offset="-100" container=".content"></x-img> -->
 			    			<img src="../../assets/images/shop/shop3.png">
 			    			<div class="tab-text"><span>{{ item.shopname}}</span></div>
 			    			<div class="tab-tag">
@@ -98,26 +100,28 @@ export default {
 				'./static/images/banner2.png',
 				'./static/images/banner1.png',
 			],
+			// defaultSrc:"http://dev.hotkidclub.com/ceo/static/images/loading.png",
+			// currentSrc:"https://m.360buyimg.com/mobilecms/s750x366_jfs/t16798/317/2168092068/211062/decdd020/5aea8108N635af9a7.jpg!cr_1125x549_0_72!q70.jpg.dpg",
 			test: true,
 			show:false,
 			showNomore: false,
 			shopList: [
-				{ shopname: 'VANS Old Skool lite黑白超轻鞋款 黑色38.5', money: '3598', score: '266', tag: '满减'},
-				{ shopname: 'VANS Old Skool lite黑白超轻鞋款 黑色38.5', money: '3598', score: '266', tag: '新品'},
-				{ shopname: 'VANS Old Skool lite黑白超轻鞋款 黑色38.5', money: '3598', score: '', tag: '满减'},
-				{ shopname: 'VANS Old Skool lite黑白超轻鞋款 黑色38.5', money: '3598', score: '', tag: '新品'},
-				{ shopname: 'VANS Old Skool lite黑白超轻鞋款 黑色38.5', money: '3598', score: '266', tag: '满减'},
-				{ shopname: 'VANS Old Skool lite黑白超轻鞋款 黑色38.5', money: '3598', score: '266', tag: '新品'},
-				{ shopname: 'VANS Old Skool lite黑白超轻鞋款 黑色38.5', money: '3598', score: '', tag: '满减'},
-				{ shopname: 'VANS Old Skool lite黑白超轻鞋款 黑色38.5', money: '3598', score: '', tag: '新品'},
-				{ shopname: 'VANS Old Skool lite黑白超轻鞋款 黑色38.5', money: '3598', score: '266', tag: '满减'},
-				{ shopname: 'VANS Old Skool lite黑白超轻鞋款 黑色38.5', money: '3598', score: '266', tag: '新品'},
-				{ shopname: 'VANS Old Skool lite黑白超轻鞋款 黑色38.5', money: '3598', score: '', tag: '满减'},
-				{ shopname: 'VANS Old Skool lite黑白超轻鞋款 黑色38.5', money: '3598', score: '', tag: '新品'},
-				{ shopname: 'VANS Old Skool lite黑白超轻鞋款 黑色38.5', money: '3598', score: '266', tag: '满减'},
-				{ shopname: 'VANS Old Skool lite黑白超轻鞋款 黑色38.5', money: '3598', score: '266', tag: '新品'},
-				{ shopname: 'VANS Old Skool lite黑白超轻鞋款 黑色38.5', money: '3598', score: '', tag: '满减'},
-				{ shopname: 'VANS Old Skool lite黑白超轻鞋款 黑色38.5', money: '3598', score: '', tag: '新品'},
+				{ shopname: 'VANS Old Skool lite黑白超轻鞋款 黑色38.5', money: '3598', score: '266', tag: '满减', img:"./static/images/cai2.png"},
+				{ shopname: 'VANS Old Skool lite黑白超轻鞋款 黑色38.5', money: '3598', score: '266', tag: '新品', img:"./static/images/cai2.png"},
+				{ shopname: 'VANS Old Skool lite黑白超轻鞋款 黑色38.5', money: '3598', score: '', tag: '满减', img:"./static/images/cai2.png"},
+				{ shopname: 'VANS Old Skool lite黑白超轻鞋款 黑色38.5', money: '3598', score: '', tag: '新品', img:"./static/images/cai2.png"},
+				{ shopname: 'VANS Old Skool lite黑白超轻鞋款 黑色38.5', money: '3598', score: '266', tag: '满减', img:"./static/images/cai2.png"},
+				{ shopname: 'VANS Old Skool lite黑白超轻鞋款 黑色38.5', money: '3598', score: '266', tag: '新品', img:"./static/images/cai2.png"},
+				{ shopname: 'VANS Old Skool lite黑白超轻鞋款 黑色38.5', money: '3598', score: '', tag: '满减', img:"./static/images/cai2.png"},
+				{ shopname: 'VANS Old Skool lite黑白超轻鞋款 黑色38.5', money: '3598', score: '', tag: '新品', img:"./static/images/cai2.png"},
+				{ shopname: 'VANS Old Skool lite黑白超轻鞋款 黑色38.5', money: '3598', score: '266', tag: '满减', img:"./static/images/cai2.png"},
+				{ shopname: 'VANS Old Skool lite黑白超轻鞋款 黑色38.5', money: '3598', score: '266', tag: '新品', img:"./static/images/cai2.png"},
+				{ shopname: 'VANS Old Skool lite黑白超轻鞋款 黑色38.5', money: '3598', score: '', tag: '满减', img:"./static/images/cai2.png"},
+				{ shopname: 'VANS Old Skool lite黑白超轻鞋款 黑色38.5', money: '3598', score: '', tag: '新品', img:"./static/images/cai2.png"},
+				{ shopname: 'VANS Old Skool lite黑白超轻鞋款 黑色38.5', money: '3598', score: '266', tag: '满减', img:"./static/images/cai2.png"},
+				{ shopname: 'VANS Old Skool lite黑白超轻鞋款 黑色38.5', money: '3598', score: '266', tag: '新品', img:"./static/images/cai2.png"},
+				{ shopname: 'VANS Old Skool lite黑白超轻鞋款 黑色38.5', money: '3598', score: '', tag: '满减', img:"./static/images/cai2.png"},
+				{ shopname: 'VANS Old Skool lite黑白超轻鞋款 黑色38.5', money: '3598', score: '', tag: '新品', img:"./static/images/cai2.png"},
 			]
 		}
 	},
@@ -125,6 +129,7 @@ export default {
 		this.InitScroll()
 	},
 	methods:{
+		
 		onItemClick(){
 
 		},
@@ -310,6 +315,17 @@ li:nth-child(odd){
 </style>
 
 <style lang="less">
+.ximg-demo {
+  width: 100%;
+  height: auto;
+}
+.ximg-error {
+  background-color: yellow;
+}
+.ximg-error:after {
+  content: '加载失败';
+  color: red;
+}
 .shopIndex{
 	height: 92%;
 }

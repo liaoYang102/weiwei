@@ -18,6 +18,7 @@ import search from '@/views/multi_user_mall/search'
 import write_logistics from '@/views/shop/write_logistics'
 import multi_shop_details from '@/views/multi_user_mall/shop_details'
 import summary from '@/views/multi_user_mall/summary'
+import store_qrcode from '@/views/multi_user_mall/store_qrcode'
 
 const shopModule = [
 	// 商城模块
@@ -130,6 +131,11 @@ const shopModule = [
 		name: 'summary',
 		component: summary
 	},
+	{
+		path: '/multi_user_mall/store_qrcode',//店铺二维码
+		name: 'store_qrcode',
+		component: store_qrcode
+	}
 ];
 
 export default shopModule

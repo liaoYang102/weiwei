@@ -39,7 +39,7 @@
 						<img @click="shanc(index)" class="gbx" src="../../../assets/images/member/gbx.png"/>
 						<input class="upinput" type="file" @change="cone" />
 					</div>
-					<div class="one">
+					<div class="one" v-if="backImages.length!=3">
 						<div>
 							<img src="../../../assets/images/member/p@2x.png" />
 						</div>
@@ -136,10 +136,7 @@
 						})
 						return
 					} else {
-						if(file.length != 1){
-	  						_this.backImages = []
-	  					}
-						
+	  					// _this.backImages = []
 						var reader = new FileReader();
 						reader.readAsDataURL(file[i]); // 读出 base64
 						reader.onloadend = function(e) {

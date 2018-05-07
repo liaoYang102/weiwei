@@ -14,9 +14,12 @@
 						<span class="mr">张生</span>
 						<span>18520496787</span>
 					</p>
-					<p class="mt">
-						广东佛山市南海区桂城街道佛平路与宝翠路交 界万科金色领域界
-					</p>
+					<router-link to="/member/address/index">
+						<p class="mt">
+							广东佛山市南海区桂城街道佛平路与宝翠路交 界万科金色领域界
+						</p>
+					</router-link>
+					
 				</div>
 			</div>
 
