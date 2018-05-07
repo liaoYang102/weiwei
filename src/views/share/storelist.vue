@@ -389,6 +389,11 @@
 		            e.target.className = "item";//切换按钮样式
 		        }
 	    	},
+	    	goStoreDetail(id){
+	    		this.$router.push({path:'/multi_user_mall',params:{
+					id:id
+				}});
+	    	}
 		}
 	}
 </script>
