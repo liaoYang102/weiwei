@@ -69,14 +69,15 @@
 		<!-- 买家已收货 无返积分-->
 		<div class="footer" v-if="value == 0">  
 			<div class="comments commen" @click="goWritecomments">评价</div>
-			<div class="view commen" @click="goLogistics">查看物流</div>
-			<div class="view commen">申请售后</div>
+			<div class="canel view commen" @click="goLogistics">查看物流</div>
+			<router-link to="/shop/refund"><div class="view commen">申请售后</div></router-link>
 		</div>
 
 		<!-- 卖家已发货 有返积分-->
 		<div class="footer" v-else-if="value == 1">
-			<div class="canel commen" @click="goTsuccess">确认收货</div>
-			<div class="view commen">取消订单</div>
+			<div class="comments commen" @click="onConfirm">确认收货</div>
+			<div class="canel commen" @click="goLogistics">查看物流</div>
+			<router-link to="/shop/refund"><div class="view commen">退货</div></router-link>
 		</div>
 
 		<!-- 买家已付款 有返积分-->
@@ -86,24 +87,15 @@
 
 		<!-- 等待买家付款 有返积分-->
 		<div class="footer" v-else-if="value == 2">
-			<div class="canel commen">付款</div>
-			<div class="view commen">取消订单</div>
+			<router-link to="/shop/confirm"><div class="canel commen">付款</div></router-link>
+			<div class="view commen" @click="orderCancel">取消订单</div>
 		</div>
 
 		<!-- 交易关闭 未付款 无返积分 -->
 		<div class="footer" v-else-if="value == 4">
-			<div class="view commen">删除订单</div>
+			<div class="view commen" @click="orderDelete">删除订单</div>
 		</div>
 		
-		<!-- 状态弹框 -->
-		<div v-transfer-dom>
-	      <confirm v-model="cancelShipment"
-	      title="取消发货？"
-	      @on-cancel="onCancel"
-	      @on-confirm="onConfirm">
-	        <p style="text-align:center;">确认取消发货吗？</p>
-	      </confirm>
-	    </div>
 	</div>
 </template>
 
@@ -127,7 +119,7 @@ import recommended from './components/recommended'
 					{ label: '订单状态', value:'买家已收货'},
 					{ label: '完成时间', value:'2018-03-17 11:44:21'}
 				],
-				value: 3
+				value: 1
 			}
 		},
 		components: {
@@ -149,20 +141,80 @@ import recommended from './components/recommended'
 		    goTsuccess(){
 		    	this.$router.push({ path: '/shop/t_success'})
 		    },
-		    onCancel () {
-		      	console.log('on cancel')
-		    },
-		    onConfirm () {
-		      	console.log('on confirm');
+		    // 确认收货
+		    onConfirm(){
+		    	let _this = this;
+		    	_this.$dialog.show({
+		    		type: 'warning',
+		    		headMessage: '确认收货',
+		    		message: '亲,您的快件状态是已到达,是否确定收到货?',
+		    		buttons: ['确定', '取消'],
+		    		canel() {
+		    			_this.$dialog.hide()
+		    		},
+		    		confirm() {
+		    			_this.goTsuccess()
+		    			_this.$dialog.hide()
+		    		}
+		    	})
+		    	console.log(_this.$dialog)
 		    },
 		    shipmentCancel(){
-		    	this.cancelShipment = true;
+		    	let _this = this;
+		    	_this.$dialog.show({
+		    		type: 'warning',
+		    		headMessage: '取消发货',
+		    		message: '亲,您是否确定取消发货？',
+		    		buttons: ['确定', '取消'],
+		    		canel() {
+		    			_this.$dialog.hide()
+		    		},
+		    		confirm() {
+		    			// _this.goTsuccess()
+		    			_this.$dialog.hide()
+		    		}
+		    	})
+		    	console.log(_this.$dialog)
 		    },
 		    showToast(){
 				this.$vux.toast.show({
 					text: '暂无客服功能',
 					type: 'text'
 				})
+			},
+			orderCancel(){
+				let _this = this;
+		    	_this.$dialog.show({
+		    		type: 'warning',
+		    		headMessage: '取消订单',
+		    		message: '亲,您是否确定取消订单？',
+		    		buttons: ['确定', '取消'],
+		    		canel() {
+		    			_this.$dialog.hide()
+		    		},
+		    		confirm() {
+		    			// _this.goTsuccess()
+		    			_this.$dialog.hide()
+		    		}
+		    	})
+		    	console.log(_this.$dialog)
+			},
+			orderDelete(){
+				let _this = this;
+		    	_this.$dialog.show({
+		    		type: 'warning',
+		    		headMessage: '删除订单',
+		    		message: '亲,您是否确定删除订单？',
+		    		buttons: ['确定', '取消'],
+		    		canel() {
+		    			_this.$dialog.hide()
+		    		},
+		    		confirm() {
+		    			// _this.goTsuccess()
+		    			_this.$dialog.hide()
+		    		}
+		    	})
+		    	console.log(_this.$dialog)
 			}
 		}
 	}
@@ -174,7 +226,7 @@ li{
 	background: #F5F6FA;
 	margin-bottom: 0.04rem;
 	overflow: hidden;
-}
+} 
 .order-details{
 	background: #F5F6FA;
 	.top{
@@ -351,6 +403,7 @@ li{
 		.view{
 			border: 0.01rem solid #90A2C7;
 			border-radius: 0.04rem;
+			color: #90A2C7;
 		}
 		.comments{
 			border: 0.01rem solid #F23030;
@@ -395,8 +448,4 @@ li{
 .ul-content .weui-form-preview__value{
 	margin-right: 0.44rem;
 }
-.vux-loadmore{
-    display: none;
-}
-
 </style>
