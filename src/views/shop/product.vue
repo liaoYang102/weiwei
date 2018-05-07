@@ -46,7 +46,7 @@
 						</div>
 						<div class="title">热门品牌</div>
 						<div class="type-circle clearfix">
-							<div v-for="i in item">
+							<div v-for="i in item" @click="goAllshop">
 								<span><img :src="i.img"/></span>
 								<p>{{i.name}}</p>
 							</div>

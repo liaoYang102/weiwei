@@ -50,7 +50,7 @@
 			    		<li class="tab-li" v-for="(item, index) in shopList" @click="goShopdetails">
 			    			<!-- <span style="font-size:20px;">Loading123123</span> -->
 			    			<!-- <x-img src="http://dev.hotkidclub.com/ceo/static/images/loading.png" @on-success="success" @on-error="error" class="ximg-demo" error-class="ximg-error" :offset="-100" container=".content"></x-img> -->
-			    			<img v-lazy="item.img">
+			    			<img src="../../assets/images/shop/shop3.png">
 			    			<div class="tab-text"><span>{{ item.shopname}}</span></div>
 			    			<div class="tab-tag">
 		    					<p class="shopPrice">

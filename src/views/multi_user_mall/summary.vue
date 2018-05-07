@@ -160,14 +160,14 @@
 		},
 		methods:{
 			showProduct(){
-				this.$router.push('/share/pintroduce')
+				this.$router.push('/share/storelist')
 			},
 			join(){
-				this.$router.push('/share/join')
+				this.$router.push('/share/storelist')
 			},
 			treatment(){
 				// this.$router.push('/share/treatment')
-				this.$router.push('/shop/my_order')
+				this.$router.push('/share/storelist')
 			},
 			seeStore(){
 				this.$router.push('/share/storelist')
@@ -293,7 +293,7 @@
 								height: .81rem;
 							}
 							p{
-								font-size: .14rem;
+								font-size: .2rem;
 								color: #7386AD;
 							}
 						}
@@ -361,6 +361,7 @@
 						}
 						img{
 							margin-top: 0.2rem;
+							margin-right: 0.2rem;
 							width: 0.46rem;
 							height: 0.46rem;
 						}
@@ -376,6 +377,7 @@
 					}
 					li:nth-child(4){
 						background-color: #FAF9FF;
+						margin-right: 0;
 					}
 				}
 			}
