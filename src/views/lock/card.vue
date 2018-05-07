@@ -25,7 +25,7 @@
 								</div>
 							</div>
 						</div>
-						<load-more v-if="show" tip="正在加载"></load-more>
+						<Loading v-if="show"> </Loading>
 					</div>
 					<div class="card-nullbox" v-else>
 						<div class="img-box">
@@ -87,7 +87,7 @@
 										</div>
 									</div>
 								</div>
-								<load-more v-if="show" tip="正在加载"></load-more>
+								<Loading v-if="show"> </Loading>
 							</div>
 						</div>
 					</div>
@@ -120,7 +120,8 @@
 
 <script>
 	import BScroll from 'better-scroll'
-	import { XDialog, Qrcode } from 'vux'
+	import Loading from '../../components/loading'
+	import { XDialog } from 'vux'
 	import settingHeader from '../../components/setting_header'
 	export default {
 		data() {
@@ -135,7 +136,7 @@
 						time: '2018.04.27-2018.04.29',
 						status: '生效中',
 						store: '长隆欢乐酒店',
-						bg: './static/lock/Bitmap@2x.png'
+						bg: '../../static/lock/Bitmap@2x.png'
 					},
 					{
 						num: '521',
@@ -143,14 +144,14 @@
 						time: '2018.04.27-2018.04.29',
 						status: '已过期',
 						store: '维也纳连锁酒店',
-						bg: './static/lock/Group@2x.png'
+						bg: '../../static/lock/Group@2x.png'
 					}, {
 						num: '308',
 						l: '3',
 						time: '2018.04.27-2018.04.29',
 						status: '生效中',
 						store: '长隆欢乐酒店',
-						bg: './static/lock/Bitmap@2x.png'
+						bg: '../../static/lock/Bitmap@2x.png'
 					},
 					{
 						num: '521',
@@ -158,7 +159,7 @@
 						time: '2018.04.27-2018.04.29',
 						status: '已过期',
 						store: '维也纳连锁酒店',
-						bg: './static/lock/Group@2x.png'
+						bg: '../../static/lock/Group@2x.png'
 					},
 				]
 			}
@@ -213,7 +214,7 @@
 		components: {
 			settingHeader,
 			XDialog,
-			Qrcode
+			Loading
 		}
 	}
 </script>

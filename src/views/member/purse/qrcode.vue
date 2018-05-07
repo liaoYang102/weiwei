@@ -2,7 +2,7 @@
 	<div class="qrcode-box">
 		<settingHeader :title="title"></settingHeader>
 		<!--有赚钱码-->
-		<div v-if="grade>1">
+		<div v-if="grade>=1">
 			<div class="bg">
 				<p class="title">我的赚钱码</p>
 				<div class="b-w">
@@ -82,7 +82,7 @@
 		data() {
 			return {
 				title: '我的二维码',
-				grade: 0,
+				grade: 1,
 			}
 		},
 		created() {

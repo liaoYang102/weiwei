@@ -13,7 +13,7 @@
 						<img src="../assets/images/index/position.png" alt="">
 						<span class="city">{{address}}</span>
 					</span>
-					<div class="search fl">
+					<div class="search fl" @click="$router.push({path:'/multi_user_mall/search'})">
 						<input type="text" placeholder='搜索你想要的' />
 						<img src="../assets/images/index/search.png" alt="">
 					</div>
@@ -142,10 +142,10 @@
 						</div>
 					</div>
 					<div class="titlebox look">
-						<span>查看附件商家 ></span>
+						<span>查看附件商家</span>
 					</div>
 				</div>
-				<div class="pro-allbox">
+				<!--<div class="pro-allbox">
 					<div class="titlebox">猜你喜欢</div>
 					<div class="cai-box">
 						<div v-for="item in caiList">
@@ -154,7 +154,7 @@
 							<p class="two">{{item.tip}}</p>
 						</div>
 					</div>
-				</div>
+				</div>-->
 			</div>
 		</div>
 		<div id='container'></div>
@@ -439,22 +439,18 @@
 				}
 				input::-webkit-input-placeholder {
 					color: #fff;
-					;
 				}
 				input::-moz-placeholder {
 					/* Mozilla Firefox 19+ */
 					color: #fff;
-					;
 				}
 				input:-moz-placeholder {
 					/* Mozilla Firefox 4 to 18 */
 					color: #fff;
-					;
 				}
 				input:-ms-input-placeholder {
 					/* Internet Explorer 10-11 */
 					color: #fff;
-					;
 				}
 				img {
 					width: 0.32rem;

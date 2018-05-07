@@ -7,7 +7,7 @@
 					<div class="img"><img :src="'./static/images/'+type+'.png'"></div>
 					<div class="dia_top">
 						<p class="title">{{headMessage}}</p>
-						<span class="note">{{message}}</span>
+						<p class="note">{{message}}</p>
 						<div class="btnList">
 							<div class="canel" v-if="buttons.length ==2" @click="canel">{{buttons[1]}}</div>
 							<div class="btn" @click="confirm">{{buttons[0]}}</div>
@@ -23,10 +23,12 @@
 
 <script>
 	import { XDialog } from 'vux'
+
 	export default {
 		props: {
 			headMessage: String,
 			message: String,
+			isClosing: Boolean,
 			buttons: {
 				type: Array,
 				default: function() {
@@ -44,7 +46,9 @@
 			}
 		},
 		methods: {
-			canel() {},
+			canel() {
+				console.log('canel')
+			},
 			confirm() {}
 		}
 	}
@@ -58,8 +62,9 @@
 		height: 5.37rem;
 		.img {
 			position: absolute;
-			top: -11%;
-			left: 20%;
+			top: 0%;
+			left: 50%;
+			transform: translate(-50%, -50%);
 			img {
 				width: 50%;
 			}
@@ -80,6 +85,8 @@
 			}
 			.note {
 				color: #90A2C7;
+				padding: 0 0.5rem;
+				box-sizing: border-box;
 			}
 			.btnList {
 				margin: 0.97rem auto;
@@ -89,19 +96,22 @@
 					flex: 1;
 					background-color: #336FFF;
 					text-align: center;
-					line-height: 0.54rem;
+					height: 0.78rem;
+					line-height: 0.78rem;
 					color: #fff;
 					border-radius: 0.09rem;
-					padding: 0.19rem 0;
+					box-sizing: border-box;
 				}
 				.canel {
 					border: 1px solid #336FFF;
 					width: 2.2rem;
 					border-radius: 0.09rem;
 					text-align: center;
+					height: 0.78rem;
+					line-height: 0.78rem;
 					color: #336FFF;
-					padding: 0.19rem 0;
 					margin-right: 0.2rem;
+					box-sizing: border-box;
 				}
 			}
 		}

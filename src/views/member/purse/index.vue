@@ -25,7 +25,7 @@
 								<p>5000.0</p>
 							</div>
 							<div class="vux-1px-r">
-								<span>通用积分</span>
+								<span>冻结余额</span>
 								<p>5000.0</p>
 							</div>
 						</div>
