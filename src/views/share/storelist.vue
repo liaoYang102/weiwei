@@ -148,7 +148,7 @@
 						    	<div class="screenlist" v-for="(screen) in screeningContent">
 							    	<div class="category">{{ screen.title}}</div>
 							    	
-					    			<li class="item" v-for="(item, index) in screen.options" @click="changeCss($event)">
+					    			<li class="item" v-for="(item, index) in screen.options" @click="selectCss($event)">
 					    				{{ item.name}}
 					    			</li>
 						    	</div>
@@ -420,7 +420,21 @@
 	    	// 完成
 	    	complete(){
 	    		this.show1 = false
-	    	}
+	    	},
+	    	selectCss: function(e){
+				if (e.target.className.indexOf("li-selected") == -1) {
+		            e.target.className = "item li-selected"; //切换按钮样式
+		            var obox=e.target.parentNode;
+		            var lis=obox.children;
+		            for(var i=1;i<lis.length;i++){
+		                if(lis[i]!=e.target){
+		                  lis[i].className = "item"
+		                }
+		              }
+		        } else {
+		            e.target.className = "item";//切换按钮样式
+		        }
+	    	},
 		}
 	}
 </script>
@@ -682,13 +696,6 @@
 .screen .vux-popup-dialog{
 	background: #fff;
 }
-li{
-	float: left;
-	background: #F5F6FA;
-	font-size: 0.24rem;
-	text-align: center;
-	list-style: none;
-}
 .screening{
 	width: 6.6rem;
 	font-family: PingFangSC-Regular;
@@ -696,6 +703,13 @@ li{
 	color: #90A2C7;
 	letter-spacing: 0;
 	list-style: none;
+	li{
+		float: left;
+		background: #F5F6FA;
+		font-size: 0.24rem;
+		text-align: center;
+		list-style: none;
+	}
 	.logo{
 		overflow: hidden;
 		margin-left: 0.25rem;
