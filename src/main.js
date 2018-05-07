@@ -114,6 +114,7 @@ methods.forEach(key => {
     store.state.vux.back = false;
 }, false);
 router.beforeEach(function(to, from, next) {
+	// console.log(1)
 	const toIndex = history.getItem(to.path)
 	const fromIndex = history.getItem(from.path)
 	if(toIndex) {
@@ -180,6 +181,7 @@ router.beforeEach(function(to, from, next) {
 
 router.afterEach(function(to) {
 	isPush = false
+	// console.log(2)
 	/*if(process.env.NODE_ENV === 'production') {
 		ga && ga('set', 'page', to.fullPath)
 		ga && ga('send', 'pageview')

@@ -13,8 +13,8 @@
 		</div>
 		<div class="select">
 			<group>
-		      <cell title="货物状态" value="请选择" :border-intent="false" is-link></cell>
-		      <cell title="退款原因" value="请选择" :border-intent="false" @click.native='test' is-link></cell>
+		      <cell title="货物状态" :value="cargoText" :border-intent="false" @click.native='cargo' is-link></cell>
+		      <cell title="退款原因" :value="refundText" :border-intent="false" @click.native='refund' is-link></cell>
 		    </group>
 		    <group class="center">
 		    	<div @click="showMoneyInput" v-show="!showInputMoney" class="red">
@@ -57,7 +57,7 @@
 
   			    	<div class="imgUpload" v-if="imgList.length!=3">
       		    		<i class="iconfont icon-zhaoxiangji icon"></i>
-      		    		<p class="most">最多3张</p>
+      		    		<p class="most">最多{{3-imgList.length}}张</p>
       		    		<input type="file" accept="image/*" multiple="multiple" @change="upload($event)">
   			    	</div>
   			    	<div class="clear"></div>
@@ -68,16 +68,29 @@
 			确定
 		</div>
 		<div v-transfer-dom>
+		  <popup v-model="show">
+	        <popup-header title="货物状态" :show-bottom-border="false"></popup-header>
+	        <group gutter="0">
+	        	<scroller lock-x height="96px" ref="scrollerEvent">
+			      <div class="box2">
+			        <radio :options="['未收到货', '已收到货']" @click.native="cargoSelect($event)"></radio>
+			      </div>
+			    </scroller>
+	          <div class="pay-box">
+				<x-button class="add-btn" :gradients="['#1D62F0', '#19D5FD']" @click.native="cargoCancel">取消</x-button>
+			  </div>
+	        </group>
+	      </popup>
 	      <popup v-model="show1">
 	        <popup-header title="退款原因" :show-bottom-border="false"></popup-header>
 	        <group gutter="0">
 	        	<scroller lock-x height="200px" ref="scrollerEvent">
 			      <div class="box2">
-			        <radio :options="['1', '2', '3', '4','5','6','7','8']"></radio>
+			        <radio :options="['不喜欢/不想要', '空包裹', '未按约定时间发货', '快递/物流一直未送到','快递/物流无跟踪记录','货物破损已拒签']" @click.native="refundSelect($event)"></radio>
 			      </div>
 			    </scroller>
 	          <div class="pay-box">
-				<x-button class="add-btn" :gradients="['#1D62F0', '#19D5FD']" >确定</x-button>
+				<x-button class="add-btn" :gradients="['#1D62F0', '#19D5FD']" @click.native="refundCancel">取消</x-button>
 			  </div>
 	        </group>
 	      </popup>
@@ -97,7 +110,10 @@
 		data(){
 			return{
 				title:"申请退款",
+				show: false,
+				cargoText:"请选择",
 				show1: false,
+				refundText:"请选择",
 				dialogConfig:{
 					buttons:['确定','取消'],
 					type:"warning",
@@ -125,21 +141,27 @@
 			// var int1 = window.setInterval(this.time,1000);
 		},
 		methods:{
-			time(){
-				// var nowreduce = new Date();
-				// var endreduce = new Date(Date.parse("2018/4/24 18:00:00"));
-				// var leftTimereduce = parseInt((endreduce-nowreduce)/1000);
-				// var day = Math.floor((leftTimereduce)/3600/24);
-				// var hour = Math.floor((leftTimereduce-day*3600*24)/3600);
-				// var minute = Math.floor((leftTimereduce-day*3600*24-hour*60*60)/60);
-				// this.timer = day + '天' + hour + '时' + minute + '分';
-				// console.log(this.timer);
-				// if(day==0&&hour==0&&minute==0){
-				// 	window.clearInterval(int1);
-				// }
+			cargo(){
+				this.show = true;
 			},
-			test(){
-				this.show1 = true;
+			cargoCancel(){
+				this.show = false;
+			},
+			cargoSelect(e){
+				this.cargoText = e.target.value;
+				this.show = false;
+			},
+			refund(){
+				if(this.cargoText !== "请选择"){
+					this.show1 = true;
+				}
+			},
+			refundSelect(e){
+				this.refundText = e.target.value;
+				this.show1 = false;
+			},
+			refundCancel(){
+				this.show1 = false;
 			},
 			goRefunddetails(){
 				this.$router.push({ path: '/shop/refund_details'})
@@ -157,17 +179,20 @@
 				this.$refs.vDialog.showDialog = false;
 			},
 			upload:function (e) {
-				var _this = this
-	  			var reader = new FileReader();
-	  			var file = e.target.files[0];
-	  			reader.readAsDataURL(file); // 读出 base64
-	  			reader.onloadend = function(e) {
-	  				// 图片的 base64 格式, 可以直接当成 img 的 src 属性值        
-	  				var dataURL = reader.result;
-	  				if(_this.imgList.length<3){
-	  					_this.imgList.push(e.target.result) 
-	  				}
-	  			};
+				var _this = this;
+	  			var file = e.target.files;
+	  			for(var i in file){
+	  				var reader = new FileReader();
+	  				reader.readAsDataURL(file[i]); // 读出 base64
+		  			reader.onloadend = function(e) {
+		  				// 图片的 base64 格式, 可以直接当成 img 的 src 属性值   
+		  				var dataURL = reader.result;
+		  				if(_this.imgList.length<3){
+		  					_this.imgList.push(e.target.result) 
+		  				}
+		  			};	
+	  			}
+	  			  			
 	        },
 	        imgDelete(index){
 	       		this.imgList.splice(index, 1);
@@ -187,17 +212,9 @@
 	        changeMoney(money){
 	        	var reg = /^\d+(?=\.{0,1}\d+$|$)/;
 	        	if(reg.test(money)){
-		        	let m = parseFloat(money)
+		        	let m = parseFloat(money);
 		        	if(m.toString().length<=9){
-    		        	if(m&&m>=0){
-    		        		if(parseInt(m)==m){
-    			        		this.money = m+'.00';
-    			        	}else{
-    		        			this.money = m + 0.00;
-    			        	}
-    		        	}else{
-    		        		this.money = 0+'.00'
-    		        	}
+    		        	this.money = this.returnFloat(m);
 		        	}else{
 		        		this.showToast = true
 		        		this.toast = '最多可输入9个字符'
@@ -217,6 +234,20 @@
 	        	}
 	        	
 	        	this.showInputOption = false;
+	        },
+	        returnFloat(val){ 				//强制保留两位小数
+				var value=Math.round(parseFloat(val)*100)/100;
+				var xsd=value.toString().split(".");
+				if(xsd.length==1){
+					value=value.toString()+".00";
+					return value;
+				}
+				if(xsd.length>1){
+					if(xsd[1].length<2){
+						value=value.toString()+"0";
+					}
+					return value;
+				}
 	        }
 		}
 	}

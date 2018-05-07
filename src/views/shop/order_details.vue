@@ -81,7 +81,7 @@
 
 		<!-- 买家已付款 有返积分-->
 		<div class="footer" v-else-if="value == 3">
-			<div class="view commen">取消发货</div>
+			<div class="view commen" @click="shipmentCancel">取消发货</div>
 		</div>
 
 		<!-- 等待买家付款 有返积分-->
@@ -94,7 +94,16 @@
 		<div class="footer" v-else-if="value == 4">
 			<div class="view commen">删除订单</div>
 		</div>
-
+		
+		<!-- 状态弹框 -->
+		<div v-transfer-dom>
+	      <confirm v-model="cancelShipment"
+	      title="取消发货？"
+	      @on-cancel="onCancel"
+	      @on-confirm="onConfirm">
+	        <p style="text-align:center;">确认取消发货吗？</p>
+	      </confirm>
+	    </div>
 	</div>
 </template>
 
@@ -106,6 +115,7 @@ import recommended from './components/recommended'
 		data(){
 			return {
 				title: '订单详情',
+				cancelShipment:false,
 				list: [
 					{ label: '积分类型', value:'信用积分'},
 					{ label: '运费', value:'10.00'},
@@ -139,6 +149,15 @@ import recommended from './components/recommended'
 		    goTsuccess(){
 		    	this.$router.push({ path: '/shop/t_success'})
 		    },
+		    onCancel () {
+		      	console.log('on cancel')
+		    },
+		    onConfirm () {
+		      	console.log('on confirm');
+		    },
+		    shipmentCancel(){
+		    	this.cancelShipment = true;
+		    }
 		}
 	}
 </script>

@@ -148,15 +148,17 @@ export default {
             }
         },
         showPanel: function(){
-            if(this.downImg == './static/shop/down1.png'){
-                this.downImg = './static/shop/down.png'
-            }else{
-                this.downImg = './static/shop/down1.png'
-            }
+            // if(this.downImg == './static/shop/down1.png'){
+            //     this.downImg = './static/shop/down.png'
+            // }else{
+            //     this.downImg = './static/shop/down1.png'
+            // }
             if(this.showMaskTop == false){
                 this.showMaskTop = true;
+                this.downImg = './static/shop/down.png'
             }else {
                 this.showMaskTop = false
+                this.downImg = './static/shop/down1.png'
             }
         },
         select: function(obj,i){
@@ -364,6 +366,9 @@ export default {
     color:#256fff;
     border-bottom:3px solid #256fff;
 }
+/*#shops .vux-tab-warp{
+    z-index: 110;
+}*/
 </style>
 
 

@@ -17,6 +17,7 @@ import multi_user_mall from '@/views/multi_user_mall/index'
 import search from '@/views/multi_user_mall/search'
 import write_logistics from '@/views/shop/write_logistics'
 import multi_shop_details from '@/views/multi_user_mall/shop_details'
+import summary from '@/views/multi_user_mall/summary'
 
 const shopModule = [
 	// 商城模块
@@ -105,7 +106,7 @@ const shopModule = [
 		component: refund_details
 	},
 	{
-		path: '/multi_user_mall', //多用户商城首页
+		path: '/multi_user_mall', //多用户商城店铺页
 		name: 'multi_user_mall',
 		component: multi_user_mall
 	},
@@ -123,7 +124,12 @@ const shopModule = [
 		path: '/multi_user_mall/shop_details',//多用户商城商品详情页
 		name: 'multi_shop_details',
 		component: multi_shop_details
-	}
+	},
+	{
+		path: '/multi_user_mall/summary', //多用户商城首页
+		name: 'summary',
+		component: summary
+	},
 ];
 
 export default shopModule

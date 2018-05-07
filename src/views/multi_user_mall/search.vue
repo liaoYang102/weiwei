@@ -5,7 +5,7 @@
 		<div class="recommended-search">
 			<div class="title">推荐搜索</div>
 			<div class="searchList">
-				<li v-for="(item, index) in searchList">{{ item}}</li>
+				<li v-for="(item, index) in searchList" @click="goProduct">{{ item}}</li>
 			</div>
 			<div class="clear"></div>
 		</div>
@@ -27,6 +27,11 @@
 		},
 		components:{
 			settingHeader, search
+		},
+		methods:{
+			goProduct(){
+				this.$router.push({path: '/shop/product'})
+			}
 		}
 	}
 </script>

@@ -5,7 +5,7 @@
 			<div class="position">
 				<router-link to="/member/score/strategy">
 					<img src="../../../assets/images/member/score_3.png" alt="">
-					<span class='fr'>积分明细</span>
+					<span class='fr'>积分说明</span>
 				</router-link>
 			</div>
 			<div class="avatar">

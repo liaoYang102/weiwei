@@ -12,15 +12,19 @@
 					<div class='fl' style='padding-top:0.1rem;'>
 						<p class="shopName">30分钟威伐光-750W单人套餐</p>
 						<p class="shopSize">型号：威伐光-750W</p>
-						<p class="shopPrice"><span class="priceNum">￥120</span></p>
+						<p class="shopPrice"><span class="priceNum">￥{{unitPrice}}</span></p>
 					</div>
 					<div class="clear"></div>
                 </div>
-                <cell title="购买数量"><x-number v-model="numberValue" button-style="round" :min="0" :max="999"></x-number></cell>
+                <cell title="购买数量">
+                	<x-number @on-change="changeNum" v-model="totalNum" button-style="round" fillable :min="1" :max="999"></x-number>
+                </cell>
                 <cell title="店铺优惠" value="省10元：100减5" :border-intent="false"></cell>
                 <cell :border-intent="false">
 					<span slot="title" style="color:#F23030; width: 3rem;display: inline-block;">CGC通用余额抵扣</span>
-					<span class="banlance" style='font-size: 0.24rem;color: #90A2C7;'><x-switch title="余额: ￥23400" sytle="padding-right: 10 !important;"></x-switch></span>
+					<span class="banlance" style='font-size: 0.24rem;color: #90A2C7;'>
+						<x-switch :title="'余额: ￥'+balance" v-model="defaultValue" @on-change="onPrice" :value-map="[0,1]" sytle="padding-right: 10 !important;"></x-switch>
+					</span>
 
                 </cell>
 
@@ -30,7 +34,7 @@
 
 		<div class="submit">
 			<div class="total fl">
-				共 <span class='color'>1</span> 件，总计：<span class="totalNum">¥120</span>
+				共 <span class='color'>{{totalNum}}</span> 件，总计：<span class="totalNum">¥{{totalPrice}}</span>
 			</div>
 			<div class="confirmSumbit fr" @click='popup'>确认提交</div>
 			<div class="clear"></div>
@@ -59,7 +63,9 @@
 		data() {
 			return {
 				title:"确认订单",
-				numberValue:1,  //默认数量
+				totalNum:1,  //默认数量,总计
+				unitPrice:120,//单价
+				totalPrice:120,//总价
 				paytype:false,
 				list: [{
 					icon: './static/member/bandCard.png',
@@ -74,6 +80,9 @@
 					key: '3',
 					value: '微信支付'
 				}],
+				balance:1200,
+				// price:120
+				defaultValue:1
 			}
 				
 		},
@@ -104,6 +113,13 @@
 			},
 			goShopsuccess(){
 				this.$router.push('/share/orderSuccess');
+			},
+			changeNum(totalNum){//改变订单数量
+				// console.log(totalNum)
+				this.totalPrice=this.totalNum * this.unitPrice
+			},
+			onPrice(newVal){
+				console.log(newVal)
 			}
 			
 		}

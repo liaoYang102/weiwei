@@ -11,6 +11,9 @@
 
 <script>
 	export default {
+		props:{
+			goSearch: Function
+		},
 		data(){
 			return {
 				themeTitle: '女子休闲',
@@ -21,10 +24,7 @@
 			
 		},
 		methods:{
-
-			goSearch(){
-				this.$router.push({ path: '/'})
-			},
+			
 		}
 	}
 </script>

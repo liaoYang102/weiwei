@@ -37,7 +37,7 @@
 									</div>
 								</div>
 							</router-link>
-							<load-more v-if="show" tip="正在加载"> </load-more>
+							<Loading v-if="show"> </Loading>
 						</div>
 					</div>
 				</div>
@@ -58,7 +58,7 @@
 									</div>
 								</div>
 							</router-link>
-							<load-more v-if="show2" tip="正在加载"> </load-more>
+							<Loading v-if="show2"> </Loading>
 						</div>
 					</div>
 				</div>
@@ -92,6 +92,8 @@
 <script>
 	import BScroll from 'better-scroll'
 	import { Tab, TabItem, Swiper, SwiperItem, CheckIcon, Scroller, Search, Popup, XButton, XHeader } from 'vux'
+	import settingHeader from '../../../components/setting_header'
+	import Loading from '../../../components/loading'
 	export default {
 		data() {
 			return {
@@ -195,13 +197,7 @@
 						money: '50.0',
 						ischeck: false,
 						id: 2
-					}, {
-						img: './static/member/login-img.png',
-						name: '热风2018年小清新女士星星休闲双肩包拉链方形背包B52W8201',
-						money: '50.0',
-						ischeck: false,
-						id: 2
-					},
+					}
 				],
 				proidList: [],
 				storeidList: [],
@@ -242,7 +238,7 @@
 						})
 						console.log(this.scroll2)
 						this.scroll2.on('pullingUp', (pos) => {
-							this.show = true;
+							this.show2 = true;
 							this.LoadData2()
 							this.$nextTick(function() {
 								this.scroll2.finishPullUp();
@@ -415,7 +411,8 @@
 			Search,
 			Popup,
 			XButton,
-			XHeader
+			XHeader,
+			Loading
 		}
 	}
 </script>
@@ -487,8 +484,8 @@
 			.vux-tab-ink-bar {
 				bottom: 4px!important;
 			}
-			.edit-btn{
-				color:rgba(144,162,199,1);
+			.edit-btn {
+				color: rgba(144, 162, 199, 1);
 			}
 		}
 		.top {
@@ -558,7 +555,7 @@
 			.wrapper2 {
 				position: absolute;
 				top: 0px;
-				bottom: 1rem;
+				bottom: 0;
 				overflow: hidden;
 				width: 100%;
 				.vux-loadmore {
@@ -567,6 +564,7 @@
 				}
 			}
 			.list-item {
+				background-color: white;
 				height: 2.22rem;
 				position: relative;
 				padding: 0.26rem 0.24rem;

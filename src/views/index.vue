@@ -797,11 +797,12 @@
 				font-size: 0.24rem;
 				color: #90A2C7;
 				.label {
+					width: 0.56rem;
 					margin-right: 0.2rem;
 					display: inline-block;
 					border-radius: 2px;
 					border: 2px solid #F23030;
-					padding: 0.02rem 8px;
+					padding: 0.02rem 0;
 					text-align: center;
 					font-size: 0.2rem;
 					color: #F23030;

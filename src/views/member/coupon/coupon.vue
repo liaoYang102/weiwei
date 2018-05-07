@@ -6,7 +6,7 @@
 				<tab class="tab" :line-width="2" active-color="#397df8" custom-bar-width="0.56rem">
 					<tab-item v-for="(item,index) in couponType" :selected="typeActive == index" @on-item-click="onItemClick(index)">{{item}}</tab-item>
 				</tab>
-				<i id="menu" class="iconfont" @click.active="showDrawer"></i>
+				<i id="menu" class="iconfont" @click.active="showDrawer"></i>
 			</div>
 		</div>
 		<div class="couponList">
@@ -28,7 +28,8 @@
 							</a>
 						</div>
 					</div>
-					<load-more v-if="show" tip="正在加载"> </load-more>
+
+					<Loading v-if="show"> </Loading>
 				</div>
 			</div>
 		</div>
@@ -64,6 +65,7 @@
 	import BScroll from 'better-scroll'
 	import { Tab, TabItem, Masker, Drawer, Spinner } from 'vux'
 	import settingHeader from '../../../components/setting_header'
+	import Loading from '../../../components/loading'
 	export default {
 		data() {
 			return {
@@ -181,7 +183,8 @@
 			settingHeader,
 			Drawer,
 			Masker,
-			Spinner
+			Spinner,
+			Loading
 		}
 	}
 </script>

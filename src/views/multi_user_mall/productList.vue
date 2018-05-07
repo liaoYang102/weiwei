@@ -1,88 +1,76 @@
 <template>
-    <div id="shops" style="height: 100%;">
-        <!-- <div class="wrapper" ref="wrapper"> -->
-            <!-- <div class="content"> -->
-                <!-- <settingHeader :title="title"></settingHeader> -->
+    <div id="shops">
+       
+        <tab :line-width='0' style="border-top: 1px solid #E1E1E1;">
+            <tab-item selected @on-item-click="showPanel" id="showPanel">
+              {{ tabItem}} <img :src="downImg" alt="" width="13%">
+            </tab-item>
+            <tab-item class='vux-center' @on-item-click="onItemClick">销量</tab-item>
+            <tab-item @on-item-click="sort">
+                <span>价格</span>
+                <img :src="priceImg" alt="" width="12%">
+            </tab-item>
+            <tab-item @on-item-click="onMenuClick">
+                筛选 <img src="../../assets/images/shop/screen.png" alt="" width="12%">
+            </tab-item>
+        </tab>
 
-                <tab :line-width='0' style="border-top: 1px solid #E1E1E1;">
-                    <tab-item selected @on-item-click="showPanel" id="showPanel">
-                      {{ tabItem}} <img :src="downImg" alt="" width="13%">
-                    </tab-item>
-                    <tab-item class='vux-center' @on-item-click="onItemClick">销量</tab-item>
-                    <tab-item @on-item-click="sort">
-                        <span>价格</span>
-                        <img :src="priceImg" alt="" width="12%">
-                    </tab-item>
-                    <tab-item @on-item-click="onMenuClick">
-                        筛选 <img src="../../assets/images/shop/screen.png" alt="" width="12%">
-                    </tab-item>
-                </tab>
-
-                <!-- 综合弹出框 -->
-                <div v-transfer-dom class="dialogTop">
-                    <x-dialog v-model="showDialog" :hide-on-blur="true">
-                        <div class="panel" id="panel">
-                            <li v-for="(item, index) in panel"  @click="select(item,index)">
-                                <div :class="{'selected':act1==index}">
-                                    <span>{{ item.title}}</span> 
-                                    <img src="../../assets/images/shop/selected.png" alt="" v-if="act1 == index">
-                                </div>
-                            </li>
+        <!-- 综合弹出框 -->
+        <div v-transfer-dom class="dialogTop">
+            <x-dialog v-model="showDialog" :hide-on-blur="true">
+                <div class="panel" id="panel">
+                    <li v-for="(item, index) in panel"  @click="select(item,index)">
+                        <div :class="{'selected':act1==index}">
+                            <span>{{ item.title}}</span> 
+                            <img src="../../assets/images/shop/selected.png" alt="" v-if="act1 == index">
                         </div>
-                    </x-dialog>
+                    </li>
                 </div>
+            </x-dialog>
+        </div>
 
-                <maskRight ref='xioaqiang'></maskRight>
+        <maskRight ref='xioaqiang'></maskRight>
 
-                <Swiper :imgList="imgList"></Swiper>
+        <Swiper :imgList="imgList"></Swiper>
 
-                <div class="shopList">
-                    <div class="all-shop">
-                        <!-- <li v-for="(item,index) in scorelist" @click="goShopdetails">
-                            <div class="list" :class="{'score' : status == 0}">
-                                <div class="score-exchange" v-if="status == 0">积分兑换</div>
-                                <div class="score-box">
-                                    <img src="../../assets/images/shop/shop1.png" alt="">
-                                    <div class="text-box">
-                                        <span>{{ item.name }}</span>
-                                        <div class="score-num">{{ item.score}}</div>
-                                        <span class="remaining">{{ item.remaining}}</span>
-                                    </div>
-                                </div>
+        <div class="shopList">
+            <div class="all-shop">
+                <!-- <li v-for="(item,index) in scorelist" @click="goShopdetails">
+                    <div class="list" :class="{'score' : status == 0}">
+                        <div class="score-exchange" v-if="status == 0">积分兑换</div>
+                        <div class="score-box">
+                            <img src="../../assets/images/shop/shop1.png" alt="">
+                            <div class="text-box">
+                                <span>{{ item.name }}</span>
+                                <div class="score-num">{{ item.score}}</div>
+                                <span class="remaining">{{ item.remaining}}</span>
                             </div>
-                        </li> -->
-                        
-                        <li v-for="(item,index) in moneylist" @click="goShopdetails">
-                            <div class="list">
-                                <div class="score-box">
-                                    <img src="../../assets/images/shop/shop1.png" alt="">
-                                    <div class="text-box">
-                                        <span>{{ item.name }}</span>
-                                        <div class='money-box'>
-                                            <span class="money-red">{{item.presentprice}}</span>
-                                            <!-- <div class="score-num" style="display:inline-block;">+{{ item.score}}</div> -->
-                                        </div>
-                                        <span class="remaining">
-                                            <span class="delete">{{ item.orprice}}</span>
-                                            <div class="right">{{ item.pin}}</div> 
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-
-                        <div class="clear"></div>
+                        </div>
                     </div>
-                    
-                    <!-- <loading v-if="show"></loading> -->
-                    <!-- <noMore v-if="showNomore"></noMore> -->
-                </div>
+                </li> -->
+                
+                <li v-for="(item,index) in moneylist" @click="goShopdetails">
+                    <div class="list">
+                        <div class="score-box">
+                            <img src="../../assets/images/shop/shop1.png" alt="">
+                            <div class="text-box">
+                                <span>{{ item.name }}</span>
+                                <div class='money-box'>
+                                    <span class="money-red">{{item.presentprice}}</span>
+                                    <!-- <div class="score-num" style="display:inline-block;">+{{ item.score}}</div> -->
+                                </div>
+                                <span class="remaining">
+                                    <span class="delete">{{ item.orprice}}</span>
+                                    <div class="right">{{ item.pin}}</div> 
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </li>
 
-            <!-- </div> -->
-        <!-- </div> -->
-        
-
-    
+                <div class="clear"></div>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -92,8 +80,6 @@ import settingHeader from '../../components/setting_header'
 import Swiper from '../shop/components/swiper'
 import BScroll from 'better-scroll'
 import maskRight from '../shop/components/maskRight'
-// import Loading from '../../components/loading'
-// import noMore from '../../components/noMore'
 
 export default {
     components: {
@@ -101,8 +87,6 @@ export default {
         Swiper,
         XDialog,
         maskRight
-        // Loading,
-        // noMore
     },
     data(){
         return {
@@ -163,15 +147,11 @@ export default {
             }
         },
         showPanel: function(){
-            if(this.downImg == './static/shop/down1.png'){
-                this.downImg = './static/shop/down.png'
-            }else{
+            if(this.downImg == './static/shop/down.png'){
                 this.downImg = './static/shop/down1.png'
             }
             if(this.showDialog == false){
                 this.showDialog = true;
-            }else {
-                this.showDialog = false
             }
 
             let top = parseInt(document.getElementById('showPanel').offsetTop);

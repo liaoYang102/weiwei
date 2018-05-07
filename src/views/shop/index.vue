@@ -232,8 +232,9 @@ export default {
 	}
 }
 .wrapper {
-	height: 92%;
+	height: 93%;
 	overflow: hidden;
+	padding-bottom: 1rem;
 }
 li{
 	list-style: none;
@@ -249,6 +250,7 @@ li:nth-child(odd){
 }
 .tab-list{
 	margin-bottom: 1px;
+	padding-bottom: 0.2rem;
 	background: #f5f6fa;
 	.tab-li{
 		float: left;
@@ -309,7 +311,7 @@ li:nth-child(odd){
 
 <style lang="less">
 .shopIndex{
-	height: 100%;
+	height: 92%;
 }
 body{
 	background: #f5f6fa;
