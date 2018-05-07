@@ -1,15 +1,23 @@
 <template>
 	<div class="storelist">
 		<settingHeader :title="title"></settingHeader>
+
+		<div class="searchBox">
+			<div class="search">
+				<img src="../../assets/images/shop/search.png">
+				<input type="search" placeholder="搜索心仪的门店" @click="goSearch">
+			</div>
+		</div>
+
 		<div class="nav">
 			<div class="area" @click="onArea()">
 				<p>{{region}}<i class="iconfont" :class="areaShang ? 'icon-shixinjiantou' : 'icon-shixinjiantou-copy'"></i></p>
 			</div>
-			<div class="type" @click="onType()">
-				<p>{{indType}}<i class="iconfont" :class="typeShang ? 'icon-shixinjiantou' : 'icon-shixinjiantou-copy'"></i></p>
-			</div>
 			<div class="price" @click="onPrice()">
 				<p>{{priceType}}<i class="iconfont" :class="priceShang ? 'icon-shixinjiantou' : 'icon-shixinjiantou-copy'"></i></p>
+			</div>
+			<div class="type" @click="onScreening()">
+				<p>{{screening}}<img src="../../assets/images/shop/screen.png" alt=""></p>
 			</div>
 			
 		</div>
@@ -117,14 +125,43 @@
 	      </popup>
 	    </div>
 
-	    <!-- 类型框 -->
-    	<div v-transfer-dom class="aa">
-	      <popup v-model="typeShang" position="top">
-	        	<group>
-			    	<radio title="title" :options="options" value="002" @on-change="changeType"></radio>
-			  	</group>
-	      </popup>
-	    </div>
+	    <!-- 筛选 -->
+    	<div style="height: 100%;">
+			<div v-transfer-dom class="screen">
+				<popup v-model='show1' position="right" style="padding-top: 0.6rem;">
+					<div class="wrapper2" ref="wrapper2">
+						<div class="content">
+						    <div class="screening">
+						    	<div class="logo">
+				    				<group>
+				    					<cell is-link :title="logoTitle" :border-intent="false" :arrow-direction="showContent ? 'up' : 'down'" @click.native="down()">
+				    					
+				    					</cell>
+				    					<div>
+				    						<div class="logolist">
+				    							<li class="item" v-for="(item, index) in logolist" @click="changeCss($event)">{{ item.name}}</li>
+				    						</div>
+				    				    </div>
+				    				</group>
+						    	</div>
+
+						    	<div class="screenlist" v-for="(screen) in screeningContent">
+							    	<div class="category">{{ screen.title}}</div>
+							    	
+					    			<li class="item" v-for="(item, index) in screen.options" @click="changeCss($event)">
+					    				{{ item.name}}
+					    			</li>
+						    	</div>
+						    </div>
+						</div>
+						<div class="bottom">
+				    		<div class="reset" @click="reset()">重置</div>
+				    		<div class="complete" @click="complete">完成</div>
+				    	</div>
+					</div>
+				</popup>
+			</div>
+		</div>
 
 	    <!-- 价格/距离框 -->
 	    <div v-transfer-dom class="aa">
@@ -150,7 +187,7 @@
 				title: '门店列表',
 				data:[],
 				region:'区域',//区域
-				indType:'类型',//类型
+				screening:'筛选',//类型
 				priceType:'价格',//价格
 				areaShang:false,//区域箭头
 				typeShang:false,//类型箭头
@@ -199,7 +236,27 @@
 					{
 						zhe:'8折'
 					}
-				]
+				],
+				show1:false,
+				logoTitle: '门店',
+				logolist: [
+					{ name:'logo'},
+					{ name:'logo'},
+					{ name:'logo'},
+					{ name:'logo'},
+					{ name:'logo'},
+					{ name:'logo'},
+					{ name:'logo'},
+					{ name:'logo'},
+					{ name:'logo'}
+				],
+				screeningContent: [
+					{ title: '美食', options: [ {name: '全部'},{name: '甜点饮品'},{name: '自助餐'}]},
+					{ title: '电影', options: [ {name: '全部'},{name: '热映电影'},{name: '电影周边'}]},
+					{ title: '酒店住宿', options: [ {name: '全部'},{name: '主题公园'},{name: '温泉'},{ name: '情侣酒店'}]},
+					{ title: '生活服务', options: [ {name: '全部'},{name: '家政服务'},{name: '鲜花'}]}
+				],
+				showContent: true
 			}
 		},
 		components:{
@@ -217,14 +274,14 @@
 		},
 		methods:{
 			InitScroll(){
-				this.$nextTick(() => {
-			        this.scroll = new BScroll(this.$refs.wrapper, {
-			        	scrollY:true,
-			        	click:true,
-			        	tap :true
-			        });
-			      })
-			      /*this.$nextTick(() => {
+				// this.$nextTick(() => {
+			 //        this.scroll = new BScroll(this.$refs.wrapper, {
+			 //        	scrollY:true,
+			 //        	click:true,
+			 //        	tap :true
+			 //        });
+			 //      })
+			    this.$nextTick(() => {
 				if(!this.scroll) {
 					this.scroll = new BScroll(this.$refs.wrapper, {
 						click: true,
@@ -241,10 +298,27 @@
 							this.scroll.refresh();
 						});
 					})
+					this.scroll2 = new BScroll(this.$refs.wrapper2, {
+						click: true,
+						scrollY: true,
+						pullUpLoad: {
+							threshold: -30, // 负值是当上拉到超过低部 70px；正值是距离底部距离 时，                    
+						}
+					})
+					console.log(this.scroll2)
+					this.scroll2.on('pullingUp', (pos) => {
+						this.show2 = true;
+						this.LoadData2()
+						this.$nextTick(function() {
+							this.scroll2.finishPullUp();
+							this.scroll2.refresh();
+						});
+					})
 				} else {
 					this.scroll.refresh()
+					this.scroll2.refresh()
 				}
-			})*/
+			})
 			},
 			onLoadData(){
 
@@ -258,12 +332,12 @@
 
 				}
 			},
-			onType(){
-				//点击类型
-				if(this.typeShang){
-					this.typeShang=false;
+			onScreening(){
+				//点击筛选
+				if(this.show1){
+					this.show1=false;
 				}else{
-					this.typeShang=true
+					this.show1=true
 				}
 			},
 			onPrice(){
@@ -304,7 +378,49 @@
 				this.$router.push({path:'/multi_user_mall'});
 				// this.$router.push({ path: '/shop/product' });
 				// consloe.log(9)
-			}
+			},
+			goSearch(){
+				this.$router.push({ path: '/multi_user_mall/search'})
+			},
+	    	// 下拉
+	    	down: function() {
+	    		let list = this.logolist;
+	    		let length= list.length;
+	    		let obj = { name: 'logo'};
+
+				if(length == 9) {
+					for(let i =0; i<6;i++){
+						list.push(obj)
+						this.showContent = false;
+						this.scroll.refresh();
+					}
+				}else{
+					list.splice(9,6)
+					this.showContent = true;
+					this.InitScroll()
+				}
+	    	},
+	    	// 切换样式
+	    	changeCss: function(e){
+				if (e.target.className.indexOf("li-selected") == -1) {
+		            e.target.className = "item li-selected"; //切换按钮样式
+
+		        } else {
+		            e.target.className = "item";//切换按钮样式
+		        }
+	    	},
+	    	// 重置
+	    	reset: function(){
+	    		var classList = document.getElementsByClassName('li-selected');
+	    		let listLength = classList.length
+	    		for(let i=0;i<listLength;i++){
+	    			classList[0].className = 'item';
+	    		}
+	    	},
+	    	// 完成
+	    	complete(){
+	    		this.show1 = false
+	    	}
 		}
 	}
 </script>
@@ -315,6 +431,10 @@
 	}
 	.aa .vux-radio-label{
 		color: #336FFF !important;
+	}
+
+	.aa .vux-no-group-title{
+		margin-top: 0;
 	}
 
 </style>
@@ -353,6 +473,11 @@
 				font-weight: bold;
 				i{
 					color: #90A2C7;
+				}
+				img{
+					width: 23%;
+					margin-left: 0.05rem;
+					vertical-align: middle;
 				}
 			}
 		}
@@ -452,7 +577,7 @@
 
 
 	/*地址遮罩*/
-	.vux-popup-dialog{
+	.storelist .vux-popup-dialog{
 		background: #fff;
 	}
 	.change_area{
@@ -501,8 +626,165 @@
 		}
 	}
 
-	.weui-cells_radio .weui-check:checked + .weui-icon-checked:before{
+	.storelist .weui-cells_radio .weui-check:checked + .weui-icon-checked:before{
 		color: #336FFF !important;
 	}
 
+	.searchBox{
+		width: 100%;
+		background: #fff;
+		padding-bottom: 0.14rem;
+		border-top: 0.01rem solid #D8DFF0;
+		.search{
+			position: relative;
+			width: 92%;
+			margin: 0 auto;
+			padding-top: 0.14rem;
+			img{
+				position: absolute;
+				width: 5%;
+				top: 0.25rem;
+				left: 0.26rem;
+			}
+			input{
+				width: 100%;
+				background: #F5F6FA;
+				border-radius: 0.29rem;
+				color: #1A2642;
+				font-size: 0.24rem;
+				padding: 0.14rem 0.1rem 0.12rem 0.78rem;
+			}
+			input::-webkit-input-placeholder {
+			    color: #90A2C7 !important; // WebKit browsers 
+			}
+			input:-moz-placeholder {
+			    color: #90A2C7 !important; // Mozilla Firefox 4 to 18 
+			}
+			input::-moz-placeholder {
+			    color: #90A2C7 !important; //Mozilla Firefox 19+ /
+			}
+			input:-ms-input-placeholder {
+			    color: #90A2C7 !important; //Internet Explorer 10+ */
+			}
+		}
+	}
+
+</style>
+
+<style lang="less" scoped>
+.wrapper2 {
+	height: 11.78rem;
+	overflow: hidden;
+	.content{
+		padding-bottom: 1rem;
+	}
+}
+.screen .vux-popup-dialog{
+	background: #fff;
+}
+li{
+	float: left;
+	background: #F5F6FA;
+	font-size: 0.24rem;
+	text-align: center;
+	list-style: none;
+}
+.screening{
+	width: 6.6rem;
+	font-family: PingFangSC-Regular;
+	font-size: 0.28rem;
+	color: #90A2C7;
+	letter-spacing: 0;
+	list-style: none;
+	.logo{
+		overflow: hidden;
+		margin-left: 0.25rem;
+		margin-bottom: 0.45rem;
+		img{
+			float: right;
+			width: 5%;
+			margin-right: 0.255rem;
+		}
+		.logolist{
+			margin: 0.24rem 0.32rem 0 0.15rem;
+			.item{
+				width: 1.86rem;
+				margin: 0 0.1rem 0.1rem 0;
+				padding: 0.32rem 0;
+			}
+		}
+	}
+	.li-selected{
+		color: #336FFF;
+		background: #E4EBFB;
+	}
+	.screenlist{
+		overflow: hidden;
+		margin-bottom: 0.35rem;
+		margin-left: 0.18rem;
+		color: #1A2642;
+		.category{
+			margin-left: 0.07rem;
+			margin-bottom: 0.24rem;
+		}
+		.item{
+			width: 1.96rem;
+			padding: 0.15rem 0;
+			border-radius: 0.04rem;
+			margin-right: 0.18rem;
+			margin-bottom: 0.18rem;
+		}
+	}
+}
+.screen .bottom{
+	position: fixed;
+	bottom: 1rem;
+	font-size: 0.28rem;
+	text-align: center;
+	.reset{
+		float: left;
+		width: 2.64rem;
+		padding: 0.3rem 0;
+		background: #F5F6FA;
+		color: #336FFF;
+	}
+	.complete{
+		float: left;
+		width: 3.96rem;
+		padding: 0.3rem 0;
+		background: #336FFF;
+		color: #fff;
+	}
+}
+</style>
+
+<style lang="less">
+.logo{
+	.weui-cells{
+		margin-top: 0;
+	}
+	.weui-cell{
+		padding: 0 0.24rem 0 0;
+	}
+	.vux-no-group-title{
+		margin-top: 0;
+	}
+	.weui-cells:before{
+		border-top: none;
+	}
+	.weui-cells:after{
+		border-bottom: none;
+	}
+	.vux-label{
+		font-size: 0.28rem;
+	}
+} 
+.screen .vux-popup-dialog{
+	min-height: 100%;
+	height: auto;
+	max-height: auto;
+}
+.screen .vux-popup-dialog.vux-popup-right{
+	height: auto;
+}
 </style>

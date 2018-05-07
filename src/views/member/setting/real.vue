@@ -144,9 +144,11 @@
 					buttons: ['确定', '取消'],
 					canel() {
 						_this.$dialog.hide()
+						console.log('--')
 					},
 					confirm() {
 						_this.$dialog.hide()
+						console.log('222')
 					}
 				})
 				console.log(_this.$dialog)

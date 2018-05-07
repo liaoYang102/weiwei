@@ -52,9 +52,6 @@ Vue.prototype.$http = axios //定义axios组件用法  this.$http(opt).then(fn)
 axios.defaults.baseURL = '/api';
 Vue.config.productionTip = false
 
-import install from '@/components/install'
-Vue.use(install)
-
 import dialog from '@/components/dialog'
 Vue.use(dialog)
 

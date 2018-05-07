@@ -17,7 +17,13 @@
 						<div class="btn" @click="focus" :class="{'btnActive': focusStatus == '已关注'}">{{focusStatus}}</div>
 					</div>
 				</div>
-				<search :goSearch="goSearch"></search>
+				<div class="searchBox">
+					<div class="search">
+						<img src="../../assets/images/shop/search.png">
+						<input type="search" placeholder="搜索商品" @click="goSearch">
+					</div>
+				</div>
+			
 				<div class="tab">
 					<tab :line-width="3" :scroll-threshold="4">
 				      	<tab-item selected @on-item-click="index">
@@ -77,7 +83,6 @@
 <script>
 	import settingHeader from '../../components/setting_header'
 	import mallTheme from './components/mall_theme'
-	import search from './components/search'
 	import BScroll from 'better-scroll'
 	import Loading from '../../components/loading'
 	import noMore from '../../components/noMore'
@@ -98,7 +103,6 @@
 		},
 		components:{
 			mallTheme,
-			search,
 			Loading,
        		noMore,
 			shop,
@@ -258,6 +262,45 @@
 		}
 	}
 }
+
+.searchBox{
+	width: 100%;
+	background: #fff;
+	padding-bottom: 0.14rem;
+	border-bottom: 0.01rem solid #D8DFF0;
+	.search{
+		position: relative;
+		width: 92%;
+		margin: 0 auto;
+		padding-top: 0.14rem;
+		img{
+			position: absolute;
+			width: 5%;
+			top: 0.25rem;
+			left: 0.26rem;
+		}
+		input{
+			width: 100%;
+			background: #F5F6FA;
+			border-radius: 0.06rem;
+			color: #1A2642;
+			padding: 0.14rem 0.1rem 0.12rem 0.78rem;
+		}
+		input::-webkit-input-placeholder {
+		    color: #90A2C7 !important; // WebKit browsers 
+		}
+		input:-moz-placeholder {
+		    color: #90A2C7 !important; // Mozilla Firefox 4 to 18 
+		}
+		input::-moz-placeholder {
+		    color: #90A2C7 !important; //Mozilla Firefox 19+ /
+		}
+		input:-ms-input-placeholder {
+		    color: #90A2C7 !important; //Internet Explorer 10+ */
+		}
+	}
+}
+
 </style>
 
 <style lang="less">

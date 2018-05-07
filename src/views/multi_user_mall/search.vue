@@ -1,9 +1,15 @@
 <template>
 	<section class="search">
 		<settingHeader :title="title"></settingHeader>
-		<search style="border-top: 0.01rem solid #D8DFF0;"></search>
+		<div class="searchBox">
+			<div class="searchInput">
+				<img src="../../assets/images/shop/search.png">
+				<input type="search" placeholder="搜索商品" @click="showCanel">
+			</div>
+			<p class="canel" v-if="canel == true" @click="back">取消</p>
+			<div class="clear"></div>
+		</div>
 		<div class="recommended-search">
-			<div class="title">推荐搜索</div>
 			<div class="searchList">
 				<li v-for="(item, index) in searchList" @click="goProduct">{{ item}}</li>
 			</div>
@@ -15,22 +21,28 @@
 
 <script>
 	import settingHeader from '../../components/setting_header'
-	import search from './components/search'
 	export default{
 		data(){
 			return{
 				title:"店铺内搜索",
+				canel: false,
 				searchList:[
 					'短裤','时尚大牌','热卖推荐','男士衬衫'
 				]
 			}
 		},
 		components:{
-			settingHeader, search
+			settingHeader
 		},
 		methods:{
 			goProduct(){
 				this.$router.push({path: '/shop/product'})
+			},
+			showCanel(){
+				this.canel = true
+			},
+			back(){
+				this.$router.go(-1)
 			}
 		}
 	}
@@ -44,36 +56,70 @@
 	height: 100%;
 	background: #fff;
 	.recommended-search{
-		padding-top: 0.18rem;
-		color: #90A2C7;
+		color: #1A2642;
 		font-size: 0.28rem;
-		.title{
-			color: #1A2642;
-			font-size: 0.32rem;
-			margin-bottom: 0.34rem;
-			margin-left: 0.24rem;
-		}
 		.searchList{
-			width: 93.6%;
-			margin: 0 auto;
+			margin: 0;
 			background: #fff;
+			height: 0.83rem;
+			margin-left: 0.26rem;
 			li{
+				width: 100%;
 				list-style: none;
-				float: left;
-				width: 48.2%;
-				height: 0.7rem;
-				line-height: 0.7rem;
-				background: #F5F6FA;
-				text-align: center;
-				margin-bottom: 0.2rem;
-				border-radius: 0.06rem;
-			}
-			li:nth-child(odd){
-			    margin-right: 0.24rem;
+				line-height: 0.83rem;
+				border-bottom: 1px solid #DEDCDC;
 			}
 		}
 	}
 }
-	
+
+.searchBox{
+	width: 100%;
+	background: #fff;
+	padding-bottom: 0.14rem;
+	border-top: 0.01rem solid #D8DFF0;
+	border-bottom: 0.01rem solid #D8DFF0;
+	.searchInput{
+		position: relative;
+		width: 80%;
+		margin: 0;
+		margin-left: 0.29rem;
+		padding-top: 0.14rem;
+		float: left;
+		img{
+			position: absolute;
+			width: 5%;
+			top: 0.25rem;
+			left: 0.26rem;
+		}
+		input{
+			width: 100%;
+			background: #E4EBFB;
+			border-radius: 0.29rem;
+			color: #1A2642;
+			padding: 0.14rem 0.1rem 0.12rem 0.78rem;
+		}
+		input::-webkit-input-placeholder {
+		    color: #90A2C7 !important; // WebKit browsers 
+		}
+		input:-moz-placeholder {
+		    color: #90A2C7 !important; // Mozilla Firefox 4 to 18 
+		}
+		input::-moz-placeholder {
+		    color: #90A2C7 !important; //Mozilla Firefox 19+ /
+		}
+		input:-ms-input-placeholder {
+		    color: #90A2C7 !important; //Internet Explorer 10+ */
+		}
+	}
+	.canel{
+		float: left;
+		color: #1A2642;
+		font-size: 0.24rem;
+		text-align: center;
+		margin-left: 0.33rem;
+		margin-top: 0.3rem;
+	}
+}
 </style>
 
