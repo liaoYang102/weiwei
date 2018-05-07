@@ -43,14 +43,10 @@
 					</div>
 					<div class="clear"></div>
                 </div>
-<<<<<<< HEAD
+
                 <router-link to="/member/coupon/coupon">
                 	 <cell title="店铺优惠" value="省10元：100减5" :border-intent="false"></cell>
                 </router-link>
-               
-=======
-                <cell title="店铺优惠" value="省10元：100减5" is-link :border-intent="false"></cell>
->>>>>>> f2880ea1db427ef94e1d5904ed4a37265d3846a4
                 <cell :border-intent="false">
 					<span slot="title" style="color:#F23030;">CGC通用余额抵扣</span>
 					<span class="banlance" style='font-size: 0.24rem;color: #90A2C7;'><x-switch title="余额: ￥23400" sytle="padding-right: 0 ;"></x-switch></span>
