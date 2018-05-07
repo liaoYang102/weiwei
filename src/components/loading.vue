@@ -1,36 +1,37 @@
 <template>
-    <div class="loading">
-        <load-more :tip="content"></load-more>
-    </div>
+	<div class="loading-box" v-show="show">
+		<div class="loading-mask"></div>
+		<div class="loading-content">
+			<div class="animate">
+			</div>
+			<div class="text">{{text}}</div>
+		</div>
+	</div>
 </template>
+
 <script>
-  export default {
-    data(){
-      return {
-          content: '加载中...'
-      }
-    }
-  }
+	export default {
+		props: {
+			show: Boolean,
+			text: {
+				type: String,
+				default: '正在加载中...'
+			},
+		}
+	}
 </script>
 
 <style lang="less">
-.loading{
-  .weui-loadmore{
-    margin-top: 0.15rem;
-    margin-left: auto;
-    margin-right: auto;
-    padding-bottom: 0.5rem;
-  }
-  .weui-loading{
-    width:0.5rem; 
-    height:0.5rem;
-    background: url('../assets/images/shop/loading.png') no-repeat;
-    background-size: 100%;
-  }
-  .weui-loadmore__tips{
-    display: block;
-    font-size: 0.2rem;
-    color: #90A2C7;
-  }
-} 
+	.loading-box {
+		position: fixed;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		width: 50px;
+		height: 50px;
+		background: red;
+		color: white;
+		text-align: center;
+		line-height: 50px;
+	}
 </style>

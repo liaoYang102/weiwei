@@ -72,6 +72,9 @@
 				userImages: '',
 			}
 		},
+		mounted() {
+			var _this = this
+		},
 		methods: {
 			just(e) {
 				var _this = this
@@ -116,24 +119,37 @@
 			},
 			submit() {
 				var _this = this
-				_this.showDialogStyle = true
-				tick(0, (percent) => {
-					if(percent === 100) {
-						_this.showDialogStyle = false
-						this.$vux.toast.show({
-							text: '上传成功',
-							type: 'text'
-						})
-						setTimeout(function() {
-							_this.$router.push({
-								path: '/member/setting/realoading'
-							})
-						}, 2100)
-						return
-					} else {
-						_this.text1 = `${percent}%`
+				//				_this.showDialogStyle = true
+				//				tick(0, (percent) => {
+				//					if(percent === 100) {
+				//						_this.showDialogStyle = false
+				//						this.$vux.toast.show({
+				//							text: '上传成功',
+				//							type: 'text'
+				//						})
+				//						setTimeout(function() {
+				//							_this.$router.push({
+				//								path: '/member/setting/realoading'
+				//							})
+				//						}, 2100)
+				//						return
+				//					} else {
+				//						_this.text1 = `${percent}%`
+				//					}
+				//				})
+				_this.$dialog.show({
+					type: 'success',
+					headMessage: '提示',
+					message: '实名成功1',
+					buttons: ['确定', '取消'],
+					canel() {
+						_this.$dialog.hide()
+					},
+					confirm() {
+						_this.$dialog.hide()
 					}
 				})
+				console.log(_this.$dialog)
 			}
 		}
 	}

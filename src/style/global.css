@@ -23,11 +23,16 @@ i,em{font-style:normal;}
 @media(min-device-width:414px) and (max-device-width:736px) and (-webkit-min-device-pixel-ratio:3){body{font-size:15.5px;}}
 
 /*原子类*/
-.clear { clear: both; }
-.clearfix:after{
-	content: "";
-	display: block;
-	clear: both;
+.clear { clear: both;}
+.clearfix {
+    zoom: 1;
+}
+.clearfix:after {
+    content: '';
+    display: block;
+    clear: both;
+    height: 0;
+    visibility: hidden;
 }
 .clear:after { display: block; clear: both; visibility: hidden; height: 0; overflow: hidden; content: "."; }
 .fl { float: left; }

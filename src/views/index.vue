@@ -170,7 +170,7 @@
 		data() {
 			return {
 				num: 5,
-				address:'',
+				address: '',
 				swiperOption: {
 					pagination: {
 						el: '.swiper-pagination'
@@ -339,6 +339,7 @@
 		},
 		created() {
 			this.loc()
+
 		},
 		mouted() {
 
@@ -358,11 +359,34 @@
 					});
 					map.addControl(geolocation);
 					geolocation.getCurrentPosition();
-					console.log(geolocation)
 					AMap.event.addListener(geolocation, 'complete', function(data) {
 						_this.address = data.addressComponent.city //返回城市定位
-					}); 
+					});
 				});
+				//				wx.config({
+				//					debug: true,
+				//					appId: "wx957ff39bdac082af",
+				//					timestamp: Date.parse(new Date()),
+				//					nonceStr: Math.random().toString(36).substring(2),
+				//					signature: "6b3af35b304341aff8b551924b385ce48d20c85b",
+				//					jsApiList: ['getLocation']
+				//				})
+				//				wx.ready(function() {
+				//					wx.getLocation({
+				//						type: 'wgs84', // 默认为wgs84的gps坐标，如果要返回直接给openLocation用的火星坐标，可传入'gcj02'
+				//						success: function(res) {
+				//							alert(123)
+				//							var latitude = res.latitude; // 纬度，浮点数，范围为90 ~ -90
+				//							var longitude = res.longitude; // 经度，浮点数，范围为180 ~ -180。
+				//							var speed = res.speed; // 速度，以米/每秒计
+				//							var accuracy = res.accuracy; // 位置精度
+				//							getBaiduPosition(latitude, longitude);
+				//						},
+				//						cancel: function(res) {
+				//							alert('用户拒绝授权获取地理位置');
+				//						}
+				//					})
+				//				})
 			}
 		},
 		components: {
