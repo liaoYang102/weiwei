@@ -18,10 +18,9 @@
 			      	<x-textarea :max="200" name="detail" placeholder="分享你的购买心得" :height="137" :show-counter="true"></x-textarea>
 			    </group>
 			    <div class="upload">
-			    	<div class="imgUpload"  v-for="(item,index) in imgList">
-			    		<p class='quxiao' @click="imgDelete(index)">
-                            <i class='iconfont icon-quxiao1'></i>
-                        </p>
+			    	<div class="imgUpload"  v-for="(item,index) in imgList" @click="cindex(index)">
+			    		<img @click="imgDelete(index)" class="gbx" src="../../assets/images/member/gbx.png"/>
+			    		<input class="upinput" type="file" @change="cone" />
 			    		<div class="bigPic" v-show="[imgList.length ? imgList.length >0 : imgList.length =0]">
 							<img :src="item">
 						</div>
@@ -78,7 +77,8 @@ export default {
 			data: 0,
 			data2: 0,
 			data3: 0,
-			imgList: []
+			imgList: [],
+			pindex: 0
 		}
 	},
 	created(){
@@ -86,24 +86,40 @@ export default {
 	},
 	methods:{
 		test:function (e) {
-			var _this = this
-  			var reader = new FileReader();
-  			var file = e.target.files[0];
-  			reader.readAsDataURL(file); // 读出 base64
-  			reader.onloadend = function(e) {
-  				// 图片的 base64 格式, 可以直接当成 img 的 src 属性值        
-  				var dataURL = reader.result;
-  				if(_this.imgList.length<5){
-  					_this.imgList.push(e.target.result) 
-  				}
-  			};
+  			var _this = this;
+  			var file = e.target.files;
+			for(var i = 0; i < file.length; i++) {
+				var reader = new FileReader();
+				reader.readAsDataURL(file[i]); // 读出 base64
+				reader.onloadend = function(e) {
+					// 图片的 base64 格式, 可以直接当成 img 的 src 属性值        
+					var dataURL = reader.result;
+					if(_this.imgList.length<5){
+						_this.imgList.push(e.target.result)
+					}
+				};
+			}
        },
        goComents(){
        		this.$router.push({name:'shop_details',params:{title: '评价'}})
        },
        imgDelete(index){
        		this.imgList.splice(index, 1);
-       }
+       },
+       cindex(index) {
+			this.pindex = index
+			console.log(this.pindex)
+	   },
+       cone(e) {
+			var _this = this
+			var reader = new FileReader();
+			var file = e.target.files[0];
+			reader.readAsDataURL(file);
+			reader.onloadend = function(e) {
+				var dataURL = reader.result;
+				_this.imgList.splice(_this.pindex, 1, e.target.result)
+			};
+	   },
 	}
 }
 </script>
@@ -157,21 +173,13 @@ export default {
 					float: left;
 					margin-right: 0.3rem;
 					margin-bottom: 0.15rem;
-					.quxiao{
+					.gbx{
 						position: absolute;
-					    top: -0.2rem;
-					    right: -0.2rem;
-					    background-color: #000;
-					    border-radius: 50%;
-					    opacity: .5;
-					    width: 0.4rem;
-					    height: 0.4rem;
-					    text-align: center;
-					    z-index: 222;
-						i{
-							font-size: 0.2rem;
-							color: #fff;
-						}
+						right: -7px;
+						top: -7px;
+						width: 0.38rem;
+						height: 0.38rem;
+						z-index: 222;
 					}
 					.length{
 						font-size: .3rem;
