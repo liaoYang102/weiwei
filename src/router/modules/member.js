@@ -24,6 +24,7 @@ import realoading from '@/views/member/setting/realoading'
 import resetCode from '@/views/member/setting/resetCode'
 import purse from '@/views/member/purse/index'
 import qrcode from '@/views/member/purse/qrcode'
+import hasqrcode from '@/views/member/purse/hasqrcode'
 import banlancelog from '@/views/member/purse/banlancelog'
 import banlance from '@/views/member/purse/banlance'
 import recharge from '@/views/member/purse/recharge'
@@ -181,10 +182,11 @@ const memberModule = [{
 	{
 		path: '/member/purse/qrcode',
 		name: 'qrcode',
-		component: qrcode,
-		meta: {
-			navShow: true
-		}
+		component: qrcode
+	},{
+		path: '/member/purse/hasqrcode',
+		name: 'hasqrcode',
+		component: hasqrcode
 	},
 	{
 		path: '/member/purse/recharge',

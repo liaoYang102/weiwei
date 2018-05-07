@@ -1,5 +1,5 @@
 <template>
-	<div class="content">
+	<div class="information-box">
 		<settingHeader :title="title"></settingHeader>
 		<div class="list">
 			<group gutter="0">
@@ -12,12 +12,16 @@
 					</div>
 				</cell>
 				<cell class="list-item" title="用户昵称">
-					<x-input class="input-item" ref="name" v-model="name" :value="name" text-align="right" :show-clear="false" placeholder="未设置" type="text" @on-change="nameChange" @on-enter="ok"></x-input>
+					<x-input class="input-div" ref="name" v-model="name" :value="name" text-align="right" :show-clear="false" placeholder="未设置" type="text" @on-change="nameChange" @on-enter="ok"></x-input>
 				</cell>
+			</group>
+			<group>
 				<cell class="list-item" title="我的二维码" is-link link="/member/purse/qrcode"><img class="code" src="../../../assets/images/member/code@2x.png" /></cell>
 				<cell class="list-item user-address" title="地址管理" is-link link="/member/address/index"></cell>
+			</group>
+			<group>
 				<cell class="list-item" title="实名认证" :value="sureName" is-link link='/member/setting/real'></cell>
-				<cell class="list-item" title="个人档案" is-link link='/member/info/data' primary="content"> <range v-model="data5" disabled :max="100"></range></cell>
+				<cell class="list-item" title="个人档案" is-link link='/member/info/data' primary="content">完整度{{data5}}%</cell>
 			</group>
 		</div>
 	</div>
@@ -35,7 +39,7 @@
 				sureName: '张广', //实名认证
 				varmax: 1, //图片最大张数
 				images: '', //图片数组
-				data5:88
+				data5: 88
 			}
 		},
 		created() {},
@@ -70,44 +74,57 @@
 	}
 </script>
 
-<style lang="less" scoped>
-	.list {
-		.list-item {
-			font-family: PingFangSC-Regular;
-			font-size: 0.28rem;
-			color: #1A2642;
-			letter-spacing: 0;
-			height: 1.02rem;
-			padding-top: 0!important;
-			padding-bottom: 0!important;
-			.tx {
-				width: 1rem;
-				height: 1rem;
-				border-radius: 50%;
-				vertical-align: middle;
-			}
-			.code {
-				width: 0.36rem;
-				height: 0.36rem;
-				vertical-align: middle;
-			}
-		}
-		.user-img {
-			height: 1.5rem;
-			.up-box {
-				position: relative;
-				overflow: hidden;
-				.upinput {
-					opacity: 0;
-					z-index: 11;
-					position: absolute;
-					top: 0;
-					right: 0;
-					width: 100%;
-					height: 100%;
+<style lang="less">
+	.information-box {
+		.list {
+			.list-item {
+				font-family: PingFangSC-Regular;
+				font-size: 0.28rem;
+				color: #1A2642;
+				letter-spacing: 0;
+				height: 1.02rem;
+				padding-top: 0!important;
+				padding-bottom: 0!important;
+				.tx {
+					width: 1rem;
+					height: 1rem;
+					border-radius: 50%;
+					vertical-align: middle;
 				}
-				img {
-					z-index: 1;
+				.code {
+					width: 0.36rem;
+					height: 0.36rem;
+					vertical-align: middle;
+				}
+				.input-div {
+					padding: 0 15px!important;
+					height: 1.02rem;
+					.weui-cell__bd>input{
+						height: 100%;
+						color:rgba(144,162,199,1)!important;
+					}
+				}
+				.weui-cell__ft{
+					color:rgba(144,162,199,1)!important;
+				}
+			}
+			.user-img {
+				height: 1.5rem;
+				.up-box {
+					position: relative;
+					overflow: hidden;
+					.upinput {
+						opacity: 0;
+						z-index: 11;
+						position: absolute;
+						top: 0;
+						right: 0;
+						width: 100%;
+						height: 100%;
+					}
+					img {
+						z-index: 1;
+					}
 				}
 			}
 		}

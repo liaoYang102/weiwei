@@ -1,20 +1,73 @@
 <template>
-	<div>
+	<div class="qrcode-box">
 		<settingHeader :title="title"></settingHeader>
-		<div class="qrcode-box">
-			<div class="bg"></div>
-			<div class="content">
-				<div class="pr-box">
-					<img class="user-img" src="../../../assets/images/member/score_1.png" alt="" />
-					<p>账号 : 17520439845</p>
-					<div class="qrcode-div">
+		<!--有赚钱码-->
+		<div v-if="grade>1">
+			<div class="bg">
+				<p class="title">我的赚钱码</p>
+				<div class="b-w">
+					<img class="code" src="../../../assets/images/lock/qcode.png" />
+					<div class="bottom">
+						<img src="../../../assets/images/draw/photo2.png" alt="" />
 						<div>
-							<qrcode class='qrconde' value="https://vux.li?x-page=demo_qrcode" type="img"></qrcode>
+							<p>张某某</p>
+							<p>18520485288</p>
 						</div>
 					</div>
-					<div class="slogan"></div>
-					<div class="tip">
-						长按此图识别二维码，加盟CGC智慧产业联盟
+				</div>
+			</div>
+			<div class="b-y">
+				<div class="tip-box">
+					<div class="title">如何赚钱?</div>
+					<div class="text-box">
+						<div class="item">
+							<div>第一步：</div>
+							<div>转发商品链接或商品图片给微信好友；</div>
+						</div>
+						<div class="item">
+							<div>第二步：</div>
+							<div>从您转发的链接或图片进入商城的好友，系统将自动锁定成为您的客户，他们在微信商城中购买任何商品，您都可以获得CGC通用积分；</div>
+						</div>
+						<div class="item">
+							<div>第三步：</div>
+							<div>您可以在创业管理中心查看【我的团队】和【CGC通用积分明细】，CGC通用积分抵现金在CGC智慧产业联盟任何实体企业或彩融商城通用。</div>
+						</div>
+					</div>
+					<div class="text-box1">
+						<div class="item">
+							<div>说明：</div>
+							<div>分享后会带有独有的推荐码，您的好友访问之后买系统会自动检测并记录客户关系。如果您的好友已被其他人抢先发展成了客户，他就不能成为您的客户，以最早发展成为客户为准</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--未获得赚钱码-->
+		<div class="bg-w" v-else>
+			<div class="img-box">
+				<img src="../../../assets/images/member/IMG_3708@2x.png" />
+			</div>
+			<div class="middle">
+				<p>暂未满足条件</p>
+				<p>专享3大权益 每月预计可赚2000+</p>
+				<div @click="$router.push({path:'/member/purse/hasqrcode'})">
+					查看条件
+				</div>
+			</div>
+			<div class="bottom">
+				<div class="title">
+					权益一 · 每月优惠券
+				</div>
+				<div class="bg-y">
+					<div class="one">
+						<span>120</span><span>元</span>
+					</div>
+					<div class="two">
+						<p>威伐光体验卷</p>
+						<p>全国通用</p>
+					</div>
+					<div class="three">
+						<div>领取礼卷</div>
 					</div>
 				</div>
 			</div>
@@ -29,6 +82,7 @@
 		data() {
 			return {
 				title: '我的二维码',
+				grade: 0,
 			}
 		},
 		created() {
@@ -39,85 +93,234 @@
 
 		},
 		components: {
-			settingHeader,
-			Qrcode
+			settingHeader
 		}
 	}
 </script>
 
 <style lang="less">
 	.qrcode-box {
-		.bg {
-			background: url(../../../assets/images/member/qrcode1.png) no-repeat;
-			background-size: 100%;
-			height: 6.47rem;
-		}
-		.content {
-			box-shadow: 2px 8px 10px #c4d2ee, -2px 0px 10px #c4d2ee;
-			border-radius: 10px;
-			position: absolute;
-			width: 5.73rem;
-			height: 8.44rem;
-			background-color: #fff;
-			left: 50%;
-			top: 18%;
-			transform: translate(-50%, 0%);
-			.pr-box {
-				position: absolute;
-				left: 50%;
-				top: -7%;
-				width: 100%;
-				transform: translate(-50%, 0%);
-				display: flex;
-				justify-content: center;
-				flex-direction: column;
-				align-items: center;
-				.user-img {
-					width: 1.5rem;
-					height: 1.5rem;
-					border-radius: 50%;
-					overflow: hidden;
+		font-family: PingFangSC-Medium;
+		/*2*/
+		.bg-w {
+			background: white;
+			position: relative;
+			.img-box {
+				height: 3.75rem;
+				position: relative;
+				img {
+					position: absolute;
+					top: 50%;
+					left: 50%;
+					transform: translate(-50%, -50%);
+					width: -webkit-fill-available;
+					height: auto;
 				}
-				p {
-					margin-top: 0.5rem;
+			}
+			.middle {
+				font-family: PingFangSC-Medium;
+				color: rgba(26, 38, 66, 1);
+				text-align: center;
+				padding: 0.23rem;
+				p:nth-child(1) {
+					font-size: 0.36rem;
+					margin-bottom: 0.11rem;
 				}
-				.qrcode-div {
-					width: 4.9rem;
-					height: 4.74rem;
-					background: url(../../../assets/images/member/qrcode3.png) no-repeat;
-					background-size: 100%;
-					position: relative;
-					div {
-						position: absolute;
-						left: 50%;
-						top: 44%;
-						transform: translate(-50%, -44%);
-						width: 3.02rem;
-						height: 3rem;
-						position: absolute;
-						border: 8px solid #548aeb;
-						z-index: 10;
-						overflow: hidden;
-						display: flex;
-						align-items: center;
-						justify-content: center;
-						.qrcode {
-							width: 100%;
-							height: 100%;
+				p:nth-child(2) {
+					font-size: 0.28rem;
+				}
+				div {
+					width: 6rem;
+					height: 0.9rem;
+					line-height: 0.9rem;
+					text-align: center;
+					margin: 0.67rem auto;
+					background: linear-gradient(90deg, rgba(94, 195, 255, 1), rgba(16, 111, 227, 1));
+					border-radius: 45px;
+					color: white;
+				}
+			}
+			.bottom {
+				font-family: PingFangSC-Regular;
+				padding: 0 0.46rem;
+				.title {
+					font-size: 0.32rem;
+					color: rgba(26, 38, 66, 1);
+				}
+				.bg-y {
+					width: 100%;
+					height: 1rem;
+					margin-top: 0.31rem;
+					background: rgba(216, 223, 240, 1);
+					border-radius: 6px;
+					padding: 0 0.24rem;
+					display: flex;
+					align-items: center;
+					font-family: PingFangSC-Regular;
+					color: rgba(26, 38, 66, 1);
+					box-sizing: border-box;
+					.one {
+						padding-right: 0.24rem;
+						border-right: 1px dashed #1A2642;
+						span:nth-child(1) {
+							font-size: 0.48rem;
+						}
+						span:nth-child(2) {
+							font-size: 0.20rem;
+						}
+					}
+					.two {
+						padding: 0 0.24rem;
+						color: rgba(26, 38, 66, 1);
+						p:nth-child(1) {
+							font-size: 0.28rem;
+							font-family: PingFangSC-Medium;
+						}
+						p:nth-child(2) {
+							font-size: 0.24rem;
+							font-family: PingFangSC-Regular;
+						}
+					}
+					.three {
+						flex: 1;
+						div {
+							width: 1.34rem;
+							height: 0.46rem;
+							line-height: 0.46rem;
+							text-align: center;
+							color: white;
+							background: rgba(26, 38, 66, 1);
+							border-radius: 23px;
+							float: right;
+							padding: 0.05rem 0.19rem;
 						}
 					}
 				}
-				.slogan {
-					width: 4.1rem;
-					height: 1.03rem;
-					background: url(../../../assets/images/member/qrcode5.png) no-repeat;
-					background-size: 100%;
+			}
+		}
+		.bg-w:before {
+			content: " ";
+			position: absolute;
+			left: 0;
+			top: 0;
+			right: 0;
+			height: 1px;
+			border-top: 1px solid #D9D9D9;
+			color: #D9D9D9;
+			-webkit-transform-origin: 0 0;
+			transform-origin: 0 0;
+			-webkit-transform: scaleY(0.5);
+			transform: scaleY(0.5);
+			left: 0px;
+		}
+		/*1*/
+		.b-y {
+			padding: 0 0.44rem 2.56rem 0.44rem;
+			background: #ff7e09;
+			.tip-box {
+				.title {
+					height: 0.75rem;
+					font-size: 0.30rem;
+					font-family: PingFangSC-Medium;
+					color: rgba(255, 255, 255, 1);
+					position: relative;
 				}
-				.tip {
-					text-align: center;
-					color: rgb(98, 98, 98);
-					font-size: 0.24rem;
-					margin-top: 0.2rem;
+				.text-box,
+				.text-box1 {
+					padding: 0.18rem 0.18rem 0.34rem 0.18rem;
+					font-size: 0.28rem;
+					font-family: PingFangSC-Regular;
+					color: rgba(255, 255, 255, 1);
+					position: relative;
+					.item {
+						display: flex;
+						div:nth-child(1) {
+							width: 1.2rem;
+						}
+						div:nth-child(2) {
+							flex: 1;
+						}
+					}
+					.item:nth-child(2) {
+						margin: 0.25rem 0;
+					}
+				}
+				.title:after,
+				.text-box:after {
+					content: " ";
+					position: absolute;
+					left: 0;
+					bottom: 0;
+					right: 0;
+					height: 1px;
+					border-top: 1px solid white;
+					color: #D9D9D9;
+					-webkit-transform-origin: 0 0;
+					transform-origin: 0 0;
+					-webkit-transform: scaleY(0.5);
+					transform: scaleY(0.5);
+					left: 0px;
+				}
+			}
+		}
+		.bg {
+			padding: 60px 0.44rem 1rem 0.44rem;
+			box-sizing: border-box;
+			background: url(../../../assets/images/member/qconde-bg.png) no-repeat;
+			background-size: 100%;
+			.title {
+				font-size: 0.36rem;
+				color: rgba(26, 38, 66, 1);
+				margin: 1rem 0;
+			}
+			.b-w {
+				width: 5.78rem;
+				height: 7.45rem;
+				border-radius: 5px;
+				background-color: white;
+				margin: 0 auto;
+				padding: 0.29rem;
+				.code {
+					width: 100%;
+					height: auto;
+				}
+				.bottom {
+					display: flex;
+					align-items: center;
+					margin-top: 0.29rem;
+					position: relative;
+					padding: 0.32rem 0;
+					img {
+						width: 1rem;
+						height: 1rem;
+						margin-right: 0.22rem;
+					}
+					div {
+						font-family: PingFangSC-Regular;
+						p:nth-child(1) {
+							font-size: 0.32rem;
+							color: rgba(26, 38, 66, 1);
+						}
+						p:nth-child(2) {
+							font-size: 0.28rem;
+							color: rgba(115, 134, 173, 1);
+						}
+					}
+				}
+				.bottom:before {
+					content: " ";
+					position: absolute;
+					left: 0;
+					top: 0;
+					right: 0;
+					height: 1px;
+					border-top: 1px solid #D9D9D9;
+					color: #D9D9D9;
+					-webkit-transform-origin: 0 0;
+					transform-origin: 0 0;
+					-webkit-transform: scaleY(0.5);
+					transform: scaleY(0.5);
+					left: 0px;
 				}
 			}
 		}

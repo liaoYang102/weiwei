@@ -1,8 +1,16 @@
 <template>
 	<div class="follow-box">
-		<settingHeader :title="title"></settingHeader>
-		<div class="top">
-			<div class="bj-box" @click="edit" :class="{'bjcolor':isBj}">{{isBj?'完成':'编辑'}}</div>
+		<x-header class="b-w" :left-options="{backText:''}" @on-click-more="edit">
+			<div class="tar-box">
+				<tab v-model="index" :line-width="2" active-color="#397df8" custom-bar-width="0.56rem">
+					<tab-item selected @on-item-click="active">商品</tab-item>
+					<tab-item @on-item-click="active">店铺</tab-item>
+				</tab>
+			</div>
+			<div class="edit-btn" @click="edit" slot="right">{{isBj?'完成':'编辑'}}</div>
+		</x-header>
+		<!--<div class="top">
+			<div class="bj-box" @click="edit" :class="{'bjcolor':isBj}"></div>
 			<div class="tar-box">
 				<tab v-model="index" :line-width="2" active-color="#397df8" custom-bar-width="0.56rem">
 					<tab-item selected @on-item-click="active">商品</tab-item>
@@ -10,7 +18,7 @@
 				</tab>
 			</div>
 			<img @click="sousShow" src="../../../assets/images/member/sous.png" />
-		</div>
+		</div>-->
 		<swiper v-model="index" height="100vh" :show-dots="false" :threshold='100'>
 			<swiper-item>
 				<div class="pro-list">
@@ -63,24 +71,27 @@
 				</div>
 			</popup>
 		</div>
-		<transition leave-active-class="leave">
-			<div class="bjBtn-box" v-if="isBj">
-				<div @click="isallcheck">
-					<check-icon v-if="isBj && index==0" class="check-btn" :value.sync="allprCheck">全部商品</check-icon>
-					<check-icon v-if="isBj && index==1" class="check-btn" :value.sync="allstCheck">全部店铺</check-icon>
+		<!--编辑页-->
+		<div v-transfer-dom>
+			<popup v-model="isBj" position="bottom" height="0.94rem" :show-mask="false">
+				<div class="bjBtn-box">
+					<div style="flex: 1;" @click="isallcheck">
+						<check-icon v-if="isBj && index==0" class="check-btn" :value.sync="allprCheck">全部商品 <span v-if="!allprCheck">已选<i>{{proidList.length}}</i>个商品</span></check-icon>
+						<check-icon v-if="isBj && index==1" class="check-btn" :value.sync="allstCheck">全部店铺<span v-if="!allstCheck">已选<i>{{proidList.length}}</i>间店铺</span></check-icon>
+					</div>
+					<div class="qx-box">
+						<div class="add-btn">取消关注</div>
+					</div>
 				</div>
-				<div class="qx-box">
-					<div class="add-btn">取消关注</div>
-				</div>
-			</div>
-		</transition>
+			</popup>
+		</div>
 
 	</div>
 </template>
 
 <script>
 	import BScroll from 'better-scroll'
-	import { Tab, TabItem, Swiper, SwiperItem, CheckIcon, Scroller, Search, Popup, XButton } from 'vux'
+	import { Tab, TabItem, Swiper, SwiperItem, CheckIcon, Scroller, Search, Popup, XButton, XHeader } from 'vux'
 	import settingHeader from '../../../components/setting_header'
 	import Loading from '../../../components/loading'
 	export default {
@@ -160,40 +171,38 @@
 						money: '50.0',
 						ischeck: false,
 						id: 2
-					},
-					{
+					}, {
 						img: 'https://ss0.bdstatic.com/-0U0bnSm1A5BphGlnYG/tam-ogel/299c55e31d7f50ae4dc85faa90d6f445_121_121.jpg',
 						name: '热风2018年小清新女士星星休闲双肩包拉链方形背包B52W8201',
 						money: '50.0',
 						ischeck: false,
-						id: 3
+						id: 1
 					},
 					{
 						img: './static/member/login-img.png',
 						name: '热风2018年小清新女士星星休闲双肩包拉链方形背包B52W8201',
 						money: '50.0',
 						ischeck: false,
-						id: 4
-					},
-					{
+						id: 2
+					}, {
 						img: 'https://ss0.bdstatic.com/-0U0bnSm1A5BphGlnYG/tam-ogel/299c55e31d7f50ae4dc85faa90d6f445_121_121.jpg',
 						name: '热风2018年小清新女士星星休闲双肩包拉链方形背包B52W8201',
 						money: '50.0',
 						ischeck: false,
-						id: 5
+						id: 1
 					},
 					{
 						img: './static/member/login-img.png',
 						name: '热风2018年小清新女士星星休闲双肩包拉链方形背包B52W8201',
 						money: '50.0',
 						ischeck: false,
-						id: 6
+						id: 2
 					}
 				],
 				proidList: [],
 				storeidList: [],
 				show: false,
-				show2:false
+				show2: false
 			}
 		},
 		created() {},
@@ -219,7 +228,7 @@
 								this.scroll.refresh();
 							});
 						})
-						
+
 						this.scroll2 = new BScroll(this.$refs.wrapper2, {
 							click: true,
 							scrollY: true,
@@ -227,6 +236,7 @@
 								threshold: -30, // 负值是当上拉到超过低部 70px；正值是距离底部距离 时，                    
 							}
 						})
+						console.log(this.scroll2)
 						this.scroll2.on('pullingUp', (pos) => {
 							this.show2 = true;
 							this.LoadData2()
@@ -393,7 +403,6 @@
 			}
 		},
 		components: {
-			settingHeader,
 			Tab,
 			TabItem,
 			Swiper,
@@ -402,12 +411,66 @@
 			Search,
 			Popup,
 			XButton,
+			XHeader,
 			Loading
 		}
 	}
 </script>
 
-<style lang="less" scoped>
+<style lang="less">
+	.bjBtn-box {
+		position: fixed;
+		bottom: 0;
+		display: flex;
+		align-items: center;
+		width: 100%;
+		height: 0.94rem;
+		padding-left: 0.24rem;
+		box-sizing: border-box;
+		background-color: white;
+		.check-btn {
+			margin-right: 0.24rem;
+			span {
+				margin-left: 0.25rem;
+				font-size: 0.24rem;
+				font-family: PingFangSC-Regular;
+				color: rgba(115, 134, 173, 1);
+				i {
+					color: red;
+				}
+			}
+		}
+		.qx-box {
+			.add-btn {
+				width: 2.4rem;
+				height: 0.94rem;
+				line-height: 0.94rem;
+				background: #FF292E;
+				font-size: 0.28rem;
+				text-align: center;
+				font-family: MicrosoftYaHei;
+				color: rgba(255, 255, 255, 1);
+				text-align: center;
+			}
+		}
+	}
+	
+	.bjBtn-box:before {
+		content: " ";
+		position: absolute;
+		left: 0;
+		top: 0;
+		right: 0;
+		height: 1px;
+		border-top: 1px solid #D9D9D9;
+		color: #D9D9D9;
+		-webkit-transform-origin: 0 0;
+		transform-origin: 0 0;
+		-webkit-transform: scaleY(0.5);
+		transform: scaleY(0.5);
+		left: 0px;
+	}
+	
 	.follow-box {
 		font-family: MicrosoftYaHei;
 		.animated {
@@ -416,55 +479,14 @@
 			-webkit-animation-fill-mode: both;
 			animation-fill-mode: both;
 		}
-		.bjBtn-box {
-			position: fixed;
-			bottom: 0;
-			display: flex;
-			align-items: center;
-			width: 100%;
-			padding-left: 0.24rem;
-			box-sizing: border-box;
+		.b-w {
 			background-color: white;
-			.check-btn {
-				margin-right: 0.24rem;
+			.vux-tab-ink-bar {
+				bottom: 4px!important;
 			}
-			.qx-box {
-				flex: 1;
-				height: 100%;
-				text-align: center;
-				padding: 0.24rem 0.4rem;
-				box-sizing: border-box;
-				.add-btn {
-					height: 0.7rem;
-					line-height: 0.7rem;
-					background: rgba(51, 111, 255, 1);
-					font-size: 0.28rem;
-					text-align: center;
-					font-family: MicrosoftYaHei;
-					color: rgba(255, 255, 255, 1);
-					border-radius: 2px;
-				}
+			.edit-btn {
+				color: rgba(144, 162, 199, 1);
 			}
-		}
-		.bjBtn-box:before {
-			content: " ";
-			position: absolute;
-			left: 0;
-			top: 0;
-			right: 0;
-			height: 1px;
-			border-top: 1px solid #D9D9D9;
-			color: #D9D9D9;
-			-webkit-transform-origin: 0 0;
-			transform-origin: 0 0;
-			-webkit-transform: scaleY(0.5);
-			transform: scaleY(0.5);
-			left: 0px;
-		}
-		.leave {
-			position: fixed;
-			bottom: -80px;
-			transition: all 0.1s linear;
 		}
 		.top {
 			padding: 0px 15px;
@@ -528,7 +550,9 @@
 		}
 		.pro-list,
 		.store-list {
-			.wrapper,.wrapper2 {
+			background-color: white;
+			.wrapper,
+			.wrapper2 {
 				position: absolute;
 				top: 0px;
 				bottom: 0;
