@@ -75,9 +75,11 @@
 					<div class="item" v-for="item in plateList">
 						<router-link :to="item.url">
 							<div class="b-w">
-								<img :src="item.img" />
+								<!-- <span style="font-size:20px;">Loading123123</span> -->
+			    				<!-- <x-img :src="item.img" @on-success="success" @on-error="error" class="ximg-demo" error-class="ximg-error" :offset="-100" container=".content"></x-img> -->
+								<img v-lazy="item.img" />
 								<div>
-									<p>{{item.title}}</p>
+									<p>{{item.title}}</p>	
 									<p>{{item.tip}}</p>
 								</div>
 							</div>
@@ -345,6 +347,16 @@
 
 		},
 		methods: {
+			// success (src, ele) {
+		 //      console.log('success load', src)
+		 //      const span = ele.parentNode.querySelector('span')
+		 //      ele.parentNode.removeChild(span)
+		 //    },
+		 //    error (src, ele, msg) {
+		 //      console.log('error load', msg, src)
+		 //      const span = ele.parentNode.querySelector('span')
+		 //      span.innerText = 'load error'
+		 //    },
 			loc() {
 				var _this = this
 				var map, geolocation;
