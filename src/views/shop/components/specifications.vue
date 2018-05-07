@@ -6,13 +6,13 @@
 		    		<div class="sp-content">
 		    			<div class="sp-panel">
 		    				<div class="ab-img"><img src="../../../assets/images/shop/close.png" @click="close"></div>
-		    				<img src="../../../assets/images/shop/shop4.png">
+		    				<img :src="shopList.shopImg">
 		    				<div class="sp-text">
 		    					<p class="shopPrice">
-									<span class="priceNum">￥3598</span> 
-									<span class="shopAcount">+266积分</span>
+									<span class="priceNum">￥{{shopList.shopPrice}}</span> 
+									<span class="shopAcount">+{{shopList.shopAccount}}积分</span>
 								</p>
-		    					<div class="sp-gray">库存7282件</div>
+		    					<div class="sp-gray">库存{{shopList.shopStock}}件</div>
 		    					<div>已选
 		    						<span v-for="item in list3">“{{item}}” </span>
 		    					</div>
@@ -22,14 +22,14 @@
 		    			<div class="sp-color">
 		    				<div>颜色分类</div>
 		    				<div class="sp-color-li">
-		    					<li class="sp-li-btn" v-for="(item,index) in list1" :class="{'sp-li-selected':act1==index}" @click="active(index)">{{ item.name}}</li>
+		    					<li class="sp-li-btn" v-for="(item,index) in shopList.list1" :class="{'sp-li-selected':act1==index}" @click="active(index)">{{ item.name}}</li>
 		    				</div>
 		    			</div>
 
 		    			<div class="sp-color">
 		    				<div>颜色分类</div>
 		    				<div class="sp-color-li">
-		    					<li class="sp-li-num" v-for="(item,index) in list2" :class="{'sp-li-selected':act2==index}" @click="active2(index)">{{ item.num}}</li>
+		    					<li class="sp-li-num" v-for="(item,index) in shopList.list2" :class="{'sp-li-selected':act2==index}" @click="active2(index)">{{ item.num}}</li>
 		    				</div>
 		    			</div>
 
@@ -37,7 +37,7 @@
 		    				<div class="sp-buyname">购买数量</div>
 		    				<div class="sp-number">
 		    					<div class="minus" @click="minus">-</div>
-		    					<div class="num">{{ num}}</div>
+		    					<div class="num">{{num}}</div>
 		    					<div class="add" @click="add">+</div>
 		    				</div>
 		    			</div>
@@ -53,24 +53,33 @@
 export default {
 	props: {
 		router: String,
-		confirm: Function
+		confirm: Function,
+		shopList: {
+	        type: Object,
+	        default: {
+				shopImg:"./static/shop/shop4.png",
+				shopPrice:"3598",
+				shopAccount:"266",
+				shopStock:"7282",
+				list1:[
+					{ name: '粉色尊贵版0'},
+					{ name: '粉色尊贵版1'},
+					{ name: '粉色尊贵版2'},
+					{ name: '粉色尊贵版3'}
+				],
+				list2:[
+					{ num: '1'},
+					{ num: '2'},
+					{ num: '3'}
+				]
+			}
+	    }
 	},
 	data(){
 		return {
 			show1: false,
 			act1: -1,
 			act2: -1,
-			list1:[
-				{ name: '粉色尊贵版0'},
-				{ name: '粉色尊贵版1'},
-				{ name: '粉色尊贵版2'},
-				{ name: '粉色尊贵版3'}
-			],
-			list2:[
-				{ num: '1'},
-				{ num: '2'},
-				{ num: '3'}
-			],
 			num: 1,
 			list3: []
 		}
@@ -80,12 +89,12 @@ export default {
 	methods: {
 		active:function (index) {
 	        this.act1 = index;
-	        let option = this.list1[index].name;
+	        let option = this.shopList.list1[index].name;
 	        this.list3[0] = option;
 	    },
 	    active2:function (index) {
 	        this.act2 = index;
-	        let option = this.list2[index].num;
+	        let option = this.shopList.list2[index].num;
 	        this.list3[1] = option;
 	    },
 	    add:function(){

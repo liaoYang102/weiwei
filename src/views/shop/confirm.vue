@@ -31,7 +31,7 @@
 
 		<div class="shops">
 			<group style='padding-bottom:1.42rem;'>
-                <cell title="优衣库旗舰店" is-link :border-intent="false" >
+                <cell title="优衣库旗舰店" :border-intent="false" >
 			        <img slot="icon" width="20" style="display:block;margin-right:5px;" >
 			    </cell>
                 <div class="shopInfo">
@@ -43,7 +43,7 @@
 					</div>
 					<div class="clear"></div>
                 </div>
-                <cell title="店铺优惠" value="省10元：100减5" :border-intent="false"></cell>
+                <cell title="店铺优惠" value="省10元：100减5" is-link :border-intent="false"></cell>
                 <cell :border-intent="false">
 					<span slot="title" style="color:#F23030;">CGC通用余额抵扣</span>
 					<span class="banlance" style='font-size: 0.24rem;color: #90A2C7;'><x-switch title="余额: ￥23400" sytle="padding-right: 0 ;"></x-switch></span>
