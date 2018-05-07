@@ -29,7 +29,7 @@
 		            	<div class="clear"></div>
 		            </div>
 		            <loading v-if="showLoading"></loading>
-		            <noMore v-if="showNomore"></noMore>
+		            <noMore v-else="showNomore"></noMore>
 		        </div>
 			</div>
 		</div>
@@ -141,10 +141,6 @@ export default {
 			setTimeout(function(){
 				_this.showLoading = false;
 				_this.showNomore = true;
-				// let obj = [{ shopname: 'VANS Old Skool lite黑白超轻鞋款 黑色38.5', money: '3598', score: '266'},
-				// { shopname: 'VANS Old Skool lite黑白超轻鞋款 黑色38.5', money: '3598', score: '266'}];
-				// _this.shopList = _this.shopList.concat(obj);
-				// console.log(_this.shopList);
 			},3000)
 		}
 	}
