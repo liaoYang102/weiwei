@@ -4,7 +4,7 @@
 		<div class="content-head">
 			<div class="address"><i class="iconfont icon-dizhi1"></i>广州
 				<div class="search fr">
-					<input type="text" placeholder='搜索你想要的' />
+					<router-link to="/multi_user_mall/search"><input type="text" placeholder='搜索你想要的' /></router-link>
 					<img src="../../assets/images/index/search.png" alt="">
 				</div>
 			</div>

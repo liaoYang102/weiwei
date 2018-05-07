@@ -9,7 +9,7 @@
 				<img src="../../assets/images/shop/right.png" class="icon">
 			</div>
 
-			<div class="top-right">
+			<div class="top-right" @click="showToast">
 				<img src="../../assets/images/shop/customer.png">
 				<span class="right-text">联系客服</span>
 			</div>
@@ -157,7 +157,13 @@ import recommended from './components/recommended'
 		    },
 		    shipmentCancel(){
 		    	this.cancelShipment = true;
-		    }
+		    },
+		    showToast(){
+				this.$vux.toast.show({
+					text: '暂无客服功能',
+					type: 'text'
+				})
+			}
 		}
 	}
 </script>

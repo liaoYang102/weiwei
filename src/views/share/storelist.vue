@@ -28,78 +28,23 @@
 				<!-- <h2>附近商家 <span class="fr">更多<i class="iconfont icon-arrow-right"></i></span></h2> -->
 				<div class="list">
 					<ul>
-						<li class="clearfix" @click="goDetail(1)">
+						<li class="clearfix" @click="goStoreDetail(1)" v-for="item in 20">
 							<div class="left">
 								<img src="../../assets/images/share/md_logo.png" alt="">
 							</div>
 							<div class="right">
-								<p class="title">章光101（番禺店）<span class="juli">5.5km</span></p>
-								<p class="content ellipise">[番禺]金牌双人套餐，提供免费WiFi</p>
-								<p class="nr"><span class="momey">￥120</span><span class="ms_price">门市价:￥150</span><span class="num">已售：2414</span></p>
-								<!-- <p class="zhekou">8折</p> -->
+								<p class="title">章光101（番禺店）</p>
+								<p class="content ellipise">
+									<span class="free">免单</span>
+									<span class="return">返积分</span>
+								</p>
+								<p class="nr"><span class="ms_price">美容美发</span><span class="num">番禺区 2.6km</span></p>
 							</div>
 						</li>
-						<li class="clearfix" @click="goDetail(1)">
-							<div class="left">
-								<img src="../../assets/images/share/md_logo.png" alt="">
-							</div>
-							<div class="right">
-								<p class="title">章光101（番禺店）<span class="juli">5.5km</span></p>
-								<p class="content ellipise">[番禺]金牌双人套餐，提供免费WiFi</p>
-								<p class="nr"><span class="momey">￥120</span><span class="ms_price">门市价:￥150</span><span class="num">已售：2414</span></p>
-								<!-- <p class="zhekou">8折</p> -->
-							</div>
-						</li>
-						<li class="clearfix" @click="goDetail(1)">
-							<div class="left">
-								<img src="../../assets/images/share/md_logo.png" alt="">
-							</div>
-							<div class="right">
-								<p class="title">章光101（番禺店）<span class="juli">5.5km</span></p>
-								<p class="content ellipise">[番禺]金牌双人套餐，提供免费WiFi</p>
-								<p class="nr"><span class="momey">￥120</span><span class="ms_price">门市价:￥150</span><span class="num">已售：2414</span></p>
-								<!-- <p class="zhekou">8折</p> -->
-							</div>
-						</li>
-						<li class="clearfix" @click="goDetail(1)">
-							<div class="left">
-								<img src="../../assets/images/share/md_logo.png" alt="">
-							</div>
-							<div class="right">
-								<p class="title">章光101（番禺店）<span class="juli">5.5km</span></p>
-								<p class="content ellipise">[番禺]金牌双人套餐，提供免费WiFi</p>
-								<p class="nr"><span class="momey">￥120</span><span class="ms_price">门市价:￥150</span><span class="num">已售：2414</span></p>
-								<!-- <p class="zhekou">8折</p> -->
-							</div>
-						</li>
-						<li class="clearfix" @click="goDetail(1)">
-							<div class="left">
-								<img src="../../assets/images/share/md_logo.png" alt="">
-							</div>
-							<div class="right">
-								<p class="title">章光101（番禺店）<span class="juli">5.5km</span></p>
-								<p class="content ellipise">[番禺]金牌双人套餐，提供免费WiFi</p>
-								<p class="nr"><span class="momey">￥120</span><span class="ms_price">门市价:￥150</span><span class="num">已售：2414</span></p>
-								<!-- <p class="zhekou">8折</p> -->
-							</div>
-						</li>
-						<li class="clearfix" @click="goDetail(1)">
-							<div class="left">
-								<img src="../../assets/images/share/md_logo.png" alt="">
-							</div>
-							<div class="right">
-								<p class="title">章光101（番禺店）<span class="juli">5.5km</span></p>
-								<p class="content ellipise">[番禺]金牌双人套餐，提供免费WiFi</p>
-								<p class="nr"><span class="momey">￥120</span><span class="ms_price">门市价:￥150</span><span class="num">已售：2414</span></p>
-								<!-- <p class="zhekou">8折</p> -->
-							</div>
-						</li>
-						
-
-
 					</ul>
-
-
+					<Loading v-if="showLoading"></Loading>
+					<noMore v-else="showNoMore"></noMore>
+					<!-- <p class="more" @click="seeStore">查看更多<i class="iconfont icon-arrow-right"></i></p> -->
 				</div>
 			</div>
 
@@ -180,7 +125,8 @@
 	import settingHeader from '../../components/setting_header'
 	import BScroll from 'better-scroll'
 	import scroll from '../../components/scroll.vue'
-
+	import Loading from '../../components/loading'
+	import noMore from '../../components/noMore'
 	export default {
 		data() {
 			return {
@@ -256,12 +202,16 @@
 					{ title: '酒店住宿', options: [ {name: '全部'},{name: '主题公园'},{name: '温泉'},{ name: '情侣酒店'}]},
 					{ title: '生活服务', options: [ {name: '全部'},{name: '家政服务'},{name: '鲜花'}]}
 				],
-				showContent: true
+				showContent: true,
+				showLoading: false,
+				showNoMore: false
 			}
 		},
 		components:{
 			settingHeader,
-			scroll
+			scroll,
+			Loading,
+			noMore
 		},
 		/*created(){
 
@@ -291,8 +241,8 @@
 						}
 					})
 					this.scroll.on('pullingUp', (pos) => {
-						this.show = true;
-						this.LoadData()
+						this.showLoading = true;
+						this.onLoadData()
 						this.$nextTick(function() {
 							this.scroll.finishPullUp();
 							this.scroll.refresh();
@@ -321,7 +271,11 @@
 			})
 			},
 			onLoadData(){
-
+				let _this = this
+				setTimeout(function(){
+					_this.showLoading = false;
+					_this.showNoMore = true
+				},2000);
 			},
 			onArea(){
 				//点击区域
@@ -391,13 +345,13 @@
 				if(length == 9) {
 					for(let i =0; i<6;i++){
 						list.push(obj)
-						this.showContent = false;
-						this.scroll.refresh();
+						// this.showContent = false;
+						// this.scroll.refresh();
 					}
 				}else{
 					list.splice(9,6)
-					this.showContent = true;
-					this.InitScroll()
+					// this.showContent = true;
+					// this.InitScroll()
 				}
 	    	},
 	    	// 切换样式
@@ -458,10 +412,8 @@
 	.storelist{}
 
 	.wrapper{
-
-		height:11.5rem;
+		height:10rem;
 		overflow:hidden; 
-
 	}
 	.storelist{
 		background: #fff;
@@ -476,7 +428,7 @@
 		display:flex;
 		align-items: center;
 		/*position: fixed;*/
-		/*border-bottom:1px solid #333;*/
+		border-bottom:1px solid #D8DFF0;
 		div{
 			flex: 1;
 			display: flex;
@@ -519,15 +471,19 @@
 			}
 		}
 		.list{
-			border-top: 1px solid #D8DFF0;
-			/*border-bottom: 1px solid #D8DFF0;*/
-			/*margin-top: .22rem;*/
-			margin-bottom: 2rem;
-			padding-bottom: 1rem;
+			padding-bottom: 0.3rem;
+			.more{
+				font-weight: normal;
+				color: #60719D;
+				font-size: .32rem;
+				display: block;
+				vertical-align: bottom;
+				text-align: center;
+				margin: 0.1rem 0;
+			}
 			li{
 				padding: .3rem .05rem .3rem 0;
 				border-bottom: 1px solid #D8DFF0;
-				/*background: #fff;*/
 				.left{
 					float: left;
 					width: 2.04rem;
@@ -546,15 +502,34 @@
 						font-size: .32rem;
 						color: #1A2642;
 						font-weight: bold;
+						margin-bottom: 0.05rem;
 						.juli{
 							font-size: .24rem;
 							float: right;
 						}
 					}
 					.content{
-						color: #7386AD;
-						font-size: .28rem;
-						margin-top: .1rem;
+						/*color: #7386AD;*/
+						/*font-size: .28rem;*/
+						/*margin-top: .1rem;*/
+						.free{
+							display: inline-block;
+							background:linear-gradient(121.4deg,rgba(94,195,255,1),rgba(16,111,227,1));
+							border-radius: 2px ; 
+							text-align: center;
+							color: #fff;
+							font-size: 0.24rem;
+							padding:2px 5px;
+						}
+						.return{
+							display: inline-block;
+							background:linear-gradient(90deg,rgba(255,122,128,1),rgba(255,83,101,1));
+							border-radius: 2px ; 
+							text-align: center;
+							color: #fff;
+							font-size: 0.24rem;
+							padding:2px 5px;
+						}
 					}
 					.nr{
 						margin-top: .1rem;
@@ -566,7 +541,7 @@
 						.ms_price,.num{
 							font-size: .24rem;
 							color: #7386AD;
-							padding-left: .1rem;
+							/*padding-left: .1rem;*/
 						}
 						.num{
 							float: right;
