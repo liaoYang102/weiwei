@@ -323,8 +323,8 @@
 .ul-content .weui-form-preview__value{
 	margin-right: 0.44rem;
 }
-.vux-loadmore{
+/*.vux-loadmore{
     display: none;
-}
+}*/
 
 </style>

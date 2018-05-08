@@ -101,9 +101,9 @@
 	.score-box {
 		height: 100%;
 		background-color: #fff;
-		.vux-loadmore {
+		/*.vux-loadmore {
 			display: none;
-		}
+		}*/
 		.head {
 			width: 100%;
 			height: 3.2rem;

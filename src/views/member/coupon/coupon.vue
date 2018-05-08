@@ -287,10 +287,10 @@
 			bottom: 0px;
 			overflow: hidden;
 			width: 100%;
-			.vux-loadmore {
+			/*.vux-loadmore {
 				display: inline-block;
 				width: 100%;
-			}
+			}*/
 		}
 		.bgImgThree {
 			background: url(../../../assets/images/user/rollBg4.png) no-repeat;
