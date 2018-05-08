@@ -7,9 +7,7 @@
 					    <div class="screening">
 					    	<div class="logo">
 			    				<group>
-			    					<cell is-link :title="logoTitle" :border-intent="false" :arrow-direction="showContent ? 'up' : 'down'" @click.native="down()">
-			    					
-			    					</cell>
+			    					<cell is-link :title="logoTitle" :border-intent="false" :arrow-direction="showContent ? 'up' : 'down'" @click.native="down()"></cell>
 			    					<div>
 			    						<div class="logolist">
 			    							<li class="item" v-for="(item, index) in logolist" @click="active($event)">{{ item.name}}</li>

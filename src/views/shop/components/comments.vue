@@ -29,7 +29,7 @@
 		            	<div class="clear"></div>
 		            </div>
 		            <loading v-if="showLoading"></loading>
-		            <noMore v-else="showNomore"></noMore>
+		            <noMore v-if="showNomore"></noMore>
 		        </div>
 			</div>
 		</div>
@@ -123,7 +123,6 @@ export default {
 						}
 					})
 					this.scroll.on('pullingUp', (pos) => {
-						this.showLoading = true;
 						this.LoadData()
 						this.$nextTick(function() {
 							this.scroll.finishPullUp();
@@ -138,9 +137,15 @@ export default {
 		},
 		LoadData() {
 			var _this = this
+			if(_this.showNomore){
+				_this.showLoading = false;
+				return 
+			}
+			_this.showLoading = true;
 			setTimeout(function(){
 				_this.showLoading = false;
 				_this.showNomore = true;
+				// _this.scroll.destroy()
 			},3000)
 		}
 	}
