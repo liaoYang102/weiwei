@@ -5,7 +5,7 @@
 			<img src="../../assets/images/shop/t_successful.png" alt="" class='fl'>
 			<div class="message fl">
 				<p class="success">交易成功</p>
-				<p class="prompt">宝贝会很快送到您手里~</p>
+				<p class="prompt">快拆开宝贝看看吧~~</p>
 			</div>
 			<div class="clear"></div>
 		</div>
