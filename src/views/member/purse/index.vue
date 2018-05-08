@@ -299,7 +299,6 @@
 	@import '~vux/src/styles/1px.less';
 	.purse-box {
 		background-color: #f5f6fa;
-		padding-bottom: 1rem;
 		.box-h {
 			width: 100%;
 			height: 2.8rem;

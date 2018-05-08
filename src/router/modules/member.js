@@ -6,7 +6,7 @@ import changeLoginPassword from '@/views/user/changeLoginPassword'
 import changeLoginPassword2 from '@/views/user/changeLoginPassword2'
 import changePaymentPassword from '@/views/user/changePaymentPassword'
 import changePaymentPassword2 from '@/views/user/changePaymentPassword2'
-import coupon from '@/views/member/coupon/coupon'
+import couponindex from '@/views/member/coupon/index'
 import coupondetail from '@/views/member/coupon/detail'
 import member from '@/views/member/index'
 import newphone from '@/views/member/setting/newphone'
@@ -95,9 +95,9 @@ const memberModule = [{
 		name: 'changelist',
 		component: changelist
 	}, {
-		path: '/member/coupon/coupon',
-		name: 'coupon',
-		component: coupon
+		path: '/member/coupon/index',
+		name: 'couponindex',
+		component: couponindex
 	}, {
 		path: '/member/coupon/detail',
 		name: 'coupon',

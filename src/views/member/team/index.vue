@@ -1,76 +1,67 @@
 <template>
-	<div class="team">
+	<div class="team-box">
 		<settingHeader :title="title"></settingHeader>
-		<div class="top">
-			<div class="middle">
-				<p>23</p>
-				<p>合伙人( 人 )</p>
-			</div>
-			<router-link to="/member/purse/qrcode">
-				<div class="right">
-					<img src="../../../assets/images/member/yq@2x.png" />
-					<span>我要邀请</span>
+		<div class="pr-box">
+			<div class="top">
+				<div class="middle">
+					<p>23</p>
+					<p>合伙人( 人 )</p>
 				</div>
-			</router-link>
-		</div>
+				<router-link to="/member/purse/qrcode">
+					<div class="right">
+						<img src="../../../assets/images/member/yq@2x.png" />
+						<span>我要邀请</span>
+					</div>
+				</router-link>
+			</div>
 
-		<div class="wrapper" ref="wrapper">
-			<div class="content">
-				<div class="box2">
-					<div class="list" v-for="(item,index) in list" :key="index">
-						<div class="he">
-							<div class="user-img">
-								<img :src="item.img" />
+			<div class="list-box">
+				<div class="scroll-box">
+					<div class="wrapper" ref="wrapper">
+						<div class="content">
+							<div class="box2">
+								<div v-if="has>0">
+									<div class="list" v-for="(item,index) in list" :key="index">
+										<div class="he">
+											<div class="user-img">
+												<img :src="item.img" />
+											</div>
+											<div class="user-text">
+												<p>{{item.name}}</p>
+												<p>手机号码：{{item.phone}}</p>
+												<p>加入时间：{{item.time}}</p>
+											</div>
+										</div>
+										<div class="footer">
+											<grid class="footer-item">
+												<grid-item v-for="i in 2" :key="i">
+													<p>订单数</p>
+													<p>12</p>
+												</grid-item>
+											</grid>
+										</div>
+									</div>
+								</div>
+
+								<div class="null-box" v-else>
+									<img src="../../../assets/images/index/null-data.png" alt="" />
+									<p>暂无数据</p>
+									<router-link to="/member/purse/qrcode">
+										<div class="add-btn">我要邀请</div>
+									</router-link>
+								</div>
+								<Loading v-if="showloading"></Loading>
 							</div>
-							<div class="user-text">
-								<p>{{item.name}}</p>
-								<p>手机号码：{{item.phone}}</p>
-								<p>加入时间：{{item.time}}</p>
-							</div>
-						</div>
-						<div class="footer">
-							<grid class="footer-item">
-								<grid-item v-for="i in 2" :key="i">
-									<p>订单数</p>
-									<p>12</p>
-								</grid-item>
-							</grid>
 						</div>
 					</div>
-					<Loading v-if="showloading"></Loading>
 				</div>
 			</div>
 		</div>
-		<!-- <scroller class="scroller-box" lock-x height="-100" :use-pullup="showUp" :pullup-config="upConf" @on-pullup-loading="selPullUp" ref="scrollerBottom">
-			<div class="box2">
-				<div class="list" v-for="(item,index) in list" :key="index">
-					<div class="he">
-						<div class="user-img">
-							<img :src="item.img" />
-						</div>
-						<div class="user-text">
-							<p>{{item.name}}</p>
-							<p>手机号码：{{item.phone}}</p>
-							<p>加入时间：{{item.time}}</p>
-						</div>
-					</div>
-					<div class="footer">
-						<grid class="footer-item">
-							<grid-item v-for="i in 2" :key="i">
-								<p>订单数</p>
-								<p>12</p>
-							</grid-item>
-						</grid>
-					</div>
-				</div>
-				<load-more tip="loading" v-model="showloading" :text="textloading"></load-more>
-			</div>
-		</scroller> -->
 	</div>
 </template>
 
 <script>
-	import { Grid, GridItem, Scroller } from 'vux'
+	import { Grid, GridItem } from 'vux'
 	import settingHeader from '../../../components/setting_header'
 	import Loading from '../../../components/loading'
 	import BScroll from 'better-scroll'
@@ -78,20 +69,8 @@
 		data() {
 			return {
 				title: '我的团队',
-				loadingShow: false,
 				showloading: false,
-				textloading: '加载中',
-				showUp: true,
-				upConf: { // 上拉配置
-					content: '',
-					pullUpHeight: 60,
-					height: 80,
-					autoRefresh: false,
-					downContent: 'Loading...',
-					upContent: '上拉加载更多',
-					loadingContent: 'Loading...',
-					clsPrefix: 'xs-plugin-pullup-'
-				},
+				has: 1,
 				list: [{
 					img: 'https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=3502149281,2119482052&fm=27&gp=0.jpg',
 					name: '这个合伙人ID最多这么长',
@@ -102,7 +81,7 @@
 					name: '这个合伙人ID最多这么长',
 					phone: '18520496787',
 					time: '2018-01-01 00:00:00'
-				},{
+				}, {
 					img: 'https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=3502149281,2119482052&fm=27&gp=0.jpg',
 					name: '这个合伙人ID最多这么长',
 					phone: '18520496787',
@@ -112,7 +91,7 @@
 					name: '这个合伙人ID最多这么长',
 					phone: '18520496787',
 					time: '2018-01-01 00:00:00'
-				},{
+				}, {
 					img: 'https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=3502149281,2119482052&fm=27&gp=0.jpg',
 					name: '这个合伙人ID最多这么长',
 					phone: '18520496787',
@@ -127,18 +106,13 @@
 			}
 		},
 		created() {
-			this.$store.state.page.footerFalg = true
+
 		},
 		mounted() {
-			//第一次加载
-			// this.$nextTick(() => {
-			// 	this.$refs.scrollerBottom.reset()
-			// })
 			this.InitScroll()
 		},
 		methods: {
-	        InitScroll() {
-	        	console.log('0000',this.scroll)
+			InitScroll() {
 				this.$nextTick(() => {
 					if(!this.scroll) {
 						this.scroll = new BScroll(this.$refs.wrapper, {
@@ -164,53 +138,73 @@
 			},
 			LoadData() {
 				var _this = this
-				setTimeout(function(){
+				setTimeout(function() {
 					_this.showloading = false;
-				},3000)
-			},
-			selPullUp() {
-				console.log(123)
-				this.showloading = true
-				this.list.push({
-					img: 'https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=3502149281,2119482052&fm=27&gp=0.jpg',
-					name: '这个合伙人ID最多这么长',
-					phone: '18520496787',
-					time: '2018-01-01 00:00:00'
-				})
-				this.showloading = false
-				//第一次加载
-				this.$refs.scrollerBottom.reset()
-				this.$refs.scrollerBottom.donePullup()
+				}, 3000)
 			}
 		},
 		components: {
 			settingHeader,
 			Grid,
 			GridItem,
-			Scroller,
 			Loading
 		}
 	}
 </script>
 
 <style lang="less" scoped>
-	.team {
+	.team-box {
 		background: #F5F6FA;
 		height: 100%;
-	}
-	.wrapper{
-		height: 78%;
-		overflow: hidden;
-	}
-	.scroller-box {
-		padding-bottom: 180px;
-	}
-	
-	.xs-plugin-pullup-up {
-		margin-bottom: 180px;
+		.pr-box {
+			position: relative;
+			height: 100%;
+			.list-box {
+				position: absolute;
+				top: 1.98rem;
+				width: 100%;
+				height: 10.08rem;
+				z-index: 11;
+				.scroll-box {
+					position: relative;
+					height: 100%;
+					.wrapper {
+						position: absolute;
+						top: 0;
+						bottom: 0;
+						width: 100%;
+						.null-box {
+							position: relative;
+							height: 11rem;
+							text-align: center;
+							background: white;
+							img {
+								width: auto;
+								height: 4.12rem;
+							}
+							p {
+								font-size: 0.32rem;
+								font-family: PingFangSC-Medium;
+								color: rgba(26, 38, 66, 1);
+							}
+							.add-btn {
+								width: 6.18rem;
+								height: 0.88rem;
+								line-height: 0.88rem;
+								color: white;
+								background: rgba(51, 111, 255, 1);
+								border-radius: 4px;
+								margin: 1.91rem auto;
+							}
+						}
+					}
+				}
+			}
+		}
 	}
 	
 	.top {
+		z-index: 15;
 		height: 1.98rem;
 		position: relative;
 		background-image: linear-gradient(-238deg, #5EC3FF 0%, #106FE3 100%);

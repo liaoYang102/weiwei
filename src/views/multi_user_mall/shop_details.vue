@@ -171,7 +171,7 @@
 							<div v-for="(item,index) in layList" @click="choicelay(index,item)"><span :class="{'layactive':layIndex == index}">{{item}}</span></div>
 						</div>
 					</div>
-					<div class="add-btn" @click="showsure = false">预定</div>
+					<div class="add-btn" @click="purchase">立即购买</div>
 				</div>
 			</popup>
 		</div>
@@ -241,6 +241,11 @@
 			}
 		},
 		methods: {
+			purchase(){
+				this.showsure = false
+				this.$router.push({path:'/shop/confirm'})
+			},
+			
 			choicelay(index, item) {
 				this.layIndex = index
 				this.layText = item

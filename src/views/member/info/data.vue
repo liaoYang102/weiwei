@@ -3,9 +3,9 @@
 		<settingHeader :title="title"></settingHeader>
 		<div class="list">
 			<group gutter="0">
-				<cell class="list-item" title="性别" value="男" is-link @click.native="showsex = true"></cell>
-				<cell class="list-item" title="出生日期" value="1995年05月05日" is-link @click.native="showDate"></cell>
-				<cell class="list-item" title="最高学历" value="大专" is-link @click.native="showrec = true"></cell>
+				<cell class="list-item" title="性别" :value="sex" is-link @click.native="showsex = true"></cell>
+				<cell class="list-item" title="出生日期" :value="birthday" is-link @click.native="showDate"></cell>
+				<cell class="list-item" title="最高学历" :value="education" is-link @click.native="showrec = true"></cell>
 			</group>
 			<group>
 				<cell class="list-item" title="微信号">
@@ -53,11 +53,9 @@
 			</div>
 		</div>
 
-		<actionsheet v-model="showsex" theme="android" :menus="sexlist" @on-click-menu="sexclick" show-cancel>
-			<!--<p slot="header" v-html="txt"></p>-->
+		<actionsheet v-model="showsex" theme="ios" :menus="sexlist" @on-click-menu="sexclick" show-cancel>
 		</actionsheet>
-		<actionsheet v-model="showrec" theme="android" :menus="reclist" @on-click-menu="recclick" show-cancel>
-			<!--<p slot="header" v-html="txt"></p>-->
+		<actionsheet v-model="showrec" theme="ios" :menus="reclist" @on-click-menu="recclick" show-cancel>
 		</actionsheet>
 	</div>
 </template>
@@ -82,7 +80,10 @@
 				reclist: ['小学', '初中', '高中', '大专', '本科'],
 				txt: '<span>请选择性别</span>',
 				backImages: [],
-				pindex: 0
+				pindex: 0,
+				sex:'未设置',//性别
+				birthday:'未设置',//生日
+				education:'未设置',//学历
 			}
 		},
 		created() {},
@@ -109,20 +110,37 @@
 				console.log('on change', val)
 			},
 			sexclick(val) {
-				console.log('on change', val)
+				if(val == 0){
+					this.sex = '男'
+				}else if(val == 1){
+					this.sex = '女'
+				}else{
+					this.sex = '隐藏'
+				}
 			},
 			recclick(val) {
-				console.log('on change', val)
+				if(val == 0){
+					this.education = '小学'
+				}else if(val == 1){
+					this.education = '初中'
+				}else if(val == 2){
+					this.education = '高中'
+				}else if(val == 3){
+					this.education = '大专'
+				}else if(val == 4){
+					this.education = '本科'
+				}
 			},
 			showDate() {
-				this.$vux.datetime.show({
+				var  _this = this
+				_this.$vux.datetime.show({
 					value: '',
 					confirmText: '确定',
 					cancelText: '取消',
 					clearText: '请选择日期',
 					onConfirm(val) {
-						console.log(val)
-					},
+						_this.birthday = val
+					}
 				})
 			},
 			back(e) {

@@ -35,60 +35,60 @@
 						<div class="tj-pro">
 							<div class="tip">附件酒店</div>
 							<div class="pro-list">
-								<div class="item">
+								<div class="item" @click="$router.push({path:'/multi_user_mall/shop_details'})">
 									<div class="pro-img">
-										<img src="../../assets/images/index/group.png" />
+										<img src="../../assets/images/lock/jd.png" />
 									</div>
 									<div class="pl">
 										<p class="name">皇冠高级房钟点房</p>
 										<p class="price">¥90</p>
 										<div class="stro">
-											<span>¥150</span>
+											<span class="oldprice">¥150</span>
 											<span>仅剩47</span>
 										</div>
 									</div>
 								</div>
 								<div class="item">
 									<div class="pro-img">
-										<img src="../../assets/images/draw/lottery_awards1.png" />
+										<img src="../../assets/images/lock/jd.png" />
 									</div>
 									<div class="pl">
 										<p class="name">皇冠高级房钟点房</p>
 										<p class="price">¥90</p>
 										<div class="stro">
-											<span>¥150</span>
+											<span class="oldprice">¥150</span>
 											<span>仅剩47</span>
 										</div>
 									</div>
 								</div>
 								<div class="item">
 									<div class="pro-img">
-										<img src="../../assets/images/index/group.png" />
+										<img src="../../assets/images/lock/jd.png" />
 									</div>
 									<div class="pl">
 										<p class="name">皇冠高级房钟点房</p>
 										<p class="price">¥90</p>
 										<div class="stro">
-											<span>¥150</span>
+											<span class="oldprice">¥150</span>
 											<span>仅剩47</span>
 										</div>
 									</div>
 								</div>
 								<div class="item">
 									<div class="pro-img">
-										<img src="../../assets/images/draw/lottery_awards1.png" />
+										<img src="../../assets/images/lock/jd.png" />
 									</div>
 									<div class="pl">
 										<p class="name">皇冠高级房钟点房</p>
 										<p class="price">¥90</p>
 										<div class="stro">
-											<span>¥150</span>
+											<span class="oldprice">¥150</span>
 											<span>仅剩47</span>
 										</div>
 									</div>
 								</div>
-								<Loading v-if="show"> </Loading>
 							</div>
+							<Loading v-if="show"> </Loading>
 						</div>
 					</div>
 				</div>
@@ -130,37 +130,38 @@
 				show: false,
 				hShow: '',
 				showModel: false,
-				list: [{
-						num: '308',
-						l: '3',
-						time: '2018.04.27-2018.04.29',
-						status: '生效中',
-						store: '长隆欢乐酒店',
-						bg: '../../static/lock/Bitmap@2x.png'
-					},
-					{
-						num: '521',
-						l: '5',
-						time: '2018.04.27-2018.04.29',
-						status: '已过期',
-						store: '维也纳连锁酒店',
-						bg: '../../static/lock/Group@2x.png'
-					}, {
-						num: '308',
-						l: '3',
-						time: '2018.04.27-2018.04.29',
-						status: '生效中',
-						store: '长隆欢乐酒店',
-						bg: '../../static/lock/Bitmap@2x.png'
-					},
-					{
-						num: '521',
-						l: '5',
-						time: '2018.04.27-2018.04.29',
-						status: '已过期',
-						store: '维也纳连锁酒店',
-						bg: '../../static/lock/Group@2x.png'
-					},
+				list: [
+//				{
+//						num: '308',
+//						l: '3',
+//						time: '2018.04.27-2018.04.29',
+//						status: '生效中',
+//						store: '长隆欢乐酒店',
+//						bg: '../../static/lock/Bitmap@2x.png'
+//					},
+//					{
+//						num: '521',
+//						l: '5',
+//						time: '2018.04.27-2018.04.29',
+//						status: '已过期',
+//						store: '维也纳连锁酒店',
+//						bg: '../../static/lock/Group@2x.png'
+//					}, {
+//						num: '308',
+//						l: '3',
+//						time: '2018.04.27-2018.04.29',
+//						status: '生效中',
+//						store: '长隆欢乐酒店',
+//						bg: '../../static/lock/Bitmap@2x.png'
+//					},
+//					{
+//						num: '521',
+//						l: '5',
+//						time: '2018.04.27-2018.04.29',
+//						status: '已过期',
+//						store: '维也纳连锁酒店',
+//						bg: '../../static/lock/Group@2x.png'
+//					},
 				]
 			}
 		},
@@ -195,6 +196,7 @@
 						})
 						this.scroll.on('pullingUp', (pos) => {
 							this.show = true
+							this.loadData()
 							this.$nextTick(function() {
 								this.scroll.finishPullUp();
 								this.scroll.refresh();
@@ -209,6 +211,9 @@
 					}
 				})
 
+			},
+			loadData(){
+				
 			}
 		},
 		components: {
@@ -412,6 +417,9 @@
 									span {
 										font-size: 0.24rem;
 										color: rgba(144, 162, 199, 1);
+									}
+									.oldprice{
+										text-decoration:line-through;
 									}
 								}
 							}

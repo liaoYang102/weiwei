@@ -141,13 +141,11 @@
 					type: 'success',
 					headMessage: '提示',
 					message: '实名成功',
-					buttons: ['确定', '取消'],
-					isClosing:true,
+					buttons: ['确定'],
+					delay:2000,
 					canel() {
-						console.log('--')
 					},
 					confirm() {
-						_this.$dialog.hide()
 					}
 				})
 			}
