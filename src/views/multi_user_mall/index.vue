@@ -7,7 +7,7 @@
 					<div class="store">
 						<img src="../../assets/images/shop/UNIQLO.png">
 						<div class="name">
-							<div @click="store"><span>优衣库官方旗舰店</span></div>
+							<div><span>优衣库官方旗舰店</span></div>
 							<div class="positionImg">
 								<img src="../../assets/images/multi_user_mall/position.png">
 								<span class="small">距离正佳广场0.2km</span>

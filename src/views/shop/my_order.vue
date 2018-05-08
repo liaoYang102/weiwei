@@ -178,8 +178,8 @@
 
 			    <div class="wrap no_orders" v-else>
 		        	<div class="none-data">
-		        		<img src="../../assets/images/shop/noOrder.png" alt=""> 
-		    			<p>暂无订单</p>
+		        		<img :src="imgSrc" alt=""> 
+		    			<p>{{ status}}</p>
 		        	</div>
 		    		
 		    		<recommended></recommended>
@@ -203,7 +203,9 @@
 				test: true,
 				show9: false,
 				show: false,
-				showNomore: false
+				showNomore: false,
+				imgSrc: './static/shop/noOrder.png', //./static/shop/404.png 页面丢失  //./static/shop/network.png  网络异常
+				status:'暂无订单',//./static/shop/noShop.png 暂无商品
 			}
 		},
 		components: {

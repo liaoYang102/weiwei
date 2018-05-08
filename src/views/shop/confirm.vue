@@ -45,7 +45,7 @@
                 </div>
 
                 <router-link to="/member/coupon/coupon">
-                	 <cell title="店铺优惠" value="省10元：100减5" :border-intent="false"></cell>
+                	 <cell title="店铺优惠" value="省10元：100减5" :border-intent="false" is-link></cell>
                 </router-link>
                 <cell :border-intent="false">
 					<span slot="title" style="color:#F23030;">CGC通用余额抵扣</span>
