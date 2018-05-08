@@ -9,9 +9,6 @@ import changePaymentPassword2 from '@/views/user/changePaymentPassword2'
 import couponindex from '@/views/member/coupon/index'
 import coupondetail from '@/views/member/coupon/detail'
 import member from '@/views/member/index'
-import newphone from '@/views/member/setting/newphone'
-import oldphone from '@/views/member/setting/oldphone'
-import sorder from '@/views/sorder/index'
 import msg_setting from '@/views/member/message/setting'
 import address from '@/views/member/address/index'
 import address_edit from '@/views/member/address/edit'
@@ -47,7 +44,8 @@ const memberModule = [{
 		component: index,
 		meta: {
 			navShow: true,
-			navIndex: 0
+			navIndex: 0,
+			title:'首页'
 		}
 	},
 	{
@@ -56,13 +54,17 @@ const memberModule = [{
 		component: index,
 		meta: {
 			navShow: true,
-			navIndex: 0
+			navIndex: 0,
+			title:'首页'
 		}
 	},
 	{
 		path: '/member/setting/index',
 		name: 'setting',
-		component: setting
+		component: setting,
+		meta: {
+			title:'账户设置'
+		}
 	},
 	{
 		path: '/user/login',
@@ -72,36 +74,60 @@ const memberModule = [{
 	{
 		path: '/user/reg',
 		name: 'reg',
-		component: reg
+		component: reg,
+		meta: {
+			title:'用户登录'
+		}
 	},
 	{
 		path: '/user/changeLoginPassword',
 		name: 'changeLoginPassword',
-		component: changeLoginPassword
+		component: changeLoginPassword,
+		meta: {
+			title:'设置登录密码'
+		}
 	}, {
 		path: '/user/changeLoginPassword2',
 		name: 'changeLoginPassword2',
-		component: changeLoginPassword2
+		component: changeLoginPassword2,
+		meta: {
+			title:'设置登录密码'
+		}
 	},{
 		path: '/user/changePaymentPassword',
 		name: 'changePaymentPassword',
-		component: changePaymentPassword
+		component: changePaymentPassword,
+		meta: {
+			title:'设置支付密码'
+		}
 	}, {
 		path: '/user/changePaymentPassword2',
 		name: 'changePaymentPassword2',
-		component: changePaymentPassword2
+		component: changePaymentPassword2,
+		meta: {
+			title:'设置支付密码'
+		}
 	}, {
 		path: '/user/changelist',
 		name: 'changelist',
-		component: changelist
+		component: changelist,
+		meta: {
+			title:'密码管理'
+		}
 	}, {
 		path: '/member/coupon/index',
 		name: 'couponindex',
-		component: couponindex
+		component: couponindex,
+		meta: {
+			title:'我的优惠券'
+		}
 	}, {
 		path: '/member/coupon/detail',
 		name: 'coupon',
-		component: coupondetail
+		component: coupondetail,
+		meta: {
+			title:'优惠券详情'
+		}
 	},
 	{
 		path: '/member/index',
@@ -109,153 +135,212 @@ const memberModule = [{
 		component: member,
 		meta: {
 			navShow: true,
-			navIndex: 4
+			navIndex: 4,
+			title:'个人中心'
 		}
-	},
-	{
-		path: '/sorder/index',
-		name: 'sorder',
-		component: sorder
-	},
-	{
-		path: '/member/setting/newphone',
-		name: 'newphone',
-		component: newphone
-	},
-	{
-		path: '/member/setting/oldphone',
-		name: 'oldphone',
-		component: oldphone
 	},
 	{
 		path: '/member/message/setting',
 		name: 'msg_setting',
-		component: msg_setting
+		component: msg_setting,
+		meta: {
+			title:'消息设置'
+		}
 	},
 	{
 		path: '/member/address/index',
 		name: 'address',
-		component: address
+		component: address,
+		meta: {
+			title:'地址管理'
+		}
 	},
 	{
 		path: '/member/address/edit',
 		name: 'address_edit',
-		component: address_edit
+		component: address_edit,
+		meta: {
+			title:'修改地址'
+		}
 	},
 	{
 		path: '/member/score/index',
 		name: 'score',
-		component: score
+		component: score,
+		meta: {
+			title:'我的积分'
+		}
 	},
 	{
 		path: '/member/score/log',
 		name: 'score_log',
-		component: score_log
+		component: score_log,
+		meta: {
+			title:'积分记录'
+		}
 	},
 	{
 		path: '/member/team/index',
 		name: 'team',
-		component: team
+		component: team,
+		meta: {
+			title:'我的团队'
+		}
 	},
 	{
 		path: '/member/info/index',
 		name: 'info',
-		component: info
+		component: info,
+		meta: {
+			title:'个人信息'
+		}
 	}, {
 		path: '/member/info/data',
 		name: 'infodata',
-		component: infodata
+		component: infodata,
+		meta: {
+			title:'详细资料'
+		}
 	},
 	{
 		path: '/member/setting/changeCode',
 		name: 'changeCode',
-		component: changeCode
+		component: changeCode,
+		meta: {
+			title:'设置新密码'
+		}
 	},
 	{
 		path: '/member/setting/code',
 		name: 'code',
-		component: code
-	},
-	{
-		path: '/member/setting/resetCode',
-		name: 'resetCode',
-		component: resetCode
+		component: code,
+		meta: {
+			title:'输入验证码'
+		}
 	},
 	{
 		path: '/member/setting/about',
 		name: 'about',
-		component: about
+		component: about,
+		meta: {
+			title:'关于我们'
+		}
 	}, {
 		path: '/member/setting/real',
 		name: 'real',
-		component: real
+		component: real,
+		meta: {
+			title:'身份认证'
+		}
 	}, {
 		path: '/member/setting/realoading',
 		name: 'realoading',
-		component: realoading
+		component: realoading,
+		meta: {
+			title:'审核结果'
+		}
 	},
 	{
 		path: '/member/purse/index',
 		name: 'purse',
-		component: purse
+		component: purse,
+		meta: {
+			title:'我的钱包'
+		}
 	},
 	{
 		path: '/member/purse/qrcode',
 		name: 'qrcode',
-		component: qrcode
+		component: qrcode,
+		meta: {
+			title:'我的赚钱码'
+		}
 	}, {
 		path: '/member/purse/hasqrcode',
 		name: 'hasqrcode',
-		component: hasqrcode
+		component: hasqrcode,
+		meta: {
+			title:'开启赚钱码'
+		}
 	},
 	{
 		path: '/member/purse/recharge',
 		name: 'recharge',
-		component: recharge
+		component: recharge,
+		meta: {
+			title:'余额充值'
+		}
 	},
 	{
 		path: '/member/card/index',
 		name: 'card',
-		component: card
+		component: card,
+		meta: {
+			title:'我的卡包'
+		}
 	}, {
 		path: '/member/card/detail',
 		name: 'carddetail',
-		component: carddetail
+		component: carddetail,
+		meta: {
+			title:'卡包详情'
+		}
 	},
 	{
 		path: '/member/purse/banlancelog',
 		name: 'banlancelog',
-		component: banlancelog
+		component: banlancelog,
+		meta: {
+			title:'余额日志'
+		}
 	},
 	{
 		path: '/member/purse/banlance',
 		name: 'banlance',
-		component: banlance
+		component: banlance,
+		meta: {
+			title:'余额详情'
+		}
 	},
 	{
 		path: '/member/follow/index',
 		name: 'follow',
-		component: follow
+		component: follow,
+		meta: {
+			title:'我的关注'
+		}
 	},
 	{
 		path: '/member/earnings/index',
 		name: 'earnings',
-		component: earnings
+		component: earnings,
+		meta: {
+			title:'通用积分'
+		}
 	},
 	{
 		path: '/member/earnings/logs',
 		name: 'logs',
-		component: logs
+		component: logs,
+		meta: {
+			title:'累计收益'
+		}
 	},
 	{
 		path: '/member/score/strategy',
 		name: 'strategy',
-		component: strategy
+		component: strategy,
+		meta: {
+			title:'积分攻略'
+		}
 	},
 	{
 		path: '/member/score/detail',
 		name: 'scoreDetail',
-		component: scoreDetail
+		component: scoreDetail,
+		meta: {
+			title:'积分详情'
+		}
 	}
 ]
 

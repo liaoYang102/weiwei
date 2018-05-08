@@ -127,7 +127,7 @@
 				<badge text="12"></badge><br>
 				<span>购物车</span>
 			</div>
-			<div class="footer-btn btn_green">导航</div>
+			<div class="footer-btn btn_green" @click="navigation">导航</div>
 			<div class="footer-btn btn_blue" @click="goConfirm">立即购买</div>
 		</div>
 
@@ -241,11 +241,13 @@
 			}
 		},
 		methods: {
-			purchase(){
+			purchase() {
 				this.showsure = false
-				this.$router.push({path:'/shop/confirm'})
+				this.$router.push({
+					path: '/shop/confirm'
+				})
 			},
-			
+
 			choicelay(index, item) {
 				this.layIndex = index
 				this.layText = item
@@ -262,7 +264,6 @@
 			onShop() {
 				this.tabTitle = '商品'
 				window.scrollTo(0, 0);
-				console.log('---11', this.tabTitle)
 			},
 			scrollTo() {
 				this.tabTitle = '详情';
@@ -284,6 +285,16 @@
 			goShopcart() {
 				this.$router.push({
 					path: '/shop/shop_cart'
+				})
+			},
+			navigation() {
+				var marker = new AMap.Marker({
+					position: [113.370196,22.979898]
+				})
+
+				marker.markOnAMAP({
+					position: marker.getPosition(),
+					name: '广州市番禺区天安科技园' //name属性在移动端有效
 				})
 			},
 			goConfirm() {
@@ -353,7 +364,7 @@
 		background-color: white;
 		box-sizing: border-box;
 		position: relative;
-		.gbi{
+		.gbi {
 			position: absolute;
 			right: 0.3rem;
 			top: 0.3rem;
