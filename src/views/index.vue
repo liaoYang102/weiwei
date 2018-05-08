@@ -325,7 +325,6 @@
 		},
 		created() {
 			this.loc()
-
 		},
 		mouted() {
 

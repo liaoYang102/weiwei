@@ -28,6 +28,10 @@
 			}
 		},
 		created() {
+			if(this.$router.app._route.meta.title){
+				document.title = this.$router.app._route.meta.title
+			}
+			
 			var ua = navigator.userAgent.toLowerCase();
 			var isWeixin = ua.indexOf('micromessenger') != -1;
 			if(isWeixin) {
@@ -52,6 +56,12 @@
 			'$route' (to, from) {
 				document.body.scrollTop = 0
 				document.documentElement.scrollTop = 0
+				
+				if(this.$route.meta.title){
+					document.title = this.$route.meta.title
+				}else{
+					document.title = '大健康App'
+				}
 			}　
 		}
 	}

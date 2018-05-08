@@ -51,7 +51,7 @@
 				<p>暂未满足条件</p>
 				<p>专享3大权益 每月预计可赚2000+</p>
 				<div @click="$router.push({path:'/member/purse/hasqrcode'})">
-					查看条件
+					查看条件 <i class="icon iconfont icon-arrow-right"></i>
 				</div>
 			</div>
 			<div class="bottom">
@@ -67,6 +67,7 @@
 						<p>全国通用</p>
 					</div>
 					<div class="three">
+						<i></i>
 						<div>领取礼卷</div>
 					</div>
 				</div>
@@ -82,7 +83,7 @@
 		data() {
 			return {
 				title: '我的二维码',
-				grade: 1,
+				grade: 0,
 			}
 		},
 		created() {
@@ -100,9 +101,11 @@
 
 <style lang="less">
 	.qrcode-box {
+		height: 100%;
 		font-family: PingFangSC-Medium;
 		/*2*/
 		.bg-w {
+			height: 100%;
 			background: white;
 			position: relative;
 			.img-box {
