@@ -1,14 +1,17 @@
 <template>
-	<div class="content">
-		<settingHeader :title="title"></settingHeader>
-		<div class="couponTab" :class="{'top46':hShow == false}">
-			<div class="bnf">
+	<div class="couponindex-box">
+
+		<x-header class="b-w" :left-options="{backText:''}">
+			<div class="tar-box">
 				<tab class="tab" :line-width="2" active-color="#397df8" custom-bar-width="0.56rem">
 					<tab-item v-for="(item,index) in couponType" :selected="typeActive == index" @on-item-click="onItemClick(index)">{{item}}</tab-item>
 				</tab>
-				<i id="menu" class="iconfont" @click.active="showDrawer"></i>
 			</div>
-		</div>
+			<div class="edit-btn" @click="showDrawer" slot="right">
+				<img src="../../../assets/images/index/shaixuan.png" alt="" />
+			</div>
+		</x-header>
+
 		<div class="couponList">
 			<div class="wrapper" :class="{'top46':hShow}" ref="wrapper">
 				<div class="content">
@@ -33,18 +36,6 @@
 				</div>
 			</div>
 		</div>
-		<!--<div class="drawer-box" @click.active="showDrawer">
-			<masker :fullscreen="drawerShow">
-				<div slot="content">
-					<drawer :show.sync="drawerShow" show-mode="overlay" placement="right" :drawer-style="{'background-color':'white', width: '200px',height:'100vh',marginTop:'46px'}">
-						<div slot="drawer">
-							<div class="typeItem" :class="{'typeItem-bg':typeItemActive == index}" v-for="(item,index) in typeList" @click.active="type(index)">{{item}}</div>
-						</div>
-					</drawer>
-				</div>
-
-			</masker>
-		</div>-->
 		<!--筛选菜单栏-->
 		<div v-transfer-dom>
 			<popup v-model="show9" position="top">
@@ -63,7 +54,7 @@
 
 <script>
 	import BScroll from 'better-scroll'
-	import { Tab, TabItem, Masker, Drawer, Spinner } from 'vux'
+	import { Tab, TabItem, Masker, Drawer, Spinner, XHeader } from 'vux'
 	import settingHeader from '../../../components/setting_header'
 	import Loading from '../../../components/loading'
 	export default {
@@ -79,6 +70,18 @@
 				hShow: '',
 				show9: false,
 				couponList: [{
+						title: '购物券1',
+						tip: '仅限威伐光门店使用',
+						time: '2018.03.29-2018.04.08',
+						type: '满减券'
+					},
+					{
+						title: '购物券1',
+						tip: '仅限威伐光门店使用',
+						time: '2018.03.29-2018.04.08',
+						type: '满减券'
+					},
+					{
 						title: '购物券1',
 						tip: '仅限威伐光门店使用',
 						time: '2018.03.29-2018.04.08',
@@ -184,89 +187,70 @@
 			Drawer,
 			Masker,
 			Spinner,
-			Loading
+			Loading,
+			XHeader
 		}
 	}
 </script>
 
-<style lang="less" scoped>
-	.drawer-box {
-		position: fixed;
-		top: 46px;
-		right: 0;
-		.typeItem {
-			text-align: center;
-			height: 1rem;
-			line-height: 1rem;
-			color: #888;
-		}
-		.typeItem-bg {
-			background-color: #26a2ff;
-			color: white;
-		}
-	}
-	
+<style lang="less">
 	.twoClass {
-		display: flex;
-		flex-wrap: wrap;
-		padding: 0.2rem 0;
-		.type-item {
-			width: 25%;
-			padding: 0.08rem 0.25rem;
-			text-align: center;
-			box-sizing: border-box;
-			span {
-				display: inline-block;
-				width: 100%;
-				height: 0.5rem;
-				line-height: 0.5rem;
-				/*border: 1px solid #eaeaea;*/
-				background: #eaeaea;
-				border-radius: 2px;
-				font-size: 0.20rem;
-			}
-			.twoActive {
-				/*border: 1px solid #ff00006b!important;*/
-				background-color: #336fff;
-				color: white;
-			}
-		}
-	}
-	
-	.top46 {
-		top: 46px!important;
-	}
-	
-	.couponTab {
-		background-color: white;
-		position: fixed;
-		top: 0;
-		width: 100%;
-		z-index: 111;
-		.bnf {
 			display: flex;
-			align-items: center;
-			position: relative;
-			.tab {
-				flex: 1;
-				.vux-tab-item {
-					background: transparent;
+			flex-wrap: wrap;
+			padding: 0.2rem 0;
+			.type-item {
+				width: 25%;
+				padding: 0.08rem 0.25rem;
+				text-align: center;
+				box-sizing: border-box;
+				span {
+					display: inline-block;
+					width: 100%;
+					height: 0.5rem;
+					line-height: 0.5rem;
+					/*border: 1px solid #eaeaea;*/
+					background: #eaeaea;
+					border-radius: 2px;
+					font-size: 0.20rem;
+				}
+				.twoActive {
+					/*border: 1px solid #ff00006b!important;*/
+					background-color: #336fff;
+					color: white;
 				}
 			}
-			i {
-				display: inline-block;
-				width: 15%;
-				text-align: center;
-				line-height: 0.8rem;
-				color: #397df8;
-				font-size: 0.35rem;
+		}
+	
+	.couponindex-box {
+		height: 100%;
+		background-color: white;
+		.vux-header .vux-header-title {
+			margin: 0 40px;
+		}
+		.b-w {
+			background-color: white;
+			position: relative;
+			.vux-tab-ink-bar {
+				bottom: 4px!important;
+			}
+			.edit-btn {
+				color: rgba(144, 162, 199, 1);
+				img{
+					width: 0.34rem;
+					height: 0.34rem;
+					vertical-align: middle;
+				}
 			}
 		}
-		.bnf:before {
+		.vux-header-left .left-arrow:before {
+			border: 1px solid #222;
+			border-width: 1px 0 0 1px;
+		}
+		.b-w:after {
 			content: " ";
 			position: absolute;
 			left: 0;
-			top: -1px;
+			bottom: 0;
 			right: 0;
 			height: 1px;
 			border-top: 1px solid #D9D9D9;
@@ -275,88 +259,116 @@
 			transform-origin: 0 0;
 			-webkit-transform: scaleY(0.5);
 			transform: scaleY(0.5);
-			left: 0px;
+			left: 0;
 		}
-	}
-	
-	.couponList {
-		padding-top: 55px;
-		.wrapper {
-			position: absolute;
-			top: 90px;
-			bottom: 0px;
-			overflow: hidden;
-			width: 100%;
-			.vux-loadmore {
-				display: inline-block;
-				width: 100%;
-			}
-		}
-		.bgImgThree {
-			background: url(../../../assets/images/user/rollBg4.png) no-repeat;
-			background-size: 100% 100%;
-		}
-		.rollOne {
-			background-position: 50%;
+		
+		.b-w {
+			background-color: white;
 			position: relative;
-			height: 2rem;
-			width: 95%;
-			margin: 0 auto;
-			margin-left: 0.5rem;
-			.left {
-				width: 60%;
-				height: 100%;
-				margin-left: 0.15rem;
-				position: relative;
-				display: flex;
-				flex-direction: column;
-				justify-content: space-between;
-				padding: 0.4rem 0.2rem;
-				box-sizing: border-box;
-				p:nth-of-type(1) {
-					font-size: 0.3rem;
-					color: #ffffff;
-				}
-				p:nth-of-type(2) {
-					font-size: 0.2rem;
-					color: #ffffff;
-				}
-				p:nth-of-type(3) {
-					font-size: 0.2rem;
-					color: #ffffff;
-					padding-right: 0.2rem;
+			.vux-tab-ink-bar {
+				bottom: 4px!important;
+			}
+			.edit-btn {
+				color: rgba(144, 162, 199, 1);
+			}
+		}
+		.vux-header-left .left-arrow:before {
+			border: 1px solid #222;
+			border-width: 1px 0 0 1px;
+		}
+		.b-w:after {
+			content: " ";
+			position: absolute;
+			left: 0;
+			bottom: 0;
+			right: 0;
+			height: 1px;
+			border-top: 1px solid #D9D9D9;
+			color: #D9D9D9;
+			-webkit-transform-origin: 0 0;
+			transform-origin: 0 0;
+			-webkit-transform: scaleY(0.5);
+			transform: scaleY(0.5);
+			left: 0;
+		}
+		.couponList {
+			.wrapper {
+				position: absolute;
+				top: 46px;
+				bottom: 0px;
+				overflow: hidden;
+				width: 100%;
+				.vux-loadmore {
+					display: inline-block;
+					width: 100%;
 				}
 			}
-			.right {
-				width: 50%;
-				display: inline-block;
-				text-align: center;
-				position: absolute;
-				right: 0.2rem;
-				top: 0.2rem;
-				span:nth-of-type(1) {
-					display: block;
-					font-size: 0.3rem;
-					color: #82a6ee;
-					margin-top: 0.1rem;
-				}
-				.btnImgThree {
-					background: url(../../../assets/images/user/rollBtn4.png) no-repeat;
-					background-size: 100% 100%;
-					height: 0.6rem;
-					span {
-						color: #fc705d;
+			.bgImgThree {
+				background: url(../../../assets/images/user/rollBg4.png) no-repeat;
+				background-size: 100% 100%;
+			}
+			.rollOne {
+				background-position: 50%;
+				position: relative;
+				height: 2rem;
+				width: 95%;
+				margin: 0 auto;
+				margin-left: 0.5rem;
+				.left {
+					width: 60%;
+					height: 100%;
+					margin-left: 0.15rem;
+					position: relative;
+					display: flex;
+					flex-direction: column;
+					justify-content: space-between;
+					padding: 0.4rem 0.2rem;
+					box-sizing: border-box;
+					p:nth-of-type(1) {
+						font-size: 0.3rem;
+						color: #ffffff;
+					}
+					p:nth-of-type(2) {
+						font-size: 0.2rem;
+						color: #ffffff;
+					}
+					p:nth-of-type(3) {
+						font-size: 0.2rem;
+						color: #ffffff;
+						padding-right: 0.2rem;
 					}
 				}
-				.rightBtn {
-					width: 1.5rem;
-					padding-bottom: 0.08rem;
+				.right {
+					width: 50%;
 					display: inline-block;
-					margin-top: 0.1rem;
-					span {
-						font-size: 0.2rem;
-						vertical-align: middle;
-						line-height: 0.5rem;
+					text-align: center;
+					position: absolute;
+					right: 0.2rem;
+					top: 0.2rem;
+					span:nth-of-type(1) {
+						display: block;
+						font-size: 0.3rem;
+						color: #82a6ee;
+						margin-top: 0.1rem;
+					}
+					.btnImgThree {
+						background: url(../../../assets/images/user/rollBtn4.png) no-repeat;
+						background-size: 100% 100%;
+						height: 0.6rem;
+						span {
+							color: #fc705d;
+						}
+					}
+					.rightBtn {
+						width: 1.5rem;
+						padding-bottom: 0.08rem;
+						display: inline-block;
+						margin-top: 0.1rem;
+						span {
+							font-size: 0.2rem;
+							vertical-align: middle;
+							line-height: 0.5rem;
+						}
 					}
 				}
 			}

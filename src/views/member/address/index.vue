@@ -1,7 +1,7 @@
 <template>
 	<div class="address-box">
 		<settingHeader :title="title"></settingHeader>
-		<div class="wrapper" ref="wrapper">
+		<div class="wrapper" ref="wrapper" :class="{'top46':hShow==false}">
 			<div class="content">
 				<div class="list" v-for="(item,index) in list">
 					<div class="top">
@@ -11,7 +11,7 @@
 						</div>
 						<p>{{item.address}}</p>
 					</div>
-					<div class="bottom">
+					<div class="bottom" @click="ischange(index)">
 						<check-icon :value.sync="item.isdefault">设置为默认地址</check-icon>
 						<div>
 							<router-link to="/member/address/edit"><span>编辑</span></router-link>
@@ -61,6 +61,7 @@
 				title: '管理收货地址',
 				demo1: false,
 				show: false,
+				hShow: false,
 				list: [{
 					name: '张广',
 					phone: '18520496787',
@@ -71,35 +72,18 @@
 					phone: '18520496787',
 					address: '广州市番禺区橘树北街43号',
 					isdefault: false
-				}, {
-					name: '张广',
-					phone: '18520496787',
-					address: '广州市番禺区橘树北街43号',
-					isdefault: false
-				}, {
-					name: '张广',
-					phone: '18520496787',
-					address: '广州市番禺区橘树北街43号',
-					isdefault: false
-				}, {
-					name: '张广',
-					phone: '18520496787',
-					address: '广州市番禺区橘树北街43号',
-					isdefault: false
-				}, {
-					name: '张广',
-					phone: '18520496787',
-					address: '广州市番禺区橘树北街43号',
-					isdefault: false
-				}, {
-					name: '张广',
-					phone: '18520496787',
-					address: '广州市番禺区橘树北街43号',
-					isdefault: false
 				}]
 			}
 		},
 		created() {
+			//判断是否微信端
+			var ua = navigator.userAgent.toLowerCase();
+			var isWeixin = ua.indexOf('micromessenger') != -1;
+			if(isWeixin) {
+				this.hShow = true;
+			} else {
+				this.hShow = false;
+			}
 		},
 		mounted: function() {
 			this.InitScroll() //初始化下拉组件
@@ -130,10 +114,27 @@
 
 			},
 			LoadData() {
-				this.list = this.list.concat(this.list)
+				this.list = this.list.concat({
+					name: '张广',
+					phone: '18520496787',
+					address: '广州市番禺区橘树北街43号',
+					isdefault: false
+				}, {
+					name: '张广',
+					phone: '18520496787',
+					address: '广州市番禺区橘树北街43号',
+					isdefault: false
+				})
 				setTimeout(function() {
 					this.show = false;
 				}, 3000)
+			},
+			ischange(i) {
+				var _this = this
+				this.list.forEach(function(index, value, array) {
+					_this.list[value].isdefault = false
+					_this.list[i].isdefault = true
+				})
 			}
 		},
 		components: {
@@ -150,16 +151,56 @@
 	.address-box {
 		background: #F5F6FA;
 		padding-bottom: 1rem;
+		height: 100%;
+		position: relative;
+		.settingHeader {
+			position: relative;
+		}
+		.settingHeader:after {
+			content: " ";
+			position: absolute;
+			left: 0;
+			bottom: -2px;
+			right: 0;
+			height: 1px;
+			border-top: 1px solid #D9D9D9;
+			color: #D9D9D9;
+			-webkit-transform-origin: 0 0;
+			transform-origin: 0 0;
+			-webkit-transform: scaleY(0.5);
+			transform: scaleY(0.5);
+			left: 0;
+		}
+		.add-btn-box {
+			width: 100%;
+			background: white;
+			position: absolute;
+			bottom: 1rem;
+			left: 0;
+			height: 0.88rem;
+			box-sizing: border-box;
+			.add-btn {
+				height: 0.88rem;
+				line-height: 0.88rem;
+				background: rgba(51, 111, 255, 1);
+				font-size: 0.28rem;
+				text-align: center;
+				font-family: MicrosoftYaHei;
+				color: rgba(255, 255, 255, 1);
+			}
+		}
 		.box2 {
 			padding-top: 0.21rem;
 		}
+		.top46 {
+			top: 47px!important;
+		}
 		.wrapper {
-			height: 10.5rem;
+			position: fixed;
+			top: 0px;
+			bottom: 0.88rem;
+			width: 100%;
 			overflow: hidden;
-			padding-bottom: 1rem;
-			.content{
-				padding-top: 0.2rem;
-			}
 		}
 		.list {
 			box-sizing: border-box;
@@ -220,22 +261,6 @@
 				-webkit-transform: scaleY(0.5);
 				transform: scaleY(0.5);
 				left: 0px;
-			}
-		}
-		.add-btn-box {
-			width: 100%;
-			background: white;
-			position: fixed;
-			bottom: 0%;
-			box-sizing: border-box;
-			.add-btn {
-				height: 0.88rem;
-				line-height: 0.88rem;
-				background: rgba(51, 111, 255, 1);
-				font-size: 0.28rem;
-				text-align: center;
-				font-family: MicrosoftYaHei;
-				color: rgba(255, 255, 255, 1);
 			}
 		}
 	}

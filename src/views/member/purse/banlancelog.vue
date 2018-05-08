@@ -3,7 +3,7 @@
 		<settingHeader :title="title"></settingHeader>
 		<div class="banlanceLog-box">
 			<div class="top">
-				<div @click="showRight"><i class="iconfont icon-caidan"></i>筛选</div>
+				<div @click="showRight"><img src="../../../assets/images/index/shaixuan.png" alt="" />筛选</div>
 				<div class="gary">{{typeText}}</div>
 			</div>
 			<div class="wrapper" :class="{'top46':hShow}" ref="wrapper">
@@ -108,7 +108,7 @@
 							})
 
 							setTimeout(function() {
-								_this.show = false
+//								_this.show = false
 							}, 1500)
 						})
 					} else {
@@ -251,7 +251,9 @@
 			position: relative;
 			padding: 0px 15px;
 			position: relative;
-			.iconfont {
+			img {
+				width: 0.21rem;
+				height: 0.22rem;
 				margin-right: 0.1rem;
 			}
 			.gary {
@@ -296,10 +298,10 @@
 			overflow: hidden;
 			width: 100%;
 			background: white;
-			.vux-loadmore {
+			/*.vux-loadmore {
 				display: inline-block;
 				width: 100%;
-			}
+			}*/
 		}
 		.top46 {
 			top: 46px!important;

@@ -99,19 +99,21 @@
 				.input-div {
 					padding: 0 15px!important;
 					height: 1.02rem;
-					.weui-cell__bd>input{
+					.weui-cell__bd>input {
 						height: 100%;
-						color:rgba(144,162,199,1)!important;
+						color: rgba(144, 162, 199, 1)!important;
 					}
 				}
-				.weui-cell__ft{
-					color:rgba(144,162,199,1)!important;
+				.weui-cell__ft {
+					color: rgba(144, 162, 199, 1)!important;
 				}
 			}
 			.user-img {
 				height: 1.5rem;
 				.up-box {
 					position: relative;
+					width: 1rem;
+					height: 1rem;
 					overflow: hidden;
 					.upinput {
 						opacity: 0;

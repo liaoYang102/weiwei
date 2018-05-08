@@ -18,12 +18,12 @@
 		</div>
 
 		<div v-transfer-dom>
-			<popup v-model="show9" class="shops">
-				<popup-header right-text="取消" title="选择支付方式" :show-bottom-border="false" @on-click-left="show9 = false" @on-click-right="show9 = false"></popup-header>
+			<popup v-model="show9">
+				<popup-header right-text="取消" title="请选择支付方式" :show-bottom-border="false" @on-click-left="show9 = false" @on-click-right="show9 = false"></popup-header>
 				<group gutter="0">
 					<radio :options="list" @on-change="change"></radio>
 					<div class="pay-box">
-						<x-button class="add-btn" :gradients="['#1D62F0', '#19D5FD']" @click.native="goShopsuccess">立即支付</x-button>
+						<div class="add-btn" @click="goShopsuccess">立即支付</div>
 					</div>
 				</group>
 			</popup>
@@ -43,7 +43,10 @@
 					</div>
 					<div class="clear"></div>
                 </div>
-                <cell title="店铺优惠" value="省10元：100减5" is-link :border-intent="false"></cell>
+
+                <router-link to="/member/coupon/coupon">
+                	 <cell title="店铺优惠" value="省10元：100减5" :border-intent="false" is-link></cell>
+                </router-link>
                 <cell :border-intent="false">
 					<span slot="title" style="color:#F23030;">CGC通用余额抵扣</span>
 					<span class="banlance" style='font-size: 0.24rem;color: #90A2C7;'><x-switch title="余额: ￥23400" sytle="padding-right: 0 ;"></x-switch></span>
@@ -94,7 +97,7 @@ export default {
 				key: '3',
 				value: '微信支付'
 			}],
-
+			selectItem: 0
 		}
 	},
 	components:{
@@ -111,9 +114,20 @@ export default {
 			this.show9 = true;
 		},
 		goShopsuccess(){
-			this.$router.push({ path:'/shop/o_success'})
+			console.log('--', this.selectItem)
+			if(this.selectItem){
+				this.$router.push({ path:'/shop/o_success'})
+			}else{
+				this.$vux.toast.show({
+					text: '请选择支付方式',
+					type: 'text',
+					width: '10em'
+				})
+			}
+			
 		},
 		change(value, label) {
+			this.selectItem = value
 			console.log('change:', value, label)
 		}
 	}
@@ -121,6 +135,19 @@ export default {
 </script>
 
 <style lang='less' scoped>
+	.pay-box {
+		padding: 10px 15px;
+		.add-btn {
+			height: 0.88rem;
+			line-height: 0.88rem;
+			background: rgba(51, 111, 255, 1);
+			font-size: 0.28rem;
+			text-align: center;
+			font-family: MicrosoftYaHei;
+			color: rgba(255, 255, 255, 1);
+			border-radius: 2px;
+		}
+	}
 	.popup{
 		position: relative;
 		.popupTop{

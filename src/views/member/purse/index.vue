@@ -25,7 +25,7 @@
 								<p>5000.0</p>
 							</div>
 							<div class="vux-1px-r">
-								<span>通用积分</span>
+								<span>冻结余额</span>
 								<p>5000.0</p>
 							</div>
 						</div>
@@ -299,7 +299,6 @@
 	@import '~vux/src/styles/1px.less';
 	.purse-box {
 		background-color: #f5f6fa;
-		padding-bottom: 1rem;
 		.box-h {
 			width: 100%;
 			height: 2.8rem;

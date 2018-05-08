@@ -345,12 +345,12 @@
 				if(length == 9) {
 					for(let i =0; i<6;i++){
 						list.push(obj)
-						// this.showContent = false;
+						this.showContent = false;
 						// this.scroll.refresh();
 					}
 				}else{
 					list.splice(9,6)
-					// this.showContent = true;
+					this.showContent = true;
 					// this.InitScroll()
 				}
 	    	},

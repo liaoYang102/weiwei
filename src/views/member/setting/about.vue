@@ -29,40 +29,44 @@
 </script>
 
 <style lang="less" scoped>
-	.about-tip {
-		/*background: #F5F6FA;*/
-		padding: 0.27rem;
-		font-family: PingFangSC-Medium;
-		position: relative;
-		.title {
-			font-size: 0.32rem;
-			margin: 0.27rem 0;
-			color: rgba(26, 38, 66, 1);
-			text-align: center;
+	.about-box {
+		height: 100%;
+		background: white;
+		.about-tip {
+			/*background: #F5F6FA;*/
+			padding: 0.27rem;
+			font-family: PingFangSC-Medium;
+			position: relative;
+			.title {
+				font-size: 0.32rem;
+				margin: 0.27rem 0;
+				color: rgba(26, 38, 66, 1);
+				text-align: center;
+			}
+			p {
+				font-size: 0.28rem;
+				color: rgba(26, 38, 66, 1);
+			}
+			.twoTitle {
+				font-size: 0.28rem;
+				color: rgba(51, 111, 255, 1);
+				margin-bottom: 0.1rem;
+			}
 		}
-		p {
-			font-size: 0.28rem;
-			color: rgba(26, 38, 66, 1);
+		.about-tip:before {
+			content: " ";
+			position: absolute;
+			left: 0;
+			top: 0;
+			right: 0;
+			height: 1px;
+			border-top: 1px solid #D9D9D9;
+			color: #D9D9D9;
+			-webkit-transform-origin: 0 0;
+			transform-origin: 0 0;
+			-webkit-transform: scaleY(0.5);
+			transform: scaleY(0.5);
+			left: 0px;
 		}
-		.twoTitle {
-			font-size: 0.28rem;
-			color: rgba(51, 111, 255, 1);
-			margin-bottom: 0.1rem;
-		}
-	}
-	.about-tip:before {
-		content: " ";
-		position: absolute;
-		left: 0;
-		top: 0;
-		right: 0;
-		height: 1px;
-		border-top: 1px solid #D9D9D9;
-		color: #D9D9D9;
-		-webkit-transform-origin: 0 0;
-		transform-origin: 0 0;
-		-webkit-transform: scaleY(0.5);
-		transform: scaleY(0.5);
-		left: 0px;
 	}
 </style>

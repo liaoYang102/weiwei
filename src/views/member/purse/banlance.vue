@@ -14,7 +14,7 @@
 						<card>
 							<div slot="content" class="card-demo-flex card-demo-content01">
 								<div class="vux-1px-r">
-									<p>5000.0</p>
+									<p>+ 5000.0</p> 
 									<span>增加余额</span>
 								</div>
 								<div class="vux-1px-r">

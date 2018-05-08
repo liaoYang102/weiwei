@@ -27,48 +27,53 @@
 				<span class="fl">日期</span>
 				<span class="fr">收益</span>
 			</p>
-			<scroller lock-x height='-380' @on-scroll-bottom="onScrollBottom" ref="scrollerBottom">
-				<div class="box2">
-					<ul>
-						<router-link to="/member/score/log">
-							<li>
-								<span class="fl">03月21日</span>
-								<span class="fr">220</span>
-							</li>
-						</router-link>
-						<li>
-							<span class="fl">03月21日</span>
-							<span class="fr">220</span>
-						</li>
-						<li>
-							<span class="fl">03月21日</span>
-							<span class="fr">220</span>
-						</li>
-						<li>
-							<span class="fl">03月21日</span>
-							<span class="fr">220</span>
-						</li>
-						<li>
-							<span class="fl">03月21日</span>
-							<span class="fr">220</span>
-						</li>
-						<li>
-							<span class="fl">03月21日</span>
-							<span class="fr">220</span>
-						</li>
-						<li>
-							<span class="fl">03月21日</span>
-							<span class="fr">220</span>
-						</li>
-					</ul>
-					<load-more tip="loading" id='loading'></load-more>
-				</div>
-			</scroller>
+			<ul>
+				<router-link to="/member/score/log">
+					<li>
+						<span class="fl">03月21日</span>
+						<span class="fr">220</span>
+					</li>
+				</router-link>
+				<li>
+					<span class="fl">03月21日</span>
+					<span class="fr">220</span>
+				</li>
+				<li>
+					<span class="fl">03月21日</span>
+					<span class="fr">220</span>
+				</li>
+				<li>
+					<span class="fl">03月21日</span>
+					<span class="fr">220</span>
+				</li>
+				<li>
+					<span class="fl">03月21日</span>
+					<span class="fr">220</span>
+				</li>
+				<li>
+					<span class="fl">03月21日</span>
+					<span class="fr">220</span>
+				</li>
+				<li>
+					<span class="fl">03月21日</span>
+					<span class="fr">220</span>
+				</li>
+				<li>
+					<span class="fl">03月21日</span>
+					<span class="fr">220</span>
+				</li>
+				<li>
+					<span class="fl">03月21日</span>
+					<span class="fr">220</span>
+				</li>
+			</ul>
 		</div>
 	</section>
 </template>
 
 <script>
+	import BScroll from 'better-scroll'
+	import Loading from '../../../components/loading'
 	import settingHeader from '../../../components/setting_header'
 	export default {
 		data() {
@@ -77,39 +82,28 @@
 			}
 		},
 		components: {
-			settingHeader
+			settingHeader,
+			Loading
 		},
 		created() {
 			this.$store.state.page.footerFalg = true
 		},
+		mounted() {
+
+		},
 		methods: {
-			onScrollBottom() {
-				var load = document.getElementById("loading");
-				load.style.display = 'block'
-				if(this.onFetching) {
-					// do nothing
-				} else {
-					this.onFetching = true
-					setTimeout(() => {
-						load.style.display = 'none'
-						console.log(123);
-						this.$nextTick(() => {
-							this.$refs.scrollerBottom.reset()
-						})
-						this.onFetching = false
-					}, 2000)
-				}
-			}
+
 		}
 	}
 </script>
 
 <style lang='less' scoped>
 	.score-box {
+		height: 100%;
 		background-color: #fff;
-		.vux-loadmore {
+		/*.vux-loadmore {
 			display: none;
-		}
+		}*/
 		.head {
 			width: 100%;
 			height: 3.2rem;
@@ -218,7 +212,7 @@
 						color: #1A2642;
 					}
 				}
-				li:after {
+				li:not(:first-child):after {
 					content: " ";
 					position: absolute;
 					left: 0;

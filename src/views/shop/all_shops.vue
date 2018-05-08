@@ -148,17 +148,12 @@ export default {
             }
         },
         showPanel: function(){
-            // if(this.downImg == './static/shop/down1.png'){
-            //     this.downImg = './static/shop/down.png'
-            // }else{
-            //     this.downImg = './static/shop/down1.png'
-            // }
+            this.priceImg = './static/shop/default.png'
+            if(this.downImg == './static/shop/down.png'){
+                this.downImg = './static/shop/down1.png'
+            }
             if(this.showMaskTop == false){
                 this.showMaskTop = true;
-                this.downImg = './static/shop/down.png'
-            }else {
-                this.showMaskTop = false
-                this.downImg = './static/shop/down1.png'
             }
         },
         select: function(obj,i){
@@ -167,10 +162,28 @@ export default {
             this.tabItem = obj.title;
         },
         onMenuClick: function() {
+            this.showMaskTop = false;
             this.$refs.xioaqiang.show1 = true;
+            this.priceImg = './static/shop/default.png'
+            this.downImg = './static/shop/down.png'
         },
         onItemClick: function() {
-
+            this.downImg = './static/shop/down.png'
+            this.priceImg = './static/shop/default.png'
+        },
+        sort(){
+            this.downImg = './static/shop/down.png'
+            let a = this.priceSort;
+            a ++;
+            this.priceSort = a;
+            if(a == 0){
+                this.priceImg = './static/shop/default.png'
+            }else if(a%2 != 0){
+                this.priceImg = './static/shop/ascending.png'
+            }else{
+                this.priceImg = './static/shop/descending.png'
+            }
+            console.log('--', this.priceSort)
         },
         InitScroll() {
             this.$nextTick(() => {
@@ -219,19 +232,7 @@ export default {
         goShopdetails(){
             this.$router.push({ path: '/shop/shop_details'})
         },
-        sort(){
-            let a = this.priceSort;
-            a ++;
-            this.priceSort = a;
-            if(a == 0){
-                this.priceImg = './static/shop/default.png'
-            }else if(a%2 != 0){
-                this.priceImg = './static/shop/ascending.png'
-            }else{
-                this.priceImg = './static/shop/descending.png'
-            }
-            console.log('--', this.priceSort)
-        },
+        
 
     }
 }

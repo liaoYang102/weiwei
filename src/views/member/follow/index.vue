@@ -197,6 +197,27 @@
 						money: '50.0',
 						ischeck: false,
 						id: 2
+					},
+					{
+						img: './static/member/login-img.png',
+						name: '热风2018年小清新女士星星休闲双肩包拉链方形背包B52W8201',
+						money: '50.0',
+						ischeck: false,
+						id: 2
+					},
+					{
+						img: './static/member/login-img.png',
+						name: '热风2018年小清新女士星星休闲双肩包拉链方形背包B52W8201',
+						money: '50.0',
+						ischeck: false,
+						id: 2
+					},
+					{
+						img: './static/member/login-img.png',
+						name: '热风2018年小清新女士星星休闲双肩包拉链方形背包B52W8201',
+						money: '50.0',
+						ischeck: false,
+						id: 2
 					}
 				],
 				proidList: [],
@@ -233,10 +254,9 @@
 							click: true,
 							scrollY: true,
 							pullUpLoad: {
-								threshold: -30, // 负值是当上拉到超过低部 70px；正值是距离底部距离 时，                    
+								threshold: -30,
 							}
 						})
-						console.log(this.scroll2)
 						this.scroll2.on('pullingUp', (pos) => {
 							this.show2 = true;
 							this.LoadData2()
@@ -348,18 +368,6 @@
 				}
 				this.storeidList = idList
 				console.log(this.storeidList, 'store')
-			},
-			onScrollBottom() {
-				if(this.onFetching) { // do nothing
-				} else {
-					this.onFetching = true
-					setTimeout(() => {
-						this.$nextTick(() => {
-							this.$refs.scrollerBottom.reset()
-						})
-						this.onFetching = false
-					}, 2000)
-				}
 			},
 			sousShow() {
 				this.show10 = true
@@ -473,6 +481,9 @@
 	
 	.follow-box {
 		font-family: MicrosoftYaHei;
+		background-color: white;
+		height: 100%;
+		overflow: hidden;
 		.animated {
 			-webkit-animation-duration: 1s;
 			animation-duration: 1s;
@@ -481,12 +492,32 @@
 		}
 		.b-w {
 			background-color: white;
+			position: relative;
 			.vux-tab-ink-bar {
 				bottom: 4px!important;
 			}
 			.edit-btn {
 				color: rgba(144, 162, 199, 1);
 			}
+		}
+		.vux-header-left .left-arrow:before {
+			border: 1px solid #222;
+			border-width: 1px 0 0 1px;
+		}
+		.b-w:after {
+			content: " ";
+			position: absolute;
+			left: 0;
+			bottom: 0;
+			right: 0;
+			height: 1px;
+			border-top: 1px solid #D9D9D9;
+			color: #D9D9D9;
+			-webkit-transform-origin: 0 0;
+			transform-origin: 0 0;
+			-webkit-transform: scaleY(0.5);
+			transform: scaleY(0.5);
+			left: 0;
 		}
 		.top {
 			padding: 0px 15px;
@@ -555,13 +586,13 @@
 			.wrapper2 {
 				position: absolute;
 				top: 0px;
-				bottom: 0;
+				bottom: 47px;
 				overflow: hidden;
 				width: 100%;
-				.vux-loadmore {
+				/*.vux-loadmore {
 					display: inline-block;
 					width: 100%;
-				}
+				}*/
 			}
 			.list-item {
 				background-color: white;

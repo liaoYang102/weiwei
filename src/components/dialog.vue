@@ -7,10 +7,10 @@
 					<div class="img"><img :src="'./static/images/'+type+'.png'"></div>
 					<div class="dia_top">
 						<p class="title">{{headMessage}}</p>
-						<span class="note">{{message}}</span>
+						<p class="note">{{message}}</p>
 						<div class="btnList">
-							<div class="canel" v-if="buttons.length ==2" @click="canel">{{buttons[1]}}</div>
-							<div class="btn" @click="confirm">{{buttons[0]}}</div>
+							<div class="canel" v-if="buttons.length ==2" @click="handleFun">{{buttons[1]}}</div>
+							<div class="btn" @click="confirm2">{{buttons[0]}}</div>
 						</div>
 					</div>
 				</div>
@@ -21,12 +21,22 @@
 	</section>
 </template>
 
+<!--_this.$dialog.show({ type: 'success', headMessage: '提示', message: '实名成功', buttons: ['确定'], canel() { }, confirm() { } })-->
 <script>
 	import { XDialog } from 'vux'
+
 	export default {
 		props: {
 			headMessage: String,
 			message: String,
+			Closing: Boolean,//是否自动关闭
+			clickDelay: Number,//按钮点击延迟多少时间关闭  
+			delay:{
+				type:Number,
+				default: function() {
+					return 0
+				}
+			}, //多少时间后自动关闭   clickDelay为false时有效
 			buttons: {
 				type: Array,
 				default: function() {
@@ -40,12 +50,40 @@
 		},
 		data() {
 			return {
-				showDialog: false,
+				showDialog: false
 			}
 		},
 		methods: {
-			canel() {},
-			confirm() {}
+			handleFun() {
+				var _this = this
+				_this.canel()
+				if(!_this.Closing) {
+					if(_this.clickDelay) {
+						setTimeout(function() {
+							_this.showDialog = false
+						}, _this.clickDelay)
+					} else {
+						_this.showDialog = false
+					}
+				} else {
+					_this.showDialog = true
+				}
+			},
+			confirm2() {
+				var _this = this
+				_this.confirm()
+				if(!_this.Closing) {
+					if(_this.clickDelay) {
+						setTimeout(function() {
+							_this.showDialog = false
+						}, _this.clickDelay)
+					} else {
+						_this.showDialog = false
+					}
+				} else {
+					_this.showDialog = true
+				}
+			}
 		}
 	}
 </script>
@@ -58,8 +96,9 @@
 		height: 5.37rem;
 		.img {
 			position: absolute;
-			top: -11%;
-			left: 20%;
+			top: 1%;
+			left: 50%;
+			transform: translate(-50%, -50%);
 			img {
 				width: 50%;
 			}
@@ -71,7 +110,7 @@
 			background-color: #fff;
 			text-align: center;
 			padding-top: 1.38rem;
-			margin-top: 0.7rem;
+			margin-top: 0.71rem;
 			border-radius: 0.16rem;
 			font-size: 0.28rem;
 			.title {
@@ -80,10 +119,9 @@
 				margin-bottom: 0.12rem;
 			}
 			.note {
-				display: inline-block;
-				width: 80%;
 				color: #90A2C7;
-				word-wrap: break-word;
+				padding: 0 0.5rem;
+				box-sizing: border-box;
 			}
 			.btnList {
 				margin: 0.9rem auto;
@@ -94,19 +132,22 @@
 					flex: 1;
 					background-color: #336FFF;
 					text-align: center;
-					line-height: 0.54rem;
+					height: 0.78rem;
+					line-height: 0.78rem;
 					color: #fff;
 					border-radius: 0.09rem;
-					padding: 0.19rem 0;
+					box-sizing: border-box;
 				}
 				.canel {
 					border: 1px solid #336FFF;
 					width: 2.2rem;
 					border-radius: 0.09rem;
 					text-align: center;
+					height: 0.78rem;
+					line-height: 0.78rem;
 					color: #336FFF;
-					padding: 0.19rem 0;
 					margin-right: 0.2rem;
+					box-sizing: border-box;
 				}
 			}
 		}

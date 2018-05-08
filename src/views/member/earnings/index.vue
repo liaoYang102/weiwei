@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<div class="b-w">
 		<settingHeader :title="title"></settingHeader>
 		<div class="purse-box1">
 			<div class="purse-box2">
@@ -138,191 +138,194 @@
 <style lang="less">
 	@import '~vux/src/styles/1px.less';
 	@import '~vux/src/styles/close';
-	.purse-box1 {
+	.b-w {
+		height: 100%;
 		background-color: white;
-		height:100vh;
-		.info-item {
-			font-family: PingFangSC-Regular;
-			font-size: 0.28rem;
-			color: #464646;
-			height: 0.8rem;
-			.vux-label {
-				color: #90A2C7;
-			}
-			.weui-cell__ft {
-				color: #1A2642;
-			}
-		}
-		.af-box {
-			padding: 0 15px;
-			background-color: #fff;
-			.title {
-				height: 0.7rem;
-				line-height: 0.7rem;
+		.purse-box1 {
+			.info-item {
+				font-family: PingFangSC-Regular;
 				font-size: 0.28rem;
-				color: rgba(26, 38, 66, 1);
-			}
-			.align-middle {
-				height: 80px;
-				display: flex;
-				align-items: center;
-				color: rgba(144, 162, 199, 1);
-				font-size: 0.26rem;
-				p:nth-child(2) {
-					margin: 0.15rem 0;
+				color: #464646;
+				height: 0.8rem;
+				.vux-label {
+					color: #90A2C7;
+				}
+				.weui-cell__ft {
+					color: #1A2642;
 				}
 			}
-			.bt-box {
-				display: flex;
-				align-items: center;
-				flex-wrap: wrap;
-				.item {
+			.af-box {
+				padding: 0 15px;
+				background-color: #fff;
+				.title {
+					height: 0.7rem;
+					line-height: 0.7rem;
+					font-size: 0.28rem;
+					color: rgba(26, 38, 66, 1);
+				}
+				.align-middle {
+					height: 80px;
 					display: flex;
 					align-items: center;
-					width: 50%;
-					box-sizing: border-box;
-					height: 1.12rem;
-					img {
-						width: 0.56rem;
-						height: 0.56rem;
-						margin-right: 0.29rem;
-					}
-					p:nth-child(1) {
-						font-size: 0.32rem;
-						color: rgba(242, 67, 67, 1);
-					}
+					color: rgba(144, 162, 199, 1);
+					font-size: 0.26rem;
 					p:nth-child(2) {
-						font-size: 0.2rem;
-						color: rgba(176, 188, 214, 1);
+						margin: 0.15rem 0;
 					}
 				}
-			}
-		}
-		.purse-box2 {
-			background-color: #f5f6fa;
-			position: relative;
-			.box-h {
-				width: 100%;
-				height: 2.8rem;
-				background: url(../../../assets/images/member/index-bg.png) no-repeat;
-				background-size: 100%;
-				.top {
+				.bt-box {
 					display: flex;
-					height: 1.64rem;
-					div {
-						flex: 1;
-						display: flex;
-						align-items: flex-start;
-						justify-content: center;
-						flex-direction: column;
-						padding-left: 0.25rem;
-						p:nth-child(1) {
-							font-size: 0.32rem;
-							color: white;
-						}
-						p:nth-child(2) {
-							font-size: 0.36rem;
-							margin-top: 0.05rem;
-							color: rgba(255, 255, 255, 1);
-						}
-					}
-				}
-				.bottom {
-					height: 1.15rem;
-					.weui-panel {
-						height: 100%;
-						background: transparent!important;
-					}
-					.weui-panel:after {
-						border-bottom: transparent!important;
-					}
-					.weui-panel__bd {
-						height: 100%!important;
-						.vux-card-content {
-							height: 100%!important;
-						}
-					}
-					.card-demo-flex {
+					align-items: center;
+					flex-wrap: wrap;
+					.item {
 						display: flex;
 						align-items: center;
-					}
-					.card-demo-content01 {
-						height: 100%;
-					}
-					.card-padding {
-						padding: 15px;
-					}
-					.card-demo-flex>div {
-						flex: 1;
-						text-align: center;
-					}
-					.card-demo-flex span {
-						color: white;
-						font-size: 0.2rem;
-					}
-					.card-demo-flex p {
-						color: white;
-						font-size: 0.28rem;
+						justify-content: center;
+						width: 50%;
+						box-sizing: border-box;
+						height: 1.12rem;
+						img {
+							width: 0.56rem;
+							height: 0.56rem;
+							margin-right: 0.8rem;
+						}
+						p:nth-child(1) {
+							font-size: 0.32rem;
+							color: rgba(242, 67, 67, 1);
+						}
+						p:nth-child(2) {
+							font-size: 0.2rem;
+							color: rgba(176, 188, 214, 1);
+						}
 					}
 				}
 			}
-			.gz {
-				position: absolute;
-				top: 0.3rem;
-				right: 0.4rem;
-				display: flex;
-				align-items: center;
-				font-size: 0.24rem;
-				color: white;
-				img {
-					width: 0.24rem;
-					height: 0.24rem;
-					margin-right: 0.1rem;
-				}
-			}
-		}
-		.purse-list {
-			display: flex;
-			height: 1.1rem;
-			background: white;
-			/*margin: 0.1rem 0;*/
-			padding: 0.26rem 0.65rem;
-			position: relative;
-			a {
-				flex: 1;
-				div {
+			.purse-box2 {
+				background-color: #f5f6fa;
+				position: relative;
+				.box-h {
 					width: 100%;
+					height: 2.8rem;
+					background: url(../../../assets/images/member/index-bg.png) no-repeat;
+					background-size: 100%;
+					.top {
+						display: flex;
+						height: 1.64rem;
+						div {
+							flex: 1;
+							display: flex;
+							align-items: flex-start;
+							justify-content: center;
+							flex-direction: column;
+							padding-left: 0.25rem;
+							p:nth-child(1) {
+								font-size: 0.32rem;
+								color: white;
+							}
+							p:nth-child(2) {
+								font-size: 0.36rem;
+								margin-top: 0.05rem;
+								color: rgba(255, 255, 255, 1);
+							}
+						}
+					}
+					.bottom {
+						height: 1.15rem;
+						.weui-panel {
+							height: 100%;
+							background: transparent!important;
+						}
+						.weui-panel:after {
+							border-bottom: transparent!important;
+						}
+						.weui-panel__bd {
+							height: 100%!important;
+							.vux-card-content {
+								height: 100%!important;
+							}
+						}
+						.card-demo-flex {
+							display: flex;
+							align-items: center;
+						}
+						.card-demo-content01 {
+							height: 100%;
+						}
+						.card-padding {
+							padding: 15px;
+						}
+						.card-demo-flex>div {
+							flex: 1;
+							text-align: center;
+						}
+						.card-demo-flex span {
+							color: white;
+							font-size: 0.2rem;
+						}
+						.card-demo-flex p {
+							color: white;
+							font-size: 0.28rem;
+						}
+					}
+				}
+				.gz {
+					position: absolute;
+					top: 0.3rem;
+					right: 0.4rem;
 					display: flex;
 					align-items: center;
-					justify-content: center;
-					flex-direction: column;
+					font-size: 0.24rem;
+					color: white;
 					img {
-						width: 0.5rem;
-						height: 0.5rem;
-						margin-bottom: 0.13rem;
-					}
-					span {
-						font-size: 0.25rem;
-						color: #1A2642;
-						font-family: MicrosoftYaHei;
+						width: 0.24rem;
+						height: 0.24rem;
+						margin-right: 0.1rem;
 					}
 				}
 			}
-		}
-		.purse-list:after {
-			content: " ";
-			position: absolute;
-			left: 0;
-			bottom: 0;
-			right: 0;
-			height: 1px;
-			border-top: 1px solid #D9D9D9;
-			color: #D9D9D9;
-			-webkit-transform-origin: 0 0;
-			transform-origin: 0 0;
-			-webkit-transform: scaleY(0.5);
-			transform: scaleY(0.5);
-			left: 0px;
+			.purse-list {
+				display: flex;
+				height: 1.1rem;
+				background: white;
+				/*margin: 0.1rem 0;*/
+				padding: 0.26rem 0.65rem;
+				position: relative;
+				a {
+					flex: 1;
+					div {
+						width: 100%;
+						display: flex;
+						align-items: center;
+						justify-content: center;
+						flex-direction: column;
+						img {
+							width: 0.5rem;
+							height: 0.5rem;
+							margin-bottom: 0.13rem;
+						}
+						span {
+							font-size: 0.25rem;
+							color: #1A2642;
+							font-family: MicrosoftYaHei;
+						}
+					}
+				}
+			}
+			.purse-list:after {
+				content: " ";
+				position: absolute;
+				left: 0;
+				bottom: 0;
+				right: 0;
+				height: 1px;
+				border-top: 1px solid #D9D9D9;
+				color: #D9D9D9;
+				-webkit-transform-origin: 0 0;
+				transform-origin: 0 0;
+				-webkit-transform: scaleY(0.5);
+				transform: scaleY(0.5);
+				left: 0px;
+			}
 		}
 	}
 </style>
