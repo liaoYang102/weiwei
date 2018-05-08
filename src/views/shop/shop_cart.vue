@@ -40,7 +40,7 @@
 											<div class="fr"><img src="../../assets/images/shop/modify.png" alt=""></div>
 										</div>
 									</div>
-									<div class="fr delete" @click="del(index,chIndex,$event)">
+									<div class="fr delete" @click="del(index,chIndex)">
 										删除
 									</div>
 								</div>
@@ -205,13 +205,12 @@
 		    		this.$nextTick();
 		    	}
 		    },
-		    del(a,b,e){
-		    	var docu = document.getElementsByClassName("list")[a];
-		    	docu.parentNode.removeChild(docu);
-		    	// this.proList[a].children.splice(b,1);
-		    	// if(this.proList[a].children.length == 0){
-		    	// 	this.proList.splice(a,1);
-		    	// }
+		    del(a,b){
+		    	this.proList[a].children.splice(b,1);
+		    	if(this.proList[a].children.length == 0){
+		    		var docu = document.getElementsByClassName("list")[a];
+		    		docu.parentNode.removeChild(docu);
+		    	}
 		    },
 		    goConfirm(){
 		    	this.$router.push({ path:'/shop/confirm'})

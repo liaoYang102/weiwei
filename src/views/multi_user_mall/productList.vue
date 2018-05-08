@@ -125,8 +125,7 @@ export default {
             moneylist: [],
             show: false,
             showNomore: false,
-            downImg:'./static/shop/down.png',
-            downImg1:'./static/shop/down.png',
+            downImg:'./static/shop/down1.png',
             topImg: './static/shop/topicon.png',
             priceImg: './static/shop/default.png',
             priceSort: 0,
@@ -147,6 +146,7 @@ export default {
             }
         },
         showPanel: function(){
+            this.priceImg = './static/shop/default.png'
             if(this.downImg == './static/shop/down.png'){
                 this.downImg = './static/shop/down1.png'
             }
@@ -168,45 +168,31 @@ export default {
             this.tabItem = obj.title;
         },
         onMenuClick: function() {
+            this.showDialog = false;
             this.$refs.xioaqiang.show1 = true;
+            this.downImg = './static/shop/down.png'
+            this.priceImg = './static/shop/default.png'
         },
         onItemClick: function() {
-
+            this.showDialog = false;
+            this.priceImg = './static/shop/default.png'
+            this.downImg = './static/shop/down.png'
         },
-        // InitScroll() {
-        //     this.$nextTick(() => {
-        //         if(!this.scroll) {
-        //             this.scroll = new BScroll(this.$refs.wrapper, {
-        //                 click: true,
-        //                 scrollY: true,
-        //                 pullUpLoad: {
-        //                     threshold: -30, // 负值是当上拉到超过低部 70px；正值是距离底部距离 时，                    
-        //                 }
-        //             })
-        //             this.scroll.on('pullingUp', (pos) => {
-        //                 this.show = true;
-        //                 this.LoadData()
-        //                 this.$nextTick(function() {
-        //                     this.scroll.finishPullUp();
-        //                     this.scroll.refresh();
-        //                 });
-        //             })
-        //         } else {
-        //             this.scroll.refresh()
-        //         }
-        //     })
-
-        // },
-        // LoadData() {
-        //     var _this = this
-        //     setTimeout(function(){
-        //         _this.show = false;
-        //         let obj = [{ name: 'Vivo X21 屏幕指纹版全面...', presentprice: '￥3598' ,orprice: '￥4355', pin: '月销4714', score: '265积分', status: 2},
-        //         { name: 'Vivo X21 屏幕指纹版全面...', presentprice: '￥3598' ,orprice: '￥4355', pin: '月销4714', score: '265积分', status: 2}];
-        //         _this.moneylist = _this.moneylist.concat(obj);
-        //         console.log(_this.moneylist);
-        //     },3000)
-        // },
+        sort(){
+            this.showDialog = false;
+            this.downImg = './static/shop/down.png'
+            let a = this.priceSort;
+            a ++;
+            this.priceSort = a;
+            if(a == 0){
+                this.priceImg = './static/shop/default.png'
+            }else if(a%2 != 0){
+                this.priceImg = './static/shop/ascending.png'
+            }else{
+                this.priceImg = './static/shop/descending.png'
+            }
+            console.log('--', this.priceSort)
+        },
         filterData(){
             let vm = this
             for (var i = 0; i<vm.list.length;i++) {
@@ -220,19 +206,7 @@ export default {
         goShopdetails(){
             this.$router.push({ path: '/shop/shop_details'})
         },
-        sort(){
-            let a = this.priceSort;
-            a ++;
-            this.priceSort = a;
-            if(a == 0){
-                this.priceImg = './static/shop/default.png'
-            }else if(a%2 != 0){
-                this.priceImg = './static/shop/ascending.png'
-            }else{
-                this.priceImg = './static/shop/descending.png'
-            }
-            console.log('--', this.priceSort)
-        },
+        
 
     }
 }

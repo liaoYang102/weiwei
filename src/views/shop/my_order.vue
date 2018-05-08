@@ -179,7 +179,7 @@
 			    	_this.$dialog.show({
 			    		type: 'warning',
 			    		headMessage: '确认取消订单？',
-			    		message: '删除之后可以从电脑端订单回收站恢复',
+			    		message: '亲,您是否确定要取消订单？',
 			    		buttons: ['确定', '取消'],
 			    		canel() {
 			    			_this.$dialog.hide()
@@ -238,7 +238,7 @@
 		    	_this.$dialog.show({
 		    		type: 'warning',
 		    		headMessage: '删除订单',
-		    		message: '亲,您是否确定删除订单？',
+		    		message: '删除之后可以从电脑端订单回收站恢复。',
 		    		buttons: ['确定', '取消'],
 		    		canel() {
 		    			_this.$dialog.hide()
