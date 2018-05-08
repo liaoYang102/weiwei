@@ -62,7 +62,7 @@
 		height: 5.37rem;
 		.img {
 			position: absolute;
-			top: 0%;
+			top: 1%;
 			left: 50%;
 			transform: translate(-50%, -50%);
 			img {
@@ -76,7 +76,7 @@
 			background-color: #fff;
 			text-align: center;
 			padding-top: 1.38rem;
-			margin-top: 0.7rem;
+			margin-top: 0.71rem;
 			border-radius: 0.16rem;
 			font-size: 0.28rem;
 			.title {
