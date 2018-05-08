@@ -2,8 +2,8 @@
 	<section class='myOrder' style="height: 100%">
 		<settingHeader :title="title"></settingHeader>
 		<tab :line-width="1" :scroll-threshold="5" custom-bar-width="30px">
-	      <tab-item selected @on-item-click="onItemClick">全部</tab-item>
-	      <tab-item @on-item-click="onItemClick">待付款</tab-item>
+	      <tab-item selected @on-item-click="onLookAll">全部</tab-item>
+	      <tab-item @on-item-click="onPayment">待付款</tab-item>
 	      <tab-item @on-item-click="onItemClick">待完成</tab-item>
 	      <tab-item @on-item-click="onItemClick">已完成</tab-item>
 	      <tab-item @on-item-click="onItemClick">已取消</tab-item>
@@ -318,6 +318,13 @@
 		    		}
 		    	})
 		    	console.log(_this.$dialog)
+		    },
+		    onLookAll(){
+		    	this.test = true;
+		        console.log('on item click:', index);
+		    },
+		    onPayment(){
+		    	let a = '等待买家付款'
 		    }
 		}
 	}

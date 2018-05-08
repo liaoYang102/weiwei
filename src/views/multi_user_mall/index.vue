@@ -243,9 +243,13 @@
 		}
 	}
 }
-.tab .tab-item{
-	padding-top: 0.19rem;
-}
+.tab{
+	height: 1.2rem;
+	.tab-item{
+		padding-top: 0.19rem;
+		/*padding-bottom: 0.2rem;*/
+	}
+} 
 .imgList .img:nth-child(3){
 	float: right;
 	margin-right: 0;
@@ -320,9 +324,9 @@
 	color: #336FFF !important;
 }
 .multi_user_mall .tab .vux-tab-container{
-	height: 1.2rem;
+	height: 1.2rem !important;
 }
 .multi_user_mall .tab .vux-tab{
-	height: 1.2rem;
+	height: 1.2rem !important;
 }
 </style>
