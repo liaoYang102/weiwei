@@ -108,7 +108,7 @@
 				infoList: [{
 						img: './static/member/member_1.png',
 						text: '我的优惠券',
-						url: '/member/coupon/coupon'
+						url: '/member/coupon/index'
 					},
 					{
 						img: './static/member/m_index12.png',

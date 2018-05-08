@@ -152,6 +152,7 @@
 		background: #F5F6FA;
 		padding-bottom: 1rem;
 		height: 100%;
+		position: relative;
 		.settingHeader {
 			position: relative;
 		}
@@ -174,7 +175,7 @@
 			width: 100%;
 			background: white;
 			position: absolute;
-			bottom: 0;
+			bottom: 1rem;
 			left: 0;
 			height: 0.88rem;
 			box-sizing: border-box;

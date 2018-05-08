@@ -26,7 +26,7 @@
 								<span class="label">活动</span> 厉害了！超强拼假省钱攻略
 							</p>
 							<p class="noticeText">
-								<span class="label">活动</span> 厉害了！超强拼假省钱攻略
+								<span class="label">活动</span> 美国人的棚子情节
 							</p>
 						</swiper-slide>
 					</swiper>
@@ -42,27 +42,11 @@
 							</router-link>
 						</p>
 						<div class="avatar">
-							<div class="row" v-for="item in num">
+							<div class="row" v-for="(item,index) in num">
 								<div class="persol">
-									<img src="../assets/images/index/time.png" alt="" class="fl">
+									<img :src="'./static/index/'+index+'.png'" alt="" class="fl">
 									<div class="fl">
-										<p class="persolName">余先生</p>
-										<p class="persolPrice">5000元</p>
-									</div>
-									<div class="clear"></div>
-								</div>
-								<div class="persol">
-									<img src="../assets/images/index/time.png" alt="" class="fl">
-									<div class="fl">
-										<p class="persolName">余先生</p>
-										<p class="persolPrice">5000元</p>
-									</div>
-									<div class="clear"></div>
-								</div>
-								<div class="persol">
-									<img src="../assets/images/index/time.png" alt="" class="fl">
-									<div class="fl">
-										<p class="persolName">余先生</p>
+										<p class="persolName">{{item}}</p>
 										<p class="persolPrice">5000元</p>
 									</div>
 									<div class="clear"></div>
@@ -76,10 +60,10 @@
 						<router-link :to="item.url">
 							<div class="b-w">
 								<!-- <span style="font-size:20px;">Loading123123</span> -->
-			    				<!-- <x-img :src="item.img" @on-success="success" @on-error="error" class="ximg-demo" error-class="ximg-error" :offset="-100" container=".content"></x-img> -->
+								<!-- <x-img :src="item.img" @on-success="success" @on-error="error" class="ximg-demo" error-class="ximg-error" :offset="-100" container=".content"></x-img> -->
 								<img v-lazy="item.img" />
 								<div>
-									<p>{{item.title}}</p>	
+									<p>{{item.title}}</p>
 									<p>{{item.tip}}</p>
 								</div>
 							</div>
@@ -103,7 +87,7 @@
 					<div class="titlebox">{{item.title}}</div>
 					<img style="width: 100%;height: auto;display: block;" :src="item.img" />
 					<div class="pro-box">
-						<div v-for="i in item.pro">
+						<div :class="{'vux-1px-r':index != 2}" v-for="(i,index) in item.pro">
 							<p>{{i.name}}</p>
 							<p :class="[{'red':i.color == 'red'},{'yollow':i.color == 'yollow'},{'blue':i.color == 'blue'}]">{{i.tip}}</p>
 							<img :src="i.img" alt="" />
@@ -143,7 +127,7 @@
 							<img src="../../static/images/store5.png" alt="" />
 						</div>
 					</div>
-					<div class="titlebox look">
+					<div class="titlebox">
 						<span>查看附件商家</span>
 					</div>
 				</div>
@@ -171,7 +155,7 @@
 	export default {
 		data() {
 			return {
-				num: 5,
+				num: ['郁先生','孔先生','杨先生','汤女士','朱先生','杜先生','赵先生','尹先生','顾先生','昂女士','金女士','张先生','赵先生','邹先生','张女士'],
 				address: '',
 				swiperOption: {
 					pagination: {
@@ -348,15 +332,15 @@
 		},
 		methods: {
 			// success (src, ele) {
-		 //      console.log('success load', src)
-		 //      const span = ele.parentNode.querySelector('span')
-		 //      ele.parentNode.removeChild(span)
-		 //    },
-		 //    error (src, ele, msg) {
-		 //      console.log('error load', msg, src)
-		 //      const span = ele.parentNode.querySelector('span')
-		 //      span.innerText = 'load error'
-		 //    },
+			//      console.log('success load', src)
+			//      const span = ele.parentNode.querySelector('span')
+			//      ele.parentNode.removeChild(span)
+			//    },
+			//    error (src, ele, msg) {
+			//      console.log('error load', msg, src)
+			//      const span = ele.parentNode.querySelector('span')
+			//      span.innerText = 'load error'
+			//    },
 			loc() {
 				var _this = this
 				var map, geolocation;
@@ -542,23 +526,27 @@
 			}
 			.avatar {
 				background-color: #fff;
+				display: flex;
+				flex-wrap: wrap;
 				.row {
 					display: flex;
-					width: 100%;
+					width: 33.333%;
 					height: 1.2rem;
 					padding: 0.1rem 0;
 					border-bottom: 1px solid #EDEFF3;
 					.persol {
 						flex: 1;
 						border-right: 1px solid #EDEFF3;
+						display: flex;
+						align-items: center;
+						justify-content: center;
 						img {
 							width: 0.66rem;
 							height: 0.66rem;
 							border-radius: 50%;
-							margin: 0.16rem 0.14rem 0 0.25rem;
+							margin-right: 0.14rem;
 						}
 						.fl {
-							margin-top: 0.16rem;
 							.persolName {
 								font-size: 0.24rem;
 								line-height: 0.33rem;
@@ -694,6 +682,7 @@
 					flex: 1;
 					text-align: center;
 					font-family: PingFangSC-Regular;
+					box-sizing: border-box;
 					p:nth-child(1) {
 						font-size: 0.32rem;
 						color: rgba(26, 38, 66, 1);
@@ -750,6 +739,7 @@
 					padding: 0 0.2rem;
 					box-sizing: border-box;
 					background: white;
+					position: relative;
 					div {
 						p:nth-child(1) {
 							font-size: 0.28rem;
@@ -768,6 +758,35 @@
 						height: 1.21rem;
 						display: block;
 					}
+				}
+				.item-box:before {
+					content: " ";
+					position: absolute;
+					right: 0;
+					top: 0;
+					width: 1px;
+					bottom: 0;
+					border-right: 1px solid #C7C7C7;
+					color: #C7C7C7;
+					-webkit-transform-origin: 100% 0;
+					transform-origin: 100% 0;
+					-webkit-transform: scaleX(0.5);
+					transform: scaleX(0.5);
+				}
+				.item-box:after {
+					content: " ";
+					position: absolute;
+					left: 0;
+					top: 0;
+					right: 0;
+					height: 1px;
+					border-top: 1px solid #C7C7C7;
+					color: #D9D9D9;
+					-webkit-transform-origin: 0 0;
+					transform-origin: 0 0;
+					-webkit-transform: scaleY(0.5);
+					transform: scaleY(0.5);
+					left: 0px;
 				}
 			}
 		}

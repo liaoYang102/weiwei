@@ -17,6 +17,9 @@ import VueVideoPlayer from 'vue-video-player'
 import 'video.js/dist/video-js.css'
 import VueLazyLoad from 'vue-lazyload'
 
+//忽略警告
+Vue.config.productionTip = false
+
 // 懒加载图片
 Vue.use(VueLazyLoad,{
 	preLoad: 1.3,

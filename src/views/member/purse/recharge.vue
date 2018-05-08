@@ -1,46 +1,44 @@
 <template>
-	<div>
+	<div class="recharge-box">
 		<settingHeader :title="title"></settingHeader>
-		<div class="recharge-box">
-			<div class="item">
-				<div class="left">
-					<p>健康平台</p>
-					<p>当前平台</p>
-				</div>
-				<div class="right">
-					当前余额: <span>500000000000.0</span>
-				</div>
+		<div class="item">
+			<div class="left">
+				<p>健康平台</p>
+				<p>当前平台</p>
 			</div>
-			<div class="change-box">
-				<div class="change-tip">
-					<img src="../../../assets/images/member/icon-paid.png" alt="" /> 选择支付套餐 :</div>
-				<div class="change-row">
-					<div v-for="(item,index) in moneyList" class="row-item" :class="{'moneyActive':index == moneyIndex}" @click="changeMoney(index)">
-						<div class="box">
-							<p>{{item.old}}元</p>
-							<p>售价{{item.now}}元</p>
-						</div>
+			<div class="right">
+				当前余额: <span>500000000000.0</span>
+			</div>
+		</div>
+		<div class="change-box">
+			<div class="change-tip">
+				<img src="../../../assets/images/member/icon-paid.png" alt="" /> 选择支付套餐 :</div>
+			<div class="change-row">
+				<div v-for="(item,index) in moneyList" class="row-item" :class="{'moneyActive':index == moneyIndex}" @click="changeMoney(index)">
+					<div class="box">
+						<p>{{item.old}}元</p>
+						<p>售价{{item.now}}元</p>
 					</div>
 				</div>
 			</div>
-			<div class="change-box">
-				<div class="change-tip">
-					<img src="../../../assets/images/member/icon-more.png" alt="" /> 可用消费平台 :</div>
-				<div class="change-row">
-					<div v-for="item in ptList" class="row-item">
-						<div>
-							<p>
-								<img :src="item.img" />
-							</p>
-							<p>{{item.name}}</p>
-						</div>
+		</div>
+		<div class="change-box">
+			<div class="change-tip">
+				<img src="../../../assets/images/member/icon-more.png" alt="" /> 可用消费平台 :</div>
+			<div class="change-row">
+				<div v-for="item in ptList" class="row-item">
+					<div>
+						<p>
+							<img :src="item.img" />
+						</p>
+						<p>{{item.name}}</p>
 					</div>
 				</div>
 			</div>
+		</div>
 
-			<div class="btn-box">
-				<x-button class="add-btn" @click.native="submit">确认充值</x-button>
-			</div>
+		<div class="btn-box">
+			<x-button class="add-btn" @click.native="submit">确认充值</x-button>
 		</div>
 
 		<div v-transfer-dom>
@@ -148,6 +146,8 @@
 
 <style lang="less">
 	.recharge-box {
+		height: 100%;
+		position: relative;
 		font-family: MicrosoftYaHei;
 		background-color: #F5F6FA;
 		.item {
@@ -239,7 +239,7 @@
 			}
 		}
 		.btn-box {
-			position: fixed;
+			position: absolute;
 			bottom: 0;
 			width: 100%;
 			padding: 0.25rem;

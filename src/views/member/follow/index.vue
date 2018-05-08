@@ -197,6 +197,27 @@
 						money: '50.0',
 						ischeck: false,
 						id: 2
+					},
+					{
+						img: './static/member/login-img.png',
+						name: '热风2018年小清新女士星星休闲双肩包拉链方形背包B52W8201',
+						money: '50.0',
+						ischeck: false,
+						id: 2
+					},
+					{
+						img: './static/member/login-img.png',
+						name: '热风2018年小清新女士星星休闲双肩包拉链方形背包B52W8201',
+						money: '50.0',
+						ischeck: false,
+						id: 2
+					},
+					{
+						img: './static/member/login-img.png',
+						name: '热风2018年小清新女士星星休闲双肩包拉链方形背包B52W8201',
+						money: '50.0',
+						ischeck: false,
+						id: 2
 					}
 				],
 				proidList: [],
@@ -233,10 +254,9 @@
 							click: true,
 							scrollY: true,
 							pullUpLoad: {
-								threshold: -30, // 负值是当上拉到超过低部 70px；正值是距离底部距离 时，                    
+								threshold: -30,
 							}
 						})
-						console.log(this.scroll2)
 						this.scroll2.on('pullingUp', (pos) => {
 							this.show2 = true;
 							this.LoadData2()
@@ -348,18 +368,6 @@
 				}
 				this.storeidList = idList
 				console.log(this.storeidList, 'store')
-			},
-			onScrollBottom() {
-				if(this.onFetching) { // do nothing
-				} else {
-					this.onFetching = true
-					setTimeout(() => {
-						this.$nextTick(() => {
-							this.$refs.scrollerBottom.reset()
-						})
-						this.onFetching = false
-					}, 2000)
-				}
 			},
 			sousShow() {
 				this.show10 = true
@@ -474,6 +482,8 @@
 	.follow-box {
 		font-family: MicrosoftYaHei;
 		background-color: white;
+		height: 100%;
+		overflow: hidden;
 		.animated {
 			-webkit-animation-duration: 1s;
 			animation-duration: 1s;
@@ -576,7 +586,7 @@
 			.wrapper2 {
 				position: absolute;
 				top: 0px;
-				bottom:47px;
+				bottom: 47px;
 				overflow: hidden;
 				width: 100%;
 				.vux-loadmore {

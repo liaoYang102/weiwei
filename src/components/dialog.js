@@ -23,14 +23,22 @@ export default {
 				$dialog.headMessage = obj.headMessage
 				$dialog.message = obj.message
 				$dialog.buttons = obj.buttons
-
+				$dialog.isClosing = obj.isClosing
+				$dialog.clickDelay = obj.clickDelay
+				$dialog.delay = obj.delay
 				$dialog.canel = obj.canel
 				$dialog.confirm = obj.confirm
+
+				if(obj.delay && !obj.clickDelay) {
+					setTimeout(function() {
+						$dialog.showDialog = false
+					}, obj.delay)
+				}
 			},
 			hide() {
 				$dialog.showDialog = false
 			}
-		};
+		}
 
 		if(!Vue.$dialog) {
 			Vue.$dialog = dialog;
