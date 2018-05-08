@@ -14,8 +14,19 @@
 			<comments></comments>
 		</div>
 
-		<div v-else style="margin-top: 0.92rem;">
-			<div><img src="../../assets/images/shop/theme_banner0.png" style="width: 100%;"></div>
+		<div v-else>
+			<!-- <div><img src="../../assets/images/shop/theme_banner0.png" style="width: 100%;"></div> -->
+
+    		<div class="shopImg">
+    			<swiper :options="swiperOption" class="imgBox">
+			       	<swiper-slide v-for="(item,index) in shopImg">
+			       		<div class="imgBox-item">
+                        	<img class="previewer-demo-img" :src="item.src" @click="show(index)">
+			       		</div>
+			       	</swiper-slide>
+			    </swiper> 
+    		</div>
+
 			<div class="shop_content">
 				<div class="shop">
 					<div class="shop_title"><span>女装U宽腿牛仔裤(水洗产品)宽腿牛仔裤宽腿宽腿牛仔裤</span></div>
@@ -125,6 +136,10 @@
 				</div>
           	</x-dialog>
         </div>
+
+        <div v-transfer-dom>
+	        <previewer :list="shopImg" ref="previewer" :options="options" @on-index-change="logIndexChange"></previewer>
+	    </div>
 		
 	</section>
 </template>
@@ -133,9 +148,11 @@
 import specifications from './components/specifications' 
 import comments from './components/comments'
 import {XDialog} from 'vux'
+import {swiper,swiperSlide } from 'vue-awesome-swiper'
+import 'swiper/dist/css/swiper.css'
 export default {
 	components: {
-		specifications, comments,XDialog
+		specifications, comments,XDialog,swiper,swiperSlide
 	},
 	data(){
 		return {
@@ -145,7 +162,26 @@ export default {
 			collectText: '收藏',
 			showDialog: false,
 			content:'"请选择尺码"',
-			router: ''
+			router: '',
+			swiperOption: {
+				autoHeight: true,
+	        },
+	        shopImg:[
+	        	{	msrc: 'https://m.360buyimg.com/mobilecms/s750x366_jfs/t18775/221/1737433669/102730/f366197/5ad58a68N264b153b.jpg!cr_1125x549_0_72!q70.jpg.dpg',src: 'https://m.360buyimg.com/mobilecms/s750x366_jfs/t18775/221/1737433669/102730/f366197/5ad58a68N264b153b.jpg!cr_1125x549_0_72!q70.jpg.dpg'
+			    },
+			    {	msrc: 'https://img20.360buyimg.com/da/jfs/t18169/49/1676902787/199684/abf88174/5ad405d6N903b6152.jpg.webp',src: 'https://img20.360buyimg.com/da/jfs/t18169/49/1676902787/199684/abf88174/5ad405d6N903b6152.jpg.webp'
+			    },
+			    {	msrc: 'https://m.360buyimg.com/mobilecms/s750x366_jfs/t17776/57/1707882480/210974/217399d5/5ad6b797N78d99799.jpg!cr_1125x549_0_72!q70.jpg.dpg',src: 'https://m.360buyimg.com/mobilecms/s750x366_jfs/t17776/57/1707882480/210974/217399d5/5ad6b797N78d99799.jpg!cr_1125x549_0_72!q70.jpg.dpg'
+			    }
+	        ],
+	        options: {
+		        getThumbBoundsFn (index) {
+		          let thumbnail = document.querySelectorAll('.previewer-demo-img')[index]
+		          let pageYScroll = window.pageYOffset || document.documentElement.scrollTop
+		          let rect = thumbnail.getBoundingClientRect()
+		          return {x: rect.left, y: rect.top + pageYScroll, w: rect.width}
+		        }
+	      	}
 		}
 	},
 	create: function(){
@@ -211,11 +247,11 @@ export default {
 			this.$router.go(-1)
 		},
 		collection(){
-			if(this.collectImg == '../../../static/shop/collection.png'){
-				this.collectImg = '../../../static/shop/collectAction.png'
+			if(this.collectImg == './static/shop/collection.png'){
+				this.collectImg = './static/shop/collectAction.png'
 				this.collectText = '已收藏'
 			}else{
-				this.collectImg = '../../../static/shop/collection.png'
+				this.collectImg = './static/shop/collection.png'
 				this.collectText = '收藏'
 			}
 		},
@@ -226,26 +262,44 @@ export default {
 			this.showDialog = false;
 		},
 		confirm(){
-			if (this.$refs.sp.router != 'shop_cart') {
-				this.content = this.$refs.sp.list3;
-				this.$refs.sp.show1 = false;
-				this.content ='"' + this.content.join('" "') +'"';
-				console.log('---', this.content)
-	    	}
-	    	if(this.$refs.sp.router == 'goShopcart'){
-	    		this.$router.push({ path: '/shop/shop_cart'})
-	    	}
-	    	if(this.$refs.sp.router == 'goConfirm'){
-	    		this.$router.push({ path: '/shop/confirm'})
-	    	}
+			this.$refs.sp.show1 = false;
+    		if(this.$refs.sp.list3 == [] || this.$refs.sp.list3.length==0){
+    			this.$refs.sp.show1 = true;
+    			this.$vux.toast.show({
+    				text: '请选择尺码(必填)',
+    				type: 'text',
+    				width: '10em',
+    				position: 'middle'
+    			})
+    		}else{
+    			if(this.$refs.sp.router == 'goShopcart'){
+    				this.$router.push({ path: '/shop/shop_cart'})
+    			}
+    			if(this.$refs.sp.router == 'goConfirm'){
+    				this.$router.push({ path: '/shop/confirm'})
+    			}
+    			if (this.$refs.sp.router != 'shop_cart') {
+					this.content = this.$refs.sp.list3;
+					this.content ='"' + this.content.join('" "') +'"';
+	    		}
+    		}
 		},
 		showToast(){
 			this.$vux.toast.show({
 				text: '暂无客服功能',
 				type: 'text',
-				width: '10em'
+				width: '10em',
+				position: 'middle'
 			})
-		}
+		},
+		show(index) {
+        	console.log('-=-=', index)
+        	console.log(this.$refs.previewer);
+          	this.$refs.previewer.show(index)
+        },
+        logIndexChange (arg) {
+          	console.log(arg)
+        },
 	}
 }	
 </script>
@@ -255,6 +309,14 @@ export default {
 	height: 100%;
 	width: 100%;
 	background: #F5F6FA;
+	.shopImg{
+		margin-top: 0.92rem;
+		width: 100%;
+		img{
+			width: 100%;
+		}
+	}
+
 	.shop_content{
 		background: #FFF;
 		.shop{
