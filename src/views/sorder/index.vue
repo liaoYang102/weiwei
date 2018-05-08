@@ -127,9 +127,9 @@
 	.scrollable .vux-tab-item{
 		flex:inherit;
 	}
-	.vux-loadmore{
+	/*.vux-loadmore{
 		display: none;
-	}
+	}*/
 	.none-data {
 	    /* display: none; */
 	    position: absolute;

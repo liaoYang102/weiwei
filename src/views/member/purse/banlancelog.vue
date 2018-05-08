@@ -298,10 +298,10 @@
 			overflow: hidden;
 			width: 100%;
 			background: white;
-			.vux-loadmore {
+			/*.vux-loadmore {
 				display: inline-block;
 				width: 100%;
-			}
+			}*/
 		}
 		.top46 {
 			top: 46px!important;

@@ -312,8 +312,8 @@
 				left: 0;
 			}
 		}
-		.vux-loadmore {
+		/*.vux-loadmore {
 			display: none;
-		}
+		}*/
 	}
 </style>

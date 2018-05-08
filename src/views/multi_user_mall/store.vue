@@ -18,9 +18,11 @@
 		      <cell title="好评率" value="99.5%" :border-intent="false"></cell>
 		    </group>
 		    <group class="center">
-		      <cell title="店铺二维码" value="￥624.00" :border-intent="false" is-link class="code">
-				<img src="../../assets/images/multi_user_mall/qrcode.png" alt="">
-		      </cell>
+		    	<router-link to='/multi_user_mall/store_qrcode'>
+    		      	<cell title="店铺二维码" value="￥624.00" :border-intent="false" is-link class="code" >
+    					<img src="../../assets/images/multi_user_mall/qrcode.png" alt="">
+    		      	</cell>
+		    	</router-link>
 		      <cell title="店铺名" value="优衣库" :border-intent="false"></cell>
 		      <cell title="服务电话" value="130293840592" :border-intent="false"></cell>
 		    </group>

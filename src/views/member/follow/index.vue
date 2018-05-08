@@ -589,10 +589,10 @@
 				bottom: 47px;
 				overflow: hidden;
 				width: 100%;
-				.vux-loadmore {
+				/*.vux-loadmore {
 					display: inline-block;
 					width: 100%;
-				}
+				}*/
 			}
 			.list-item {
 				background-color: white;

@@ -43,7 +43,10 @@
 					</div>
 					<div class="clear"></div>
                 </div>
-                <cell title="店铺优惠" value="省10元：100减5" is-link :border-intent="false"></cell>
+
+                <router-link to="/member/coupon/coupon">
+                	 <cell title="店铺优惠" value="省10元：100减5" :border-intent="false" is-link></cell>
+                </router-link>
                 <cell :border-intent="false">
 					<span slot="title" style="color:#F23030;">CGC通用余额抵扣</span>
 					<span class="banlance" style='font-size: 0.24rem;color: #90A2C7;'><x-switch title="余额: ￥23400" sytle="padding-right: 0 ;"></x-switch></span>
@@ -94,7 +97,7 @@ export default {
 				key: '3',
 				value: '微信支付'
 			}],
-
+			selectItem:''
 		}
 	},
 	components:{
@@ -111,9 +114,19 @@ export default {
 			this.show9 = true;
 		},
 		goShopsuccess(){
-			this.$router.push({ path:'/shop/o_success'})
+			if(this.selectItem){
+				this.$router.push({ path:'/shop/o_success'})
+			}else{
+				this.$vux.toast.show({
+					text: '请选择支付方式',
+					type: 'text',
+					width: '10em'
+				})
+			}
+			
 		},
 		change(value, label) {
+			this.selectItem = value
 			console.log('change:', value, label)
 		}
 	}

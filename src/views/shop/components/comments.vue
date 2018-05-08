@@ -123,7 +123,6 @@ export default {
 						}
 					})
 					this.scroll.on('pullingUp', (pos) => {
-						this.showLoading = true;
 						this.LoadData()
 						this.$nextTick(function() {
 							this.scroll.finishPullUp();
@@ -138,13 +137,15 @@ export default {
 		},
 		LoadData() {
 			var _this = this
+			if(_this.showNomore){
+				_this.showLoading = false;
+				return 
+			}
+			_this.showLoading = true;
 			setTimeout(function(){
 				_this.showLoading = false;
 				_this.showNomore = true;
-				// let obj = [{ shopname: 'VANS Old Skool lite黑白超轻鞋款 黑色38.5', money: '3598', score: '266'},
-				// { shopname: 'VANS Old Skool lite黑白超轻鞋款 黑色38.5', money: '3598', score: '266'}];
-				// _this.shopList = _this.shopList.concat(obj);
-				// console.log(_this.shopList);
+				// _this.scroll.destroy()
 			},3000)
 		}
 	}
