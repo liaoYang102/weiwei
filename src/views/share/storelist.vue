@@ -248,25 +248,8 @@
 							this.scroll.refresh();
 						});
 					})
-					this.scroll2 = new BScroll(this.$refs.wrapper2, {
-						click: true,
-						scrollY: true,
-						pullUpLoad: {
-							threshold: -30, // 负值是当上拉到超过低部 70px；正值是距离底部距离 时，                    
-						}
-					})
-					console.log(this.scroll2)
-					this.scroll2.on('pullingUp', (pos) => {
-						this.show2 = true;
-						this.LoadData2()
-						this.$nextTick(function() {
-							this.scroll2.finishPullUp();
-							this.scroll2.refresh();
-						});
-					})
 				} else {
 					this.scroll.refresh()
-					this.scroll2.refresh()
 				}
 			})
 			},
@@ -293,6 +276,16 @@
 				}else{
 					this.show1=true
 				}
+				this.$nextTick(() => {
+					this.scroll2 = new BScroll(this.$refs.wrapper2, {
+						click: true,
+						scrollY: true,
+						pullUpLoad: {
+							threshold: -30, // 负值是当上拉到超过低部 70px；正值是距离底部距离 时，                    
+						}
+					})
+				})
+				
 			},
 			onPrice(){
 				//点击价格
@@ -353,6 +346,7 @@
 					this.showContent = true;
 					// this.InitScroll()
 				}
+				console.log(this.scroll2);
 	    	},
 	    	// 切换样式
 	    	changeCss: function(e){
@@ -670,6 +664,7 @@
 	height: 11.78rem;
 	overflow: hidden;
 	.content{
+		height: 12.rem;
 		padding-bottom: 1rem;
 	}
 }

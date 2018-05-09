@@ -55,6 +55,7 @@
 					<noMore v-if="showNomore"></noMore>
 					<specifications ref='sp' :router="router" :confirm="confirm" :shopList="shopList"></specifications>
 				</div>
+
 			    <div class="wrap no_shops" v-else>
 		        	<div class="none-data">
 		        		<img :src="imgSrc" alt=""> 
