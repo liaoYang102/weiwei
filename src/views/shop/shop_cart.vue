@@ -28,7 +28,13 @@
 								</div>
 								<div class="fr shopEdit" v-else>
 									<div class="fl">
+<<<<<<< HEAD
 										<inline-x-number width="1.8rem" v-model.value="i.childrenNum" :min="1"></inline-x-number>
+=======
+										<group>
+											<x-number width="1.8rem" v-model="children.childrenNum" :min="1"></x-number>
+										</group>
+>>>>>>> 5e0302c58d5c8640c81cc681210e7f2462392972
 										<div class="editSize" @click="showMask(index,chIndex)">
 											<div class="fl">
 												<!-- <span v-for="(item,index) in children.childrenContent"> -->
@@ -40,7 +46,7 @@
 											<div class="fr"><img src="../../assets/images/shop/modify.png" alt=""></div>
 										</div>
 									</div>
-									<div class="fr delete" @click="del(index,chIndex)">
+									<div class="fr delete" @click="del(index,chIndex,$event)">
 										删除
 									</div>
 								</div>
@@ -97,7 +103,7 @@
 						childrenImg:"./static/shop/order_detail1.png",
 						childrenName:"女装U宽腿牛仔裤(水洗产品)女装U宽腿牛仔裤(水洗产品)",
 						childrenSize:"颜色:蓝色；尺码:L/170修身",
-						childrenNum:"4",
+						childrenNum:4,
 						childrenPrice:"3598",
 						childrenAccount:"266",
 						childrenContent: "165/S;蓝色",
@@ -106,7 +112,7 @@
 						childrenImg:"./static/shop/order_detail1.png",
 						childrenName:"女装U宽腿牛仔裤(水洗产品)女装U宽腿牛仔裤(水洗产品)",
 						childrenSize:"颜色:蓝色；尺码:L/170修身",
-						childrenNum:"1",
+						childrenNum:1,
 						childrenPrice:"3598",
 						childrenAccount:"266",
 						childrenContent: "165/S;蓝色",
@@ -122,7 +128,7 @@
 						childrenImg:"./static/shop/order_detail1.png",
 						childrenName:"女装U宽腿牛仔裤(水洗产品)女装U宽腿牛仔裤(水洗产品)",
 						childrenSize:"颜色:蓝色；尺码:L/170修身",
-						childrenNum:"1",
+						childrenNum:1,
 						childrenPrice:"3598",
 						childrenAccount:"266",
 						childrenContent: "165/S;蓝色",
@@ -138,7 +144,23 @@
 						childrenImg:"./static/shop/order_detail1.png",
 						childrenName:"女装U宽腿牛仔裤(水洗产品)女装U宽腿牛仔裤(水洗产品)",
 						childrenSize:"颜色:蓝色；尺码:L/170修身",
-						childrenNum:"3",
+						childrenNum:3,
+						childrenPrice:"3598",
+						childrenAccount:"266",
+						childrenContent: "165/S;蓝色",
+						ischeck:false
+					}]
+				},{
+					storeImg:"./static/shop/UNIQLO.png",
+					storeName:"优衣库旗舰店",
+					ischeck:false,
+					shopEdit:true,
+					allcheck:false,
+					children:[{
+						childrenImg:"./static/shop/order_detail1.png",
+						childrenName:"女装U宽腿牛仔裤(水洗产品)女装U宽腿牛仔裤(水洗产品)",
+						childrenSize:"颜色:蓝色；尺码:L/170修身",
+						childrenNum:7,
 						childrenPrice:"3598",
 						childrenAccount:"266",
 						childrenContent: "165/S;蓝色",
@@ -209,20 +231,38 @@
 		    	}else{
 		    		e.target.innerHTML = '编辑';
 		    		this.proList[index].shopEdit = true;
-		    		var a = this.arr[0];
-		    		var b = this.arr[1];
-		    		this.proList[a].children[b].childrenSize = this.proList[a].children[b].childrenContent;
-		    		this.$nextTick();
+		    		if(a,b){
+		    			var a = this.arr[0];
+			    		var b = this.arr[1];
+			    		this.proList[a].children[b].childrenSize = this.proList[a].children[b].childrenContent;
+			    		this.$nextTick();
+		    		}
 		    	}
 		    },
-		    del(a,b){
+		    del(a,b,e){
 		    	this.proList[a].children.splice(b,1);
+<<<<<<< HEAD
 		    	console.log('--aa',a,b)
 		    	console.log('---proList', this.proList[a])
 		    	if(this.proList[a].children.length == 0){
 		    		var docu = document.getElementsByClassName("list")[a];
 		    		console.log('--', docu.parentNode)
 		    		docu.parentNode.removeChild(docu);
+=======
+		    	if(this.proList[a].children.length==0){
+		    		this.proList.splice(a,1);
+		    		if(this.proList.length!=0){
+		    			a = (a+1) > this.proList.length ? this.proList.length-1 : a;
+		    			var element = document.getElementsByClassName("list")[a].getElementsByClassName("edit")[0];
+		    			console.log(this.proList)
+			    		if(this.proList[a].shopEdit){
+			    			element.innerHTML = '编辑';
+			    		}else{
+			    			element.innerHTML = '完成';
+			    		}
+		    		}
+	    			
+>>>>>>> 5e0302c58d5c8640c81cc681210e7f2462392972
 		    	}
 		    },
 		    goConfirm(){
@@ -515,6 +555,15 @@
 		}
 		.vux-number-selector svg{
 			fill: #1A2642;
+		}
+		.weui-cell{
+			padding:0;
+		}
+		.weui-cells:after{
+			border-bottom:none;
+		}
+		.weui-cells{
+			margin-top:0;
 		}
 	}
 </style>
