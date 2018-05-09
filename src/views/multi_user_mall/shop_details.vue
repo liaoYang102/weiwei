@@ -15,7 +15,15 @@
 		</div>
 
 		<div style="margin-top: 46px;" v-else>
-			<div><img src="../../assets/images/shop/theme_banner0.png" style="width: 100%;"></div>
+			<div class="shopImg">
+    			<swiper :options="swiperOption" class="imgBox">
+			       	<swiper-slide v-for="(item,index) in shopImg">
+			       		<div class="imgBox-item">
+                        	<img class="previewer-demo-img" :src="item.src" @click="show(index)">
+			       		</div>
+			       	</swiper-slide>
+			    </swiper> 
+    		</div>
 			<div class="shop_content">
 				<div class="shop">
 					<div class="shop_title">
@@ -59,15 +67,6 @@
 							<div class="pr">积分加现金</div>
 						</cell>
 					</group>
-
-					<!--<group>
-						<cell title="房型" :value="val1" @click.native="showrec = true"></cell>
-						<cell title="时间" primary="content">
-							<div class="time">
-								<span @click="start">{{startDate}}</span>
-							</div>
-						</cell>
-					</group>-->
 
 					<div class="comments">
 						<div class="comments_title">商品评价</div>
@@ -118,7 +117,7 @@
 		</div>
 
 		<div class="footer">
-			<div class="footer_icon">
+			<div class="footer_icon" @click="showToast">
 				<img src="../../assets/images/shop/customer.png"><br>
 				<span>客服</span>
 			</div>
@@ -127,7 +126,7 @@
 				<badge text="12"></badge><br>
 				<span>购物车</span>
 			</div>
-			<div class="footer-btn btn_green">导航</div>
+			<div class="footer-btn btn_green" @click="navigation">导航</div>
 			<div class="footer-btn btn_blue" @click="goConfirm">立即购买</div>
 		</div>
 
@@ -137,14 +136,10 @@
 					<img src="../../assets/images/shop/rightShare.png" class="right">
 					<div class="clear"></div>
 					<div class="btn" @click="hideDialog">我知道了</div>
-					<!-- <img src="../../assets/images/shop/Rectangle.png" class="mt10" @click="hideDialog"> -->
 				</div>
 			</x-dialog>
 		</div>
 
-		<!--<div v-transfer-dom>
-			<actionsheet v-model="showrec" theme="ios" :menus="reclist" @on-click-menu="recclick" show-cancel></actionsheet>
-		</div>-->
 		<!--购买确认页-->
 		<div v-transfer-dom>
 			<popup v-model="showsure" height="100%" position="bottom">
@@ -175,25 +170,32 @@
 				</div>
 			</popup>
 		</div>
+
+		<div v-transfer-dom>
+	        <previewer :list="shopImg" ref="previewer" :options="options" @on-index-change="logIndexChange"></previewer>
+	    </div>
 	</section>
 </template>
 
 <script>
 	import comments from './components/comments'
 	import { XDialog, Actionsheet, InlineCalendar, Popup } from 'vux'
+	import {swiper,swiperSlide } from 'vue-awesome-swiper'
+	import 'swiper/dist/css/swiper.css'
 	export default {
 		components: {
 			comments,
 			XDialog,
 			Actionsheet,
 			InlineCalendar,
-			Popup
+			Popup,
+			swiper,swiperSlide
 		},
 		data() {
 			return {
 				tabTitle: '商品',
 				obj: null,
-				collectImg: '../../../static/shop/collection.png',
+				collectImg: './static/shop/collection.png',
 				collectText: '收藏',
 				showDialog: false,
 				showsure: false,
@@ -225,7 +227,26 @@
 					return val.replace(/-/g, '$')
 				},
 				val1: '请选择房间类型',
-				showrec: false
+				showrec: false,
+				swiperOption: {
+					autoHeight: true,
+		        },
+		        shopImg:[
+		        	{	msrc: 'https://m.360buyimg.com/mobilecms/s750x366_jfs/t18775/221/1737433669/102730/f366197/5ad58a68N264b153b.jpg!cr_1125x549_0_72!q70.jpg.dpg',src: 'https://m.360buyimg.com/mobilecms/s750x366_jfs/t18775/221/1737433669/102730/f366197/5ad58a68N264b153b.jpg!cr_1125x549_0_72!q70.jpg.dpg'
+				    },
+				    {	msrc: 'https://img20.360buyimg.com/da/jfs/t18169/49/1676902787/199684/abf88174/5ad405d6N903b6152.jpg.webp',src: 'https://img20.360buyimg.com/da/jfs/t18169/49/1676902787/199684/abf88174/5ad405d6N903b6152.jpg.webp'
+				    },
+				    {	msrc: 'https://m.360buyimg.com/mobilecms/s750x366_jfs/t17776/57/1707882480/210974/217399d5/5ad6b797N78d99799.jpg!cr_1125x549_0_72!q70.jpg.dpg',src: 'https://m.360buyimg.com/mobilecms/s750x366_jfs/t17776/57/1707882480/210974/217399d5/5ad6b797N78d99799.jpg!cr_1125x549_0_72!q70.jpg.dpg'
+				    }
+		        ],
+		        options: {
+			        getThumbBoundsFn (index) {
+			          let thumbnail = document.querySelectorAll('.previewer-demo-img')[index]
+			          let pageYScroll = window.pageYOffset || document.documentElement.scrollTop
+			          let rect = thumbnail.getBoundingClientRect()
+			          return {x: rect.left, y: rect.top + pageYScroll, w: rect.width}
+			        }
+		      	}
 			}
 		},
 		create: function() {},
@@ -241,11 +262,13 @@
 			}
 		},
 		methods: {
-			purchase(){
+			purchase() {
 				this.showsure = false
-				this.$router.push({path:'/shop/confirm'})
+				this.$router.push({
+					path: '/shop/confirm'
+				})
 			},
-			
+
 			choicelay(index, item) {
 				this.layIndex = index
 				this.layText = item
@@ -262,7 +285,6 @@
 			onShop() {
 				this.tabTitle = '商品'
 				window.scrollTo(0, 0);
-				console.log('---11', this.tabTitle)
 			},
 			scrollTo() {
 				this.tabTitle = '详情';
@@ -286,20 +308,29 @@
 					path: '/shop/shop_cart'
 				})
 			},
+			navigation() {
+				var marker = new AMap.Marker({
+					position: [113.370196,22.979898]
+				})
+
+				marker.markOnAMAP({
+					position: marker.getPosition(),
+					name: '广州市番禺区天安科技园' //name属性在移动端有效
+				})
+			},
 			goConfirm() {
 				this.showsure = true
 			},
 			changeBack() {
 				this.$store.state.vux.back = false;
-				console.log('111', this.$store.state.vux.back)
 				this.$router.go(-1)
 			},
 			collection() {
-				if(this.collectImg == '../../../static/shop/collection.png') {
-					this.collectImg = '../../../static/shop/collectAction.png'
+				if(this.collectImg == './static/shop/collection.png') {
+					this.collectImg = './static/shop/collectAction.png'
 					this.collectText = '已收藏'
 				} else {
-					this.collectImg = '../../../static/shop/collection.png'
+					this.collectImg = './static/shop/collection.png'
 					this.collectText = '收藏'
 				}
 			},
@@ -315,7 +346,6 @@
 					let num = 'x' + this.$refs.sp.num
 					this.content.push(num)
 					this.$refs.sp.show1 = false;
-					console.log('---', this.content)
 				}
 				if(this.$refs.sp.router == 'goShopcart') {
 					this.$router.push({
@@ -323,37 +353,48 @@
 					})
 				}
 			},
-
-			//			start() {
-			//				var _this = this
-			//				this.$vux.datetime.show({
-			//					value: '',
-			//					confirmText: '确定',
-			//					cancelText: '取消',
-			//					clearText: '请选择入住日期',
-			//					hourRow:"{value}点",
-			//					format:'YYYY-MM-DD HH:mm',
-			//					onConfirm(val) {
-			//						console.log(val)
-			//						_this.startDate = val
-			//					},
-			//				})
-			//			},
 			recclick(val) {
 				this.val1 = this.reclist[val]
 			},
+			show(index) {
+	        	console.log('-=-=', index)
+	        	console.log(this.$refs.previewer);
+	          	this.$refs.previewer.show(index)
+	        },
+	        logIndexChange (arg) {
+	          	console.log(arg)
+	        },
+	        showToast(){
+	        	this.$vux.toast.show({
+	        		text: '暂无客服功能',
+	        		type: 'text',
+	        		width: '10em',
+	        		position: 'middle'
+	        	})
+	        },
 		}
 	}
 </script>
 
 <style lang="less" scoped>
+	.shopImg{
+		margin-top: 0.92rem;
+		width: 100%;
+		height: 3.66rem;
+		line-height: 3.66rem;
+		img{
+			width: 100%;
+			display: inline-block; 
+			vertical-align: middle;
+		}
+	}
 	.sure-popup {
 		height: 100%;
 		padding: 0.3rem 0.38rem;
 		background-color: white;
 		box-sizing: border-box;
 		position: relative;
-		.gbi{
+		.gbi {
 			position: absolute;
 			right: 0.3rem;
 			top: 0.3rem;

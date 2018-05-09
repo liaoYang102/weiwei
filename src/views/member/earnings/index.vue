@@ -49,7 +49,7 @@
 			<div class="af-box">
 				<p class="title">兑换公告</p>
 				<div>
-					<marquee :duration='9000'>
+					<marquee :duration='3000'>
 						<marquee-item v-for="i in 5" :key="i" @click.native="onClick(i)" class="align-middle">
 							<div>
 								<p>恭喜130*******0045 用户兑换三亚三天两夜游旅游票</p>

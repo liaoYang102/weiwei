@@ -13,7 +13,7 @@
 						<img src="../assets/images/index/position.png" alt="">
 						<span class="city">{{address}}</span>
 					</span>
-					<div class="search fl" @click="$router.push({path:'/multi_user_mall/search'})">
+					<div class="search fr" @click="$router.push({path:'/multi_user_mall/search'})">
 						<input type="text" placeholder='搜索你想要的' />
 						<img src="../assets/images/index/search.png" alt="">
 					</div>
@@ -325,7 +325,6 @@
 		},
 		created() {
 			this.loc()
-
 		},
 		mouted() {
 
@@ -422,8 +421,10 @@
 			}
 			.search {
 				position: relative;
+				text-align: right;
+				padding-right: 0.5rem;
 				input {
-					width: 4.14rem;
+					width: 4.44rem;
 					height: 0.54rem;
 					border-radius: 0.27rem;
 					background-color: #808080;

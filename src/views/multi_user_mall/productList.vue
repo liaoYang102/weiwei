@@ -1,7 +1,7 @@
 <template>
     <div id="shops">
        
-        <tab :line-width='0' style="border-top: 1px solid #E1E1E1;">
+        <tab :line-width='0'>
             <tab-item selected @on-item-click="showPanel" id="showPanel">
               {{ tabItem}} <img :src="downImg" alt="" width="13%">
             </tab-item>
@@ -157,7 +157,6 @@ export default {
             let top = parseInt(document.getElementById('showPanel').offsetTop);
             console.log('--00', top)
             this.obj = top + 40;
-            console.log('---', this.obj)
             let panel = document.getElementById('panel');
             let dialog = panel.parentNode
             
@@ -328,9 +327,9 @@ export default {
     }
     .weui-dialog{
         position: absolute;
-        top: 54.1%;
+        /*top: 54.1%;*/
         width: 101%;
-        left: 49.5%;
+        /*left: 49.5%;*/
         background: #fff;
         max-width: 101%;
         z-index: 11;

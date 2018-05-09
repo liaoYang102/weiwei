@@ -131,37 +131,37 @@
 				hShow: '',
 				showModel: false,
 				list: [
-				{
-						num: '308',
-						l: '3',
-						time: '2018.04.27-2018.04.29',
-						status: '生效中',
-						store: '长隆欢乐酒店',
-						bg: './static/lock/Bitmap@2x.png'
-					},
-					{
-						num: '521',
-						l: '5',
-						time: '2018.04.27-2018.04.29',
-						status: '已过期',
-						store: '维也纳连锁酒店',
-						bg: './static/lock/Group@2x.png'
-					}, {
-						num: '308',
-						l: '3',
-						time: '2018.04.27-2018.04.29',
-						status: '生效中',
-						store: '长隆欢乐酒店',
-						bg: './static/lock/Bitmap@2x.png'
-					},
-					{
-						num: '521',
-						l: '5',
-						time: '2018.04.27-2018.04.29',
-						status: '已过期',
-						store: '维也纳连锁酒店',
-						bg: './static/lock/Group@2x.png'
-					},
+//				{
+//						num: '308',
+//						l: '3',
+//						time: '2018.04.27-2018.04.29',
+//						status: '生效中',
+//						store: '长隆欢乐酒店',
+//						bg: './static/lock/Bitmap@2x.png'
+//					},
+//					{
+//						num: '521',
+//						l: '5',
+//						time: '2018.04.27-2018.04.29',
+//						status: '已过期',
+//						store: '维也纳连锁酒店',
+//						bg: './static/lock/Group@2x.png'
+//					}, {
+//						num: '308',
+//						l: '3',
+//						time: '2018.04.27-2018.04.29',
+//						status: '生效中',
+//						store: '长隆欢乐酒店',
+//						bg: './static/lock/Bitmap@2x.png'
+//					},
+//					{
+//						num: '521',
+//						l: '5',
+//						time: '2018.04.27-2018.04.29',
+//						status: '已过期',
+//						store: '维也纳连锁酒店',
+//						bg: './static/lock/Group@2x.png'
+//					},
 				]
 			}
 		},

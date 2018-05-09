@@ -101,7 +101,7 @@
 			settingHeader,PopupHeader,Radio,XButton,XInput
 		},
 		created(){
-			document.title = '填写退货物流';
+			// document.title = '填写退货物流';
 		},
 		methods:{
 			logistics(){

@@ -14,28 +14,40 @@
 			<comments></comments>
 		</div>
 
-		<div v-else style="margin-top: 0.92rem;">
-			<div><img src="../../assets/images/shop/theme_banner0.png" style="width: 100%;"></div>
+		<div v-else>
+    		<div class="shopImg">
+    			<swiper :options="swiperOption" class="imgBox">
+			       	<swiper-slide v-for="(item,index) in shopImg">
+			       		<div class="imgBox-item">
+                        	<img class="previewer-demo-img" :src="item.src" @click="show(index)">
+			       		</div>
+			       	</swiper-slide>
+			    </swiper> 
+    		</div>
+
 			<div class="shop_content">
 				<div class="shop">
 					<div class="shop_title"><span>女装U宽腿牛仔裤(水洗产品)宽腿牛仔裤宽腿宽腿牛仔裤</span></div>
-					<div class="shop_left">
-						<p class="shopPrice">
-							<span class="priceNum">￥3598</span> 
-							<span class="shopAcount">+266积分</span>
-						</p>
-						<span>运费:10.00</span>
-					</div>
-					<div class="shop_right">
-						<div class="shop_collection" @click="collection">
-							<img :src="collectImg"><br>
-							<span>{{ collectText}}</span>
+					<div class="shop_f">
+						<div class="shop_left">
+							<p class="shopPrice">
+								<span class="priceNum">￥3598</span> 
+								<span class="shopAcount">+266积分</span>
+							</p>
+							<span>运费:10.00</span>
 						</div>
-						<div class="shop_share" @click="showShareDialog">
-							<img src="../../assets/images/shop/share.png"><br>
-							<span>分享</span>
+						<div class="shop_right">
+							<div class="shop_collection" @click="collection">
+								<img :src="collectImg"><br>
+								<span>{{ collectText}}</span>
+							</div>
+							<div class="shop_share" @click="showShareDialog">
+								<img src="../../assets/images/shop/share.png"><br>
+								<span>分享</span>
+							</div>
 						</div>
 					</div>
+					
 				</div>
 
 				<div class="shop_cell">
@@ -125,6 +137,10 @@
 				</div>
           	</x-dialog>
         </div>
+
+        <div v-transfer-dom>
+	        <previewer :list="shopImg" ref="previewer" :options="options" @on-index-change="logIndexChange"></previewer>
+	    </div>
 		
 	</section>
 </template>
@@ -133,19 +149,40 @@
 import specifications from './components/specifications' 
 import comments from './components/comments'
 import {XDialog} from 'vux'
+import {swiper,swiperSlide } from 'vue-awesome-swiper'
+import 'swiper/dist/css/swiper.css'
 export default {
 	components: {
-		specifications, comments,XDialog
+		specifications, comments,XDialog,swiper,swiperSlide
 	},
 	data(){
 		return {
 			tabTitle: '商品',
 			obj:null,
-			collectImg:'../../../static/shop/collection.png',
+			collectImg:'./static/shop/collection.png',
 			collectText: '收藏',
 			showDialog: false,
 			content:'"请选择尺码"',
-			router: ''
+			router: '',
+			swiperOption: {
+				autoHeight: true,
+	        },
+	        shopImg:[
+	        	{	msrc: 'https://m.360buyimg.com/mobilecms/s750x366_jfs/t18775/221/1737433669/102730/f366197/5ad58a68N264b153b.jpg!cr_1125x549_0_72!q70.jpg.dpg',src: 'https://m.360buyimg.com/mobilecms/s750x366_jfs/t18775/221/1737433669/102730/f366197/5ad58a68N264b153b.jpg!cr_1125x549_0_72!q70.jpg.dpg'
+			    },
+			    {	msrc: 'https://img20.360buyimg.com/da/jfs/t18169/49/1676902787/199684/abf88174/5ad405d6N903b6152.jpg.webp',src: 'https://img20.360buyimg.com/da/jfs/t18169/49/1676902787/199684/abf88174/5ad405d6N903b6152.jpg.webp'
+			    },
+			    {	msrc: 'https://m.360buyimg.com/mobilecms/s750x366_jfs/t17776/57/1707882480/210974/217399d5/5ad6b797N78d99799.jpg!cr_1125x549_0_72!q70.jpg.dpg',src: 'https://m.360buyimg.com/mobilecms/s750x366_jfs/t17776/57/1707882480/210974/217399d5/5ad6b797N78d99799.jpg!cr_1125x549_0_72!q70.jpg.dpg'
+			    }
+	        ],
+	        options: {
+		        getThumbBoundsFn (index) {
+		          let thumbnail = document.querySelectorAll('.previewer-demo-img')[index]
+		          let pageYScroll = window.pageYOffset || document.documentElement.scrollTop
+		          let rect = thumbnail.getBoundingClientRect()
+		          return {x: rect.left, y: rect.top + pageYScroll, w: rect.width}
+		        }
+	      	}
 		}
 	},
 	create: function(){
@@ -211,11 +248,11 @@ export default {
 			this.$router.go(-1)
 		},
 		collection(){
-			if(this.collectImg == '../../../static/shop/collection.png'){
-				this.collectImg = '../../../static/shop/collectAction.png'
+			if(this.collectImg == './static/shop/collection.png'){
+				this.collectImg = './static/shop/collectAction.png'
 				this.collectText = '已收藏'
 			}else{
-				this.collectImg = '../../../static/shop/collection.png'
+				this.collectImg = './static/shop/collection.png'
 				this.collectText = '收藏'
 			}
 		},
@@ -226,26 +263,44 @@ export default {
 			this.showDialog = false;
 		},
 		confirm(){
-			if (this.$refs.sp.router != 'shop_cart') {
-				this.content = this.$refs.sp.list3;
-				this.$refs.sp.show1 = false;
-				this.content ='"' + this.content.join('" "') +'"';
-				console.log('---', this.content)
-	    	}
-	    	if(this.$refs.sp.router == 'goShopcart'){
-	    		this.$router.push({ path: '/shop/shop_cart'})
-	    	}
-	    	if(this.$refs.sp.router == 'goConfirm'){
-	    		this.$router.push({ path: '/shop/confirm'})
-	    	}
+			this.$refs.sp.show1 = false;
+    		if(this.$refs.sp.list3 == [] || this.$refs.sp.list3.length==0){
+    			this.$refs.sp.show1 = true;
+    			this.$vux.toast.show({
+    				text: '请选择尺码(必填)',
+    				type: 'text',
+    				width: '10em',
+    				position: 'middle'
+    			})
+    		}else{
+    			if(this.$refs.sp.router == 'goShopcart'){
+    				this.$router.push({ path: '/shop/shop_cart'})
+    			}
+    			if(this.$refs.sp.router == 'goConfirm'){
+    				this.$router.push({ path: '/shop/confirm'})
+    			}
+    			if (this.$refs.sp.router != 'shop_cart') {
+					this.content = this.$refs.sp.list3;
+					this.content ='"' + this.content.join('" "') +'"';
+	    		}
+    		}
 		},
 		showToast(){
 			this.$vux.toast.show({
 				text: '暂无客服功能',
 				type: 'text',
-				width: '10em'
+				width: '10em',
+				position: 'middle'
 			})
-		}
+		},
+		show(index) {
+        	console.log('-=-=', index)
+        	console.log(this.$refs.previewer);
+          	this.$refs.previewer.show(index)
+        },
+        logIndexChange (arg) {
+          	console.log(arg)
+        },
 	}
 }	
 </script>
@@ -255,6 +310,18 @@ export default {
 	height: 100%;
 	width: 100%;
 	background: #F5F6FA;
+	.shopImg{
+		margin-top: 0.92rem;
+		width: 100%;
+		height: 3.66rem;
+		line-height: 3.66rem;
+		img{
+			width: 100%;
+			display: inline-block; 
+			vertical-align: middle;
+		}
+	}
+
 	.shop_content{
 		background: #FFF;
 		.shop{
@@ -265,57 +332,58 @@ export default {
 			word-break: normal;
 			padding-top: 0.2rem;
 			margin: 0 auto;
-			.shop_left{
-				float: left;
-				width: 50%;
-				margin-top: 0.31rem;
-				font-size: 0.24rem;
-				color: #90A2C7;
-				padding-bottom: 0.29rem;
-				.shopPrice{
-					margin-bottom: 0.09rem;
-					.priceNum{
-						display: inline-block;
-						
-						font-size: 0.32rem;
-						color: #F23030;
-						font-weight: 700;
-						vertical-align: middle;
+			.shop_f{
+				display: flex;
+				align-items: center;
+				.shop_left {
+					width: 50%;
+					margin: 0.31rem 0;
+					font-size: 0.24rem;
+					color: #90A2C7;
+					.shopPrice{
+						margin-bottom: 0.09rem;
+						.priceNum{
+							display: inline-block;
+							font-size: 0.32rem;
+							color: #F23030;
+							font-weight: 700;
+							vertical-align: middle;
+						}
+						.shopAcount{
+							font-weight: normal;
+							display: inline-block;
+							padding-left: 0.06rem;
+							padding-right: 0.08rem;
+							height: 0.4rem;
+							text-align: center;
+							font-size: 0.24rem;
+							line-height: 0.4rem;
+							background-image: linear-gradient(238deg, #5EC3FF 0%, #106FE3 100%);
+							border-radius: 0.04rem;
+							color:#fff;
+						}
 					}
-					.shopAcount{
-						font-weight: normal;
-						display: inline-block;
-						padding-left: 0.06rem;
-						padding-right: 0.08rem;
-						height: 0.4rem;
-						text-align: center;
-						font-size: 0.24rem;
-						line-height: 0.4rem;
-						background-image: linear-gradient(238deg, #5EC3FF 0%, #106FE3 100%);
-						border-radius: 0.04rem;
-						color:#fff;
+					
+				}
+				.shop_right {
+					width: 50%;
+					margin: 0.31rem 0;
+					font-size: 0.2rem;
+					color: #90A2C7;
+					img {
+						width: 47%;
 					}
-				}
-			}
-			.shop_right{
-				float: left;
-				width: 50%;
-				margin-top: 0.31rem;
-				font-size: 0.2rem;
-				color: #90A2C7;
-				img{
-					width: 47%;
-				}
-				.shop_share{
-					float: right;
-					border-right: 1px solid #90A2C7;
-				}
-				.shop_collection{
-					float: right;
-					/*width: 50%;*/
-					padding-left: 0.27rem;
-					span{
+					.shop_share {
+						float: right;
+						border-right: 1px solid #90A2C7;
+					}
+					.shop_collection {
+						float: right;
 						text-align: center;
+						padding-left: 0.22rem;
+						span {
+							text-align: center;
+						}
 					}
 				}
 			}
@@ -331,7 +399,7 @@ export default {
 				}
 			}
 			.pr{
-				padding-right: 0.44rem;
+				padding-right: 0.1rem;
 			}
 			.comments{
 				background: #FFF;

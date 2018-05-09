@@ -90,14 +90,15 @@ li{
 			padding-bottom: 0.17rem;
 		}
 		.score-btn{
-			width: 3rem;
+			width: 40%;
 			border: 0.02rem solid #FFFFFF;
 			border-radius: 1rem;
 			font-size: 0.24rem;
-			padding: 0.05rem 0 0.05rem 0.25rem;
+			padding: 0.05rem 0.1rem 0.05rem 0.25rem;
 			margin: 0 auto;
 			img{
 				width: 5%;
+				margin-left: 0.05rem;
 			}
 		}
 		.score-rules{

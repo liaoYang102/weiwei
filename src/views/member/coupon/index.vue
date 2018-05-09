@@ -138,7 +138,6 @@
 				this.typeActive = index
 			},
 			showDrawer() {
-				//				this.drawerShow = !this.drawerShow
 				this.show9 = true
 			},
 			type(index) {
@@ -155,10 +154,9 @@
 							click: true,
 							scrollY: true,
 							pullUpLoad: {
-								threshold: -30, // 负值是当上拉到超过低部 70px；正值是距离底部距离 时，                    
+								threshold: -30                
 							}
 						})
-						console.log(this.scroll)
 						this.scroll.on('pullingUp', (pos) => {
 							this.show = true;
 							this.LoadData()
@@ -208,13 +206,11 @@
 					width: 100%;
 					height: 0.5rem;
 					line-height: 0.5rem;
-					/*border: 1px solid #eaeaea;*/
 					background: #eaeaea;
 					border-radius: 2px;
 					font-size: 0.20rem;
 				}
 				.twoActive {
-					/*border: 1px solid #ff00006b!important;*/
 					background-color: #336fff;
 					color: white;
 				}
@@ -236,45 +232,15 @@
 			.edit-btn {
 				color: rgba(144, 162, 199, 1);
 				img{
-					width: 0.34rem;
-					height: 0.34rem;
+					width: 0.3rem;
+					height: 0.3rem;
 					vertical-align: middle;
 				}
 			}
 		}
 		.vux-header-left .left-arrow:before {
-			border: 1px solid #222;
-			border-width: 1px 0 0 1px;
-		}
-		.b-w:after {
-			content: " ";
-			position: absolute;
-			left: 0;
-			bottom: 0;
-			right: 0;
-			height: 1px;
-			border-top: 1px solid #D9D9D9;
-			color: #D9D9D9;
-			-webkit-transform-origin: 0 0;
-			transform-origin: 0 0;
-			-webkit-transform: scaleY(0.5);
-			transform: scaleY(0.5);
-			left: 0;
-		}
-		
-		.b-w {
-			background-color: white;
-			position: relative;
-			.vux-tab-ink-bar {
-				bottom: 4px!important;
-			}
-			.edit-btn {
-				color: rgba(144, 162, 199, 1);
-			}
-		}
-		.vux-header-left .left-arrow:before {
-			border: 1px solid #222;
-			border-width: 1px 0 0 1px;
+			border: 1px solid #222!important;
+			border-width: 1px 0 0 1px!important;
 		}
 		.b-w:after {
 			content: " ";

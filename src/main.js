@@ -11,20 +11,17 @@ import './assets/icons_font/iconfont.css'
 import './style/global.css'
 import 'swiper/dist/css/swiper.css'
 import './config/wy_rem'
-import { Group, DatetimeRange, Cell, Tab, TabItem, CellBox, XHeader, Scroller, LoadMore,TransferDom, Confirm, Popup, Toast, Swiper, InlineXNumber, CheckIcon, CellFormPreview, XSwitch, XNumber, Badge, Previewer, Timeline, TimelineItem, Rater, XTextarea,Radio} from 'vux'
+import { Group, DatetimeRange, Cell, Tab, TabItem, CellBox, XHeader, Scroller, LoadMore, TransferDom, Confirm, Popup, Toast, Swiper, InlineXNumber, CheckIcon, CellFormPreview, XSwitch, XNumber, Badge, Previewer, Timeline, TimelineItem, Rater, XTextarea, Radio } from 'vux'
 import FastClick from 'fastclick'
 import VueVideoPlayer from 'vue-video-player'
 import 'video.js/dist/video-js.css'
 import VueLazyLoad from 'vue-lazyload'
 
-//忽略警告
-Vue.config.productionTip = false
-
 // 懒加载图片
-Vue.use(VueLazyLoad,{
+Vue.use(VueLazyLoad, {
 	preLoad: 1.3,
-    error:'./static/images/warning.png',
-    loading:'./static/images/loading.jpg',
+	error: './static/images/warning.png',
+	loading: './static/images/loading.jpg',
 })
 // --------------------------------
 
@@ -71,7 +68,7 @@ Vue.use(dialog)
 import animate from 'animate.css'
 Vue.use(animate)
 //全局load
-import { LoadingPlugin, DatetimePlugin ,ToastPlugin } from 'vux'
+import { LoadingPlugin, DatetimePlugin, ToastPlugin } from 'vux'
 Vue.use(LoadingPlugin)
 Vue.use(DatetimePlugin)
 Vue.use(ToastPlugin)
@@ -87,7 +84,7 @@ const shouldUseTransition = !/transition=none/.test(location.href)
 store.registerModule('vux', {
 	state: {
 		direction: shouldUseTransition ? 'forward' : '',
-		back:true
+		back: true
 	},
 	mutations: {
 		UPDATE_DIRECTION(state, payload) {
@@ -95,7 +92,6 @@ store.registerModule('vux', {
 				return
 			}
 			state.direction = payload.direction
-			console.log(payload.direction)
 		}
 	}
 })
@@ -118,12 +114,11 @@ methods.forEach(key => {
 		method.apply(null, args)
 	}
 })
- window.addEventListener("popstate", function(e) {
-// 新版中使用wx.closeWindow()方法
-    store.state.vux.back = false;
+window.addEventListener("popstate", function(e) {
+	// 新版中使用wx.closeWindow()方法
+	store.state.vux.back = false;
 }, false);
 router.beforeEach(function(to, from, next) {
-	// console.log(1)
 	const toIndex = history.getItem(to.path)
 	const fromIndex = history.getItem(from.path)
 	if(toIndex) {
@@ -133,12 +128,12 @@ router.beforeEach(function(to, from, next) {
 					direction: ''
 				})
 				store.state.vux.back = true;
-			} else{
+			} else {
 				store.commit('UPDATE_DIRECTION', {
 					direction: 'forward'
 				})
 			}
-			if(!store.state.vux.back){
+			if(!store.state.vux.back) {
 				store.commit('UPDATE_DIRECTION', {
 					direction: 'reverse'
 				})
@@ -152,7 +147,7 @@ router.beforeEach(function(to, from, next) {
 				});
 				store.state.vux.back = true;
 			} else {
-				if(store.state.vux.back){
+				if(store.state.vux.back) {
 					store.commit('UPDATE_DIRECTION', {
 						direction: 'forward'
 					});
@@ -163,7 +158,7 @@ router.beforeEach(function(to, from, next) {
 					// 		direction: 'reverse'
 					// 	});
 					// }
-				}else{
+				} else {
 					store.commit('UPDATE_DIRECTION', {
 						direction: 'reverse'
 					})
@@ -190,11 +185,6 @@ router.beforeEach(function(to, from, next) {
 
 router.afterEach(function(to) {
 	isPush = false
-	// console.log(2)
-	/*if(process.env.NODE_ENV === 'production') {
-		ga && ga('set', 'page', to.fullPath)
-		ga && ga('send', 'pageview')
-	}*/
 })
 //const whiteList = ['/user/login', '/index', '/user/reg','/','/member/index'];// 不重定向白名单
 // router.beforeEach((to, from, next) => {
