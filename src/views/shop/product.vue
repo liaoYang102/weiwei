@@ -14,14 +14,20 @@
 				</div>
 			</div>
 			<div class="content-right">
-				<div class="imglist">
+				<!-- <div class="imglist">
 					<swiper :options="swiperOption">
 				        <swiper-slide v-for="item in imgList" class="img">
 				        	<img :src="item">
 				        </swiper-slide>
 				        <div class="swiper-pagination" slot="pagination"></div>
 			        </swiper>
-				</div>
+				</div> -->
+				<router-link to="/shop/all_shops">
+					<div class="channel">
+						<span>进入手机频道</span>
+						<span class="gray">></span>
+					</div>
+				</router-link>
 
 				<!-- <div class="wrapper1" ref="wrapper1">
 					<div class="content">
@@ -183,6 +189,7 @@
 		}
 		.content-left {
 			width: 2.1rem;
+			border-top: 1px solid #E1E1E1;
 			/*padding-bottom: 50px;*/
 			.box1-item {
 				background: #F5F6FA;
@@ -212,6 +219,19 @@
 			padding: 0.11rem 0.09rem 0 0.11rem;
 			box-sizing: content-box;
 			background-color: #fff;
+			border-top: 1px solid #E1E1E1;
+			.channel{
+				width: 97%;
+				margin: 0 auto 0.37rem auto;
+				background: #E4EBFB;
+				text-align: center;
+				padding: 0.25rem 0;
+				color: #1A2642;
+				font-size: 0.28rem;
+				.gray{
+					color: #90A2C7;
+				} 
+			}
 			img {
 				width: 100%;
 				height: 1.84rem;

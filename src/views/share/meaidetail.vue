@@ -204,7 +204,7 @@
 		background: #f5f6fa;
 	}
 	.wrapper {
-		height: 100%;
+		height: 93%;
 		overflow: hidden;
 	}
 	.commentsList li{
