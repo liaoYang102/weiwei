@@ -60,15 +60,6 @@
 						</cell>
 					</group>
 
-					<!--<group>
-						<cell title="房型" :value="val1" @click.native="showrec = true"></cell>
-						<cell title="时间" primary="content">
-							<div class="time">
-								<span @click="start">{{startDate}}</span>
-							</div>
-						</cell>
-					</group>-->
-
 					<div class="comments">
 						<div class="comments_title">商品评价</div>
 						<div class="comments_details">
@@ -137,14 +128,10 @@
 					<img src="../../assets/images/shop/rightShare.png" class="right">
 					<div class="clear"></div>
 					<div class="btn" @click="hideDialog">我知道了</div>
-					<!-- <img src="../../assets/images/shop/Rectangle.png" class="mt10" @click="hideDialog"> -->
 				</div>
 			</x-dialog>
 		</div>
 
-		<!--<div v-transfer-dom>
-			<actionsheet v-model="showrec" theme="ios" :menus="reclist" @on-click-menu="recclick" show-cancel></actionsheet>
-		</div>-->
 		<!--购买确认页-->
 		<div v-transfer-dom>
 			<popup v-model="showsure" height="100%" position="bottom">
@@ -302,7 +289,6 @@
 			},
 			changeBack() {
 				this.$store.state.vux.back = false;
-				console.log('111', this.$store.state.vux.back)
 				this.$router.go(-1)
 			},
 			collection() {
@@ -326,7 +312,6 @@
 					let num = 'x' + this.$refs.sp.num
 					this.content.push(num)
 					this.$refs.sp.show1 = false;
-					console.log('---', this.content)
 				}
 				if(this.$refs.sp.router == 'goShopcart') {
 					this.$router.push({
@@ -334,22 +319,6 @@
 					})
 				}
 			},
-
-			//			start() {
-			//				var _this = this
-			//				this.$vux.datetime.show({
-			//					value: '',
-			//					confirmText: '确定',
-			//					cancelText: '取消',
-			//					clearText: '请选择入住日期',
-			//					hourRow:"{value}点",
-			//					format:'YYYY-MM-DD HH:mm',
-			//					onConfirm(val) {
-			//						console.log(val)
-			//						_this.startDate = val
-			//					},
-			//				})
-			//			},
 			recclick(val) {
 				this.val1 = this.reclist[val]
 			},
