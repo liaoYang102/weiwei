@@ -137,7 +137,7 @@
 			settingHeader,PopupHeader,Radio,XButton,XInput
 		},
 		created(){
-			document.title = '申请退款';
+			// document.title = '申请退款';
 			// var int1 = window.setInterval(this.time,1000);
 		},
 		methods:{

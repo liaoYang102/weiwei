@@ -52,7 +52,7 @@
 			PopupHeader,Radio
 		},
 		created(){
-			document.title = '店铺信息';
+			// document.title = '店铺信息';
 			// var int1 = window.setInterval(this.time,1000);
 		},
 		methods:{
