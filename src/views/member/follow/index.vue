@@ -273,13 +273,15 @@
 
 			},
 			LoadData() {
+				let _this = this;
 				setTimeout(function() {
-					this.show = false;
+					_this.show = false;
 				}, 5500)
 			},
 			LoadData2() {
+				let _this = this;
 				setTimeout(function() {
-					this.show2 = false;
+					_this.show2 = false;
 				}, 5500)
 			},
 			//点击全选
@@ -324,6 +326,8 @@
 				this.allstCheck = false
 				this.proidList = []
 				this.storeidList = []
+				this.show = false
+				this.show2 = false
 			},
 			//点击编辑
 			edit() {

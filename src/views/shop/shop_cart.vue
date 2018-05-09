@@ -3,7 +3,7 @@
 		<settingHeader :title="title"></settingHeader>
 		<div class="wrapper" ref="wrapper">
 			<div class="content">
-				<div class="box2">
+				<div class="box2" v-if="proList.length !=0">
 			      	<div class="list" v-for="(item,index) in proList">
 						<div class="storeName">
 							<check-icon :value.sync='item.ischeck' @click.native="storecheck(index)" style="width:0.88rem;height:0.88rem;text-align:center;line-height:0.88rem;" class='fl'></check-icon>
@@ -28,9 +28,13 @@
 								</div>
 								<div class="fr shopEdit" v-else>
 									<div class="fl">
+<<<<<<< HEAD
+										<inline-x-number width="1.8rem" v-model.value="i.childrenNum" :min="1"></inline-x-number>
+=======
 										<group>
 											<x-number width="1.8rem" v-model="children.childrenNum" :min="1"></x-number>
 										</group>
+>>>>>>> 5e0302c58d5c8640c81cc681210e7f2462392972
 										<div class="editSize" @click="showMask(index,chIndex)">
 											<div class="fl">
 												<!-- <span v-for="(item,index) in children.childrenContent"> -->
@@ -55,6 +59,14 @@
 					<noMore v-if="showNomore"></noMore>
 					<specifications ref='sp' :router="router" :confirm="confirm" :shopList="shopList"></specifications>
 				</div>
+				<div class="wrap no_orders" v-else>
+		        	<div class="none-data">
+		        		<img :src="imgSrc" alt=""> 
+		    			<p>{{ status}}</p>
+		        	</div>
+		    		
+		    		<recommended></recommended>
+        		</div>
 			</div>
 			<div class="position">
 				<div class="fl total">
@@ -79,6 +91,8 @@
 	export default{
 		data(){
 			return{
+				imgSrc: './static/shop/noShop.png', 
+				status:'暂无商品',
 				proList:[{
 					storeImg:"./static/shop/UNIQLO.png",
 					storeName:"优衣库旗舰店",
@@ -227,6 +241,14 @@
 		    },
 		    del(a,b,e){
 		    	this.proList[a].children.splice(b,1);
+<<<<<<< HEAD
+		    	console.log('--aa',a,b)
+		    	console.log('---proList', this.proList[a])
+		    	if(this.proList[a].children.length == 0){
+		    		var docu = document.getElementsByClassName("list")[a];
+		    		console.log('--', docu.parentNode)
+		    		docu.parentNode.removeChild(docu);
+=======
 		    	if(this.proList[a].children.length==0){
 		    		this.proList.splice(a,1);
 		    		if(this.proList.length!=0){
@@ -240,6 +262,7 @@
 			    		}
 		    		}
 	    			
+>>>>>>> 5e0302c58d5c8640c81cc681210e7f2462392972
 		    	}
 		    },
 		    goConfirm(){
@@ -348,6 +371,25 @@
 	}
 	.box2{
 		padding-bottom: 0.3rem;
+	}
+	.no_orders{
+		padding-bottom: 0.2rem;
+		background-color: #F5F6FA;
+		.none-data {
+		    background: #fff;
+		    width: 100%;
+		    padding-bottom: 0.66rem;
+		    margin-bottom: 0.2rem;
+		    text-align: center;
+		    z-index: 10;
+		    img{
+	    	    width: 100%;
+		    }
+		    p{
+		    	font-size: 0.32rem;
+	    		color: #1A2642;
+		    }
+		}
 	}
 	.storeName{
 		width: 100%;

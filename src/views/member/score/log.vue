@@ -185,14 +185,14 @@
 			LoadData() {
 				var _this = this
 				setTimeout(function() {
-					//					_this.show = false;
+					_this.show = false;
 					// _this.showNomore = true;
 				}, 3000)
 			},
 		},
 		computed: {
 			h: function() {
-				return document.body.clientHeight - 46 - 94
+				return document.body.clientHeight - 94
 			}
 		}
 	}
