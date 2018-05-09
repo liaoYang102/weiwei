@@ -295,16 +295,15 @@
 		.footer{
 			position: fixed;
 			bottom: 0;
-			height: 1.68rem;
 			width: 100%;
 			z-index: 3;
 			background: #f5f6fa;
 			.btn{
-				width: 80%;
+				width: 6rem;
 				height: 0.94rem;
 				background-color: #3889FF;
 				box-shadow:0 0.02rem 0.2rem 0 rgba(41,120,235,0.4);
-				margin:0.3rem auto 0 auto;
+				margin:0.44rem auto;
 				color: #fff;
 				text-align: center;
 				line-height: 0.94rem;

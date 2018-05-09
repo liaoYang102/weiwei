@@ -23,10 +23,11 @@
 					<swiper :options="noticeOption" class="noticeswiper">
 						<swiper-slide v-for="item in num">
 							<p class="noticeText">
-								<span class="label">活动</span> 厉害了！超强拼假省钱攻略
+								厉害了！超强拼假省钱攻略
 							</p>
 							<p class="noticeText">
-								<span class="label">活动</span> 美国人的棚子情节
+								<!--<span class="label">活动</span>--> 
+								美国人的棚子情节
 							</p>
 						</swiper-slide>
 					</swiper>
@@ -55,12 +56,13 @@
 						</div>
 					</div>
 				</div>
+				<router-link to="">
+					<img style="width: 100%;height: auto;display: block;" src="../../static/images/IMG_3224 Copy@2x.png" alt="" />
+				</router-link>
 				<div class="plate">
 					<div class="item" v-for="item in plateList">
 						<router-link :to="item.url">
 							<div class="b-w">
-								<!-- <span style="font-size:20px;">Loading123123</span> -->
-								<!-- <x-img :src="item.img" @on-success="success" @on-error="error" class="ximg-demo" error-class="ximg-error" :offset="-100" container=".content"></x-img> -->
 								<img v-lazy="item.img" />
 								<div>
 									<p>{{item.title}}</p>
@@ -101,27 +103,27 @@
 					<div class="store-box">
 						<div class="item-box">
 							<div>
-								<p>屈臣氏</p>
+								<p>国美</p>
 								<p>满100减30</p>
 							</div>
 							<img src="../../static/images/store2.png" alt="" />
 						</div>
 						<div class="item-box">
 							<div>
-								<p>全家</p>
+								<p>红豆</p>
 								<p>满20减10</p>
 							</div>
 							<img src="../../static/images/store3.png" alt="" />
 						</div>
 						<div class="item-box">
 							<div>
-								<p>卜蜂莲花</p>
+								<p>红星美凯龙</p>
 								<p>双日立减5元</p>
 							</div>
 							<img src="../../static/images/store4.png" alt="" /></div>
 						<div class="item-box">
 							<div>
-								<p>大润发</p>
+								<p>魅族手机</p>
 								<p>双日立减5元</p>
 							</div>
 							<img src="../../static/images/store5.png" alt="" />
@@ -330,16 +332,6 @@
 
 		},
 		methods: {
-			// success (src, ele) {
-			//      console.log('success load', src)
-			//      const span = ele.parentNode.querySelector('span')
-			//      ele.parentNode.removeChild(span)
-			//    },
-			//    error (src, ele, msg) {
-			//      console.log('error load', msg, src)
-			//      const span = ele.parentNode.querySelector('span')
-			//      span.innerText = 'load error'
-			//    },
 			loc() {
 				var _this = this
 				var map, geolocation;
@@ -464,7 +456,7 @@
 			height: 0.95rem;
 			margin-bottom: 0.2rem;
 			background-color: #fff;
-			padding-top: 0.15rem;
+			padding-top: 0.25rem;
 			padding-left: 0.45rem;
 			img {
 				float: left;
@@ -478,6 +470,7 @@
 		.lottery {
 			background-color: #FF9304;
 			padding-bottom: 0.1rem;
+			margin-bottom: 0.29rem;
 			img {
 				width: 100%;
 				height: 2.7rem;

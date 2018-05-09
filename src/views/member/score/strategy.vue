@@ -8,16 +8,12 @@
 </template>
 
 <script>
-	import { Tab, TabItem, Masker, Drawer } from 'vux'
 	import settingHeader from '../../../components/setting_header'
 	export default {
 		data() {
 			return {
 				title: '积分攻略'
 			}
-		},
-		methods: {
-
 		},
 		components: {
 			settingHeader
@@ -30,6 +26,7 @@
 		img {
 			width: 100%;
 			height: auto;
+			display: block;
 		}
 	}
 </style>

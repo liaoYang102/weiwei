@@ -45,7 +45,7 @@
 						</li>
 					</a>
 					<a href="javascript:;">
-						<li @click="goCoupon">
+						<li @click="$router.push({path:'/member/coupon/index'})">
 							<img src="../../assets/images/share/coupon.png">
 							<p>优惠券</p>
 						</li>
