@@ -140,7 +140,7 @@ export default {
 						click: true,
 						scrollY: true,
 						pullUpLoad: {
-							threshold: -50, // 负值是当上拉到超过低部 70px；正值是距离底部距离 时，                    
+							threshold: 0, // 负值是当上拉到超过低部 70px；正值是距离底部距离 时，                    
 						}
 					})
 					this.scroll.on('pullingUp', (pos) => {
