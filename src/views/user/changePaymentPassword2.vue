@@ -27,7 +27,7 @@
 		},
 		created() {},
 		mounted() {
-			this.$refs.phone.focus()
+			this.$refs.password.focus()
 		},
 		methods: {
 			submit() {

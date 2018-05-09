@@ -8,7 +8,7 @@
 					<div class="dia_top">
 						<p class="title">{{headMessage}}</p>
 						<p class="note">{{message}}</p>
-						<div class="btnList">
+						<div class="btnList" v-if='buttons'>
 							<div class="canel" v-if="buttons.length ==2" @click="handleFun">{{buttons[1]}}</div>
 							<div class="btn" @click="confirm2">{{buttons[0]}}</div>
 						</div>
@@ -21,28 +21,18 @@
 	</section>
 </template>
 
-<!--_this.$dialog.show({ type: 'success', headMessage: '提示', message: '实名成功', buttons: ['确定'], canel() { }, confirm() { } })-->
+<!--_this.$dialog.show({ type: '', headMessage: '', message: '', buttons: [''], canel() { }, confirm() { } })-->
 <script>
 	import { XDialog } from 'vux'
 
 	export default {
 		props: {
-			headMessage: String,
+			headMessage:String,
 			message: String,
-			Closing: Boolean,//是否自动关闭
-			clickDelay: Number,//按钮点击延迟多少时间关闭  
-			delay:{
-				type:Number,
-				default: function() {
-					return 0
-				}
-			}, //多少时间后自动关闭   clickDelay为false时有效
-			buttons: {
-				type: Array,
-				default: function() {
-					return []
-				}
-			},
+			closing: Boolean, //按钮点击是否自动关闭
+			clickDelay: Number, //按钮点击延迟多少时间关闭  
+			delay: Number, //多少时间后自动关闭   clickDelay为false时有效
+			buttons: Array,
 			type: String, //type: failure/success/warning  //buttons: 确定、取消、我知道了
 		},
 		components: {
@@ -57,7 +47,7 @@
 			handleFun() {
 				var _this = this
 				_this.canel()
-				if(!_this.Closing) {
+				if(!_this.closing) {
 					if(_this.clickDelay) {
 						setTimeout(function() {
 							_this.showDialog = false
@@ -72,7 +62,7 @@
 			confirm2() {
 				var _this = this
 				_this.confirm()
-				if(!_this.Closing) {
+				if(!_this.closing) {
 					if(_this.clickDelay) {
 						setTimeout(function() {
 							_this.showDialog = false

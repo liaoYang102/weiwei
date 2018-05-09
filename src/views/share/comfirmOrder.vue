@@ -42,11 +42,11 @@
 
 		<div v-transfer-dom>
 			<popup v-model="paytype">
-				<popup-header left-text="取消" right-text="确定" title="选择支付方式" :show-bottom-border="false" @on-click-left="paytype = false" @on-click-right="paytype = false"></popup-header>
+				<popup-header right-text="取消" title="选择支付方式" :show-bottom-border="false" @on-click-left="paytype = false" @on-click-right="paytype = false"></popup-header>
 				<group gutter="0">
 					<radio :options="list" @on-change="change"></radio>
 					<div class="pay-box">
-						<x-button class="add-btn" :gradients="['#1D62F0', '#19D5FD']" @click.native="goShopsuccess">立即支付</x-button>
+						<div class="add-btn" @click.native="goShopsuccess">立即支付</div>
 					</div>
 				</group>
 			</popup>

@@ -14,16 +14,14 @@ export default {
 			document.body.appendChild($dialog.$el);
 		}
 
-		$dialog.showDialog = false;
-
 		let dialog = {
 			show(obj) {
 				$dialog.showDialog = true
 				$dialog.type = obj.type
-				$dialog.headMessage = obj.headMessage
+				$dialog.headMessage = obj.headMessage?obj.headMessage:'提示'
 				$dialog.message = obj.message
-				$dialog.buttons = obj.buttons
-				$dialog.isClosing = obj.isClosing
+				$dialog.buttons = obj.buttons?obj.buttons:['确定','取消']
+				$dialog.closing = obj.closing
 				$dialog.clickDelay = obj.clickDelay
 				$dialog.delay = obj.delay
 				$dialog.canel = obj.canel

@@ -9,16 +9,6 @@
 			</div>
 			<div class="edit-btn" @click="edit" slot="right">{{isBj?'完成':'编辑'}}</div>
 		</x-header>
-		<!--<div class="top">
-			<div class="bj-box" @click="edit" :class="{'bjcolor':isBj}"></div>
-			<div class="tar-box">
-				<tab v-model="index" :line-width="2" active-color="#397df8" custom-bar-width="0.56rem">
-					<tab-item selected @on-item-click="active">商品</tab-item>
-					<tab-item @on-item-click="active">店铺</tab-item>
-				</tab>
-			</div>
-			<img @click="sousShow" src="../../../assets/images/member/sous.png" />
-		</div>-->
 		<swiper v-model="index" height="100vh" :show-dots="false" :threshold='100'>
 			<swiper-item>
 				<div class="pro-list">
@@ -125,37 +115,37 @@
 						name: '热风2018年小清新女士星星休闲双肩包拉链方形背包B52W8201',
 						money: '50.0',
 						ischeck: false,
-						id: 2
+						id: 3
 					}, {
 						img: './static/member/login-img.png',
 						name: '热风2018年小清新女士星星休闲双肩包拉链方形背包B52W8201',
 						money: '50.0',
 						ischeck: false,
-						id: 2
+						id: 4
 					}, {
 						img: './static/member/login-img.png',
 						name: '热风2018年小清新女士星星休闲双肩包拉链方形背包B52W8201',
 						money: '50.0',
 						ischeck: false,
-						id: 2
+						id: 5
 					}, {
 						img: './static/member/login-img.png',
 						name: '热风2018年小清新女士星星休闲双肩包拉链方形背包B52W8201',
 						money: '50.0',
 						ischeck: false,
-						id: 2
+						id: 6
 					}, {
 						img: './static/member/login-img.png',
 						name: '热风2018年小清新女士星星休闲双肩包拉链方形背包B52W8201',
 						money: '50.0',
 						ischeck: false,
-						id: 2
+						id: 7
 					}, {
 						img: './static/member/login-img.png',
 						name: '热风2018年小清新女士星星休闲双肩包拉链方形背包B52W8201',
 						money: '50.0',
 						ischeck: false,
-						id: 2
+						id: 8
 					},
 				],
 				storeList: [{
@@ -176,48 +166,48 @@
 						name: '热风2018年小清新女士星星休闲双肩包拉链方形背包B52W8201',
 						money: '50.0',
 						ischeck: false,
-						id: 1
+						id: 3
 					},
 					{
 						img: './static/member/login-img.png',
 						name: '热风2018年小清新女士星星休闲双肩包拉链方形背包B52W8201',
 						money: '50.0',
 						ischeck: false,
-						id: 2
+						id: 4
 					}, {
 						img: 'https://ss0.bdstatic.com/-0U0bnSm1A5BphGlnYG/tam-ogel/299c55e31d7f50ae4dc85faa90d6f445_121_121.jpg',
 						name: '热风2018年小清新女士星星休闲双肩包拉链方形背包B52W8201',
 						money: '50.0',
 						ischeck: false,
-						id: 1
+						id: 5
 					},
 					{
 						img: './static/member/login-img.png',
 						name: '热风2018年小清新女士星星休闲双肩包拉链方形背包B52W8201',
 						money: '50.0',
 						ischeck: false,
-						id: 2
+						id: 6
 					},
 					{
 						img: './static/member/login-img.png',
 						name: '热风2018年小清新女士星星休闲双肩包拉链方形背包B52W8201',
 						money: '50.0',
 						ischeck: false,
-						id: 2
+						id: 7
 					},
 					{
 						img: './static/member/login-img.png',
 						name: '热风2018年小清新女士星星休闲双肩包拉链方形背包B52W8201',
 						money: '50.0',
 						ischeck: false,
-						id: 2
+						id: 8
 					},
 					{
 						img: './static/member/login-img.png',
 						name: '热风2018年小清新女士星星休闲双肩包拉链方形背包B52W8201',
 						money: '50.0',
 						ischeck: false,
-						id: 2
+						id: 9
 					}
 				],
 				proidList: [],
@@ -501,8 +491,8 @@
 			}
 		}
 		.vux-header-left .left-arrow:before {
-			border: 1px solid #222;
-			border-width: 1px 0 0 1px;
+			border: 1px solid #222!important;
+			border-width: 1px 0 0 1px!important;
 		}
 		.b-w:after {
 			content: " ";
@@ -519,66 +509,6 @@
 			transform: scaleY(0.5);
 			left: 0;
 		}
-		.top {
-			padding: 0px 15px;
-			height: 0.98rem;
-			display: flex;
-			align-items: center;
-			justify-content: space-between;
-			position: relative;
-			background-color: white;
-			.bj-box {
-				height: 0.98rem;
-				line-height: 0.98rem;
-				padding: 0 0.6rem 0 0.3rem;
-				font-size: 14px
-			}
-			.bjcolor {
-				color: #256fff;
-			}
-			.tar-box {
-				flex: 1;
-				box-sizing: border-box;
-				padding-right: 0.4rem;
-				.vux-tab-item {
-					background: transparent!important;
-				}
-			}
-			img {
-				width: 0.35rem;
-				height: auto;
-			}
-		}
-		.top:after {
-			content: " ";
-			position: absolute;
-			left: 0;
-			bottom: 0;
-			right: 0;
-			height: 1px;
-			border-top: 1px solid #D9D9D9;
-			color: #D9D9D9;
-			-webkit-transform-origin: 0 0;
-			transform-origin: 0 0;
-			-webkit-transform: scaleY(0.5);
-			transform: scaleY(0.5);
-			left: 0px;
-		}
-		.top:before {
-			content: " ";
-			position: absolute;
-			left: 0;
-			top: 0;
-			right: 0;
-			height: 1px;
-			border-top: 1px solid #D9D9D9;
-			color: #D9D9D9;
-			-webkit-transform-origin: 0 0;
-			transform-origin: 0 0;
-			-webkit-transform: scaleY(0.5);
-			transform: scaleY(0.5);
-			left: 0px;
-		}
 		.pro-list,
 		.store-list {
 			background-color: white;
@@ -589,10 +519,6 @@
 				bottom: 47px;
 				overflow: hidden;
 				width: 100%;
-				/*.vux-loadmore {
-					display: inline-block;
-					width: 100%;
-				}*/
 			}
 			.list-item {
 				background-color: white;
