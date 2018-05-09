@@ -15,8 +15,6 @@
 		</div>
 
 		<div v-else>
-			<!-- <div><img src="../../assets/images/shop/theme_banner0.png" style="width: 100%;"></div> -->
-
     		<div class="shopImg">
     			<swiper :options="swiperOption" class="imgBox">
 			       	<swiper-slide v-for="(item,index) in shopImg">
@@ -30,23 +28,26 @@
 			<div class="shop_content">
 				<div class="shop">
 					<div class="shop_title"><span>女装U宽腿牛仔裤(水洗产品)宽腿牛仔裤宽腿宽腿牛仔裤</span></div>
-					<div class="shop_left">
-						<p class="shopPrice">
-							<span class="priceNum">￥3598</span> 
-							<span class="shopAcount">+266积分</span>
-						</p>
-						<span>运费:10.00</span>
-					</div>
-					<div class="shop_right">
-						<div class="shop_collection" @click="collection">
-							<img :src="collectImg"><br>
-							<span>{{ collectText}}</span>
+					<div class="shop_f">
+						<div class="shop_left">
+							<p class="shopPrice">
+								<span class="priceNum">￥3598</span> 
+								<span class="shopAcount">+266积分</span>
+							</p>
+							<span>运费:10.00</span>
 						</div>
-						<div class="shop_share" @click="showShareDialog">
-							<img src="../../assets/images/shop/share.png"><br>
-							<span>分享</span>
+						<div class="shop_right">
+							<div class="shop_collection" @click="collection">
+								<img :src="collectImg"><br>
+								<span>{{ collectText}}</span>
+							</div>
+							<div class="shop_share" @click="showShareDialog">
+								<img src="../../assets/images/shop/share.png"><br>
+								<span>分享</span>
+							</div>
 						</div>
 					</div>
+					
 				</div>
 
 				<div class="shop_cell">
@@ -158,7 +159,7 @@ export default {
 		return {
 			tabTitle: '商品',
 			obj:null,
-			collectImg:'../../../static/shop/collection.png',
+			collectImg:'./static/shop/collection.png',
 			collectText: '收藏',
 			showDialog: false,
 			content:'"请选择尺码"',
@@ -312,8 +313,12 @@ export default {
 	.shopImg{
 		margin-top: 0.92rem;
 		width: 100%;
+		height: 3.66rem;
+		line-height: 3.66rem;
 		img{
 			width: 100%;
+			display: inline-block; 
+			vertical-align: middle;
 		}
 	}
 
@@ -327,57 +332,58 @@ export default {
 			word-break: normal;
 			padding-top: 0.2rem;
 			margin: 0 auto;
-			.shop_left{
-				float: left;
-				width: 50%;
-				margin-top: 0.31rem;
-				font-size: 0.24rem;
-				color: #90A2C7;
-				padding-bottom: 0.29rem;
-				.shopPrice{
-					margin-bottom: 0.09rem;
-					.priceNum{
-						display: inline-block;
-						
-						font-size: 0.32rem;
-						color: #F23030;
-						font-weight: 700;
-						vertical-align: middle;
+			.shop_f{
+				display: flex;
+				align-items: center;
+				.shop_left {
+					width: 50%;
+					margin: 0.31rem 0;
+					font-size: 0.24rem;
+					color: #90A2C7;
+					.shopPrice{
+						margin-bottom: 0.09rem;
+						.priceNum{
+							display: inline-block;
+							font-size: 0.32rem;
+							color: #F23030;
+							font-weight: 700;
+							vertical-align: middle;
+						}
+						.shopAcount{
+							font-weight: normal;
+							display: inline-block;
+							padding-left: 0.06rem;
+							padding-right: 0.08rem;
+							height: 0.4rem;
+							text-align: center;
+							font-size: 0.24rem;
+							line-height: 0.4rem;
+							background-image: linear-gradient(238deg, #5EC3FF 0%, #106FE3 100%);
+							border-radius: 0.04rem;
+							color:#fff;
+						}
 					}
-					.shopAcount{
-						font-weight: normal;
-						display: inline-block;
-						padding-left: 0.06rem;
-						padding-right: 0.08rem;
-						height: 0.4rem;
-						text-align: center;
-						font-size: 0.24rem;
-						line-height: 0.4rem;
-						background-image: linear-gradient(238deg, #5EC3FF 0%, #106FE3 100%);
-						border-radius: 0.04rem;
-						color:#fff;
+					
+				}
+				.shop_right {
+					width: 50%;
+					margin: 0.31rem 0;
+					font-size: 0.2rem;
+					color: #90A2C7;
+					img {
+						width: 47%;
 					}
-				}
-			}
-			.shop_right{
-				float: left;
-				width: 50%;
-				margin-top: 0.31rem;
-				font-size: 0.2rem;
-				color: #90A2C7;
-				img{
-					width: 47%;
-				}
-				.shop_share{
-					float: right;
-					border-right: 1px solid #90A2C7;
-				}
-				.shop_collection{
-					float: right;
-					/*width: 50%;*/
-					padding-left: 0.27rem;
-					span{
+					.shop_share {
+						float: right;
+						border-right: 1px solid #90A2C7;
+					}
+					.shop_collection {
+						float: right;
 						text-align: center;
+						padding-left: 0.22rem;
+						span {
+							text-align: center;
+						}
 					}
 				}
 			}
@@ -393,7 +399,7 @@ export default {
 				}
 			}
 			.pr{
-				padding-right: 0.44rem;
+				padding-right: 0.1rem;
 			}
 			.comments{
 				background: #FFF;
