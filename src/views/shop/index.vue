@@ -24,9 +24,11 @@
 
 						<div class="top-secondtitle">
 							<div class="border1"></div>
-							<span>跨品牌最高</span>
-							<span class="text">满199减100</span>
-							<span>上不封顶</span>
+							<div class="textDiv">
+								<span>跨品牌最高</span>
+								<span class="text">满199减100</span>
+								<span>上不封顶</span>
+							</div>
 							<div class="border2"></div>
 						</div>
 					</div>
@@ -210,15 +212,18 @@ export default {
 		}
 	}
 	.top-secondtitle{
-		width: 50%;
-		margin: 0 auto;
+		width: 100%;
 		clear: both;
 		font-size: 0.24rem;
 		color: #5486fd;
+		position: relative;
+		.textDiv{
+			text-align: center;
+		}
 		.border1{
-			position: relative;
+			position: absolute;
 			top: 0.16rem;
-			left: -0.73rem;
+			left: 1.2rem;
 			height: 1px;
 			width: 0.68rem;
 			background-image: linear-gradient(238deg, #5EC3FF 0%, #106FE3 100%);
@@ -227,9 +232,9 @@ export default {
 			color: #3e76fe;
 		}
 		.border2{
-			position: relative;
-			top: -0.15rem;
-    		left: 3.65rem;
+			position: absolute;
+			top: 0.15rem;
+    		right: 1.2rem;
 			height: 1px;
 			width: 0.68rem;
 			background-image: linear-gradient(238deg, #5EC3FF 0%, #106FE3 100%);

@@ -170,8 +170,8 @@
 				font-size: 0.20rem;
 				color: white;
 				img {
-					width: 0.28rem;
-					height: 0.28rem;
+					width: 0.26rem;
+					height: 0.26rem;
 					margin-right: 0.1rem;
 				}
 			}
