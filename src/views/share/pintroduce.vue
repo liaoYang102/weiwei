@@ -9,8 +9,8 @@
 			</ul>
 		</div>
 
-		<scroll class="scroll">
-			<div>
+		<!-- <scroll class="scroll">
+			<div class="content">
 				<div class="pro" v-show="nowIndex==0">
 					<img src="../../assets/images/share/producted.png" alt="">
 				</div>
@@ -18,7 +18,17 @@
 					<img src="../../assets/images/share/treatment.png" alt="">
 				</div>
 			</div>
-		</scroll>
+		</scroll> -->
+		<div ref="wrapper" class="wrapper">
+			<div class="content">
+				<div class="pro" v-show="nowIndex==0">
+					<img src="../../assets/images/share/producted.png" alt="">
+				</div>
+				<div class="zhiliao" v-show="nowIndex==1">
+					<img src="../../assets/images/share/treatment.png" alt="">
+				</div>
+			</div>
+		</div>
 
 	</div>
 </template>
@@ -26,7 +36,7 @@
 <script>
 	import settingHeader from '../../components/setting_header'
 	import scroll from '../../components/scroll.vue'
-
+	import BScroll from 'better-scroll'
 	export default {
 		data() {
 			return {
@@ -44,7 +54,7 @@
 
 		},*/
 		mounted(){
-			
+			this.InitScroll()
 		},
 		computed:{
 			
@@ -53,7 +63,29 @@
 			toggleTabs(index){
 				// alert(index)
 				this.nowIndex=index;
-			}
+			},
+			InitScroll() {
+				this.$nextTick(() => {
+					if(!this.scroll) {
+						this.scroll = new BScroll(this.$refs.wrapper, {
+							click: true,
+							scrollY: true,
+							pullUpLoad: {
+								threshold: -50, // 负值是当上拉到超过低部 70px；正值是距离底部距离 时，                    
+							}
+						})
+						this.scroll.on('pullingUp', (pos) => {
+							this.$nextTick(function() {
+								this.scroll.finishPullUp();
+								this.scroll.refresh();
+							});
+						})
+					} else {
+						this.scroll.refresh()
+					}
+				})
+
+			},
 		}
 	}
 </script>
@@ -62,6 +94,9 @@
 	@import url('../../../static/css/global');
 	.producte{
 		width: 100%;
+		height: 100%;
+		margin: 0;
+		padding: 0;
 		.tab{
 			height: .88rem;
 			box-sizing: border-box;
@@ -98,12 +133,18 @@
 			width: 100%;
 			img{
 				width: 100%;
+				display: block;
+				margin: 0;
+				padding: 0;
 			}
 		}
 		.scroll{
 			width: 100%;
-			height: 600px;
-			/*.border;*/
+			height: 75%;
+		}
+		.wrapper{
+			height: 86.5%;
+			overflow: hidden;
 		}
 	}
 </style>

@@ -492,13 +492,13 @@
 					}
 				}
 				.list{
-					border-top: 1px solid #D8DFF0;
+					/*border-top: 1px solid #D8DFF0;*/
 					/*border-bottom: 1px solid #D8DFF0;*/
 					margin-top: .22rem;
-					margin-bottom: 2rem;
+					padding-bottom: 1rem;
 					li{
 						padding: .3rem .05rem .3rem 0;
-						border-bottom: 1px solid #D8DFF0;
+						border-top: 1px solid #D8DFF0;
 						.left{
 							float: left;
 							width: 2.04rem;

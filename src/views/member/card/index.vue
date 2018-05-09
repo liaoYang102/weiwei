@@ -17,7 +17,7 @@
 		</div>-->
 
 		<div class="card-box">
-			<swiper v-model="cardLook" height="100vh" :show-dots="false" :threshold='100'>
+			<swiper v-model="cardLook" height="100vh" :show-dots="false" :threshold='150'>
 				<swiper-item>
 					<div class="box2">
 						<div class="wrapper1" ref="wrapper1">
@@ -213,30 +213,19 @@
 				})
 			},
 			LoadData() {
+				let _this = this;
 				setTimeout(function() {
-					this.onFetching = false;
-				}, 5500)
+					_this.onFetching = false;
+				}, 3500)
 			},
 			LoadData2() {
+				let _this = this;
 				setTimeout(function() {
-					this.onFetching = false;
-				}, 5500)
+					_this.onFetching = false;
+				}, 3500)
 			},
 			enter(el, done) {
 				console.log(123)
-			},
-			onScrollBottom() {
-				if(this.onFetching) {
-					// do nothing
-				} else {
-					this.onFetching = true
-					setTimeout(() => {
-						this.$nextTick(() => {
-							this.$refs.scrollerBottom.reset()
-						})
-						this.onFetching = false
-					}, 2000)
-				}
 			},
 			showDrawer() {
 				this.drawerShow = !this.drawerShow
@@ -245,6 +234,7 @@
 				this.typeItemActive = index
 			},
 			lookCard(index) {
+				this.onFetching = false
 				console.log(this.cardLook)
 				this.cardLook = index
 			},

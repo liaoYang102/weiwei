@@ -30,7 +30,9 @@
 		      <cell title="退款说明" value="选填" :border-intent="false"></cell>
 		    </group> -->
 		    <group style="margin-top:0.2rem">
-		      <cell title="店铺地址" :border-intent="false" is-link></cell>
+		    	<div @click="navigation">
+		    		<cell title="店铺地址" :border-intent="false" is-link></cell>
+		    	</div>
 		    </group>
 		</div>
 	</section>
@@ -68,6 +70,16 @@
 				// if(day==0&&hour==0&&minute==0){
 				// 	window.clearInterval(int1);
 				// }
+			},
+			navigation() {
+				var marker = new AMap.Marker({
+					position: [113.370196,22.979898]
+				})
+
+				marker.markOnAMAP({
+					position: marker.getPosition(),
+					name: '广州市番禺区天安科技园' //name属性在移动端有效
+				})
 			},
 		}
 	}

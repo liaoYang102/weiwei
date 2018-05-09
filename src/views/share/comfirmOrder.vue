@@ -42,11 +42,11 @@
 
 		<div v-transfer-dom>
 			<popup v-model="paytype">
-				<popup-header right-text="取消" title="选择支付方式" :show-bottom-border="false" @on-click-left="paytype = false" @on-click-right="paytype = false"></popup-header>
+				<popup-header right-text="取消" title="请选择支付方式" :show-bottom-border="false" @on-click-left="paytype = false" @on-click-right="paytype = false"></popup-header>
 				<group gutter="0">
-					<radio :options="list" @on-change="change"></radio>
+					<radio :options="list" value="1" @on-change="change"></radio>
 					<div class="pay-box">
-						<div class="add-btn" @click.native="goShopsuccess">立即支付</div>
+						<router-link to='/share/orderSuccess'><div class="add-btn">立即支付</div></router-link>
 					</div>
 				</group>
 			</popup>
@@ -220,6 +220,20 @@
 			color: #FFFFFF;
 		}
 	}
+
+	.pay-box {
+		padding: 10px 15px;
+		.add-btn {
+			height: 0.88rem;
+			line-height: 0.88rem;
+			background: rgba(51, 111, 255, 1);
+			font-size: 0.28rem;
+			text-align: center;
+			font-family: MicrosoftYaHei;
+			color: rgba(255, 255, 255, 1);
+			border-radius: 2px;
+		}
+	}
 </style>
 <style lang="less">
 	.shops .weui-cells{
@@ -228,5 +242,15 @@
 	.shops .weui-label{
 		width: 9em!important;
 		padding-right: 5px;
+	}
+	.shops{
+		.vux-label{
+			font-size: 0.28rem;
+			color:#1A2642;
+		}
+		.weui-cell__ft{
+			font-size: 0.3rem;
+			color:#1A2642;
+		}
 	}
 </style>

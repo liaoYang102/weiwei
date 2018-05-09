@@ -135,7 +135,7 @@ const shopModule = [
 		name: 'shop_details',
 		component: shop_details,
 		meta: {
-			title:'商城详情'
+			title:'商品详情'
 		}
 	},
 	{

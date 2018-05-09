@@ -116,6 +116,7 @@
 
 			},
 			LoadData() {
+				let _this = this
 				this.list = this.list.concat({
 					name: '张广',
 					phone: '18520496787',
@@ -128,7 +129,7 @@
 					isdefault: false
 				})
 				setTimeout(function() {
-					this.show = false;
+					_this.show = false;
 				}, 3000)
 			},
 			ischange(i) {
@@ -176,8 +177,8 @@
 		.add-btn-box {
 			width: 100%;
 			background: white;
-			position: absolute;
-			bottom: 1rem;
+			position: fixed;
+			bottom: 0;
 			left: 0;
 			height: 0.88rem;
 			box-sizing: border-box;
