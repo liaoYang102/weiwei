@@ -19,7 +19,7 @@
 			</div>
 			<img @click="sousShow" src="../../../assets/images/member/sous.png" />
 		</div>-->
-		<swiper v-model="index" height="100vh" :show-dots="false" :threshold='100'>
+		<swiper v-model="index" height="100vh" :show-dots="false" :threshold='150'>
 			<swiper-item>
 				<div class="pro-list">
 					<div class="wrapper" ref="wrapper">
@@ -276,13 +276,13 @@
 				let _this = this;
 				setTimeout(function() {
 					_this.show = false;
-				}, 5500)
+				}, 3500)
 			},
 			LoadData2() {
 				let _this = this;
 				setTimeout(function() {
 					_this.show2 = false;
-				}, 5500)
+				}, 3500)
 			},
 			//点击全选
 			isallcheck() {

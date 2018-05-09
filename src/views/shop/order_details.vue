@@ -179,7 +179,9 @@ import recommended from './components/recommended'
 		    showToast(){
 				this.$vux.toast.show({
 					text: '暂无客服功能',
-					type: 'text'
+					type: 'text',
+					width: '10em',
+					position: 'middle'
 				})
 			},
 			orderCancel(){
