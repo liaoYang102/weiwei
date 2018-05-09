@@ -225,7 +225,6 @@
     						}
     					})
     					this.scroll.on('pullingUp', (pos) => {
-    						this.show = true;
     						this.LoadData()
     						this.$nextTick(function() {
     							this.scroll.finishPullUp();
@@ -240,11 +239,16 @@
     		},
     		LoadData() {
     			var _this = this
+    			if(_this.showNomore){
+    				_this.show = false;
+    				return 
+    			}
+    			_this.show = true;
     			setTimeout(function(){
     				_this.show = false;
     				_this.showNomore = true;
     			},3000)
-    		},
+    		}
 		}
 	}
 </script>

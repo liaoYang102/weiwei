@@ -136,6 +136,7 @@
 		methods: {
 			onItemClick(index) {
 				this.typeActive = index
+				this.show = false
 			},
 			showDrawer() {
 				this.show9 = true
@@ -158,7 +159,7 @@
 							}
 						})
 						this.scroll.on('pullingUp', (pos) => {
-							this.show = true;
+							
 							this.LoadData()
 							this.$nextTick(function() {
 								this.scroll.finishPullUp();
@@ -172,10 +173,11 @@
 
 			},
 			LoadData() {
-				//				this.couponList = this.couponList.concat(this.couponList)
+				let _this = this
+				_this.show = true;			//this.couponList = this.couponList.concat(this.couponList)
 				setTimeout(function() {
-					this.show = false;
-				}, 5500)
+					_this.show = false;
+				}, 1000)
 			}
 		},
 		components: {
