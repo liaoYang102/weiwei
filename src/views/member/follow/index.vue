@@ -497,6 +497,7 @@
 		.b-w {
 			background-color: white;
 			position: relative;
+			height: 50px;
 			.vux-tab-ink-bar {
 				bottom: 4px!important;
 			}
