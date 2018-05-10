@@ -1,8 +1,8 @@
 <template>
     <div id="shops">
        
-        <tab :line-width='0'>
-            <tab-item selected @on-item-click="showPanel" id="showPanel">
+        <tab :line-width='0' id="showPanel">
+            <tab-item selected @on-item-click="showPanel">
               {{ tabItem}} <img :src="downImg" alt="" width="13%">
             </tab-item>
             <tab-item class='vux-center' @on-item-click="onItemClick">销量</tab-item>
@@ -153,12 +153,14 @@ export default {
             if(this.showDialog == false){
                 this.showDialog = true;
             }
-
-            let top = parseInt(document.getElementById('showPanel').offsetTop);
-            console.log('--00', top)
-            this.obj = top + 40;
-            let panel = document.getElementById('panel');
-            let dialog = panel.parentNode
+            let top = parseInt(document.getElementById('showPanel'));
+            var transform = document.getElementsByClassName('content')[0].style.transform;
+            var regRule = /translate(Y|\dd)?\(\s*(\w+\s*,)?\s*([^,]+)(\s*,[^)]+)?\s*\)/;
+            var regRule2 = /matrix\(.*,\s*(\w+)\s*\)/;
+            var reg = regRule.exec(transform);
+            console.log(reg);
+            let dialog = document.getElementById('panel').parentNode;
+            dialog.style.top = top+"px";
             
         },
         select: function(obj,i){
