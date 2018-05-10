@@ -3,7 +3,7 @@
 		<settingHeader :title="title"></settingHeader>
 		<div class="wrapper" ref="wrapper">
 			<div class="content">
-				<div class="box2">
+				<div class="box2" v-if="proList.length != 0">
 			      	<div class="list" v-for="(item,index) in proList">
 						<div class="storeName">
 							<check-icon :value.sync='item.ischeck' @click.native="storecheck(index)" style="width:0.88rem;height:0.88rem;text-align:center;line-height:0.88rem;" class='fl'></check-icon>
@@ -55,6 +55,15 @@
 					<noMore v-if="showNomore"></noMore>
 					<specifications ref='sp' :router="router" :confirm="confirm" :shopList="shopList"></specifications>
 				</div>
+
+			    <div class="wrap no_shops" v-else>
+		        	<div class="none-data">
+		        		<img :src="imgSrc" alt=""> 
+		    			<p>{{ status}}</p>
+		        	</div>
+		    		
+		    		<recommended></recommended>
+        		</div>
 			</div>
 			<div class="position">
 				<div class="fl total">
@@ -76,6 +85,7 @@
 	import Loading from '../../components/loading'
 	import noMore from '../../components/noMore'
 	import specifications from './components/specifications' 
+	import recommended from './components/recommended'
 	export default{
 		data(){
 			return{
@@ -175,11 +185,13 @@
 						{ num: '黑色'}
 					]
 				},
-				arr:[]
+				arr:[],
+				imgSrc: './static/shop/noShop.png', 
+				status:'暂无商品',
 			}
 		},
 		components:{
-			settingHeader,Loading,noMore,specifications
+			settingHeader,Loading,noMore,specifications,recommended
 		},
 		mounted() {
 			this.InitScroll()
@@ -496,6 +508,28 @@
 			text-align: center;
 			line-height: 0.94rem;
 			color: #FFFFFF;
+		}
+	}
+
+	.no_shops{
+		padding-bottom: 0.2rem;
+		background-color: #F5F6FA;
+		.none-data {
+		    /* display: none; */
+		    /*position: absolute;*/
+		    background: #fff;
+		    width: 100%;
+		    padding-bottom: 0.66rem;
+		    margin-bottom: 0.2rem;
+		    text-align: center;
+		    z-index: 10;
+		    img{
+	    	    width: 100%;
+		    }
+		    p{
+		    	font-size: 0.32rem;
+	    		color: #1A2642;
+		    }
 		}
 	}
 </style>

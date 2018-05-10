@@ -45,7 +45,7 @@
 						</li>
 					</a>
 					<a href="javascript:;">
-						<li @click="goCoupon">
+						<li @click="$router.push({path:'/member/coupon/index'})">
 							<img src="../../assets/images/share/coupon.png">
 							<p>优惠券</p>
 						</li>
@@ -253,7 +253,7 @@
 				this.$router.push('/share/storelist')
 			},
 			goCoupon(){
-				this.$router.push('/member/coupon/coupon')
+				this.$router.push('/member/coupon/index')
 			},
 			goStoreDetail(id){//go门店详情
 				this.$router.push({path:'/multi_user_mall',params:{
@@ -492,13 +492,13 @@
 					}
 				}
 				.list{
-					border-top: 1px solid #D8DFF0;
+					/*border-top: 1px solid #D8DFF0;*/
 					/*border-bottom: 1px solid #D8DFF0;*/
 					margin-top: .22rem;
-					margin-bottom: 2rem;
+					padding-bottom: 1rem;
 					li{
 						padding: .3rem .05rem .3rem 0;
-						border-bottom: 1px solid #D8DFF0;
+						border-top: 1px solid #D8DFF0;
 						.left{
 							float: left;
 							width: 2.04rem;

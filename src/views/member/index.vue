@@ -19,7 +19,7 @@
 								<p>
 									<div class="num">
 										<span class="money">1000.49</span>
-										<badge></badge>
+										<!--<badge></badge>-->
 									</div>
 								</p>
 								<p class="universalAccount">CGC通用积分</p>
@@ -44,7 +44,7 @@
 							<router-link to="/member/purse/index">
 								<div class="li-box">
 									<img src="../../assets/images/member/member_wallet.png">
-									<badge class="new"></badge>
+									<!--<badge class="new"></badge>-->
 								</div>
 								<p>我的钱包</p>
 							</router-link>
@@ -53,7 +53,7 @@
 							<router-link to="/member/team/index">
 								<div class="li-box">
 									<img src="../../assets/images/member/member_cardpackage.png">
-									<badge class="new"></badge>
+									<!--<badge class="new"></badge>-->
 								</div>
 								<p>我的团队</p>
 							</router-link>
@@ -62,7 +62,7 @@
 							<router-link to="/member/score/index">
 								<div class="li-box">
 									<img src="../../assets/images/member/member_account.png">
-									<badge class="new-account" text="2312"></badge>
+									<!--<badge class="new-account" text="2312"></badge>-->
 								</div>
 
 								<p>会员积分</p>
@@ -130,10 +130,6 @@
 						text: '收货地址',
 						url: '/member/address/index'
 					},
-					/*{
-						img: './static/member/member_5.png',
-						text: '门禁系统'
-					},*/
 					{
 						img: './static/member/m_index17.png',
 						text: '幸运抽奖',

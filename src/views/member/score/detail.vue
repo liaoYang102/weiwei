@@ -205,13 +205,13 @@
 				top: 0.3rem;
 				right: 0.4rem;
 				display: flex;
-				align-items: center;
-				font-size: 0.20rem;
+				font-size: 0.25rem;
 				color: white;
 				img {
 					width: 0.28rem;
 					height: 0.28rem;
 					margin-right: 0.1rem;
+					vertical-align: middle;
 				}
 			}
 		}

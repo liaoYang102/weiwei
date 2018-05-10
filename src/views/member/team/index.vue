@@ -70,7 +70,7 @@
 			return {
 				title: '我的团队',
 				showloading: false,
-				has: 1,
+				has: 0,
 				list: [{
 					img: 'https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=3502149281,2119482052&fm=27&gp=0.jpg',
 					name: '这个合伙人ID最多这么长',

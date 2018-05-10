@@ -73,7 +73,7 @@ export default {
 	data() {
 		return {
 			demo1: false,
-			title: '评论',
+			title: '订单评价',
 			data: 0,
 			data2: 0,
 			data3: 0,
@@ -101,7 +101,7 @@ export default {
 			}
        },
        goComents(){
-       		this.$router.push({name:'shop_details',params:{title: '评价'}})
+       		this.$router.push({name:'meaidetail',params:2});
        },
        imgDelete(index){
        		this.imgList.splice(index, 1);
@@ -183,7 +183,7 @@ export default {
 					}
 					.length{
 						font-size: .3rem;
-						color: #bcbbc0;
+						color: #90A2C7;
 						margin-top: -0.22rem;
 					}
 		        	.bigPic{

@@ -164,6 +164,7 @@ export default {
         onMenuClick: function() {
             this.showMaskTop = false;
             this.$refs.xioaqiang.show1 = true;
+            this.$refs.xioaqiang.InitScroll();
             this.priceImg = './static/shop/default.png'
             this.downImg = './static/shop/down.png'
         },

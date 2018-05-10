@@ -205,6 +205,7 @@
 		    		headMessage: '温馨提示',
 		    		message: '亲,您的请求卖家已收到,请勿着急!',
 		    		buttons: ['我知道了'],
+		    		delay: 2000,
 		    		canel() {
 		    			_this.$dialog.hide()
 		    		},

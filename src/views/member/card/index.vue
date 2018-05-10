@@ -17,7 +17,7 @@
 		</div>-->
 
 		<div class="card-box">
-			<swiper v-model="cardLook" height="100vh" :show-dots="false" :threshold='100'>
+			<swiper v-model="cardLook" height="100vh" :show-dots="false" :threshold='150'>
 				<swiper-item>
 					<div class="box2">
 						<div class="wrapper1" ref="wrapper1">

@@ -11,8 +11,10 @@
 						</div>
 						<p>{{item.address}}</p>
 					</div>
-					<div class="bottom" @click="ischange(index)">
-						<check-icon :value.sync="item.isdefault">设置为默认地址</check-icon>
+					<div class="bottom">
+						<div @click="ischange(index)">
+							<check-icon :value.sync="item.isdefault">设置为默认地址</check-icon>
+						</div>
 						<div>
 							<router-link to="/member/address/edit"><span>编辑</span></router-link>
 							<span>删除</span>
