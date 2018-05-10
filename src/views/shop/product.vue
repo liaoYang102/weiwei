@@ -41,7 +41,7 @@
 					</div>
 				</div> -->
 
-				<scroller lock-x height="-100">
+				<scroller lock-x height="-68">
 					<div class="box2">
 						<div class="title">热门品牌</div>
 						<div class="type-box clearfix">
@@ -189,7 +189,7 @@
 		}
 		.content-left {
 			width: 2.1rem;
-			border-top: 1px solid #E1E1E1;
+			/*border-top: 1px solid #E1E1E1;*/
 			/*padding-bottom: 50px;*/
 			.box1-item {
 				background: #F5F6FA;
@@ -219,7 +219,7 @@
 			padding: 0.11rem 0.09rem 0 0.11rem;
 			box-sizing: content-box;
 			background-color: #fff;
-			border-top: 1px solid #E1E1E1;
+			/*border-top: 1px solid #E1E1E1;*/
 			.channel{
 				width: 97%;
 				margin: 0 auto 0.37rem auto;

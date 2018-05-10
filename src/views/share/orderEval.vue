@@ -6,11 +6,12 @@
 			<div class="content">
 				<div class="img">
 					<img src="../../assets/images/shop/shop4.png">
-					<span>商品评价</span>
+					<div class="img-text">商品评价</div>
 				</div>
 				<div class="star">
-					<rater v-model="data" :max="5" active-color="#336FFF" class="center" :margin="5"></rater>
+					<rater v-model="data" :max="5" active-color="#336FFF" class="center" :margin="5" star='<i class="iconfont icon-xingxing"></i>'></rater>
 				</div>
+				<div class="summary">{{ describe}}</div>
 			</div>
 
 			<div class="textarea">
@@ -43,11 +44,13 @@
 			</div>
 			<div class="store-star">
 				<div class="s-text">商品打分</div>
-				<rater v-model="data2" :max="5" active-color="#336FFF" class="s-star" :margin="5"></rater>
+				<rater v-model="data2" :max="5" active-color="#336FFF" class="s-star" :margin="5" star='<i class="iconfont icon-xingxing"></i>'></rater>
+				<div class="summary">{{ storeDesc}}</div>
 			</div>
 			<div class="store-star">
 				<div class="s-text">物流服务</div>
-				<rater v-model="data3" :max="5" active-color="#336FFF" class="s-star" :margin="5"></rater>
+				<rater v-model="data3" :max="5" active-color="#336FFF" class="s-star" :margin="5" star='<i class="iconfont icon-xingxing"></i>'></rater>
+				<div class="summary">{{ logisticsDesc}}</div>
 			</div>
 			<div class="clear"></div>
 		</div>
@@ -78,7 +81,10 @@ export default {
 			data2: 0,
 			data3: 0,
 			imgList: [],
-			pindex: 0
+			pindex: 0,
+			describe: '',
+			storeDesc: '',
+			logisticsDesc: ''
 		}
 	},
 	created(){
@@ -120,6 +126,43 @@ export default {
 				_this.imgList.splice(_this.pindex, 1, e.target.result)
 			};
 	   },
+	   changeDescribe(val,index){
+	   		let text;
+	   		if(val == 1){
+	   			text = '非常差'
+	   		}else if(val == 2){
+	   			text = '差'
+	   		}else if(val == 3){
+	   			text = '一般'
+	   		}else if (val == 4) {
+	   			text = '好'
+	   		}else if(val == 5){
+	   			text = '非常好'
+	   		}else {
+	   			text = ''
+	   		}
+	   		if(index == 0){
+	   			this.describe = text;
+	   		}else if(index == 1){
+	   			this.storeDesc = text
+	   		}else {
+	   			this.logisticsDesc = text
+	   		} 
+	   }
+	},
+	watch:{
+		data(val, oldVal){
+            console.log("data: "+val, oldVal);
+            this.changeDescribe(val,0)
+        },
+        data2(val, oldVal){
+            console.log("data2: "+val, oldVal);
+            this.changeDescribe(val,1)
+        },
+        data3(val, oldVal){
+            console.log("data3: "+val, oldVal);
+            this.changeDescribe(val,2)
+        }
 	}
 }
 </script>
@@ -145,20 +188,30 @@ export default {
 			padding-bottom: 0.26rem;
 			.img{
 				float: left;
-				width: 40%;
-				line-height: 1rem;
+				width: 38%;
+				/*line-height: 1.1rem;*/
 				img{
-					width: 34%;
+					width: 36%;
 					float: left;
 					margin-left: 0.09rem;
 					margin-right: 0.18rem;
+				}
+				.img-text{
+					margin-top: 0.34rem;
 				}
 			}
 			.star{
 				float: left;
 				.center{
-					margin: 0.26rem 0 0 0;
+					margin: 0.22rem 0 0 0;
 				}
+			}
+			.summary{
+			    color:#90A2C7;
+			    float:right;
+			    text-align: center;
+			    margin-top: 0.34rem;
+			    margin-right: .35rem;
 			}
 		}
 		.textarea{
@@ -248,7 +301,6 @@ export default {
 			margin-left: 0.21rem;
 			font-size: 0.28rem;
 			color: #1A2642;
-			margin-top: 0.26rem;
 			.s-text{
 				float: left;
 				text-align: center;
@@ -256,9 +308,19 @@ export default {
 				margin-left: 0.09rem;
 				line-height: 0.4rem;
 				padding-top: 0.06rem;
+				margin-top: 0.26rem;
 			}
 			.s-star{
 				float: left;
+				margin-top: 0.23rem;
+			}
+			.summary{
+				float: right;
+				margin-right: 1rem;
+				color:#90A2C7;
+				padding-top: 0.1rem;
+				text-align: center;
+				margin-top: 0.24rem;
 			}
 		}
 	}
@@ -290,6 +352,9 @@ export default {
 </style>
 
 <style lang="less">
+.order_eval .iconfont{
+	font-size: 0.36rem;
+}
 .textarea .weui-cells{
 	margin-top: 0;
 }

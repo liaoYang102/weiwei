@@ -17,13 +17,13 @@
 		      <cell title="退款原因" :value="refundText" :border-intent="false" @click.native='refund' is-link></cell>
 		    </group>
 		    <group class="center">
-		    	<div @click="showMoneyInput" v-show="!showInputMoney" class="red">
+		    	<!-- <div @click="showMoneyInput" v-show="!showInputMoney" class="red">
 		    		<cell title="退款金额" :value="'￥'+money" :border-intent="false"></cell>
-		    	</div>
+		    	</div> -->
 		      
-			    <div class="money-input" v-show="showInputMoney">
-			    	<div class="symbol">￥</div>
-			    	<x-input title="退款金额" placeholder="请填写(只能输入数字)" :should-toast-error="false" type="number" :max="9" :show-clear="false" v-model="inputMoney" @on-blur="changeMoney(inputMoney)">
+			    <div class="money-input">
+			    	<!-- <div class="symbol">￥</div> -->
+			    	<x-input :value="'￥'+money" title="退款金额" placeholder="请填写" :min="1" :show-clear="false" @on-blur="changeMoney">
 			    	</x-input>
 			    </div>
 
@@ -429,9 +429,12 @@
 			}
 			
 			.weui-input{
+				width: auto;
+				min-width: 10%;
 				font-size: 0.28rem;
 				color: #F23030;
-				padding-left: 0.43rem;
+				text-align: right;
+				float: right;
 			}
 			.red{
 				.weui-cell__ft{
@@ -446,7 +449,7 @@
 					position: absolute;
 					color:#F23030;
 					top: 32%;
-					left: 25%;
+					right: 25%;
 				}
 			}
 		}

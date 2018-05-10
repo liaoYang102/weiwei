@@ -3,6 +3,7 @@
 		<settingHeader :title="title"></settingHeader>
 		<div class="wrapper" ref="wrapper" :class="{'top46':hShow==false}">
 			<div class="content">
+				
 				<div class="list" v-for="(item,index) in list">
 					<div class="top">
 						<div class="pro">
@@ -22,7 +23,14 @@
 					</div>
 				</div>
 				<Loading v-if="show"></Loading>
+				
 			</div>
+		</div>
+
+		<div class="add-btn-box">
+			<router-link to="/member/address/edit">
+				<div class="add-btn">添加地址</div>
+			</router-link>
 		</div>
 		<!--<scroller lock-x height="-46">
 			<div class="box2">
@@ -44,11 +52,7 @@
 				</div>
 			</div>
 		</scroller>-->
-		<div class="add-btn-box">
-			<router-link to="/member/address/edit">
-				<div class="add-btn">添加地址</div>
-			</router-link>
-		</div>
+		
 	</div>
 </template>
 
@@ -69,6 +73,26 @@
 					phone: '18520496787',
 					address: '广州市番禺区橘树北街43号',
 					isdefault: true
+				}, {
+					name: '张广',
+					phone: '18520496787',
+					address: '广州市番禺区橘树北街43号',
+					isdefault: false
+				}, {
+					name: '张广',
+					phone: '18520496787',
+					address: '广州市番禺区橘树北街43号',
+					isdefault: false
+				}, {
+					name: '张广',
+					phone: '18520496787',
+					address: '广州市番禺区橘树北街43号',
+					isdefault: false
+				}, {
+					name: '张广',
+					phone: '18520496787',
+					address: '广州市番禺区橘树北街43号',
+					isdefault: false
 				}, {
 					name: '张广',
 					phone: '18520496787',
@@ -130,7 +154,7 @@
 				})
 				setTimeout(function() {
 					_this.show = false;
-				}, 3000)
+				}, 5000)
 			},
 			ischange(i) {
 				var _this = this
@@ -199,9 +223,10 @@
 			top: 47px!important;
 		}
 		.wrapper {
-			position: fixed;
-			top: 0px;
-			bottom: 0.88rem;
+			height: 93%;
+			/*position: fixed;*/
+			/*top: 0px;*/
+			/*bottom: 0.88rem;*/
 			width: 100%;
 			overflow: hidden;
 		}
@@ -209,6 +234,7 @@
 			box-sizing: border-box;
 			margin-bottom: 0.21rem;
 			background: white;
+			padding-bottom: 0.88rem;
 			.top {
 				padding: 0.27rem 0.25rem;
 				.pro {
