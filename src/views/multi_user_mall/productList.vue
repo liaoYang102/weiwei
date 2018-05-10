@@ -134,7 +134,7 @@ export default {
     },
     mounted:function(){
         this.init()
-        // this.InitSc  roll()
+        // this.InitScroll()
     },
     created:function(){
         this.filterData();
@@ -153,15 +153,18 @@ export default {
             if(this.showDialog == false){
                 this.showDialog = true;
             }
-            let top = parseInt(document.getElementById('showPanel'));
+            let top = parseInt(document.getElementById('showPanel').offsetTop);
             var transform = document.getElementsByClassName('content')[0].style.transform;
-            var regRule = /translate(Y|\dd)?\(\s*(\w+\s*,)?\s*([^,]+)(\s*,[^)]+)?\s*\)/;
-            var regRule2 = /matrix\(.*,\s*(\w+)\s*\)/;
-            var reg = regRule.exec(transform);
-            console.log(reg);
-            let dialog = document.getElementById('panel').parentNode;
-            dialog.style.top = top+"px";
-            
+            console.log(transform);
+            var regRule =/\s(\d|-?\d+)/;
+            var reg = Math.abs(transform.match(regRule)[0]);
+            console.log(reg,top);
+            let distance = parseInt(top+90-reg);
+            let mask = document.getElementById('panel').parentNode.parentNode;
+            let children = mask.children;
+            for(var i=0;i<children.length;i++){
+                children[i].style.top = distance+"px";
+            }
         },
         select: function(obj,i){
             this.act1 = i;
