@@ -24,12 +24,9 @@
 		    </group>
 
 		    <group>
-		    	<div @click="optional" v-show="!showInputOption" class="widthOption">
-		    		<cell title="退款说明" :value="option" :border-intent="false"></cell>
+		    	<div class="option-input" >
+		    		<x-textarea title="退款说明" v-model="option" placeholder="选填" :show-counter="false" :rows="1" autosize></x-textarea>
 		    	</div>
-		     	<div class="option-input" v-show="showInputOption">
-		     		<x-input title="退款说明" v-model="inputOption" placeholder="选填" @on-blur="changeOption(inputOption)"></x-input>
-		     	</div>
 		    </group>
 
 		    <group style="margin-top:0.2rem">
@@ -286,6 +283,9 @@
 		.weui-input:-ms-input-placeholder {
 		    color: #90A2C7 !important; //Internet Explorer 10+ */
 		}
+		.weui-textarea::-webkit-input-placeholder {
+		    color: #90A2C7 !important; // WebKit browsers 
+		}
 		.vux-label{
 			height:auto;  
 			font-size:0.28rem;
@@ -337,10 +337,8 @@
 		}
 		.option-input{
 			font-size: 0.28rem;
-			.weui-input{
-				text-align: left;
-				font-size: 0.28rem;
-				color: #90A2C7;
+			.weui-textarea{
+				text-align: right;
 			}
 		}
 	}

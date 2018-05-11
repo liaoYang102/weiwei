@@ -70,7 +70,7 @@
 					<mallTheme :themeTitle="themeTitle"></mallTheme>
 					<mallTheme :themeTitle="themeTitle1"></mallTheme>
 				</div>
-				<shop v-else-if="pyy==2"></shop>
+				<shop v-else-if="pyy==2" ref="all"></shop>
 				<service v-else-if="pyy==3"></service>
 				<store v-else-if="pyy==4"></store>
 				<loading v-if="show && pyy!=3 && pyy!=4"></loading>
@@ -237,8 +237,7 @@
 				float: right;
 				text-align: center;
 				width: 1.16rem;
-				height: 0.5rem;
-				line-height: 0.5rem;
+				padding: 0.06rem 0 0.03rem 0;
 				background: #336FFF;
 				color: #fff;
 				font-size: 0.25rem;

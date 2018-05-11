@@ -44,10 +44,9 @@
 					</ul>
 					<Loading v-if="showLoading"></Loading>
 					<noMore v-else="showNoMore"></noMore>
-					<!-- <p class="more" @click="seeStore">查看更多<i class="iconfont icon-arrow-right"></i></p> -->
 				</div>
 			</div>
-
+			
 		</div>
 
 		
@@ -200,7 +199,7 @@
 					{ title: '美食', options: [ {name: '全部'},{name: '甜点饮品'},{name: '自助餐'}]},
 					{ title: '电影', options: [ {name: '全部'},{name: '热映电影'},{name: '电影周边'}]},
 					{ title: '酒店住宿', options: [ {name: '全部'},{name: '主题公园'},{name: '温泉'},{ name: '情侣酒店'}]},
-					{ title: '生活服务', options: [ {name: '全部'},{name: '家政服务'},{name: '鲜花'}]}
+					{ title: '生活服务', options: [ {name: '全部'},{name: '家政服务'},{name: '鲜花'},{name: '酒水'}]}
 				],
 				showContent: true,
 				showLoading: false,
@@ -213,52 +212,45 @@
 			Loading,
 			noMore
 		},
-		/*created(){
-
-		},*/
-		mounted(){
+		created(){
 			this.InitScroll();
+		},
+		mounted(){
+			// this.InitScroll();
 		},
 		computed:{
 			
 		},
 		methods:{
-			InitScroll(){
-				// this.$nextTick(() => {
-			 //        this.scroll = new BScroll(this.$refs.wrapper, {
-			 //        	scrollY:true,
-			 //        	click:true,
-			 //        	tap :true
-			 //        });
-			 //      })
-			    this.$nextTick(() => {
-				if(!this.scroll) {
-					this.scroll = new BScroll(this.$refs.wrapper, {
-						click: true,
-						scrollY: true,
-						pullUpLoad: {
-							threshold: -30, // 负值是当上拉到超过低部 70px；正值是距离底部距离 时，                    
-						}
-					})
-					this.scroll.on('pullingUp', (pos) => {
-						this.showLoading = true;
-						this.onLoadData()
-						this.$nextTick(function() {
-							this.scroll.finishPullUp();
-							this.scroll.refresh();
-						});
-					})
-				} else {
-					this.scroll.refresh()
-				}
-			})
+			InitScroll() {
+				this.$nextTick(() => {
+					if(!this.scroll) {
+						this.scroll = new BScroll(this.$refs.wrapper, {
+							click: true,
+							scrollY: true,
+							pullUpLoad: {
+								threshold: -30, // 负值是当上拉到超过低部 70px；正值是距离底部距离 时，                    
+							}
+						})
+						this.scroll.on('pullingUp', (pos) => {
+							this.onLoadData()
+							this.$nextTick(function() {
+								this.scroll.finishPullUp();
+								this.scroll.refresh();
+							});
+						})
+					} else {
+						this.scroll.refresh()
+					}
+				})
 			},
 			onLoadData(){
+				this.showLoading = true;
 				let _this = this
 				setTimeout(function(){
 					_this.showLoading = false;
 					_this.showNoMore = true
-				},2000);
+				},4000);
 			},
 			onArea(){
 				//点击区域
@@ -313,7 +305,6 @@
 				},50);
 			},
 			changeType(value,label){//改变类型
-
 				var _this=this;
 				setTimeout(function(){
 					_this.indType=label;
@@ -339,12 +330,10 @@
 					for(let i =0; i<6;i++){
 						list.push(obj)
 						this.showContent = false;
-						// this.scroll.refresh();
 					}
 				}else{
 					list.splice(9,6)
 					this.showContent = true;
-					// this.InitScroll()
 				}
 				console.log(this.scroll2);
 	    	},
@@ -406,12 +395,12 @@
 
 </style>
 <style lang="less" scoped>
-	@import url('../../../static/css/global'); 
+	/*@import url('../../../static/css/global'); */
 
 	.storelist{}
 
 	.wrapper{
-		height:10rem;
+		height:60%;
 		overflow:hidden; 
 	}
 	.storelist{
@@ -661,11 +650,11 @@
 
 <style lang="less" scoped>
 .wrapper2 {
-	height: 11.78rem;
+	height: 11rem;
 	overflow: hidden;
 	.content{
 		height: 12.rem;
-		padding-bottom: 1rem;
+		padding-bottom: 1.3rem;
 	}
 }
 .screen .vux-popup-dialog{
