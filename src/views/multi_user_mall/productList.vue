@@ -1,8 +1,8 @@
 <template>
     <div id="shops">
        
-        <tab :line-width='0'>
-            <tab-item selected @on-item-click="showPanel" id="showPanel">
+        <tab :line-width='0' id="showPanel">
+            <tab-item selected @on-item-click="showPanel">
               {{ tabItem}} <img :src="downImg" alt="" width="13%">
             </tab-item>
             <tab-item class='vux-center' @on-item-click="onItemClick">销量</tab-item>
@@ -134,7 +134,7 @@ export default {
     },
     mounted:function(){
         this.init()
-        // this.InitSc  roll()
+        // this.InitScroll()
     },
     created:function(){
         this.filterData();
@@ -153,13 +153,18 @@ export default {
             if(this.showDialog == false){
                 this.showDialog = true;
             }
-
             let top = parseInt(document.getElementById('showPanel').offsetTop);
-            console.log('--00', top)
-            this.obj = top + 40;
-            let panel = document.getElementById('panel');
-            let dialog = panel.parentNode
-            
+            var transform = document.getElementsByClassName('content')[0].style.transform;
+            console.log(transform);
+            var regRule =/\s(\d|-?\d+)/;
+            var reg = Math.abs(transform.match(regRule)[0]);
+            console.log(reg,top);
+            let distance = parseInt(top+90-reg);
+            let mask = document.getElementById('panel').parentNode.parentNode;
+            let children = mask.children;
+            for(var i=0;i<children.length;i++){
+                children[i].style.top = distance+"px";
+            }
         },
         select: function(obj,i){
             this.act1 = i;
@@ -169,6 +174,7 @@ export default {
         onMenuClick: function() {
             this.showDialog = false;
             this.$refs.xioaqiang.show1 = true;
+            this.$refs.xioaqiang.InitScroll()
             this.downImg = './static/shop/down.png'
             this.priceImg = './static/shop/default.png'
         },

@@ -1,6 +1,6 @@
 <template>
 	<div class="score-nav" v-model="scoreTitle">
-		<div class="score-top" :class="[title == '信用积分购'?'bg':'']">
+		<div class="score-top" v-if="title == '信用积分购'">
 			<div class="score-title">{{ title}}</div>
 			<div class="score-btn" @click="goAllshop">
 				<span>全场包邮，积分全额兑换</span>
@@ -11,12 +11,13 @@
 				<img src="../../../assets/images/shop/doubt.png">
 			</div>
 		</div>
+		<div class="colorful-top" v-else></div>
 		<div class="score-list">
 			<li class="score-li" v-for="(item, index) in scorelist" @click="goShopdetails">
 				<div class="img"><img src="../../../assets/images/shop/1.png"></div>
 				<div class="li-text">
 					<span>{{ item.title}}</span>
-					<div v-if="title == '信用积分兑'" class="pb">
+					<div v-if="title == '七彩云南'" class="pb">
 						<div class="red">{{ item.score}}</div>
 						<div class="coupons">优惠券</div>
 					</div>
@@ -38,9 +39,9 @@
 		data(){
 			return {
 				scorelist: [
-					{ title: '飞利浦剃须刀', score: '1000积分', money: '199.67元'},
-					{ title: '飞利浦剃须刀', score: '1000积分', money: '199.67元'},
-					{ title: '飞利浦剃须刀', score: '1000积分', money: '199.67元'}
+					{ title: '昆大丽六日五夜', score: '1000积分', money: '199.67元'},
+					{ title: '港澳海洋公园', score: '1000积分', money: '199.67元'},
+					{ title: '云南三人豪华游', score: '1000积分', money: '199.67元'}
 				],
 				title: ''
 			}
@@ -52,6 +53,19 @@
 			onList(){
 				let vm = this;
 				vm.title = vm.scoreTitle;
+				if(vm.title == '七彩云南'){
+					vm.scorelist = [
+						{ title: '昆大丽六日五夜', score: '1000积分', money: '199.67元'},
+						{ title: '港澳海洋公园', score: '1000积分', money: '199.67元'},
+						{ title: '云南三人豪华游', score: '1000积分', money: '199.67元'}
+					]
+				}else{
+					vm.scorelist = [
+						{ title: '美国进口吹风机', score: '1000积分', money: '199.67元'},
+						{ title: '心相印柔卷纸', score: '1000积分', money: '199.67元'},
+						{ title: 'Dove多芬止汗喷雾', score: '1000积分', money: '199.67元'}
+					]
+				}
 			},
 			goAllshop(){
 				let title = this.title.slice(2);
@@ -80,9 +94,10 @@ li{
 	.score-top{
 		position: relative;
 		z-index: 0;
-		background: url('../../../assets/images/shop/scorebg.png') no-repeat;
+		background: url('../../../assets/images/shop/scorebg1.png') no-repeat;
 		height: 3.2rem;
 		color: #fff;
+		background-size: 100%;
 		.score-title{
 			text-align: center;
 			font-size: 0.34rem;
@@ -116,9 +131,12 @@ li{
 			}
 		}
 	}
-	.bg{
-		width: 100%;
-		background: url('../../../assets/images/shop/scorebg1.png') no-repeat;
+	.colorful-top{
+		position: relative;
+		height: 3.2rem;
+		background: url('../../../assets/images/shop/colorful.png') no-repeat;
+		color: #fff;
+		background-size: 100%;
 	}
 	.score-list{
 		position: absolute;

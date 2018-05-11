@@ -1,5 +1,5 @@
 <template>
-	<div class="content">
+	<div class="content" style="height: 100%">
 		<settingHeader :title="title"></settingHeader>
 		<div class="list">
 			<div class="wrapper" ref="wrapper">
@@ -14,28 +14,43 @@
 				</div>
 			</div>
 			<div class="content-right">
-				<div class="imglist">
+				<!-- <div class="imglist">
 					<swiper :options="swiperOption">
 				        <swiper-slide v-for="item in imgList" class="img">
 				        	<img :src="item">
 				        </swiper-slide>
 				        <div class="swiper-pagination" slot="pagination"></div>
 			        </swiper>
-				</div>
+				</div> -->
+				<router-link to="/shop/all_shops">
+					<div class="channel">
+						<span>进入手机频道</span>
+						<span class="gray">></span>
+					</div>
+				</router-link>
 
-				<!-- <div class="wrapper1" ref="wrapper1">
+				<div class="wrapper1" ref="wrapper1">
 					<div class="content">
-						<div class="content-left">
-	    			    	<div class="box1">
-								<div class="box1-item" v-for="(item,index) in listData" :class="{'border-left':index == itemActive}" @click.active="boxItemActive(index)">
-									<span>{{item}}</span>
+						<div class="box2">
+							<div class="title">热门品牌</div>
+							<div class="type-box clearfix">
+								<div v-for="i in item" @click="goAllshop">
+									<span><img :src="i.img"></span>
+									<p>{{i.name}}</p>
 								</div>
 							</div>
-	    	    	    </div>
+							<div class="title">热门分类</div>
+							<div class="type-circle clearfix">
+								<div v-for="i in item" @click="goAllshop">
+									<span><img :src="i.img"/></span>
+									<p>{{i.name}}</p>
+								</div>
+							</div>
+						</div>
 					</div>
-				</div> -->
+				</div>
 
-				<scroller lock-x height="-100">
+				<!-- <scroller lock-x height="-68">
 					<div class="box2">
 						<div class="title">热门品牌</div>
 						<div class="type-box clearfix">
@@ -52,7 +67,7 @@
 							</div>
 						</div>
 					</div>
-				</scroller>
+				</scroller> -->
 			</div>
 		</div>
 	</div>
@@ -132,8 +147,18 @@
 								threshold: -30, // 负值是当上拉到超过低部 70px；正值是距离底部距离 时，                    
 							}
 						})
+
+						this.scroll2 = new BScroll(this.$refs.wrapper1, {
+							click: true,
+							scrollY: true,
+							pullUpLoad: {
+								threshold: -30,
+							}
+						})
+						
 					} else {
 						this.scroll.refresh()
+						this.scroll2.refresh();
 					}
 				})
 
@@ -170,19 +195,20 @@
 		height: 0;
 	}
 	
-	.box1,
 	.box2 {
-		/*padding-bottom: 180px*/;
+		padding-bottom: 0.4rem;
 	}
 	
 	.list {
 		display: flex;
+		height: 100%;
 		.wrapper {
-			height: 12.2rem;
+			height: 100%;
 			overflow: hidden;
 		}
 		.content-left {
 			width: 2.1rem;
+			/*border-top: 1px solid #E1E1E1;*/
 			/*padding-bottom: 50px;*/
 			.box1-item {
 				background: #F5F6FA;
@@ -212,6 +238,23 @@
 			padding: 0.11rem 0.09rem 0 0.11rem;
 			box-sizing: content-box;
 			background-color: #fff;
+			height: 100%;
+			.wrapper1{
+				height: 91%;
+				overflow: hidden;
+			}
+			.channel{
+				width: 97%;
+				margin: 0 auto 0.37rem auto;
+				background: #E4EBFB;
+				text-align: center;
+				padding: 0.25rem 0;
+				color: #1A2642;
+				font-size: 0.28rem;
+				.gray{
+					color: #90A2C7;
+				} 
+			}
 			img {
 				width: 100%;
 				height: 1.84rem;

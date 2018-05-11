@@ -33,7 +33,7 @@
 
                 <Swiper :imgList="imgList"></Swiper>
 
-                <div class="shopList">
+                <div class="shopList" v-if="scorelist.length!=0&&moneylist.length!=0">
                     <div class="all-shop">
                         <li v-for="(item,index) in scorelist" @click="goShopdetails">
                             <div class="list" :class="{'score' : status == 0}">
@@ -74,6 +74,8 @@
                     <loading v-if="show"></loading>
                     <noMore v-if="showNomore"></noMore>
                 </div>
+
+                <noData v-else :status="noDataStatus"></noData>
             </div>
         </div>
     </div>
@@ -86,6 +88,7 @@ import Swiper from './components/swiper'
 import BScroll from 'better-scroll'
 import Loading from '../../components/loading'
 import noMore from '../../components/noMore'
+import noData from '../../components/noData'
 
 export default {
     components: {
@@ -93,7 +96,8 @@ export default {
         maskRight,
         Swiper,
         Loading,
-        noMore
+        noMore,
+        noData
     },
     data(){
         return {
@@ -131,7 +135,8 @@ export default {
             downImg:'./static/shop/down1.png',
             topImg: './static/shop/topicon.png',
             priceImg: './static/shop/default.png',
-            priceSort: 0
+            priceSort: 0,
+            noDataStatus: 0
         }
     },
     mounted:function(){
@@ -164,6 +169,7 @@ export default {
         onMenuClick: function() {
             this.showMaskTop = false;
             this.$refs.xioaqiang.show1 = true;
+            this.$refs.xioaqiang.InitScroll();
             this.priceImg = './static/shop/default.png'
             this.downImg = './static/shop/down.png'
         },
@@ -221,13 +227,16 @@ export default {
         },
         filterData(){
             let vm = this
-            for (var i = 0; i<vm.list.length;i++) {
-                if(vm.list[i].status == 1){
-                    vm.scorelist.push(vm.list[i])
-                }else{
-                    vm.moneylist.push(vm.list[i])
+            if(vm.list.length != 0){
+                for (var i = 0; i<vm.list.length;i++) {
+                    if(vm.list[i].status == 1){
+                        vm.scorelist.push(vm.list[i])
+                    }else{
+                        vm.moneylist.push(vm.list[i])
+                    }
                 }
             }
+            
         },
         goShopdetails(){
             this.$router.push({ path: '/shop/shop_details'})
@@ -257,8 +266,9 @@ export default {
     }
 }
 .wrapper {
-    height: 95%;
+    height: 93%;
     overflow: hidden;
+    background: #fff;
 }
 .shopList{
     width: 100%;

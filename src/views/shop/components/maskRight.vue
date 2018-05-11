@@ -62,30 +62,29 @@ export default {
     	}
     },
     mounted() {
-		this.InitScroll()
+		// this.InitScroll()
 	},
     methods: {
         InitScroll() {
-			this.$nextTick(() => {
-				if(!this.scroll) {
-					this.scroll = new BScroll(this.$refs.wrapper, {
-						click: true,
-						scrollY: true,
-						pullUpLoad: {
-							threshold: -30, // 负值是当上拉到超过低部 70px；正值是距离底部距离 时，                    
-						}
-					})
-					this.scroll.on('pullingUp', (pos) => {
-						this.$nextTick(function() {
-							this.scroll.finishPullUp();
-							this.scroll.refresh();
-						});
-					})
-				} else {
-					this.scroll.refresh()
-				}
-			})
-
+    		this.$nextTick(() => {
+    			if(!this.scroll) {
+    				this.scroll = new BScroll(this.$refs.wrapper, {
+    					click: true,
+    					scrollY: true,
+    					pullUpLoad: {
+    						threshold: -30, // 负值是当上拉到超过低部 70px；正值是距离底部距离 时，                    
+    					}
+    				})
+    				this.scroll.on('pullingUp', (pos) => {
+    					this.$nextTick(function() {
+    						this.scroll.finishPullUp();
+    						this.scroll.refresh();
+    					});
+    				})
+    			} else {
+    				this.scroll.refresh()
+    			}
+    		})
 		},
     	// 下拉
     	down: function() {
@@ -97,12 +96,10 @@ export default {
 				for(let i =0; i<6;i++){
 					list.push(obj)
 					this.showContent = false;
-					this.scroll.refresh();
 				}
 			}else{
 				list.splice(9,6)
 				this.showContent = true;
-				this.InitScroll()
 			}
     	},
     	// 切换样式

@@ -17,13 +17,8 @@
 		      <cell title="退款原因" :value="refundText" :border-intent="false" @click.native='refund' is-link></cell>
 		    </group>
 		    <group class="center">
-		    	<div @click="showMoneyInput" v-show="!showInputMoney" class="red">
-		    		<cell title="退款金额" :value="'￥'+money" :border-intent="false"></cell>
-		    	</div>
-		      
-			    <div class="money-input" v-show="showInputMoney">
-			    	<div class="symbol">￥</div>
-			    	<x-input title="退款金额" placeholder="请填写(只能输入数字)" :should-toast-error="false" type="number" :max="9" :show-clear="false" :value="12" v-model="inputMoney" @on-blur="changeMoney(inputMoney)">
+			    <div class="money-input">
+			    	<x-input :value="'￥'+money" title="退款金额" placeholder="请填写" :show-clear="false" @on-blur="changeMoney">
 			    	</x-input>
 			    </div>
 
@@ -35,21 +30,15 @@
 		    <span class="prompt">最多¥624.00，含发货邮费¥0.00</span>
 
 		    <group>
-		    	<div @click="optional" v-show="!showInputOption" class="widthOption">
-		    		<cell title="退款说明" :value="option" :border-intent="false"></cell>
+		    	<div class="option-input" >
+		    		<x-textarea title="退款说明" v-model="option" placeholder="选填" :show-counter="false" :rows="1" autosize></x-textarea>
 		    	</div>
-		     	<div class="option-input" v-show="showInputOption">
-		     		<x-input title="退款说明" v-model="inputOption" placeholder="选填" @on-blur="changeOption(inputOption)"></x-input>
-		     	</div>
 		    </group>
 
 		    <group style="margin-top:0.2rem">
 		      <cell title="上传凭证" :border-intent="false"></cell>
   			    <div class="upload">
   			    	<div class="imgUpload" v-for="(item,index) in imgList" @click="cindex(index)">
-  			    		<!-- <p class='delete' @click="imgDelete(index)">
-                              <i class='iconfont icon-quxiao1'></i>
-                          </p> -->
                         <img @click="imgDelete(index)" class="gbx" src="../../assets/images/member/gbx.png"/>
   			    		<input class="upinput" type="file" @change="cone" />
   			    		<div class="bigPic" v-show="[imgList.length ? imgList.length >0 : imgList.length =0]">
@@ -123,22 +112,16 @@
 				showInputMoney: false,
 				imgList: [],
 				money: '624.00',
-				showInputOption: false,
-				inputOption: '',
-				option: '选填',
+				option: '',
 				showToast: false,
 				toast:'退款金额必须为数字',
 				pindex: 0
-				// timer: '',
 			}
 		},
 		components:{
 			settingHeader,PopupHeader,Radio,XButton,XInput
 		},
-		created(){
-			// document.title = '申请退款';
-			// var int1 = window.setInterval(this.time,1000);
-		},
+		created(){},
 		methods:{
 			cargo(){
 				this.show = true;
@@ -165,10 +148,6 @@
 			goRefunddetails(){
 				this.$router.push({ path: '/shop/refund_details'})
 			},
-			showMoneyInput(){
-				this.showInputMoney = true
-				this.inputMoney = this.money
-			},
 			upload:function (e) {
 				var _this = this;
 	  			var file = e.target.files;
@@ -182,25 +161,10 @@
 							_this.imgList.push(e.target.result)
 						}
 					};
-				}
-	  			// for(var i in file){
-	  			// 	var reader = new FileReader();
-	  			// 	reader.readAsDataURL(file[i]); // 读出 base64
-		  		// 	reader.onloadend = function(e) {
-		  		// 		// 图片的 base64 格式, 可以直接当成 img 的 src 属性值   
-		  		// 		var dataURL = reader.result;
-		  		// 		if(_this.imgList.length<3){
-		  		// 			_this.imgList.push(e.target.result) 
-		  		// 		}
-		  		// 	};	
-	  			// }
-	  			  			
+				}  			
 	        },
 	        imgDelete(index){
 	       		this.imgList.splice(index, 1);
-	        },
-	        optional(){
-	        	this.showInputOption = true;
 	        },
 	        changeMoney(money){
 	        	var reg = /^\d+(?=\.{0,1}\d+$|$)/;
@@ -212,21 +176,9 @@
 		        		this.showToast = true
 		        		this.toast = '最多可输入9个字符'
 		        	}
-		        	
 	        	}else{
 	        		this.showToast = true
 	        	}
-	        	
-	        	this.showInputMoney = false;
-	        },
-	        changeOption(option){
-	        	if(option && option.length!=0){
-	        		this.option = option;
-	        	}else{
-	        		this.option = '选填'
-	        	}
-	        	
-	        	this.showInputOption = false;
 	        },
 	        returnFloat(val){ 				//强制保留两位小数
 				var value=Math.round(parseFloat(val)*100)/100;
@@ -398,6 +350,9 @@
 		.weui-input:-ms-input-placeholder {
 		    color: #90A2C7 !important; //Internet Explorer 10+ */
 		}
+		.weui-textarea::-webkit-input-placeholder {
+		    color: #90A2C7 !important; // WebKit browsers 
+		}
 		.vux-label{
 			height:auto; 
 			font-size:0.28rem;
@@ -428,9 +383,12 @@
 			}
 			
 			.weui-input{
+				width: auto;
+				min-width: 10%;
 				font-size: 0.28rem;
 				color: #F23030;
-				padding-left: 0.43rem;
+				text-align: right;
+				float: right;
 			}
 			.red{
 				.weui-cell__ft{
@@ -445,7 +403,7 @@
 					position: absolute;
 					color:#F23030;
 					top: 32%;
-					left: 25%;
+					right: 25%;
 				}
 			}
 		}
@@ -466,9 +424,13 @@
 		}
 		.option-input{
 			font-size: 0.28rem;
+			.weui-textarea{
+				text-align: right;
+			}
 		}
 		.weui-toast{
 			width: 80%;
 		}
+		
 	}
 </style>

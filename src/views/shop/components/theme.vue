@@ -67,7 +67,7 @@
 							{ goodsname:'COACH女士贝壳包', tag: [ { name:'时尚大牌'}, { name: '方便百搭'}]}
 						]
 					}
-					vm.imgSrc = '../../../../static/shop/purchase.png'
+					vm.imgSrc = './static/shop/purchase.png'
 				} else {
 					vm.list = {
 						title: '好东西,中国造', 
