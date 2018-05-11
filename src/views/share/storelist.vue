@@ -44,10 +44,9 @@
 					</ul>
 					<Loading v-if="showLoading"></Loading>
 					<noMore v-else="showNoMore"></noMore>
-					<!-- <p class="more" @click="seeStore">查看更多<i class="iconfont icon-arrow-right"></i></p> -->
 				</div>
 			</div>
-
+			
 		</div>
 
 		
@@ -401,7 +400,7 @@
 	.storelist{}
 
 	.wrapper{
-		height:9.81rem;
+		height:60%;
 		overflow:hidden; 
 	}
 	.storelist{

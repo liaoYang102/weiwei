@@ -5,6 +5,13 @@
 			<div class="content">
 				
 				<swiper :imgList="imgList"></swiper>
+
+				<div class="swiperTop">
+					<div class="search" @click="$router.push({path:'/multi_user_mall/search'})">
+						<input type="text" placeholder='搜索你想要的' />
+						<img src="../../assets/images/index/search.png" alt="">
+					</div>
+				</div>
 				
 				<navindex></navindex>  
 				
@@ -12,7 +19,17 @@
 				
 				<scorenav :scoreTitle="scoreTitle1"></scorenav>
 				
-				<swiper :imgList="imgList2" style="margin-top: 0.2rem;"></swiper>
+				<!-- <swiper :imgList="imgList2" style="margin-top: 0.2rem;"></swiper> -->
+				<div class="score">
+					<div class="scoreText">
+						<p>信用积分兑</p>
+						<div class="exchange">
+							<span>积分</span>
+							<div class="free">免费</div>
+							<span>兑换</span>
+						</div>
+					</div>
+				</div>
 
 				<section>
 					<div class="top">
@@ -88,7 +105,7 @@ export default {
 	data(){
 		return {
 			title: '信用商城',
-			scoreTitle0: '信用积分兑',
+			scoreTitle0: '七彩云南',
 			scoreTitle1: '信用积分购',
 			purchase: '海外购',
 			best: '中国臻品',
@@ -178,6 +195,83 @@ export default {
 </script>
 
 <style lang="less" scoped>
+.shopIndex{
+	.swiperTop {
+		z-index: 1000;
+		width: 100%;
+		height: 0.88rem;
+		line-height: 0.88rem;
+		position: absolute;
+		top: 0;
+		.search {
+			width: 80%;
+			margin: auto;
+			position: relative;
+			text-align: right;
+			padding-right: 0.5rem;
+			input {
+				width: 100%;
+				height: 0.54rem;
+				border-radius: 0.27rem;
+				background:rgba(255,255,255,0.5);
+				/*color: #fff;*/
+				padding-left: 0.64rem;
+				font-size: 0.24rem;
+				/*opacity: 0.5;*/
+				letter-spacing: 1px;
+			}
+			input::-webkit-input-placeholder {
+				color: #fff;
+			}
+			input::-moz-placeholder {
+				/* Mozilla Firefox 19+ */
+				color: #fff;
+			}
+			input:-moz-placeholder {
+				/* Mozilla Firefox 4 to 18 */
+				color: #fff;
+			}
+			input:-ms-input-placeholder {
+				/* Internet Explorer 10-11 */
+				color: #fff;
+			}
+			img {
+				width: 0.32rem;
+				height: 0.32rem;
+				position: absolute;
+				top: 0.3rem;
+				left: 0.24rem;
+			}
+		}
+	}
+	.score{
+		width: 100%;
+		margin-top: 0.2rem;
+		background: url('../../assets/images/shop/scoreBanner.png') no-repeat;
+		height: 2rem;
+		background-size: 100%;
+		.scoreText{
+			margin-left: 0.61rem;
+			padding-top: 0.36rem;
+			color: #fff;
+			font-size: 0.28rem;
+			p{
+				font-size: 0.48rem;
+			}
+			.exchange{
+				margin-top: 0.1rem;
+				.free{
+					display: inline-block;
+					background:#FF001F;
+					width: 0.86rem;
+					text-align: center;
+					padding:0.03rem 0;
+					border-radius: 0.09rem;
+				}
+			}
+		}
+	}
+}
 .top{
 	width: 100%;
 	background: #f5f6fa;
