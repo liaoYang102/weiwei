@@ -23,7 +23,7 @@
 		      
 			    <div class="money-input" v-show="showInputMoney">
 			    	<div class="symbol">￥</div>
-			    	<x-input title="退款金额" placeholder="请填写(只能输入数字)" :should-toast-error="false" type="number" :max="9" :show-clear="false" v-model="inputMoney" @on-blur="changeMoney(inputMoney)">
+			    	<x-input title="退款金额" placeholder="请填写(只能输入数字)" :should-toast-error="false" type="number" :max="9" :show-clear="false" :value="12" v-model="inputMoney" @on-blur="changeMoney(inputMoney)">
 			    	</x-input>
 			    </div>
 
@@ -123,7 +123,6 @@
 				showInputMoney: false,
 				imgList: [],
 				money: '624.00',
-				inputMoney: '624.00',
 				showInputOption: false,
 				inputOption: '',
 				option: '选填',

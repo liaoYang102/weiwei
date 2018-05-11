@@ -77,7 +77,7 @@
 				<div class="bjBtn-box">
 					<div style="flex: 1;" @click="isallcheck">
 						<check-icon v-if="isBj && index==0" class="check-btn" :value.sync="allprCheck">全部商品 <span v-if="!allprCheck">已选<i>{{proidList.length}}</i>个商品</span></check-icon>
-						<check-icon v-if="isBj && index==1" class="check-btn" :value.sync="allstCheck">全部店铺<span v-if="!allstCheck">已选<i>{{proidList.length}}</i>间店铺</span></check-icon>
+						<check-icon v-if="isBj && index==1" class="check-btn" :value.sync="allstCheck">全部店铺<span v-if="!allstCheck">已选<i>{{storeidList.length}}</i>间店铺</span></check-icon>
 					</div>
 					<div class="qx-box">
 						<div class="add-btn">取消关注</div>
@@ -158,67 +158,68 @@
 						id: 2
 					},
 				],
-				storeList: [{
-						img: 'https://ss0.bdstatic.com/-0U0bnSm1A5BphGlnYG/tam-ogel/299c55e31d7f50ae4dc85faa90d6f445_121_121.jpg',
-						name: '热风2018年小清新女士星星休闲双肩包拉链方形背包B52W8201',
-						money: '50.0',
-						ischeck: false,
-						id: 1
-					},
-					{
-						img: './static/member/login-img.png',
-						name: '热风2018年小清新女士星星休闲双肩包拉链方形背包B52W8201',
-						money: '50.0',
-						ischeck: false,
-						id: 2
-					}, {
-						img: 'https://ss0.bdstatic.com/-0U0bnSm1A5BphGlnYG/tam-ogel/299c55e31d7f50ae4dc85faa90d6f445_121_121.jpg',
-						name: '热风2018年小清新女士星星休闲双肩包拉链方形背包B52W8201',
-						money: '50.0',
-						ischeck: false,
-						id: 1
-					},
-					{
-						img: './static/member/login-img.png',
-						name: '热风2018年小清新女士星星休闲双肩包拉链方形背包B52W8201',
-						money: '50.0',
-						ischeck: false,
-						id: 2
-					}, {
-						img: 'https://ss0.bdstatic.com/-0U0bnSm1A5BphGlnYG/tam-ogel/299c55e31d7f50ae4dc85faa90d6f445_121_121.jpg',
-						name: '热风2018年小清新女士星星休闲双肩包拉链方形背包B52W8201',
-						money: '50.0',
-						ischeck: false,
-						id: 1
-					},
-					{
-						img: './static/member/login-img.png',
-						name: '热风2018年小清新女士星星休闲双肩包拉链方形背包B52W8201',
-						money: '50.0',
-						ischeck: false,
-						id: 2
-					},
-					{
-						img: './static/member/login-img.png',
-						name: '热风2018年小清新女士星星休闲双肩包拉链方形背包B52W8201',
-						money: '50.0',
-						ischeck: false,
-						id: 2
-					},
-					{
-						img: './static/member/login-img.png',
-						name: '热风2018年小清新女士星星休闲双肩包拉链方形背包B52W8201',
-						money: '50.0',
-						ischeck: false,
-						id: 2
-					},
-					{
-						img: './static/member/login-img.png',
-						name: '热风2018年小清新女士星星休闲双肩包拉链方形背包B52W8201',
-						money: '50.0',
-						ischeck: false,
-						id: 2
-					}
+				storeList: [
+//				{
+//						img: 'https://ss0.bdstatic.com/-0U0bnSm1A5BphGlnYG/tam-ogel/299c55e31d7f50ae4dc85faa90d6f445_121_121.jpg',
+//						name: '热风2018年小清新女士星星休闲双肩包拉链方形背包B52W8201',
+//						money: '50.0',
+//						ischeck: false,
+//						id: 1
+//					},
+//					{
+//						img: './static/member/login-img.png',
+//						name: '热风2018年小清新女士星星休闲双肩包拉链方形背包B52W8201',
+//						money: '50.0',
+//						ischeck: false,
+//						id: 2
+//					}, {
+//						img: 'https://ss0.bdstatic.com/-0U0bnSm1A5BphGlnYG/tam-ogel/299c55e31d7f50ae4dc85faa90d6f445_121_121.jpg',
+//						name: '热风2018年小清新女士星星休闲双肩包拉链方形背包B52W8201',
+//						money: '50.0',
+//						ischeck: false,
+//						id: 1
+//					},
+//					{
+//						img: './static/member/login-img.png',
+//						name: '热风2018年小清新女士星星休闲双肩包拉链方形背包B52W8201',
+//						money: '50.0',
+//						ischeck: false,
+//						id: 2
+//					}, {
+//						img: 'https://ss0.bdstatic.com/-0U0bnSm1A5BphGlnYG/tam-ogel/299c55e31d7f50ae4dc85faa90d6f445_121_121.jpg',
+//						name: '热风2018年小清新女士星星休闲双肩包拉链方形背包B52W8201',
+//						money: '50.0',
+//						ischeck: false,
+//						id: 1
+//					},
+//					{
+//						img: './static/member/login-img.png',
+//						name: '热风2018年小清新女士星星休闲双肩包拉链方形背包B52W8201',
+//						money: '50.0',
+//						ischeck: false,
+//						id: 2
+//					},
+//					{
+//						img: './static/member/login-img.png',
+//						name: '热风2018年小清新女士星星休闲双肩包拉链方形背包B52W8201',
+//						money: '50.0',
+//						ischeck: false,
+//						id: 2
+//					},
+//					{
+//						img: './static/member/login-img.png',
+//						name: '热风2018年小清新女士星星休闲双肩包拉链方形背包B52W8201',
+//						money: '50.0',
+//						ischeck: false,
+//						id: 2
+//					},
+//					{
+//						img: './static/member/login-img.png',
+//						name: '热风2018年小清新女士星星休闲双肩包拉链方形背包B52W8201',
+//						money: '50.0',
+//						ischeck: false,
+//						id: 2
+//					}
 				],
 				proidList: [],
 				storeidList: [],

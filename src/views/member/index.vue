@@ -14,7 +14,7 @@
 					</div>
 
 					<div class="account">
-						<router-link to="/member/earnings/index">
+						<router-link to="/member/earnings/currency">
 							<div class="universal">
 								<p>
 									<div class="num">
@@ -25,7 +25,7 @@
 								<p class="universalAccount">CGC通用积分</p>
 							</div>
 						</router-link>
-						<router-link to="/member/earnings/index">
+						<router-link to="/member/earnings/credit">
 							<div class="universal">
 								<div class="num">
 									<span class="money">2800.01 </span>
@@ -41,7 +41,7 @@
 				<div class="navigation">
 					<ul>
 						<li>
-							<router-link to="/member/purse/index">
+							<router-link to="/member/purse/wallet">
 								<div class="li-box">
 									<img src="../../assets/images/member/member_wallet.png">
 									<!--<badge class="new"></badge>-->
