@@ -75,7 +75,7 @@
                     <noMore v-if="showNomore"></noMore>
                 </div>
 
-                <noData v-else :status="noDataStatus"></noData>
+                <noData v-else :status="noDataStatus" :stateText="noDataText"></noData>
             </div>
         </div>
     </div>
@@ -136,7 +136,8 @@ export default {
             topImg: './static/shop/topicon.png',
             priceImg: './static/shop/default.png',
             priceSort: 0,
-            noDataStatus: 0
+            noDataStatus: 0,
+            noDataText: '暂无商品'
         }
     },
     mounted:function(){
@@ -235,6 +236,11 @@ export default {
                         vm.moneylist.push(vm.list[i])
                     }
                 }
+                // setTimeout(function(){
+                //     vm.scorelist = []
+                //     vm.moneylist = []
+                    
+                // },3000)
             }
             
         },

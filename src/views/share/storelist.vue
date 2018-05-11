@@ -397,14 +397,13 @@
 <style lang="less" scoped>
 	/*@import url('../../../static/css/global'); */
 
-	.storelist{}
-
 	.wrapper{
-		height:60%;
+		height:80%;
 		overflow:hidden; 
 	}
 	.storelist{
 		background: #fff;
+		height: 100%;
 	}
 	.header{
 		/*position:relative !important;*/
@@ -459,7 +458,7 @@
 			}
 		}
 		.list{
-			padding-bottom: 0.3rem;
+			padding-bottom: 0.1rem;
 			.more{
 				font-weight: normal;
 				color: #60719D;

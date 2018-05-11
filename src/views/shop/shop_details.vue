@@ -66,9 +66,6 @@
 					<group>
 						<cell title="规格">
 							<div class="pr" @click="showMask">
-								<!-- <span v-for="(item,index) in content">
-									<span>"{{item}}" </span>
-								</span> -->
 								<span>
 									{{content}}
 								</span>
@@ -273,6 +270,20 @@ export default {
     				position: 'middle'
     			})
     		}else{
+    			console.log('this.$refs.sp.list3',this.$refs.sp.list3)
+    			for(let i=0;i<this.$refs.sp.list3.length;i++){
+    				if(this.$refs.sp.list3[i] == null){
+    					this.$refs.sp.show1 = true;
+    					this.$vux.toast.show({
+    						text: '亲,要把规格都选上!',
+    						type: 'text',
+    						width: '10em',
+    						position: 'middle'
+    					})
+    					console.log('----',this.$refs.sp.list3)
+    					return
+    				}
+    			}
     			if(this.$refs.sp.router == 'goShopcart'){
     				this.$router.push({ path: '/shop/shop_cart'})
     			}
