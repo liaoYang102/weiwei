@@ -27,15 +27,23 @@
 						</div>
 					</router-link>
 				</div>
+
+				<div class="load-more">
+					<load-more :show-loading="false" tip="我是有底线的" background-color="#D8DFF0"></load-more>
+				</div>
 			</div>
 		</div>
 
+		<!-- 时间选择器 -->
+		<group v-if="visibility">
+			<datetime :show.sync="visibility" v-model="showDatetime" @on-change="change" clear-text="今天" @on-clear="setToday" @on-cancel="canel"  @on-confirm="onConfirm"></datetime>
+		</group>
 		<!--删除-->
 		<div v-transfer-dom class="delBox">
 			<popup v-model="footerShow" position="bottom" height="0.94rem" :show-mask="false">
 				<div class="del-box">
-					<div style="flex: 1;" @click="isallcheck">
-						<check-icon class="check-btn" :value.sync="allprCheck">全部商品 <span v-if="!allprCheck">已选<i>{{shopId.length}}</i>个商品</span></check-icon>
+					<div style="flex: 1;">
+						<check-icon class="check-btn" :value.sync="allprCheck" @click.native="isallcheck">全部商品 <span v-if="!allprCheck">已选<i>{{shopId.length}}</i>个商品</span></check-icon>
 					</div>
 					<div class="qx-box">
 						<div class="add-btn">删除</div>
@@ -49,9 +57,11 @@
 <script>
 	import BScroll from 'better-scroll'
 	import settingHeader from '../../components/setting_header'
+	import { Datetime } from 'vux'
+	import { LoadMore } from 'vux'
 	export default {
 		components: {
-			settingHeader
+			settingHeader,Datetime,LoadMore
 		},
 		data(){
 			return {
@@ -158,7 +168,9 @@
 				delShow: false,
 				shopId: [],
 				footerShow: false,
-				allprCheck: false
+				allprCheck: false,
+				showDatetime: '',
+				visibility: false
 			}
 		},
 		mounted() {
@@ -181,7 +193,9 @@
 				})
 			},
 			showDate(){
+				this.delShow = false;
 				this.footerShow = false;
+				this.visibility = true;
 				this.delImg = './static/shop/del.png'
 				if(this.dateImg == './static/shop/date.png'){
 					this.dateImg = './static/shop/dateActive.png'
@@ -191,6 +205,7 @@
 			del(){
 				this.delShow = true;
 				this.footerShow = true;
+				this.visibility = false;
 				this.dateImg = './static/shop/date.png'
 				if(this.delImg == './static/shop/del.png'){
 					this.delImg = './static/shop/delActive.png'
@@ -220,7 +235,7 @@
 			//点击全选
 			isallcheck() {
 				this.shopId = [] //重置商品id数组
-				this.allprCheck = false //重置全选
+				// this.allprCheck = false //重置全选
 				if(this.allprCheck == true) {
 					for(var i = 0; i < this.logList.length; i++) {
 						for(var j = 0; j< this.logList[i].shopList.length; j++){
@@ -228,7 +243,7 @@
 							this.shopId.push(this.logList[i].shopList[j].id)
 						}
 					}
-					console.log(this.shopId, 'shopId')
+					console.log(this.shopId, 'shopId000')
 				} else {
 					for(var i = 0; i < this.logList.length; i++) {
 						for(var j = 0; j< this.logList[i].shopList.length; j++){
@@ -239,16 +254,28 @@
 				}
 				console.log(this.shopId, 'shopId')
 			},
+			setToday (value) {
+		      let now = new Date()
+		      let cmonth = now.getMonth() + 1
+		      let day = now.getDate()
+		      if (cmonth < 10) cmonth = '0' + cmonth
+		      if (day < 10) day = '0' + day
+		      this.showDatetime = now.getFullYear() + '-' + cmonth + '-' + day
+		      console.log('set today ok')
+		    },
+		    change (value) {
+	          console.log('change', value)
+	        },
+	        canel(){
+	        	this.dateImg = './static/shop/date.png'
+	        },
+	        onConfirm(){
+	        	this.dateImg = './static/shop/date.png'
+	        	console.log('date', showDatetime)
+	        }
 		},
 		watch: {
-			// shopId() {
-
-			// 	if(this.shopId.length == this..length) {
-			// 		this.allprCheck = true
-			// 	} else {
-			// 		this.allprCheck = false
-			// 	}
-			// }
+			
 		},
 	}
 </script>
@@ -456,6 +483,15 @@
 			-webkit-transform: scaleY(0.5);
 			transform: scaleY(0.5);
 			left: 0px;
+		}
+	}
+
+	.load-more{
+		.weui-loadmore_line .weui-loadmore__tips{
+			color: #D8DFF0;
+		}
+		.vux-loadmore.weui-loadmore_line:before, .vux-loadmore.weui-loadmore_line:after{
+			border-top: 1px solid #D8DFF0;
 		}
 	}
 </style>
