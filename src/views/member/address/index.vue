@@ -223,7 +223,7 @@
 			top: 47px!important;
 		}
 		.wrapper {
-			height: 93%;
+			height: 94%;
 			/*position: fixed;*/
 			/*top: 0px;*/
 			/*bottom: 0.88rem;*/

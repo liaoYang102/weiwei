@@ -46,10 +46,14 @@
 						<check-icon class="check-btn" :value.sync="allprCheck" @click.native="isallcheck">全部商品 <span v-if="!allprCheck">已选<i>{{shopId.length}}</i>个商品</span></check-icon>
 					</div>
 					<div class="qx-box">
-						<div class="add-btn">删除</div>
+						<div class="add-btn" @click="delData">删除</div>
 					</div>
 				</div>
 			</popup>
+		</div>
+
+		<div class="backTop" @click="backTop">
+			<img src="../../assets/images/shop/backTop.png">
 		</div>
 	</section>
 </template>
@@ -218,6 +222,8 @@
 						this.logList[i].shopList[j].ischeck = false
 					}
 				}
+				var content = document.getElementsByClassName('content')[0];
+				content.style.paddingBottom = '0.94rem';
 			},
 			changeLog(){
 				//商品选择
@@ -271,7 +277,18 @@
 	        },
 	        onConfirm(){
 	        	this.dateImg = './static/shop/date.png'
-	        	console.log('date', showDatetime)
+	        	console.log('date', this.showDatetime)
+	        },
+	        delData(){
+	        	// alert(123);
+	        	this.visibility = false;
+	        	console.log('--=-=-=',this.visibility)
+	        	var content = document.getElementsByClassName('content')[0];
+				content.style.paddingBottom = '0';
+	        },
+	        // 回到顶部
+	        backTop(){
+	    	    
 	        }
 		},
 		watch: {
@@ -333,7 +350,7 @@
 		height: 92%;
 		overflow: hidden;
 		.content{
-			padding-bottom: 0.94rem;
+			
 		}
 	}
 
@@ -422,7 +439,15 @@
 		}
 	}
 
-	
+	.backTop{
+		position: absolute;
+		bottom: 0.68rem;
+		right: 0.24rem;
+		width: 11.5%;
+		img{
+			width: 100%;
+		}
+	}
 	
 }
 </style>

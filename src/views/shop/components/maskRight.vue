@@ -1,7 +1,7 @@
 <template>
 	<div style="height: 100%;">
 		<div v-transfer-dom class="maskright">
-			<popup v-model='show1' position="right" style="padding-top: 0.6rem;">
+			<popup v-model='show1' position="right">
 				<div class="wrapper" ref="wrapper">
 					<div class="content">
 					    <div class="screening">
@@ -129,10 +129,11 @@ export default {
 
 <style lang="less" scoped>
 .wrapper {
-	height: 11.78rem;
+	height: 95%;
 	overflow: hidden;
 	.content{
-		padding-bottom: 1rem;
+		padding-top: 0.6rem;
+		padding-bottom: 0.7rem;
 	}
 }
 .maskright .vux-popup-dialog{
@@ -237,10 +238,10 @@ li{
 } 
 .maskright .vux-popup-dialog{
 	min-height: 100%;
-	height: auto;
+	height: 100%;
 	max-height: auto;
 }
 .maskright .vux-popup-dialog.vux-popup-right{
-	height: auto;
+	height: 100%;
 }
 </style>

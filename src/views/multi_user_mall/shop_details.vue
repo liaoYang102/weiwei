@@ -85,7 +85,7 @@
 				</div>
 			</div>
 
-			<div class="details" id="details">
+			<div class="details" id="lockDetails">
 				<div class="title1">房间详情</div>
 				<div class="cardlist-popup">
 					<div class="pd">
@@ -252,7 +252,8 @@
 		create: function() {},
 		mounted() {
 			this.onRouter();
-			let top = parseInt(document.getElementById('details').offsetTop);
+			let top = parseInt(document.getElementById('lockDetails').offsetTop);
+			console.log('--', top)
 			this.obj = top - 40;
 		},
 		computed: {
@@ -290,7 +291,7 @@
 				this.tabTitle = '详情';
 				var that = this;
 				window.setTimeout(function() {
-					let top = parseInt(document.getElementById('details').offsetTop);
+					let top = parseInt(document.getElementById('lockDetails').offsetTop);
 					that.obj = top - 40;
 					window.scrollTo(0, that.obj);
 				}, 200)
