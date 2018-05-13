@@ -19,7 +19,6 @@
 			<div class="type" @click="onScreening()">
 				<p>{{screening}}<img src="../../assets/images/shop/screen.png" alt=""></p>
 			</div>
-			
 		</div>
 
 		<div class="wrapper" ref="wrapper">
@@ -44,10 +43,9 @@
 					</ul>
 					<Loading v-if="showLoading"></Loading>
 					<noMore v-else="showNoMore"></noMore>
-					<!-- <p class="more" @click="seeStore">查看更多<i class="iconfont icon-arrow-right"></i></p> -->
 				</div>
 			</div>
-
+			
 		</div>
 
 		
@@ -73,7 +71,7 @@
 	    <!-- 筛选 -->
     	<div style="height: 100%;">
 			<div v-transfer-dom class="screen">
-				<popup v-model='show1' position="right" style="padding-top: 0.6rem;">
+				<popup v-model='show1' position="right">
 					<div class="wrapper2" ref="wrapper2">
 						<div class="content">
 						    <div class="screening">
@@ -398,14 +396,13 @@
 <style lang="less" scoped>
 	/*@import url('../../../static/css/global'); */
 
-	.storelist{}
-
 	.wrapper{
-		height:9.81rem;
+		height:80%;
 		overflow:hidden; 
 	}
 	.storelist{
 		background: #fff;
+		height: 100%;
 	}
 	.header{
 		/*position:relative !important;*/
@@ -437,7 +434,7 @@
 			}
 		}
 	}
-	.content{
+	.wrapper .content{
 		width: 95%;
 		margin:0 auto;
 		/*background: #fff;*/
@@ -460,7 +457,7 @@
 			}
 		}
 		.list{
-			padding-bottom: 0.3rem;
+			padding-bottom: 0.1rem;
 			.more{
 				font-weight: normal;
 				color: #60719D;
@@ -646,17 +643,19 @@
 			}
 		}
 	}
-
 </style>
 
 <style lang="less" scoped>
 .wrapper2 {
-	height: 11rem;
+	height: 90%;
 	overflow: hidden;
 	.content{
-		height: 12.rem;
-		padding-bottom: 1.3rem;
+		padding-top: 0.6rem;
+		padding-bottom: 0.7rem;
 	}
+}
+.screen{
+	height: 100%;
 }
 .screen .vux-popup-dialog{
 	background: #fff;
@@ -758,12 +757,12 @@
 		font-size: 0.28rem;
 	}
 } 
+
 .screen .vux-popup-dialog{
 	min-height: 100%;
-	height: auto;
-	max-height: auto;
+	height: 100%;
 }
 .screen .vux-popup-dialog.vux-popup-right{
-	height: auto;
+	height: 100%;
 }
 </style>

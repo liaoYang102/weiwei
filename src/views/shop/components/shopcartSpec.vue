@@ -29,7 +29,7 @@
 		    			<div class="sp-color">
 		    				<div>颜色分类</div>
 		    				<div class="sp-color-li">
-		    					<li class="sp-li-btn" v-for="(item,index) in shopList.list2" :class="{'sp-li-selected':act2==index}" @click="active2(index)">{{ item.num}}</li>
+		    					<li class="sp-li-num" v-for="(item,index) in shopList.list2" :class="{'sp-li-selected':act2==index}" @click="active2(index)">{{ item.num}}</li>
 		    				</div>
 		    			</div>
 
@@ -54,48 +54,32 @@ export default {
 	props: {
 		router: String,
 		confirm: Function,
-		shopList: {
-	        type: Object,
-	        default: {
-				shopImg:"./static/shop/shop4.png",
-				shopPrice:"3598",
-				shopAccount:"266",
-				shopStock:"7282",
-				// list: [
-				// 	{
-				// 		spName: '颜色分类',
-				// 		spList: [
-				// 			{ name: '粉色尊贵版0'},
-				// 			{ name: '粉色尊贵版1'},
-				// 			{ name: '粉色尊贵版2'},
-				// 			{ name: '粉色尊贵版3'}
-				// 		]
-				// 	},
-				// 	{
-				// 		spName: '颜色分类',
-				// 		spList: [
-				// 			{ name: '1'},
-				// 			{ name: '2'},
-				// 			{ name: '3'}
-				// 		]
-				// 	}
-				// ],
-				list1:[
-					{ name: '粉色尊贵版0'},
-					{ name: '粉色尊贵版1'},
-					{ name: '粉色尊贵版2'},
-					{ name: '粉色尊贵版3'}
-				],
-				list2:[
-					{ num: '1'},
-					{ num: '2'},
-					{ num: '3'}
-				]
-			}
-	    }
+
 	},
 	data(){
 		return {
+			shopList: {
+		        type: Object,
+		        default: function(){
+		        	return{
+		        		shopImg:"./static/shop/shop4.png",
+						shopPrice:"3598",
+						shopAccount:"266",
+						shopStock:"7282",
+						list1:[
+							{ name: '粉色尊贵版0'},
+							{ name: '粉色尊贵版1'},
+							{ name: '粉色尊贵版2'},
+							{ name: '粉色尊贵版3'}
+						],
+						list2:[
+							{ num: '1'},
+							{ num: '2'},
+							{ num: '3'}
+						]
+		        	}
+				}
+		    },
 			show1: false,
 			act1: -1,
 			act2: -1,
@@ -210,21 +194,22 @@ li{
 				.sp-color-li{
 					margin-top: 0.19rem;
 					.sp-li-btn{
+						width: 1.79rem;
 						float: left;
 						margin-right: 0.24rem;
 						margin-bottom: 0.2rem;
-						padding: 0.08rem 0.2rem;
+						padding: 0.08rem 0;
 					}
 					.sp-li-selected{
 						background: #336FFF;
 						color: #fff;
 					}
-					/*.sp-li-num{
+					.sp-li-num{
 						float: left;
 						padding: 0.08rem 0.2rem;
 						margin-right: 0.24rem;
 						margin-bottom: 0.2rem;
-					}*/
+					}
 				}
 			}
 

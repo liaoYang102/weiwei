@@ -71,6 +71,8 @@
                 <div class="clear"></div>
             </div>
         </div>
+
+        <div class="maskTop" v-if="showDialog"></div>
     </div>
 </template>
 
@@ -165,6 +167,10 @@ export default {
             for(var i=0;i<children.length;i++){
                 children[i].style.top = distance+"px";
             }
+            let maskTop = document.getElementsByClassName('maskTop')[0];
+            console.log(maskTop);
+            maskTop.style.height = distance+"px";
+
         },
         select: function(obj,i){
             this.act1 = i;
@@ -322,6 +328,15 @@ export default {
             
         }
     }
+}
+
+.maskTop{
+    position: fixed;
+    top: 0;
+    z-index: 10;
+    background: rgba(255,255,255,0);
+    width: 100%;
+    height: 1%;
 }
 </style>
 

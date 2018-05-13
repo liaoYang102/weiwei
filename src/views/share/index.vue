@@ -2,7 +2,14 @@
 	<div class="info-box">
 		<settingHeader :title="title"></settingHeader>
 		<div class="content-head">
-			<div class="address"><i class="iconfont icon-dizhi1"></i>广州</div>
+			<div class="address"><i class="iconfont icon-dizhi1"></i>广州
+				<div class="search fr">
+					<router-link to="/multi_user_mall/search"><input type="text" placeholder='搜索你想要的' /></router-link>
+					<img src="../../assets/images/index/search.png" alt="">
+				</div>
+			</div>
+
+			
 			<!-- <swiper height="3.4rem" dots-position="center" loop auto>
 				<swiper-item class="swiperImg" v-for="(item, index) in demo04_list" :key="index">
 					<img :src="item">
@@ -299,6 +306,47 @@
 					font-size: .45rem;
 					position: relative;
 					top: .05rem;
+				}
+				.search {
+					position: relative;
+					margin-top: 0.1rem;
+					margin-left: 0.34rem;
+					input {
+						width: 4.14rem;
+						height: 0.54rem;
+						border-radius: 0.27rem;
+						background:rgba(255,255,255,0.5);
+						/*color: #fff;*/
+						padding-left: 0.64rem;
+						font-size: 0.24rem;
+						letter-spacing: 1px;
+					}
+					input::-webkit-input-placeholder {
+						color: #fff;
+						/*opacity: 1;*/
+					}
+					input::-moz-placeholder {
+						/* Mozilla Firefox 19+ */
+						color: #fff;
+						/*opacity: 1;*/
+					}
+					input:-moz-placeholder {
+						/* Mozilla Firefox 4 to 18 */
+						color: #fff;
+						/*opacity: 1;*/
+					}
+					input:-ms-input-placeholder {
+						/* Internet Explorer 10-11 */
+						color: #fff;
+						/*opacity: 1;*/
+					}
+					img {
+						width: 0.32rem;
+						height: 0.32rem;
+						position: absolute;
+						top: 0.12rem;
+						left: 0.24rem;
+					}
 				}
 			}
 		}

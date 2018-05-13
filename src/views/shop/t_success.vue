@@ -102,7 +102,7 @@
 				}
 			}
 			.btn{
-				width: 100%;
+				/*width: 100%;*/
 				padding-left: 0.55rem;
 				margin-top: 0.31rem;
 				.redeemDetails,.exchangeCenter{

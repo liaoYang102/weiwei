@@ -107,7 +107,7 @@ export default {
 			}
        },
        goComents(){
-       		this.$router.push({name:'meaidetail',params:2});
+       		this.$router.push({name:'shop_details', params:{title:'评价'}});
        },
        imgDelete(index){
        		this.imgList.splice(index, 1);
@@ -328,21 +328,21 @@ export default {
 		bottom: 0;
 		width: 100%;
 		height: 0.94rem;
-		line-height: 0.94rem;
 		background: #fff;
 		.left{
 			float: left;
 			width: 64.5%;
-			padding-left: 0.16rem;
+			padding: 0.24rem 0 0.24rem 0.16rem;
 		}
 		.right{
 			float: right;
 			width: 32%;
-			height: 0.94rem; 
 			background: #336FFF;
 			text-align: center;
 			font-size:0.28rem;
 			color: #fff;
+			padding: 0.27rem 0;
+			line-height: 0.4rem;
 
 		}
 	}
@@ -371,4 +371,12 @@ export default {
 	border-bottom: 1px solid #D8DFF0;
 }
 textarea::-webkit-input-placeholder{color:#90A2C7 !important;}
+.footer .left .weui-icon-circle{
+	color: #90A2C7;
+	font-size: 0.4rem;
+}
+.footer .vux-check-icon > span{
+	font-size: 0.3rem;
+	line-height: 0.4rem;
+}
 </style>

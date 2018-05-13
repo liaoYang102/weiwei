@@ -41,7 +41,7 @@
 
 		<div class="footer">
 			<div class="canel commen" @click="eval">评价</div>
-			<div class="view commen">删除订单</div>
+			<div class="view commen" @click="orderDelete">删除订单</div>
 		</div>
 
 	</div>
@@ -87,7 +87,24 @@
 			 		name:'orderEval',
 			 		params:{id:1}
 			 	});
-			 }
+			 },
+		 	orderDelete(){
+		 		let _this = this;
+		     	_this.$dialog.show({
+		     		type: 'warning',
+		     		headMessage: '删除订单',
+		     		message: '亲,您是否确定删除订单？',
+		     		buttons: ['确定', '取消'],
+		     		canel() {
+		     			_this.$dialog.hide()
+		     		},
+		     		confirm() {
+		     			// _this.goTsuccess()
+		     			_this.$dialog.hide()
+		     		}
+		     	})
+		     	console.log(_this.$dialog)
+		 	},
 
 		}
 	}

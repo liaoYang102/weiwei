@@ -5,7 +5,8 @@
             <tab-item selected @on-item-click="showPanel">
               {{ tabItem}} <img :src="downImg" alt="" width="13%">
             </tab-item>
-            <tab-item class='vux-center' @on-item-click="onItemClick">销量</tab-item>
+            <tab-item class='vux-center' @on-item-click="onItemClick">销量<img :src="numImg" alt="" width="12%">
+            </tab-item>
             <tab-item @on-item-click="sort">
                 <span>价格</span>
                 <img :src="priceImg" alt="" width="12%">
@@ -33,7 +34,7 @@
 
                 <Swiper :imgList="imgList"></Swiper>
 
-                <div class="shopList">
+                <div class="shopList" v-if="scorelist.length!=0&&moneylist.length!=0">
                     <div class="all-shop">
                         <li v-for="(item,index) in scorelist" @click="goShopdetails">
                             <div class="list" :class="{'score' : status == 0}">
@@ -74,6 +75,8 @@
                     <loading v-if="show"></loading>
                     <noMore v-if="showNomore"></noMore>
                 </div>
+
+                <noData v-else :status="noDataStatus" :stateText="noDataText"></noData>
             </div>
         </div>
     </div>
@@ -86,6 +89,7 @@ import Swiper from './components/swiper'
 import BScroll from 'better-scroll'
 import Loading from '../../components/loading'
 import noMore from '../../components/noMore'
+import noData from '../../components/noData'
 
 export default {
     components: {
@@ -93,7 +97,8 @@ export default {
         maskRight,
         Swiper,
         Loading,
-        noMore
+        noMore,
+        noData
     },
     data(){
         return {
@@ -131,7 +136,11 @@ export default {
             downImg:'./static/shop/down1.png',
             topImg: './static/shop/topicon.png',
             priceImg: './static/shop/default.png',
-            priceSort: 0
+            priceSort: 0,
+            noDataStatus: 0,
+            noDataText: '暂无商品',
+            numImg: './static/shop/default.png',
+            numSort: 0
         }
     },
     mounted:function(){
@@ -149,6 +158,7 @@ export default {
         },
         showPanel: function(){
             this.priceImg = './static/shop/default.png'
+            this.numImg = './static/shop/default.png'
             if(this.downImg == './static/shop/down.png'){
                 this.downImg = './static/shop/down1.png'
             }
@@ -171,9 +181,21 @@ export default {
         onItemClick: function() {
             this.downImg = './static/shop/down.png'
             this.priceImg = './static/shop/default.png'
+            let a = this.numSort;
+            a ++;
+            this.numSort = a;
+            if(a == 0){
+                this.numImg = './static/shop/default.png'
+            }else if(a%2 != 0){
+                this.numImg = './static/shop/ascending.png'
+            }else{
+                this.numImg = './static/shop/descending.png'
+            }
+            console.log('--', this.numSort)
         },
         sort(){
             this.downImg = './static/shop/down.png'
+            this.numImg = './static/shop/default.png'
             let a = this.priceSort;
             a ++;
             this.priceSort = a;
@@ -222,13 +244,21 @@ export default {
         },
         filterData(){
             let vm = this
-            for (var i = 0; i<vm.list.length;i++) {
-                if(vm.list[i].status == 1){
-                    vm.scorelist.push(vm.list[i])
-                }else{
-                    vm.moneylist.push(vm.list[i])
+            if(vm.list.length != 0){
+                for (var i = 0; i<vm.list.length;i++) {
+                    if(vm.list[i].status == 1){
+                        vm.scorelist.push(vm.list[i])
+                    }else{
+                        vm.moneylist.push(vm.list[i])
+                    }
                 }
+                // setTimeout(function(){
+                //     vm.scorelist = []
+                //     vm.moneylist = []
+                    
+                // },3000)
             }
+            
         },
         goShopdetails(){
             this.$router.push({ path: '/shop/shop_details'})
@@ -258,8 +288,9 @@ export default {
     }
 }
 .wrapper {
-    height: 95%;
+    height: 93%;
     overflow: hidden;
+    background: #fff;
 }
 .shopList{
     width: 100%;

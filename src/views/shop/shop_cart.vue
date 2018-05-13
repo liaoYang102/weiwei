@@ -53,7 +53,7 @@
 					<div class="clear"></div>
 					<loading v-if="show"></loading>
 					<noMore v-if="showNomore"></noMore>
-					<specifications ref='sp' :router="router" :confirm="confirm" :shopList="shopList"></specifications>
+					<specifications ref='sp' :router="router" :confirm="confirm"></specifications>
 				</div>
 
 			    <div class="wrap no_shops" v-else>
@@ -84,7 +84,7 @@
 	import BScroll from 'better-scroll'
 	import Loading from '../../components/loading'
 	import noMore from '../../components/noMore'
-	import specifications from './components/specifications' 
+	import specifications from './components/shopcartSpec'
 	import recommended from './components/recommended'
 	export default{
 		data(){
@@ -102,8 +102,25 @@
 						childrenNum:4,
 						childrenPrice:"3598",
 						childrenAccount:"266",
-						childrenContent: "165/S;蓝色",
+						childrenContent: "165/S,蓝色",
 						ischeck:false,
+						shopList:{
+							shopImg:"./static/shop/order_detail1.png",
+							shopPrice:"3598",
+							shopAccount:"266",
+							shopStock:"7282",
+							list1:[
+								{ name: 'S/165修身'},
+								{ name: 'M/170修身'},
+								{ name: 'L/175修身'},
+								{ name: 'XL/180修身'}
+							],
+							list2:[
+								{ num: '蓝色'},
+								{ num: '白色'},
+								{ num: '黑色'}
+							]
+						},
 					},{
 						childrenImg:"./static/shop/order_detail1.png",
 						childrenName:"女装U宽腿牛仔裤(水洗产品)女装U宽腿牛仔裤(水洗产品)",
@@ -111,8 +128,25 @@
 						childrenNum:1,
 						childrenPrice:"3598",
 						childrenAccount:"266",
-						childrenContent: "165/S;蓝色",
+						childrenContent: "165/S,蓝色",
 						ischeck:false,
+						shopList:{
+							shopImg:"./static/shop/shop4.png",
+							shopPrice:"123",
+							shopAccount:"222",
+							shopStock:"123",
+							list1:[
+								{ name: '测试1'},
+								{ name: '测试2'},
+								{ name: '测试3'},
+								{ name: '测试4'}
+							],
+							list2:[
+								{ num: '1'},
+								{ num: '2'},
+								{ num: '3'}
+							]
+						},
 					}]
 				},{
 					storeImg:"./static/shop/UNIQLO.png",
@@ -127,8 +161,25 @@
 						childrenNum:1,
 						childrenPrice:"3598",
 						childrenAccount:"266",
-						childrenContent: "165/S;蓝色",
-						ischeck:false
+						childrenContent: "165/S,蓝色",
+						ischeck:false,
+						shopList:{
+							shopImg:"./static/shop/order_detail1.png",
+							shopPrice:"3598",
+							shopAccount:"266",
+							shopStock:"7282",
+							list1:[
+								{ name: 'S/165修身'},
+								{ name: 'M/170修身'},
+								{ name: 'L/175修身'},
+								{ name: 'XL/180修身'}
+							],
+							list2:[
+								{ num: '蓝色'},
+								{ num: '白色'},
+								{ num: '黑色'}
+							]
+						},
 					}]
 				},{
 					storeImg:"./static/shop/UNIQLO.png",
@@ -143,8 +194,25 @@
 						childrenNum:3,
 						childrenPrice:"3598",
 						childrenAccount:"266",
-						childrenContent: "165/S;蓝色",
-						ischeck:false
+						childrenContent: "165/S,蓝色",
+						ischeck:false,
+						shopList:{
+							shopImg:"./static/shop/order_detail1.png",
+							shopPrice:"3598",
+							shopAccount:"266",
+							shopStock:"7282",
+							list1:[
+								{ name: 'S/165修身'},
+								{ name: 'M/170修身'},
+								{ name: 'L/175修身'},
+								{ name: 'XL/180修身'}
+							],
+							list2:[
+								{ num: '蓝色'},
+								{ num: '白色'},
+								{ num: '黑色'}
+							]
+						},
 					}]
 				},{
 					storeImg:"./static/shop/UNIQLO.png",
@@ -159,8 +227,25 @@
 						childrenNum:7,
 						childrenPrice:"3598",
 						childrenAccount:"266",
-						childrenContent: "165/S;蓝色",
-						ischeck:false
+						childrenContent: "165/S,蓝色",
+						ischeck:false,
+						shopList:{
+							shopImg:"./static/shop/order_detail1.png",
+							shopPrice:"3598",
+							shopAccount:"266",
+							shopStock:"7282",
+							list1:[
+								{ name: 'S/165修身'},
+								{ name: 'M/170修身'},
+								{ name: 'L/175修身'},
+								{ name: 'XL/180修身'}
+							],
+							list2:[
+								{ num: '蓝色'},
+								{ num: '白色'},
+								{ num: '黑色'}
+							]
+						},
 					}]
 				}],
 				title:'购物车',
@@ -168,23 +253,6 @@
 				show: false,
 				showNomore: false,
 				router: 'shop_cart',
-				shopList:{
-					shopImg:"./static/shop/order_detail1.png",
-					shopPrice:"3598",
-					shopAccount:"266",
-					shopStock:"7282",
-					list1:[
-						{ name: 'S/165修身'},
-						{ name: 'M/170修身'},
-						{ name: 'L/175修身'},
-						{ name: 'XL/180修身'}
-					],
-					list2:[
-						{ num: '蓝色'},
-						{ num: '白色'},
-						{ num: '黑色'}
-					]
-				},
 				arr:[],
 				imgSrc: './static/shop/noShop.png', 
 				status:'暂无商品',
@@ -228,10 +296,12 @@
 		    	}else{
 		    		e.target.innerHTML = '编辑';
 		    		this.proList[index].shopEdit = true;
-		    		if(a,b){
-		    			var a = this.arr[0];
-			    		var b = this.arr[1];
-			    		this.proList[a].children[b].childrenSize = this.proList[a].children[b].childrenContent;
+		    		var a = this.arr[0];
+		    		var b = this.arr[1];
+		    		if(a!='undefined'&&b!='undefined'){
+			    		console.log(this.proList[a].children[b].childrenContent);
+			    		console.log(this.proList);
+			    		// this.proList[a].children[b].childrenSize = this.proList[a].children[b].childrenContent;
 			    		this.$nextTick();
 		    		}
 		    		
@@ -260,7 +330,10 @@
 		    showMask(a,b){
 				this.arr[0] = a;
 				this.arr[1] = b;
+				console.log(this.arr);
 		    	this.$refs.sp.show1 = true;
+		    	this.$refs.sp.shopList = this.proList[a].children[b].shopList;
+		    	this.$refs.sp.list3 = this.proList[a].children[b].childrenContent.split(',')
 		    },
 		    goShopDetails(){
 		    	this.$router.push({ path: '/shop/shop_details'})
@@ -269,9 +342,11 @@
 		    	var a = this.arr[0];
 		    	var b = this.arr[1];
 		    	if (this.$refs.sp.router == 'shop_cart') {
+		    		console.log(this.$refs.sp.list3);
 		    		this.proList[a].children[b].childrenContent = this.$refs.sp.list3.join();
+		    		this.proList[a].children[b].childrenSize = this.proList[a].children[b].childrenContent;
 		    		this.$refs.sp.show1 = false;
-		    		this.$refs.sp.shopList = this.shopList;
+		    		// this.$refs.sp.shopList = this.proList[a].children[b].shopList;
 		    	}
 		    },
 		    isallcheck(){				//全选

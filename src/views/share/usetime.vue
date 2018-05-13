@@ -277,7 +277,7 @@
 			margin-left: -.4rem;
 		}
 		.lunbo{
-			margin-top: .2rem;
+			padding-top: .2rem;
 		}
 		.sw_wrap{
 			background: #fff;

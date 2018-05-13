@@ -19,6 +19,7 @@ import write_logistics from '@/views/shop/write_logistics'
 import multi_shop_details from '@/views/multi_user_mall/shop_details'
 import summary from '@/views/multi_user_mall/summary'
 import store_qrcode from '@/views/multi_user_mall/store_qrcode'
+import shop_log from '@/views/shop/shop_log'
 
 const shopModule = [
 	// 商城模块
@@ -200,6 +201,14 @@ const shopModule = [
 		component: store_qrcode,
 		meta: {
 			title:'店铺二维码'
+		}
+	},
+	{
+		path: '/shop/shop_log',//商品浏览
+		name: 'shop_log',
+		component: shop_log,
+		meta: {
+			title: '商品浏览'
 		}
 	}
 ];
