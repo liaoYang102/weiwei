@@ -49,7 +49,7 @@
 			</div>
 		</div>
 
-		<div class="enduse">结束使用</div>
+		<div class="enduse" @click=endOfUse>结束使用</div>
 		
 		<div class="footer">
 			<!-- <div class="num">设备编号：60005</div>
@@ -89,6 +89,8 @@
 				    		_this.changeEquiDate=info;
 
 				    		_this.onIndex = this.activeIndex;
+				    		// console.log(_this.onIndex)
+				    		_this.closeIndex = this.activeIndex;//关闭的机器
 
 				    		clearInterval(_this.clearTime);
 				    		
@@ -147,6 +149,7 @@
 				remainTime : '', //当前设备剩余时间 01:00:00
 				onIndex : 0, //当前显示设备的下标
 				slideStatus:false,//当前机器状态
+				closeIndex:0,//关闭的机器index
 
 
 			}
@@ -245,6 +248,9 @@
 			},
 			useend(){
 				clearInterval(this.clearTime);
+			},
+			endOfUse(){
+				alert(this.closeIndex)
 			}
 
 		}
