@@ -85,7 +85,7 @@
 								id: 1
 							},
 							{
-								img: './static/member/login-img.png',
+								img: 'https://ss0.bdstatic.com/-0U0bnSm1A5BphGlnYG/tam-ogel/299c55e31d7f50ae4dc85faa90d6f445_121_121.jpg',
 								name: '热风2018年小清新女士星星休闲双肩包拉链方形背包B52W8201',
 								money: '50.0',
 								score: 266,
@@ -98,7 +98,7 @@
 						date: '5月6日',
 						shopList: [
 							{
-								img: './static/member/login-img.png',
+								img: 'https://ss0.bdstatic.com/-0U0bnSm1A5BphGlnYG/tam-ogel/299c55e31d7f50ae4dc85faa90d6f445_121_121.jpg',
 								name: '热风2018年小清新女士星星休闲双肩包拉链方形背包B52W8201',
 								money: '50.0',
 								score: 266,
@@ -205,7 +205,7 @@
 					this.dateImg = './static/shop/dateActive.png'
 				}
 			},
-			// 点击删除按钮
+			// 点击删除图标
 			del(){
 				this.delShow = true;
 				this.footerShow = true;
@@ -281,14 +281,24 @@
 	        },
 	        delData(){
 	        	// alert(123);
+	        	this.footerShow = false;
+	        	this.delShow = false;
 	        	this.visibility = false;
-	        	console.log('--=-=-=',this.visibility)
+	        	this.dateImg = './static/shop/date.png'
+	        	if(this.delImg == './static/shop/delActive.png'){
+	        		this.delImg = './static/shop/del.png'
+	        	}
+	        	console.log('--=-=-=',this.footerShow)
 	        	var content = document.getElementsByClassName('content')[0];
 				content.style.paddingBottom = '0';
 	        },
 	        // 回到顶部
 	        backTop(){
-	    	    
+	    	    var transform = document.getElementsByClassName('content')[0];
+	    	    transform.style.transform = 'translate(0px, 0px) translateZ(0px)';
+	    	    console.log(transform);
+	    	    // var regRule =/\s(\d|-?\d+)/;
+	    	    // var reg = Math.abs(transform.match(regRule)[0]);
 	        }
 		},
 		watch: {

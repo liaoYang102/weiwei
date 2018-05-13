@@ -2,11 +2,14 @@
 	<div class="order_detail">
 		<settingHeader :title="title"></settingHeader>
 		<div class="top">
-			<div class="top-left">
-				<img src="../../assets/images/shop/UNIQLO.png">
-				<div class="left-text">优衣库旗舰店</div>
-				<img src="../../assets/images/shop/right.png" class="icon">
-			</div>
+			<router-link to="/multi_user_mall">
+				<div class="top-left">
+					<img src="../../assets/images/shop/UNIQLO.png">
+					<div class="left-text">优衣库旗舰店</div>
+					<img src="../../assets/images/shop/right.png" class="icon">
+				</div>
+			</router-link>
+			
 		</div>
 
 		<div class="order">
