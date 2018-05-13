@@ -7,20 +7,18 @@
 		</div>
 
 		<div class="details">
-			<div class="person-msg">
+			<div class="person-msg" @click="$router.push({path:'/member/address/index'})">
 				<img src="../../assets/images/shop/position.png">
 				<div class="msg-right">
 					<p>
 						<span class="mr">张生</span>
 						<span>18520496787</span>
 					</p>
-					<router-link to="/member/address/index">
-						<p class="mt">
-							广东佛山市南海区桂城街道佛平路与宝翠路交 界万科金色领域界
-						</p>
-					</router-link>
-					
+					<p class="mt">
+						广东佛山市南海区桂城街道佛平路与宝翠路交 界万科金色领域界
+					</p>
 				</div>
+				<div class="fr"><img src="../../assets/images/shop/turn_right.png" width="40%"></div>
 			</div>
 
 			<div class="msg-li">

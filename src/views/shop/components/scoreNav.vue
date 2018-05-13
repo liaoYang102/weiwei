@@ -6,7 +6,7 @@
 				<span>全场包邮，积分全额兑换</span>
 				<img src="../../../assets/images/shop/arrow.png">
 			</div>
-			<div class="score-rules">
+			<div class="score-rules" @click="$router.push({path:'/member/score/strategy'})">
 				<span>积分规则</span>
 				<img src="../../../assets/images/shop/doubt.png">
 			</div>

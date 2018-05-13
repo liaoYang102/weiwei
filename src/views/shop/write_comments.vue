@@ -379,4 +379,7 @@ textarea::-webkit-input-placeholder{color:#90A2C7 !important;}
 	font-size: 0.3rem;
 	line-height: 0.4rem;
 }
+.footer .weui-icon-success{
+	font-size: 0.4rem;
+}
 </style>
