@@ -41,6 +41,7 @@
 											</grid>
 										</div>
 									</div>
+									<Loading v-if="showloading"></Loading>
 								</div>
 
 								<div class="null-box" v-else>
@@ -50,7 +51,7 @@
 										<div class="add-btn">我要邀请</div>
 									</router-link>
 								</div>
-								<Loading v-if="showloading"></Loading>
+								
 							</div>
 						</div>
 					</div>

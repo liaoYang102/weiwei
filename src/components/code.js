@@ -1,4 +1,4 @@
-import codeComponent from '@/views/member/setting/code'
+import codeComponent from './code.vue'
 
 let $code
 
@@ -14,6 +14,7 @@ export default {
 		let code = {
 			show(obj){
 				$code.showCode = true
+				$code.type = obj.type
 				$code.codeChange = obj.codeChange
 			},
 			hide(){

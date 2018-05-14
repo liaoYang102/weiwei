@@ -1,31 +1,54 @@
 <template>
 	<popup class="code-popup" height="100%" v-model="showCode">
-		<x-header class="code-header" :left-options="{showBack: false}">
-			输入验证码
-			<a slot="right" @click="showCode = false">关闭</a>
-		</x-header>
-		<div class="code-box">
-			<div class="code-tip">
-				我们已发送<span>验证码</span>短信到您的手机
-				<p>18520496787</p>
-			</div>
-			<div class="code-input-box" @click.native="focus">
-				<x-input v-model="code" class="code-input" ref="one" type="number" placeholder="请输入5验证码" :show-clear="false" text-align="center" :max="5" @on-change="one"></x-input>
-			</div>
-			<transition enter-active-class="zoomIn animated" leave-active-class="zoomOut animated">
-				<div class="code-err-tip" v-if="iserror">
-					<div>{{errText}}</div>
-					<div @click="recapture">重新获取</div>
+		<div v-if="type == 'code'">
+			<x-header class="code-header" :left-options="{showBack: false}">
+				请输入验证码
+				<a slot="right" @click="showCode = false">关闭</a>
+			</x-header>
+			<div class="code-box">
+				<div class="code-tip">
+					我们已发送<span>验证码</span>短信到您的手机
+					<p>18520496787</p>
 				</div>
-			</transition>
+				<div class="code-input-box" @click.native="focus">
+					<x-input v-model="code" class="code-input" ref="one" type="number" placeholder="请输入5验证码" :show-clear="false" text-align="center" :max="5" @on-change="one"></x-input>
+				</div>
+				<transition enter-active-class="zoomIn animated" leave-active-class="zoomOut animated">
+					<div class="code-err-tip" v-if="iserror">
+						<div>{{errText}}</div>
+						<div @click="recapture">重新获取</div>
+					</div>
+				</transition>
+			</div>
 		</div>
+
+		<div v-if="type == 'pay'">
+			<x-header class="code-header" :left-options="{showBack: false}">
+				请输入支付密码
+				<a slot="right" @click="showCode = false">关闭</a>
+			</x-header>
+			<div class="code-box">
+				<div class="code-input-box" @click.native="focus">
+					<x-input v-model="code" class="code-input" ref="one" type="password" placeholder="请输入支付密码" :show-clear="false" text-align="center" :max="5" @on-change="one"></x-input>
+				</div>
+				<transition enter-active-class="zoomIn animated" leave-active-class="zoomOut animated">
+					<div class="code-err-tip" v-if="iserror">
+						<div>{{errText}}</div>
+						<div @click="recapture">重新获取</div>
+					</div>
+				</transition>
+			</div>
+		</div>
+
 	</popup>
 </template>
 
 <script>
 	import { XInput, Group, XButton, Cell, Popup, XHeader } from 'vux'
-	import settingHeader from '../../../components/setting_header'
 	export default {
+		props: {
+			type: String
+		},
 		data() {
 			return {
 				showCode: false,
@@ -67,7 +90,6 @@
 			}
 		},
 		components: {
-			settingHeader,
 			XInput,
 			Group,
 			XButton,
@@ -84,7 +106,7 @@
 		.vux-header-title {
 			color: black!important;
 		}
-		.vux-header-right {
+		.vux-header-right>a{
 			color: #73859f!important;
 		}
 	}
@@ -106,6 +128,7 @@
 	}
 	
 	.code-popup {
+		background-color: white!important;
 		z-index: 999999999!important;
 	}
 	
