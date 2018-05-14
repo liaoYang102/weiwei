@@ -212,6 +212,7 @@ export default {
 				let top = parseInt(document.getElementById('details').offsetTop);
 				that.obj = top - 47;
 				window.scrollTo(0,that.obj);
+				console.log('---', that.obj)
 			},200)
 		},
 		onItemClick () {
