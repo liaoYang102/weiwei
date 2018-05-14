@@ -16,7 +16,7 @@
         </tab>
 
         <!-- 综合弹出框 -->
-        <div v-transfer-dom class="dialogTop">
+        <!-- <div v-transfer-dom class="dialogTop">
             <x-dialog v-model="showDialog" :hide-on-blur="true">
                 <div class="panel" id="panel">
                     <li v-for="(item, index) in panel"  @click="select(item,index)">
@@ -27,7 +27,7 @@
                     </li>
                 </div>
             </x-dialog>
-        </div>
+        </div> -->
 
         <maskRight ref='xioaqiang'></maskRight>
 
@@ -172,11 +172,11 @@ export default {
             maskTop.style.height = distance+"px";
 
         },
-        select: function(obj,i){
-            this.act1 = i;
-            this.showDialog = false;
-            this.tabItem = obj.title;
-        },
+        // select: function(obj,i){
+        //     this.act1 = i;
+        //     this.showDialog = false;
+        //     this.tabItem = obj.title;
+        // },
         onMenuClick: function() {
             this.showDialog = false;
             this.$refs.xioaqiang.show1 = true;

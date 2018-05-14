@@ -33,7 +33,7 @@
 									<p>{{item.name}}</p>
 									<p>￥{{item.money}}</p>
 									<div class="btn-box">
-										<span>加入购物车</span> <span>立即购买</span>
+										<!-- <span>加入购物车</span> --> <span>立即购买</span>
 									</div>
 								</div>
 							</div>
@@ -59,10 +59,9 @@
 									</div>
 								</div>
 							</div>
+							<Loading v-if="show2"> </Loading>
+							<noData v-if="storeList.length==0" :status="storeState" :stateText="noStore"></noData>
 						</div>
-						<noData v-if="storeList.length == 0" :status="1"></noData>
-						<Loading v-if="show2"> </Loading>
-						<noData v-if="storeList.length==0" :status="storeState" :stateText="noStore"></noData>
 					</div>
 				</div>
 			</swiper-item>
@@ -596,8 +595,7 @@
 		.pro-list,
 		.store-list {
 			background-color: white;
-			.wrapper,
-			.wrapper2 {
+			.wrapper, .wrapper2{
 				position: absolute;
 				top: 0px;
 				bottom: 47px;

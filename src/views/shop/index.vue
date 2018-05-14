@@ -20,7 +20,7 @@
 				<scorenav :scoreTitle="scoreTitle1"></scorenav>
 				
 				<!-- <swiper :imgList="imgList2" style="margin-top: 0.2rem;"></swiper> -->
-				<div class="score">
+				<div class="score" @click="goAllshop">
 					<div class="scoreText">
 						<p>信用积分兑</p>
 						<div class="exchange">
@@ -189,7 +189,13 @@ export default {
 		},
 	    goShopdetails(){
 	    	this.$router.push({ path: '/shop/shop_details'})
-	    }
+	    },
+	    
+    	goAllshop(){
+    		let title = '积分兑';
+    		this.$router.push({ name: 'all_shops', params: { title }})
+    	},
+	    
 	}
 }
 </script>
