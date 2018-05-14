@@ -69,7 +69,7 @@
 	    </div>
 
 	    <!-- 筛选 -->
-    	<div style="height: 100%;">
+    	<div style="height: 100%;" v-if="show1">
 			<div v-transfer-dom class="screen">
 				<popup v-model='show1' position="right">
 					<div class="wrapper2" ref="wrapper2">

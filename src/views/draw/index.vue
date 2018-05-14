@@ -1,81 +1,63 @@
 <template>
-	<section style="height: 100%;">
+	<section style="height: 100%;background: #E32921;">
 		<div class="wrapper" ref="wrapper">
 			<div class="content">
-				<drawHeader :title="title"></drawHeader>
+				<!-- <drawHeader :title="title"></drawHeader> -->
 
 				<div class="head">
+					<img src="../../assets/images/draw/lottery_index1.png">
 					<div class="list">
-						<ul>
+						<ul class="ul-list">
 							<li>
-								<p class="money">5000</p>
-								<p class="status">待领奖金</p>
-							</li>
-							<li>
-								<p class="money">5</p>
 								<p class="status">中奖次数</p>
+								<p class="money">5</p>
 							</li>
 							<li>
-								<p class="money">25000</p>
+								<p class="status">待领奖金</p>
+								<p class="money">5000</p>
+							</li>
+							<li>
 								<p class="status">中奖总额</p>
+								<p class="money">25000</p>
 							</li>
 						</ul>
+
+						<div class="navList">
+							<ul>
+								<li class="li-nav" @click="$router.push({path: '/draw/luckyrank'})">	
+									<span>幸运排行</span>
+								</li>
+								<li class="li-nav" @click="$router.push({path: '/draw/record'})">
+									<span>中奖记录</span>
+								</li>
+							</ul>
+							<div class="btn" @click="$router.push({path: '/draw/review'})">
+								<span>往期回顾</span>
+							</div>
+							<div class="round1"></div>
+							<div class="round2"></div>
+						</div>
 					</div>
 		        </div>
 				
-		       	<div class="navList">
-		       		<ul>
-		       			<li>
-		       				<router-link to="/draw/review">
-		       					<img src="../../assets/images/draw/lottery_index3.png" alt="">
-		       					<p>往期回顾</p>
-		       				</router-link>
-		       			</li>
-		       		 	<li>
-		       				<router-link to="/draw/luckyrank">
-		       					<img src="../../assets/images/draw/lottery_index4.png" alt="">
-		       					<p>幸运排行</p>
-		       				</router-link>
-		       			</li>
-
-		   				<li>
-		   					<img src="../../assets/images/draw/lottery_index5.png" alt="">
-		   					<p>抽奖预告</p>
-		   				</li>
-		       			<li>
-		       				<router-link to="/draw/record">
-		       					<img src="../../assets/images/draw/lottery_index6.png" alt="">
-		       					<p>中奖记录</p>
-		       				</router-link>
-		       			</li>
-		       		</ul>
-		        </div>
-
                 <div class="drawList">
-                	<p class="wonderful">精彩推荐</p>
+                	<p class="wonderful">往期视频</p>
                     <ul class="commodity">
-                    	<group v-for="(item,index) in drawList">
-							<cell is-link>
-								<li @click="goPastevents">
-									<div class="left img">
-										<img src="../../assets/images/draw/lottery_index7.png" alt="">
-									</div>
-									<div class="arrow">
-										<img src="../../assets/images/draw/lottery_index8.png" alt="" >
-									</div>
-									<div class="left container">
-										<p class="lucky">{{ item.title}}</p>
-										<p class="num">参加人数:{{ item.num}}</p>
-										<p class="bonusPool">奖金池:<span>￥{{ item.money}}</span></p>
-									</div>
-									<div class="clear"></div>
-			                    </li>
-							</cell>
-						</group>
+                    	<li v-for="(item,index) in drawList" @click="$router.push({path: '/draw/pastevents'})">
+                    		<div class="img">
+								<img src="../../assets/images/draw/lottery_index7.png" alt="">
+							</div>
+							<div class="bonusPool">奖金池{{ item.money}}</div>
+							<div class="container">
+								<p class="lucky">{{ item.title}}</p>
+								<p class="num">{{ item.num}}人参与</p>
+							</div>
+                    	</li>
+                    	<div class="clear"></div>
                     </ul>
-                    <loading v-if="show"></loading>
-                    <noMore v-if="showNomore"></noMore>
+                    <div class="more" @click="$router.push({path: '/draw/review'})"><span>查看更多></span></div>
                 </div>
+                <div class="clear"></div>
 			</div>
 		</div>
 	</section>
@@ -95,6 +77,10 @@
 				show:true,
 				showNomore: false,
 				drawList: [
+					{ title: '第1263期周末幸运大抽奖', num: '1000000', money: '80000'},
+					{ title: '第1263期周末幸运大抽奖', num: '1000000', money: '80000'},
+					{ title: '第1263期周末幸运大抽奖', num: '1000000', money: '80000'},
+					{ title: '第1263期周末幸运大抽奖', num: '1000000', money: '80000'},
 					{ title: '第1263期周末幸运大抽奖', num: '1000000', money: '80000'},
 					{ title: '第1263期周末幸运大抽奖', num: '1000000', money: '80000'},
 					{ title: '第1263期周末幸运大抽奖', num: '1000000', money: '80000'},
@@ -118,8 +104,8 @@
 							}
 						})
 						this.scroll.on('pullingUp', (pos) => {
-							this.show = true;
-							this.LoadData()
+							// this.show = true;
+							// this.LoadData()
 							this.$nextTick(function() {
 								this.scroll.finishPullUp();
 								this.scroll.refresh();
@@ -130,13 +116,6 @@
 					}
 				})
 
-			},
-			LoadData() {
-				var _this = this
-				setTimeout(function(){
-					_this.show = false;
-					_this.showNomore = true;
-				},3000)
 			},
 			goPastevents(){
 				this.$router.push({ path: '/draw/pastevents'})
@@ -149,89 +128,148 @@
 .wrapper {
 	height: 100%;
 	overflow: hidden;
+	.content{
+		padding-bottom: 0.24rem;
+	}
 }
 .head {
-  	background-image: url('../../assets/images/draw/lottery_index1.png');
-  	background-size: 100% 100%;
   	width: 100%;
-  	height: 1.8rem;
-  	padding-top: 4.36rem;
+  	img{
+  		width: 100%;
+  		display: block;
+  		margin: 0;
+  		padding: 0;
+  	}
   	.list {
-	  width: 100%;
-	  height: 1.49rem;
-	  background-image: url('../../assets/images/draw/lottery_index2.png');
-	  background-size: 100% 100%;
-	  ul {
-	    display: flex;
-	    padding-top: 0.18rem;
-	    padding-bottom: 0.12rem;
-	    padding-left: 0.86rem;
-	    padding-right: 0.44rem;
-	    height: 80%;
-	    li {
-	      flex: 1;
-	      text-align: center;
-	      padding-top: 0.16rem;
-	      border-right: 1px solid #eee;
-	      .money {
-	        font-size: .4rem;
-	        font-weight: 700;
-	        color: #FF5365;
-	      }
-	      .status {
-	        font-size: 0.28rem;
-	        color: #1A2642;
-	      }
-	    }
-	    li:nth-child(3) {
-	      border: none;
-	    }
-	  }
+		width: 94.7%;
+		margin: 0 auto;
+		background: #fff;
+		padding-bottom: 0.48rem;
+		border-radius: 0.08rem;
+		.ul-list {
+		    display: flex;
+		    margin: 0 0.1rem;
+		    border-bottom: 1px solid #E6E6E6;
+		    padding-top: 0.28rem ;
+		    padding-bottom: 0.15rem;
+		    li {
+		      flex: 1;
+		      text-align: center;
+		      padding-bottom: 0.2rem;
+		      border-right: 1px solid #eee;
+		      .money {
+		        font-size: .64rem;
+		        font-weight: 700;
+		        color: #1A2642;
+		        margin-top: 0.12rem;
+		      }
+		      .status {
+		        font-size: 0.24rem;
+		        color: #666666;
+		      }
+		    }
+		    li:nth-child(3) {
+		      border: none;
+		    }
+		}
+		.navList {
+		  width: 100%;
+		  margin-top: 0.39rem;
+		  background-color: #FFF;
+		  position: relative;
+		  	ul {
+		  		display: flex;
+		  		width: 81.5%;
+		  		margin: 0 auto;
+				.li-nav {
+				    text-align: center;
+				    flex: 1;
+				    border-radius: 0.49rem ; 
+				    border: 1px solid #FF2D4F;
+				    margin-right: 0.64rem;
+				    color: #FF3B5A;
+				    font-size: 0.32rem;
+				    padding: 0.25rem 0.6rem; 
+				}
+				li:nth-child(2) {
+			      	margin-right: 0;
+			    }
+			}
+			.btn{
+                width:81.5%; 
+				background:linear-gradient(-90deg,rgba(255,92,52,1),rgba(255,42,75,1));
+				box-shadow:0px 0px 30px 0px rgba(255,81,58,0.5);
+				border-radius:0.49rem;
+				color: #fff;
+				text-align: center;
+				font-size: 0.32rem;
+				padding: 0.25rem 0;
+				margin: 0 auto;
+				margin-top: 0.32rem;
+			}
+			.round1{
+				position: absolute;
+				background-color: #E32921;
+				border-radius: 50%;
+				width: 0.24rem;
+				height: 0.24rem;
+				top: 0;
+				left: -0.12rem;
+			}
+			.round2{
+				position: absolute;
+				background-color: #E32921;
+				border-radius: 50%;
+				width: 0.24rem;
+				height: 0.24rem;
+				top: 0;
+				right: -0.12rem;
+			}
+		}
 	}
 }
-.navList {
-  width: 100%;
-  height: 1.68rem;
-  background-color: #FFF;
-  margin-bottom: 0.18rem;
-  ul {
-  display: flex;
-  padding-top: 0.24rem;
-	li {
-	    text-align: center;
-	    flex: 1;
-	    img {
-	      width: 0.78rem;
-	      height: 0.78rem;
-	    }
-	    p {
-	      font-size: 0.28rem;
-	       color: #1A2642;
-	    }
-	}
-  }
-}
-.drawList{
-	background: #fff;
-	.wonderful {
-	  padding-left: 0.18rem;
-	  font-size: 0.32rem;
-	  color: #1A2642;
-	  line-height: 0.7rem;
-	}
-	li {
-	  padding-left: 0.18rem;
-	  padding-top: 0.28rem;
-	  position: relative;
-	  padding-bottom: 0.28rem;
-	  .img{
-	    width: 1.54rem;
-	    img{
-	    	width: 100%;
-	    }
-	  }
 
-	  .left{
+.drawList{
+	width: 94.7%;
+	margin: 0.2rem auto 0 auto;
+	background: #fff;
+	border-radius: 0.08rem;
+	padding-bottom: 0.42rem;
+	.wonderful {
+	  padding-top: 0.36rem;
+	  font-size: 0.36rem;
+	  color: #1A2642;
+	  text-align: center;
+	  margin-bottom: 0.32rem;
+	}
+	li:nth-child(odd){
+		margin-right: 0.1rem;
+	}
+	li {
+		position: relative;
+		width: 49%;
+		float: left;
+		.img{
+		    width: 100%;
+		    border-radius: 0.06rem;
+		    img{
+		    	width: 100%;
+		    	border-radius: 0.06rem;
+		    }
+		}
+
+		.bonusPool{
+			position: absolute;
+			top: 0;
+			left: 25%;
+			width:50%;
+			background:linear-gradient(94.5deg,rgba(254,91,52,1),rgba(255,41,75,1));
+			border-radius:0px 0px 8px 8px;
+			color: #fff;
+			font-size: 0.24rem;
+			padding: 1px 0.1rem;
+		}
+	  /*.left{
 	  	float: left;
 	  }
 	  
@@ -243,33 +281,41 @@
 	    img{
 	    	width: 100%;
 	    }
-	  }
-	  .container {
-	    margin-left: 0.25rem;
-	    line-height: .36rem;
-	    .lucky {
-	      font-size: .32rem;
-	      color: #1A2642;
-	      margin-bottom: 0.12rem;
-	    }
-	    .num {
-	      font-size: .26rem;
-	      color: #90A2C7;
-	    }
-	    .bonusPool {
+	  }*/
+	  	.container {
+		  	position: absolute;
+		  	bottom: 0;
+		  	left: 0.11rem;
+		  	color: #fff;
+		    .lucky {
+		      font-size: .28rem;
+		    }
+		    .num {
+		      font-size: .2rem;
+		      margin-bottom: 0.1rem;
+		    }
+	    /*.bonusPool {
 	      font-size: .26rem;
 	      color: #90A2C7;
 	      span {
 	        color: #FF5365;
 	      }
-	    }
-	  }
+	    }*/
+	  	}
+	}
+	.more{
+		width: 100%;
+		text-align: center;
+		color: #A0A0A0;
+		font-size: 0.24rem;
+		margin-top: 0.43rem;
 	}
 }
 </style>
 
 <style lang="less">
 .commodity{
+	padding: 0 0.2rem;
 	.weui-cells{
 		margin-top: 0;
 	}

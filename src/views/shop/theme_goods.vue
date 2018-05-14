@@ -69,7 +69,7 @@ import {swiper,swiperSlide } from 'vue-awesome-swiper'
 				imgSrc: 'https://m.360buyimg.com/mobilecms/s750x366_jfs/t18199/89/1740907398/275155/d8efc7b3/5ad47af2N47fb76cd.jpg!cr_1125x549_0_72!q70.jpg.dpg',
 				imgList:[
 					'https://m.360buyimg.com/mobilecms/s750x366_jfs/t18775/221/1737433669/102730/f366197/5ad58a68N264b153b.jpg!cr_1125x549_0_72!q70.jpg.dpg',
-					'https://img20.360buyimg.com/da/jfs/t18169/49/1676902787/199684/abf88174/5ad405d6N903b6152.jpg.webp',
+					'https://m.360buyimg.com/mobilecms/s750x366_jfs/t17776/57/1707882480/210974/217399d5/5ad6b797N78d99799.jpg!cr_1125x549_0_72!q70.jpg.dpg',
 					'https://m.360buyimg.com/mobilecms/s750x366_jfs/t17776/57/1707882480/210974/217399d5/5ad6b797N78d99799.jpg!cr_1125x549_0_72!q70.jpg.dpg'
 				],
 				test: true,
@@ -184,9 +184,9 @@ li:nth-child(odd){
 		background-color: #fff;
 		line-height: 1rem;
 		.swiper-slide {
-		    width: 1.28rem;
-		    margin-right: 0.2rem;
-		    margin-left: 0.2rem;
+		    width: 1.32rem;
+		    padding-right: 0.18rem;
+		    padding-left: 0.2rem;
 		}
 		.tab-item{
 			height: 100%;

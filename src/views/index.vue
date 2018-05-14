@@ -19,28 +19,27 @@
 					</div>
 				</div>
 				<div class="notice">
-					<img src="../assets/images/index/notice.png" alt="">
+					<div class="notNew">CGC快报</div>
+					<!-- <img src="../assets/images/index/notice.png" alt=""> -->
 					<swiper :options="noticeOption" class="noticeswiper">
 						<swiper-slide v-for="item in num">
 							<p class="noticeText">
-								厉害了！超强拼假省钱攻略
-							</p>
-							<p class="noticeText">
-								<!--<span class="label">活动</span>--> 
-								美国人的棚子情节
+								<span class="label">热门</span> 
+								测试文章
 							</p>
 						</swiper-slide>
 					</swiper>
+					<div class="notMore">| &nbsp;更多</div>
 				</div>
-				<div class="lottery">
+				<div class="lottery" @click="$router.push({path: '/draw/review'})">
 					<img src="../assets/images/index/group.png" alt="">
 					<div class="info">
 						<p class="infoText">
 							<img src="../assets/images/index/time.png" alt="" class="fl">
 							<span class="core fl">恭喜500人获得<span class="orange">5000元</span>大奖</span>
-							<router-link to="/draw/review">
-								<span class="past fr">往期</span>
-							</router-link>
+							<!-- <router-link to=""> -->
+							<span class="past fr">往期</span>
+							<!-- </router-link> -->
 						</p>
 						<div class="avatar">
 							<div class="row" v-for="(item,index) in num">
@@ -215,7 +214,7 @@
 						url: '/shop'
 					},
 					{
-						title: '我的钱包',
+						title: '赚钱攻略',
 						tip: '消费增值管理',
 						img: './static/images/plate3.png',
 						url: '/member/purse/index'
@@ -452,12 +451,23 @@
 		}
 		/*通告模块*/
 		.notice {
-			width: 100%;
 			height: 0.95rem;
 			margin-bottom: 0.2rem;
 			background-color: #fff;
-			padding-top: 0.25rem;
 			padding-left: 0.45rem;
+			padding-right: 0.25rem;
+			overflow: hidden;
+			display: flex;
+			line-height: 0.95rem;
+			.notNew {
+			    font-size: 0.24rem;
+			    font-weight: 700;
+			    color: #1A2642;
+			}
+			.notMore {
+				color: #90A2C7;
+			    font-size: 0.22rem;
+			}
 			img {
 				float: left;
 				width: 0.6rem;
@@ -811,7 +821,8 @@
 			}
 		}
 		.noticeswiper {
-			height: 1.1rem;
+			flex: 1;
+			height: 0.95rem;
 			padding-left: 0.38rem;
 			.noticeText {
 				margin-bottom: 0.05rem;
@@ -821,8 +832,6 @@
 					width: 0.56rem;
 					margin-right: 0.2rem;
 					display: inline-block;
-					border-radius: 2px;
-					border: 2px solid #F23030;
 					padding: 0.02rem 0;
 					text-align: center;
 					font-size: 0.2rem;

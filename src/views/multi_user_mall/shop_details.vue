@@ -58,7 +58,7 @@
 				<div class="shop_cell">
 					<group :gutter="0">
 						<cell title="店铺名" is-link :border-intent="false">
-							<div class="cell_item">
+							<div class="cell_item" @click="$router.push({path: '/multi_user_mall'})">
 								<img src="../../assets/images/shop/UNIQLO.png">
 								<span>长隆主题酒店式公寓</span>
 							</div>

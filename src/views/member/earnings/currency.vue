@@ -119,9 +119,9 @@
 					align-items: center;
 					color: rgba(115, 134, 173, 1);
 					img {
-						width: 0.25rem;
-						height: 0.25rem;
+						width: 16%;
 						margin-left: 0.12rem;
+						/*vertical-align: middle;*/
 					}
 				}
 			}

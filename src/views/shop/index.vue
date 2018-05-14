@@ -55,7 +55,7 @@
 					<theme :theme="best"></theme>
 				</section>
 
-				<img src="../../assets/images/shop/i_banner.png" style="width: 100%;">
+				<!-- <img src="../../assets/images/shop/i_banner.png" style="width: 100%;"> -->
 
 				<tab :line-width="3" :scroll-threshold="4" custom-bar-width="30px" class="tab mt">
 			      <tab-item selected @on-item-click="onItemClick">精选</tab-item>
