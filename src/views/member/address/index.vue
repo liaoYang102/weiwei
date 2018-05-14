@@ -3,7 +3,7 @@
 		<settingHeader :title="title"></settingHeader>
 		<div class="wrapper" ref="wrapper" :class="{'top46':hShow==false}">
 			<div class="content">
-				
+
 				<div class="list" v-for="(item,index) in list">
 					<div class="top">
 						<div class="pro">
@@ -18,12 +18,12 @@
 						</div>
 						<div>
 							<router-link to="/member/address/edit"><span>编辑</span></router-link>
-							<span>删除</span>
+							<span @click="deleteAddress">删除</span>
 						</div>
 					</div>
 				</div>
 				<Loading v-if="show"></Loading>
-				
+
 			</div>
 		</div>
 
@@ -52,7 +52,7 @@
 				</div>
 			</div>
 		</scroller>-->
-		
+
 	</div>
 </template>
 
@@ -115,6 +115,20 @@
 			this.InitScroll() //初始化下拉组件
 		},
 		methods: {
+			deleteAddress() {
+				this.$dialog.show({
+					type: 'warning',
+					headMessage: '提示',
+					message: '确定删除该地址吗?',
+					canel() {
+						console.log('取消')
+					},
+					confirm() {
+						console.log('确定')
+
+					}
+				})
+			},
 			InitScroll() {
 				this.$nextTick(() => {
 					if(!this.scroll) {
@@ -223,10 +237,9 @@
 			top: 47px!important;
 		}
 		.wrapper {
-			height: 94%;
-			/*position: fixed;*/
-			/*top: 0px;*/
-			/*bottom: 0.88rem;*/
+			position: fixed;
+			top: 0px;
+			bottom: 0.88rem;
 			width: 100%;
 			overflow: hidden;
 		}
@@ -234,7 +247,6 @@
 			box-sizing: border-box;
 			margin-bottom: 0.21rem;
 			background: white;
-			padding-bottom: 0.88rem;
 			.top {
 				padding: 0.27rem 0.25rem;
 				.pro {

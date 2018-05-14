@@ -134,6 +134,7 @@
 			pay(){
 				console.log(this.$code)
 				this.$code.show({
+					type:'pay',
 					showCode:true,
 					codeChange:function(){
 						console.log(123)

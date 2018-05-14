@@ -3,8 +3,8 @@
 		<settingHeader :title="title"></settingHeader>
 		<div class="content">
 			<group gutter="0" class="input-div">
-				<x-input class="input-item" ref="password" v-model="password" placeholder="输入新密码" type="text" :max="11" :required="true" @on-change="newpasswordChange"></x-input>
-				<x-input class="input-item" ref="password1" v-model="password1" placeholder="再次输入新密码" type="text" :required="true" @on-change="newpasswordChange1"></x-input>
+				<x-input class="input-item" ref="password" v-model="password" placeholder="输入新密码" type="password" :max="11" :required="true" @on-change="newpasswordChange"></x-input>
+				<x-input class="input-item" ref="password1" v-model="password1" placeholder="再次输入新密码" type="password" :required="true" @on-change="newpasswordChange1"></x-input>
 			</group>
 			<div class="tip">
 				<x-button class="add-btn" @click.native="submit" :show-loading="showLoading">提交</x-button>

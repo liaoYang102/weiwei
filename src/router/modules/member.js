@@ -18,7 +18,6 @@ import team from '@/views/member/team/index'
 import info from '@/views/member/info/index'
 import infodata from '@/views/member/info/data'
 import changeCode from '@/views/member/setting/changeCode'
-import code from '@/views/member/setting/code'
 import about from '@/views/member/setting/about'
 import real from '@/views/member/setting/real'
 import realoading from '@/views/member/setting/realoading'
@@ -214,14 +213,6 @@ const memberModule = [{
 		component: changeCode,
 		meta: {
 			title: '设置新密码'
-		}
-	},
-	{
-		path: '/member/setting/code',
-		name: 'code',
-		component: code,
-		meta: {
-			title: '输入验证码'
 		}
 	},
 	{

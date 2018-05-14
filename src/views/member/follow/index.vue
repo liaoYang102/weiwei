@@ -19,7 +19,7 @@
 			</div>
 			<img @click="sousShow" src="../../../assets/images/member/sous.png" />
 		</div>-->
-		<swiper v-model="index" height="100vh" :show-dots="false" :threshold='150'>
+		<swiper v-model="index" height="aspect-ratio" :show-dots="false" :threshold='150'>
 			<swiper-item>
 				<div class="pro-list">
 					<div class="wrapper" ref="wrapper">
@@ -33,7 +33,7 @@
 									<p>{{item.name}}</p>
 									<p>￥{{item.money}}</p>
 									<div class="btn-box">
-										<span>加入购物车</span> <span>立即购买</span>
+										<!--<span>加入购物车</span>--><span>立即购买</span>
 									</div>
 								</div>
 							</div>
@@ -60,7 +60,6 @@
 								</div>
 							</div>
 						</div>
-						<noData v-if="storeList.length == 0" :status="1"></noData>
 						<Loading v-if="show2"> </Loading>
 						<noData v-if="storeList.length==0" :status="storeState" :stateText="noStore"></noData>
 					</div>
@@ -241,7 +240,7 @@
 		methods: {
 			InitScroll() {
 				this.$nextTick(() => {
-					if(!this.scroll) {
+					if(!this.scroll || !this.scroll2) {
 						this.scroll = new BScroll(this.$refs.wrapper, {
 							click: true,
 							scrollY: true,
@@ -287,10 +286,10 @@
 				}, 3500)
 			},
 			LoadData2() {
-				let _this = this;
-				setTimeout(function() {
-					_this.show2 = false;
-				}, 3500)
+//				let _this = this;
+//				setTimeout(function() {
+//					_this.show2 = false;
+//				}, 3500)
 			},
 			//点击全选
 			isallcheck() {

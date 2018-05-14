@@ -57,16 +57,16 @@
 		methods: {
 			remember() {
 				var _this = this
-				_this.isRemember = 0
+				_this.isRemember = 1
 				_this.$nextTick(function() {
-					_this.$refs.phone.focus()
+					_this.$refs.oldpassword.focus()
 				})
 			},
 			forget() {
 				var _this = this
-				_this.isRemember = 1
+				_this.isRemember = 0
 				_this.$nextTick(function() {
-					_this.$refs.oldpassword.focus()
+					_this.$refs.phone.focus()
 				})
 			},
 			submit() {
