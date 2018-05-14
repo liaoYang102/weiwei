@@ -2,11 +2,14 @@
 	<div class="order_detail">
 		<settingHeader :title="title"></settingHeader>
 		<div class="top">
-			<div class="top-left">
-				<img src="../../assets/images/shop/UNIQLO.png">
-				<div class="left-text">优衣库旗舰店</div>
-				<img src="../../assets/images/shop/right.png" class="icon">
-			</div>
+			<router-link to="/multi_user_mall">
+				<div class="top-left">
+					<img src="../../assets/images/shop/UNIQLO.png">
+					<div class="left-text">优衣库旗舰店</div>
+					<img src="../../assets/images/shop/right.png" class="icon">
+				</div>
+			</router-link>
+			
 		</div>
 
 		<div class="order">
@@ -41,7 +44,7 @@
 
 		<div class="footer">
 			<div class="canel commen" @click="eval">评价</div>
-			<div class="view commen">删除订单</div>
+			<div class="view commen" @click="orderDelete">删除订单</div>
 		</div>
 
 	</div>
@@ -87,7 +90,24 @@
 			 		name:'orderEval',
 			 		params:{id:1}
 			 	});
-			 }
+			 },
+		 	orderDelete(){
+		 		let _this = this;
+		     	_this.$dialog.show({
+		     		type: 'warning',
+		     		headMessage: '删除订单',
+		     		message: '亲,您是否确定删除订单？',
+		     		buttons: ['确定', '取消'],
+		     		canel() {
+		     			_this.$dialog.hide()
+		     		},
+		     		confirm() {
+		     			// _this.goTsuccess()
+		     			_this.$dialog.hide()
+		     		}
+		     	})
+		     	console.log(_this.$dialog)
+		 	},
 
 		}
 	}

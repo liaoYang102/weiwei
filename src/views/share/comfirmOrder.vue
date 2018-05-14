@@ -180,14 +180,18 @@
 	.submit{
 		width: 100%;
 		position: fixed;
-		bottom: 0;
+		bottom:0;
+		background-color: #fff;
+		border-top: 1px solid #E1E1E1;
+		box-sizing:border-box;
+		height: 1rem;
 		.total{
-			background-color: #fff;
+			/*background-color: #fff;*/
 			width: 4.4rem;
 			padding-left: 0.7rem;
-			line-height: 1.05rem;
+			line-height: 1rem;
 			font-size: 0.28rem;
-			color:#222;
+			color:##1A1A1A;
 			.color{
 				color:#f45656;
 			}
@@ -212,8 +216,8 @@
 		}
 		.confirmSumbit{
 			width: 2.4rem;
-			height: 1.05rem;
-			line-height: 1.05rem;
+			padding: 0.3rem 0;
+			line-height: 0.4rem;
 			text-align: center;
 			background: #336FFF;
 			font-size: 0.28rem;

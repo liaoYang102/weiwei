@@ -265,7 +265,7 @@ export default {
 					background:#FF001F;
 					width: 0.86rem;
 					text-align: center;
-					padding:0.03rem 0;
+					padding:0.05rem 0 0.01rem 0;
 					border-radius: 0.09rem;
 				}
 			}

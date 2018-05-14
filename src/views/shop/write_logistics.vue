@@ -65,7 +65,8 @@
 			      </div>
 			    </scroller>
 	          <div class="pay-box">
-				<x-button class="add-btn" :gradients="['#1D62F0', '#19D5FD']" @click.native="logisticsCancel">取消</x-button>
+	          	<div class="add-btn" @click.native="logisticsCancel">取消</div>
+				<!-- <x-button class="add-btn" :gradients="['#1D62F0', '#19D5FD']" @click.native="logisticsCancel">取消</x-button> -->
 			  </div>
 	        </group>
 	      </popup>
@@ -267,6 +268,20 @@
 		    clear:both;
 		}
 	}
+ }
+
+ .pay-box {
+ 	padding: 10px 15px;
+ 	.add-btn {
+ 		height: 0.88rem;
+ 		line-height: 0.88rem;
+ 		background: rgba(51, 111, 255, 1);
+ 		font-size: 0.28rem;
+ 		text-align: center;
+ 		font-family: MicrosoftYaHei;
+ 		color: rgba(255, 255, 255, 1);
+ 		border-radius: 2px;
+ 	}
  }
 </style>
 <style lang="less">

@@ -4,7 +4,7 @@
 		<div class="searchBox">
 			<div class="searchInput">
 				<img src="../../assets/images/shop/search.png">
-				<input type="search" placeholder="搜索商品" @click="showCanel">
+				<input type="search" placeholder="搜索商品" @click="showCanel" ref="search" @focus="showCanel">
 			</div>
 			<p class="canel" v-if="canel == true" @click="back">取消</p>
 			<div class="clear"></div>
@@ -33,6 +33,10 @@
 		},
 		components:{
 			settingHeader
+		},
+		mounted() {
+			this.$refs.search.focus()
+			console.log('---',this.$refs.search)
 		},
 		methods:{
 			goProduct(){

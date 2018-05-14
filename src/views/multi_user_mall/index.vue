@@ -70,7 +70,7 @@
 					<mallTheme :themeTitle="themeTitle"></mallTheme>
 					<mallTheme :themeTitle="themeTitle1"></mallTheme>
 				</div>
-				<shop v-else-if="pyy==2" ref="all"></shop>
+				<shop v-else-if="pyy==2"></shop>
 				<service v-else-if="pyy==3"></service>
 				<store v-else-if="pyy==4"></store>
 				<loading v-if="show && pyy!=3 && pyy!=4"></loading>

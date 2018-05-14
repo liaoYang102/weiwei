@@ -38,6 +38,7 @@
 								</div>
 							</div>
 							<Loading v-if="show"> </Loading>
+							<noData v-if="proList.length==0" :status="proState" :stateText="noPro"></noData>
 						</div>
 					</div>
 				</div>
@@ -54,13 +55,14 @@
 								<div class="pro-box">
 									<p>{{item.name}}</p>
 									<div class="storbtn-box">
-										<span>标签</span> <span>关注人数：5850人</span>
+										<!-- <span>标签</span> --><span>关注人数：5850人</span>
 									</div>
 								</div>
 							</div>
-							<noData v-if="storeList.length == 0" :status="1"></noData>
-							<Loading v-if="show2"> </Loading>
 						</div>
+						<noData v-if="storeList.length == 0" :status="1"></noData>
+						<Loading v-if="show2"> </Loading>
+						<noData v-if="storeList.length==0" :status="storeState" :stateText="noStore"></noData>
 					</div>
 				</div>
 			</swiper-item>
@@ -225,7 +227,11 @@
 				proidList: [],
 				storeidList: [],
 				show: false,
-				show2: false
+				show2: false,
+				proState: 0,
+				storeState: 0,
+				noPro: '暂无商品',
+				noStore: '暂无店铺'
 			}
 		},
 		created() {},
@@ -658,7 +664,7 @@
 						}
 					}
 					.storbtn-box {
-						span:nth-child(1) {
+						/*span:nth-child(1) {
 							display: inline-block;
 							border: 1px solid #F23030;
 							font-size: 0.24rem;
@@ -667,8 +673,8 @@
 							color: #F23030;
 							margin: 0.18rem 0.26rem 0 0;
 							height: 0.3rem;
-						}
-						span:nth-child(2) {
+						}*/
+						span {
 							font-size: 0.24rem;
 							color: rgba(144, 162, 199, 1);
 						}

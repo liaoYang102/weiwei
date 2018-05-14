@@ -13,7 +13,7 @@
 			</div>
 			<div class="clear"></div>
 		</div>
-		<div class="time-line">
+		<div class="logTime-line">
 			<timeline>
 				<timeline-item v-for="(i, index) in item" :key="index">
 					<h4 :class="[index === 0 ? 'recent' : 'default']" >{{i.Node}}</h4>
@@ -124,7 +124,7 @@
 				color:#2850FF;
 			}
 		}
-		.time-line{
+		.logTime-line{
 			background-color: #fff;
 			.timeline-demo {
 				p {

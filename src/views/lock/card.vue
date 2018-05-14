@@ -270,11 +270,9 @@
 		height: 100%;
 		.card-list {
 			position: relative;
+			height: 100%;
 			.wrapper {
-				position: fixed;
-				top: 1px;
-				bottom: 0;
-				width: 100%;
+				height: 100%;
 				overflow: hidden;
 				.pro-box {
 					padding: 0.26rem 0.55rem;
