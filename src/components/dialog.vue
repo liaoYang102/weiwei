@@ -2,7 +2,7 @@
 	<section>
 		<!-- 弹出框 -->
 		<div v-transfer-dom class="vue-dialog">
-			<x-dialog v-model="showDialog" :hide-on-blur="true">
+			<x-dialog v-model="showDialog" :hide-on-blur="true" @on-hide="ishide">
 				<div class="dia">
 					<div class="img"><img :src="'./static/images/'+type+'.png'"></div>
 					<div class="dia_top">
@@ -73,7 +73,8 @@
 				} else {
 					_this.showDialog = true
 				}
-			}
+			},
+			ishide(){}
 		}
 	}
 </script>

@@ -35,8 +35,13 @@
 			</div>
 		</div>
 		<div class="tip">
-			<p>（文字清晰，四角齐全）</p>
-			<div class="add-btn" @click="submit">保存</div>
+			<p v-if="status == 0">（文字清晰,四角齐全）</p>
+			<x-button v-if="status == 0" class="add-btn" @click.native="submit" :show-loading="isload">{{isload?'正在上传':'保存'}}</x-button>
+			<div v-if="status == 1" class="two-btn bounceInRight animated">
+				<div @click="$router.go(-1)">返回</div>
+				<div @click="reexamination">重新递交审核</div>
+			</div>
+			<div v-if="status == 3" class="add-btn" :class="{'b-g':status == 3}">受理中，请耐心等待</div>
 		</div>
 		<div v-transfer-dom>
 			<loading :show="showDialogStyle" :text="text1"></loading>
@@ -64,6 +69,8 @@
 			return {
 				title: '实名认证',
 				showDialogStyle: false,
+				isload: false,
+				status: 0, //0 上传审核  1 未受理   2 已受理  3 审核结果
 				text1: 'Processing',
 				name: '',
 				idNum: '',
@@ -123,31 +130,58 @@
 				//				tick(0, (percent) => {
 				//					if(percent === 100) {
 				//						_this.showDialogStyle = false
-				//						this.$vux.toast.show({
-				//							text: '上传成功',
-				//							type: 'text'
+				//						_this.status = 1
+				//
+				//						_this.$dialog.show({
+				//							type: 'success',
+				//							headMessage: '信息提交成功',
+				//							message: '',
+				//							buttons: ['我知道了'],
+				//							delay: 2000
 				//						})
-				//						setTimeout(function() {
-				//							_this.$router.push({
-				//								path: '/member/setting/realoading'
-				//							})
-				//						}, 2100)
 				//						return
 				//					} else {
-				//						_this.text1 = `${percent}%`
+				//						_this.text1 = '上传了' + `${percent}%`
 				//					}
 				//				})
-				_this.$dialog.show({
-					type: 'success',
-					headMessage: '提示',
-					message: '实名成功',
-					buttons: ['确定'],
-					delay:2000,
-					canel() {
-					},
-					confirm() {
-					}
-				})
+				_this.isload = true
+				setTimeout(function() {
+					_this.status = 1
+					_this.$dialog.show({
+						type: 'success',
+						headMessage: '信息提交成功',
+						message: '',
+						buttons: ['我知道了'],
+						delay: 2000,
+						canel() {},
+						confirm() {
+
+						}
+					})
+					_this.isload = false
+				}, 1500)
+
+			},
+			reexamination() {
+				this.status = 0
+				this.justImages = ''
+				this.backImages = ''
+				this.userImages = ''
+				this.idNum = ''
+				this.name = ''
+			}
+		},
+		watch: {
+			status() {
+				if(this.status == 0) {
+					document.title = '身份认证'
+				} else if(status == 1) {
+					document.title = '审核未受理'
+				} else if(status == 2) {
+					document.title = '审核已受理'
+				} else if(status == 3) {
+					document.title = '审核结果'
+				}
 			}
 		}
 	}
@@ -191,6 +225,32 @@
 				font-size: 0.28rem;
 				text-align: center;
 				font-family: MicrosoftYaHei;
+				color: rgba(255, 255, 255, 1);
+				border-radius: 0!important;
+			}
+			.b-g {
+				background-color: #90a2c7;
+			}
+		}
+		.two-btn {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			div {
+				width: 2.7rem;
+				height: 0.88rem;
+				line-height: 0.88rem;
+				margin-top: 0.6rem;
+				font-size: 0.28rem;
+				text-align: center;
+				font-family: MicrosoftYaHei;
+			}
+			div:nth-child(1) {
+				border: 1px solid #ddd;
+				color: rgba(26, 38, 66, 1);
+			}
+			div:nth-child(2) {
+				background: rgba(51, 111, 255, 1);
 				color: rgba(255, 255, 255, 1);
 			}
 		}

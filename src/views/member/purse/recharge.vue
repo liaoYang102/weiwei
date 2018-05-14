@@ -47,7 +47,7 @@
 				<group gutter="0">
 					<radio :options="list" value="1" @on-change="change"></radio>
 					<div class="pay-box">
-						<div class="add-btn">立即支付</div>
+						<div class="add-btn" @click="pay">立即支付</div>
 					</div>
 				</group>
 			</popup>
@@ -130,6 +130,18 @@
 			},
 			change(value, label) {
 				console.log('change:', value, label)
+			},
+			pay(){
+				console.log(this.$code)
+				this.$code.show({
+					showCode:true,
+					codeChange:function(){
+						console.log(123)
+					},
+					recapture:function(){
+						
+					}
+				})
 			}
 		},
 		components: {

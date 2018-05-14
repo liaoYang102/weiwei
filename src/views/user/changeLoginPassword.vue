@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<div class="login-box">
 		<settingHeader :title="title"></settingHeader>
 		<div class="content">
 			<group gutter="0" class="input-div">
@@ -37,7 +37,9 @@
 		},
 		methods: {
 			submit() {
-				this.$router.push({path:'/user/changeLoginPassword2'})
+				this.$router.push({
+					path: '/user/changeLoginPassword2'
+				})
 			},
 			codeChange(val) {
 
@@ -87,54 +89,39 @@
 
 <style lang="less" scoped>
 	.login-box {
-		width: 100%;
-		height: 3.5rem;
-		position: relative;
-		img {
-			position: absolute;
-			top: 50%;
-			left: 50%;
-			transform: translate(-50%, -50%);
-			width: 2rem;
-			height: auto;
+		.input-item {
+			height: 1.02rem;
+			font-family: PingFangSC-Regular;
+			font-size: 0.28rem;
+			letter-spacing: 0;
+			padding-top: 0;
+			padding-bottom: 0;
+			box-sizing: border-box;
 		}
-	}
-	
-	.input-item {
-		height: 1.02rem;
-		font-family: PingFangSC-Regular;
-		font-size: 0.28rem;
-		letter-spacing: 0;
-		padding-top: 0;
-		padding-bottom: 0;
-		box-sizing: border-box;
-	}
-	
-	.tip {
-		padding: 10px 15px;
-		ont-family: PingFangSC-Regular;
-		font-size: 0.28rem;
-		color: #90A2C7;
-		letter-spacing: 0;
-		text-align: center;
-	}
-	
-	.add-btn {
-		height: 0.88rem;
-		margin-top: 0.55rem;
-		ont-family: PingFangSC-Regular;
-		font-size: 0.28rem;
-		color: #FFFFFF!important;
-		letter-spacing: 0;
-		background-color: #336FFF!important;
-	}
-	
-	.login-re {
-		padding: 10px 15px;
-		display: flex;
-		justify-content: space-between;
-		span {
-			color: #10aeff;
+		.tip {
+			padding: 10px 15px;
+			ont-family: PingFangSC-Regular;
+			font-size: 0.28rem;
+			color: #90A2C7;
+			letter-spacing: 0;
+			text-align: center;
+		}
+		.add-btn {
+			height: 0.88rem;
+			margin-top: 0.55rem;
+			ont-family: PingFangSC-Regular;
+			font-size: 0.28rem;
+			color: #FFFFFF!important;
+			letter-spacing: 0;
+			background-color: #336FFF!important;
+		}
+		.login-re {
+			padding: 10px 15px;
+			display: flex;
+			justify-content: space-between;
+			span {
+				color: #10aeff;
+			}
 		}
 	}
 </style>

@@ -24,19 +24,19 @@
 				<div class="pro-list">
 					<div class="wrapper" ref="wrapper">
 						<div class="content">
-							<router-link to="">
-								<div class="list-item" v-for="(item,index) in proList" @click="changePr()">
+							<div class="list-item" v-for="(item,index) in proList">
+								<div @click="changePr()">
 									<check-icon v-if="proShow" class="check-btn" :value.sync="item.ischeck"></check-icon>
-									<div class="img-box"><img :src="item.img" /></div>
-									<div class="pro-box">
-										<p>{{item.name}}</p>
-										<p>￥{{item.money}}</p>
-										<div class="btn-box">
-											<span>加入购物车</span> <span>立即购买</span>
-										</div>
+								</div>
+								<div class="img-box"><img :src="item.img" /></div>
+								<div class="pro-box">
+									<p>{{item.name}}</p>
+									<p>￥{{item.money}}</p>
+									<div class="btn-box">
+										<span>加入购物车</span> <span>立即购买</span>
 									</div>
 								</div>
-							</router-link>
+							</div>
 							<Loading v-if="show"> </Loading>
 						</div>
 					</div>
@@ -46,18 +46,19 @@
 				<div class="store-list">
 					<div class="wrapper2" ref="wrapper2">
 						<div class="content">
-							<router-link to="">
-								<div class="list-item" v-for="(item,index) in storeList" @click="changeStore()">
+							<div class="list-item" v-for="(item,index) in storeList" v-if="storeList.length>0">
+								<div @click="changeStore()">
 									<check-icon v-if="storeShow" class="check-btn" :value.sync="item.ischeck"></check-icon>
-									<div class="img-box"><img :src="item.img" /></div>
-									<div class="pro-box">
-										<p>{{item.name}}</p>
-										<div class="storbtn-box">
-											<span>标签</span> <span>关注人数：5850人</span>
-										</div>
+								</div>
+								<div class="img-box"><img :src="item.img" /></div>
+								<div class="pro-box">
+									<p>{{item.name}}</p>
+									<div class="storbtn-box">
+										<span>标签</span> <span>关注人数：5850人</span>
 									</div>
 								</div>
-							</router-link>
+							</div>
+							<noData v-if="storeList.length == 0" :status="1"></noData>
 							<Loading v-if="show2"> </Loading>
 						</div>
 					</div>
@@ -94,6 +95,7 @@
 	import { Tab, TabItem, Swiper, SwiperItem, CheckIcon, Scroller, Search, Popup, XButton, XHeader } from 'vux'
 	import settingHeader from '../../../components/setting_header'
 	import Loading from '../../../components/loading'
+	import noData from '../../../components/noData'
 	export default {
 		data() {
 			return {
@@ -158,68 +160,67 @@
 						id: 2
 					},
 				],
-				storeList: [
-//				{
-//						img: 'https://ss0.bdstatic.com/-0U0bnSm1A5BphGlnYG/tam-ogel/299c55e31d7f50ae4dc85faa90d6f445_121_121.jpg',
-//						name: '热风2018年小清新女士星星休闲双肩包拉链方形背包B52W8201',
-//						money: '50.0',
-//						ischeck: false,
-//						id: 1
-//					},
-//					{
-//						img: './static/member/login-img.png',
-//						name: '热风2018年小清新女士星星休闲双肩包拉链方形背包B52W8201',
-//						money: '50.0',
-//						ischeck: false,
-//						id: 2
-//					}, {
-//						img: 'https://ss0.bdstatic.com/-0U0bnSm1A5BphGlnYG/tam-ogel/299c55e31d7f50ae4dc85faa90d6f445_121_121.jpg',
-//						name: '热风2018年小清新女士星星休闲双肩包拉链方形背包B52W8201',
-//						money: '50.0',
-//						ischeck: false,
-//						id: 1
-//					},
-//					{
-//						img: './static/member/login-img.png',
-//						name: '热风2018年小清新女士星星休闲双肩包拉链方形背包B52W8201',
-//						money: '50.0',
-//						ischeck: false,
-//						id: 2
-//					}, {
-//						img: 'https://ss0.bdstatic.com/-0U0bnSm1A5BphGlnYG/tam-ogel/299c55e31d7f50ae4dc85faa90d6f445_121_121.jpg',
-//						name: '热风2018年小清新女士星星休闲双肩包拉链方形背包B52W8201',
-//						money: '50.0',
-//						ischeck: false,
-//						id: 1
-//					},
-//					{
-//						img: './static/member/login-img.png',
-//						name: '热风2018年小清新女士星星休闲双肩包拉链方形背包B52W8201',
-//						money: '50.0',
-//						ischeck: false,
-//						id: 2
-//					},
-//					{
-//						img: './static/member/login-img.png',
-//						name: '热风2018年小清新女士星星休闲双肩包拉链方形背包B52W8201',
-//						money: '50.0',
-//						ischeck: false,
-//						id: 2
-//					},
-//					{
-//						img: './static/member/login-img.png',
-//						name: '热风2018年小清新女士星星休闲双肩包拉链方形背包B52W8201',
-//						money: '50.0',
-//						ischeck: false,
-//						id: 2
-//					},
-//					{
-//						img: './static/member/login-img.png',
-//						name: '热风2018年小清新女士星星休闲双肩包拉链方形背包B52W8201',
-//						money: '50.0',
-//						ischeck: false,
-//						id: 2
-//					}
+				storeList: [{
+						img: 'https://ss0.bdstatic.com/-0U0bnSm1A5BphGlnYG/tam-ogel/299c55e31d7f50ae4dc85faa90d6f445_121_121.jpg',
+						name: '热风2018年小清新女士星星休闲双肩包拉链方形背包B52W8201',
+						money: '50.0',
+						ischeck: false,
+						id: 1
+					},
+					{
+						img: './static/member/login-img.png',
+						name: '热风2018年小清新女士星星休闲双肩包拉链方形背包B52W8201',
+						money: '50.0',
+						ischeck: false,
+						id: 2
+					}, {
+						img: 'https://ss0.bdstatic.com/-0U0bnSm1A5BphGlnYG/tam-ogel/299c55e31d7f50ae4dc85faa90d6f445_121_121.jpg',
+						name: '热风2018年小清新女士星星休闲双肩包拉链方形背包B52W8201',
+						money: '50.0',
+						ischeck: false,
+						id: 1
+					},
+					{
+						img: './static/member/login-img.png',
+						name: '热风2018年小清新女士星星休闲双肩包拉链方形背包B52W8201',
+						money: '50.0',
+						ischeck: false,
+						id: 2
+					}, {
+						img: 'https://ss0.bdstatic.com/-0U0bnSm1A5BphGlnYG/tam-ogel/299c55e31d7f50ae4dc85faa90d6f445_121_121.jpg',
+						name: '热风2018年小清新女士星星休闲双肩包拉链方形背包B52W8201',
+						money: '50.0',
+						ischeck: false,
+						id: 1
+					},
+					{
+						img: './static/member/login-img.png',
+						name: '热风2018年小清新女士星星休闲双肩包拉链方形背包B52W8201',
+						money: '50.0',
+						ischeck: false,
+						id: 2
+					},
+					{
+						img: './static/member/login-img.png',
+						name: '热风2018年小清新女士星星休闲双肩包拉链方形背包B52W8201',
+						money: '50.0',
+						ischeck: false,
+						id: 2
+					},
+					{
+						img: './static/member/login-img.png',
+						name: '热风2018年小清新女士星星休闲双肩包拉链方形背包B52W8201',
+						money: '50.0',
+						ischeck: false,
+						id: 2
+					},
+					{
+						img: './static/member/login-img.png',
+						name: '热风2018年小清新女士星星休闲双肩包拉链方形背包B52W8201',
+						money: '50.0',
+						ischeck: false,
+						id: 2
+					}
 				],
 				proidList: [],
 				storeidList: [],
@@ -425,7 +426,8 @@
 			Popup,
 			XButton,
 			XHeader,
-			Loading
+			Loading,
+			noData
 		}
 	}
 </script>
