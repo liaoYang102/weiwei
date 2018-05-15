@@ -30,7 +30,7 @@
 			//全局地址数据
 			_this.$nextTick(function() {
 				_this.$http({
-					url:'app/index.php?i=2&c=entry&m=mx_shop&do=mobile&r=area.getall',
+					url:'app/index.php?i=2&c=entry&m=mx_shop&do=mobile&r=area.getArea',
 					async: false,
 				}).then(function(res) {
 					//					return new Promise((resolve, reject) => {
