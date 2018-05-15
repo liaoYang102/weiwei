@@ -6,7 +6,7 @@
 				<p>405.45</p>
 				<p>累计记录</p>
 			</div>
-			<div  class="screen-box">
+			<div class="screen-box">
 				<div>
 					查看全部
 				</div>
@@ -16,20 +16,23 @@
 			</div>
 			<div class="title-box">
 				<div>{{date?date:'日期'}}</div>
-				<div>收入</div>
+				<div>收益</div>
 			</div>
 			<div class="wrapper" ref="wrapper">
 				<div class="content">
-					<div class="list-box">
-						<ul>
-							<li v-for="item in list">
-								<p>{{item.date}}</p>
-								<p>+{{item.money}}</p>
-							</li>
-						</ul>
+					<div v-if="list.length>0">
+						<div class="list-box">
+							<ul>
+								<li v-for="item in list" @click="toDetail">
+									<p>{{item.date}}</p>
+									<p>+{{item.money}}</p>
+								</li>
+							</ul>
+						</div>
+						<Loading v-if="show"></Loading>
+						<Nomore v-if="showNo"></Nomore>
 					</div>
-					<Loading v-if="show"></Loading>
-					<Nomore v-if="showNo"></Nomore>
+					<noData v-if="list.length == 0" :status="2" stateText="暂无数据"></noData>
 				</div>
 			</div>
 		</div>
@@ -41,6 +44,7 @@
 	import settingHeader from '../../../components/setting_header'
 	import Loading from '../../../components/loading'
 	import Nomore from '../../../components/noMore'
+	import noData from '../../../components/noData'
 	export default {
 		data() {
 			return {
@@ -108,17 +112,27 @@
 					{
 						date: '2018.05.14',
 						money: '130.00'
-					},
+					}
 				]
 			}
 		},
 		created() {
-
+			if(this.$route.params.title){
+				document.title = this.$route.params.title
+			}
 		},
 		mounted() {
 			this.InitScroll()
 		},
 		methods: {
+			toDetail(){
+				this.$router.push({
+					name: 'earnings_detail',
+					params:{
+						title:'信用积分'
+					}
+				})
+			},
 			showDate() {
 				var _this = this
 				_this.$vux.datetime.show({
@@ -180,7 +194,8 @@
 		components: {
 			settingHeader,
 			Loading,
-			Nomore
+			Nomore,
+			noData
 		}
 	}
 </script>
@@ -188,7 +203,7 @@
 <style lang="less">
 	.record-box {
 		height: 100%;
-		font-family: MicrosoftYaHei;
+		font-family: PingFangSC-Medium;
 		background-color: white;
 		.h {
 			height: 100%;

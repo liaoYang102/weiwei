@@ -1,53 +1,67 @@
 <template>
-	<popup class="code-popup" height="100%" v-model="showCode">
+	<div>
 		<div v-if="type == 'code'">
-			<x-header class="code-header" :left-options="{showBack: false}">
-				请输入验证码
-				<a slot="right" @click="showCode = false">关闭</a>
-			</x-header>
-			<div class="code-box">
-				<div class="code-tip">
-					我们已发送<span>验证码</span>短信到您的手机
-					<p>18520496787</p>
-				</div>
-				<div class="code-input-box" @click.native="focus">
-					<x-input v-model="code" class="code-input" ref="one" type="number" placeholder="请输入5验证码" :show-clear="false" text-align="center" :max="5" @on-change="one"></x-input>
-				</div>
-				<transition enter-active-class="zoomIn animated" leave-active-class="zoomOut animated">
-					<div class="code-err-tip" v-if="iserror">
-						<div>{{errText}}</div>
-						<div @click="recapture">重新获取</div>
+			<popup class="code-popup" height="100%" v-model="showCode">
+				<x-header class="code-header" :left-options="{showBack: false}">
+					请输入验证码
+					<a slot="right" @click="showCode = false">关闭</a>
+				</x-header>
+				<div class="code-box">
+					<div class="code-tip">
+						我们已发送<span>验证码</span>短信到您的手机
+						<p>18520496787</p>
 					</div>
-				</transition>
-			</div>
+					<div class="code-input-box" @click.native="focus">
+						<x-input v-model="code" class="code-input" ref="one" type="number" placeholder="请输入5验证码" :show-clear="false" text-align="center" :max="5" @on-change="one"></x-input>
+					</div>
+					<transition enter-active-class="zoomIn animated" leave-active-class="zoomOut animated">
+						<div class="code-err-tip" v-if="iserror">
+							<div>{{errText}}</div>
+							<div @click="recapture">重新获取</div>
+						</div>
+					</transition>
+				</div>
+			</popup>
 		</div>
 
 		<div v-if="type == 'pay'">
-			<x-header class="code-header" :left-options="{showBack: false}">
-				请输入支付密码
-				<a slot="right" @click="showCode = false">关闭</a>
-			</x-header>
-			<div class="code-box">
-				<div class="code-input-box" @click.native="focus">
-					<x-input v-model="code" class="code-input" ref="one" type="password" placeholder="请输入支付密码" :show-clear="false" text-align="center" :max="5" @on-change="one"></x-input>
-				</div>
-				<transition enter-active-class="zoomIn animated" leave-active-class="zoomOut animated">
-					<div class="code-err-tip" v-if="iserror">
-						<div>{{errText}}</div>
-						<div @click="recapture">重新获取</div>
+			<popup class="pay-popup" v-model="showCode">
+				<div>
+					<x-header class="code-header" :left-options="{showBack: false}">
+						请输入支付密码
+						<a slot="right" @click="gb">关闭</a>
+					</x-header>
+					<div class="pay-input">
+						<ul>
+							<li>{{payNum[0]}}</li>
+							<li>{{payNum[1]}}</li>
+							<li>{{payNum[2]}}</li>
+							<li>{{payNum[3]}}</li>
+							<li>{{payNum[4]}}</li>
+						</ul>
+						<p @click="forgetpassword">忘记密码了？</p>
 					</div>
-				</transition>
-			</div>
-		</div>
+				</div>
 
-	</popup>
+				<div class="keyboard">
+					<ul>
+						<li v-for="(item,index) in keyboard" @click="keyActive(item,index)">
+							<img v-if="index == 11" src="../assets/images/index/x.png" alt="" />
+							<p v-else>{{item}}</p>
+						</li>
+					</ul>
+				</div>
+			</popup>
+		</div>
+	</div>
 </template>
 
 <script>
 	import { XInput, Group, XButton, Cell, Popup, XHeader } from 'vux'
 	export default {
 		props: {
-			type: String
+			type: String,
+			change: Function
 		},
 		data() {
 			return {
@@ -56,6 +70,8 @@
 				errText: '验证码错误，请重新输入',
 				iserror: false,
 				code: '',
+				payNum: [],
+				keyboard: [1, 2, 3, 4, 5, 6, 7, 8, 9, 'C', 0, '']
 			}
 		},
 		created() {
@@ -63,14 +79,22 @@
 		},
 		mounted() {
 			if(this.showCode == true) {
-
 				this.$refs.one.focus()
 			}
 		},
-		ready() {
-
-		},
 		methods: {
+			keyActive(num, index) {
+				
+				var _this = this
+				
+				if(_this.payNum.length < 5 && index != 9 && index != 11) {
+					_this.payNum.push('*')
+				} else if(index == 9) {
+					_this.payNum = []
+				} else if(index == 11) {
+					_this.payNum.pop()
+				}
+			},
 			one(val) {
 				if(val.length == 5) {
 					this.$refs.one.blur()
@@ -85,8 +109,20 @@
 				this.iserror = false
 				this.code = ""
 			},
-			ishide() {
-
+			gb() {
+				this.payNum = []
+				this.showCode = false
+			},
+			forgetpassword(){
+				console.log(this.vm)
+				this.vm.$router.push({path:'/user/changePaymentPassword'})
+			}
+		},
+		watch:{
+			payNum(){
+				if(this.payNum.length == 5){
+					this.change()
+				}
 			}
 		},
 		components: {
@@ -100,14 +136,109 @@
 </script>
 
 <style lang="less">
+	.pay-popup {
+		background:rgba(245,248,249,1)!important;
+		z-index: 666!important;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		user-select: none;
+		font-family:MicrosoftYaHei;
+		.pay-input {
+			background-color: white;
+			padding: 0.57rem 0.43rem;
+			box-sizing: border-box;
+			ul {
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+				li {
+					width: 20%;
+					height: 0.93rem;
+					line-height: 0.93rem;
+					border: 1px solid #D8DFF0;
+					text-align: center;
+					font-size: 0.40rem;
+					box-sizing: border-box;
+				}
+				li:not(:last-child) {
+					border-right: none;
+				}
+			}
+			p {
+				text-align: right;
+				margin-top: 0.30rem;
+				font-size: 0.24;
+				color: rgba(51, 111, 255, 1);
+			}
+		}
+		.keyboard {
+			ul {
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+				flex-wrap: wrap;
+			}
+			ul>li {
+				width: 33.333333333333336%;
+				height: 1.12rem;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				position: relative;
+				font-size: 0.40rem;
+				font-family: PingFangSC-Medium;
+				color: rgba(26, 38, 66, 1);
+				user-select: none;
+				img {
+					width: 0.65rem;
+					height: 0.53rem;
+				}
+			}
+			ul>li:nth-child(10),
+			ul>li:nth-child(12) {
+				background: rgba(216, 223, 240, 1);
+			}
+			ul>li:active {
+				background: #256fff;
+				color: white;
+			}
+			ul>li:before {
+				content: " ";
+				position: absolute;
+				right: 0;
+				top: 0;
+				width: 1px;
+				bottom: 0;
+				border-right: 1px solid #c7c7c7;
+				color: #c7c7c7;
+				transform-origin: 100% 0;
+				transform: scaleX(.5);
+			}
+			ul>li:after {
+				content: " ";
+				position: absolute;
+				top: 0;
+				right: 0;
+				height: 1px;
+				border-top: 1px solid #c7c7c7;
+				color: #d9d9d9;
+				transform-origin: 0 0;
+				transform: scaleY(.5);
+				left: 0;
+			}
+		}
+	}
+	
 	.code-header {
 		background-color: white!important;
 		position: relative;
 		.vux-header-title {
 			color: black!important;
 		}
-		.vux-header-right>a{
+		.vux-header-right>a {
 			color: #73859f!important;
+			font-size: 16px;
 		}
 	}
 	
@@ -129,7 +260,7 @@
 	
 	.code-popup {
 		background-color: white!important;
-		z-index: 999999999!important;
+		z-index: 666!important;
 	}
 	
 	.code-box {

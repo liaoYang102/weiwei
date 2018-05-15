@@ -88,7 +88,10 @@
 				} else {
 					document.title = '大健康App'
 				}
-			}　
+				
+				this.$code.hide()
+				this.$dialog.hide()
+			}
 		}
 	}
 </script>
@@ -117,7 +120,7 @@
 	.vux-pop-in-enter-active,
 	.vux-pop-in-leave-active {
 		will-change: transform;
-		transition: all 500ms;
+		transition: all .5s cubic-bezier(.55,0,.1,1);
 		height: 100%;
 		width: 100%;
 		top: 0;

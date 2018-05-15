@@ -2,7 +2,7 @@
 	<div class="cashBack">
 		<p class="cashTop">本次支付获得</p>
 		<div class="cashBox">
-			<router-link to="/member/earnings/index">
+			<router-link to="/member/earnings/currency">
 				<div class="fl box">
 					<p class="accountBack">CGC通用积分</p>
 					<p class="priceBack">2元</p>
@@ -10,7 +10,7 @@
 				</div>
 			</router-link>
 			
-			<router-link to="/member/earnings/index">
+			<router-link to="/member/earnings/credit">
 				<div class="fl box">
 					<p class="accountBack">信用积分</p>
 					<p class="priceBack">200分</p>

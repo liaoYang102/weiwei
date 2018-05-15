@@ -7,8 +7,8 @@
 				<input type="search" placeholder="搜索商品">
 			</div>
 			<div class="icon">
-				<img :src="dateImg" @click="showDate">
-				<img :src="delImg" @click="del">
+				<img v-lazy="dateImg" @click="showDate">
+				<img v-lazy="delImg" @click="del">
 			</div>
 		</div>
 
@@ -19,7 +19,7 @@
 					<router-link to="">
 						<div class="list-item" v-for="(item,sIndex) in log.shopList" @click="changeLog()">
 							<check-icon v-if="delShow" class="check-btn" :value.sync="item.ischeck"></check-icon>
-							<div class="img-box"><img :src="item.img" /></div>
+							<div class="img-box"><img v-lazy="item.img" /></div>
 							<div class="pro-box">
 								<p>{{item.name}}</p>
 								<p class="shop-price"><span class="priceNum">￥{{item.money}}</span> <span class="shopAcount">+{{item.score}}积分</span></p>

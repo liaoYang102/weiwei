@@ -16,19 +16,22 @@
 			</div>
 			<div class="wrapper" ref="wrapper">
 				<div class="content">
-					<div class="list-box">
-						<ul>
-							<li v-for="item in list">
-								<div>
-									<p>{{typeText}}</p>
-									<p>{{item.date}}</p>
-								</div>
-								<p class="red">+{{item.money}}</p>
-							</li>
-						</ul>
+					<div v-if="list.length >0">
+						<div class="list-box">
+							<ul>
+								<li v-for="item in list" @click="toDetail">
+									<div>
+										<p>{{typeText}}</p>
+										<p>{{item.date}}</p>
+									</div>
+									<p class="red">+{{item.money}}</p>
+								</li>
+							</ul>
+						</div>
+						<Loading v-if="show"></Loading>
+						<Nomore v-if="showNo"></Nomore>
 					</div>
-					<Loading v-if="show"></Loading>
-					<Nomore v-if="showNo"></Nomore>
+					<noData v-if="list.length == 0" :status="2" stateText="暂无数据"></noData>
 				</div>
 			</div>
 		</div>
@@ -53,6 +56,7 @@
 	import settingHeader from '../../../components/setting_header'
 	import Loading from '../../../components/loading'
 	import Nomore from '../../../components/noMore'
+	import noData from '../../../components/noData'
 	export default {
 		data() {
 			return {
@@ -122,21 +126,30 @@
 					{
 						date: '2018.05.14',
 						money: '130.00'
-					},
+					}
 				]
 			}
 		},
 		created() {
-			console.log(this.$route.params)
 			this.twoIndex = this.$route.params.num
 			this.typeText = this.$route.params.title
-			this.title = this.$route.params.title
-			document.title = this.$route.params.title
+			if(this.$route.params.title) {
+				this.title = this.$route.params.title
+				document.title = this.$route.params.title
+			}
 		},
 		mounted() {
 			this.InitScroll()
 		},
 		methods: {
+			toDetail(){
+				this.$router.push({
+					name: 'earnings_detail',
+					params:{
+						title:'通用积分'
+					}
+				})
+			},
 			twoChange(index, item) {
 				this.twoIndex = index
 				this.typeText = item
@@ -166,7 +179,6 @@
 
 			},
 			LoadData() {
-				console.log(this.list.length)
 				var _this = this
 				if(_this.list.length <= 25) {
 					_this.show = true
@@ -190,7 +202,8 @@
 		components: {
 			settingHeader,
 			Loading,
-			Nomore
+			Nomore,
+			noData
 		}
 	}
 </script>
@@ -231,7 +244,7 @@
 	
 	.reward-box {
 		height: 100%;
-		font-family: MicrosoftYaHei;
+		font-family: PingFangSC-Medium;
 		background-color: white;
 		.h {
 			height: 100%;

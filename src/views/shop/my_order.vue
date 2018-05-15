@@ -53,7 +53,7 @@
 
 			    <div class="wrap no_orders" v-else>
 		        	<div class="none-data">
-		        		<img :src="imgSrc" alt=""> 
+		        		<img v-lazy="imgSrc" alt=""> 
 		    			<p>{{ status}}</p>
 		        	</div>
 		    		

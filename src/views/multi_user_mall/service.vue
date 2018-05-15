@@ -73,7 +73,7 @@ export default{
 		width: 100%;
 		margin: 0 auto;
 		.list{
-			border-top: 1px solid #D8DFF0;
+			/*border-top: 1px solid #D8DFF0;*/
 			/*border-bottom: 1px solid #D8DFF0;*/
 			/*margin-top: .22rem;
 			margin-bottom: 2rem;*/

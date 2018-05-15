@@ -35,14 +35,14 @@
 							<div class="title">热门品牌</div>
 							<div class="type-box clearfix">
 								<div v-for="i in item" @click="goAllshop">
-									<span><img :src="i.img"></span>
+									<span><img v-lazy="i.img"></span>
 									<p>{{i.name}}</p>
 								</div>
 							</div>
 							<div class="title">热门分类</div>
 							<div class="type-circle clearfix">
 								<div v-for="i in item" @click="goAllshop">
-									<span><img :src="i.img"/></span>
+									<span><img v-lazy="i.img"/></span>
 									<p>{{i.name}}</p>
 								</div>
 							</div>

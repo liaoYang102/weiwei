@@ -67,9 +67,7 @@
 				<div class="tab-list">
 			    	<div class="list">
 			    		<li class="tab-li" v-for="(item, index) in shopList" @click="goShopdetails">
-			    			<!-- <span style="font-size:20px;">Loading123123</span> -->
-			    			<!-- <x-img src="http://dev.hotkidclub.com/ceo/static/images/loading.png" @on-success="success" @on-error="error" class="ximg-demo" error-class="ximg-error" :offset="-100" container=".content"></x-img> -->
-			    			<img src="../../assets/images/shop/shop3.png">
+			    			<img :src="item.img">
 			    			<div class="tab-text"><span>{{ item.shopname}}</span></div>
 			    			<div class="tab-tag">
 		    					<p class="shopPrice">
@@ -148,7 +146,6 @@ export default {
 		this.InitScroll()
 	},
 	methods:{
-		
 		onItemClick(){
 
 		},
@@ -190,7 +187,6 @@ export default {
 	    goShopdetails(){
 	    	this.$router.push({ path: '/shop/shop_details'})
 	    },
-	    
     	goAllshop(){
     		let title = '积分兑';
     		this.$router.push({ name: 'all_shops', params: { title }})
@@ -367,7 +363,10 @@ li:nth-child(odd){
 		width: 49.8%;
 		margin-bottom: 1px;
 		img{
-			width: 100%;
+			width: 80%;
+			vertical-align:middle;
+			display: block;
+			margin: 0 auto; 
 		}
 		.tab-text{
 			margin-left: 0.23rem;

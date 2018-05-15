@@ -2,7 +2,7 @@
 	<div v-model="imgList">
 		<swiper :options="swiperOption" class="swiper">
 	        <swiper-slide v-for="item in demoList">
-	        	<img :src="item">
+	        	<img v-lazy="item">
 	        </swiper-slide>
 	        <div class="swiper-pagination" slot="pagination"></div>
         </swiper>
@@ -25,7 +25,7 @@
 					autoplay: {
 						disableOnInteraction: false,
 					},
-					loop:true,
+					// loop:true,
 					// observer:true,//修改swiper自己或子元素时，自动初始化swiper
                 	// observeParents:true,//修改swiper的父元素时，自动初始化swiper
                 	// disableOnInteraction : false,

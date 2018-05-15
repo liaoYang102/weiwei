@@ -5,10 +5,10 @@
             <tab-item selected @on-item-click="showPanel">
               {{ tabItem}} <!-- <img :src="downImg" alt="" width="13%"> -->
             </tab-item>
-            <tab-item class='vux-center' @on-item-click="onItemClick">销量<img :src="numImg" alt="" width="12%"></tab-item>
+            <tab-item class='vux-center' @on-item-click="onItemClick">销量<img v-lazy="numImg" alt="" width="12%"></tab-item>
             <tab-item @on-item-click="sort">
                 <span>价格</span>
-                <img :src="priceImg" alt="" width="12%">
+                <img v-lazy="priceImg" alt="" width="12%">
             </tab-item>
             <tab-item @on-item-click="onMenuClick">
                 筛选 <img src="../../assets/images/shop/screen.png" alt="" width="12%">
@@ -28,50 +28,55 @@
                 </div>
             </x-dialog>
         </div> -->
+        <div class="wrapper2" ref="wrapper2">
+            <div class="content">
+                <maskRight ref='xioaqiang'></maskRight>
 
-        <maskRight ref='xioaqiang'></maskRight>
+                <Swiper :imgList="imgList"></Swiper>
 
-        <Swiper :imgList="imgList"></Swiper>
-
-        <div class="shopList">
-            <div class="all-shop">
-                <!-- <li v-for="(item,index) in scorelist" @click="goShopdetails">
-                    <div class="list" :class="{'score' : status == 0}">
-                        <div class="score-exchange" v-if="status == 0">积分兑换</div>
-                        <div class="score-box">
-                            <img src="../../assets/images/shop/shop1.png" alt="">
-                            <div class="text-box">
-                                <span>{{ item.name }}</span>
-                                <div class="score-num">{{ item.score}}</div>
-                                <span class="remaining">{{ item.remaining}}</span>
-                            </div>
-                        </div>
-                    </div>
-                </li> -->
-                
-                <li v-for="(item,index) in moneylist" @click="goShopdetails">
-                    <div class="list">
-                        <div class="score-box">
-                            <img src="../../assets/images/shop/shop1.png" alt="">
-                            <div class="text-box">
-                                <span>{{ item.name }}</span>
-                                <div class='money-box'>
-                                    <span class="money-red">{{item.presentprice}}</span>
-                                    <!-- <div class="score-num" style="display:inline-block;">+{{ item.score}}</div> -->
+                <div class="shopList" v-if="scorelist.length!=0&&moneylist.length!=0">
+                    <div class="all-shop">
+                        <!-- <li v-for="(item,index) in scorelist" @click="goShopdetails">
+                            <div class="list" :class="{'score' : status == 0}">
+                                <div class="score-exchange" v-if="status == 0">积分兑换</div>
+                                <div class="score-box">
+                                    <img src="../../assets/images/shop/shop1.png" alt="">
+                                    <div class="text-box">
+                                        <span>{{ item.name }}</span>
+                                        <div class="score-num">{{ item.score}}</div>
+                                        <span class="remaining">{{ item.remaining}}</span>
+                                    </div>
                                 </div>
-                                <span class="remaining">
-                                    <span class="delete">{{ item.orprice}}</span>
-                                    <div class="right">{{ item.pin}}</div> 
-                                </span>
                             </div>
-                        </div>
-                    </div>
-                </li>
+                        </li> -->
+                        
+                        <li v-for="(item,index) in moneylist" @click="goShopdetails">
+                            <div class="list">
+                                <div class="score-box">
+                                    <img src="../../assets/images/shop/shop1.png" alt="">
+                                    <div class="text-box">
+                                        <span>{{ item.name }}</span>
+                                        <div class='money-box'>
+                                            <span class="money-red">{{item.presentprice}}</span>
+                                            <!-- <div class="score-num" style="display:inline-block;">+{{ item.score}}</div> -->
+                                        </div>
+                                        <span class="remaining">
+                                            <span class="delete">{{ item.orprice}}</span>
+                                            <div class="right">{{ item.pin}}</div> 
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
 
-                <div class="clear"></div>
+                        <div class="clear"></div>
+                    </div>
+                    <loading v-if="show"></loading>
+                    <noMore v-if="showNomore"></noMore>
+                </div>
+                <noData v-else :status="noDataStatus" :stateText="noDataText"></noData>
             </div>
         </div>
-
         <!-- <div class="maskTop" v-if="showDialog"></div> -->
     </div>
 </template>
@@ -82,13 +87,19 @@ import settingHeader from '../../components/setting_header'
 import Swiper from '../shop/components/swiper'
 import BScroll from 'better-scroll'
 import maskRight from '../shop/components/maskRight'
+import Loading from '../../components/loading'
+import noMore from '../../components/noMore'
+import noData from '../../components/noData'
 
 export default {
     components: {
         settingHeader,
         Swiper,
         XDialog,
-        maskRight
+        maskRight,
+        Loading,
+        noMore,
+        noData
     },
     data(){
         return {
@@ -133,12 +144,14 @@ export default {
             priceSort: 0,
             obj: null,
             numImg: './static/shop/default.png',
-            numSort: 0
+            numSort: 0,
+            noDataStatus: 0,
+            noDataText: '暂无商品',
         }
     },
     mounted:function(){
         this.init()
-        // this.InitScroll()
+        this.InitScroll()
     },
     created:function(){
         this.filterData();
@@ -195,7 +208,11 @@ export default {
             this.priceImg = './static/shop/default.png'
             this.priceSort = 0;
             let a = this.numSort;
-            a ++;
+            if(a<2){
+                a ++;
+            }else{
+                a--;
+            }
             this.numSort = a;
             if(a == 0){
                 this.numImg = './static/shop/default.png'
@@ -214,7 +231,11 @@ export default {
             this.numImg = './static/shop/default.png'
             this.numSort = 0;
             let a = this.priceSort;
-            a ++;
+            if(a<2){
+                a ++;
+            }else{
+                a--;
+            }
             this.priceSort = a;
             if(a == 0){
                 this.priceImg = './static/shop/default.png'
@@ -239,7 +260,40 @@ export default {
         goShopdetails(){
             this.$router.push({ path: '/shop/shop_details'})
         },
-        
+        InitScroll() {
+            this.$nextTick(() => {
+                if(!this.scroll) {
+                    this.scroll = new BScroll(this.$refs.wrapper2, {
+                        click: true,
+                        scrollY: true,
+                        pullUpLoad: {
+                            // threshold: -30, // 负值是当上拉到超过低部 70px；正值是距离底部距离 时，                    
+                        }
+                    })
+                    this.scroll.on('pullingUp', (pos) => {
+                        this.show = true;
+                        this.LoadData()
+                        this.$nextTick(function() {
+                            this.scroll.finishPullUp();
+                            this.scroll.refresh();
+                        });
+                    })
+                } else {
+                    this.scroll.refresh()
+                }
+            })
+
+        },
+        LoadData() {
+            var _this = this
+            setTimeout(function(){
+                _this.show = false;
+                let obj = [{ name: 'Vivo X21 屏幕指纹版全面...', presentprice: '￥3598' ,orprice: '￥4355', pin: '月销4714', score: '265积分', status: 2},
+                { name: 'Vivo X21 屏幕指纹版全面...', presentprice: '￥3598' ,orprice: '￥4355', pin: '月销4714', score: '265积分', status: 2}];
+                _this.moneylist = _this.moneylist.concat(obj);
+                console.log(_this.moneylist);
+            },3000)
+        },
 
     }
 }
@@ -264,10 +318,13 @@ export default {
         }
     }
 }
-/*.wrapper {
-    height: 100%;
+.wrapper2 {
+    height: 92%;
     overflow: hidden;
-}*/
+    .content{
+        padding-bottom: 0.1rem;
+    }
+}
 /*li:nth-child(odd) .list{
     margin-right: 0.04rem;
 }*/

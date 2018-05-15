@@ -42,7 +42,7 @@
                         <img @click="imgDelete(index)" class="gbx" src="../../assets/images/member/gbx.png"/>
   			    		<input class="upinput" type="file" @change="cone" />
   			    		<div class="bigPic" v-show="[imgList.length ? imgList.length >0 : imgList.length =0]">
-  							<img :src="item">
+  							<img v-lazy="item">
   						</div>
   			    	</div>
 
@@ -169,6 +169,9 @@
 	       		this.imgList.splice(index, 1);
 	        },
 	        changeMoney(money){
+	        	let index=money.lastIndexOf("\￥");
+    			money=parseFloat(money.substring(index+1,money.length));
+    			console.log('money',money)
 	        	var reg = /^\d+(?=\.{0,1}\d+$|$)/;
 	        	if(reg.test(money)){
 		        	let m = parseFloat(money);

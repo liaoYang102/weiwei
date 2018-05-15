@@ -335,9 +335,9 @@ li{
 	.content{
 		clear: both;
 		width: 100%;
-		margin-bottom: 0.2rem;
+		/*margin-bottom: 0.2rem;*/
 		overflow: auto;
-		padding-bottom: 1rem;
+		padding-bottom: 1.22rem;
 		ul{
 			background: #fff;
 			.ul-top{

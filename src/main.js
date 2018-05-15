@@ -59,10 +59,11 @@ Vue.component('radio', Radio)
 Vue.component('x-dialog', XDialog)
 
 Vue.prototype.$http = axios //定义axios组件用法  this.$http(opt).then(fn)
-axios.defaults.baseURL = '/api';
+axios.defaults.baseURL = '/api'
+axios.defaults.withCredentials = true //让ajax携带token
 Vue.config.productionTip = false
 
-
+//组件插件
 import dialog from '@/components/dialog'
 import code from '@/components/code'
 Vue.use(dialog)
@@ -108,9 +109,10 @@ let isPush = false
 let endTime = Date.now()
 let methods = ['push', 'go', 'replace', 'forward', 'back']
 
-document.addEventListener('touchend', () => {
+document.addEventListener('touchend', (e) => {
 	endTime = Date.now()
 })
+
 methods.forEach(key => {
 	let method = router[key].bind(router)
 	router[key] = function(...args) {
@@ -217,7 +219,7 @@ router.afterEach(function(to) {
 // });
 
 /* eslint-disable no-new */
-new Vue({
+Vue.prototype.vm = new Vue({
 	el: '#app',
 	router,
 	store,

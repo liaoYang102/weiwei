@@ -29,27 +29,27 @@
 			var _this = this
 			//全局地址数据
 			_this.$nextTick(function() {
-				_this.$http({
-					url:'app/index.php?i=2&c=entry&m=mx_shop&do=mobile&r=area.getArea',
-					async: false,
-				}).then(function(res) {
-					//					return new Promise((resolve, reject) => {
-					//						resolve(res)
-					//					})
-//					alert(123)
-					_this.list = res.data.result.data
-					
-				},function(res){
-//					alert(res)
-				})
+				_this.$http('/index.php?i=2&c=entry&m=mx_shop&do=mobile&r=area.getArea')
+					.then(function(res) {
+						//					return new Promise((resolve, reject) => {
+						//						resolve(res)
+						//					})
+											console.log(res)
+						_this.list = res.data.result.data
+
+					})
+					.catch(function(res) {
+						if(res instanceof Error) {
+						}
+					})
 				//				data.then(function(res) {
 				//					_this.list = res.data.result.data
-				//				})
+				//				})	
 				
-				_this.$http('app/data_center.cgc_report').then(function(res){
-//					alert(res.status)
+				
+				_this.$http('/index.php?i=2&c=entry&m=mx_shop&do=app&r=data_center.cgc_report').then(function(res){
+//					alert(res.data)
 				})
-			
 			})
 		},
 		methods: {},

@@ -9,7 +9,7 @@
 							<check-icon :value.sync='item.ischeck' @click.native="storecheck(index)" style="width:0.88rem;height:0.88rem;text-align:center;line-height:0.88rem;" class='fl'></check-icon>
 							<div class="fr" style="width:6.62rem;line-height: 0.88rem;border-bottom:1px solid #D8DFF0">
 								<div class="fl">
-									<img :src="item.storeImg" alt="">
+									<img v-lazy="item.storeImg" alt="">
 									<span>{{item.storeName}}</span>
 								</div>
 								<div class="fr edit" @click='edit($event,index)'>编辑</div>
@@ -19,7 +19,7 @@
 							<check-icon :value.sync="children.ischeck" @click.native="shopcheck(index)" style="width:0.88rem;height:2.24rem;text-align:center;line-height:2.24rem;" class='fl'></check-icon>
 							<div class="fr" style="width:6.62rem;padding-bottom:0.2rem;border-bottom:1px solid #D8DFF0;padding-top:0.2rem;">
 								<div class="fl">
-									<img :src="children.childrenImg" alt="">
+									<img v-lazy="children.childrenImg" alt="">
 								</div>
 								<div class="fl shop-content" v-if='item.shopEdit'  @click="goShopDetails">
 									<p class="shop-name">{{children.childrenName}}</p>
@@ -58,7 +58,7 @@
 
 			    <div class="wrap no_shops" v-else>
 		        	<div class="none-data">
-		        		<img :src="imgSrc" alt=""> 
+		        		<img v-lazy="imgSrc" alt=""> 
 		    			<p>{{ status}}</p>
 		        	</div>
 		    		

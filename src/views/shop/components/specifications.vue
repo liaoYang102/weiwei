@@ -6,7 +6,7 @@
 		    		<div class="sp-content">
 		    			<div class="sp-panel">
 		    				<div class="ab-img"><img src="../../../assets/images/shop/close.png" @click="close"></div>
-		    				<img :src="shopList.shopImg">
+		    				<img v-lazy="shopList.shopImg">
 		    				<div class="sp-text">
 		    					<p class="shopPrice">
 									<span class="priceNum">￥{{shopList.shopPrice}}</span> 
@@ -14,26 +14,27 @@
 								</p>
 		    					<div class="sp-gray">库存{{shopList.shopStock}}件</div>
 		    					<div>已选
-		    						<span v-for="item in list3">“{{item}}” </span>
+		    						<span v-for="item in list3" v-if="item !=null">“{{item}}”</span>
 		    					</div>
 		    				</div>
 		    			</div>
 
-		    			<div class="sp-color">
-		    				<div>颜色分类</div>
+		    			<div class="sp-color" v-for="(shop,index) in shopList.list">
+		    				<div>{{shop.spName}}</div>
 		    				<div class="sp-color-li">
-		    					<li class="sp-li-btn" v-for="(item,index) in shopList.list1" :class="{'sp-li-selected':act1==index}" @click="active(index)">{{ item.name}}</li>
+		    					<li class="sp-li-btn" v-for="(item,sIndex) in shop.spList" @click="active(index,sIndex,$event)">{{ item.name}}</li>
+		    					<!--  :class="{'sp-li-selected':act1==index}"  -->
 		    				</div>
 		    			</div>
 
-		    			<div class="sp-color">
+		    			<!-- <div class="sp-color">
 		    				<div>颜色分类</div>
 		    				<div class="sp-color-li">
 		    					<li class="sp-li-btn" v-for="(item,index) in shopList.list2" :class="{'sp-li-selected':act2==index}" @click="active2(index)">{{ item.num}}</li>
 		    				</div>
-		    			</div>
+		    			</div> -->
 
-		    			<div class="sp-buynum" v-if="router != 'shop_cart'">
+		    			<div class="sp-buynum">
 		    				<div class="sp-buyname">购买数量</div>
 		    				<div class="sp-number">
 		    					<div class="minus" @click="minus">-</div>
@@ -56,41 +57,32 @@ export default {
 		confirm: Function,
 		shopList: {
 	        type: Object,
-	        default: {
-				shopImg:"./static/shop/shop4.png",
-				shopPrice:"3598",
-				shopAccount:"266",
-				shopStock:"7282",
-				// list: [
-				// 	{
-				// 		spName: '颜色分类',
-				// 		spList: [
-				// 			{ name: '粉色尊贵版0'},
-				// 			{ name: '粉色尊贵版1'},
-				// 			{ name: '粉色尊贵版2'},
-				// 			{ name: '粉色尊贵版3'}
-				// 		]
-				// 	},
-				// 	{
-				// 		spName: '颜色分类',
-				// 		spList: [
-				// 			{ name: '1'},
-				// 			{ name: '2'},
-				// 			{ name: '3'}
-				// 		]
-				// 	}
-				// ],
-				list1:[
-					{ name: '粉色尊贵版0'},
-					{ name: '粉色尊贵版1'},
-					{ name: '粉色尊贵版2'},
-					{ name: '粉色尊贵版3'}
-				],
-				list2:[
-					{ num: '1'},
-					{ num: '2'},
-					{ num: '3'}
-				]
+	        default: function(){
+	        	return {
+	        		shopImg:"./static/shop/shop4.png",
+					shopPrice:"3598",
+					shopAccount:"266",
+					shopStock:"7282",
+					list: [
+						{
+							spName: '颜色分类',
+							spList: [
+								{ name: '粉色尊贵版0'},
+								{ name: '粉色尊贵版1'},
+								{ name: '粉色尊贵版2'},
+								{ name: '粉色尊贵版3'}
+							]
+						},
+						{
+							spName: '颜色分类',
+							spList: [
+								{ name: '1'},
+								{ name: '2'},
+								{ name: '3'}
+							]
+						}
+					]
+	        	}
 			}
 	    }
 	},
@@ -106,28 +98,40 @@ export default {
 	mounted() {
 	},
 	methods: {
-		active:function (index) {
-	        this.act1 = index;
-	        let option = this.shopList.list1[index].name;
-	        this.list3[0] = option;
+		// 单选
+		active:function (index,sIndex,e) {
+			let option;
+			if (e.target.className.indexOf("sp-li-selected") == -1) {
+	            e.target.className = "sp-li-btn sp-li-selected"; //切换按钮样式
+	            var obox=e.target.parentNode;
+	            var lis=obox.children;
+	            option = this.shopList.list[index].spList[sIndex].name;
+	            for(var i=0;i<lis.length;i++){
+	                if(lis[i]!= e.target){
+	                  lis[i].className = "sp-li-btn"
+	                }
+	            }
+	        } else {
+	        	option = null;
+	            e.target.className = "sp-li-btn";//切换按钮样式
+	        }
+	        this.$set(this.list3,index,option)
 	    },
-	    active2:function (index) {
-	        this.act2 = index;
-	        let option = this.shopList.list2[index].num;
-	        this.list3[1] = option;
-	    },
+	    // 加
 	    add:function(){
 	    	this.num++;
 	    },
+	    // 减
 	    minus: function(){
 	    	this.num--;
 	    	if(this.num <= 1){
 	    		this.num = 1;
 	    	}
 	    },
+	    // 关闭
 	    close: function(){
 	    	this.show1 = false
-	    },
+	    }
 	}
 }	
 </script>
