@@ -1,5 +1,5 @@
 <template>
-	<section style="background: #fff;color: #1A2642;" class="pastwrap">
+	<section style="background: #E32921;color: #1A2642;" class="pastwrap">
 		<settingHeader :title="title"></settingHeader>
 
 		<div class="item">
@@ -13,43 +13,68 @@
       			</video-player>
 	        </div>
 	     </div>
-		<div class="show-down">
-			<group>
-				<cell is-link :border-intent="false" :arrow-direction="showContent ? 'up' : 'down'" @click.native="showContent = !showContent">
-					<div>
-	                    <span class="wz1">国美白云店第1期(已揭晓)</span>
-	                    <span style="letter-spacing:0.02rem;color: #90A2C7;">奖金池共￥800,000</span>
-	                </div>
-				</cell>
-				<div v-if="showContent">
-			    </div>
-			</group>
-		</div>
 
-		<div class="imgList">
-			<swiper :options="swiperOption" class="box1">
-		       	<swiper-slide v-for="(item,index) in list">
-		       		<div class="award0">
-                        <img src="../../assets/images/draw/medals.png" alt="">
-                        <div class="wz-red">{{ item.bonus}}</div>
-                        <div class="wz-black">{{item.award}}</div>
-                        <div class="wz-gray">{{item.number}}</div>
-                    </div>
-		       	</swiper-slide>
-		    </swiper>
-		</div>
 
-		<div class="wz-period">抽奖期数</div>
 
-		<div class="period">
-			<swiper :options="swiperOption1">
-		       	<swiper-slide v-for="(item,index) in data3" >
-		       		<div class="btn0" :class="{'btn-active':act3==index}" @click="periodActive(index)">
-                       {{item}}
-                    </div>
-		       	</swiper-slide>
-		    </swiper>
-		</div>
+	    <div class="container">
+ 			<div class="show-down">
+ 				<group>
+ 					<cell>
+ 						<div class="title">
+ 							<div class="wz1">
+ 								<div class="left">国美白云店第1期(已揭晓)</div>
+ 		                    	<div class="period left">1564期</div>
+ 							</div>
+ 		                    <span style="letter-spacing:0.02rem;color: #666666;">奖金池共￥800,000</span>
+ 		                </div>
+ 					</cell>
+ 				</group>
+ 			</div>
+
+ 			<!-- <div class="imgList">
+ 				<swiper :options="swiperOption" class="box1">
+ 			       	<swiper-slide v-for="(item,index) in list">
+ 			       		<div class="award0">
+ 	                        <img src="../../assets/images/draw/medals.png" alt="">
+ 	                        <div class="wz-red">{{ item.bonus}}</div>
+ 	                        <div class="wz-black">{{item.award}}</div>
+ 	                        <div class="wz-gray">{{item.number}}</div>
+ 	                    </div>
+ 			       	</swiper-slide>
+ 			    </swiper>
+ 			</div> -->
+ 			<div class="award-set">
+ 				<div class="title">奖品设置</div>
+ 				<ul class="ul-set">
+ 					<li v-for="i in 4">
+ 						<div class="flex">
+ 							<div style="flex: 1">一等奖</div>
+ 							<div>5000<span class="small">元</span></div>
+ 						</div>
+ 						<div class="left num">30名</div>
+ 					</li>
+ 				</ul>
+ 			</div>
+
+ 			<div class="clear"></div>
+
+ 			<div class="wz-periods">
+				<div class="wz-period">抽奖期数</div>
+
+				<div class="period">
+					<swiper :options="swiperOption1">
+				       	<swiper-slide v-for="(item,index) in data3" >
+				       		<div class="btn0" :class="{'btn-active':act3==index}" @click="periodActive(index)">
+		                       {{item}}
+		                    </div>
+				       	</swiper-slide>
+				    </swiper>
+				</div>
+ 			</div>
+
+ 			
+	    </div>
+		
 
 		<!-- 中奖人员 -->
         <div class="win-person">
@@ -259,6 +284,114 @@
 		height: 8rem;
 		overflow: hidden;
 	}
+	.left{
+		float: left;
+	}
+	.container{
+		width: 94.7%;
+		background-color: #fff;
+		margin: 0.2rem;
+		.title{
+			width: 100%;
+			padding: 0.4rem 0 0.2rem 0;
+			.wz1{
+				width: 100%;
+			    color: #333333;
+			    font-size: 0.36rem;
+			    .period{
+			    	color: #fff;
+			    	font-size: 0.26rem;
+			    	background:linear-gradient(-121.4deg,#AF51FF,#9013FE);
+			    	border-radius: 0.04rem;
+			    	text-align: center;
+			    	padding:0.05rem 0.07rem; 
+			    }
+			}
+		}
+		.award-set{
+			padding-top:0.39rem;
+			margin: 0 0.1rem;
+			border-bottom: 1px solid #E6E6E6;
+			overflow: hidden;
+			padding-bottom: 0.3rem;
+			.title{
+				color: #333333;
+				font-size: 0.36rem;
+				padding-left: 0.19rem;
+			}
+			.ul-set{
+				margin-top: 0.3rem;
+				padding-left: 0.19rem;
+				li{
+					list-style: none;
+			    	background:linear-gradient(-121.4deg,#FF5C34,#FF2A4B);
+			    	padding: 0.1rem 0.09rem;
+			    	margin-right: 0.2rem;
+			    	margin-bottom: 0.1rem;
+			    	float: left;
+			    	color: #fff;
+			    	font-size: 0.26rem;
+			    	border-radius: 0.04rem; 
+			    	text-align: center;
+			    	display: flex;
+			    	.flex{
+			    		display: flex;
+			    		flex: 1;
+			    		div:nth-child(1){
+			    			line-height: 0.64rem;
+			    			margin-right: 0.1rem;
+			    		}
+			    		div:nth-child(2){
+			    			color: #FFEEB3;
+			    			font-size: 0.42rem;
+			    			.small{
+			    				font-size: 0.2rem;
+			    			}
+			    		}
+			    	}
+			    	
+			    	.num{
+			    		padding-left: 0.15rem;
+			    		margin: auto ;
+			    		margin-left: 0.2rem;
+			    		border-left: 1px solid #fff;
+			    	}
+				}
+			}
+		}
+
+		.wz-periods{
+			padding-top:0.4rem;
+			.period{
+				border-bottom: 0.01rem solid #D8DFF0;
+				padding-bottom: 0.2rem;
+				.swiper-slide {
+				    width: 1rem;
+				    margin-left: 0.2rem;
+				}
+				/* 抽奖期数*/
+				.btn0{
+				    width: 0.8rem;
+				    height: 0.81rem;
+				    border-radius: 50%;
+				    border: solid 1px #D8DFF0;
+				    text-align: center;
+				    color: #D8DFF0;
+				    font-size: 0.3rem;
+				    line-height: 0.8rem;
+				}
+				.btn-active{
+				    border: solid 1px #FF5365;
+				    color: #FF5365;
+				}
+			}
+			.wz-period{
+			    margin: 0.3rem 0 0.2rem 0.2rem;
+			    font-size: 0.32rem;
+			}
+		}
+		
+	}
 	.imgList{
 		background: #fff;
 		padding-top: 0.1rem;
@@ -296,33 +429,7 @@
 	    font-size: 0.2rem;
 	    line-height: 0.1rem;
 	}
-	.period{
-		border-bottom: 0.01rem solid #D8DFF0;
-		padding-bottom: 0.2rem;
-		.swiper-slide {
-		    width: 1rem;
-		    margin-left: 0.2rem;
-		}
-		/* 抽奖期数*/
-		.btn0{
-		    width: 0.8rem;
-		    height: 0.81rem;
-		    border-radius: 50%;
-		    border: solid 1px #D8DFF0;
-		    text-align: center;
-		    color: #D8DFF0;
-		    font-size: 0.3rem;
-		    line-height: 0.8rem;
-		}
-		.btn-active{
-		    border: solid 1px #FF5365;
-		    color: #FF5365;
-		}
-	}
-	.wz-period{
-	    margin: 0.3rem 0 0.2rem 0.2rem;
-	    font-size: 0.32rem;
-	}
+	
 	.win-person{
 		border-bottom: 0.01rem solid #D8DFF0;
 		
@@ -344,12 +451,7 @@
 		    border-bottom: solid 0.05rem #FF5365;
 		}
 	} 
-	.wz1{
-	    color: #FF5365;
-	    font-size: 0.4rem;
-	    display: block;
-	    margin: 0.1rem 0 0.2rem 0;
-	}
+	
 
 	.personlist{
 	   width: 100%;

@@ -89,7 +89,7 @@
  .store{
  	background-color: #F5F8F9;
  	.shop{
- 		border-top: 1px solid #E1E1E1;
+ 		/*border-top: 1px solid #E1E1E1;*/
  		background-color: #fff;
 		margin-bottom: 0.2rem;
 		padding: 0.25rem 0 0.25rem 0.5rem;

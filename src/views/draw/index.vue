@@ -41,21 +41,30 @@
 		        </div>
 				
                 <div class="drawList">
-                	<p class="wonderful">往期视频</p>
+                	<p class="wonderful">精彩推荐</p>
                     <ul class="commodity">
-                    	<li v-for="(item,index) in drawList" @click="$router.push({path: '/draw/pastevents'})">
-                    		<div class="img">
-								<img src="../../assets/images/draw/lottery_index7.png" alt="">
-							</div>
-							<div class="bonusPool">奖金池{{ item.money}}</div>
-							<div class="container">
-								<p class="lucky">{{ item.title}}</p>
-								<p class="num">{{ item.num}}人参与</p>
-							</div>
-                    	</li>
-                    	<div class="clear"></div>
+                    	<group  v-for="(item,index) in drawList">
+                    		<cell>
+		                    	<li @click="$router.push({path: '/draw/pastevents'})">
+		                    		<div class="left img">
+		                    			<img src="../../assets/images/draw/lottery_index7.png" alt="">
+		                    			<div class="arrow">
+		                    				<img src="../../assets/images/draw/lottery_index8.png" alt="" >
+		                    			</div>
+		                    		</div>
+		                    		
+		                    		<div class="left container">
+		                    			<p class="lucky">{{ item.title}}</p>
+		                    			<p class="num">参加人数:{{ item.num}}</p>
+		                    			<p class="bonusPool">奖金池:<span>￥{{ item.money}}</span></p>
+		                    		</div>
+		                    		<div class="clear"></div>
+		                    	</li>
+                    		</cell>
+                    	</group>
                     </ul>
-                    <div class="more" @click="$router.push({path: '/draw/review'})"><span>查看更多></span></div>
+                    <loading v-if="show"></loading>
+                    <noMore v-if="showNomore"></noMore>
                 </div>
                 <div class="clear"></div>
 			</div>
@@ -74,7 +83,7 @@
 		},
 		data(){
 			return {
-				show:true,
+				show:false,
 				showNomore: false,
 				drawList: [
 					{ title: '第1263期周末幸运大抽奖', num: '1000000', money: '80000'},
@@ -104,8 +113,7 @@
 							}
 						})
 						this.scroll.on('pullingUp', (pos) => {
-							// this.show = true;
-							// this.LoadData()
+							this.LoadData()
 							this.$nextTick(function() {
 								this.scroll.finishPullUp();
 								this.scroll.refresh();
@@ -119,7 +127,15 @@
 			},
 			goPastevents(){
 				this.$router.push({ path: '/draw/pastevents'})
-			}
+			},
+			LoadData() {
+				var _this = this
+				_this.show = true
+				setTimeout(function(){
+					_this.show = false;
+					_this.showNomore = true;
+				},3000)
+			},
 		}
 	}
 </script>
@@ -158,8 +174,8 @@
 		      padding-bottom: 0.2rem;
 		      border-right: 1px solid #eee;
 		      .money {
-		        font-size: .64rem;
-		        font-weight: 700;
+		        font-size: .6rem;
+		        font-weight: 500;
 		        color: #1A2642;
 		        margin-top: 0.12rem;
 		      }
@@ -235,87 +251,70 @@
 	background: #fff;
 	border-radius: 0.08rem;
 	padding-bottom: 0.42rem;
+	padding-top: 0.36rem;
 	.wonderful {
-	  padding-top: 0.36rem;
-	  font-size: 0.36rem;
-	  color: #1A2642;
 	  text-align: center;
-	  margin-bottom: 0.32rem;
-	}
-	li:nth-child(odd){
-		margin-right: 0.1rem;
+	  width: 100%;
+	  font-size: 0.36rem;
+	  color: #333;
 	}
 	li {
-		position: relative;
-		width: 49%;
-		float: left;
-		.img{
-		    width: 100%;
-		    border-radius: 0.06rem;
-		    img{
-		    	width: 100%;
-		    	border-radius: 0.06rem;
-		    }
-		}
-
-		.bonusPool{
-			position: absolute;
-			top: 0;
-			left: 25%;
-			width:50%;
-			background:linear-gradient(94.5deg,rgba(254,91,52,1),rgba(255,41,75,1));
-			border-radius:0px 0px 8px 8px;
-			color: #fff;
-			font-size: 0.24rem;
-			padding: 1px 0.1rem;
-		}
-	  /*.left{
-	  	float: left;
-	  }
-	  
-	  .arrow {
-	    position: absolute;
-	    width: 0.33rem;
-	    left: 0.8rem;
-	    top: 0.6rem;
+	  padding-top: 0.29rem;
+	  position: relative;
+	  padding-bottom: 0.3rem;
+	  margin-right: 0.24rem;
+	  border-bottom: 1px solid #E6E6E6;
+	  .img{
+	  	position: relative;
+	    width: 2.42rem;
+	    height: 1.5rem;
 	    img{
 	    	width: 100%;
+	    	height: 100%;
 	    }
-	  }*/
-	  	.container {
-		  	position: absolute;
-		  	bottom: 0;
-		  	left: 0.11rem;
-		  	color: #fff;
-		    .lucky {
-		      font-size: .28rem;
-		    }
-		    .num {
-		      font-size: .2rem;
-		      margin-bottom: 0.1rem;
-		    }
-	    /*.bonusPool {
+	  }
+	  .left{
+	  	float: left;
+	  }
+	  .arrow {
+	    width: 0.33rem;
+	    position: absolute;
+	    bottom:0.1rem;
+	    right: 0.1rem;
+	    img{
+	    	width: 100%;
+	    	height: 100%;
+	    }
+	  }
+	  .container {
+	    margin-left: 0.3rem;
+	    line-height: .36rem;
+	    .lucky {
+	      font-size: .3rem;
+	      color: #1A2642;
+	      margin-bottom: 0.48rem;
+	      margin-top: 0.05rem;
+	    }
+	    .num {
 	      font-size: .26rem;
-	      color: #90A2C7;
+	      color: #666666;
+	    }
+	    .bonusPool {
+	      font-size: .26rem;
+	      color: #666666;
 	      span {
-	        color: #FF5365;
+	        color: #E32921;
+	        font-size: 0.3rem;
 	      }
-	    }*/
-	  	}
-	}
-	.more{
-		width: 100%;
-		text-align: center;
-		color: #A0A0A0;
-		font-size: 0.24rem;
-		margin-top: 0.43rem;
+	    }
+	  }
 	}
 }
 </style>
 
 <style lang="less">
 .commodity{
-	padding: 0 0.2rem;
+	padding: 0 0.3rem;
 	.weui-cells{
 		margin-top: 0;
 	}
@@ -330,6 +329,7 @@
 	}
 	.weui-cell__ft{
 		text-align: left;
+		width: 100%;
 	}
 	.weui-cell_access .weui-cell__ft{
 		width: 100%;

@@ -23,7 +23,7 @@
 			    		<img @click="imgDelete(index)" class="gbx" src="../../assets/images/member/gbx.png"/>
 			    		<input class="upinput" type="file" @change="cone" />
 			    		<div class="bigPic" v-show="[imgList.length ? imgList.length >0 : imgList.length =0]">
-							<img :src="item">
+							<img v-lazy="item">
 						</div>
 			    	</div>
 

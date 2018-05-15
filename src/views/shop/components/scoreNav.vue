@@ -109,7 +109,7 @@ li{
 		}
 		.score-btn{
 			width: 40%;
-			border: 0.02rem solid #FFFFFF;
+			border: 1px solid #FFFFFF;
 			border-radius: 1rem;
 			font-size: 0.24rem;
 			padding: 0.05rem 0.1rem 0.05rem 0.25rem;

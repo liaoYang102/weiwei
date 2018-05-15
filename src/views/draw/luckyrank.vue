@@ -1,16 +1,23 @@
 <template>
 	<section>
-		<drawHeader :title="title" ></drawHeader>
+		<!-- <drawHeader :title="title" ></drawHeader> -->
 
-		<div class="top">
+		<!-- <div class="top">
             <div class="btn-large">
                	<button-tab>
 	               	<button-tab-item selected @on-item-click="showNumber">中奖次数</button-tab-item>
 	               	<button-tab-item @on-item-click="showMoney">中奖累计金额</button-tab-item>
                	</button-tab>
             </div>
+        </div> -->
+        <div class="">
+        	<tab :line-width="3" :scroll-threshold="4">
+		      	<tab-item selected @on-item-click="onItemClick">中奖次数</tab-item>
+		      	<tab-item @on-item-click="onItemClick">中奖累计金额</tab-item>
+		    </tab>
         </div>
-
+        
+	    <!-- #FF273A -->
         <!-- 排行前3名 -->
         <div class="former-three">
             <div class="rank-left">
