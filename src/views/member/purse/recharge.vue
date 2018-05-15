@@ -31,7 +31,7 @@
 						<p>
 							<img :src="item.img" />
 						</p>
-						<p>{{item.name}}</p>
+						<p style="color:#666666">{{item.name}}</p>
 					</div>
 				</div>
 			</div>
@@ -114,9 +114,7 @@
 				]
 			}
 		},
-		created() {
-			this.$store.state.page.footerFalg = true
-		},
+		created() {},
 		mounted() {},
 		methods: {
 			changeMoney(index) {
@@ -131,16 +129,23 @@
 			change(value, label) {
 				console.log('change:', value, label)
 			},
-			pay(){
-				console.log(this.$code)
+			pay() {
 				this.$code.show({
-					type:'pay',
-					showCode:true,
-					codeChange:function(){
-						console.log(123)
-					},
-					recapture:function(){
-						
+					type: 'pay',
+					showCode: true,
+					change() {
+						this.$dialog.show({
+							type: 'success',
+							headMessage: '提示',
+							message: '支付成功',
+							buttons: ['我知道了'],
+							canel() {
+								console.log(123)
+							},
+							confirm() {
+								console.log(123)
+							}
+						})
 					}
 				})
 			}

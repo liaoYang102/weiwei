@@ -3,7 +3,7 @@
 		<settingHeader :title="title"></settingHeader>
 		<div class="content">
 			<div class="login-box">
-				<img src="../../../static/member/login-img.png" />
+				<img :src="'./static/member/login-img.png'" />
 			</div>
 			<group gutter="0" class="input-div">
 				<!--<cell class="input-item" title="国家" value="中国" is-link value-align="right"></cell>-->
@@ -15,7 +15,7 @@
 			</group>
 			<!--			<div class="tip">每个手机号只能作为一个账号注册</div>-->
 			<div class="tip">
-				<x-button class="add-btn" @click.native="submit" :show-loading="showLoading" :disabled="isClick">{{btnText}}</x-button>
+				<x-button class="add-btn" @click.native="submit" :show-loading="showLoading">{{btnText}}</x-button>
 			</div>
 			<div class="login-re">
 				<span @click="resetPass">忘记密码?</span>
@@ -61,11 +61,8 @@
 				if(this.isReg) {
 					if(_this.phone == '17520439845' && _this.password == '123456') {
 						this.showLoading = true
-						_this.$vux.loading.show({
-							text: '登陆中'
-						})
 						setTimeout(() => {
-							_this.$vux.loading.hide()
+							_this.showLoading = false
 						}, 2000)
 					} else if(_this.phone.length == 11 && _this.phone != '17520439845') {
 						_this.$dialog.show({
@@ -92,12 +89,12 @@
 							position: 'middle',
 							text: '验证码错误'
 						})
-					}else{
+					} else {
 						this.$vux.toast.show({
 							width: '50%',
 							type: 'text',
 							position: 'middle',
-							text: '登录成功'
+							text: '注册成功'
 						})
 					}
 				}

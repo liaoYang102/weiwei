@@ -15,24 +15,28 @@
 		<div class="couponList">
 			<div class="wrapper" :class="{'top46':hShow}" ref="wrapper">
 				<div class="content">
-					<div class="rollOne bgImgThree" v-for="item in couponList">
-						<router-link to="/member/coupon/detail">
-							<div class="left">
-								<p>{{item.title}}</p>
-								<p class="mt20">{{item.tip}}</p>
-								<p>{{item.time}}</p>
-							</div>
-						</router-link>
-						<div class="right fontOne"><span>{{item.type}}</span>
-							<a href="#">
-								<div class="rightBtn mt20 btnImgThree">
-									<span>立即使用</span>
+					<div v-if="couponList.length>0">
+						<div class="rollOne bgImgThree" v-for="item in couponList">
+							<router-link to="/member/coupon/detail">
+								<div class="left">
+									<p>{{item.title}}</p>
+									<p class="mt20">{{item.tip}}</p>
+									<p>{{item.time}}</p>
 								</div>
-							</a>
+							</router-link>
+							<div class="right fontOne"><span>{{item.type}}</span>
+								<a href="#">
+									<div class="rightBtn mt20 btnImgThree">
+										<span>立即使用</span>
+									</div>
+								</a>
+							</div>
 						</div>
-					</div>
 
-					<Loading v-if="show"> </Loading>
+						<Loading v-if="show"> </Loading>
+						<Nomore v-if="showNo"></Nomore>
+					</div>
+					<noData v-if="couponList.length == 0" :status="2" stateText="暂无数据"></noData>
 				</div>
 			</div>
 		</div>
@@ -57,6 +61,8 @@
 	import { Tab, TabItem, Masker, Drawer, Spinner, XHeader } from 'vux'
 	import settingHeader from '../../../components/setting_header'
 	import Loading from '../../../components/loading'
+	import Nomore from '../../../components/noMore'
+	import noData from '../../../components/noData'
 	export default {
 		data() {
 			return {
@@ -69,7 +75,9 @@
 				title: '我的优惠券',
 				hShow: '',
 				show9: false,
-				couponList: [{
+				showNo: false,
+				couponList: [
+				{
 						title: '购物券1',
 						tip: '仅限威伐光门店使用',
 						time: '2018.03.29-2018.04.08',
@@ -155,11 +163,11 @@
 							click: true,
 							scrollY: true,
 							pullUpLoad: {
-								threshold: -30                
+								threshold: -30
 							}
 						})
 						this.scroll.on('pullingUp', (pos) => {
-							
+
 							this.LoadData()
 							this.$nextTick(function() {
 								this.scroll.finishPullUp();
@@ -174,10 +182,23 @@
 			},
 			LoadData() {
 				let _this = this
-				_this.show = true;			//this.couponList = this.couponList.concat(this.couponList)
-				setTimeout(function() {
-					_this.show = false;
-				}, 1000)
+				console.log(_this.couponList.length)
+				if(_this.couponList.length <= 11) {
+					_this.show = true
+					_this.showNo = false
+					_this.couponList = _this.couponList.concat({
+						title: '购物券1',
+						tip: '仅限威伐光门店使用',
+						time: '2018.03.29-2018.04.08',
+						type: '满减券'
+					})
+					setTimeout(function() {
+						_this.show = false
+					}, 1500)
+				} else {
+					_this.show = false
+					_this.showNo = true
+				}
 			}
 		},
 		components: {
@@ -188,36 +209,38 @@
 			Masker,
 			Spinner,
 			Loading,
-			XHeader
+			XHeader,
+			Nomore,
+			noData
 		}
 	}
 </script>
 
 <style lang="less">
 	.twoClass {
-			display: flex;
-			flex-wrap: wrap;
-			padding: 0.2rem 0;
-			.type-item {
-				width: 25%;
-				padding: 0.08rem 0.25rem;
-				text-align: center;
-				box-sizing: border-box;
-				span {
-					display: inline-block;
-					width: 100%;
-					height: 0.5rem;
-					line-height: 0.5rem;
-					background: #eaeaea;
-					border-radius: 2px;
-					font-size: 0.20rem;
-				}
-				.twoActive {
-					background-color: #336fff;
-					color: white;
-				}
+		display: flex;
+		flex-wrap: wrap;
+		padding: 0.2rem 0;
+		.type-item {
+			width: 25%;
+			padding: 0.08rem 0.25rem;
+			text-align: center;
+			box-sizing: border-box;
+			span {
+				display: inline-block;
+				width: 100%;
+				height: 0.5rem;
+				line-height: 0.5rem;
+				background: #eaeaea;
+				border-radius: 2px;
+				font-size: 0.20rem;
+			}
+			.twoActive {
+				background-color: #336fff;
+				color: white;
 			}
 		}
+	}
 	
 	.couponindex-box {
 		height: 100%;
@@ -233,7 +256,7 @@
 			}
 			.edit-btn {
 				color: rgba(144, 162, 199, 1);
-				img{
+				img {
 					width: 0.3rem;
 					height: 0.3rem;
 					vertical-align: middle;
@@ -266,10 +289,6 @@
 				bottom: 0px;
 				overflow: hidden;
 				width: 100%;
-				.vux-loadmore {
-					display: inline-block;
-					width: 100%;
-				}
 			}
 			.bgImgThree {
 				background: url(../../../assets/images/user/rollBg4.png) no-repeat;

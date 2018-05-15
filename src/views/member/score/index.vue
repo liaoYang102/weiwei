@@ -27,66 +27,61 @@
 				<span class="fl">日期</span>
 				<span class="fr">收益</span>
 			</p>
-			<ul>
-				<router-link to="/member/score/log">
-					<li>
-						<span class="fl">03月21日</span>
-						<span class="fr">220</span>
-					</li>
-				</router-link>
-				<li>
-					<span class="fl">03月21日</span>
-					<span class="fr">220</span>
-				</li>
-				<li>
-					<span class="fl">03月21日</span>
-					<span class="fr">220</span>
-				</li>
-				<li>
-					<span class="fl">03月21日</span>
-					<span class="fr">220</span>
-				</li>
-				<li>
-					<span class="fl">03月21日</span>
-					<span class="fr">220</span>
-				</li>
-				<li>
-					<span class="fl">03月21日</span>
-					<span class="fr">220</span>
-				</li>
-				<li>
-					<span class="fl">03月21日</span>
-					<span class="fr">220</span>
-				</li>
-				<li>
-					<span class="fl">03月21日</span>
-					<span class="fr">220</span>
-				</li>
-				<li>
-					<span class="fl">03月21日</span>
-					<span class="fr">220</span>
+			<ul v-if="isData.length>0">
+				<li v-for="item in isData">
+					<span class="fl">{{item.date}}</span>
+					<span class="fr">{{item.money}}</span>
 				</li>
 			</ul>
+			<noData v-if="isData.length == 0" :status="2" stateText="暂无数据"></noData>
 		</div>
 	</section>
 </template>
 
 <script>
-	import BScroll from 'better-scroll'
-	import Loading from '../../../components/loading'
 	import settingHeader from '../../../components/setting_header'
+	import noData from '../../../components/noData'
 	export default {
 		data() {
 			return {
-				title: '我的积分'
+				title: '我的积分',
+				isData: [{
+						date: '03月21日',
+						money: '220'
+					},
+					{
+						date: '03月22日',
+						money: '220'
+					},
+					{
+						date: '03月23日',
+						money: '220'
+					},
+					{
+						date: '03月24日',
+						money: '220'
+					},
+					{
+						date: '03月25日',
+						money: '220'
+					},
+					{
+						date: '03月26日',
+						money: '220'
+					},
+					{
+						date: '03月26日',
+						money: '220'
+					},
+				]
 			}
 		},
 		components: {
 			settingHeader,
-			Loading
+			noData
 		},
 		created() {
-			this.$store.state.page.footerFalg = true
+
 		},
 		mounted() {
 
@@ -101,9 +96,6 @@
 	.score-box {
 		height: 100%;
 		background-color: #fff;
-		/*.vux-loadmore {
-			display: none;
-		}*/
 		.head {
 			width: 100%;
 			height: 3.2rem;

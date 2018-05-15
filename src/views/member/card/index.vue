@@ -22,16 +22,20 @@
 					<div class="box2">
 						<div class="wrapper1" ref="wrapper1">
 							<div class="content">
-								<div class="card-list">
-									<div class="card-ltem" :class="[item.type ==1 ? 'b-bg':'y-bg']" v-for="(item,index) in cardList">
-										<div class="card-f">{{item.store}}</div>
-										<div class="card-m">
-											<div style="text-align: right;">{{item.tip}}</div>
-											<div>{{item.typename}}</div>
+								<div v-if="cardList">
+									<div class="card-list">
+										<div class="card-ltem" :class="[item.type ==1 ? 'b-bg':'y-bg']" v-for="(item,index) in cardList">
+											<div class="card-f">{{item.store}}</div>
+											<div class="card-m">
+												<div style="text-align: right;">{{item.tip}}</div>
+												<div>{{item.typename}}</div>
+											</div>
 										</div>
 									</div>
+									<Loading v-if="show"></Loading>
+									<Nomore v-if="showNo"></Nomore>
 								</div>
-								<Loading v-if="onFetching"></Loading>
+								<noData v-if="cardList.length == 0" :status="2" stateText="暂无数据"></noData>
 							</div>
 						</div>
 					</div>
@@ -55,7 +59,7 @@
 										</div>
 									</router-link>
 								</div>
-								<Loading v-if="onFetching"></Loading>
+								<Loading v-if="show2"></Loading>
 							</div>
 						</div>
 					</div>
@@ -104,12 +108,16 @@
 <script>
 	import { Badge, Cell, Group, Masker, Drawer, Tab, TabItem, Swiper, SwiperItem, XHeader } from 'vux'
 	import Loading from '../../../components/loading'
+	import Nomore from '../../../components/noMore'
+	import noData from '../../../components/noData'
 	import BScroll from 'better-scroll'
 	export default {
 		data() {
 			return {
 				title: '全部卡包',
-				onFetching: false,
+				show: false,
+				show2: false,
+				showNo:false,
 				drawerShow: false,
 				typeItemActive: 0,
 				cardLook: 0,
@@ -118,7 +126,8 @@
 				data1: '',
 				twoIndex: '',
 				typeText: '全部',
-				cardList: [{
+				cardList: [
+				{
 						store: '威伐光番禺门店',
 						type: '1',
 						tip: '9折',
@@ -213,10 +222,23 @@
 				})
 			},
 			LoadData() {
-				let _this = this;
-				setTimeout(function() {
-					_this.onFetching = false;
-				}, 3500)
+				var _this = this
+				if(_this.cardList.length <= 11) {
+					_this.show = true
+					_this.showNo = false
+					_this.cardList = _this.cardList.concat({
+						store: '威伐光番禺门店',
+						type: '0',
+						tip: '8折',
+						typename: 'VIP会员卡'
+					})
+					setTimeout(function() {
+						_this.show = false
+					}, 1500)
+				} else {
+					_this.show = false
+					_this.showNo = true
+				}
 			},
 			LoadData2() {
 				let _this = this;
@@ -258,7 +280,9 @@
 			Swiper,
 			SwiperItem,
 			Loading,
-			XHeader
+			XHeader,
+			Nomore,
+			noData
 		}
 	}
 </script>

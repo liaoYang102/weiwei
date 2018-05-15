@@ -7,7 +7,7 @@
 		</div>
 		<div class="g-list">
 			<group :gutter='0'>
-				<cell class="item" primary="content" is-link>
+				<cell class="item" primary="content" is-link @click.native="toReward">
 					<div class="left">
 						<p>累计通用积分</p>
 						<p>1000.00</p>
@@ -18,11 +18,11 @@
 		<div class="bottom">
 			<div class="title">
 				<div>积分来源</div>
-				<div @click="$router.push({path:'/member/score/strategy'})">积分规则<img :src="thao" alt="" /></div>
+				<div @click="$router.push({path:'/member/score/strategy'})">积分攻略<img :src="thao" alt="" /></div>
 			</div>
 			<div class="b-list">
 				<group :gutter='0'>
-					<cell class="item" primary="content" is-link v-for="item in bList">
+					<cell class="item" primary="content" is-link v-for="item in bList" @click.native="link(item)">
 						<div class="left">
 							<img :src="item.img" alt="" />
 							<div>
@@ -77,7 +77,25 @@
 
 		},
 		mounted() {},
-		methods: {},
+		methods: {
+			toReward(){
+				this.$router.push({
+					name: 'reward',
+					params:{
+						title:'通用积分'
+					}
+				})
+			},
+			link(item){
+				this.$router.push({
+					name: 'reward',
+					params:{
+						num:item.num,
+						title:item.tip
+					}
+				})
+			}
+		},
 		components: {
 			settingHeader,
 			Cell,
@@ -87,7 +105,7 @@
 </script>
 <style lang="less">
 	.currency-box {
-		font-family: MicrosoftYaHei;
+		font-family: PingFangSC-Medium;
 		.top {
 			height: 3.2rem;
 			display: flex;
@@ -122,6 +140,7 @@
 						width: 0.25rem;
 						height: 0.25rem;
 						margin-left: 0.12rem;
+						vertical-align: middle;
 					}
 				}
 			}

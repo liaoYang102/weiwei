@@ -1,14 +1,14 @@
 <template>
 	<section id="appIndex">
 		<div class="wrapper" ref="wrapper">
-			<div class="content">
+			<div class="content" style="padding-bottom: 0.2rem">
 				<swiper :options="swiperOption" class="swiper">
 					<swiper-slide v-for="item in demoList">
-						<img :src="item">
+						<img v-lazy="item">
 					</swiper-slide>
 					<div class="swiper-pagination" slot="pagination"></div>
 				</swiper>
-				<div class="swiperTop">
+				<!--<div class="swiperTop">
 					<span class="position fl">
 						<img src="../assets/images/index/position.png" alt="">
 						<span class="city">{{address}}</span>
@@ -17,7 +17,7 @@
 						<input type="text" placeholder='搜索你想要的' />
 						<img src="../assets/images/index/search.png" alt="">
 					</div>
-				</div>
+				</div>-->
 				<div class="notice">
 					<img src="../assets/images/index/notice.png" alt="">
 					<swiper :options="noticeOption" class="noticeswiper">
@@ -26,14 +26,14 @@
 								厉害了！超强拼假省钱攻略
 							</p>
 							<p class="noticeText">
-								<!--<span class="label">活动</span>--> 
+								<!--<span class="label">活动</span>-->
 								美国人的棚子情节
 							</p>
 						</swiper-slide>
 					</swiper>
 				</div>
 				<div class="lottery">
-					<img src="../assets/images/index/group.png" alt="">
+					<img class="auto-img" src="../assets/images/index/group.png" alt="">
 					<div class="info">
 						<p class="infoText">
 							<img src="../assets/images/index/time.png" alt="" class="fl">
@@ -45,7 +45,7 @@
 						<div class="avatar">
 							<div class="row" v-for="(item,index) in num">
 								<div class="persol">
-									<img :src="'./static/index/'+index+'.png'" alt="" class="fl">
+									<img v-lazy="'./static/index/'+index+'.png'" alt="" class="fl">
 									<div class="fl">
 										<p class="persolName">{{item}}</p>
 										<p class="persolPrice">5000元</p>
@@ -57,7 +57,7 @@
 					</div>
 				</div>
 				<router-link to="">
-					<img style="width: 100%;height: auto;display: block;" src="../../static/images/IMG_3224 Copy@2x.png" alt="" />
+					<img class="auto-img" v-lazy="'../../static/images/IMG_3224 Copy@2x.png'" alt="" />
 				</router-link>
 				<div class="plate">
 					<div class="item" v-for="item in plateList">
@@ -73,13 +73,13 @@
 					</div>
 				</div>
 				<router-link to="/share">
-					<img style="width: 100%;height: auto;display: block;" src="../../static/images/jiam.png" alt="" />
+					<img class="auto-img" v-lazy="'../../static/images/jiam.png'" alt="" />
 				</router-link>
 				<div class="alliance">
 					<card>
 						<div slot="content" class="card-demo-flex">
 							<div class="item" :class="{'vux-1px-r':index != 2}" v-for="(item,index) in allianceList">
-								<img :src="item.img" />
+								<img v-lazy="item.img" />
 								<span>{{item.title}}</span>
 							</div>
 						</div>
@@ -87,51 +87,51 @@
 				</div>
 				<div class="pro-allbox" v-for="item in proList">
 					<div class="titlebox">{{item.title}}</div>
-					<img style="width: 100%;height: auto;display: block;" :src="item.img" />
+					<img class="auto-img" v-lazy="item.img" />
 					<div class="pro-box">
 						<div :class="{'vux-1px-r':index != 2}" v-for="(i,index) in item.pro">
 							<p>{{i.name}}</p>
 							<p :class="[{'red':i.color == 'red'},{'yollow':i.color == 'yollow'},{'blue':i.color == 'blue'}]">{{i.tip}}</p>
-							<img :src="i.img" alt="" />
+							<img v-lazy="i.img" alt="" />
 						</div>
 					</div>
-					<img style="width: 100%;height: auto;display: block;" v-if="item.twoimg" :src="item.twoimg" alt="" />
+					<img class="auto-img" v-if="item.twoimg" v-lazy="item.twoimg" alt="" />
 				</div>
 				<div class="pro-allbox">
 					<div class="titlebox">明星商家</div>
-					<img style="width: 100%;height: auto;display: block;" src="../../static/images/store1.png" alt="" />
+					<img class="auto-img" v-lazy="'../../static/images/store1.png'" alt="" />
 					<div class="store-box">
 						<div class="item-box">
 							<div>
 								<p>国美</p>
 								<p>满100减30</p>
 							</div>
-							<img src="../../static/images/store2.png" alt="" />
+							<img v-lazy="'../../static/images/store2.png'" alt="" />
 						</div>
 						<div class="item-box">
 							<div>
 								<p>红豆</p>
 								<p>满20减10</p>
 							</div>
-							<img src="../../static/images/store3.png" alt="" />
+							<img v-lazy="'../../static/images/store3.png'" alt="" />
 						</div>
 						<div class="item-box">
 							<div>
 								<p>红星美凯龙</p>
 								<p>双日立减5元</p>
 							</div>
-							<img src="../../static/images/store4.png" alt="" /></div>
+							<img v-lazy="'../../static/images/store4.png'" alt="" /></div>
 						<div class="item-box">
 							<div>
 								<p>魅族手机</p>
 								<p>双日立减5元</p>
 							</div>
-							<img src="../../static/images/store5.png" alt="" />
+							<img v-lazy="'../../static/images/store5.png'" alt="" />
 						</div>
 					</div>
-					<div class="titlebox">
+					<!--<div class="titlebox">
 						<span>查看附件商家</span>
-					</div>
+					</div>-->
 				</div>
 				<!--<div class="pro-allbox">
 					<div class="titlebox">猜你喜欢</div>
@@ -157,7 +157,7 @@
 	export default {
 		data() {
 			return {
-				num: ['郁先生','孔先生','杨先生','汤女士','朱先生','杜先生','赵先生','尹先生','顾先生','昂女士','金女士','张先生','赵先生','邹先生','张女士'],
+				num: ['郁先生', '孔先生', '杨先生', '汤女士', '朱先生', '杜先生', '赵先生', '尹先生', '顾先生', '昂女士', '金女士', '张先生', '赵先生', '邹先生', '张女士'],
 				address: '',
 				swiperOption: {
 					pagination: {
@@ -279,54 +279,56 @@
 								img: './static/images/pro6.png'
 							}
 						]
-					}, {
-						title: '千万家庭健康计划',
-						img: './static/images/jk.png',
-						twoimg: './static/images/wfg.png',
-						pro: [{
-								name: '立即体验',
-								tip: '高品质 良心价',
-								img: './static/images/pro7.png',
-								color: 'yollow'
-							},
-							{
-								name: '领取优惠券',
-								tip: '商家体验卷',
-								img: './static/images/pro8.png',
-								color: 'red'
-							},
-							{
-								name: '招商加盟',
-								tip: '千万家庭健康',
-								img: './static/images/pro9.png',
-								color: 'blue'
-							}
-						]
-					}, {
-						title: '积分购买',
-						img: './static/images/jf1.png',
-						pro: [{
-								name: 'RK 机械键盘',
-								tip: '竞技游戏有线键盘',
-								img: './static/images/jf2.png'
-							},
-							{
-								name: '斗牛犬音箱',
-								tip: '重低音立体声',
-								img: './static/images/jf3.png'
-							},
-							{
-								name: 'Polo男士包',
-								tip: '轻盈包身大容量',
-								img: './static/images/jf4.png'
-							}
-						]
-					}
+					},
+					//										{
+					//						title: '千万家庭健康计划',
+					//						img: './static/images/jk.png',
+					//						twoimg: './static/images/wfg.png',
+					//						pro: [{
+					//								name: '立即体验',
+					//								tip: '高品质 良心价',
+					//								img: './static/images/pro7.png',
+					//								color: 'yollow'
+					//							},
+					//							{
+					//								name: '领取优惠券',
+					//								tip: '商家体验卷',
+					//								img: './static/images/pro8.png',
+					//								color: 'red'
+					//							},
+					//							{
+					//								name: '招商加盟',
+					//								tip: '千万家庭健康',
+					//								img: './static/images/pro9.png',
+					//								color: 'blue'
+					//							}
+					//						]
+					//					}, 
+					//					{
+					//						title: '积分购买',
+					//						img: './static/images/jf1.png',
+					//						pro: [{
+					//								name: 'RK 机械键盘',
+					//								tip: '竞技游戏有线键盘',
+					//								img: './static/images/jf2.png'
+					//							},
+					//							{
+					//								name: '斗牛犬音箱',
+					//								tip: '重低音立体声',
+					//								img: './static/images/jf3.png'
+					//							},
+					//							{
+					//								name: 'Polo男士包',
+					//								tip: '轻盈包身大容量',
+					//								img: './static/images/jf4.png'
+					//							}
+					//						]
+					//					}
 				]
 			}
 		},
 		created() {
-			this.loc()
+			//			this.loc()
 		},
 		mouted() {
 
@@ -390,6 +392,11 @@
 		background-color: #F5F6FA;
 		overflow-x: hidden;
 		padding-bottom: 1rem;
+		.auto-img {
+			width: 100%;
+			height: auto;
+			display: block
+		}
 		/*banner顶部*/
 		.swiperTop {
 			z-index: 1000;

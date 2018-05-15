@@ -11,8 +11,8 @@
 						</uploader>-->
 					</div>
 				</cell>
-				<cell class="list-item" title="用户昵称">
-					<x-input class="input-div" ref="name" v-model="name" :value="name" text-align="right" :show-clear="false" placeholder="未设置" type="text" @on-change="nameChange" @on-enter="ok"></x-input>
+				<cell class="list-item" title="用户昵称" is-link link="/member/setting/nickname">
+					<!--<x-input class="input-div" ref="name" v-model="name" :value="name" text-align="right" :show-clear="false" placeholder="未设置" type="text" @on-change="nameChange" @on-enter="ok"></x-input>-->
 				</cell>
 			</group>
 			<group>
