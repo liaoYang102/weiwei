@@ -196,6 +196,7 @@
 					}
 				})
 			},
+			// 显示日期选择器
 			showDate(){
 				this.delShow = false;
 				this.footerShow = false;
@@ -204,6 +205,8 @@
 				if(this.dateImg == './static/shop/date.png'){
 					this.dateImg = './static/shop/dateActive.png'
 				}
+				var content = document.getElementsByClassName('content')[0];
+				content.style.paddingBottom = '0';
 			},
 			// 点击删除图标
 			del(){
@@ -225,6 +228,7 @@
 				var content = document.getElementsByClassName('content')[0];
 				content.style.paddingBottom = '0.94rem';
 			},
+			// 单选
 			changeLog(){
 				//商品选择
 				var idList = []
@@ -279,8 +283,8 @@
 	        	this.dateImg = './static/shop/date.png'
 	        	console.log('date', this.showDatetime)
 	        },
+	        // 点击删除按钮
 	        delData(){
-	        	// alert(123);
 	        	this.footerShow = false;
 	        	this.delShow = false;
 	        	this.visibility = false;
@@ -297,8 +301,6 @@
 	    	    var transform = document.getElementsByClassName('content')[0];
 	    	    transform.style.transform = 'translate(0px, 0px) translateZ(0px)';
 	    	    console.log(transform);
-	    	    // var regRule =/\s(\d|-?\d+)/;
-	    	    // var reg = Math.abs(transform.match(regRule)[0]);
 	        }
 		},
 		watch: {

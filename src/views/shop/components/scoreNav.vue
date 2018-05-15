@@ -14,12 +14,15 @@
 		<div class="colorful-top" v-else></div>
 		<div class="score-list">
 			<li class="score-li" v-for="(item, index) in scorelist" @click="goShopdetails">
-				<div class="img"><img src="../../../assets/images/shop/1.png"></div>
+				<div class="img" v-if="title == '信用积分购'"><img src="../../../assets/images/shop/1.png"></div>
+				<div class="img" v-else><img src="../../../assets/images/shop/shop01.png"></div>
 				<div class="li-text">
 					<span>{{ item.title}}</span>
 					<div v-if="title == '七彩云南'" class="pb">
-						<div class="red">{{ item.score}}</div>
-						<div class="coupons">优惠券</div>
+						<!-- <div class="red"></div> -->
+						<!-- <div class="coupons">信用积分</div> -->
+						<span class="red">{{ item.score}}</span>
+						<span class="coupons">信用积分</span>
 					</div>
 					<div v-else>
 						<div class="li-red">{{item.score}}+{{item.money}}</div>
@@ -119,11 +122,11 @@ li{
 		.score-rules{
 			position: absolute;
 			top: 0.76rem;
-			left: 80.7%;
+			right: 0;
 			font-size: 0.24rem;
 			margin-bottom: 0.31rem;
 			img{
-				width: 18%;
+				width: 16%;
 				vertical-align:middle;
 				margin-left: 0.03rem;
 				margin-right: 0.1rem;
@@ -151,6 +154,7 @@ li{
 			.img{
 				vertical-align: middle;
 				text-align: center;
+				padding: 0.12rem;
 				img{
 					width: 100%;
 				}
@@ -159,23 +163,24 @@ li{
 				padding-left: 0.12rem;
 				padding-bottom: 0.32rem;
 				.pb{
-					margin-bottom: 0.32rem;
+					padding-top: 0.12rem;
 					.red{
-						float: left;
+						/*float: left;*/
 						color: #F23030;
-						margin-top: 0.12rem;
-						margin-right: 0.22rem;
+						font-size: 0.24rem;
+						/*margin-top: 0.12rem;
+						margin-right: 0.22rem;*/
 					}
 					.coupons{
-						float: right;
-						background: rgba(56,137,255,0.20);
+						/*float: left;*/
+						/*background: rgba(56,137,255,0.20);*/
 						font-size: 0.2rem;
-						color: #3889FF;
-						margin-top: 0.13rem;
-						padding-left: 0.07rem;
-						padding-right: 0.06rem;
+						color: #61719F;
+						/*margin-top: 0.13rem;*/
+						/*padding-left: 0.1rem;*/
+						/*padding-right: 0.06rem;
 						padding-top: 0.02rem;
-						margin-right: 0.12rem;
+						margin-right: 0.12rem;*/
 					}
 				}
 				

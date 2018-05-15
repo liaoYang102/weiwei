@@ -33,7 +33,8 @@
 									<p>{{item.name}}</p>
 									<p>￥{{item.money}}</p>
 									<div class="btn-box">
-										<!-- <span>加入购物车</span> --> <span>立即购买</span>
+										<!-- <span>加入购物车</span> --> 
+										<router-link to="/shop/confirm"><span>立即购买</span></router-link>
 									</div>
 								</div>
 							</div>

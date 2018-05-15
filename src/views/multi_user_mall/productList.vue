@@ -3,9 +3,9 @@
        
         <tab :line-width='0' id="showPanel">
             <tab-item selected @on-item-click="showPanel">
-              {{ tabItem}} <img :src="downImg" alt="" width="13%">
+              {{ tabItem}} <!-- <img :src="downImg" alt="" width="13%"> -->
             </tab-item>
-            <tab-item class='vux-center' @on-item-click="onItemClick">销量</tab-item>
+            <tab-item class='vux-center' @on-item-click="onItemClick">销量<img :src="numImg" alt="" width="12%"></tab-item>
             <tab-item @on-item-click="sort">
                 <span>价格</span>
                 <img :src="priceImg" alt="" width="12%">
@@ -72,7 +72,7 @@
             </div>
         </div>
 
-        <div class="maskTop" v-if="showDialog"></div>
+        <!-- <div class="maskTop" v-if="showDialog"></div> -->
     </div>
 </template>
 
@@ -104,7 +104,7 @@ export default {
                 { title: '积分兑', status: 1}, 
                 { title: '积分购', status: 2}
             ],
-            showDialog: false,
+            // showDialog: false,
             sMaskRight: false,
             act1: 0,
             shopTitle: '',
@@ -131,7 +131,9 @@ export default {
             topImg: './static/shop/topicon.png',
             priceImg: './static/shop/default.png',
             priceSort: 0,
-            obj: null
+            obj: null,
+            numImg: './static/shop/default.png',
+            numSort: 0
         }
     },
     mounted:function(){
@@ -147,29 +149,33 @@ export default {
                 this.tabItem = this.$route.params.title
             }
         },
+        // 综合
         showPanel: function(){
             this.priceImg = './static/shop/default.png'
-            if(this.downImg == './static/shop/down.png'){
-                this.downImg = './static/shop/down1.png'
-            }
-            if(this.showDialog == false){
-                this.showDialog = true;
-            }
-            let top = parseInt(document.getElementById('showPanel').offsetTop);
-            var transform = document.getElementsByClassName('content')[0].style.transform;
-            console.log(transform);
-            var regRule =/\s(\d|-?\d+)/;
-            var reg = Math.abs(transform.match(regRule)[0]);
-            console.log(reg,top);
-            let distance = parseInt(top+90-reg);
-            let mask = document.getElementById('panel').parentNode.parentNode;
-            let children = mask.children;
-            for(var i=0;i<children.length;i++){
-                children[i].style.top = distance+"px";
-            }
-            let maskTop = document.getElementsByClassName('maskTop')[0];
-            console.log(maskTop);
-            maskTop.style.height = distance+"px";
+            this.numImg = './static/shop/default.png'
+            this.numSort = 0;
+            this.priceSort = 0;
+            // if(this.downImg == './static/shop/down.png'){
+            //     this.downImg = './static/shop/down1.png'
+            // }
+            // if(this.showDialog == false){
+            //     this.showDialog = true;
+            // }
+            // let top = parseInt(document.getElementById('showPanel').offsetTop);
+            // var transform = document.getElementsByClassName('content')[0].style.transform;
+            // console.log(transform);
+            // var regRule =/\s(\d|-?\d+)/;
+            // var reg = Math.abs(transform.match(regRule)[0]);
+            // console.log(reg,top);
+            // let distance = parseInt(top+90-reg);
+            // let mask = document.getElementById('panel').parentNode.parentNode;
+            // let children = mask.children;
+            // for(var i=0;i<children.length;i++){
+            //     children[i].style.top = distance+"px";
+            // }
+            // let maskTop = document.getElementsByClassName('maskTop')[0];
+            // console.log(maskTop);
+            // maskTop.style.height = distance+"px";
 
         },
         // select: function(obj,i){
@@ -177,30 +183,46 @@ export default {
         //     this.showDialog = false;
         //     this.tabItem = obj.title;
         // },
+        // 筛选
         onMenuClick: function() {
-            this.showDialog = false;
+            // this.showDialog = false;
             this.$refs.xioaqiang.show1 = true;
             this.$refs.xioaqiang.InitScroll()
-            this.downImg = './static/shop/down.png'
-            this.priceImg = './static/shop/default.png'
         },
+        // 销量
         onItemClick: function() {
-            this.showDialog = false;
+            this.downImg = './static/shop/down.png'
             this.priceImg = './static/shop/default.png'
-            this.downImg = './static/shop/down.png'
+            this.priceSort = 0;
+            let a = this.numSort;
+            a ++;
+            this.numSort = a;
+            if(a == 0){
+                this.numImg = './static/shop/default.png'
+            }else{
+                this.numImg = './static/shop/ascending.png'
+                if(a == 2){
+                    this.numImg = './static/shop/descending.png'
+                }
+            }
+            console.log('--', this.numSort)
         },
+        // 价格
         sort(){
-            this.showDialog = false;
-            this.downImg = './static/shop/down.png'
+            // this.showDialog = false;
+            // this.downImg = './static/shop/down.png'
+            this.numImg = './static/shop/default.png'
+            this.numSort = 0;
             let a = this.priceSort;
             a ++;
             this.priceSort = a;
             if(a == 0){
                 this.priceImg = './static/shop/default.png'
-            }else if(a%2 != 0){
-                this.priceImg = './static/shop/ascending.png'
             }else{
-                this.priceImg = './static/shop/descending.png'
+                this.priceImg = './static/shop/ascending.png'
+                if(a == 2){
+                    this.priceImg = './static/shop/descending.png'
+                }
             }
             console.log('--', this.priceSort)
         },

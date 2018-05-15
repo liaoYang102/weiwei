@@ -64,13 +64,15 @@
 					</group>
 
 					<group>
-						<cell title="规格">
-							<div class="pr" @click="showMask">
-								<span>
-									{{content}}
-								</span>
-							</div>
-						</cell>
+						<div @click="showMask">
+							<cell title="规格">
+								<div class="pr">
+									<span>
+										{{content}}
+									</span>
+								</div>
+							</cell>
+						</div>
 					</group>
 
 					<div class="comments">
