@@ -57,7 +57,7 @@
 					</div>
 				</div>
 				<router-link to="">
-					<img class="auto-img" v-lazy="'../../static/images/IMG_3224 Copy@2x.png'" alt="" />
+					<img class="auto-img" v-lazy="'/static/images/IMG_3224 Copy@2x.png'" alt="" />
 				</router-link>
 				<div class="plate">
 					<div class="item" v-for="item in plateList">
@@ -73,7 +73,7 @@
 					</div>
 				</div>
 				<router-link to="/share">
-					<img class="auto-img" v-lazy="'../../static/images/jiam.png'" alt="" />
+					<img class="auto-img" v-lazy="'/static/images/jiam.png'" alt="" />
 				</router-link>
 				<div class="alliance">
 					<card>
@@ -99,34 +99,34 @@
 				</div>
 				<div class="pro-allbox">
 					<div class="titlebox">明星商家</div>
-					<img class="auto-img" v-lazy="'../../static/images/store1.png'" alt="" />
+					<img class="auto-img" v-lazy="'/static/images/store1.png'" alt="" />
 					<div class="store-box">
 						<div class="item-box">
 							<div>
 								<p>国美</p>
 								<p>满100减30</p>
 							</div>
-							<img v-lazy="'../../static/images/store2.png'" alt="" />
+							<img v-lazy="'/static/images/store2.png'" alt="" />
 						</div>
 						<div class="item-box">
 							<div>
 								<p>红豆</p>
 								<p>满20减10</p>
 							</div>
-							<img v-lazy="'../../static/images/store3.png'" alt="" />
+							<img v-lazy="'/static/images/store3.png'" alt="" />
 						</div>
 						<div class="item-box">
 							<div>
 								<p>红星美凯龙</p>
 								<p>双日立减5元</p>
 							</div>
-							<img v-lazy="'../../static/images/store4.png'" alt="" /></div>
+							<img v-lazy="'/static/images/store4.png'" alt="" /></div>
 						<div class="item-box">
 							<div>
 								<p>魅族手机</p>
 								<p>双日立减5元</p>
 							</div>
-							<img v-lazy="'../../static/images/store5.png'" alt="" />
+							<img v-lazy="'/static/images/store5.png'" alt="" />
 						</div>
 					</div>
 					<!--<div class="titlebox">
