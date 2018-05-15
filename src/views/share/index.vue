@@ -209,6 +209,9 @@
 	import {swiper,swiperSlide } from 'vue-awesome-swiper'
 	import 'swiper/dist/css/swiper.css'
 	import settingHeader from '../../components/setting_header'
+
+	import mainApp from '../../global/global.js'
+
 	export default {
 		data() {
 			return {
@@ -244,6 +247,10 @@
 			XButton,
 			swiper,
 			swiperSlide
+		},
+		created:function(){
+			/*var data='2018-05-10'
+			console.log(mainApp.frDateTimehp.getDateTimesTamp(data));*/
 		},
 		methods:{
 			showProduct(){

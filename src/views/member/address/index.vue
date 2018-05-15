@@ -3,27 +3,29 @@
 		<settingHeader :title="title"></settingHeader>
 		<div class="wrapper" ref="wrapper" :class="{'top46':hShow==false}">
 			<div class="content">
-
-				<div class="list" v-for="(item,index) in list">
-					<div class="top">
-						<div class="pro">
-							<span>{{item.name}}</span>
-							<span>{{item.phone}}</span>
+				<div v-if="list.length>0">
+					<div class="list" v-for="(item,index) in list">
+						<div class="top">
+							<div class="pro">
+								<span>{{item.name}}</span>
+								<span>{{item.phone}}</span>
+							</div>
+							<p>{{item.address}}</p>
 						</div>
-						<p>{{item.address}}</p>
+						<div class="bottom">
+							<div @click="ischange(index)">
+								<check-icon :value.sync="item.isdefault">设置为默认地址</check-icon>
+							</div>
+							<div>
+								<router-link to="/member/address/edit"><span>编辑</span></router-link>
+								<span @click="deleteAddress">删除</span>
+							</div>
+						</div>
 					</div>
-					<div class="bottom">
-						<div @click="ischange(index)">
-							<check-icon :value.sync="item.isdefault">设置为默认地址</check-icon>
-						</div>
-						<div>
-							<router-link to="/member/address/edit"><span>编辑</span></router-link>
-							<span @click="deleteAddress">删除</span>
-						</div>
-					</div>
+					<Loading v-if="show"></Loading>
+					<Nomore v-if="showNo"></Nomore>
 				</div>
-				<Loading v-if="show"></Loading>
-
+				<noData v-if="list.length == 0" :status="2" stateText="暂无数据"></noData>
 			</div>
 		</div>
 
@@ -61,6 +63,8 @@
 	import { Scroller, CheckIcon, XButton } from 'vux'
 	import settingHeader from '../../../components/setting_header'
 	import Loading from '../../../components/loading'
+	import Nomore from '../../../components/noMore'
+	import noData from '../../../components/noData'
 	export default {
 		data() {
 			return {
@@ -68,6 +72,7 @@
 				demo1: false,
 				show: false,
 				hShow: false,
+				showNo: false,
 				list: [{
 					name: '张广',
 					phone: '18520496787',
@@ -101,8 +106,7 @@
 				}]
 			}
 		},
-		created() {
-			//判断是否微信端
+		created() { //判断是否微信端
 			var ua = navigator.userAgent.toLowerCase();
 			var isWeixin = ua.indexOf('micromessenger') != -1;
 			if(isWeixin) {
@@ -154,21 +158,28 @@
 
 			},
 			LoadData() {
-				let _this = this
-				this.list = this.list.concat({
-					name: '张广',
-					phone: '18520496787',
-					address: '广州市番禺区橘树北街43号',
-					isdefault: false
-				}, {
-					name: '张广',
-					phone: '18520496787',
-					address: '广州市番禺区橘树北街43号',
-					isdefault: false
-				})
-				setTimeout(function() {
-					_this.show = false;
-				}, 5000)
+				var _this = this
+				if(_this.list.length <= 11) {
+					_this.show = true
+					_this.showNo = false
+					_this.list = _this.list.concat({
+						name: '张广',
+						phone: '18520496787',
+						address: '广州市番禺区橘树北街43号',
+						isdefault: false
+					}, {
+						name: '张广',
+						phone: '18520496787',
+						address: '广州市番禺区橘树北街43号',
+						isdefault: false
+					})
+					setTimeout(function() {
+						_this.show = false
+					}, 1500)
+				} else {
+					_this.show = false
+					_this.showNo = true
+				}
 			},
 			ischange(i) {
 				var _this = this
@@ -183,7 +194,9 @@
 			CheckIcon,
 			XButton,
 			Scroller,
-			Loading
+			Loading,
+			Nomore,
+			noData
 		}
 	}
 </script>

@@ -16,6 +16,7 @@ export default {
 				$code.showCode = true
 				$code.type = obj.type
 				$code.codeChange = obj.codeChange
+				$code.change = obj.change
 			},
 			hide(){
 				$code.showCode = false
@@ -28,7 +29,5 @@ export default {
 		}
 		
 		Vue.prototype.$code = Vue.$code
-		
-		console.log(Vue.$code)
 	}
 }

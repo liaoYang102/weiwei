@@ -14,7 +14,6 @@
 						</div>
 					</div>
 				</div>
-
 			</x-dialog>
 		</div>
 
@@ -151,6 +150,7 @@
 			width: 73%;
 			max-width: 73%;
 			background-color: rgba(255, 255, 255, 0);
+			z-index: 111111111111111111111111;
 		}
 	}
 </style>

@@ -58,6 +58,8 @@
 	.cardDetail-box {
 		background-color: white;
 		font-family: MicrosoftYaHei;
+		height: 100%;
+		overflow: hidden;
 		.btn {
 			position: fixed;
 			width: 100%;
@@ -70,7 +72,8 @@
 			color: rgba(255, 255, 255, 1);
 		}
 		.b-w {
-			margin: 0.24rem 0.24rem 0 0.24rem;
+			padding: 0 0.24rem 0 0.24rem;
+			position: relative;
 			.top {
 				display: flex;
 				align-items: center;
@@ -146,6 +149,21 @@
 					}
 				}
 			}
+		}
+		.b-w:before {
+			content: " ";
+			position: absolute;
+			left: 0;
+			top: 0;
+			right: 0;
+			height: 1px;
+			border-top: 1px solid #C7C7C7;
+			color: #D9D9D9;
+			-webkit-transform-origin: 0 0;
+			transform-origin: 0 0;
+			-webkit-transform: scaleY(0.5);
+			transform: scaleY(0.5);
+			left: 0px;
 		}
 	}
 </style>

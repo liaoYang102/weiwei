@@ -7,7 +7,7 @@
 		</div>
 		<div class="g-list">
 			<group :gutter='0' class="b-no">
-				<cell class="item" primary="content" is-link link="/member/earnings/record">
+				<cell class="item" primary="content" is-link @click.native="toRecord">
 					<div class="left">
 						<p>累计信用积分</p>
 						<p>1000.00</p>
@@ -18,7 +18,7 @@
 		<div class="bottom">
 			<div class="title">
 				<div>积分来源</div>
-				<div @click="$router.push({path:'/member/score/strategy'})">积分规则<img :src="thao" alt="" /></div>
+				<div @click="$router.push({path:'/member/score/strategy'})">积分攻略<img :src="thao" alt="" /></div>
 			</div>
 			<div class="b-list">
 				<group :gutter='0'>
@@ -77,6 +77,14 @@
 		},
 		mounted() {},
 		methods: {
+			toRecord(){
+				this.$router.push({
+					name: 'record',
+					params:{
+						title:'信用积分'
+					}
+				})
+			},
 			link(item){
 				this.$router.push({
 					name: 'reward',
@@ -96,7 +104,7 @@
 </script>
 <style lang="less">
 	.currency-box {
-		font-family: MicrosoftYaHei;
+		font-family: PingFangSC-Medium;
 		.top {
 			height: 3.2rem;
 			display: flex;

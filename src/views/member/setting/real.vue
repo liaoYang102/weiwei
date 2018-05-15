@@ -153,7 +153,9 @@
 						message: '',
 						buttons: ['我知道了'],
 						delay: 2000,
-						canel() {},
+						canel() {
+							console.log(123)
+						},
 						confirm() {
 
 						}

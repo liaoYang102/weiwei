@@ -11,7 +11,7 @@ import './assets/icons_font/iconfont.css'
 import './style/global.css'
 import 'swiper/dist/css/swiper.css'
 import './config/wy_rem'
-import { Group, DatetimeRange, Cell, Tab, TabItem, CellBox, XHeader, Scroller, LoadMore, TransferDom, Confirm, Popup, Toast, Swiper, InlineXNumber, CheckIcon, CellFormPreview, XSwitch, XNumber, Badge, Previewer, Timeline, TimelineItem, Rater, XTextarea, Radio } from 'vux'
+import { Group, DatetimeRange, Cell, XDialog ,Tab, TabItem, CellBox, XHeader, Scroller, LoadMore, TransferDom, Confirm, Popup, Toast, Swiper, InlineXNumber, CheckIcon, CellFormPreview, XSwitch, XNumber, Badge, Previewer, Timeline, TimelineItem, Rater, XTextarea, Radio } from 'vux'
 import FastClick from 'fastclick'
 import VueVideoPlayer from 'vue-video-player'
 import 'video.js/dist/video-js.css'
@@ -56,12 +56,14 @@ Vue.component('timeline-item', TimelineItem)
 Vue.component('rater', Rater)
 Vue.component('x-textarea', XTextarea)
 Vue.component('radio', Radio)
+Vue.component('x-dialog', XDialog)
 
 Vue.prototype.$http = axios //定义axios组件用法  this.$http(opt).then(fn)
-axios.defaults.baseURL = '/api';
+axios.defaults.baseURL = '/api'
+axios.defaults.withCredentials = true //让ajax携带token
 Vue.config.productionTip = false
 
-
+//组件插件
 import dialog from '@/components/dialog'
 import code from '@/components/code'
 Vue.use(dialog)
@@ -107,9 +109,10 @@ let isPush = false
 let endTime = Date.now()
 let methods = ['push', 'go', 'replace', 'forward', 'back']
 
-document.addEventListener('touchend', () => {
+document.addEventListener('touchend', (e) => {
 	endTime = Date.now()
 })
+
 methods.forEach(key => {
 	let method = router[key].bind(router)
 	router[key] = function(...args) {
@@ -216,7 +219,7 @@ router.afterEach(function(to) {
 // });
 
 /* eslint-disable no-new */
-new Vue({
+Vue.prototype.vm = new Vue({
 	el: '#app',
 	router,
 	store,

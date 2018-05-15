@@ -18,6 +18,7 @@ import team from '@/views/member/team/index'
 import info from '@/views/member/info/index'
 import infodata from '@/views/member/info/data'
 import changeCode from '@/views/member/setting/changeCode'
+import nickname from '@/views/member/setting/nickname'
 import about from '@/views/member/setting/about'
 import real from '@/views/member/setting/real'
 import realoading from '@/views/member/setting/realoading'
@@ -38,6 +39,8 @@ import earningscurrency from '@/views/member/earnings/currency'
 import earningscredit from '@/views/member/earnings/credit'
 import record from '@/views/member/earnings/record'
 import reward from '@/views/member/earnings/reward'
+import earnings_detail from '@/views/member/earnings/detail'
+import rule from '@/views/member/earnings/rule'
 import logs from '@/views/member/earnings/logs'
 import profit from '@/views/member/earnings/profit'
 import strategy from '@/views/member/score/strategy'
@@ -166,6 +169,13 @@ const memberModule = [{
 		component: address_edit,
 		meta: {
 			title: '修改地址'
+		}
+	},{
+		path: '/member/setting/nickname',
+		name: 'nickname',
+		component: nickname,
+		meta: {
+			title: '修改用户昵称'
 		}
 	},
 	{
@@ -348,6 +358,20 @@ const memberModule = [{
 		component: reward,
 		meta: {
 			title: '奖励'
+		}
+	}, {
+		path: '/member/earnings/detail',
+		name: 'earnings_detail',
+		component: earnings_detail,
+		meta: {
+			title: '积分详情'
+		}
+	},{
+		path: '/member/earnings/rule',
+		name: 'rule',
+		component: rule,
+		meta: {
+			title: '积分规则'
 		}
 	},
 	{
