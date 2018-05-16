@@ -8,8 +8,8 @@
 				<div class="name">
 					<div><span>优衣库官方旗舰店</span></div>
 					<div class="positionImg">
-						<img src="../../assets/images/multi_user_mall/position.png">
-						<span class="small">距离正佳广场0.2km</span>
+						<!-- <img src="../../assets/images/multi_user_mall/position.png"> -->
+						<!-- <span class="small">距离正佳广场0.2km</span> -->
 						<img src="../../assets/images/multi_user_mall/right.png" class="rightImg">
 					</div>
 				</div>
