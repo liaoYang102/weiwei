@@ -359,7 +359,7 @@
 		}
 	}
 	.wrapper{
-		height: 92%;
+		height: 92.1%;
 		overflow: hidden;
 		.content{
 			
