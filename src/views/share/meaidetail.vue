@@ -67,10 +67,12 @@
 <script>
 	import settingHeader from '../../components/setting_header'
 	import BScroll from 'better-scroll'
+	// import wx from 'weixin-js-sdk'
 	import Loading from '../../components/loading'
 	import {swiper,swiperSlide } from 'vue-awesome-swiper'
 	import 'swiper/dist/css/swiper.css'
 	import noMore from '../../components/noMore'
+
 
 	export default {
 		data() {
@@ -192,7 +194,10 @@
 			},
 			searchDetail(){
 				this.$router.push('/share/pintroduce')
-			}
+			},
+			/*erweima(){
+				alert(9)
+			}*/
 			
 		}
 	}
