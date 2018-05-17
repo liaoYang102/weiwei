@@ -1,6 +1,6 @@
 <template>
 	<div class="info-box">
-		<settingHeader :title="title"></settingHeader>
+		<setting-header :title="title"></setting-header>
 		<div class="content-head">
 			<div class="address"><i class="iconfont icon-dizhi1"></i>广州
 				<div class="search fr">
@@ -24,8 +24,42 @@
 		        <div class="swiper-pagination" slot="pagination"></div>
 		     </swiper>
 		</div>
+		<div class="nav-brief">
+			<div class="main">
+				<div class="left">
+					<span>威伐光介绍</span>
+				</div>
+				<div class="right">
+					<div class="cont">
+						<span>治疗指引</span>
+					</div>
+					<div class="cont bg">
+						<span>应用案例</span>
+					</div>
+				</div>
+			</div>
+			<button class="nav-btn">立即体验</button>
+		</div>
+		<img src="../../assets/images/share/partner-bg.png" class="image"/>
+		<div class="partner">
+			<div class="partner-item">
+				<img src="../../assets/images/share/partner02.png"/>
+				<h2>联营企业</h2>
+				<span>(合伙人)</span>
+			</div>
+			<div class="partner-item">
+				<img src="../../assets/images/share/partner01.png"/>
+				<h2>设备投资商</h2>
+				<span>(合伙人)</span>
+			</div>
+			<div class="partner-item">
+				<img src="../../assets/images/share/partner03.png"/>
+				<h2>系统服务商</h2>
+				<span>(合伙人)</span>
+			</div>
+		</div>
 		<div class="wrap">
-			<div class="nav clearfix">
+			<!-- <div class="nav clearfix">
 				<ul class="fl">
 					<a href="javascript:;">
 						<li @click="showProduct">
@@ -58,11 +92,11 @@
 						</li>
 					</a>
 				</ul>
-			</div>
-			
-			<div class="banner">
+			</div> -->
+
+			<!-- <div class="banner">
 				<img src="../../assets/images/share/xbanner.png" alt="">
-			</div>
+			</div> -->
 
 			<!-- <div class="hot_product">
 				<h2>热门产品</h2>
@@ -612,6 +646,95 @@
 							}
 						}
 					}
+				}
+			}
+		}
+		.nav-brief {
+			height: 4.6rem;
+			font-size: .32rem;
+			font-weight: bold;
+			padding: .2rem .3rem 0 .3rem;
+			.main {
+				height: 2.9rem;
+				padding-bottom: .3rem;
+				display: flex;
+				justify-content: space-between;
+				.left {
+					width: 3.08rem;
+					height: 100%;
+					box-shadow: 0px 2px 10px 0px rgba(144,162,199,0.13);
+					background: #fff url('../../assets/images/share/case.png') no-repeat;
+					background-size: 2.04rem 1.82rem;
+					background-position: 0.88rem 1.08rem;
+					span {
+						display: inline-block;
+						padding-left: .2rem;
+						padding-top: .48rem;
+					}
+				}
+				.right {
+					width: 3.7rem;
+					height: 100%;
+					display: flex;
+					flex-direction: column;
+					justify-content: space-between;
+					.cont {
+						height: 1.4rem;
+						box-shadow: 0px 2px 10px 0px rgba(144,162,199,0.13);
+						background: #fff url('../../assets/images/share/guide.png') no-repeat;
+						background-size: 1.15rem 1.2rem;
+						background-position: 2.17rem 0.2rem;
+						span {
+							line-height: 1.4rem;
+							padding-left: 0.2rem;
+						}
+					}
+					.bg {
+						background: #fff url('../../assets/images/share/introduce.png') no-repeat;
+						background-size: 1.99rem 0.91rem;
+						background-position: 1.48rem 0.49rem;
+					}
+				}
+			}
+			.nav-btn {
+				width: 100%;
+				height: 0.94rem;
+				color: #fff;
+				font-size: 0.28rem;
+				line-height: 0.94rem;
+				background-color: #3889FF;
+				border: 0;
+				box-shadow: 0px 2px 20px 0px rgba(41,120,235,0.4);
+			}
+		}
+		.image {
+			width: 100%;
+			height: 2.6rem;
+		}
+		.partner {
+			display: flex;
+			justify-content: space-between;
+			padding-bottom: .2rem;
+			.partner-item {
+				width: 33%;
+				height: 3rem;
+				background-color: #fff;
+				box-shadow: 0px 2px 10px 0px rgba(115,134,173,0.2);
+				img {
+					width: 1.1rem;
+					height: 1.1rem;
+					margin: 0.15rem;
+				}
+				h2 {
+					padding-left: .4rem;
+					font-size: 0.28rem;
+					color: #1A2642;
+					font-weight: bold;
+				}
+				span {
+					padding-left: .4rem;
+					font-size: .24rem;
+					color: #90A2C7;
 				}
 			}
 		}
