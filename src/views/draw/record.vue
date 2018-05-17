@@ -1,27 +1,9 @@
 <template>
 	<section style="background: #E32921;height: 100%;">
-		<!-- <drawHeader :title="title" id="changeBlock"></drawHeader> -->
-
-		<!-- <div class="record">
-            <div class="btn-large">
-               	<button-tab>
-	               	<button-tab-item selected @on-item-click="showNumber">参与记录</button-tab-item>
-	               	<button-tab-item @on-item-click="showAward">中奖记录</button-tab-item>
-               	</button-tab>
-            </div>
-        </div> -->
-
-        <div class="tab-record">
-        	<tab active-color="#E32921" custom-bar-width="80px" default-color="#333">
-    	      <tab-item selected @on-item-click="showNumber">参与记录</tab-item>
-    	      <tab-item @on-item-click="showAward">中奖记录</tab-item>
-    	    </tab>
-        </div>
-
         <div class="wrapper" ref="wrapper">
 			<div class="content">
 				<!-- tab切换 -->
-				<div class="time-line" v-if="tab2 == true">
+				<!-- <div class="time-line" v-if="tab2 == true">
 					<div v-if="count.length == 0">
 		        		<div class="noRecord">
 		        			<div class="img">
@@ -55,15 +37,19 @@
 							<div class="clear"></div>
 						</timeline-item>
 					</timeline>
-				</div>
-
-		        <div class="recordList" v-else>
+				</div> -->
+		        <div class="recordList">
 					<div v-if="recordList.length==0">
 		        		<div class="noRecord">
 		        			<div class="img">
 		        				<img src="../../assets/images/draw/norecord.png">
-		        				<p>暂无{{tabTitle}}</p>
-		        				<p class="text">买单报电机号赢<span>5000元</span>大奖</p>
+		        				<p>您还没有中奖记录</p>
+		        				<div class="awardBtn" @click="$router.push({ path: '/multi_user_mall/summary'})">我要抽奖</div>
+		        				<p class="text red">
+		        					温馨提示：
+		        				</p>
+		        				<p class="text">只要在平台上消费任意一笔订单，就能参加周末幸运大抽奖!</p>
+		        				
 		        			</div>
 		        		</div>
 		        	</div>
@@ -84,8 +70,11 @@
 									</p>
 									<p>参与人数：<span class="num">{{ item.num}}人</span></p>
 								</div>
-								<div class="right btn" v-if="item.status == 2">
+								<div class="right btn" v-if="item.status == 2 && item.awardStatus == '未领取'" @click="goWinningSpeech">
 									领奖
+								</div>
+								<div class="right btn2" v-else>
+									已领取
 								</div>
 							</div>
 			            </ul>
@@ -95,13 +84,59 @@
 
 			        <!-- 弹出框 -->
 			        <div v-transfer-dom class="dialog">
-			          	<x-dialog v-model="showDialog" :hide-on-blur="true">
-			          		<div class="dia_top">
-								<p class="title">{{ toast}}</p>
-								<!-- <span class="note">{{ note}}</span> -->
-								<router-link to="/member/setting/real"><div class="btn">实名验证</div></router-link>
-							</div>
-			          	</x-dialog>
+			        	<x-dialog v-model="showDialog" :hide-on-blur="true">
+			        		<!-- 未实名认证\等待审核\审核未通过 -->
+			        		<div class="dia" v-if="0 != false">
+			        			<img class="img" src="../../assets/images/draw/warning.png">
+			        			<div class="dia_top">
+			        				<div class="dia_content">
+			        					<p class="title">{{headMessage}}</p>
+			        					<p class="note">{{message}}</p>
+			        					<div class="btnList">{{btnText}}</div>
+			        				</div>
+			        			</div>
+			        			<div class="close"><img src="../../assets/images/draw/open.png"></div>
+			        		</div>
+
+			        		<!-- 已中奖\未中奖\未开奖 -->
+			        		<div  class="dia" v-else>
+			        			<div class="dia_top2">
+			        				<div class="dia_title">
+			        					<p>第12期</p>
+			        					<p>番禺国美店周末幸运大抽奖</p>
+			        				</div>
+			        				<div class="dia_content2">
+			        					<p class="title">{{headMessage}}</p>
+			        					<p class="note">买单报手机号赢<span>5000元</span>大奖</p>
+			        					<img src="../../assets/images/draw/tag.png" width="90%">
+			        					<div class="btn-link">点击查看详情 <img src="../../assets/images/draw/crown.png"></div>
+			        					<div  class="time-line">
+			        						<timeline>
+			        							<timeline-item v-for="(item, index) in count" :key="index">
+			        								<h4 :class="[index === 0 ? 'recent' : '']" >
+			        									<span class="tl-content">{{item.content}}</span>
+			        									<!-- <span class="winMoney right">{{item.date}}元</span> -->
+			        								</h4>
+			        								<div :class="[index === 0 ? 'recent' : '']" class='bottom flex'>
+			        									<div class="rank flex">
+			        										<div>{{item.date}}</div>
+			        									</div>
+			        									<!-- <div class="winStatus2" v-if="item.winStatus == '领取'">
+			        										<img src="../../assets/images/draw/receiveIcon.png">
+			        										<span>{{item.winStatus}}</span>
+			        									</div>
+			        									<div class="winStatus" :class="[index === 0 ? 'recent' : '']" v-else>{{item.winStatus}}</div> -->
+			        									
+			        								</div>
+			        								<div class="clear"></div>
+			        							</timeline-item>
+			        						</timeline>
+			        					</div>
+			        				</div>
+			        			</div>
+			        			<div class="close"><img src="../../assets/images/draw/open.png"></div>
+			        		</div>
+			        	</x-dialog>
 			        </div>
 		        </div>
 	        	
@@ -124,11 +159,9 @@
 			return {
 				title: '中奖记录',
 				count: [
-					{weekend: '周末幸运大抽奖', winMoney: '5000', rank: '1234期', award: '一等奖', winStatus: '已领取'},
-					{weekend: '周末幸运大抽奖', winMoney: '1000', rank: '1233期', award: '二等奖', winStatus: '未领取'},
-					{weekend: '周末幸运大抽奖', winMoney: '800', rank: '1232期', award: '三等奖', winStatus: '领取'},
-					{weekend: '周末幸运大抽奖', winMoney: '5000', rank: '1231期', award: '四等奖', winStatus: '已过期'},
-					{weekend: '周末幸运大抽奖', winMoney: '5000', rank: '1230期', award: '一等奖', winStatus: '已过期'}
+					{content: '恭喜您中了一等奖', date: '2018-02-09 17：56：30'},
+					{content: '开奖时间：2018-08-28 19：00：00', date: '2018-08-28 19：00：00'},
+					{content: '您花了￥1，256购买了一双耐克KD10广州万国奥特广场负一层', date: '2018-08-28 19：00：00'}
 				],
 				tab1: true,
 				tab2: false,
@@ -136,22 +169,23 @@
 				showNomore: false,
 				showDialog: false,
 				recordList:[
-					{ drawTitle: '国美番禺店大抽奖', period: '1234', awardDate: '2018-03-20 20:00:00', money: '800.00', num:'600.00',status:0, stateValue: '等待开奖'},
-					{ drawTitle: '国美番禺店大抽奖', period: '1234', awardDate: '2018-03-20 20:00:00', money: '800.00', num:'600.00',status:0, stateValue: '等待开奖'},
-					{ drawTitle: '国美番禺店大抽奖', period: '1234', awardDate: '2018-03-20 20:00:00', money: '800.00', num:'600.00',status:1, stateValue: '未中奖'},
-					{ drawTitle: '国美番禺店大抽奖', period: '1234', awardDate: '2018-03-20 20:00:00', money: '800.00', num:'600.00',status:1, stateValue: '未中奖'},
-					{ drawTitle: '国美番禺店大抽奖', period: '1234', awardDate: '2018-03-20 20:00:00', money: '800.00', num:'600.00',status:2, stateValue: '已中奖'},
-					{ drawTitle: '国美番禺店大抽奖', period: '1234', awardDate: '2018-03-20 20:00:00', money: '800.00', num:'600.00',status:1, stateValue: '未中奖'},
-					{ drawTitle: '国美番禺店大抽奖', period: '1234', awardDate: '2018-03-20 20:00:00', money: '800.00', num:'600.00',status:0, stateValue: '等待开奖'},
-					{ drawTitle: '国美番禺店大抽奖', period: '1234', awardDate: '2018-03-20 20:00:00', money: '800.00', num:'600.00',status:0, stateValue: '等待开奖'}
+					{ drawTitle: '国美番禺店大抽奖', period: '1234', awardDate: '2018-03-20 20:00:00', money: '800.00', num:'600.00',status:0, stateValue: '等待开奖',awardStatus: '未领取'},
+					{ drawTitle: '国美番禺店大抽奖', period: '1234', awardDate: '2018-03-20 20:00:00', money: '800.00', num:'600.00',status:0, stateValue: '等待开奖',awardStatus: '未领取'},
+					{ drawTitle: '国美番禺店大抽奖', period: '1234', awardDate: '2018-03-20 20:00:00', money: '800.00', num:'600.00',status:2, stateValue: '已中奖',awardStatus: '未领取'},
+					{ drawTitle: '国美番禺店大抽奖', period: '1234', awardDate: '2018-03-20 20:00:00', money: '800.00', num:'600.00',status:2, stateValue: '已中奖',awardStatus: '已领取'},
+					{ drawTitle: '国美番禺店大抽奖', period: '1234', awardDate: '2018-03-20 20:00:00', money: '800.00', num:'600.00',status:2, stateValue: '已中奖',awardStatus: '未领取'},
+					{ drawTitle: '国美番禺店大抽奖', period: '1234', awardDate: '2018-03-20 20:00:00', money: '800.00', num:'600.00',status:1, stateValue: '未中奖',awardStatus: '未领取'},
+					{ drawTitle: '国美番禺店大抽奖', period: '1234', awardDate: '2018-03-20 20:00:00', money: '800.00', num:'600.00',status:0, stateValue: '等待开奖',awardStatus: '未领取'},
+					{ drawTitle: '国美番禺店大抽奖', period: '1234', awardDate: '2018-03-20 20:00:00', money: '800.00', num:'600.00',status:0, stateValue: '等待开奖',awardStatus: '未领取'}
 				],
-				toast: '您还未实名验证',
+				headMessage: '您还未进行实名认证',
 				note: '(请你检查身份验证是否通过)',
 				// 恭喜您成功领取奖金  您已成功领取奖金  请您耐心等待审核
 				// 审核未通过 （请你检查身份验证是否通过）
 				// 领取奖金失败（请你检查身份验证是否通过）
 				// 您还未实名验证  按钮实名验证
-				tabTitle: '参与记录'
+				message: '进行实名认证之后才可以领取奖励',
+				btnText: '立即去认证'
 
 			}
 		},
@@ -159,16 +193,6 @@
 			this.InitScroll()
 		},
 		methods:{
-			showNumber(){
-                this.tab1 = true;
-                this.tab2 = false;
-                this.tabTitle = '参与记录'
-			},
-			showAward(){
-				this.tab1 = false;
-				this.tab2 = true;
-				this.tabTitle = '中奖记录'
-			},
 	        InitScroll() {
 				this.$nextTick(() => {
 					if(!this.scroll) {
@@ -212,9 +236,9 @@
 			goWinningSpeech(){
 				var that = this;
 				this.showDialog = true;
-				setTimeout(function(){
-					that.showDialog = false
-				},5000)
+				// setTimeout(function(){
+				// 	that.showDialog = false
+				// },5000)
 			},
 		}
 	}
@@ -235,16 +259,16 @@
 		padding-bottom: 2px;
 	}
 	.wrapper {
-		height: 92.5%;
+		height: 100%;
 		overflow: hidden;
 	}
 	.noRecord{
 		background: #fff;
-		width: 90%;
+		width: 94.7%;
 		margin: 0.2rem auto;
-		border-radius: 0.1rem;
-		padding-top: 2.5rem;
-		padding-bottom: 3rem;
+		border-radius: 0.08rem;
+		padding-top: 1.07rem;
+		padding-bottom: 0.6rem;
 		.img{
 			width: 100%;
 			text-align: center;
@@ -255,36 +279,54 @@
 			}
 			p{
 				font-size: 0.32rem;
-				color: #90A2C7;
+				color: #333333;
+				margin-top: 0.27rem;
+			}
+			.awardBtn{
+				width: 88.8%;
+				background: linear-gradient(-120deg,#FF5C34,#FF2A4B);
+				margin: 1.3rem auto 0.32rem auto ;
+				padding: 0.31rem 0;
+				text-align: center;
+				color: #fff;
+				border-radius: 0.48rem;
+				box-shadow:0.07rem 0.09rem 0.27rem rgba(255,53,70,0.4);
+				font-size: 0.36rem;
 			}
 			.text{
-				font-size: 0.3rem;
+				font-size: 0.2rem;
 				line-height: 0.5rem;
-				span{
-					color: #E32921;
-				}
+				color: #A0A0A0;
+				text-align: left;
+				width: 85%;
+				margin: 0 auto;
+			}
+			.red{
+				color: #E32921;
 			}
 		}
 		
 	}
 	.time-line{
-		background: #fff;
+		background: #FFF5F6;
 		width: 94.7%;
 		margin: 0.2rem auto 0.3rem auto;
 		border-radius: 0.06rem;
 		height: 75%;
-		color: #A0A0A0;
+		color: #666666;
 		font-size: 0.26rem;
+		text-align: left;
+		.tl-content{
+			font-size: 0.28rem;
+		}
 		.winMoney{
 			font-size: 0.36rem;
 			font-weight: 700;
 			color: #333333;
 		}
-		.weekend{
-			font-size: 0.32rem;
-		}
+		
 		.rank{
-			color: #A0A0A0;
+			color: #666666;
 			width: 70%;
 			line-height: 0.38rem;
 		}
@@ -326,7 +368,7 @@
 			}
 		}
 		.recent{
-			color: #E32921;
+			color: #333333;
 		}
 	}
 
@@ -391,34 +433,135 @@
 	  		margin-right: 0.2rem;
 	  		margin-top: 0.25rem;
 	  	}
+	  	.btn2{
+	  		background:#E5EAEF;
+	  		border-radius:0.48rem;
+	  		padding: 0.33rem 0.5rem;
+	  		text-align: center;
+	  		color: #666666;
+	  		font-size: 0.32rem;
+	  		margin-right: 0.2rem;
+	  		margin-top: 0.25rem;
+	  		
+	  	}
 	}
 
-	.dia_top {
-		width: 90%;
-		height: 1.78rem;
-		margin: auto;
-	  	border-radius: 0.1rem;
-	  	background-color: #fff;
-	  	color: #1A2642;
-	  	.title {
-	  	  font-size: 0.32rem;
-	  	  margin-top: 0.8rem;
-	  	  line-height: 0.48rem;
-	  	  text-align: center;
-	  	}
-	  	.note{
-	  		font-size: 0.2rem;
-	  	}
-	  	.btn{
-	  		margin: 0.35rem auto;
-	  		width: 2.17rem;
-	  		height: 0.54rem;
-	  		background-color: #E32921;
-	  		text-align: center;
-	  		line-height: 0.54rem;
-	  		color: #fff;
-	  		border-radius: 0.23rem;
-	  	}
+	.dia {
+		width: 100%;
+		color: #1A2642;
+		position: relative;
+		height: auto;
+		.img {
+			width: 25%;
+			position: absolute;
+			top: 0;
+			left: 50%;
+			transform: translate(-50%, -50%);
+		}
+		.dia_top {
+			width: 100%;
+			margin: 0 auto;
+			height: auto;
+			min-height: 2.49rem;
+			background-color: #FF273A;
+			text-align: center;
+			padding-top: 1.09rem;
+			margin-top: 1.09rem;
+			border-radius: 0.16rem;
+			.dia_content{
+				background: #fff;
+				height: auto;
+				min-height: 2.49rem;
+				padding-bottom: 0.55rem;
+				border-radius: 0 0 0.16rem 0.16rem;
+			}
+			.title {
+				font-size: 0.36rem;
+				line-height: 0.59rem;
+				margin-bottom: 0.12rem;
+				color: #333333;
+				padding-top: 0.6rem;
+			}
+			.note {
+				color: #666666;
+				padding: 0 0.5rem;
+				box-sizing: border-box;
+				font-size: 0.24rem;
+			}
+			.btnList {
+				margin: 0 auto;
+				width: 85.4%;
+				background: #FF273A;
+				color: #fff;
+				font-size: 0.36rem;
+				border-radius: 0.5rem;
+				text-align: center;
+				box-shadow:0.04rem 0px 0.08rem rgba(136,46,219,0.3);
+				padding: 0.32rem 0; 
+				margin-top: 0.8rem;
+			}
+			
+		}
+		.dia_top2{
+			width: 100%;
+			margin: 0 auto;
+			height: auto;
+			min-height: 2.49rem;
+			background-color: #FF273A;
+			text-align: center;
+			margin-top: 1.09rem;
+			border-radius: 0.16rem;
+			.dia_title{
+				color: #fff;
+				padding-top: 0.08rem;
+				font-size: 0.36rem;
+				padding-bottom: 0.1rem;
+				p:nth-child(1){
+					font-size: 0.72rem;
+				}
+			}
+			.dia_content2{
+				background: #fff;
+				height: auto;
+				border-radius: 0 0 0.16rem 0.16rem;
+				.title {
+					font-size: 0.36rem;
+					line-height: 0.59rem;
+					margin-bottom: 0.15rem;
+					color: #333333;
+					padding-top: 0.5rem;
+				}
+				.note {
+					color: #666666;
+					padding: 0 0.5rem;
+					box-sizing: border-box;
+					font-size: 0.24rem;
+					margin-bottom: 0.6rem;
+					span{
+						color: #E32921;
+					}
+				}
+				.btn-link{
+					color: #666666;
+					font-size: 0.3rem;
+					text-align: center;
+					margin-top: 0.22rem;
+					img{
+						width: 5%;
+						vertical-align: middle;
+					}
+				}
+			}
+		}
+		.close{
+			width: 100%;
+			background: rgba(255,255,255,0);
+			height: 1.25rem;
+			img{
+				height: 100%;
+				margin: 0 auto;
+			}
+		}
 	}
 </style>
 
@@ -433,7 +576,6 @@
 		.vux-tab .vux-tab-item{
 			font-size: 0.36rem;
 			background-size: 100% 0;
-			/*color: #333333;*/
 		}
 		.vux-tab-container{
 			height: 0.98rem;
@@ -504,8 +646,11 @@
 		}
 	}
 	.dialog{
-		.weui-dialog{
-			width: 60%;
+		.weui-dialog {
+			width: 78.67%;
+			max-width: 78.67%;
+			z-index: 111111111111111111111111;
+			border-radius: 0.16rem; 
 		}
 	}
 

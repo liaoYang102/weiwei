@@ -828,7 +828,8 @@
 			}
 		}
 		.noticeswiper {
-			height: 1.1rem;
+			flex: 1;
+			height: 0.95rem;
 			padding-left: 0.38rem;
 			.noticeText {
 				margin-bottom: 0.05rem;
@@ -838,8 +839,6 @@
 					width: 0.56rem;
 					margin-right: 0.2rem;
 					display: inline-block;
-					border-radius: 2px;
-					border: 2px solid #F23030;
 					padding: 0.02rem 0;
 					text-align: center;
 					font-size: 0.2rem;

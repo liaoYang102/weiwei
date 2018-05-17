@@ -7,27 +7,54 @@
 		    </tab>
 		     <!-- 排行前3名 -->
 		    <div class="former-three">
-		    	<li v-for="(item,index) in rankList" v-if="index<3">
-	    		    <div class="rank-pic">
-	    		        <img src="../../assets/images/draw/2.png" alt="" v-if="index==0">
-	    		        <img src="../../assets/images/draw/1.png" alt="" v-else-if="index==1">
-	    		        <img src="../../assets/images/draw/3.png" alt="" v-else>
-	    		        <div class="pic-move">
-	    		            <img src="../../assets/images/draw/photo1.png" alt="">
-	    		        </div>
-	    		        <div class="ranking">
-	    		        	<img src="../../assets/images/draw/two.png">
-	    		        </div>
-	    		    </div>
-		    		
-		    		<div class="rank-content">
-	    		        <div class="rank-phone">{{ item.phone}}</div>
-	    		        <div class="rank-money" v-if="tab2 == true">{{ item.money}}</div>
-	    		        <div class="rank-money" v-else>{{ item.num}}</div>
-		    		</div>
-		    	</li>
-		    </div>
+		    	<div class="rank-top">
+			    	<li>
+		    		    <div class="rank-pic">
+		    		        <img src="../../assets/images/draw/2.png" alt="">
+		    		        <div class="pic-move">
+		    		            <img src="../../assets/images/draw/photo1.png" alt="">
+		    		        </div>
+		    		        <div class="ranking">
+		    		        	<img src="../../assets/images/draw/two.png">
+		    		        </div>
+		    		    </div>
+			    	</li>
 
+			    	<li>
+		    		    <div class="rank-pic">
+		    		        <img src="../../assets/images/draw/1.png" alt="">
+		    		        <div class="pic-move">
+		    		            <img src="../../assets/images/draw/photo1.png" alt="">
+		    		        </div>
+		    		        <div class="ranking">
+		    		        	<img src="../../assets/images/draw/one.png">
+		    		        </div>
+		    		    </div>
+			    	</li>
+
+			    	<li>
+		    		    <div class="rank-pic">
+		    		        <img src="../../assets/images/draw/3.png" alt="">
+		    		        <div class="pic-move">
+		    		            <img src="../../assets/images/draw/photo1.png" alt="">
+		    		        </div>
+		    		        <div class="ranking">
+		    		        	<img src="../../assets/images/draw/three.png">
+		    		        </div>
+		    		    </div>
+			    	</li>
+		    	</div>
+		    	
+    		    <div class="rank-content">
+    		    	<div class="content-float" v-for="(item,index) in rankList" v-if="index<3">
+    		    		<div class="rank-phone">{{ item.phone}}</div>
+    		    		<div class="rank-money" v-if="tab2 == true">{{ item.money}}</div>
+    		    		<div class="rank-money" v-else>{{ item.num}}</div>
+    		    	</div>
+    		        
+	    		</div>
+		    </div>
+		    
             <div class="wrapper" ref="wrapper">
     			<div class="content">
     				<div class="rankData">
@@ -91,9 +118,9 @@
                 tab1: true,
                 tab2: false,
                 rankList:[
-                    { phone : '132****0224', money: '￥73,325', num: '29'},
-                    { phone : '137****3256', money: '￥80,031', num: '50'},
-                    { phone : '138****0124', money: '￥75,654', num: '50'},
+                    { phone : '132****0224', money: '￥73,325', num: '30'},
+                    { phone : '137****3256', money: '￥80,031', num: '20'},
+                    { phone : '138****0124', money: '￥75,654', num: '10'},
                     { phone : '151****6545', money: '￥69,654', num: '45'},
                     { phone : '159****3256', money: '￥60,887', num: '40'},
                     { phone : '138****6009', money: '￥50,987', num: '30'},
@@ -153,6 +180,7 @@
 			},
 			LoadData() {
 				var _this = this
+				_this.show = true;
 				if(_this.showNomore){
 					_this.show = false;
 					return 
@@ -169,7 +197,7 @@
 
 <style lang="less" scoped>
 	.wrapper{
-		height: 59.5%;
+		height: 56.5%;
 		overflow: hidden;
 	}
 	.luckyrank{
@@ -190,12 +218,15 @@
 	}
 	/* 排行前3名 */
 	.former-three {
-	    display: flex;
 	    overflow: hidden;
 	    background-color: #FFF;
 	    padding-top: 0.5rem;
 	    margin: 0 0.4rem;
 	    padding-bottom: 0.4rem;
+	    .rank-top{
+	    	display: flex;
+	    	width: 100%;
+	    }
 	    li{
 	    	list-style: none;
 	    	margin-right: 0.53rem;
@@ -209,6 +240,15 @@
 	    	flex: 1;
 	    	padding-top: 0;
 	    }
+	    li:nth-child(2) .pic-move {
+	        position: absolute;
+	        top: 4.2%;
+	        left: 4.5%;
+	        img{
+    	        width: 1.88rem;
+    	        vertical-align: middle;
+    	    }
+	    }
 	    .rank-pic{
 	    	width: 100%;
 	        position: relative;
@@ -218,16 +258,16 @@
     	    }
     	    .pic-move {
 		        position: absolute;
-		        top: 0;
-		        left: 0;
+		        top: 4.8%;
+		        left: 4.3%;
 		        img{
-        	        width: 96%;
+        	        width: 1.47rem;
         	        vertical-align: middle;
         	    }
 		    }
 		    .ranking{
 	    		position: absolute;
-	    		top: 75%;
+	    		top: 77%;
 		        left: 35%;
 	    		img{
 	    			width: 55%;
@@ -240,6 +280,19 @@
     	    width: 100%;
     	    color: #333333;
     	    text-align: center;
+    	    /*display: flex;*/
+    	    .content-float{
+		    	width: 25.4%;
+		    	padding-top: 0.45rem;
+		    	float: left;
+		    	display: inline-block;
+    	    }
+    	    .content-float:nth-child(1){
+    	    	float: none;
+    	    }
+    	    .content-float:nth-child(3){
+    	    	float: right;
+    	    }
         	.rank-phone{
         		font-size: 0.24rem;
         		margin-bottom: 0.2rem; 
@@ -318,6 +371,9 @@
 		.vux-tab-container{
 			height: 0.98rem;
 		}
+		.weui-cells:before{
+			border-top: none;
+		}
 	}
 	.rankData{
 		.weui-cells{
@@ -327,7 +383,7 @@
 			margin-top: 0;
 		}
 		.weui-cells:before{
-			border-top: none;
+			border-top: none !important;
 		}
 		.weui-cell{
 			padding: 0;
@@ -339,7 +395,7 @@
 			text-align: left;
 		}
 		.weui-cells:after{
-			border: none;
+			border-bottom: none;
 		}
 		
 	}	
