@@ -46,7 +46,7 @@
 									<img src="../../assets/images/member/member_wallet.png">
 									<!--<badge class="new"></badge>-->
 								</div>
-								<p>我的钱包</p>
+								<p>我的资产</p>
 							</router-link>
 						</li>
 						<li>
@@ -59,13 +59,13 @@
 							</router-link>
 						</li>
 						<li>
-							<router-link to="/member/score/index">
+							<router-link to="/shop/my_order">
 								<div class="li-box">
 									<img src="../../assets/images/member/member_account.png">
 									<!--<badge class="new-account" text="2312"></badge>-->
 								</div>
 
-								<p>会员积分</p>
+								<p>我的订单</p>
 							</router-link>
 						</li>
 						<li>
@@ -73,7 +73,7 @@
 								<div class="li-box">
 									<img src="../../assets/images/member/member_code.png">
 								</div>
-								<p>赚钱码</p>
+								<p>推广码</p>
 							</router-link>
 						</li>
 					</ul>
@@ -115,11 +115,11 @@
 						text: '多商户商城',
 						url: '/multi_user_mall/summary'
 					},
-					{
+					/*{
 						img: './static/member/member_2.png',
 						text: '我的订单',
 						url: '/shop/my_order'
-					},
+					},*/
 					{
 						img: './static/member/member_3.png',
 						text: '我的关注',
@@ -135,7 +135,7 @@
 						text: '幸运抽奖',
 						url: '/draw'
 					},
-					{
+					/*{
 						img: './static/member/m_index13.png',
 						text: '我的卡包',
 						url: '/member/card/index'
@@ -143,7 +143,7 @@
 						img: './static/member/menjin.png',
 						text: '门禁系统',
 						url: '/lock/card'
-					},
+					},*/
 				],
 				yhqTip: '5张快过期'
 			}

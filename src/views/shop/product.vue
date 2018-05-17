@@ -238,9 +238,9 @@
 			padding: 0.11rem 0.09rem 0 0.11rem;
 			box-sizing: content-box;
 			background-color: #fff;
-			height: 100%;
+			/*height: 100%;*/
 			.wrapper1{
-				height: 91%;
+				height: 90.7%;
 				overflow: hidden;
 			}
 			.channel{

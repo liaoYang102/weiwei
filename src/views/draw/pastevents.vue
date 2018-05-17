@@ -1,123 +1,105 @@
 <template>
-	<section style="background: #E32921;color: #1A2642;" class="pastwrap">
-		<settingHeader :title="title"></settingHeader>
+	<section style="background: #E32921;color: #1A2642;height: 100%;" class="pastwrap">
+		<div class="wrapper" ref="wrapper">
+    		<div class="content">
+				<settingHeader :title="title"></settingHeader>
 
-		<div class="item">
-			<div class="periodVideo">{{ periodVideo}}</div>
-	        <div class="player">
-	          	<video-player  class="video-player vjs-custom-skin"
-                     ref="videoPlayer"
-                     :playsinline="true"
-                     :options="playerOptions"
-                     @pause="onPlayerPause($event)">
-      			</video-player>
-	        </div>
-	     </div>
+				<div class="item">
+					<div class="periodVideo">{{ periodVideo}}</div>
+			        <div class="player">
+			          	<video-player  class="video-player vjs-custom-skin"
+		                     ref="videoPlayer"
+		                     :playsinline="true"
+		                     :options="playerOptions"
+		                     @pause="onPlayerPause($event)">
+		      			</video-player>
+			        </div>
+			    </div>
 
+			    <div class="container">
+		 			<div class="show-down">
+		 				<group>
+		 					<cell>
+		 						<div class="title">
+		 							<div class="wz1">
+		 								<div class="left">国美白云店第1期(已揭晓)</div>
+		 		                    	<div class="period left">1564期</div>
+		 							</div>
+		 		                    <div class="money">奖金池共￥800,000</div>
+		 		                </div>
+		 					</cell>
+		 				</group>
+		 			</div>
+		 			<div class="award-set">
+		 				<div class="set-title">奖品设置</div>
+		 				<ul class="ul-set">
+		 					<li v-for="i in 4">
+		 						<div class="flex">
+		 							<div style="flex: 1">一等奖</div>
+		 							<div>5000<span class="small">元</span></div>
+		 						</div>
+		 						<div class="left num">30名</div>
+		 					</li>
+		 				</ul>
+		 			</div>
 
+		 			<div class="wz-periods">
+						<div class="wz-period">抽奖期数</div>
 
-	    <div class="container">
- 			<div class="show-down">
- 				<group>
- 					<cell>
- 						<div class="title">
- 							<div class="wz1">
- 								<div class="left">国美白云店第1期(已揭晓)</div>
- 		                    	<div class="period left">1564期</div>
- 							</div>
- 		                    <span style="letter-spacing:0.02rem;color: #666666;">奖金池共￥800,000</span>
- 		                </div>
- 					</cell>
- 				</group>
- 			</div>
+						<div class="period">
+							<swiper :options="swiperOption1">
+						       	<swiper-slide v-for="(item,index) in data3" >
+						       		<div class="btn0" :class="{'btn-active':act3==index}" @click="periodActive(index)">
+				                       {{item}}
+				                    </div>
+						       	</swiper-slide>
+						    </swiper>
+						</div>
+		 			</div>
+			    </div>
+			    <div class="clear"></div>
 
- 			<!-- <div class="imgList">
- 				<swiper :options="swiperOption" class="box1">
- 			       	<swiper-slide v-for="(item,index) in list">
- 			       		<div class="award0">
- 	                        <img src="../../assets/images/draw/medals.png" alt="">
- 	                        <div class="wz-red">{{ item.bonus}}</div>
- 	                        <div class="wz-black">{{item.award}}</div>
- 	                        <div class="wz-gray">{{item.number}}</div>
- 	                    </div>
- 			       	</swiper-slide>
- 			    </swiper>
- 			</div> -->
- 			<div class="award-set">
- 				<div class="title">奖品设置</div>
- 				<ul class="ul-set">
- 					<li v-for="i in 4">
- 						<div class="flex">
- 							<div style="flex: 1">一等奖</div>
- 							<div>5000<span class="small">元</span></div>
- 						</div>
- 						<div class="left num">30名</div>
- 					</li>
- 				</ul>
- 			</div>
+	    		<div class="winList">
+	    			<!-- 中奖人员 -->
+	    	        <div class="win-person">
+	    	            <div class="wz-period">中奖名单</div>
+	    				<swiper :options="swiperOption2">
+	    			       	<swiper-slide v-for="(item,index) in data1">
+	    			       		<div class="wz-award" :class="{'wz-award-active':act1==index}" @click="actice(index)">{{item}}</div>
+	    			       	</swiper-slide>
+	    			    </swiper>
+	    	        </div>
 
- 			<div class="clear"></div>
+	    			<!-- 一等奖数据列表 -->
+	    			<div class="web">
+	    			    <!--数据列表-->
+	    			    <ul>
+	                    	<group v-for="(item,index) in personList">
+	    						<cell>
+	    							<li>
+	    								<div class="personlist">
+	    					                <div class="img-left">
+	    					                    <img src="../../assets/images/draw/photo0.png" alt="">
+	    					                </div>
 
- 			<div class="wz-periods">
-				<div class="wz-period">抽奖期数</div>
-
-				<div class="period">
-					<swiper :options="swiperOption1">
-				       	<swiper-slide v-for="(item,index) in data3" >
-				       		<div class="btn0" :class="{'btn-active':act3==index}" @click="periodActive(index)">
-		                       {{item}}
-		                    </div>
-				       	</swiper-slide>
-				    </swiper>
-				</div>
- 			</div>
-
- 			
-	    </div>
-		
-
-		<!-- 中奖人员 -->
-        <div class="win-person">
-            <div class="wz-period">中奖人员</div>
-			<swiper :options="swiperOption2">
-		       	<swiper-slide v-for="(item,index) in data1">
-		       		<div class="wz-award" :class="{'wz-award-active':act1==index}" @click="actice(index)">{{item}}</div>
-		       	</swiper-slide>
-		    </swiper>
-        </div>
-
-        <div class="wrapper" ref="wrapper">
-			<div class="content">
-				<!-- 一等奖数据列表 -->
-				<div class="web">
-				    <!--数据列表-->
-				    <ul>
-                    	<group v-for="(item,index) in personList">
-							<cell>
-								<li>
-									<div class="personlist">
-						                <div class="img-left">
-						                    <img src="../../assets/images/draw/photo0.png" alt="">
-						                </div>
-
-						                <div class="user-right">
-						                    <div>手机用户</div>
-						                    <div class="wz-red fr">{{item.bonus}}</div>
-						                    <span class="wz-red">{{item.phoneNum}}</span>
-						                    <div class="wz-gray2">{{item.speech}}</div>
-						                </div>
-						            </div>
-						            <div class="clear"></div>
-			                    </li>
-							</cell>
-						</group>
-				    </ul>
-				    <loading v-if="show"></loading>
-                    <noMore v-if="showNomore"></noMore>    
-				</div>
-			</div>
-		</div>
-
+	    					                <div class="user-right">
+	    					                	<div class="wz-red2 fr">{{item.bonus}}<span class="yuan">元</span></div>
+	    					                    <div>手机用户</div>
+	    					                    <span class="wz-red">{{item.phoneNum}}</span>
+	    					                    <div class="wz-gray2">{{item.speech}}</div>
+	    					                </div>
+	    					            </div>
+	    					            <div class="clear"></div>
+	    		                    </li>
+	    						</cell>
+	    					</group>
+	    			    </ul>
+	    			    <loading v-if="show"></loading>
+	                    <noMore v-if="showNomore"></noMore>    
+	    			</div>
+	    		</div>
+    		</div>
+    	</div>
 	</section>
 </template>
 
@@ -180,16 +162,16 @@
 		        },
 		        act1:0,
                 data1:['一等奖','二等奖','三等奖','四等奖','特等奖','幸运奖'],
-                data3: [ 1,2,3,4,5,6,7,8,9,10],
+                data3: [ 1234,1235,1236,1237,1238,1239,1240,1241,1242,1243],
                 act3:0,
                 personList:[
-                    { bonus : '5000元', phoneNum: '130****0124',speech: '第一次抽奖就中了一等奖，好高兴啊！'},
-                    { bonus : '5000元', phoneNum: '130****0124',speech: '第一次抽奖就中了一等奖，好高兴啊！'},
-                    { bonus : '5000元', phoneNum: '130****0124',speech: '第一次抽奖就中了一等奖，好高兴啊！'},
-                    { bonus : '5000元', phoneNum: '130****0124',speech: '第一次抽奖就中了一等奖，好高兴啊！'},
-                    { bonus : '5000元', phoneNum: '130****0124',speech: '第一次抽奖就中了一等奖，好高兴啊！'},
-                    { bonus : '5000元', phoneNum: '130****0124',speech: '第一次抽奖就中了一等奖，好高兴啊！'},
-                    { bonus : '5000元', phoneNum: '130****0124',speech: '第一次抽奖就中了一等奖，好高兴啊！'}
+                    { bonus : '5000', phoneNum: '130****0124',speech: '第一次抽奖就中了一等奖，好高兴啊！'},
+                    { bonus : '5000', phoneNum: '130****0124',speech: '第一次抽奖就中了一等奖，好高兴啊！'},
+                    { bonus : '5000', phoneNum: '130****0124',speech: '第一次抽奖就中了一等奖，好高兴啊！'},
+                    { bonus : '5000', phoneNum: '130****0124',speech: '第一次抽奖就中了一等奖，好高兴啊！'},
+                    { bonus : '5000', phoneNum: '130****0124',speech: '第一次抽奖就中了一等奖，好高兴啊！'},
+                    { bonus : '5000', phoneNum: '130****0124',speech: '第一次抽奖就中了一等奖，好高兴啊！'},
+                    { bonus : '5000', phoneNum: '130****0124',speech: '第一次抽奖就中了一等奖，好高兴啊！'}
                 ],
     	        swiperOption2: {
     				autoHeight: true,
@@ -281,8 +263,11 @@
 <style lang="less" scoped>
 
 	.wrapper {
-		height: 8rem;
+		height: 100%;
 		overflow: hidden;
+		.content{
+			padding-bottom: 0.2rem;
+		}
 	}
 	.left{
 		float: left;
@@ -291,9 +276,10 @@
 		width: 94.7%;
 		background-color: #fff;
 		margin: 0.2rem;
+		border-radius: 0.08rem;
+		padding-bottom: 0.3rem;
 		.title{
-			width: 100%;
-			padding: 0.4rem 0 0.2rem 0;
+			padding: 0.4rem 0 0.2rem 0.3rem;
 			.wz1{
 				width: 100%;
 			    color: #333333;
@@ -305,7 +291,15 @@
 			    	border-radius: 0.04rem;
 			    	text-align: center;
 			    	padding:0.05rem 0.07rem; 
+			    	margin-left: 0.12rem;
 			    }
+			}
+			.money{
+				clear: both;
+				letter-spacing:0.02rem;
+				color: #666666;
+				font-size: 0.26rem;
+				margin-top: 0.22rem;
 			}
 		}
 		.award-set{
@@ -314,7 +308,8 @@
 			border-bottom: 1px solid #E6E6E6;
 			overflow: hidden;
 			padding-bottom: 0.3rem;
-			.title{
+			border-top: 1px solid #E6E6E6;
+			.set-title{
 				color: #333333;
 				font-size: 0.36rem;
 				padding-left: 0.19rem;
@@ -363,102 +358,89 @@
 		.wz-periods{
 			padding-top:0.4rem;
 			.period{
-				border-bottom: 0.01rem solid #D8DFF0;
-				padding-bottom: 0.2rem;
+				color: #fff;
+				padding-bottom: 0.19rem;
 				.swiper-slide {
-				    width: 1rem;
-				    margin-left: 0.2rem;
+				    width: 1.1rem;
+				    margin-left: 0.33rem;
 				}
 				/* 抽奖期数*/
 				.btn0{
-				    width: 0.8rem;
-				    height: 0.81rem;
-				    border-radius: 50%;
-				    border: solid 1px #D8DFF0;
 				    text-align: center;
-				    color: #D8DFF0;
 				    font-size: 0.3rem;
-				    line-height: 0.8rem;
+				    padding: 0.2rem 0.18rem;
+				    background-color: #E1E1E1;
+				    border-radius: 6px;
 				}
 				.btn-active{
-				    border: solid 1px #FF5365;
-				    color: #FF5365;
+				    background-color: #E32921;
 				}
 			}
 			.wz-period{
-			    margin: 0.3rem 0 0.2rem 0.2rem;
+			    padding: 0 0 0.4rem 0.2rem;
 			    font-size: 0.32rem;
 			}
 		}
 		
 	}
-	.imgList{
-		background: #fff;
-		padding-top: 0.1rem;
-		padding-bottom: 0.2rem;
-		.swiper-slide {
-		    width: 2rem;
-		    margin-left: 0.3rem;
-		}
-		.award0{
-		    width: 1.92rem;
-		    height: 2.5rem;
-		    background: url('../../assets/images/draw/pink.jpg') no-repeat;
-		    background-size: contain;
-		    text-align: center;
-		    img {
-    		    width: 35%;
-    		    margin-top: 0.1rem;
-    		    margin-bottom: 0.05rem;
-    		}
-    		
-		}
+	.winList{
+		width: 94.7%;
+		background-color: #fff;
+		margin: 0.2rem;
+		border-radius: 0.06rem;
+		.win-person{
+			border-bottom: 1px solid #E6E6E6;
+			.wz-period{
+				color: #333333;
+				font-size: 0.36rem;
+				text-align: center;
+				padding-top: 0.33rem;
+				padding-bottom: 0.3rem;
+			}
+			.swiper-slide {
+			    width: 1.3rem;
+			    height: auto;
+			}
+			.wz-award{
+			    width: 1.1rem;
+			    color: #1A2642;
+			    font-size: 0.3rem;
+			    margin-left: 0.3rem;
+			    text-align: center;
+			    padding-bottom: 0.3rem;
+			    box-sizing:border-box; 
+			    border-bottom: solid 3px #fff;
+			}
+			.wz-award-active{
+			    color: #E32921;
+			    border-bottom: solid 3px #E32921;
+			}
+		} 
+
 	}
 	.wz-red{
-	    color: #FF5365;
-	    font-size: 0.3rem;
-	    line-height: 0.2rem;
+	    color:#E32921;
+	    font-size: 0.32rem;
 	}
 	.wz-black{
 	    color: #1A2642;
 	    font-size: 0.25rem;
 	    line-height: 0.6rem;
 	}
-	.wz-gray{
-	    color:#90A2C7;
-	    font-size: 0.2rem;
-	    line-height: 0.1rem;
+	
+	.yuan{
+		font-size: 0.18rem;
 	}
-	
-	.win-person{
-		border-bottom: 0.01rem solid #D8DFF0;
-		
-		.swiper-slide {
-		    width: 1.3rem;
-		    height: 0.75rem;
-		}
-		.wz-award{
-		    width: 1.1rem;
-		    height: 0.7rem;
-		    color: #1A2642;
-		    font-size: 0.3rem;
-		    line-height: 0.7rem;
-		    margin-left: 0.3rem;
-		    text-align: center;
-		}
-		.wz-award-active{
-		    color: #FF5365;
-		    border-bottom: solid 0.05rem #FF5365;
-		}
-	} 
-	
-
+	.wz-red2{
+	    color:#E32921;
+	    font-size: 0.36rem;
+	}
 	.personlist{
 	   width: 100%;
 	   .img-left {
-	       width: 23%;
+	       width: 20%;
 	       float: left;
-	       margin: 0.1rem 0.1rem 0.1rem 0;
+	       margin: 0.1rem 0.21rem 0.1rem 0;
 	       img{
 	       	    width: 100%;
 	       	}
@@ -466,9 +448,9 @@
 	   .user-right{
 	       margin: 0.3rem 0 0 0;
 	       color: #1A2642;
+	       font-size: 0.26rem;
 	       .wz-gray2{
-	           color:#90A2C7;
-	           font-size: 0.3rem;
+	           color:#666666;
 	           margin-top: 0.1rem;
 	       }
 	   }
@@ -496,15 +478,10 @@
 		}
 		.weui-cell__ft{
 			text-align: left;
+			width: 100%;
 		}
 		.weui-cell_access .weui-cell__ft{
-			padding-right: 2.7rem;
-		}
-		.weui-cell_access .weui-cell__ft:after{
-			width: 0.2rem;
-			height: 0.2rem;
-			right: 0.2rem;
-			border-width: 0.04rem 0.04rem 0 0;
+			/*padding-right: 2.7rem;*/
 		}
 		.weui-cells:after{
 			border-bottom: none;
@@ -565,9 +542,9 @@
 		}
 		.weui-cell__ft{
 			text-align: left;
-			width: 93%;
-			margin-right: 0.3rem;
-			border-bottom: solid 0.01rem #D8DFF0;
+			width: 96%;
+			margin-left: 0.3rem;
+			border-bottom: solid 1px #E6E6E6;
 		}
 		.weui-cells:after{
 			border-bottom: none;
@@ -577,7 +554,7 @@
 			height: 0.2rem;
 			right: 0.2rem;
 			border-width: 0.04rem 0.04rem 0 0;
-			border-color: #D8DFF0;
+			border-color: #E6E6E6;
 		}
 	}	
 </style>

@@ -280,7 +280,7 @@
 
 <style lang="less" scoped>
 	.wrapper {
-		height: 95%;
+		height: 93.2%;
 		background-color: #F5F6FA;
 		overflow: hidden;
 	}

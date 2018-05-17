@@ -1,50 +1,57 @@
 <template>
-	<section>
-		<drawHeader :title="title"></drawHeader>
-		<div class="head">
-			<div class="receive">
-				<p class="receiveText">中奖信息</p>
-				<p class="receiveMoney">张三先生恭喜您获得一等奖五千元。</p>
-			</div>
-		</div>
+	<section style="background-color: #F4F4F4;height: 100%;">
+		<!-- <drawHeader :title="title"></drawHeader> -->
+		<div class="wrapper" ref="wrapper">
+			<div class="content">
+				<div class="head">
+					<span class="receiveText">中奖信息</span>
+					<span class="receiveMoney">张三先生恭喜您获得一等奖五千元</span>
+				</div>
 
-		<div class="awards-main">
-			<div class="photos">
-				<h4>上传生活照</h4>			    
-		    	<div class="life"  v-for="(item,index) in imgList" @click="cindex(index)">
-		    		<img @click="imgDelete(index)" class="gbx" src="../../assets/images/member/gbx.png"/>
-		    		
-		    		<div class="bigPic" v-show="[imgList.length ? imgList.length >0 : imgList.length =0]">
-						<img :src="item">
+				<div class="awards-main">
+					<div class="photos">
+						<div class="awards-title clear">
+							<div class="border left"></div>
+							<h4 class="left">上传生活照</h4>
+						</div>
+									    
+				    	<div class="life"  v-for="(item,index) in imgList" @click="cindex(index)">
+				    		<img @click="imgDelete(index)" class="gbx" src="../../assets/images/member/gbx.png"/>
+				    		
+				    		<div class="bigPic" v-show="[imgList.length ? imgList.length >0 : imgList.length =0]">
+								<img :src="item">
+							</div>
+							<input type="file" accept="image/*" multiple="multiple" @change="cone">
+				    	</div>
+
+				    	<div class="life" v-if="imgList.length!=5">
+				    		<!-- <i class="iconfont icon-zhaoxiangji icon"></i> -->
+				    		<img src="../../assets/images/draw/addIcon.png" class="add">
+				    		<p class="length">生活照</p>
+				    		<input type="file" accept="image/*" multiple="multiple" @change="test($event)">
+				    	</div>
+				    	<div class="clear"></div>
 					</div>
-					<input type="file" accept="image/*" multiple="multiple" @change="cone">
-		    	</div>
-
-		    	<div class="life" v-if="imgList.length!=5">
-		    		<i class="iconfont icon-zhaoxiangji icon"></i>
-		    		<p class="length">{{ imgList.length}}/5</p>
-		    		<input type="file" accept="image/*" multiple="multiple" @change="test($event)">
-		    	</div>
-		    	<div class="clear"></div>
-			    
-			</div>
-			<div class="photos" style="text-align:center">
-				<h4 class="left">中奖感言</h4>
-				<div class="clear"></div>
-				<group>
-			      	<x-textarea :max="200" name="detail" placeholder="不超过200字" :height="137" :show-counter="false"></x-textarea>
-			    </group>
-
-			    <div class="radio">
+					<div class="photos" style="text-align:center">
+						<div class="awards-title clear">
+							<div class="border left"></div>
+							<h4 class="left">中奖感言</h4>
+						</div>
+						<group style="margin-top: 0.3rem;">
+					      	<x-textarea :max="200" name="detail" placeholder="文字不得少于20字" :height="137" :show-counter="false"></x-textarea>
+					    </group>
+					</div>
+				</div>
+				<div class="radio">
 			    	<input type="radio" name="">
 			    	<span class="read">
 			    		阅读<span class="preposition">《易消费中奖协议》</span>
 			    	</span>
 			    </div>
 			</div>
+			<div class="foot" @click="showToast">立即提交</div>
 		</div>
-		<div class="foot" @click="showToast">立即提交</div>
-
+		
         <!-- 弹出框 -->
         <div v-transfer-dom class="dialog">
           	<x-dialog v-model="showDialog" :hide-on-blur="true">
@@ -59,6 +66,7 @@
 <script>
 	import { XInput, XDialog} from 'vux'
 	import drawHeader from './components/header'
+	import BScroll from 'better-scroll'
 	export default {
 	  components: {
 	    XInput,drawHeader,XDialog
@@ -72,6 +80,9 @@
 	  		toast: '请您耐心等待审核',
 	  		pindex:0
 	  	}
+	  },
+	  mounted:function(){
+	    this.InitScroll()
 	  },
 	  methods:{
 		test:function (e) {
@@ -113,65 +124,88 @@
 			this.pindex = index
 			console.log(this.pindex)
 	   	},
+        InitScroll() {
+			this.$nextTick(() => {
+				this.scroll = new BScroll(this.$refs.wrapper, {
+					click: true,
+					scrollY: true,
+					pullUpLoad: {
+						threshold: -30, // 负值是当上拉到超过低部 70px；正值是距离底部距离 时，                    
+					}
+				})
+			})
+		},
 	  }
 	}
 </script>
 
 <style lang="less" scoped>
+	.wrapper{
+		height: 100%;
+		overflow: hidden;
+		.content{
+			padding-bottom: 0.78rem;
+		}
+	}
 	.left{
 		float: left;
 	}
 	.head {
-	  padding-top: 1.05rem;
-	  background-image: url(../../assets/images/draw/lottery_awards1.png);
-	  background-size: 100% 100%;
-	  width: 100%;
-	  height: 4.1rem;
-	  .receive {
-	    margin: 0 auto;
-	    text-align: center;
-	    width: 4rem;
-	    height: 2.54rem;
-	    background-image: url(../../assets/images/draw/lottery_awards2.png);
-	    background-size: 100% 100%;
-	    padding-top: 0.9rem;
+	  	padding: 0.36rem 0.3rem;
+	  	background-color: #fff;
+	  	display: flex;
 	    .receiveText {
-    	  font-size: 0.32rem;
-    	  margin-bottom: 0.35rem;
-    	}
-    	.receiveMoney {
-		  /*text-indent: -0.23rem;*/
-		  width: 60%;
-		  margin:0 auto;
-		  font-size: 0.26rem;
-		  word-wrap:break-word;
+		  font-size: 0.3rem;
+		  color: #333333;
 		}
-	    p {
-		  color: #fff;
+		.receiveMoney {
+			flex: 1;
+		 	font-size: 0.3rem;
+		  	color: #A0A0A0;
+		  	text-align: right;
 		}
-	  }
 	}
 
 	.awards-main{
+		margin-top: 0.3rem;
 		background-color: #fff;
+		margin-bottom: 0.5rem;
 		.photos {
-		   border-top: 0.01rem solid #D8DFF0;
-		   padding: 0.2rem 0.25rem;
+		   /*border-top: 0.01rem solid #D8DFF0;*/
+		   padding: 0.2rem 0 0.2rem 0.3rem;
 		   color: #1A2642;
-		   h4 {
-		     font-size: 0.28rem;
-		     font-weight: normal;
-		     margin-bottom: 0.2rem;
+		   .awards-title{
+		   		padding-bottom: 0.23rem;
+		   		border-bottom: 1px solid #F3F3F3;
+		   		.border{
+		   				width: 0.06rem;
+		   				height: 0.3rem;
+		   				background-color: #E32921;
+		   				border-radius: 0.03rem;
+		   				margin-right: 0.16rem;
+		   		}
+		   		h4 {
+		   		  	font-size: 0.3rem;
+		   		  	line-height: 0.3rem;
+		   		}
 		   }
+		   
 	   		.life{
-	   			background: #F5F6FA;
-	   			width: 1.6rem;
-	   			height: 1.6rem;
+	   			margin-top: 0.3rem;
+	   			background: #fff;
+	   			width: 46%;
+	   			height: 2.1rem;
 	   			text-align: center;
 	   			position: relative;
 	   			float: left;
-	   			margin-right: 0.2rem;
+	   			margin-right: 0.16rem;
 	   			margin-bottom: 0.15rem;
+	   			border-radius: 0.06rem;
+	   			border: 1px solid #E1E1E1;
+	   			.add{
+	   				width: 20%;
+	   				margin: 0.4rem auto;
+	   			}
 	   			.gbx{
 	   				position: absolute;
 	   				right: -0.1rem;
@@ -187,12 +221,13 @@
 	   			}
 	           	.bigPic{
 	           		position: absolute;
-        			width: 95%;
-        			height: 95%;
+        			width: 100%;
+        			height: 100%;
         			left: 50%;
         			top: 50%;
         			transform: translate(-50%,-50%);
         			overflow: hidden;
+        			border-radius: 0.06rem;
 	   	     		img{
 	   	     			width: 100%;
 	   	     			height: auto;
@@ -220,30 +255,33 @@
 	   		.clear{
 	   		    clear:both;
 	   		}
-		   	
-
-
-		   .preposition {
-		     color: #1a5ae2;
-		   }
-		   .radio{
-		   		margin-top: 0.15rem;
-		   		input{
-		   			vertical-align: middle;
-		   		}
-		   }
+		   
 		}
-		
+	}
+
+	.radio{
+		text-align: center;
+		margin-top: 0.5rem;
+		padding-bottom: 0.35rem;
+		font-size: 0.26rem;
+		input{
+			vertical-align: middle;
+		}
+		.preposition {
+	     	color: #004FE1;
+	    }
 	}
 
 	.foot {
-	  width: 100%;
-	  height: 0.78rem;
-	  background-color: #FF5365;
-	  color: #fff;
-	  font-size: 0.3rem;
-	  text-align: center;
-	  line-height: 0.78rem;
+		position: fixed;
+		width: 100%;
+		height: 0.78rem;
+		background-color: #E32921;
+		color: #fff;
+		font-size: 0.3rem;
+		text-align: center;
+		line-height: 0.78rem;
+		bottom: 0;
 	}
 
 	.dia_top {
@@ -274,7 +312,7 @@
 			border-top: none;
 		}
 		.weui-cell{
-			border-bottom: 0.01rem solid #D8DFF0;
+			/*border-bottom: 0.01rem solid #F5F5F5;*/
 		}
 		.weui-label{
 			width: 1.4rem;
@@ -300,14 +338,15 @@
 	.photos{
 		.weui-cells{
 			margin-top: 0;
+			margin-right: 0.24rem;
 		}
 		.weui-textarea{
 			color: #1A2642;
 			font-size: 0.28rem;
 		}
 		.vux-x-textarea.weui-cell {
-			border-radius: 0.1rem;
-			border: 0.01rem solid #D8DFF0;
+			border-radius: 0.06rem;
+			border: 1px solid #F5F5F5;
 		}
 	} 
 	.dialog{

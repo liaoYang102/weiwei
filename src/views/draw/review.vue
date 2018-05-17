@@ -155,11 +155,10 @@
 }
 .drawList{
 	width: 94.7%;
+	margin: 0.2rem auto 0.24rem auto;
 	background: #fff;
 	border-radius: 0.08rem;
-	padding-bottom: 0.42rem;
 	padding-top: 0.36rem;
-	margin: 0 auto;
 	.wonderful {
 	  text-align: center;
 	  width: 100%;
