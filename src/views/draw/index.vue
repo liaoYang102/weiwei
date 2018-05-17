@@ -144,9 +144,6 @@
 .wrapper {
 	height: 100%;
 	overflow: hidden;
-	.content{
-		padding-bottom: 0.24rem;
-	}
 }
 .head {
   	width: 100%;
@@ -247,10 +244,9 @@
 
 .drawList{
 	width: 94.7%;
-	margin: 0.2rem auto 0 auto;
+	margin: 0.2rem auto 0.24rem auto;
 	background: #fff;
 	border-radius: 0.08rem;
-	padding-bottom: 0.42rem;
 	padding-top: 0.36rem;
 	.wonderful {
 	  text-align: center;

@@ -19,18 +19,17 @@
 					</div>
 				</div>-->
 				<div class="notice">
-					<img src="../assets/images/index/notice.png" alt="">
+					<div class="notNew">CGC快报</div>
+					<!-- <img src="../assets/images/index/notice.png" alt=""> -->
 					<swiper :options="noticeOption" class="noticeswiper">
 						<swiper-slide v-for="item in num">
 							<p class="noticeText">
-								厉害了！超强拼假省钱攻略
-							</p>
-							<p class="noticeText">
-								<!--<span class="label">活动</span>-->
-								美国人的棚子情节
+								<span class="label">热门</span> 
+								测试文章
 							</p>
 						</swiper-slide>
 					</swiper>
+					<div class="notMore">| &nbsp;更多</div>
 				</div>
 				<div class="lottery">
 					<img class="auto-img" src="../assets/images/index/group.png" alt="">
@@ -459,12 +458,23 @@
 		}
 		/*通告模块*/
 		.notice {
-			width: 100%;
 			height: 0.95rem;
 			margin-bottom: 0.2rem;
 			background-color: #fff;
-			padding-top: 0.25rem;
 			padding-left: 0.45rem;
+			padding-right: 0.25rem;
+			overflow: hidden;
+			display: flex;
+			line-height: 0.95rem;
+			.notNew {
+			    font-size: 0.24rem;
+			    font-weight: 700;
+			    color: #1A2642;
+			}
+			.notMore {
+				color: #90A2C7;
+			    font-size: 0.22rem;
+			}
 			img {
 				float: left;
 				width: 0.6rem;

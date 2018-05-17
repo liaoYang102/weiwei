@@ -1,6 +1,6 @@
 <template>
 	<div class="meai_detail">
-		<settingHeader :title="title"></settingHeader>
+		<!-- <settingHeader :title="title"></settingHeader> -->
 		<div class="wrapper" ref="wrapper">
 			<div class="content">
 				
