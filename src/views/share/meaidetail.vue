@@ -122,7 +122,7 @@
 			          let rect = thumbnail.getBoundingClientRect()
 			          return {x: rect.left, y: rect.top + pageYScroll, w: rect.width}
 			        }
-		      	},
+		      	},  
 		      	showNomore: false
 			}
 				
