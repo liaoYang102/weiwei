@@ -191,7 +191,7 @@
 			padding-left: 0.7rem;
 			line-height: 1rem;
 			font-size: 0.28rem;
-			color:##1A1A1A;
+			color:#1A1A1A;
 			.color{
 				color:#f45656;
 			}
