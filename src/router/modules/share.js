@@ -11,6 +11,7 @@ import OrderSuccess from '@/views/share/orderSuccess'
 import OrderDetail from '@/views/share/orderDetail'
 import OrderEval from '@/views/share/orderEval'
 import UseTime from '@/views/share/usetime'
+import Qrcode from '@/views/share/qrcode'
 
 
 const share =[
@@ -125,6 +126,14 @@ const share =[
 		component:UseTime,
 		meta: {
 			title:'使用时间'
+		}
+	},
+	{
+		path:'/share/qrcode',//二维码
+		name:'shareQrcode',
+		component:Qrcode,
+		meta: {
+			title:'二维码'
 		}
 	}
 ]
