@@ -16,15 +16,29 @@ axios.defaults.withCredentials = true // 允许请求携带token
 axios.interceptors.request.use(config => {
 	// isLoading方法
 	Vue.$isload.show()
-	//	let sign, token
-	//	let timestamp = Math.round(new Date().getTime() / 1000)
-	//	sign = MD5(config.url + timestamp)
-	//	config.headers = {
-	//		'Content-Type': 'application/json;charset=utf-8',
-	//		'timestamp': timestamp,
-	//		'sign': sign
-	//	}
-
+	if(sessionStorage.getItem('token')) {
+		let sign, token
+		let timestamp = Math.round(new Date().getTime() / 1000)
+		sign = MD5(config.url + timestamp + '123456')
+		token = sessionStorage.getItem('token')
+		config.headers = {
+			'Content-Type': 'application/json;charset=utf-8',
+			'timestamp': timestamp,
+			'sign': sign,
+			'token': token
+		}
+	} else {
+		let sign, token
+		let timestamp = Math.round(new Date().getTime() / 1000)
+		sign = MD5(config.url + timestamp)
+		token = sessionStorage.getItem('token')
+		config.headers = {
+			'Content-Type': 'application/json;charset=utf-8',
+			'timestamp': timestamp,
+			'sign': sign,
+			'token': token
+		}
+	}
 	return config
 }, error => {
 	return Promise.reject(error)
@@ -55,4 +69,12 @@ axios.interceptors.response.use(res => { // 响应成功关闭loading
 	return Promise.reject(error)
 })
 
+axios.post('/datacenter/public/v1/login', {
+	audience: 'platform',
+	name: '123',
+	passwd: '456'
+}).then((res) => {
+	console.log(res)
+	sessionStorage.setItem('token', res.data.data.token)
+})
 export default axios

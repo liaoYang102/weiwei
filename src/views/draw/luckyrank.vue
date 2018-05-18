@@ -9,10 +9,10 @@
 		    <div class="former-three">
 		    	<div class="rank-top">
 			    	<li>
-		    		    <div class="rank-pic">
+		    		    <div class="rank-pic" v-if="rankList.lists.length>1">
 		    		        <img src="../../assets/images/draw/2.png" alt="">
 		    		        <div class="pic-move">
-		    		            <img src="../../assets/images/draw/photo1.png" alt="">
+		    		            <img :src="rankList.lists[1].thumb" alt="">
 		    		        </div>
 		    		        <div class="ranking">
 		    		        	<img src="../../assets/images/draw/two.png">
@@ -21,10 +21,10 @@
 			    	</li>
 
 			    	<li>
-		    		    <div class="rank-pic">
+		    		    <div class="rank-pic"  v-if="rankList.lists.length>0">
 		    		        <img src="../../assets/images/draw/1.png" alt="">
 		    		        <div class="pic-move">
-		    		            <img src="../../assets/images/draw/photo1.png" alt="">
+		    		            <img :src="rankList.lists[0].thumb" alt="">
 		    		        </div>
 		    		        <div class="ranking">
 		    		        	<img src="../../assets/images/draw/one.png">
@@ -33,10 +33,10 @@
 			    	</li>
 
 			    	<li>
-		    		    <div class="rank-pic">
+		    		    <div class="rank-pic"  v-if="rankList.lists.length>2">
 		    		        <img src="../../assets/images/draw/3.png" alt="">
 		    		        <div class="pic-move">
-		    		            <img src="../../assets/images/draw/photo1.png" alt="">
+		    		            <img :src="rankList.lists[2].thumb" alt="">
 		    		        </div>
 		    		        <div class="ranking">
 		    		        	<img src="../../assets/images/draw/three.png">
@@ -46,10 +46,10 @@
 		    	</div>
 		    	
     		    <div class="rank-content">
-    		    	<div class="content-float" v-for="(item,index) in rankList" v-if="index<3">
-    		    		<div class="rank-phone">{{ item.phone}}</div>
+    		    	<div class="content-float" v-for="(item,index) in rankList.lists" :key="index" v-if="index<3">
+    		    		<div class="rank-phone">{{ item.mobile}}</div>
     		    		<div class="rank-money" v-if="tab2 == true">{{ item.money}}</div>
-    		    		<div class="rank-money" v-else>{{ item.num}}</div>
+    		    		<div class="rank-money" v-else>{{ item.number}}</div>
     		    	</div>
     		        
 	    		</div>
@@ -61,12 +61,12 @@
     				<!--数据列表 -->
     			        <ul  v-if="tab2 == true">
     		            	<group>
-    							<cell v-for="(item,index) in rankList" v-if="index>2" class="item">
+    							<cell v-for="(item,index) in rankList.lists" :key="index" v-if="index>2" class="item">
     							    <div class="rankList">
     							        <div class="rankList-left">{{ index+1 }}</div>
     							        <div class="rankList-center">
-    							            <img src="../../assets/images/draw/photo1.png" alt="">
-    							            <div>{{item.phone}}</div>
+    							            <img :src="item.thumb" alt="">
+    							            <div>{{item.mobile}}</div>
     							        </div>
     							        <div class="pr">{{ item.money}}</div>
     							    </div>
@@ -75,14 +75,14 @@
     			        </ul>
     			        <ul v-else>
     			            <group>
-    							<cell v-for="(item,index) in rankList" v-if="index>2" class="item">
+    							<cell v-for="(item,index) in rankList.lists" :key="index" v-if="index>2" class="item">
     				                <div class="rankList">
     				                    <div class="rankList-left">{{ index+1 }}</div>
     				                    <div class="rankList-center">
-    				                        <img src="../../assets/images/draw/photo1.png" alt="">
-    				                        <div>{{item.phone}}</div>
+    				                        <img :src="item.thumb" alt="">
+    				                        <div>{{item.mobile}}</div>
     				                    </div>
-    				                    <div class="rankList-right">{{ item.num}}</div>
+    				                    <div class="rankList-right">{{ item.number}}</div>
     				                </div>
     			            	</cell>
     						</group>
@@ -110,6 +110,7 @@
 	import Loading from '../../components/loading'
 	import noMore from '../../components/noMore'
 	import drawHeader from './components/header'
+	import url from '../../config/url'
 	export default {
 		data(){
 			return {
@@ -117,43 +118,42 @@
 				rankData: [0],
                 tab1: true,
                 tab2: false,
-                rankList:[
-                    { phone : '132****0224', money: '￥73,325', num: '30'},
-                    { phone : '137****3256', money: '￥80,031', num: '20'},
-                    { phone : '138****0124', money: '￥75,654', num: '10'},
-                    { phone : '151****6545', money: '￥69,654', num: '45'},
-                    { phone : '159****3256', money: '￥60,887', num: '40'},
-                    { phone : '138****6009', money: '￥50,987', num: '30'},
-                    { phone : '151****6230', money: '￥49,658', num: '20'},
-                    { phone : '135****3256', money: '￥45,325', num: '10'},
-                    { phone : '132****0224', money: '￥73,325', num: '29'},
-                    { phone : '137****3256', money: '￥80,031', num: '50'},
-                    { phone : '138****0124', money: '￥75,654', num: '50'},
-                    { phone : '151****6545', money: '￥69,654', num: '45'},
-                    { phone : '159****3256', money: '￥60,887', num: '40'},
-                    { phone : '138****6009', money: '￥50,987', num: '30'},
-                    { phone : '151****6230', money: '￥49,658', num: '20'},
-                    { phone : '135****3256', money: '￥45,325', num: '10'}
-                ],
+                rankList:{
+                	lists:[]
+                },
                 show:false,
 				showNomore: false,
+				moneyList:{},
+				numberList: {},
+				page: 1,
 			}
 		},
 		components:{
 			ButtonTab,ButtonTabItem,Loading,noMore,drawHeader
 		},
+		beforeCreate:function(){
+			// this.getLuckRankData()
+		},
+		created:function(){
+			this.getLuckRankData()
+		},
 		mounted() {
 			this.InitScroll()
-			console.log('--',this.scroll)
 		},
 		methods:{
 			showNumber(){
                 this.tab1 = true;
                 this.tab2 = false;
+                this.rankList = this.numberList;
+                this.show = false;
+                this.showNomore = false;
 			},
 			showMoney(){
 				this.tab1 = false;
 				this.tab2 = true;
+				this.rankList = this.moneyList;
+				this.show = false;
+				this.showNomore = false;
 			},
 	        InitScroll() {
 				this.$nextTick(() => {
@@ -172,6 +172,7 @@
 								this.scroll.refresh();
 							});
 						})
+						console.log('----22222222',this.scroll)
 					} else {
 						this.scroll.refresh()
 					}
@@ -179,18 +180,64 @@
 
 			},
 			LoadData() {
+				this.page ++;
 				var _this = this
-				_this.show = true;
+				_this.show = true
+				let len = _this.rankList.lists.length;
+				let par = new URLSearchParams()
+				par.append('page',_this.page)
 				if(_this.showNomore){
 					_this.show = false;
 					return 
 				}
-				_this.showLoading = true;
+				if(this.tab1){
+					par.append('sort', '0')
+				}else{
+					par.append('sort', '1')
+				}
 				setTimeout(function(){
 					_this.show = false;
-					_this.showNomore = true;
-				},3000)
-			}
+					
+					_this.$http.post(url.draw.getLuckRankLists,par).then(function (response) {
+						if( response.status == 200 && response.data != null&&response.data.result.page == _this.page){
+							_this.rankList.lists = _this.rankList.lists.concat(response.data.result.lists)
+						}
+						console.log(_this.rankList);
+						if(len == _this.rankList.lists.length){
+							_this.showNomore = true;
+						}
+					}).catch(function (error) {
+						console.log(error);
+					});
+				},1000)
+			},
+			getLuckRankData(){
+				let _this = this;
+				let par = new URLSearchParams()
+					par.append('pageSize', 10)
+				var params = new URLSearchParams()
+					params.append('pageSize', 10)
+				 
+				this.$http.post(url.draw.getLuckRankLists,par).then(function (response) {
+					if( response.status == 200 && response.data != null){
+						_this.numberList = response.data.result
+						_this.rankList = _this.numberList;
+					}
+					console.log(_this.numberList);
+				}).catch(function (error) {
+					console.log(error);
+				});
+				params.append('sort', '1')
+				this.$http.post(url.draw.getLuckRankLists,params).then(function (response) {
+					if( response.status == 200 && response.data != null){
+						_this.moneyList = response.data.result
+					}
+					console.log(_this.moneyList);
+				}).catch(function (error) {
+					console.log(error);
+				});
+				
+			},
 		}
 	}
 </script>
@@ -246,6 +293,7 @@
 	        left: 4.5%;
 	        img{
     	        width: 1.88rem;
+    	        height: 1.88rem;
     	        vertical-align: middle;
     	    }
 	    }
@@ -262,7 +310,9 @@
 		        left: 4.3%;
 		        img{
         	        width: 1.47rem;
+        	        height: 1.47rem;
         	        vertical-align: middle;
+        	        border-radius: 50%;
         	    }
 		    }
 		    .ranking{
@@ -300,6 +350,7 @@
     		.rank-money{
     			font-size: 0.32rem;
     		    color: #E32921;
+    		    font-weight: bold;
     		}
     	}
 	}
@@ -321,11 +372,14 @@
 	        float: left;
 	        margin: auto;
 	        img{
-	            width: 19%;
+	            width: 0.8rem;
+	            height: 0.8rem;
 	            float: left;
 	            margin-top: 0.2rem;
 	            margin-right: 0.4rem;
 	            vertical-align: middle;
+	            border-radius: 50%;
+
 	        }
 	        div{
 	        	line-height: 1.2rem;

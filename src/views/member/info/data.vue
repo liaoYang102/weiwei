@@ -53,10 +53,8 @@
 			</div>
 		</div>
 
-		<actionsheet v-model="showsex" theme="ios" :menus="sexlist" @on-click-menu="sexclick" show-cancel>
-		</actionsheet>
-		<actionsheet v-model="showrec" theme="ios" :menus="reclist" @on-click-menu="recclick" show-cancel>
-		</actionsheet>
+		<actionsheet v-model="showsex" theme="ios" :menus="sexlist" @on-click-menu="sexclick" show-cancel></actionsheet>
+		<actionsheet v-model="showrec" theme="ios" :menus="reclist" @on-click-menu="recclick" show-cancel></actionsheet>
 	</div>
 </template>
 
@@ -82,14 +80,21 @@
 				backImages: [],
 				pindex: 0,
 				sex: '', //性别
+				gender: '',
+				xl: '',
 				birthday: '', //生日
 				education: '', //学历
 				info: {},
-				imgdata: null
+				imgdata: null,
+				token: '',
+				fileIdList: [],
+				instance: ''
 			}
 		},
 		created() {
 			this.getUserInfo()
+
+			var _this = this
 		},
 		mounted() {
 
@@ -97,9 +102,10 @@
 		methods: {
 			getUserInfo() {
 				var _this = this
-				_this.$http.get(_this.url.user.getUserInfo, {
+
+				this.$http.get(_this.url.user.getUserInfo, {
 					params: {
-						userId: 1
+						userId: 2
 					}
 				}).then((res) => {
 					if(res.status == '00000000') {
@@ -114,6 +120,7 @@
 			contactChange(val) {},
 			contactnumChange(val) {},
 			sexclick(val) {
+				this.gender = val
 				if(val == 0) {
 					this.sex = '男'
 				} else if(val == 1) {
@@ -123,6 +130,7 @@
 				}
 			},
 			recclick(val) {
+				this.xl = val
 				if(val == 0) {
 					this.education = '小学'
 				} else if(val == 1) {
@@ -159,33 +167,45 @@
 						return
 					} else {
 						// _this.backImages = []
-						var reader = new FileReader();
-						reader.readAsDataURL(file[i]); // 读出 base64
+						var reader = new FileReader()
+						reader.readAsDataURL(file[i]) // 读出 base64
 						reader.onloadend = function(e) {
 							// 图片的 base64 格式, 可以直接当成 img 的 src 属性值        
-							var dataURL = reader.result;
+							var dataURL = reader.result
 							if(_this.backImages.length < 3) {
 								_this.backImages.push(e.target.result)
 							}
-						};
-
-						var imgdata = new FormData()
-						imgdata.append('img' + i, file[i])
-
-						var config = {
-							'Content-Type': 'multipart/form-data'
 						}
+
+						var imgdata = file[i]
+
+						let sign, token
+						let timestamp = Math.round(new Date().getTime() / 1000)
+						sign = _this.MD5('/datacenter/v1/fileupload/image' + timestamp + "123456")
+						token = sessionStorage.getItem('token')
+						var instance = _this.$http.create({
+							headers: {
+								'Content-Type': 'multipart/form-data',
+								'timestamp': timestamp,
+								'sign': sign,
+								'token': token
+							}
+						})
 
 						var data = {
 							type: 'user',
 							name: '1',
-							file: imgdata,
-							config:config
+							file: imgdata
 						}
+						let formdata = new FormData()
 
-						_this.$http.post(_this.url.user.fileuploadImage,data).then((res) => {
+						formdata.append("type", data.type)
+						formdata.append("name", data.name)
+						formdata.append("file", data.file)
+
+						instance.post(_this.url.user.fileuploadImage, formdata).then((res) => {
 							if(res.status == '00000000') {
-								_this.info = res.data
+								_this.fileIdList.push(res.data.data.fileId)
 							}
 						})
 					}
@@ -211,16 +231,17 @@
 			changeUserInfo() {
 				var _this = this
 				var data = {
-					gender: _this.sex,
+					gender: _this.gender,
 					birthday: _this.mainApp.frDateTimehp.getDateTimesTamp(_this.birthday),
-					education: _this.education,
+					education: _this.xl,
 					wechat: _this.wxnum,
 					qq: _this.qq,
 					alipay: _this.zfbnum,
 					email: _this.mail,
 					egmobile: _this.contactnum,
 					emergency: _this.contact,
-					userId: 1
+					imageIds:_this.fileIdList,
+					userId: 2
 				}
 				_this.$http.post(_this.url.user.changeUserInfo, data).then((res) => {
 					if(res.status == '00000000') {

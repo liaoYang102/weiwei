@@ -5,7 +5,7 @@
 			<x-input class="input-item" v-model="name" placeholder="请输入修改的用户名" type="text" :max="20" :required="true"></x-input>
 		</group>
 		<div class="tip">
-			<div class="add-btn" @click.native="submit">保存</div>
+			<div class="add-btn" @click="submit">保存</div>
 		</div>
 	</div>
 </template>
@@ -25,7 +25,18 @@
 
 		},
 		methods: {
-			submit() {}
+			submit() {
+				let _this = this
+				let param = {
+					userId: 2,
+					nickname: _this.name
+					// userToken: sessionStorage['token']
+				}
+				console.log(param)
+				_this.$http.post(_this.url.user.changeNickname, param).then(resp=>{
+					_this.$router.go(-1)
+				})
+			}
 		},
 		components: {
 			settingHeader,
