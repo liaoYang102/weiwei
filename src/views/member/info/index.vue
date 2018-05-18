@@ -42,11 +42,27 @@
 				data5: 88
 			}
 		},
-		created() {},
+		created() {
+
+			this.getUserInfo()
+
+		},
 		mounted() {
 
 		},
 		methods: {
+			//获取用户信息
+			getUserInfo() {
+				var _this = this
+				_this.$http.get(_this.url.user.getBasicInfo, {
+					params: {
+						userId: 1
+					}
+				}).then((res) => {
+					console.log(res)
+				})
+			},
+
 			nameChange() {
 
 			},

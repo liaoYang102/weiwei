@@ -2,10 +2,20 @@
 	<div class="content">
 		<settingHeader :title="title"></settingHeader>
 		<group :gutter="0" class="input-div">
-			<x-input class="address-item" placeholder="姓名" value="张广" required></x-input>
-			<x-input class="address-item" placeholder="手机号码" :max="11" type="number" is-type="china-mobile" required></x-input>
-			<x-address :list="list" class="address-item address-check" v-model="value_0_1" title="" placeholder="请选择地址" value-text-align="left"></x-address>
-			<x-input class="address-item" placeholder="详细地址" :max="11" type="text" required></x-input>
+			<x-input class="address-item" placeholder="姓名" v-model="name" required></x-input>
+			<x-input class="address-item" placeholder="联系方式" type="text" v-model="vPhone" required></x-input>
+			<x-address :list="list" class="address-item address-check" v-model="address" title='' placeholder="请选择地址" value-text-align="left"></x-address>
+			<x-input class="address-item" placeholder="详细地址" v-model="xaddress" :max="11" type="text" required></x-input>
+			<x-input class="address-item" placeholder="邮箱" v-model="email" type="text"></x-input>
+			<x-textarea class="address-tt" title="备注 :" v-model="remarks"></x-textarea>
+			<x-textarea class="address-tt" :height="40" title="标签 :" v-model="label" @on-change="isLabel"></x-textarea>
+			<div class="label-box">
+				<div class="twoClass">
+					<div class="type-item" v-for="(item,index) in twoClass">
+						<div :class="{'twoActive':twoIndex === index}" @click="twoChange(index,item)">{{item}}</div>
+					</div>
+				</div>
+			</div>
 		</group>
 		<div class="tip">
 			<div class="add-btn">保存</div>
@@ -14,60 +24,98 @@
 </template>
 
 <script>
-	import { Group, Cell, XInput, XAddress, ChinaAddressV4Data, XButton } from 'vux'
+	import { Group, Cell, XInput, XAddress, ChinaAddressV4Data, XButton, XTextarea } from 'vux'
 	import settingHeader from '../../../components/setting_header'
 	export default {
 		data() {
 			return {
 				title: '编辑收货地址',
-				name: '张广',
+				name: '',
+				vPhone: '',
 				list: [],
-				value_0_1: []
+				address: [],
+				xaddress: '',
+				email: '',
+				remarks: '',
+				label: '',
+				twoClass: ['家', '公司', '代收点', '丰巢'],
+				twoIndex: '',
 			}
 		},
 		created() {
 			var _this = this
 			//全局地址数据
-			_this.$nextTick(function() {
-				_this.$http('/index.php?i=2&c=entry&m=mx_shop&do=mobile&r=area.getArea')
-					.then(function(res) {
-						//					return new Promise((resolve, reject) => {
-						//						resolve(res)
-						//					})
-											console.log(res)
-						_this.list = res.data.result.data
-
-					})
-					.catch(function(res) {
-						if(res instanceof Error) {
-						}
-					})
-				//				data.then(function(res) {
-				//					_this.list = res.data.result.data
-				//				})	
-				
-				
-				_this.$http('/index.php?i=2&c=entry&m=mx_shop&do=app&r=data_center.cgc_report').then(function(res){
-//					alert(res.data)
-				})
-			})
 		},
-		methods: {},
+		methods: {
+			twoChange(index, item) {
+				this.twoIndex = index
+				this.label = item
+			},
+			isLabel() {
+				
+			}
+		},
 		components: {
 			settingHeader,
 			Group,
 			Cell,
 			XInput,
 			XAddress,
-			XButton
+			XButton,
+			XTextarea
+		},
+		watch: {
+			vPhone() {
+				if(!(/0\d{2,3}-\d{7,8}/).test(this.vPhone)) {
+					console.log('手机号码')
+				} else {
+					console.log('固定电话')
+				}
+			}
 		}
 	}
 </script>
 
 <style lang="less" scoped>
+	.label-box {
+		padding: 0px 15px;
+		.twoClass {
+			display: flex;
+			flex-wrap: wrap;
+			padding: 0.2rem 0;
+			justify-content: flex-start;
+			.type-item {
+				width: 25%;
+				text-align: center;
+				box-sizing: border-box;
+				padding: 0rem 0.25rem;
+				margin-bottom: 0.1rem;
+				div {
+					display: inline-block;
+					width: 100%;
+					height: 0.5rem;
+					line-height: 0.55rem;
+					background: #eaeaea;
+					border-radius: 2px;
+					font-size: 0.20rem;
+				}
+				.twoActive {
+					background: #336FFF;
+					color: white;
+				}
+			}
+		}
+	}
+	
+	.address-tt {
+		font-family: PingFangSC-Regular;
+		font-size: 0.28rem!important;
+		color: #1A2642!important;
+	}
+	
 	.address-item {
 		font-family: PingFangSC-Regular;
-		font-size: 0.3rem!important;
+		font-size: 0.28rem!important;
 		color: #1A2642;
 		letter-spacing: 0;
 		padding-top: 0;

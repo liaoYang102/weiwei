@@ -28,7 +28,6 @@
 		},
 		methods: {
 			changeBack(){
-				this.$store.state.vux.back= false;
 				this.$router.go(-1)
 			}
 		}

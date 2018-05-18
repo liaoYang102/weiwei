@@ -39,7 +39,6 @@ import earningscurrency from '@/views/member/earnings/currency'
 import earningscredit from '@/views/member/earnings/credit'
 import record from '@/views/member/earnings/record'
 import reward from '@/views/member/earnings/reward'
-import earnings_detail from '@/views/member/earnings/detail'
 import rule from '@/views/member/earnings/rule'
 import logs from '@/views/member/earnings/logs'
 import profit from '@/views/member/earnings/profit'
@@ -143,7 +142,7 @@ const memberModule = [{
 		component: member,
 		meta: {
 			navShow: true,
-			navIndex: 4,
+			navIndex: 3,
 			title: '个人中心'
 		}
 	},
@@ -358,13 +357,6 @@ const memberModule = [{
 		component: reward,
 		meta: {
 			title: '奖励'
-		}
-	}, {
-		path: '/member/earnings/detail',
-		name: 'earnings_detail',
-		component: earnings_detail,
-		meta: {
-			title: '积分详情'
 		}
 	},{
 		path: '/member/earnings/rule',

@@ -166,7 +166,7 @@
 	.recharge-box {
 		height: 100%;
 		position: relative;
-		font-family: MicrosoftYaHei;
+		font-family: PingFangSC-Medium;
 		background-color: #F5F6FA;
 		.item {
 			padding: 0 0.25rem;

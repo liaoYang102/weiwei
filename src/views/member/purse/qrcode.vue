@@ -83,7 +83,7 @@
 		data() {
 			return {
 				title: '我的二维码',
-				grade: 0,
+				grade: 1,
 			}
 		},
 		created() {
