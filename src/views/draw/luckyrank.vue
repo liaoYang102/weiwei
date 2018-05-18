@@ -199,7 +199,7 @@
 					_this.show = false;
 					
 					_this.$http.post(url.draw.getLuckRankLists,par).then(function (response) {
-						if( response.status == 200 && response.data != null){
+						if( response.status == 200 && response.data != null&&response.data.result.page == _this.page){
 							_this.rankList.lists = _this.rankList.lists.concat(response.data.result.lists)
 						}
 						console.log(_this.rankList);
@@ -214,9 +214,9 @@
 			getLuckRankData(){
 				let _this = this;
 				let par = new URLSearchParams()
-					par.append('pagesize', '10')
+					par.append('pageSize', 10)
 				var params = new URLSearchParams()
-					params.append('pagesize', '10')
+					params.append('pageSize', 10)
 				 
 				this.$http.post(url.draw.getLuckRankLists,par).then(function (response) {
 					if( response.status == 200 && response.data != null){
