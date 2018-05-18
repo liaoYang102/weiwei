@@ -51,23 +51,24 @@
 		methods: {
 			submit() {
 				var _this = this
-				
-				console.log(_this.mainApp.isphone(_this.mobile))
-				return false
 
-				this.$http.post('/datacenter/public/v1/login', {
-					audience: 'platform',
-					platformId: 'platform',
-					mobile: _this.mobile,
-					passwd: _this.password
-				}).then(function(res) {
+				if(_this.mainApp.isphone(_this.mobile)) {
+					_this.$http.post(this.url.user.userLogin, {
+						platformId: '1',
+						mobile: _this.mobile,
+						passwd: _this.password
+					}).then(function(res) {
+						console.log(res)
+					})
+				} else {
 					_this.$vux.toast.show({
-						text: res.data.message,
+						width: '50%',
 						type: 'text',
 						position: 'middle',
-						width:'50%'
+						text: '用户名格式不正确'
 					})
-				})
+				}
+
 			},
 			submit2() {
 				var _this = this
@@ -124,6 +125,12 @@
 					_this.$refs.phone.blur()
 					_this.$refs.password.focus()
 					this.isClick = false
+					
+					_this.$http(_this.url.user.checkUserExistsByMobile,{
+						mobile:_this.mobile
+					}).then(res=>{
+						console.log(res)
+					})
 				}
 			},
 			onConfirm() {
