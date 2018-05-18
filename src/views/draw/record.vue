@@ -118,15 +118,7 @@
 			        									<!-- <span class="winMoney right">{{item.date}}元</span> -->
 			        								</h4>
 			        								<div :class="[index === 0 ? 'recent' : '']" class='bottom flex'>
-			        									<div class="rank flex">
-			        										<div>{{item.date}}</div>
-			        									</div>
-			        									<!-- <div class="winStatus2" v-if="item.winStatus == '领取'">
-			        										<img src="../../assets/images/draw/receiveIcon.png">
-			        										<span>{{item.winStatus}}</span>
-			        									</div>
-			        									<div class="winStatus" :class="[index === 0 ? 'recent' : '']" v-else>{{item.winStatus}}</div> -->
-			        									
+			        									<div class="rankDate">{{item.date}}</div>
 			        								</div>
 			        								<div class="clear"></div>
 			        							</timeline-item>
@@ -309,8 +301,7 @@
 	}
 	.time-line{
 		background: #FFF5F6;
-		width: 94.7%;
-		margin: 0.2rem auto 0.3rem auto;
+		width: 100%;
 		border-radius: 0.06rem;
 		height: 75%;
 		color: #666666;
@@ -319,53 +310,9 @@
 		.tl-content{
 			font-size: 0.28rem;
 		}
-		.winMoney{
-			font-size: 0.36rem;
-			font-weight: 700;
-			color: #333333;
-		}
-		
-		.rank{
+		.rankDate{
 			color: #666666;
-			width: 70%;
-			line-height: 0.38rem;
-		}
-		.ranks{
-			background: linear-gradient(-121.4deg,#FDC95A,#F2AE40);
-			border-radius: 0.04rem;
-			height: 0.38rem;
-			width: 0.97rem;
-			color: #fff;
-			margin-left: 0.2rem;
 			font-size: 0.26rem;
-			text-align: center;
-			line-height: 0.38rem;
-		}
-		.winStatus{
-			flex: 1;
-			color: #A0A0A0;
-			text-align: right;
-		}
-		.two{
-			background: linear-gradient(-121.4deg,#E2E4E8,#C7CAD1);
-		}
-		.three{
-			background: linear-gradient(-121.4deg,#F9D0B5,#D8AA8B);
-		}
-		.four{
-			background: linear-gradient(-121.4deg,#C0D3FC,#90A2C7);
-		}
-		.winStatus2{
-			flex: 1;
-			color: #E32921;
-			text-align: right;
-			img{
-				width: 20%;
-				vertical-align: middle;
-			}
-			span{
-				vertical-align: middle;
-			}
 		}
 		.recent{
 			color: #333333;
@@ -529,14 +476,14 @@
 					line-height: 0.59rem;
 					margin-bottom: 0.15rem;
 					color: #333333;
-					padding-top: 0.5rem;
+					padding-top: 0.45rem;
 				}
 				.note {
 					color: #666666;
 					padding: 0 0.5rem;
 					box-sizing: border-box;
 					font-size: 0.24rem;
-					margin-bottom: 0.6rem;
+					margin-bottom: 0.5rem;
 					span{
 						color: #E32921;
 					}
@@ -545,7 +492,7 @@
 					color: #666666;
 					font-size: 0.3rem;
 					text-align: center;
-					margin-top: 0.22rem;
+					margin-top: 0.2rem;
 					img{
 						width: 5%;
 						vertical-align: middle;
@@ -583,17 +530,17 @@
 	}
 
 	.time-line{
+		margin-top: 0.3rem;
 		.vux-timeline{
-			padding: 0.3rem;
-			margin-bottom: 0.2rem;
+			padding: 0.3rem 0.3rem 0 0.3rem;
 		}
 		.vux-timeline-item-content{
-			padding:0.05rem 0 0.2rem 0.5rem;
+			padding:0.05rem 0 0.15rem 0.5rem;
 		}
 		.bottom{
 			padding-bottom: 0.3rem;
 			border-bottom: none;
-			margin-top: 0.11rem;
+			margin-top: 0.05rem;
 		}
 		
 		.vux-timeline-item-color{
@@ -651,6 +598,7 @@
 			max-width: 78.67%;
 			z-index: 111111111111111111111111;
 			border-radius: 0.16rem; 
+			top: 46%;
 		}
 	}
 
