@@ -3,13 +3,36 @@
 		<x-header class="b-w" :left-options="{backText:''}" @on-click-more="edit">
 			<div class="tar-box">
 				<tab v-model="index" :line-width="2" active-color="#397df8" custom-bar-width="0.56rem">
-					<tab-item selected @on-item-click="active">店铺</tab-item>
+					<tab-item selected @on-item-click="active">联盟企业</tab-item>
+					<tab-item @on-item-click="active">联营企业</tab-item>
 					<tab-item @on-item-click="active">商品</tab-item>
 				</tab>
 			</div>
 			<div class="edit-btn" @click="edit" slot="right">{{isBj?'完成':'编辑'}}</div>
 		</x-header>
 		<swiper v-model="index" height="100vh" :show-dots="false" :threshold='150'>
+			<swiper-item>
+				<div class="store-list">
+					<div class="wrapper3" ref="wrapper3">
+						<div class="content">
+							<div class="list-item" v-for="(item,index) in storeList2" v-if="storeList2.length>0">
+								<div @click="changeStore2()">
+									<check-icon v-if="storeShow2" class="check-btn" :value.sync="item.ischeck"></check-icon>
+								</div>
+								<div class="img-box"><img :src="item.img" /></div>
+								<div class="pro-box">
+									<p>{{item.name}}</p>
+									<div class="storbtn-box">
+										<!-- <span>标签</span> --><span>关注人数：5850人</span>
+									</div>
+								</div>
+							</div>
+							<Loading v-if="show3"> </Loading>
+							<noData v-if="storeList2.length==0" :status="storeState" :stateText="noStore"></noData>
+						</div>
+					</div>
+				</div>
+			</swiper-item>
 			<swiper-item>
 				<div class="store-list">
 					<div class="wrapper2" ref="wrapper2">
@@ -69,8 +92,9 @@
 			<popup v-model="isBj" position="bottom" height="0.94rem" :show-mask="false">
 				<div class="bjBtn-box">
 					<div style="flex: 1;" @click="isallcheck">
-						<check-icon v-if="isBj && index==1" class="check-btn" :value.sync="allprCheck">全部商品 <span v-if="!allprCheck">已选<i>{{proidList.length}}</i>个商品</span></check-icon>
-						<check-icon v-if="isBj && index==0" class="check-btn" :value.sync="allstCheck">全部店铺<span v-if="!allstCheck">已选<i>{{storeidList.length}}</i>间店铺</span></check-icon>
+						<check-icon v-if="isBj && index==2" class="check-btn" :value.sync="allprCheck">全部商品 <span v-if="!allprCheck">已选<i>{{proidList.length}}</i>个商品</span></check-icon>
+						<check-icon v-if="isBj && index==1" class="check-btn" :value.sync="allstCheck">全部店铺<span v-if="!allstCheck">已选<i>{{storeidList.length}}</i>间店铺</span></check-icon>
+						<check-icon v-if="isBj && index==0" class="check-btn" :value.sync="allstCheck2">全部店铺<span v-if="!allstCheck2">已选<i>{{storeidList2.length}}</i>间店铺</span></check-icon>
 					</div>
 					<div class="qx-box">
 						<div class="add-btn">取消关注</div>
@@ -96,10 +120,12 @@
 				isBj: false,
 				proShow: false, //点击商品编辑
 				storeShow: false, //点击店铺编辑
+				storeShow2: false, //点击店铺编辑
 				onFetching: false,
 				show10: false,
 				allprCheck: false, //全选商品
 				allstCheck: false, //全选店铺
+				allstCheck2: false, //全选店铺
 				results: [], //搜索值
 				proList: [{
 						img: 'https://ss0.bdstatic.com/-0U0bnSm1A5BphGlnYG/tam-ogel/299c55e31d7f50ae4dc85faa90d6f445_121_121.jpg',
@@ -150,6 +176,27 @@
 						money: '50.0',
 						ischeck: false,
 						id: 2
+					},
+				],
+				storeList2: [{
+						img: 'https://ss0.bdstatic.com/-0U0bnSm1A5BphGlnYG/tam-ogel/299c55e31d7f50ae4dc85faa90d6f445_121_121.jpg',
+						name: '热风2018年小清新女士星星休闲双肩包拉链方形背包B52W8201',
+						money: '50.0',
+						ischeck: false,
+						id: 1
+					},
+					{
+						img: './static/member/login-img.png',
+						name: '热风2018年小清新女士星星休闲双肩包拉链方形背包B52W8201',
+						money: '50.0',
+						ischeck: false,
+						id: 2
+					}, {
+						img: 'https://ss0.bdstatic.com/-0U0bnSm1A5BphGlnYG/tam-ogel/299c55e31d7f50ae4dc85faa90d6f445_121_121.jpg',
+						name: '热风2018年小清新女士星星休闲双肩包拉链方形背包B52W8201',
+						money: '50.0',
+						ischeck: false,
+						id: 1
 					},
 				],
 				storeList: [{
@@ -216,8 +263,10 @@
 				],
 				proidList: [],
 				storeidList: [],
+				storeidList2: [],
 				show: false,
 				show2: false,
+				show3: false,
 				proState: 0,
 				storeState: 0,
 				noPro: '暂无商品',
@@ -263,9 +312,26 @@
 								this.scroll2.refresh();
 							});
 						})
+
+						this.scroll3 = new BScroll(this.$refs.wrapper2, {
+							click: true,
+							scrollY: true,
+							pullUpLoad: {
+								threshold: -30,
+							}
+						})
+						this.scroll3.on('pullingUp', (pos) => {
+							this.show3 = true;
+							this.LoadData3()
+							this.$nextTick(function() {
+								this.scroll2.finishPullUp();
+								this.scroll2.refresh();
+							});
+						})
 					} else {
 						this.scroll.refresh()
 						this.scroll2.refresh()
+						this.scroll3.refresh()
 					}
 				})
 
@@ -282,12 +348,19 @@
 					_this.show2 = false;
 				}, 3500)
 			},
+			LoadData3() {
+				let _this = this;
+				setTimeout(function() {
+					_this.show3 = false;
+				}, 3500)
+			},
 			//点击全选
 			isallcheck() {
 				this.proidList = [] //重置商品id数组
 				this.storeidList = [] //重置店铺id数组
+				this.storeidList2 = [] //重置店铺id数组
 
-				if(this.index == 1) {
+				if(this.index == 2) {
 					if(this.allprCheck == true) {
 						for(var i = 0; i < this.proList.length; i++) {
 							this.proList[i].ischeck = true
@@ -300,7 +373,20 @@
 						}
 					}
 					console.log(this.proidList, 'pro')
-				} else {
+				} else if(this.index == 0) {
+					if(this.allstCheck2 == true) {
+						for(var i = 0; i < this.storeList2.length; i++) {
+							this.storeList2[i].ischeck = true
+							this.storeidList2.push(this.storeList2[i].id)
+						}
+					} else {
+						for(var i = 0; i < this.storeList2.length; i++) {
+							this.storeList2[i].ischeck = false
+							this.storeidList2 = []
+						}
+					}
+					console.log(this.storeidList, 'store2')
+				}  else if(this.index == 1) {
 					if(this.allstCheck == true) {
 						for(var i = 0; i < this.storeList.length; i++) {
 							this.storeList[i].ischeck = true
@@ -331,8 +417,10 @@
 			edit() {
 				this.proidList = [] //重置商品id列表
 				this.storeidList = [] //重置店铺id列表
+				this.storeidList2 = [] //重置店铺id列表
 				this.allprCheck = false //重置全选
 				this.allstCheck = false
+				this.allstCheck2 = false
 
 				//重置原始数据
 				for(var i = 0; i < this.proList.length; i++) {
@@ -343,10 +431,12 @@
 				}
 
 				this.isBj = !this.isBj
-				if(this.index == 1) {
+				if(this.index == 2) {
 					this.proShow = !this.proShow
-				} else {
+				} else if(this.index == 1) {
 					this.storeShow = !this.storeShow
+				}else{
+					this.storeShow2 = !this.storeShow2
 				}
 			},
 			//商品选择
@@ -370,6 +460,17 @@
 				}
 				this.storeidList = idList
 				console.log(this.storeidList, 'store')
+			},
+			//店铺选择
+			changeStore2() {
+				var idList = []
+				for(var i = 0; i < this.storeList2.length; i++) {
+					if(this.storeList2[i].ischeck == true) {
+						idList.push(this.storeList2[i].id)
+					}
+				}
+				this.storeidList2 = idList
+				console.log(this.storeidList, 'store2')
 			},
 			sousShow() {
 				this.show10 = true
@@ -402,14 +503,24 @@
 					this.allstCheck = false
 				}
 			},
+			storeidList2() {
+				if(this.storeidList2.length == this.storeList2.length) {
+					this.allstCheck2 = true
+				} else {
+					this.allstCheck2 = false
+				}
+			},
 			index() {
 				this.isBj = false //重置编辑
 				this.storeShow = false //重置商品选择框
+				this.storeShow2 = false //重置商品选择框
 				this.proShow = false //重置店铺选择框
 				this.allprCheck = false
 				this.allstCheck = false
+				this.allstCheck2 = false
 				this.proidList = []
 				this.storeidList = []
+				this.storeidList2 = []
 			}
 		},
 		components: {

@@ -108,7 +108,7 @@ store.registerModule('vux', {
 	}
 })
 
-const history = window.sessionStorage;
+const history = window.localStorage
 history.clear()
 let historyCount = history.getItem('count') * 1;
 
