@@ -125,8 +125,7 @@
 				var _this = this
 				_this.show = true
 				if(_this.showNomore){
-					_this.show = false;
-					return 
+					_this.show = false; 
 				}else{
 					setTimeout(function(){
 						_this.show = false;
@@ -134,7 +133,7 @@
 						let par = new URLSearchParams()
 						par.append('page',_this.page)
 						_this.$http.post(url.draw.getReviewLists,par).then(function (response) {
-							if( response.status == 200 && response.data != null){
+							if( response.status == 200 && response.data != null&&response.data.result.page == _this.page){
 								_this.reviewData.lists = _this.reviewData.lists.concat(response.data.result.lists)
 							}
 							console.log(_this.reviewData);
@@ -144,10 +143,8 @@
 						}).catch(function (error) {
 							console.log(error);
 						});
-					},1000)
+					},3000)
 				}
-				
-				
 			},
 			getData(){
 				let _this = this;
