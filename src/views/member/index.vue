@@ -22,7 +22,7 @@
 										<!--<badge></badge>-->
 									</div>
 								</p>
-								<p class="universalAccount">CGC通用积分</p>
+								<p class="universalAccount">通用积分</p>
 							</div>
 						</router-link>
 						<router-link to="/member/earnings/credit">

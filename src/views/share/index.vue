@@ -40,6 +40,7 @@
 			</div>
 			<button class="nav-btn">立即体验</button>
 		</div>
+		<button class="qr-btn" @click="btnQrcode">生成二维码</button>
 		<img src="../../assets/images/share/partner-bg.png" class="image"/>
 		<div class="partner">
 			<div class="partner-item">
@@ -307,6 +308,9 @@
 				this.$router.push({path:'/multi_user_mall',params:{
 					id:id
 				}});
+			},
+			btnQrcode () {
+				this.$router.push({ name: 'shareQrcode', params: { url: 'https://www.baidu.com/' }})
 			}
 		}
 	}
@@ -737,6 +741,16 @@
 					color: #90A2C7;
 				}
 			}
+		}
+		.qr-btn {
+			width: 100%;
+			height: 0.94rem;
+			color: #fff;
+			font-size: 0.28rem;
+			line-height: 0.94rem;
+			background-color: #3889FF;
+			border: 0;
+			box-shadow: 0px 2px 20px 0px rgba(41,120,235,0.4);
 		}
 	}
 </style>
