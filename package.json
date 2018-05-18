@@ -10,6 +10,7 @@
     "build": "node build/build.js"
   },
   "dependencies": {
+    "@xkeshi/vue-qrcode": "github:xkeshi/vue-qrcode",
     "animate.css": "^3.6.1",
     "axios": "^0.18.0",
     "better-scroll": "^1.10.0",
