@@ -2,42 +2,6 @@
 	<section style="background: #E32921;height: 100%;">
         <div class="wrapper" ref="wrapper">
 			<div class="content">
-				<!-- tab切换 -->
-				<!-- <div class="time-line" v-if="tab2 == true">
-					<div v-if="count.length == 0">
-		        		<div class="noRecord">
-		        			<div class="img">
-		        				<img src="../../assets/images/draw/norecord.png">
-		        				<p>暂无{{tabTitle}}</p>
-		        				<p class="text">买单报电机号赢<span>5000元</span>大奖</p>
-		        			</div>
-		        		</div>
-		        	</div>
-					<timeline v-else>
-						<timeline-item v-for="(item, index) in count" :key="index">
-							<h4 :class="[index === 0 ? 'recent' : '']" >
-								<span class="weekend">{{item.weekend}}</span>
-								<span class="winMoney right">{{item.winMoney}}元</span>
-							</h4>
-							<div :class="[index === 0 ? 'recent' : '']" class='bottom flex'>
-								<div class="rank flex">
-									<div>{{item.rank}}</div>
-									<div class='ranks' v-if="item.award == '一等奖'">{{item.award}}</div>
-									<div class='ranks' :class="{'two': item.award == '二等奖'}" v-else-if="item.award == '二等奖'">{{item.award}}</div>
-									<div class='ranks' :class="{'three': item.award == '三等奖'}" v-else-if="item.award == '三等奖'">{{item.award}}</div>
-									<div class='ranks' :class="{'four': item.award == '四等奖'}" v-else>{{item.award}}</div>
-								</div>
-								<div class="winStatus2" v-if="item.winStatus == '领取'">
-									<img src="../../assets/images/draw/receiveIcon.png">
-									<span>{{item.winStatus}}</span>
-								</div>
-								<div class="winStatus" :class="[index === 0 ? 'recent' : '']" v-else>{{item.winStatus}}</div>
-								
-							</div>
-							<div class="clear"></div>
-						</timeline-item>
-					</timeline>
-				</div> -->
 		        <div class="recordList">
 					<div v-if="recordList.length==0">
 		        		<div class="noRecord">
@@ -54,7 +18,7 @@
 		        		</div>
 		        	</div>
 		        	<div v-else style="padding-bottom: 0rem;">
-			            <ul class="ul-record" v-for="(item,index) in recordList">
+			            <ul class="ul-record" v-for="(item,index) in recordList" :key="index">
 							<router-link to="/draw/details">
 								<div class="re-content">
 									<div class="left">{{ item.drawTitle}}</div>
@@ -63,13 +27,15 @@
 								</div>
 	                    	</router-link>
 							<div class="clear pd">
-								<div class="left">
-									<p class="time">开奖时间: {{ item.awardDate}}</p>
-									<p class="bonusPool">
-										奖金池：￥{{ item.money}}
-									</p>
-									<p>参与人数：<span class="num">{{ item.num}}人</span></p>
-								</div>
+								<router-link to="/draw/details">
+									<div class="left">
+										<p class="time">开奖时间: {{ item.awardDate}}</p>
+										<p class="bonusPool">
+											奖金池：￥{{ item.money}}
+										</p>
+										<p>参与人数：<span class="num">{{ item.num}}人</span></p>
+									</div>
+								</router-link>
 								<div class="right btn" v-if="item.status == 2 && item.awardStatus == '未领取'" @click="goWinningSpeech">
 									领奖
 								</div>
@@ -87,7 +53,7 @@
 			        	<x-dialog v-model="showDialog" :hide-on-blur="true">
 			        		<!-- 未实名认证\等待审核\审核未通过 -->
 			        		<div class="dia" v-if="0 != false">
-			        			<img class="img" src="../../assets/images/draw/warning.png">
+			        			<img class="img" :src="imgSrc">
 			        			<div class="dia_top">
 			        				<div class="dia_content">
 			        					<p class="title">{{headMessage}}</p>
@@ -95,11 +61,11 @@
 			        					<div class="btnList">{{btnText}}</div>
 			        				</div>
 			        			</div>
-			        			<div class="close"><img src="../../assets/images/draw/open.png"></div>
+			        			<div class="close" @click="showDialog=false"><img src="../../assets/images/draw/open.png"></div>
 			        		</div>
 
 			        		<!-- 已中奖\未中奖\未开奖 -->
-			        		<div  class="dia" v-else>
+			        		<div class="dia" v-else>
 			        			<div class="dia_top2">
 			        				<div class="dia_title">
 			        					<p>第12期</p>
@@ -109,7 +75,7 @@
 			        					<p class="title">{{headMessage}}</p>
 			        					<p class="note">买单报手机号赢<span>5000元</span>大奖</p>
 			        					<img src="../../assets/images/draw/tag.png" width="90%">
-			        					<div class="btn-link">点击查看详情 <img src="../../assets/images/draw/crown.png"></div>
+			        					<div class="btn-link" @click="$router.push({path: '/draw/details'})">点击查看详情 <img src="../../assets/images/draw/crown.png"></div>
 			        					<div  class="time-line">
 			        						<timeline>
 			        							<timeline-item v-for="(item, index) in count" :key="index">
@@ -126,7 +92,7 @@
 			        					</div>
 			        				</div>
 			        			</div>
-			        			<div class="close"><img src="../../assets/images/draw/open.png"></div>
+			        			<div class="close" @click="showDialog=false"><img src="../../assets/images/draw/open.png"></div>
 			        		</div>
 			        	</x-dialog>
 			        </div>
@@ -171,14 +137,15 @@
 					{ drawTitle: '国美番禺店大抽奖', period: '1234', awardDate: '2018-03-20 20:00:00', money: '800.00', num:'600.00',status:0, stateValue: '等待开奖',awardStatus: '未领取'}
 				],
 				headMessage: '您还未进行实名认证',
-				note: '(请你检查身份验证是否通过)',
-				// 恭喜您成功领取奖金  您已成功领取奖金  请您耐心等待审核
-				// 审核未通过 （请你检查身份验证是否通过）
-				// 领取奖金失败（请你检查身份验证是否通过）
-				// 您还未实名验证  按钮实名验证
 				message: '进行实名认证之后才可以领取奖励',
-				btnText: '立即去认证'
-
+				btnText: '立即去认证',
+				imgSrc:'./static/draw/warning.png'
+				// 1、未实名认证  进行实名认证之后才可以领取奖励 按钮:立即去认证 图片: warning.png
+				// 2、等待审核 请您耐心等待审核 图片wait.png
+				// 3、审核未通过 审核未通过
+				// 4、已中奖 恭喜您成功领取奖金 点击查看详情 图片：5000元现金 timeline：
+				// 5、未开奖 还未开奖，请耐心等待 timeline：
+				// 6、未中奖 很遗憾，您未中奖 timeline：
 			}
 		},
 		mounted() {
@@ -217,8 +184,8 @@
 					if(_this.recordList.length == 11){
 						_this.showNomore = true;
 					}else{
-						let obj = [{ drawTitle: '国美番禺店大抽奖', period: '1234', awardDate: '2018-03-20 20:00:00', money: '800.00', num:'600.00'},
-						{ drawTitle: '国美番禺店大抽奖', period: '1234', awardDate: '2018-03-20 20:00:00', money: '800.00', num:'600.00'}];
+						let obj = [{ drawTitle: '国美番禺店大抽奖', period: '1234', awardDate: '2018-03-20 20:00:00', money: '800.00', num:'600.00',status:0, stateValue: '等待开奖',awardStatus: '未领取'},
+						{ drawTitle: '国美番禺店大抽奖', period: '1234', awardDate: '2018-03-20 20:00:00', money: '800.00', num:'600.00',status:2, stateValue: '已开奖',awardStatus: '未领取'}];
 						_this.recordList = _this.recordList.concat(obj);
 						console.log(_this.recordList);
 					}

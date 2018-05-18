@@ -43,22 +43,20 @@
                 <div class="drawList">
                 	<p class="wonderful">精彩推荐</p>
                     <ul class="commodity">
-                    	<group  v-for="(item,index) in drawList">
+                    	<group  v-for="(item,index) in reviewData.lists" :key="index">
                     		<cell>
 		                    	<li @click="$router.push({path: '/draw/pastevents'})">
-		                    		<div class="left img">
-		                    			<img src="../../assets/images/draw/lottery_index7.png" alt="">
+		                    		<div class="img">
+		                    			<img :src="item.thumb" alt="">
 		                    			<div class="arrow">
 		                    				<img src="../../assets/images/draw/lottery_index8.png" alt="" >
 		                    			</div>
 		                    		</div>
-		                    		
-		                    		<div class="left container">
+		                    		<div class="container flex">
 		                    			<p class="lucky">{{ item.title}}</p>
-		                    			<p class="num">参加人数:{{ item.num}}</p>
-		                    			<p class="bonusPool">奖金池:<span>￥{{ item.money}}</span></p>
+		                    			<p class="num">参加人数:{{ item.user}}</p>
+		                    			<p class="bonusPool">奖金池:<span>￥{{ item.bonusPool}}</span></p>
 		                    		</div>
-		                    		<div class="clear"></div>
 		                    	</li>
                     		</cell>
                     	</group>
@@ -77,6 +75,7 @@
 	import Loading from '../../components/loading'
 	import noMore from '../../components/noMore'
 	import drawHeader from './components/header'
+	import url from '../../config/url'
 	export default {
 		components: {
 			Loading,noMore,drawHeader
@@ -85,20 +84,13 @@
 			return {
 				show:false,
 				showNomore: false,
-				drawList: [
-					{ title: '第1263期周末幸运大抽奖', num: '1000000', money: '80000'},
-					{ title: '第1263期周末幸运大抽奖', num: '1000000', money: '80000'},
-					{ title: '第1263期周末幸运大抽奖', num: '1000000', money: '80000'},
-					{ title: '第1263期周末幸运大抽奖', num: '1000000', money: '80000'},
-					{ title: '第1263期周末幸运大抽奖', num: '1000000', money: '80000'},
-					{ title: '第1263期周末幸运大抽奖', num: '1000000', money: '80000'},
-					{ title: '第1263期周末幸运大抽奖', num: '1000000', money: '80000'},
-					{ title: '第1263期周末幸运大抽奖', num: '1000000', money: '80000'}
-				],
-				title: '幸运大抽奖'
+				reviewData: {},
+				title: '幸运大抽奖',
+				page: 1
 			}
 		},
 		mounted() {
+			this.getData()
 			this.InitScroll()
 		},
 		methods: {
@@ -129,13 +121,42 @@
 				this.$router.push({ path: '/draw/pastevents'})
 			},
 			LoadData() {
+				this.page ++;
 				var _this = this
 				_this.show = true
-				setTimeout(function(){
-					_this.show = false;
-					_this.showNomore = true;
-				},3000)
+				if(_this.showNomore){
+					_this.show = false; 
+				}else{
+					setTimeout(function(){
+						_this.show = false;
+						let len = _this.reviewData.lists.length;
+						let par = new URLSearchParams()
+						par.append('page',_this.page)
+						_this.$http.post(url.draw.getReviewLists,par).then(function (response) {
+							if( response.status == 200 && response.data != null&&response.data.result.page == _this.page){
+								_this.reviewData.lists = _this.reviewData.lists.concat(response.data.result.lists)
+							}
+							console.log(_this.reviewData);
+							if(len == _this.reviewData.lists.length){
+								_this.showNomore = true;
+							}
+						}).catch(function (error) {
+							console.log(error);
+						});
+					},3000)
+				}
 			},
+			getData(){
+				let _this = this;
+				this.$http.post(url.draw.getReviewLists,{}).then(function (response) {
+					if( response.status == 200 && response.data != null){
+						_this.reviewData = response.data.result
+					}
+					console.log(_this.reviewData);
+				}).catch(function (error) {
+					console.log(error);
+				});
+			}
 		}
 	}
 </script>
@@ -260,6 +281,10 @@
 	  padding-bottom: 0.3rem;
 	  margin-right: 0.24rem;
 	  border-bottom: 1px solid #E6E6E6;
+	  display: flex;
+	  .flex{
+	  	flex: 1;
+	  }
 	  .img{
 	  	position: relative;
 	    width: 2.42rem;
@@ -288,8 +313,15 @@
 	    .lucky {
 	      font-size: .3rem;
 	      color: #1A2642;
-	      margin-bottom: 0.48rem;
+	      margin-bottom: 0.4rem;
 	      margin-top: 0.05rem;
+	      word-wrap: break-word;
+	      display: -webkit-box;
+	      -webkit-line-clamp: 2;
+	      -webkit-box-orient: vertical;
+	      word-break: break-all;
+	      height: 0.7rem;
+	      overflow: hidden;
 	    }
 	    .num {
 	      font-size: .26rem;
@@ -310,7 +342,7 @@
 
 <style lang="less">
 .commodity{
-	padding: 0 0.3rem;
+	padding: 0 0.2rem 0 0.3rem;
 	.weui-cells{
 		margin-top: 0;
 	}

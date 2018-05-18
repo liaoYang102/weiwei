@@ -33,7 +33,7 @@
 		 			<div class="award-set">
 		 				<div class="set-title">奖品设置</div>
 		 				<ul class="ul-set">
-		 					<li v-for="i in 4">
+		 					<li v-for="i in 4" :key="i">
 		 						<div class="flex">
 		 							<div style="flex: 1">一等奖</div>
 		 							<div>5000<span class="small">元</span></div>
@@ -48,7 +48,7 @@
 
 						<div class="period">
 							<swiper :options="swiperOption1">
-						       	<swiper-slide v-for="(item,index) in data3" >
+						       	<swiper-slide v-for="(item,index) in data3" :key="index">
 						       		<div class="btn0" :class="{'btn-active':act3==index}" @click="periodActive(index)">
 				                       {{item}}
 				                    </div>
@@ -64,7 +64,7 @@
 	    	        <div class="win-person">
 	    	            <div class="wz-period">中奖名单</div>
 	    				<swiper :options="swiperOption2">
-	    			       	<swiper-slide v-for="(item,index) in data1">
+	    			       	<swiper-slide v-for="(item,index) in data1" :key="index">
 	    			       		<div class="wz-award" :class="{'wz-award-active':act1==index}" @click="actice(index)">{{item}}</div>
 	    			       	</swiper-slide>
 	    			    </swiper>
@@ -74,7 +74,7 @@
 	    			<div class="web">
 	    			    <!--数据列表-->
 	    			    <ul>
-	                    	<group v-for="(item,index) in personList">
+	                    	<group v-for="(item,index) in personList" :key="index">
 	    						<cell>
 	    							<li>
 	    								<div class="personlist">
@@ -362,7 +362,10 @@
 				padding-bottom: 0.19rem;
 				.swiper-slide {
 				    width: 1.1rem;
-				    margin-left: 0.33rem;
+				    padding-right: 0.3rem;
+				}
+				.swiper-slide:nth-child(1){
+					margin-left: 0.33rem;
 				}
 				/* 抽奖期数*/
 				.btn0{
@@ -398,14 +401,17 @@
 				padding-bottom: 0.3rem;
 			}
 			.swiper-slide {
-			    width: 1.3rem;
+			   	width: 1.3rem;
 			    height: auto;
+			    padding-right: 0.2rem;
+			}
+			.swiper-slide:nth-child(1){
+				margin-left: 0.4rem;
 			}
 			.wz-award{
 			    width: 1.1rem;
 			    color: #1A2642;
 			    font-size: 0.3rem;
-			    margin-left: 0.3rem;
 			    text-align: center;
 			    padding-bottom: 0.3rem;
 			    box-sizing:border-box; 

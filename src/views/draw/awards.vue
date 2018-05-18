@@ -15,7 +15,7 @@
 							<h4 class="left">上传生活照</h4>
 						</div>
 									    
-				    	<div class="life"  v-for="(item,index) in imgList" @click="cindex(index)">
+				    	<div class="life"  v-for="(item,index) in imgList" :key="index" @click="cindex(index)">
 				    		<img @click="imgDelete(index)" class="gbx" src="../../assets/images/member/gbx.png"/>
 				    		
 				    		<div class="bigPic" v-show="[imgList.length ? imgList.length >0 : imgList.length =0]">
@@ -25,7 +25,6 @@
 				    	</div>
 
 				    	<div class="life" v-if="imgList.length!=5">
-				    		<!-- <i class="iconfont icon-zhaoxiangji icon"></i> -->
 				    		<img src="../../assets/images/draw/addIcon.png" class="add">
 				    		<p class="length">生活照</p>
 				    		<input type="file" accept="image/*" multiple="multiple" @change="test($event)">
@@ -53,11 +52,18 @@
 		</div>
 		
         <!-- 弹出框 -->
-        <div v-transfer-dom class="dialog">
+        <div v-transfer-dom class="speechDialog">
           	<x-dialog v-model="showDialog" :hide-on-blur="true">
-          		<div class="dia_top">
-					<p class="title">{{ toast}}</p>
-				</div>
+          		<!-- 等待审核 -->
+        		<div class="dia">
+        			<img class="img" src="../../../static/draw/wait.png">
+        			<div class="dia_top">
+        				<div class="dia_content">
+        					<p class="title">{{headMessage}}</p>
+        				</div>
+        			</div>
+        			<div class="close" @click="showToast"><img src="../../assets/images/draw/open.png"></div>
+        		</div>
           	</x-dialog>
         </div>
 	</section>
@@ -77,8 +83,8 @@
 	  		demo2: true,
 	  		imgList: [],
 	  		showDialog: false,
-	  		toast: '请您耐心等待审核',
-	  		pindex:0
+	  		pindex:0,
+	  		headMessage: '请您耐心等待审核',
 	  	}
 	  },
 	  mounted:function(){
@@ -105,9 +111,14 @@
 	  	},
 	  	showToast(){
 			var that = this;
+			if(this.showDialog){
+				that.showDialog = false
+				that.$router.push({path:'/draw/record'})
+			}
 			this.showDialog = true;
 			setTimeout(function(){
 				that.showDialog = false
+				that.$router.push({path:'/draw/record'})
 			},3000)
 		},
 		cone(e,i) {
@@ -284,20 +295,75 @@
 		bottom: 0;
 	}
 
-	.dia_top {
-		width: 90%;
-		height: 1.78rem;
-		margin: auto;
-	  	border-radius: 0.1rem;
-	  	background-color: #fff;
-	  	color: #000;
-	  	.title {
-	  	  font-size: 0.32rem;
-	  	  margin-top: 1rem;
-	  	  line-height: 0.48rem;
-	  	  text-align: center;
-	  	}
+	.speechDialog{
+		.dia {
+			width: 100%;
+			color: #1A2642;
+			position: relative;
+			height: auto;
+			.img {
+				width: 25%;
+				position: absolute;
+				top: 0;
+				left: 50%;
+				transform: translate(-50%, -50%);
+			}
+			.dia_top {
+				width: 100%;
+				margin: 0 auto;
+				height: auto;
+				min-height: 2rem;
+				background-color: #FF273A;
+				text-align: center;
+				padding-top: 1.09rem;
+				margin-top: 1.09rem;
+				border-radius: 0.16rem;
+				.dia_content{
+					background: #fff;
+					height: auto;
+					min-height: 2rem;
+					padding-bottom: 0.55rem;
+					border-radius: 0 0 0.16rem 0.16rem;
+				}
+				.title {
+					font-size: 0.36rem;
+					line-height: 0.59rem;
+					margin-bottom: 0.12rem;
+					color: #333333;
+					padding-top: 0.6rem;
+				}
+				.note {
+					color: #666666;
+					padding: 0 0.5rem;
+					box-sizing: border-box;
+					font-size: 0.24rem;
+				}
+				.btnList {
+					margin: 0 auto;
+					width: 85.4%;
+					background: #FF273A;
+					color: #fff;
+					font-size: 0.36rem;
+					border-radius: 0.5rem;
+					text-align: center;
+					box-shadow:0.04rem 0px 0.08rem rgba(136,46,219,0.3);
+					padding: 0.32rem 0; 
+					margin-top: 0.8rem;
+				}
+				
+			}
+			.close{
+				width: 100%;
+				background: rgba(255,255,255,0);
+				height: 1.25rem;
+				img{
+					height: 100%;
+					margin: 0 auto;
+				}
+			}
+		}
 	}
+	
 </style>
 
 <style lang="less">
@@ -349,9 +415,13 @@
 			border: 1px solid #F5F5F5;
 		}
 	} 
-	.dialog{
-		.weui-dialog{
-			width: 60%;
+	.speechDialog{
+		.weui-dialog {
+			width: 78.67%;
+			max-width: 78.67%;
+			z-index: 111111111111111111111111;
+			border-radius: 0.16rem; 
+			top: 46%;
 		}
 	}
 </style>
