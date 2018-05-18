@@ -69,14 +69,12 @@ axios.interceptors.response.use(res => { // 响应成功关闭loading
 	return Promise.reject(error)
 })
 
-if(!sessionStorage.getItem('token')) {
-	axios.post('/datacenter/public/v1/login', {
-		audience: 'platform',
-		name: '123',
-		passwd: '456'
-	}).then((res) => {
-		console.log(res)
-		sessionStorage.setItem('token', res.data.data.token)
-	})
-}
+axios.post('/datacenter/public/v1/login', {
+	audience: 'platform',
+	name: '123',
+	passwd: '456'
+}).then((res) => {
+	console.log(res)
+	sessionStorage.setItem('token', res.data.data.token)
+})
 export default axios

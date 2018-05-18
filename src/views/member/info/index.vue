@@ -11,7 +11,7 @@
 						</uploader>-->
 					</div>
 				</cell>
-				<cell class="list-item" title="用户昵称" is-link link="/member/setting/nickname">
+				<cell class="list-item" title="用户昵称" :value="userInfo.nickname" is-link link="/member/setting/nickname">
 					<!--<x-input class="input-div" ref="name" v-model="name" :value="name" text-align="right" :show-clear="false" placeholder="未设置" type="text" @on-change="nameChange" @on-enter="ok"></x-input>-->
 				</cell>
 			</group>
@@ -20,7 +20,7 @@
 				<cell class="list-item user-address" title="地址管理" is-link link="/member/address/index"></cell>
 			</group>
 			<group>
-				<cell class="list-item" title="实名认证" :value="sureName" is-link link='/member/setting/real'></cell>
+				<cell class="list-item" title="实名认证" :value="userInfo.realName" is-link link='/member/setting/real'></cell>
 				<cell class="list-item" title="个人档案" is-link link='/member/info/data' primary="content">完整度{{data5}}%</cell>
 			</group>
 		</div>
@@ -36,10 +36,10 @@
 			return {
 				title: '个人信息',
 				name: "", //用户名
-				sureName: '张广', //实名认证
 				varmax: 1, //图片最大张数
 				images: '', //图片数组
-				data5: 88
+				data5: 88,
+				userInfo:{}
 			}
 		},
 		created() {
@@ -56,10 +56,13 @@
 				var _this = this
 				_this.$http.get(_this.url.user.getBasicInfo, {
 					params: {
-						userId: 1
+						userId: 2
 					}
 				}).then((res) => {
 					console.log(res)
+					if(res.data.status == "00000000"){
+						_this.userInfo = res.data.data
+					}
 				})
 			},
 
