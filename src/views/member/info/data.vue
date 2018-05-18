@@ -172,19 +172,18 @@
 						var imgdata = new FormData()
 						imgdata.append('img' + i, file[i])
 
-						let config = {
+						var config = {
 							'Content-Type': 'multipart/form-data'
 						}
 
 						var data = {
 							type: 'user',
 							name: '1',
-							file: imgdata
+							file: imgdata,
+							config:config
 						}
 
-						_this.$http.post(_this.url.user.fileuploadImage,{
-							
-						}).then((res) => {
+						_this.$http.post(_this.url.user.fileuploadImage,data).then((res) => {
 							if(res.status == '00000000') {
 								_this.info = res.data
 							}
