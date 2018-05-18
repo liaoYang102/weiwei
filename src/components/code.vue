@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<div v-if="type == 'code'">
-			<popup class="code-popup" height="100%" v-model="showCode">
+			<popup class="code-popup" height="100%" v-model="showCode" @on-hide="payNum = []">
 				<x-header class="code-header" :left-options="{showBack: false}">
 					请输入验证码
 					<a slot="right" @click="showCode = false">关闭</a>
@@ -88,7 +88,7 @@
 				var _this = this
 				
 				if(_this.payNum.length < 5 && index != 9 && index != 11) {
-					_this.payNum.push('*')
+					_this.payNum.push('●')
 				} else if(index == 9) {
 					_this.payNum = []
 				} else if(index == 11) {
@@ -169,7 +169,7 @@
 				text-align: right;
 				margin-top: 0.30rem;
 				font-size: 0.24;
-				color: rgba(51, 111, 255, 1);
+				color: #90A2C7;
 			}
 		}
 		.keyboard {

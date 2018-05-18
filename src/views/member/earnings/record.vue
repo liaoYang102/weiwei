@@ -127,7 +127,7 @@
 		methods: {
 			toDetail(){
 				this.$router.push({
-					name: 'earnings_detail',
+					name: 'scoreDetail',
 					params:{
 						title:'信用积分'
 					}

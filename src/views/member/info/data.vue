@@ -36,7 +36,7 @@
 						<div>
 							<img :src="item" alt="" />
 						</div>
-						<img @click="shanc(index)" class="gbx" src="../../../assets/images/member/gbx.png"/>
+						<img @click="shanc(index)" class="gbx" src="../../../assets/images/member/gbx.png" />
 						<input class="upinput" type="file" @change="cone" />
 					</div>
 					<div class="one" v-if="backImages.length!=3">
@@ -48,7 +48,7 @@
 				</div>
 
 				<div class="tip">
-					<div class="add-btn" @click="submit">保存</div>
+					<div class="add-btn" @click="changeUserInfo">保存</div>
 				</div>
 			</div>
 		</div>
@@ -81,58 +81,62 @@
 				txt: '<span>请选择性别</span>',
 				backImages: [],
 				pindex: 0,
-				sex:'未设置',//性别
-				birthday:'未设置',//生日
-				education:'未设置',//学历
+				sex: '', //性别
+				birthday: '', //生日
+				education: '', //学历
+				info: {},
+				imgdata: null
 			}
 		},
-		created() {},
+		created() {
+			this.getUserInfo()
+		},
 		mounted() {
 
 		},
 		methods: {
-			wxChange(val) {
-				console.log('on change', val)
+			getUserInfo() {
+				var _this = this
+				_this.$http.get(_this.url.user.getUserInfo, {
+					params: {
+						userId: 1
+					}
+				}).then((res) => {
+					if(res.status == '00000000') {
+						_this.info = res.data
+					}
+				})
 			},
-			zfbChange(val) {
-				console.log('on change', val)
-			},
-			mailChange(val) {
-				console.log('on change', val)
-			},
-			qqChange(val) {
-				console.log('on change', val)
-			},
-			contactChange(val) {
-				console.log('on change', val)
-			},
-			contactnumChange(val) {
-				console.log('on change', val)
-			},
+			wxChange(val) {},
+			zfbChange(val) {},
+			mailChange(val) {},
+			qqChange(val) {},
+			contactChange(val) {},
+			contactnumChange(val) {},
 			sexclick(val) {
-				if(val == 0){
+				if(val == 0) {
 					this.sex = '男'
-				}else if(val == 1){
+				} else if(val == 1) {
 					this.sex = '女'
-				}else{
+				} else {
 					this.sex = '隐藏'
 				}
 			},
 			recclick(val) {
-				if(val == 0){
+				if(val == 0) {
 					this.education = '小学'
-				}else if(val == 1){
+				} else if(val == 1) {
 					this.education = '初中'
-				}else if(val == 2){
+				} else if(val == 2) {
 					this.education = '高中'
-				}else if(val == 3){
+				} else if(val == 3) {
 					this.education = '大专'
-				}else if(val == 4){
+				} else if(val == 4) {
 					this.education = '本科'
 				}
 			},
 			showDate() {
-				var  _this = this
+				var _this = this
 				_this.$vux.datetime.show({
 					value: '',
 					confirmText: '确定',
@@ -145,7 +149,7 @@
 			},
 			back(e) {
 				var _this = this
-				var file = e.target.files;
+				var file = e.target.files
 				for(var i = 0; i < file.length; i++) {
 					if(file.length > 3) {
 						this.$vux.toast.show({
@@ -154,16 +158,37 @@
 						})
 						return
 					} else {
-	  					// _this.backImages = []
+						// _this.backImages = []
 						var reader = new FileReader();
 						reader.readAsDataURL(file[i]); // 读出 base64
 						reader.onloadend = function(e) {
 							// 图片的 base64 格式, 可以直接当成 img 的 src 属性值        
 							var dataURL = reader.result;
-							if(_this.backImages.length<3){
+							if(_this.backImages.length < 3) {
 								_this.backImages.push(e.target.result)
 							}
 						};
+
+						var imgdata = new FormData()
+						imgdata.append('img' + i, file[i])
+
+						let config = {
+							'Content-Type': 'multipart/form-data'
+						}
+
+						var data = {
+							type: 'user',
+							name: '1',
+							file: imgdata
+						}
+
+						_this.$http.post(_this.url.user.fileuploadImage,{
+							
+						}).then((res) => {
+							if(res.status == '00000000') {
+								_this.info = res.data
+							}
+						})
 					}
 				}
 			},
@@ -181,11 +206,28 @@
 					_this.backImages.splice(_this.pindex, 1, e.target.result)
 				};
 			},
-			shanc(index){
-				this.backImages.splice(index,1)
+			shanc(index) {
+				this.backImages.splice(index, 1)
 			},
-			submit() {
-
+			changeUserInfo() {
+				var _this = this
+				var data = {
+					gender: _this.sex,
+					birthday: _this.mainApp.frDateTimehp.getDateTimesTamp(_this.birthday),
+					education: _this.education,
+					wechat: _this.wxnum,
+					qq: _this.qq,
+					alipay: _this.zfbnum,
+					email: _this.mail,
+					egmobile: _this.contactnum,
+					emergency: _this.contact,
+					userId: 1
+				}
+				_this.$http.post(_this.url.user.changeUserInfo, data).then((res) => {
+					if(res.status == '00000000') {
+						_this.info = res.data
+					}
+				})
 			}
 		},
 		components: {
@@ -264,7 +306,7 @@
 							width: 100%;
 							height: 100%;
 						}
-						.gbx{
+						.gbx {
 							position: absolute;
 							right: -7px;
 							top: -7px;

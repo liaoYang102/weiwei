@@ -28,7 +28,7 @@
 				<span class="fr">收益</span>
 			</p>
 			<ul v-if="isData.length>0">
-				<li v-for="item in isData">
+				<li v-for="item in isData" @click="$router.push({path:'/member/score/detail'})">
 					<span class="fl">{{item.date}}</span>
 					<span class="fr">{{item.money}}</span>
 				</li>

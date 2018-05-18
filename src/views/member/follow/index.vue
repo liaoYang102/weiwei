@@ -3,47 +3,13 @@
 		<x-header class="b-w" :left-options="{backText:''}" @on-click-more="edit">
 			<div class="tar-box">
 				<tab v-model="index" :line-width="2" active-color="#397df8" custom-bar-width="0.56rem">
-					<tab-item selected @on-item-click="active">商品</tab-item>
-					<tab-item @on-item-click="active">店铺</tab-item>
+					<tab-item selected @on-item-click="active">店铺</tab-item>
+					<tab-item @on-item-click="active">商品</tab-item>
 				</tab>
 			</div>
 			<div class="edit-btn" @click="edit" slot="right">{{isBj?'完成':'编辑'}}</div>
 		</x-header>
-		<!--<div class="top">
-			<div class="bj-box" @click="edit" :class="{'bjcolor':isBj}"></div>
-			<div class="tar-box">
-				<tab v-model="index" :line-width="2" active-color="#397df8" custom-bar-width="0.56rem">
-					<tab-item selected @on-item-click="active">商品</tab-item>
-					<tab-item @on-item-click="active">店铺</tab-item>
-				</tab>
-			</div>
-			<img @click="sousShow" src="../../../assets/images/member/sous.png" />
-		</div>-->
 		<swiper v-model="index" height="100vh" :show-dots="false" :threshold='150'>
-			<swiper-item>
-				<div class="pro-list">
-					<div class="wrapper" ref="wrapper">
-						<div class="content">
-							<div class="list-item" v-for="(item,index) in proList">
-								<div @click="changePr()">
-									<check-icon v-if="proShow" class="check-btn" :value.sync="item.ischeck"></check-icon>
-								</div>
-								<div class="img-box"><img :src="item.img" /></div>
-								<div class="pro-box">
-									<p>{{item.name}}</p>
-									<p>￥{{item.money}}</p>
-									<div class="btn-box">
-										<!-- <span>加入购物车</span> --> 
-										<router-link to="/shop/confirm"><span>立即购买</span></router-link>
-									</div>
-								</div>
-							</div>
-							<Loading v-if="show"> </Loading>
-							<noData v-if="proList.length==0" :status="proState" :stateText="noPro"></noData>
-						</div>
-					</div>
-				</div>
-			</swiper-item>
 			<swiper-item>
 				<div class="store-list">
 					<div class="wrapper2" ref="wrapper2">
@@ -66,6 +32,30 @@
 					</div>
 				</div>
 			</swiper-item>
+			<swiper-item>
+				<div class="pro-list">
+					<div class="wrapper" ref="wrapper">
+						<div class="content">
+							<div class="list-item" v-for="(item,index) in proList">
+								<div @click="changePr()">
+									<check-icon v-if="proShow" class="check-btn" :value.sync="item.ischeck"></check-icon>
+								</div>
+								<div class="img-box"><img :src="item.img" /></div>
+								<div class="pro-box">
+									<p>{{item.name}}</p>
+									<p>￥{{item.money}}</p>
+									<div class="btn-box">
+										<!-- <span>加入购物车</span> -->
+										<router-link to="/shop/confirm"><span>立即购买</span></router-link>
+									</div>
+								</div>
+							</div>
+							<Loading v-if="show"> </Loading>
+							<noData v-if="proList.length==0" :status="proState" :stateText="noPro"></noData>
+						</div>
+					</div>
+				</div>
+			</swiper-item>
 		</swiper>
 		<div v-transfer-dom>
 			<popup v-model="show10" position="top">
@@ -79,8 +69,8 @@
 			<popup v-model="isBj" position="bottom" height="0.94rem" :show-mask="false">
 				<div class="bjBtn-box">
 					<div style="flex: 1;" @click="isallcheck">
-						<check-icon v-if="isBj && index==0" class="check-btn" :value.sync="allprCheck">全部商品 <span v-if="!allprCheck">已选<i>{{proidList.length}}</i>个商品</span></check-icon>
-						<check-icon v-if="isBj && index==1" class="check-btn" :value.sync="allstCheck">全部店铺<span v-if="!allstCheck">已选<i>{{storeidList.length}}</i>间店铺</span></check-icon>
+						<check-icon v-if="isBj && index==1" class="check-btn" :value.sync="allprCheck">全部商品 <span v-if="!allprCheck">已选<i>{{proidList.length}}</i>个商品</span></check-icon>
+						<check-icon v-if="isBj && index==0" class="check-btn" :value.sync="allstCheck">全部店铺<span v-if="!allstCheck">已选<i>{{storeidList.length}}</i>间店铺</span></check-icon>
 					</div>
 					<div class="qx-box">
 						<div class="add-btn">取消关注</div>
@@ -297,7 +287,7 @@
 				this.proidList = [] //重置商品id数组
 				this.storeidList = [] //重置店铺id数组
 
-				if(this.index == 0) {
+				if(this.index == 1) {
 					if(this.allprCheck == true) {
 						for(var i = 0; i < this.proList.length; i++) {
 							this.proList[i].ischeck = true
@@ -353,7 +343,7 @@
 				}
 
 				this.isBj = !this.isBj
-				if(this.index == 0) {
+				if(this.index == 1) {
 					this.proShow = !this.proShow
 				} else {
 					this.storeShow = !this.storeShow
@@ -515,8 +505,8 @@
 			}
 		}
 		.vux-header-left .left-arrow:before {
-			border: 1px solid #222;
-			border-width: 1px 0 0 1px;
+			border: 1px solid #222!important;
+			border-width: 1px 0 0 1px!important;
 		}
 		.b-w:after {
 			content: " ";
@@ -533,70 +523,11 @@
 			transform: scaleY(0.5);
 			left: 0;
 		}
-		.top {
-			padding: 0px 15px;
-			height: 0.98rem;
-			display: flex;
-			align-items: center;
-			justify-content: space-between;
-			position: relative;
-			background-color: white;
-			.bj-box {
-				height: 0.98rem;
-				line-height: 0.98rem;
-				padding: 0 0.6rem 0 0.3rem;
-				font-size: 14px
-			}
-			.bjcolor {
-				color: #256fff;
-			}
-			.tar-box {
-				flex: 1;
-				box-sizing: border-box;
-				padding-right: 0.4rem;
-				.vux-tab-item {
-					background: transparent!important;
-				}
-			}
-			img {
-				width: 0.35rem;
-				height: auto;
-			}
-		}
-		.top:after {
-			content: " ";
-			position: absolute;
-			left: 0;
-			bottom: 0;
-			right: 0;
-			height: 1px;
-			border-top: 1px solid #D9D9D9;
-			color: #D9D9D9;
-			-webkit-transform-origin: 0 0;
-			transform-origin: 0 0;
-			-webkit-transform: scaleY(0.5);
-			transform: scaleY(0.5);
-			left: 0px;
-		}
-		.top:before {
-			content: " ";
-			position: absolute;
-			left: 0;
-			top: 0;
-			right: 0;
-			height: 1px;
-			border-top: 1px solid #D9D9D9;
-			color: #D9D9D9;
-			-webkit-transform-origin: 0 0;
-			transform-origin: 0 0;
-			-webkit-transform: scaleY(0.5);
-			transform: scaleY(0.5);
-			left: 0px;
-		}
 		.pro-list,
 		.store-list {
 			background-color: white;
-			.wrapper, .wrapper2{
+			.wrapper,
+			.wrapper2 {
 				position: absolute;
 				top: 0px;
 				bottom: 47px;
