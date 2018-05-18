@@ -7,25 +7,18 @@
 			</div>
 			<group gutter="0" class="input-div">
 				<!--<cell class="input-item" title="国家" value="中国" is-link value-align="right"></cell>-->
-				<x-input class="input-item" ref="phone" v-model="phone" placeholder="用户名" type="number" :max="11" :required="true" @on-change="nameChange"></x-input>
+				<x-input class="input-item" ref="phone" v-model="mobile" placeholder="用户名" type="number" :max="11" :required="true" @on-change="nameChange"></x-input>
 				<x-input class="input-item" ref="password" v-model="password" placeholder="登录密码" type="password" :required="true"></x-input>
 				<x-input v-if="!isReg" class="input-item bounceInUp animated" type="number" ref="code" v-model="code" placeholder="验证码" @on-change="codeChange">
 					<x-button slot="right" type="primary" mini @click.native="sendCode" :disabled="sendFlag">{{codeText}}</x-button>
 				</x-input>
 			</group>
-			<!--			<div class="tip">每个手机号只能作为一个账号注册</div>-->
 			<div class="tip">
 				<x-button class="add-btn" @click.native="submit" :show-loading="showLoading">{{btnText}}</x-button>
 			</div>
 			<div class="login-re">
 				<span @click="resetPass">忘记密码?</span>
-				<!--<span @click.native="codeLogin">验证码登录</span>-->
 			</div>
-			<!--<div v-transfer-dom>
-				<confirm v-model="show" :title="regText" theme="ios" @on-confirm="onConfirm">
-					<p style="text-align:center;">该账户没有注册,是否立即注册?</p>
-				</confirm>
-			</div>-->
 		</div>
 	</div>
 </template>
@@ -37,7 +30,7 @@
 		data() {
 			return {
 				title: '用户登录', //头部标题
-				phone: '', //手机号码
+				mobile: '', //手机号码
 				password: '', //密码
 				code: '', //验证码
 				show: false,
@@ -57,6 +50,26 @@
 		},
 		methods: {
 			submit() {
+				var _this = this
+				
+				console.log(_this.mainApp.isphone(_this.mobile))
+				return false
+
+				this.$http.post('/datacenter/public/v1/login', {
+					audience: 'platform',
+					platformId: 'platform',
+					mobile: _this.mobile,
+					passwd: _this.password
+				}).then(function(res) {
+					_this.$vux.toast.show({
+						text: res.data.message,
+						type: 'text',
+						position: 'middle',
+						width:'50%'
+					})
+				})
+			},
+			submit2() {
 				var _this = this
 				if(this.isReg) {
 					if(_this.phone == '17520439845' && _this.password == '123456') {
@@ -217,7 +230,7 @@
 		display: flex;
 		justify-content: space-between;
 		span {
-			color: #10aeff;
+			color: #90A2C7;
 		}
 	}
 </style>

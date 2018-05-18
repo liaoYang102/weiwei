@@ -25,7 +25,7 @@
 						</card>
 					</div>
 				</div>
-				<div class="gz" @click="showDialogStyle = true">
+				<div class="gz" @click="$router.push({path:'/member/earnings/rule'})">
 					<img src="../../../assets/images/member/thao.png" alt="" /> 规则
 				</div>
 			</div>
@@ -71,7 +71,9 @@
 			}
 		},
 		created() {
-
+			if(this.$route.params.title) {
+				document.title = this.$route.params.title
+			}
 		},
 		mounted() {},
 		methods: {
@@ -90,8 +92,8 @@
 	@import '~vux/src/styles/1px.less';
 	@import '~vux/src/styles/close';
 	.scoreDetail-box {
-		height:100vh;
-		background-color:white;
+		height: 100vh;
+		background-color: white;
 		.lw-box {
 			margin-top: 0.6rem;
 			.all-h {
@@ -116,7 +118,7 @@
 					}
 					p:nth-child(2) {
 						font-size: 0.20rem;
-						color:rgba(255,99,99,1);
+						color: rgba(255, 99, 99, 1);
 					}
 				}
 			}

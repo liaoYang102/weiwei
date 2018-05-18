@@ -7,7 +7,10 @@
 					<div class="list" v-for="(item,index) in list">
 						<div class="top">
 							<div class="pro">
-								<span>{{item.name}}</span>
+								<div>
+									<span>{{item.name}}</span>
+									<span class="label">家</span>
+								</div>
 								<span>{{item.phone}}</span>
 							</div>
 							<p>{{item.address}}</p>
@@ -270,6 +273,17 @@
 					color: #1A2642;
 					letter-spacing: 0;
 					margin-bottom: 0.11rem;
+					align-items: center;
+					.label {
+						display: inline-block;
+						width: 0.8rem;
+						border: 1px solid #1c70f1;
+						border-radius: 2px;
+						margin-left: 0.18rem;
+						text-align: center;
+						font-size: 0.24rem;
+						padding: 0.02rem 0;
+					}
 				}
 				p {
 					font-family: PingFangSC-Regular;

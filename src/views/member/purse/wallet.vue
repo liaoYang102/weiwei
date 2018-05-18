@@ -47,7 +47,7 @@
 					<p>任务奖励</p>
 					<p>0.00</p>
 				</div>
-				<div class="one-item">
+				<div class="one-item" @click="$router.push({path:'/member/purse/recharge'})">
 					<p style="color: #336FFF">积分充值</p>
 					<p>充100送100</p>
 				</div>
@@ -93,7 +93,7 @@
 				</div>
 			</div>
 		</div>
-		<img style="display: block;width: 100%;height: auto;" src="../../../../static/member/integral-bg.png" alt="" />
+		<img style="display: block;width: 100%;height: auto;" :src="'./static/images/integral-bg.png'" alt="" />
 	</div>
 </template>
 

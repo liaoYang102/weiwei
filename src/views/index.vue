@@ -4,7 +4,7 @@
 			<div class="content" style="padding-bottom: 0.2rem">
 				<swiper :options="swiperOption" class="swiper">
 					<swiper-slide v-for="item in demoList">
-						<img v-lazy="item">
+						<img :src="item">
 					</swiper-slide>
 					<div class="swiper-pagination" slot="pagination"></div>
 				</swiper>
@@ -19,19 +19,14 @@
 					</div>
 				</div>-->
 				<div class="notice">
-					<div class="notNew">CGC快报</div>
-					<!-- <img src="../assets/images/index/notice.png" alt=""> -->
-					<swiper :options="noticeOption" class="noticeswiper">
-						<swiper-slide v-for="item in num">
-							<p class="noticeText">
-								<span class="label">热门</span> 
-								测试文章
-							</p>
-						</swiper-slide>
-					</swiper>
-					<div class="notMore">| &nbsp;更多</div>
+					<img src="../assets/images/index/notice.png" alt="">
+					<div style="padding-left: 0.15rem">
+						<marquee>
+							<marquee-item v-for="i in 5" :duration='3000' class="align-middle">魅族手机成功加盟CGC全球智慧产业联盟</marquee-item>
+						</marquee>
+					</div>
 				</div>
-				<div class="lottery">
+				<!--<div class="lottery">
 					<img class="auto-img" src="../assets/images/index/group.png" alt="">
 					<div class="info">
 						<p class="infoText">
@@ -56,10 +51,10 @@
 					</div>
 				</div>
 				<router-link to="">
-					<img class="auto-img" v-lazy="'./static/images/weifaguang.png'" alt="" />
-				</router-link>
+					<img class="auto-img" v-lazy="'../../static/images/IMG_3224 Copy@2x.png'" alt="" />
+				</router-link>-->
 				<div class="plate">
-					<div class="item" v-for="item in plateList">
+					<div class="item" v-for="(item,index) in plateList">
 						<router-link :to="item.url">
 							<div class="b-w">
 								<img v-lazy="item.img" />
@@ -72,9 +67,9 @@
 					</div>
 				</div>
 				<router-link to="/share">
-					<img class="auto-img" v-lazy="'./static/images/jiam.png'" alt="" />
+					<img class="auto-img" v-lazy="'./static/images/jiam2.png'" alt="" />
 				</router-link>
-				<div class="alliance">
+				<!--<div class="alliance">
 					<card>
 						<div slot="content" class="card-demo-flex">
 							<div class="item" :class="{'vux-1px-r':index != 2}" v-for="(item,index) in allianceList">
@@ -83,8 +78,25 @@
 							</div>
 						</div>
 					</card>
-				</div>
-				<div class="pro-allbox" v-for="item in proList">
+				</div>-->
+				<section>
+					<div class="navigation">
+						<ul>
+							<li v-for="item in navList">
+								<router-link :to="item.url">
+									<div class="li-box">
+										<img :src="item.img">
+									</div>
+									<p>{{item.title}}</p>
+								</router-link>
+							</li>
+						</ul>
+					</div>
+				</section>
+				<router-link to="/share">
+					<img class="auto-img" v-lazy="'./static/images/fn.png'" alt="" />
+				</router-link>
+				<!--<div class="pro-allbox" v-for="item in proList">
 					<div class="titlebox">{{item.title}}</div>
 					<img class="auto-img" v-lazy="item.img" />
 					<div class="pro-box">
@@ -95,37 +107,37 @@
 						</div>
 					</div>
 					<img class="auto-img" v-if="item.twoimg" v-lazy="item.twoimg" alt="" />
-				</div>
+				</div>-->
 				<div class="pro-allbox">
-					<div class="titlebox">明星商家</div>
-					<img class="auto-img" v-lazy="'./static/images/store1.png'" alt="" />
+					<!--<div class="titlebox">明星商家</div>-->
+					<img style="margin-top: 0.2rem;" class="auto-img" v-lazy="'./static/images/mxqy.png'" alt="" />
 					<div class="store-box">
 						<div class="item-box">
 							<div>
 								<p>国美</p>
 								<p>满100减30</p>
 							</div>
-							<img v-lazy="'./static/images/store2.png'" alt="" />
+							<img v-lazy="'./static/images/gm.png'" alt="" />
 						</div>
 						<div class="item-box">
 							<div>
 								<p>红豆</p>
 								<p>满20减10</p>
 							</div>
-							<img v-lazy="'./static/images/store3.png'" alt="" />
+							<img v-lazy="'./static/images/hd.png'" alt="" />
 						</div>
 						<div class="item-box">
 							<div>
 								<p>红星美凯龙</p>
 								<p>双日立减5元</p>
 							</div>
-							<img v-lazy="'./static/images/store4.png'" alt="" /></div>
+							<img v-lazy="'./static/images/hxmkl.png'" alt="" /></div>
 						<div class="item-box">
 							<div>
 								<p>魅族手机</p>
 								<p>双日立减5元</p>
 							</div>
-							<img v-lazy="'./static/images/store5.png'" alt="" />
+							<img v-lazy="'./static/images/mz.png'" alt="" />
 						</div>
 					</div>
 					<!--<div class="titlebox">
@@ -150,7 +162,7 @@
 
 <script>
 	import { swiper, swiperSlide } from 'vue-awesome-swiper'
-	import { Card } from 'vux'
+	import { Card, Marquee, MarqueeItem } from 'vux'
 	import BScroll from 'better-scroll'
 	//	import AMap from 'AMap'
 	export default {
@@ -202,29 +214,27 @@
 					'https://img1.360buyimg.com/da/s750x366_jfs/t17776/179/1756407821/231537/470e3442/5ad9b0a3N5573c82c.jpg!cr_1125x549_0_72.dpg',
 				],
 				plateList: [{
-						title: '邀请有奖',
-						tip: '送200信用积分',
-						img: './static/images/plate1.png',
+						title: '扫一扫',
+						tip: '赢5000大奖',
+						img: './static/images/zqm2.png',
 						url: '/member/purse/qrcode'
 					},
 					{
-						title: '积分商城',
-						tip: '积分任意兑',
-						img: './static/images/plate2.png',
+						title: '推广码',
+						tip: '赢5000大奖',
+						img: './static/images/tgm.png',
 						url: '/shop'
-					},
-					{
-						title: '我的钱包',
-						tip: '消费增值管理',
-						img: './static/images/plate3.png',
-						url: '/member/purse/index'
-					},
-					{
-						title: '积分充值',
-						tip: '百万豪礼等你来',
-						img: './static/images/plate4.png',
-						url: '/member/purse/recharge'
-					},
+					}
+				],
+				navList:[
+					{title:'抽奖中心',img:'./static/images/cj.png',url:'/draw'},
+					{title:'邀请有奖',img:'./static/images/yq.png',url:'/member/purse/qrcode'},
+					{title:'推广助手',img:'./static/images/tg.png',url:'/member/purse/qrcode'},
+					{title:'赚钱攻略',img:'./static/images/gl.png',url:'/member/purse/qrcode'},
+					{title:'充值有奖',img:'./static/images/cz.png',url:'/member/purse/recharge'},
+					{title:'我的优惠券',img:'./static/images/yh.png',url:'/member/coupon/index'},
+					{title:'会员权益',img:'./static/images/hy.png',url:''},
+					{title:'我的资产',img:'./static/images/zc.png',url:'/member/purse/wallet'},
 				],
 				allianceList: [{
 						title: '本地服务',
@@ -380,6 +390,8 @@
 		components: {
 			swiper,
 			swiperSlide,
+			Marquee,
+			MarqueeItem,
 			Card
 		},
 	}
@@ -458,23 +470,16 @@
 		}
 		/*通告模块*/
 		.notice {
-			height: 0.95rem;
-			margin-bottom: 0.2rem;
+			width: 100%;
+			height: 0.7rem;
+			padding: 0.2rem 0.45rem;
 			background-color: #fff;
-			padding-left: 0.45rem;
-			padding-right: 0.25rem;
-			overflow: hidden;
 			display: flex;
-			line-height: 0.95rem;
-			.notNew {
-			    font-size: 0.24rem;
-			    font-weight: 700;
-			    color: #1A2642;
-			}
-			.notMore {
-				color: #90A2C7;
-			    font-size: 0.22rem;
-			}
+			align-items: center;
+			margin-bottom: 0.2rem;
+			font-family: PingFangSC-Light;
+			color: rgba(66, 88, 132, 1);
+			font-size: 0.24rem;
 			img {
 				float: left;
 				width: 0.6rem;
@@ -576,7 +581,8 @@
 		}
 		/*入口模块*/
 		.plate {
-			padding: 0.2rem 0.29rem;
+			padding: 0 0.3rem;
+			margin-bottom: 0.2rem;
 			display: flex;
 			flex-wrap: wrap;
 			justify-content: space-between;
@@ -586,16 +592,17 @@
 				padding: 0.05rem;
 				box-sizing: border-box;
 				.b-w {
-					height: 1.65rem;
+					height: 1.2rem;
 					display: flex;
 					align-items: center;
-					justify-content: center;
+					justify-content: flex-start;
+					padding-left: 0.4rem;
 					background: rgba(255, 255, 255, 1);
 					box-shadow: 0px 2px 4px 0px rgba(144, 162, 199, 0.2);
 					img {
-						width: 1.2rem;
-						height: auto;
-						margin-right: 0.1rem;
+						width: 0.7rem;
+						height: 0.7rem;
+						margin-right: 0.2rem;
 					}
 					p:nth-child(1) {
 						font-size: 0.32rem;
@@ -604,6 +611,59 @@
 					p:nth-child(2) {
 						font-size: 0.24rem;
 						color: rgba(144, 162, 199, 1);
+					}
+				}
+			}
+			.item:nth-child(1) {
+				.b-w>div>p:nth-child(2) {
+					color: #F23030!important;
+				}
+			}
+		}
+		.navigation {
+			width: 100%;
+			margin: 0.2rem 0;
+			background: white;
+			ul {
+				padding: 0.26rem 0.3rem;
+				display: flex;
+				flex-wrap: wrap;
+				box-sizing: border-box;
+				li {
+					width: 25%;
+					margin: 0.25rem 0;
+					a {
+						position: relative;
+						display: flex;
+						align-items: center;
+						justify-content: center;
+						flex-direction: column;
+						.li-box {
+							position: relative;
+							width: 0.52rem;
+							height: 0.52rem;
+							img {
+								width: 100%;
+								height: auto;
+							}
+							.new {
+								position: absolute;
+								right: -3px;
+								top: -2px;
+							}
+							.new-account {
+								position: absolute;
+								right: -28px;
+								top: -2px;
+							}
+						}
+						p {
+							font-family: PingFangSC-Regular;
+							font-size: 0.24rem;
+							color: #7D7D7D;
+							letter-spacing: 0;
+							margin-top: 0.18rem;
+						}
 					}
 				}
 			}
@@ -765,8 +825,8 @@
 						}
 					}
 					img {
-						width: 1.59rem;
-						height: 1.21rem;
+						width: 1.50rem;
+						height: 1.50rem;
 						display: block;
 					}
 				}
@@ -825,25 +885,6 @@
 				background-color: transparent!important;
 				border: 2px solid #fff;
 				border-radius: 50%;
-			}
-		}
-		.noticeswiper {
-			flex: 1;
-			height: 0.95rem;
-			padding-left: 0.38rem;
-			.noticeText {
-				margin-bottom: 0.05rem;
-				font-size: 0.24rem;
-				color: #90A2C7;
-				.label {
-					width: 0.56rem;
-					margin-right: 0.2rem;
-					display: inline-block;
-					padding: 0.02rem 0;
-					text-align: center;
-					font-size: 0.2rem;
-					color: #F23030;
-				}
 			}
 		}
 	}

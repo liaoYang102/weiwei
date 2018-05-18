@@ -11,16 +11,16 @@
 	        </div>
 	      </x-dialog>
 	    </div> -->
-	    <div v-transfer-dom>
-	      <x-dialog v-model="orientation" class="dialog-demo" hide-on-blur>
-	        <div class="img-box">
-	          <img src="../static/images/orientation.jpg" style="max-width:100%">
-	        </div>
-	        <div @click="orientation=false">
-	          <!-- <span class="vux-close"></span> -->
-	        </div>
-	      </x-dialog>
-	    </div>
+		<div v-transfer-dom>
+			<x-dialog v-model="orientation" class="dialog-demo" hide-on-blur>
+				<div class="img-box">
+					<img src="../static/images/orientation.jpg" style="max-width:100%">
+				</div>
+				<div @click="orientation=false">
+					<!-- <span class="vux-close"></span> -->
+				</div>
+			</x-dialog>
+		</div>
 	</div>
 </template>
 
@@ -42,18 +42,18 @@
 		data() {
 			return {
 				show: '',
-				orientation:false
+				orientation: false
 			}
 		},
 		created() {
 			var _this = this;
-			window.onorientationchange=function(){
-		      if(window.orientation==90||window.orientation==-90){
-		          _this.orientation = true;
-		      }else{
-		      	  _this.orientation = false;
-		      }
-		    }
+			window.onorientationchange = function() {
+				if(window.orientation == 90 || window.orientation == -90) {
+					_this.orientation = true;
+				} else {
+					_this.orientation = false;
+				}
+			}
 			if(this.$router.app._route.meta.title) {
 				document.title = this.$router.app._route.meta.title
 			}
@@ -67,6 +67,9 @@
 				this.show = true;
 				return false;
 			}
+			
+			
+			console.log(_this.$store.state.page.isLoading)
 		},
 		components: {
 			ButtonTab,
@@ -80,6 +83,9 @@
 		},
 		watch: {
 			'$route' (to, from) {
+
+				var _this = this
+
 				document.body.scrollTop = 0
 				document.documentElement.scrollTop = 0
 
@@ -88,7 +94,7 @@
 				} else {
 					document.title = '大健康App'
 				}
-				
+
 				this.$code.hide()
 				this.$dialog.hide()
 			}
@@ -100,13 +106,16 @@
 	* {
 		-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 	}
-	.weui-dialog{
+	
+	.weui-dialog {
 		background-color: transparent;
 		z-index: 10001;
 	}
-	.weui-mask{
+	
+	.weui-mask {
 		z-index: 10000;
 	}
+	
 	#app {
 		height: 100%;
 		background-color: #F5F6FA;
@@ -120,7 +129,7 @@
 	.vux-pop-in-enter-active,
 	.vux-pop-in-leave-active {
 		will-change: transform;
-		transition: all .5s cubic-bezier(.55,0,.1,1);
+		transition: all .5s cubic-bezier(.55, 0, .1, 1);
 		height: 100%;
 		width: 100%;
 		top: 0;

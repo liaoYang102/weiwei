@@ -4,7 +4,7 @@
 		<div class="pr-box">
 			<div class="top">
 				<div class="middle">
-					<p>23</p>
+					<p>{{totalNums}}</p>
 					<p>合伙人( 人 )</p>
 				</div>
 				<router-link to="/member/purse/qrcode">
@@ -20,7 +20,7 @@
 					<div class="wrapper" ref="wrapper">
 						<div class="content">
 							<div class="box2">
-								<div v-if="has>0">
+								<div v-if="list.length>0">
 									<div class="list" v-for="(item,index) in list" :key="index">
 										<div class="he">
 											<div class="user-img">
@@ -51,7 +51,7 @@
 										<div class="add-btn">我要邀请</div>
 									</router-link>
 								</div>
-								
+
 							</div>
 						</div>
 					</div>
@@ -71,48 +71,37 @@
 			return {
 				title: '我的团队',
 				showloading: false,
-				has: 0,
-				list: [{
-					img: 'https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=3502149281,2119482052&fm=27&gp=0.jpg',
-					name: '这个合伙人ID最多这么长',
-					phone: '18520496787',
-					time: '2018-01-01 00:00:00'
-				}, {
-					img: 'https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=3502149281,2119482052&fm=27&gp=0.jpg',
-					name: '这个合伙人ID最多这么长',
-					phone: '18520496787',
-					time: '2018-01-01 00:00:00'
-				}, {
-					img: 'https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=3502149281,2119482052&fm=27&gp=0.jpg',
-					name: '这个合伙人ID最多这么长',
-					phone: '18520496787',
-					time: '2018-01-01 00:00:00'
-				}, {
-					img: 'https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=3502149281,2119482052&fm=27&gp=0.jpg',
-					name: '这个合伙人ID最多这么长',
-					phone: '18520496787',
-					time: '2018-01-01 00:00:00'
-				}, {
-					img: 'https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=3502149281,2119482052&fm=27&gp=0.jpg',
-					name: '这个合伙人ID最多这么长',
-					phone: '18520496787',
-					time: '2018-01-01 00:00:00'
-				}, {
-					img: 'https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=3502149281,2119482052&fm=27&gp=0.jpg',
-					name: '这个合伙人ID最多这么长',
-					phone: '18520496787',
-					time: '2018-01-01 00:00:00'
-				}],
-				showloading: false
+				totalNums: 0,
+				list: [],
+				showloading: false,
+				pageSize:20,
+				curPage:1,
 			}
 		},
 		created() {
-
+			this.getMyTeam()
 		},
 		mounted() {
 			this.InitScroll()
 		},
 		methods: {
+
+			getMyTeam() {
+				var _this = this
+				_this.$http.get(_this.url.user.getMyTeam, {
+					params: {
+						userId: 1,
+						curPage:_this.curPage,
+						pageSize:_this.pageSize
+					}
+				}).then((res) => {
+					console.log(res.data.data)
+					var data = res.data.data
+					this.list = data.list
+					this.totalNums = data.totalNums
+				})
+			},
+
 			InitScroll() {
 				this.$nextTick(() => {
 					if(!this.scroll) {
