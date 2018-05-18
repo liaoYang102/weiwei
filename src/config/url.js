@@ -6,6 +6,11 @@ var url = {
 		getUserInfo:'/v1/user/getUserInfo', //个人资料
 		changeUserInfo:'/v1/user/changeUserInfo',
 		fileuploadImage:'/v1/fileupload/image'
+	},
+
+	draw:{
+		getReviewLists: '/app/index.php?i=7&c=entry&m=mx_shop&do=mobile&r=copy.getReviewLists',
+		getLuckRankLists: '/app/index.php?i=7&c=entry&m=mx_shop&do=mobile&r=copy.getLuckyRankLists'
 	}
 }
 
