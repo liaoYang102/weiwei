@@ -138,5 +138,10 @@
 .ul-recommended .weui-cell_access .weui-cell__ft:after{
 	border-color: #90A2C7;
 	right: 0.202rem;
+	margin-top: -5px;
+	/*border:none;*/
+}
+.ul-recommended .weui-cells:before{
+	border:none;
 }
 </style>

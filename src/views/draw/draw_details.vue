@@ -1,17 +1,16 @@
 <template>
-	<section style="background-color: #F5F8F9;">
-		<settingHeader :title="title"></settingHeader>
+	<section style="background-color: #F3F3F3;height: 100%;">
+		<!-- <settingHeader :title="title"></settingHeader> -->
 		<div class="content">
-			<p class="title">番禺国美店周末幸运大抽奖</p>
-			<p class="times">第12356期</p>
-			<p class="text">只要在e消费平台上消费任意一笔订单，就能参与周末幸运大抽奖</p>
+			<p class="title left">番禺国美店周末幸运大抽奖</p>
+			<p class="times left">12356期</p>
+			<!-- <p class="text">只要在e消费平台上消费任意一笔订单，就能参与周末幸运大抽奖</p> -->
 		</div>
-
-		<div class="status">
+		<!-- <div class="status">
 			<div>状态</div>
 			<div class="text">已中奖</div>
 			<div class="clear"></div>
-		</div>
+		</div> -->
 
 		<div class="ways">	
 			<group>
@@ -33,7 +32,8 @@
 				list: [
 					{ label: '开奖时间', value:'2018.04.29'},
 					{ label: '参与时间', value:'2018.02.12'},
-					{ label: '参与方式', value:'2018.02.12购买耐克店铺商品赠送'}
+					{ label: '参与方式', value:'2018.02.12购买耐克店铺商品赠送'},
+					{ label: '状态', value:'已中奖'}
 				],
 			}
 		}
@@ -41,20 +41,25 @@
 </script>
 
 <style lang="less" scoped>
+.left{
+	float: left;
+}
 .content{
-	/*height: 2.36rem;*/
-	background-color: #FF5365;
-	color: #fff;
-	padding: 0.25rem 0 0.41rem 0.39rem;
+	background-color: #fff;
+	color: #333333;
+	padding: 0.29rem 0 0.36rem 0.29rem;
+	overflow: hidden;
 	.title{
-		font-size: 0.28rem;
-	}
-	.times{
-		margin: 0.25rem 0;
 		font-size: 0.36rem;
 	}
-	.text{
-		font-size: 0.2rem;
+	.times{
+		font-size: 0.24rem;
+		color: #fff;
+		background:linear-gradient(-121.4deg,#AF51FF,#9013FE);
+		border-radius: 0.04rem;
+		text-align: center;
+		padding:0.05rem 0.07rem; 
+		margin-left: 0.12rem;
 	}
 }
 .status{
@@ -78,25 +83,29 @@
 
 <style lang="less">
 .ways{
+	margin-top: 0.4rem;
 	.weui-cells{
-		margin-top: 0.2rem;
+		margin-top: 0.14rem;
 	}
 	.weui-cells:before{
 		border-top: none;
 	}
 	.weui-cell{
-		padding: 0.22rem 0.4rem 0.22rem 0.15rem;
+		padding: 0.33rem 0.4rem 0.22rem 0.28rem;
 	}
 	.weui-cells:after{
 		border-bottom: none;
 	}
 	.weui-form-preview__label{
-		color: #90A2C7;
+		color: #666666;
 		font-size: 0.28rem;
 	}
 	.weui-form-preview__value{
-		color: #1A2642;
+		color: #A0A0A0;
 		font-size: 0.28rem;
+	}
+	.weui-form-preview__item:last-child .weui-form-preview__value{
+		color: #E32921;
 	}
 }
 </style>

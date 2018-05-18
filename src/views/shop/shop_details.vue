@@ -19,7 +19,7 @@
     			<swiper :options="swiperOption" class="imgBox">
 			       	<swiper-slide v-for="(item,index) in shopImg">
 			       		<div class="imgBox-item">
-                        	<img class="previewer-demo-img" :src="item.src" @click="show(index)">
+                        	<img class="previewer-demo-img" v-lazy="item.src" @click="show(index)">
 			       		</div>
 			       	</swiper-slide>
 			    </swiper> 
@@ -38,7 +38,7 @@
 						</div>
 						<div class="shop_right">
 							<div class="shop_collection" @click="collection">
-								<img :src="collectImg"><br>
+								<img v-lazy="collectImg"><br>
 								<span>{{ collectText}}</span>
 							</div>
 							<div class="shop_share" @click="showShareDialog">
@@ -264,27 +264,15 @@ export default {
 		},
 		confirm(){
 			this.$refs.sp.show1 = false;
-    		if(this.$refs.sp.list3 == [] || this.$refs.sp.list3.length==0){
-    			this.$refs.sp.show1 = true;
-    			this.$vux.toast.show({
-    				text: '请选择尺码(必填)',
-    				type: 'text',
-    				width: '10em',
-    				position: 'middle'
-    			})
-    		}else{
-    			console.log('this.$refs.sp.list3',this.$refs.sp.list3)
-    			for(let i=0;i<this.$refs.sp.list3.length;i++){
-    				if(this.$refs.sp.list3[i] == null){
-    					this.$refs.sp.show1 = true;
-    					this.$vux.toast.show({
-    						text: '亲,要把规格都选上!',
-    						type: 'text',
-    						width: '10em',
-    						position: 'middle'
-    					})
-    					console.log('----',this.$refs.sp.list3)
-    					return
+			let list3 = this.$refs.sp.list3 
+    		if(list3 == [] || list3.length==0 || list3.length != this.$refs.sp.shopList.list.length){
+    			this.showSpToast()
+    		}
+    		else{
+    			for(var i =0;i<list3.length;i++){
+    				if(list3[i] == null){
+		    			this.showSpToast()
+		    			return
     				}
     			}
     			if(this.$refs.sp.router == 'goShopcart'){
@@ -315,6 +303,15 @@ export default {
         logIndexChange (arg) {
           	console.log(arg)
         },
+        showSpToast(){
+        	this.$refs.sp.show1 = true;
+        	this.$vux.toast.show({
+        		text: '请选择该商品的规格',
+        		type: 'text',
+        		width: '12em',
+        		position: 'middle'
+        	})
+        }
 	}
 }	
 </script>

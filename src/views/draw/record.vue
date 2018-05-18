@@ -1,20 +1,9 @@
 <template>
-	<section style="background: #F5F6FA;height: 100%;">
-		<drawHeader :title="title" id="changeBlock"></drawHeader>
-
-		<div class="record">
-            <div class="btn-large">
-               	<button-tab>
-	               	<button-tab-item selected @on-item-click="showNumber">参与记录</button-tab-item>
-	               	<button-tab-item @on-item-click="showAward">中奖记录</button-tab-item>
-               	</button-tab>
-            </div>
-        </div>
-
+	<section style="background: #E32921;height: 100%;">
         <div class="wrapper" ref="wrapper">
 			<div class="content">
 				<!-- tab切换 -->
-				<div class="time-line" v-if="tab2 == true">
+				<!-- <div class="time-line" v-if="tab2 == true">
 					<div v-if="count.length == 0">
 		        		<div class="noRecord">
 		        			<div class="img">
@@ -30,53 +19,64 @@
 								<span class="weekend">{{item.weekend}}</span>
 								<span class="winMoney right">{{item.winMoney}}元</span>
 							</h4>
-							<p :class="[index === 0 ? 'recent' : '']" class='bottom'>
-								<span class="rank">{{item.rank}}<span class='ranks'>{{item.award}}</span></span>
-								<span class="winStatus right">{{item.winStatus}}</span>
-							</p>
+							<div :class="[index === 0 ? 'recent' : '']" class='bottom flex'>
+								<div class="rank flex">
+									<div>{{item.rank}}</div>
+									<div class='ranks' v-if="item.award == '一等奖'">{{item.award}}</div>
+									<div class='ranks' :class="{'two': item.award == '二等奖'}" v-else-if="item.award == '二等奖'">{{item.award}}</div>
+									<div class='ranks' :class="{'three': item.award == '三等奖'}" v-else-if="item.award == '三等奖'">{{item.award}}</div>
+									<div class='ranks' :class="{'four': item.award == '四等奖'}" v-else>{{item.award}}</div>
+								</div>
+								<div class="winStatus2" v-if="item.winStatus == '领取'">
+									<img src="../../assets/images/draw/receiveIcon.png">
+									<span>{{item.winStatus}}</span>
+								</div>
+								<div class="winStatus" :class="[index === 0 ? 'recent' : '']" v-else>{{item.winStatus}}</div>
+								
+							</div>
+							<div class="clear"></div>
 						</timeline-item>
 					</timeline>
-				</div>
-
-		        <div class="recordList" v-else>
+				</div> -->
+		        <div class="recordList">
 					<div v-if="recordList.length==0">
 		        		<div class="noRecord">
 		        			<div class="img">
 		        				<img src="../../assets/images/draw/norecord.png">
-		        				<p>暂无{{tabTitle}}</p>
-		        				<p class="text">买单报电机号赢<span>5000元</span>大奖</p>
+		        				<p>您还没有中奖记录</p>
+		        				<div class="awardBtn" @click="$router.push({ path: '/multi_user_mall/summary'})">我要抽奖</div>
+		        				<p class="text red">
+		        					温馨提示：
+		        				</p>
+		        				<p class="text">只要在平台上消费任意一笔订单，就能参加周末幸运大抽奖!</p>
+		        				
 		        			</div>
 		        		</div>
 		        	</div>
 		        	<div v-else style="padding-bottom: 0rem;">
-			            <ul class="commodity">
-			            	<group v-for="(item,index) in recordList" class="li-item">
-								<cell>
-									<router-link to="/draw/details">
-										<li>
-											<p class="title">
-												<span>{{ item.drawTitle}}</span>
-												<span class="frequency right">{{ item.period}}期</span>
-											</p>
-											<p class="time">开奖时间:{{ item.awardDate}}</p>
-											<p class="bonusPool">
-												奖金池：<span class="num">￥{{ item.money}}</span> 中奖总人数：{{ item.num}}人
-											</p>
-				                        </li>
-			                    	</router-link>
-								</cell>
-								<cell>
-									<div class="status">
-										<span class="wait" v-if="item.status == 0">等待开奖</span>
-										<span class="start" v-else-if="item.status == 1">未中奖</span>
-										<div v-else-if="item.status == 2">
-											<span class="win">已中奖</span>
-											<div class="btn" @click="goWinningSpeech">立即领奖</div>
-										</div>
-										
-									</div>
-								</cell>
-							</group>
+			            <ul class="ul-record" v-for="(item,index) in recordList">
+							<router-link to="/draw/details">
+								<div class="re-content">
+									<div class="left">{{ item.drawTitle}}</div>
+			                    	<div class="period left">{{ item.period}}期</div>
+			                    	<div class="win">{{ item.stateValue}}</div>
+								</div>
+	                    	</router-link>
+							<div class="clear pd">
+								<div class="left">
+									<p class="time">开奖时间: {{ item.awardDate}}</p>
+									<p class="bonusPool">
+										奖金池：￥{{ item.money}}
+									</p>
+									<p>参与人数：<span class="num">{{ item.num}}人</span></p>
+								</div>
+								<div class="right btn" v-if="item.status == 2 && item.awardStatus == '未领取'" @click="goWinningSpeech">
+									领奖
+								</div>
+								<div class="right btn2" v-else>
+									已领取
+								</div>
+							</div>
 			            </ul>
 			            <loading v-if="show"></loading>
 			            <noMore v-if="showNomore"></noMore>
@@ -84,13 +84,59 @@
 
 			        <!-- 弹出框 -->
 			        <div v-transfer-dom class="dialog">
-			          	<x-dialog v-model="showDialog" :hide-on-blur="true">
-			          		<div class="dia_top">
-								<p class="title">{{ toast}}</p>
-								<!-- <span class="note">{{ note}}</span> -->
-								<router-link to="/member/setting/real"><div class="btn">实名验证</div></router-link>
-							</div>
-			          	</x-dialog>
+			        	<x-dialog v-model="showDialog" :hide-on-blur="true">
+			        		<!-- 未实名认证\等待审核\审核未通过 -->
+			        		<div class="dia" v-if="0 != false">
+			        			<img class="img" src="../../assets/images/draw/warning.png">
+			        			<div class="dia_top">
+			        				<div class="dia_content">
+			        					<p class="title">{{headMessage}}</p>
+			        					<p class="note">{{message}}</p>
+			        					<div class="btnList">{{btnText}}</div>
+			        				</div>
+			        			</div>
+			        			<div class="close"><img src="../../assets/images/draw/open.png"></div>
+			        		</div>
+
+			        		<!-- 已中奖\未中奖\未开奖 -->
+			        		<div  class="dia" v-else>
+			        			<div class="dia_top2">
+			        				<div class="dia_title">
+			        					<p>第12期</p>
+			        					<p>番禺国美店周末幸运大抽奖</p>
+			        				</div>
+			        				<div class="dia_content2">
+			        					<p class="title">{{headMessage}}</p>
+			        					<p class="note">买单报手机号赢<span>5000元</span>大奖</p>
+			        					<img src="../../assets/images/draw/tag.png" width="90%">
+			        					<div class="btn-link">点击查看详情 <img src="../../assets/images/draw/crown.png"></div>
+			        					<div  class="time-line">
+			        						<timeline>
+			        							<timeline-item v-for="(item, index) in count" :key="index">
+			        								<h4 :class="[index === 0 ? 'recent' : '']" >
+			        									<span class="tl-content">{{item.content}}</span>
+			        									<!-- <span class="winMoney right">{{item.date}}元</span> -->
+			        								</h4>
+			        								<div :class="[index === 0 ? 'recent' : '']" class='bottom flex'>
+			        									<div class="rank flex">
+			        										<div>{{item.date}}</div>
+			        									</div>
+			        									<!-- <div class="winStatus2" v-if="item.winStatus == '领取'">
+			        										<img src="../../assets/images/draw/receiveIcon.png">
+			        										<span>{{item.winStatus}}</span>
+			        									</div>
+			        									<div class="winStatus" :class="[index === 0 ? 'recent' : '']" v-else>{{item.winStatus}}</div> -->
+			        									
+			        								</div>
+			        								<div class="clear"></div>
+			        							</timeline-item>
+			        						</timeline>
+			        					</div>
+			        				</div>
+			        			</div>
+			        			<div class="close"><img src="../../assets/images/draw/open.png"></div>
+			        		</div>
+			        	</x-dialog>
 			        </div>
 		        </div>
 	        	
@@ -113,11 +159,9 @@
 			return {
 				title: '中奖记录',
 				count: [
-					{weekend: '周末幸运大抽奖', winMoney: '5000', rank: '1234期', award: '一等奖', winStatus: '已领取'},
-					{weekend: '周末幸运大抽奖', winMoney: '1000', rank: '1233期', award: '二等奖', winStatus: '未领取'},
-					{weekend: '周末幸运大抽奖', winMoney: '800', rank: '1232期', award: '三等奖', winStatus: '已领取'},
-					{weekend: '周末幸运大抽奖', winMoney: '5000', rank: '1231期', award: '一等奖', winStatus: '已领取'},
-					{weekend: '周末幸运大抽奖', winMoney: '5000', rank: '1230期', award: '一等奖', winStatus: '已领取'}
+					{content: '恭喜您中了一等奖', date: '2018-02-09 17：56：30'},
+					{content: '开奖时间：2018-08-28 19：00：00', date: '2018-08-28 19：00：00'},
+					{content: '您花了￥1，256购买了一双耐克KD10广州万国奥特广场负一层', date: '2018-08-28 19：00：00'}
 				],
 				tab1: true,
 				tab2: false,
@@ -125,22 +169,23 @@
 				showNomore: false,
 				showDialog: false,
 				recordList:[
-					{ drawTitle: '国美番禺店大抽奖', period: '1234', awardDate: '2018-03-20 20:00:00', money: '800.00', num:'600.00',status:0},
-					{ drawTitle: '国美番禺店大抽奖', period: '1234', awardDate: '2018-03-20 20:00:00', money: '800.00', num:'600.00',status:0},
-					{ drawTitle: '国美番禺店大抽奖', period: '1234', awardDate: '2018-03-20 20:00:00', money: '800.00', num:'600.00',status:1},
-					{ drawTitle: '国美番禺店大抽奖', period: '1234', awardDate: '2018-03-20 20:00:00', money: '800.00', num:'600.00',status:1},
-					{ drawTitle: '国美番禺店大抽奖', period: '1234', awardDate: '2018-03-20 20:00:00', money: '800.00', num:'600.00',status:2},
-					{ drawTitle: '国美番禺店大抽奖', period: '1234', awardDate: '2018-03-20 20:00:00', money: '800.00', num:'600.00',status:1},
-					{ drawTitle: '国美番禺店大抽奖', period: '1234', awardDate: '2018-03-20 20:00:00', money: '800.00', num:'600.00',status:0},
-					{ drawTitle: '国美番禺店大抽奖', period: '1234', awardDate: '2018-03-20 20:00:00', money: '800.00', num:'600.00',status:0}
+					{ drawTitle: '国美番禺店大抽奖', period: '1234', awardDate: '2018-03-20 20:00:00', money: '800.00', num:'600.00',status:0, stateValue: '等待开奖',awardStatus: '未领取'},
+					{ drawTitle: '国美番禺店大抽奖', period: '1234', awardDate: '2018-03-20 20:00:00', money: '800.00', num:'600.00',status:0, stateValue: '等待开奖',awardStatus: '未领取'},
+					{ drawTitle: '国美番禺店大抽奖', period: '1234', awardDate: '2018-03-20 20:00:00', money: '800.00', num:'600.00',status:2, stateValue: '已中奖',awardStatus: '未领取'},
+					{ drawTitle: '国美番禺店大抽奖', period: '1234', awardDate: '2018-03-20 20:00:00', money: '800.00', num:'600.00',status:2, stateValue: '已中奖',awardStatus: '已领取'},
+					{ drawTitle: '国美番禺店大抽奖', period: '1234', awardDate: '2018-03-20 20:00:00', money: '800.00', num:'600.00',status:2, stateValue: '已中奖',awardStatus: '未领取'},
+					{ drawTitle: '国美番禺店大抽奖', period: '1234', awardDate: '2018-03-20 20:00:00', money: '800.00', num:'600.00',status:1, stateValue: '未中奖',awardStatus: '未领取'},
+					{ drawTitle: '国美番禺店大抽奖', period: '1234', awardDate: '2018-03-20 20:00:00', money: '800.00', num:'600.00',status:0, stateValue: '等待开奖',awardStatus: '未领取'},
+					{ drawTitle: '国美番禺店大抽奖', period: '1234', awardDate: '2018-03-20 20:00:00', money: '800.00', num:'600.00',status:0, stateValue: '等待开奖',awardStatus: '未领取'}
 				],
-				toast: '您还未实名验证',
+				headMessage: '您还未进行实名认证',
 				note: '(请你检查身份验证是否通过)',
 				// 恭喜您成功领取奖金  您已成功领取奖金  请您耐心等待审核
 				// 审核未通过 （请你检查身份验证是否通过）
 				// 领取奖金失败（请你检查身份验证是否通过）
 				// 您还未实名验证  按钮实名验证
-				tabTitle: '参与记录'
+				message: '进行实名认证之后才可以领取奖励',
+				btnText: '立即去认证'
 
 			}
 		},
@@ -148,16 +193,6 @@
 			this.InitScroll()
 		},
 		methods:{
-			showNumber(){
-                this.tab1 = true;
-                this.tab2 = false;
-                this.tabTitle = '参与记录'
-			},
-			showAward(){
-				this.tab1 = false;
-				this.tab2 = true;
-				this.tabTitle = '中奖记录'
-			},
 	        InitScroll() {
 				this.$nextTick(() => {
 					if(!this.scroll) {
@@ -201,9 +236,9 @@
 			goWinningSpeech(){
 				var that = this;
 				this.showDialog = true;
-				setTimeout(function(){
-					that.showDialog = false
-				},5000)
+				// setTimeout(function(){
+				// 	that.showDialog = false
+				// },5000)
 			},
 		}
 	}
@@ -216,15 +251,12 @@
 	.right{
 		float: right;
 	}
-	.record{
-	    background-color: #F5F6FA;
-	    padding-top: 0.8rem;
-	    padding-bottom: 0.2rem;
-	    .btn-large {
-	        width: 90%;
-	        height: 0.8rem;
-	        margin: auto;
-	    }
+	.flex{
+		display: flex;
+	}
+	.tab-record{
+		background-color: #fff;
+		padding-bottom: 2px;
 	}
 	.wrapper {
 		height: 100%;
@@ -232,11 +264,11 @@
 	}
 	.noRecord{
 		background: #fff;
-		width: 90%;
+		width: 94.7%;
 		margin: 0.2rem auto;
-		border-radius: 0.1rem;
-		padding-top: 2.5rem;
-		padding-bottom: 3rem;
+		border-radius: 0.08rem;
+		padding-top: 1.07rem;
+		padding-bottom: 0.6rem;
 		.img{
 			width: 100%;
 			text-align: center;
@@ -247,176 +279,306 @@
 			}
 			p{
 				font-size: 0.32rem;
-				color: #90A2C7;
+				color: #333333;
+				margin-top: 0.27rem;
+			}
+			.awardBtn{
+				width: 88.8%;
+				background: linear-gradient(-120deg,#FF5C34,#FF2A4B);
+				margin: 1.3rem auto 0.32rem auto ;
+				padding: 0.31rem 0;
+				text-align: center;
+				color: #fff;
+				border-radius: 0.48rem;
+				box-shadow:0.07rem 0.09rem 0.27rem rgba(255,53,70,0.4);
+				font-size: 0.36rem;
 			}
 			.text{
-				font-size: 0.3rem;
+				font-size: 0.2rem;
 				line-height: 0.5rem;
-				span{
-					color: #FF5365;
-				}
+				color: #A0A0A0;
+				text-align: left;
+				width: 85%;
+				margin: 0 auto;
+			}
+			.red{
+				color: #E32921;
 			}
 		}
 		
 	}
 	.time-line{
-		background: #fff;
-		width: 90%;
+		background: #FFF5F6;
+		width: 94.7%;
 		margin: 0.2rem auto 0.3rem auto;
-		border-radius: 0.1rem;
+		border-radius: 0.06rem;
 		height: 75%;
-		color: #1A2642;
+		color: #666666;
+		font-size: 0.26rem;
+		text-align: left;
+		.tl-content{
+			font-size: 0.28rem;
+		}
 		.winMoney{
 			font-size: 0.36rem;
 			font-weight: 700;
+			color: #333333;
 		}
-		.weekend{
-			font-size: 0.32rem;
-		}
+		
 		.rank{
-			font-size: 0.26rem;
-			color: #90A2C7;
+			color: #666666;
+			width: 70%;
+			line-height: 0.38rem;
 		}
 		.ranks{
-			color: #FF5365;
+			background: linear-gradient(-121.4deg,#FDC95A,#F2AE40);
+			border-radius: 0.04rem;
+			height: 0.38rem;
+			width: 0.97rem;
+			color: #fff;
+			margin-left: 0.2rem;
+			font-size: 0.26rem;
+			text-align: center;
+			line-height: 0.38rem;
 		}
 		.winStatus{
-			color: #90A2C7;
+			flex: 1;
+			color: #A0A0A0;
 			text-align: right;
+		}
+		.two{
+			background: linear-gradient(-121.4deg,#E2E4E8,#C7CAD1);
+		}
+		.three{
+			background: linear-gradient(-121.4deg,#F9D0B5,#D8AA8B);
+		}
+		.four{
+			background: linear-gradient(-121.4deg,#C0D3FC,#90A2C7);
+		}
+		.winStatus2{
+			flex: 1;
+			color: #E32921;
+			text-align: right;
+			img{
+				width: 20%;
+				vertical-align: middle;
+			}
+			span{
+				vertical-align: middle;
+			}
+		}
+		.recent{
+			color: #333333;
 		}
 	}
 
 	.recordList{
-		background-color: #F5F6FA;
-		.li-item{
-			margin-bottom: 0.2rem;
+		width: 94.7%;
+		margin: 0 auto;
+		padding-bottom: 0.2rem;
+		.ul-record{
+			width: auto;
+			margin-top: 0.2rem;
+			border-radius: 0.08rem;
+			background-color: #fff;
+			padding: 0.35rem 0.1rem;
 		}
-		li {
-		  padding-bottom: 0.18rem;
-		  background-color: #fff;
-		  width: 100%;
-		  padding-top: 0.22rem;
-		  margin-left: 0.3rem;
-		  font-size: 0.26rem;
-		  border-bottom: 0.01rem dashed #D8DFF0;
-		  .title {
-		    font-size: 0.32rem;
-		    color: #1A2642;
-		    font-weight: 400;
-		    .frequency {
-		      color: #90A2C7;
+	  	.re-content{
+	      	color: #333333;
+	      	font-size: 0.36rem;
+	      	padding-left: 0.4rem;
+		  	border-bottom: 1px solid #F3F3F3;
+		  	padding-top: 0.05rem;
+		  	padding-bottom: 0.39rem;
+		  	overflow: hidden;
+		    .period{
+		      	color: #fff;
+		      	font-size: 0.26rem;
+		      	background:linear-gradient(-121.4deg,#AF51FF,#9013FE);
+		      	border-radius: 0.04rem;
+		      	text-align: center;
+		      	padding:0.05rem 0.07rem; 
+		      	margin-left: 0.12rem;
 		    }
-		  }
-		  .time {
-		    line-height: 0.45rem;
-		    color: #90A2C7;
-		  }
-		  .bonusPool {
-		    line-height: 0.35rem;
-		    color: #90A2C7;
-		    .num {
-		      color: #FF5365;
+		    .win{
+		      	float: right;
+		      	background-color: #E5EAEF;
+		      	padding: 0.15rem 0.38rem;
+		      	color: #666666;
+		      	font-size: 0.28rem;
+		      	text-align: center;
+		      	border-radius: 0.28rem;
+		      	margin-right: 0.2rem;
 		    }
-		  }
-		  
-		}
-		.status {
-			position: relative;
-		  	margin-top: 0.17rem;
-		  	padding-left: 0.3rem;
-		  	padding-bottom: 0.2rem;
-		  	font-size: 0.32rem;
-		  	.wait {
-		  	  color: #FF811C;
-		  	}
-		  	.start {
-		    	color: #7386AD;
-		  	}
-		  	.win {
-		    	color: #FF5365;
-		  	}
-	    	.btn {
-		    	position: absolute;
-		  	  	width: 1.5rem;
-		  	  	border-radius: 0.23rem;
-		  	  	height: 0.45rem;
-		  	  	color: #fff;
-		  	  	line-height: 0.45rem;
-		  	  	background-color: #FF5365;
-		  	  	font-size: 0.26rem;
-		  	  	text-align: center;
-		  	  	right: -0.2rem;
-		  	  	top: 0rem;
+	  	}
+	  	.pd{
+	  		padding:0.29rem 0 0 0.4rem ;
+	  		p{
+	  			font-size: 0.26rem;
+	  			color: #666;
 	  		}
-		}
-	  
+	  		.num{
+	  			color: #333333;
+	  		}
+	  	}
+
+	  	.btn{
+	  		background:linear-gradient(-121.4deg,#FF5C34,#FF2A4B);
+	  		border-radius:0.48rem;
+	  		box-shadow:0.07rem 0.09rem 0.27rem rgba(255,53,70,0.4);
+	  		padding: 0.33rem 0.65rem;
+	  		text-align: center;
+	  		color: #fff;
+	  		font-size: 0.32rem;
+	  		margin-right: 0.2rem;
+	  		margin-top: 0.25rem;
+	  	}
+	  	.btn2{
+	  		background:#E5EAEF;
+	  		border-radius:0.48rem;
+	  		padding: 0.33rem 0.5rem;
+	  		text-align: center;
+	  		color: #666666;
+	  		font-size: 0.32rem;
+	  		margin-right: 0.2rem;
+	  		margin-top: 0.25rem;
+	  		
+	  	}
 	}
 
-	.dia_top {
-		width: 90%;
-		height: 1.78rem;
-		margin: auto;
-	  	border-radius: 0.1rem;
-	  	background-color: #fff;
-	  	color: #1A2642;
-	  	.title {
-	  	  font-size: 0.32rem;
-	  	  margin-top: 0.8rem;
-	  	  line-height: 0.48rem;
-	  	  text-align: center;
-	  	}
-	  	.note{
-	  		font-size: 0.2rem;
-	  	}
-	  	.btn{
-	  		margin: 0.35rem auto;
-	  		width: 2.17rem;
-	  		height: 0.54rem;
-	  		background-color: #FF5365;
-	  		text-align: center;
-	  		line-height: 0.54rem;
-	  		color: #fff;
-	  		border-radius: 0.23rem;
-	  	}
+	.dia {
+		width: 100%;
+		color: #1A2642;
+		position: relative;
+		height: auto;
+		.img {
+			width: 25%;
+			position: absolute;
+			top: 0;
+			left: 50%;
+			transform: translate(-50%, -50%);
+		}
+		.dia_top {
+			width: 100%;
+			margin: 0 auto;
+			height: auto;
+			min-height: 2.49rem;
+			background-color: #FF273A;
+			text-align: center;
+			padding-top: 1.09rem;
+			margin-top: 1.09rem;
+			border-radius: 0.16rem;
+			.dia_content{
+				background: #fff;
+				height: auto;
+				min-height: 2.49rem;
+				padding-bottom: 0.55rem;
+				border-radius: 0 0 0.16rem 0.16rem;
+			}
+			.title {
+				font-size: 0.36rem;
+				line-height: 0.59rem;
+				margin-bottom: 0.12rem;
+				color: #333333;
+				padding-top: 0.6rem;
+			}
+			.note {
+				color: #666666;
+				padding: 0 0.5rem;
+				box-sizing: border-box;
+				font-size: 0.24rem;
+			}
+			.btnList {
+				margin: 0 auto;
+				width: 85.4%;
+				background: #FF273A;
+				color: #fff;
+				font-size: 0.36rem;
+				border-radius: 0.5rem;
+				text-align: center;
+				box-shadow:0.04rem 0px 0.08rem rgba(136,46,219,0.3);
+				padding: 0.32rem 0; 
+				margin-top: 0.8rem;
+			}
+			
+		}
+		.dia_top2{
+			width: 100%;
+			margin: 0 auto;
+			height: auto;
+			min-height: 2.49rem;
+			background-color: #FF273A;
+			text-align: center;
+			margin-top: 1.09rem;
+			border-radius: 0.16rem;
+			.dia_title{
+				color: #fff;
+				padding-top: 0.08rem;
+				font-size: 0.36rem;
+				padding-bottom: 0.1rem;
+				p:nth-child(1){
+					font-size: 0.72rem;
+				}
+			}
+			.dia_content2{
+				background: #fff;
+				height: auto;
+				border-radius: 0 0 0.16rem 0.16rem;
+				.title {
+					font-size: 0.36rem;
+					line-height: 0.59rem;
+					margin-bottom: 0.15rem;
+					color: #333333;
+					padding-top: 0.5rem;
+				}
+				.note {
+					color: #666666;
+					padding: 0 0.5rem;
+					box-sizing: border-box;
+					font-size: 0.24rem;
+					margin-bottom: 0.6rem;
+					span{
+						color: #E32921;
+					}
+				}
+				.btn-link{
+					color: #666666;
+					font-size: 0.3rem;
+					text-align: center;
+					margin-top: 0.22rem;
+					img{
+						width: 5%;
+						vertical-align: middle;
+					}
+				}
+			}
+		}
+		.close{
+			width: 100%;
+			background: rgba(255,255,255,0);
+			height: 1.25rem;
+			img{
+				height: 100%;
+				margin: 0 auto;
+			}
+		}
 	}
 </style>
 
 <style lang="less">
-@button-tab-border-radius: 0.6rem;
-	.record{
-		.vux-button-group > a.vux-button-group-current{
-			color: #fff !important;
-			background: #FF5365 !important;
+	.tab-record{
+		.vux-tab{
+			height: 0.98rem;
 		}
-		.vux-button-group{
-			height: 0.8rem !important;
+		.vux-tab-warp{
+			padding-top: 0.98rem;
 		}
-		.vux-button-group > a{
-			height: 0.8rem !important;
-			line-height: 0.8rem !important;
-			font-size: 0.36rem !important;
-			color: #FF5365 !important;
-			background: rgba(0,0,0,0) !important;
-			
+		.vux-tab .vux-tab-item{
+			font-size: 0.36rem;
+			background-size: 100% 0;
 		}
-		.vux-button-group > a.vux-button-tab-item-first:after, .vux-button-group > a.vux-button-tab-item-last:after{
-			border: 0.02rem solid #FF5365;
-		}
-		.vux-button-group > a.vux-button-tab-item-first{
-			border-top-left-radius: @button-tab-border-radius !important;
-			border-bottom-left-radius: @button-tab-border-radius !important;
-		}
-		.vux-button-group > a.vux-button-tab-item-last{
-			border-top-right-radius: @button-tab-border-radius !important;
-			border-bottom-right-radius: @button-tab-border-radius !important;
-		}
-		.vux-button-group > a.vux-button-tab-item-first:after{
-			border-top-left-radius: 0.7rem !important;
-			border-bottom-left-radius: 0.7rem !important;
-		}
-		.vux-button-group > a.vux-button-tab-item-last:after{
-			border-top-right-radius: 0.7rem !important;
-			border-bottom-right-radius: 0.7rem !important;
+		.vux-tab-container{
+			height: 0.98rem;
 		}
 	}
 
@@ -431,27 +593,25 @@
 		.bottom{
 			padding-bottom: 0.3rem;
 			border-bottom: none;
-			margin-top: 0.1rem;
-			color: #1A2642;
+			margin-top: 0.11rem;
 		}
-		.recent{
-			color: #000;
-		}
+		
 		.vux-timeline-item-color{
-			background-color:#FF5365;
+			background-color:#E32921;
 		}
 		.vux-timeline-item-tail{
-			background-color:#FF5365;
+			background-color:#E32921;
 		}
 		.vux-timeline-item-head-first{
-			background-color:#FF5365;
+			background-color:#E32921;
+			/*opacity: 0.4;*/
 			i{
 				display: none;
 			}
 		}
 	}
 
-	.commodity{
+	.ul-record{
 		.weui-cells{
 			margin-top: 0 !important;
 		}
@@ -486,8 +646,11 @@
 		}
 	}
 	.dialog{
-		.weui-dialog{
-			width: 60%;
+		.weui-dialog {
+			width: 78.67%;
+			max-width: 78.67%;
+			z-index: 111111111111111111111111;
+			border-radius: 0.16rem; 
 		}
 	}
 

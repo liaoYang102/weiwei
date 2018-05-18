@@ -19,7 +19,7 @@
 		            			<swiper :options="swiperOption" class="box1">
 	            			       	<swiper-slide v-for="(item,index) in list">
 	            			       		<div class="box1-item">
-    			                        	<img  class="previewer-demo-img" :src="item.src" width="100" @click="show(index)">
+    			                        	<img  class="previewer-demo-img" v-lazy="item.src" width="100" @click="show(index)">
 	            			       		</div>
 	            			       	</swiper-slide>
 	            			    </swiper>
@@ -57,8 +57,8 @@ export default {
 			showNomore: false,
 			swiperOption: {
 				autoHeight: true,
-	          slidesPerView: 'auto',
-              spaceBetween: 10
+	          	slidesPerView: 'auto',
+              	spaceBetween: 10
 	        },
 			list: [{
 			        msrc: 'http://ww1.sinaimg.cn/thumbnail/663d3650gy1fplwu9ze86j20m80b40t2.jpg',

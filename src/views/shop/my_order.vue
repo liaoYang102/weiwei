@@ -53,7 +53,7 @@
 
 			    <div class="wrap no_orders" v-else>
 		        	<div class="none-data">
-		        		<img :src="imgSrc" alt=""> 
+		        		<img v-lazy="imgSrc" alt=""> 
 		    			<p>{{ status}}</p>
 		        	</div>
 		    		
@@ -280,7 +280,7 @@
 
 <style lang="less" scoped>
 	.wrapper {
-		height: 95%;
+		height: 93.2%;
 		background-color: #F5F6FA;
 		overflow: hidden;
 	}

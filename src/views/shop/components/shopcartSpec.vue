@@ -6,7 +6,7 @@
 		    		<div class="sp-content">
 		    			<div class="sp-panel">
 		    				<div class="ab-img"><img src="../../../assets/images/shop/close.png" @click="close"></div>
-		    				<img :src="shopList.shopImg">
+		    				<img v-lazy="shopList.shopImg">
 		    				<div class="sp-text">
 		    					<p class="shopPrice">
 									<span class="priceNum">￥{{shopList.shopPrice}}</span> 

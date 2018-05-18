@@ -3,13 +3,13 @@
         <settingHeader :title="title"></settingHeader>
         <tab :line-width='0' style="border-top: 1px solid #E1E1E1;">
             <tab-item selected @on-item-click="showPanel">
-              {{ tabItem}} <img :src="downImg" alt="" width="13%">
+              {{ tabItem}} <img v-lazy="downImg" alt="" width="13%">
             </tab-item>
-            <tab-item class='vux-center' @on-item-click="onItemClick">销量<img :src="numImg" alt="" width="12%">
+            <tab-item class='vux-center' @on-item-click="onItemClick">销量<img v-lazy="numImg" alt="" width="12%">
             </tab-item>
             <tab-item @on-item-click="sort">
                 <span>价格</span>
-                <img :src="priceImg" alt="" width="12%">
+                <img v-lazy="priceImg" alt="" width="12%">
             </tab-item>
             <tab-item @on-item-click="onMenuClick">
                 筛选 <img src="../../assets/images/shop/screen.png" alt="" width="12%">
@@ -156,6 +156,7 @@ export default {
                 this.tabItem = this.$route.params.title
             }
         },
+        // 综合
         showPanel: function(){
             this.priceImg = './static/shop/default.png'
             this.numImg = './static/shop/default.png'
@@ -165,6 +166,8 @@ export default {
             if(this.showMaskTop == false){
                 this.showMaskTop = true;
             }
+            this.numSort = 0;
+            this.priceSort = 0;
         },
         select: function(obj,i){
             this.act1 = i;
@@ -175,36 +178,49 @@ export default {
             this.showMaskTop = false;
             this.$refs.xioaqiang.show1 = true;
             this.$refs.xioaqiang.InitScroll();
-            this.priceImg = './static/shop/default.png'
             this.downImg = './static/shop/down.png'
         },
+        // 销量
         onItemClick: function() {
             this.downImg = './static/shop/down.png'
             this.priceImg = './static/shop/default.png'
+            this.priceSort = 0;
             let a = this.numSort;
-            a ++;
+            if(a<2){
+                a ++;
+            }else{
+                a--;
+            }
             this.numSort = a;
             if(a == 0){
                 this.numImg = './static/shop/default.png'
-            }else if(a%2 != 0){
-                this.numImg = './static/shop/ascending.png'
             }else{
-                this.numImg = './static/shop/descending.png'
+                this.numImg = './static/shop/ascending.png'
+                if(a == 2){
+                    this.numImg = './static/shop/descending.png'
+                }
             }
             console.log('--', this.numSort)
         },
+        // 价格
         sort(){
             this.downImg = './static/shop/down.png'
             this.numImg = './static/shop/default.png'
+            this.numSort = 0;
             let a = this.priceSort;
-            a ++;
+            if(a<2){
+                a ++;
+            }else{
+                a--;
+            }
             this.priceSort = a;
             if(a == 0){
                 this.priceImg = './static/shop/default.png'
-            }else if(a%2 != 0){
-                this.priceImg = './static/shop/ascending.png'
             }else{
-                this.priceImg = './static/shop/descending.png'
+                this.priceImg = './static/shop/ascending.png'
+                if(a == 2){
+                    this.priceImg = './static/shop/descending.png'
+                }
             }
             console.log('--', this.priceSort)
         },

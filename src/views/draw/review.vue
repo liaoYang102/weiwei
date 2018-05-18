@@ -1,40 +1,46 @@
 <template>
-	<section style="height: 100%;">
+	<section style="height: 100%;background-color: #E32921;">
 		<div class="wrapper" ref="wrapper">
 			<div class="content">
-				<drawHeader :title="title"></drawHeader>
+				<!-- <drawHeader :title="title"></drawHeader> -->
 				<!-- 轮播 -->
-				<swiper :options="swiperOption" class="swiper">
+				<!-- <swiper :options="swiperOption" class="swiper">
 			        <swiper-slide v-for="item in imgList">
 			        	<img :src="item">
 			        </swiper-slide>
 			        <div class="swiper-pagination" slot="pagination"></div>
-		        </swiper>
+		        </swiper> -->
+		        <div class="head">
+					<img src="../../assets/images/draw/lottery_index1.png">
+				</div>
 		        
                 <div class="drawList">
+                	<p class="wonderful">往期回顾</p>
                     <ul class="commodity">
-                    	<group v-for="(item,index) in drawList">
-							<cell is-link>
-								<li @click="goPastevents">
-									<div class="left img">
-										<img src="../../assets/images/draw/lottery_index7.png" alt="">
-									</div>
-									<div class="arrow">
-										<img src="../../assets/images/draw/lottery_index8.png" alt="" >
-									</div>
-									<div class="left container">
-										<p class="lucky">{{ item.title}}</p>
-										<p class="num">参加人数:{{ item.num}}</p>
-										<p class="bonusPool">奖金池:<span>￥{{ item.money}}</span></p>
-									</div>
-									<div class="clear"></div>
-			                    </li>
-							</cell>
-						</group>
+                    	<group  v-for="(item,index) in drawList">
+                    		<cell>
+		                    	<li @click="$router.push({path: '/draw/pastevents'})">
+		                    		<div class="left img">
+		                    			<img src="../../assets/images/draw/lottery_index7.png" alt="">
+		                    			<div class="arrow">
+		                    				<img src="../../assets/images/draw/lottery_index8.png" alt="" >
+		                    			</div>
+		                    		</div>
+		                    		
+		                    		<div class="left container">
+		                    			<p class="lucky">{{ item.title}}</p>
+		                    			<p class="num">参加人数:{{ item.num}}</p>
+		                    			<p class="bonusPool">奖金池:<span>￥{{ item.money}}</span></p>
+		                    		</div>
+		                    		<div class="clear"></div>
+		                    	</li>
+                    		</cell>
+                    	</group>
                     </ul>
                     <loading v-if="show"></loading>
                     <noMore v-if="showNomore"></noMore>
                 </div>
+                <div class="clear"></div>
 			</div>
 		</div>
 	</section>
@@ -138,21 +144,37 @@
 	height: 100%;
 	overflow: hidden;
 }
+.head {
+  	width: 100%;
+  	img{
+  		width: 100%;
+  		display: block;
+  		margin: 0;
+  		padding: 0;
+  	}
+}
 .drawList{
+	width: 94.7%;
+	margin: 0.2rem auto 0.24rem auto;
 	background: #fff;
+	border-radius: 0.08rem;
+	padding-top: 0.36rem;
 	.wonderful {
-	  padding-left: 0.18rem;
-	  font-size: 0.32rem;
+	  text-align: center;
+	  width: 100%;
+	  font-size: 0.36rem;
 	  color: #333;
-	  line-height: 0.7rem;
 	}
 	li {
-	  padding-left: 0.18rem;
-	  padding-top: 0.28rem;
+	  padding-top: 0.29rem;
 	  position: relative;
-	  padding-bottom: 0.28rem;
+	  padding-bottom: 0.3rem;
+	  margin-right: 0.24rem;
+	  border-bottom: 1px solid #E6E6E6;
 	  .img{
-	    width: 1.54rem;
+	  	position: relative;
+	    width: 2.42rem;
+	    height: 1.5rem;
 	    img{
 	    	width: 100%;
 	    	height: 100%;
@@ -164,30 +186,32 @@
 	  .arrow {
 	    width: 0.33rem;
 	    position: absolute;
-	    left: 0.8rem;
-	    top: 0.6rem;
+	    bottom:0.1rem;
+	    right: 0.1rem;
 	    img{
 	    	width: 100%;
 	    	height: 100%;
 	    }
 	  }
 	  .container {
-	    margin-left: 0.25rem;
+	    margin-left: 0.3rem;
 	    line-height: .36rem;
 	    .lucky {
-	      font-size: .32rem;
+	      font-size: .3rem;
 	      color: #1A2642;
-	      margin-bottom: 0.12rem;
+	      margin-bottom: 0.48rem;
+	      margin-top: 0.05rem;
 	    }
 	    .num {
 	      font-size: .26rem;
-	      color: #90A2C7;
+	      color: #666666;
 	    }
 	    .bonusPool {
 	      font-size: .26rem;
-	      color: #90A2C7;
+	      color: #666666;
 	      span {
-	        color: #FF5365;
+	        color: #E32921;
+	        font-size: 0.3rem;
 	      }
 	    }
 	  }

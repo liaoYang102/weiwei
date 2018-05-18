@@ -3,7 +3,7 @@
     	<div class="wrapper" ref="wrapper">
 			<div class="content">
 				<settingHeader :title="title"></settingHeader>
-				<img :src="imgSrc" style="width: 100%;">
+				<img v-lazy="imgSrc" style="width: 100%;">
 				<div class="theme" id="theme">
 					
 				    <div class="themeTab">
