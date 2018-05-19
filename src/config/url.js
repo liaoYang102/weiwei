@@ -11,10 +11,14 @@ var url = {
 		userRegister:'/user/v1/userRegister', //用户注册
 		checkUserExistsByMobile:'/user/v1/user/checkUserExistsByMobile', //用户是否注册
 		changeNickname:'/user/v1/user/changeNickname', // 修改用户名
+		addShippingAddress:'/user/v1/user/addShippingAddress', // 添加收货地址
 	},
 	draw:{
 		getReviewLists: '/app/index.php?i=7&c=entry&m=mx_shop&do=mobile&r=copy.getReviewLists', //往期回顾
 		getLuckRankLists: '/app/index.php?i=7&c=entry&m=mx_shop&do=mobile&r=copy.getLuckyRankLists'//幸运排行
+	},
+	zone: {
+		area: '/area/v1/area/getInfo'
 	}
 
 }

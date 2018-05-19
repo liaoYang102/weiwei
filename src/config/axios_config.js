@@ -10,8 +10,8 @@ Vue.use(isload)
 axios.defaults.retry = 4 //请求次数
 axios.defaults.retryDelay = 1000 //请求间隙
 //axios.defaults.timeout = 5000 // 超时时间
-axios.defaults.baseURL = '/api' // 请求默认地址
-axios.defaults.withCredentials = true // 允许请求携带token
+axios.defaults.baseURL = 'http://47.104.187.243:18666' // 请求默认地址
+// axios.defaults.withCredentials = true // 允许请求携带token
 
 axios.interceptors.request.use(config => {
 	// isLoading方法
