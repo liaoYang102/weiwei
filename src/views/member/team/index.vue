@@ -24,24 +24,29 @@
 									<div class="list" v-for="(item,index) in list" :key="index">
 										<div class="he">
 											<div class="user-img">
-												<img :src="item.img" />
+												<img :src="item.avatar" />
 											</div>
 											<div class="user-text">
-												<p>{{item.name}}</p>
-												<p>手机号码：{{item.phone}}</p>
-												<p>加入时间：{{item.time}}</p>
+												<p>{{item.nickname}}</p>
+												<p>手机号码：{{item.mobile}}</p>
+												<p>加入时间：{{item.registerTime}}</p>
 											</div>
 										</div>
 										<div class="footer">
 											<grid class="footer-item">
-												<grid-item v-for="i in 2" :key="i">
+												<grid-item>
 													<p>订单数</p>
-													<p>12</p>
+													<p>{{item.orderSum}}</p>
+												</grid-item>
+												<grid-item>
+													<p>消费额</p>
+													<p>{{item.orderPrice}}</p>
 												</grid-item>
 											</grid>
 										</div>
 									</div>
 									<Loading v-if="showloading"></Loading>
+									<Nomore v-if="showNo"></Nomore>
 								</div>
 
 								<div class="null-box" v-else>
@@ -65,17 +70,19 @@
 	import { Grid, GridItem } from 'vux'
 	import settingHeader from '../../../components/setting_header'
 	import Loading from '../../../components/loading'
+	import noData from '../../../components/noData'
 	import BScroll from 'better-scroll'
 	export default {
 		data() {
 			return {
 				title: '我的团队',
 				showloading: false,
+				showNo:false,
 				totalNums: 0,
 				list: [],
 				showloading: false,
-				pageSize:20,
-				curPage:1,
+				pageSize: 20,
+				curPage: 1,
 			}
 		},
 		created() {
@@ -90,15 +97,17 @@
 				var _this = this
 				_this.$http.get(_this.url.user.getMyTeam, {
 					params: {
-						userId: 1,
-						curPage:_this.curPage,
-						pageSize:_this.pageSize
+						userId: 2,
+						curPage: _this.curPage,
+						pageSize: _this.pageSize
 					}
 				}).then((res) => {
 					console.log(res.data.data)
-					var data = res.data.data
-					this.list = data.list
-					this.totalNums = data.totalNums
+					if(res.data.status == '00000000') {
+						var data = res.data.data
+						this.list = data.list
+						this.totalNums = data.totalNums
+					}
 				})
 			},
 
@@ -128,16 +137,35 @@
 			},
 			LoadData() {
 				var _this = this
-				setTimeout(function() {
-					_this.showloading = false;
-				}, 3000)
+				_this.curPage++
+					var _this = this
+				_this.$http.get(_this.url.user.getMyTeam, {
+					params: {
+						userId: 2,
+						curPage: _this.curPage,
+						pageSize: _this.pageSize
+					}
+				}).then((res) => {
+					console.log(res.data.data)
+					if(res.data.status == '00000000') {
+						var data = res.data.data
+						if(data.list.length > 0) {
+							_this.showLoading = false
+							_this.showNo = false
+							_this.list = _this.list.concat(data.list)
+						}else{
+							_this.showNo = true
+						}
+					}
+				})
 			}
 		},
 		components: {
 			settingHeader,
 			Grid,
 			GridItem,
-			Loading
+			Loading,
+			noData
 		}
 	}
 </script>

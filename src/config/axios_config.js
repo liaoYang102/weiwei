@@ -16,6 +16,7 @@ axios.defaults.withCredentials = true // 允许请求携带token
 axios.interceptors.request.use(config => {
 	// isLoading方法
 	Vue.$isload.show()
+
 	let token = sessionStorage.getItem('token')
 	let timestamp = Math.round(new Date().getTime() / 1000)
 	let sign = token ? MD5(config.url + timestamp + '1234456') : MD5(config.url + timestamp)
@@ -69,5 +70,4 @@ if(!sessionStorage.getItem('token')) {
 		sessionStorage.setItem('token', res.data.data.token)
 		sessionStorage.setItem('userId', 2)
 	})
-}
-export default axios
+}export default axios
