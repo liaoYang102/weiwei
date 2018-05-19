@@ -9,7 +9,8 @@ var url = {
 		login: '/datacenter/public/v1/login', //云中心登录
 		userLogin:'/user/v1/userLogin', //用户登录
 		userRegister:'/user/v1/userRegister', //用户注册
-		checkUserExistsByMobile:'/user/v1/user/checkUserExistsByMobile' //用户是否注册
+		checkUserExistsByMobile:'/user/v1/user/checkUserExistsByMobile', //用户是否注册
+		changeNickname:'/user/v1/user/changeNickname', // 修改用户名
 	},
 	draw:{
 		getReviewLists: '/app/index.php?i=7&c=entry&m=mx_shop&do=mobile&r=copy.getReviewLists', //往期回顾

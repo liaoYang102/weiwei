@@ -240,6 +240,7 @@
 					email: _this.mail,
 					egmobile: _this.contactnum,
 					emergency: _this.contact,
+					imageIds:_this.fileIdList,
 					userId: 2
 				}
 				_this.$http.post(_this.url.user.changeUserInfo, data).then((res) => {
