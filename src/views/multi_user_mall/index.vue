@@ -232,6 +232,7 @@
 				font-size: 0.32rem;
 				color: #fff;
 				padding-top: 0.15rem;
+				line-height: 0.9rem;
 				.positionImg {
 					float: left;
 					img {

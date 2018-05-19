@@ -216,11 +216,10 @@
 			getLuckRankData(){
 				let _this = this;
 				let parJson = {
-					pagesize:10,
-					sort:1
+					pagesize:10
 				}
 				let a = Qs.stringify(parJson)
-				
+				// let baseUrl = 'http://www.cgc999.com'
 				this.$http.post(url.draw.getLuckRankLists,a).then(function (response) {
 					if( response.status == 200 && response.data != null){
 						_this.numberList = response.data.result
@@ -231,9 +230,11 @@
 					console.log(error);
 				});
 
-				this.$http.post(url.draw.getLuckRankLists,{
-					pagesize:10,sort:1
-				}).then(function (response) {
+				parJson.sort = 1;
+				console.log('---', parJson)
+				let b = Qs.stringify(parJson);
+
+				this.$http.post(url.draw.getLuckRankLists,b).then(function (response) {
 					if( response.status == 200 && response.data != null){
 						_this.moneyList = response.data.result
 					}

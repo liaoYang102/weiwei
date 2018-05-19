@@ -18,29 +18,28 @@
 		        		</div>
 		        	</div>
 		        	<div v-else style="padding-bottom: 0rem;">
-			            <ul class="ul-record" v-for="(item,index) in recordList" :key="index">
-							<router-link to="/draw/details">
-								<div class="re-content">
-									<div class="left">{{ item.drawTitle}}</div>
-			                    	<div class="period left">{{ item.period}}期</div>
-			                    	<div class="win">{{ item.stateValue}}</div>
-								</div>
-	                    	</router-link>
+			            <ul class="ul-record" v-for="(item,index) in recordList" :key="index" @click="$router.push({path:'/draw/details'})">
+							<div class="re-content">
+								<div class="left">{{ item.drawTitle}}</div>
+		                    	<div class="period left">{{ item.period}}期</div>
+		                    	<div class="win">{{ item.stateValue}}</div>
+							</div>
+	                    	
 							<div class="clear pd">
-								<router-link to="/draw/details">
-									<div class="left">
-										<p class="time">开奖时间: {{ item.awardDate}}</p>
-										<p class="bonusPool">
-											奖金池：￥{{ item.money}}
-										</p>
-										<p>参与人数：<span class="num">{{ item.num}}人</span></p>
-									</div>
-								</router-link>
-								<div class="right btn" v-if="item.status == 2 && item.awardStatus == '未领取'" @click="goWinningSpeech">
-									领奖
+								<div class="left">
+									<p class="time">开奖时间: {{ item.awardDate}}</p>
+									<p class="bonusPool">
+										奖金池：￥{{ item.money}}
+									</p>
+									<p>参与人数：<span class="num">{{ item.num}}人</span></p>
 								</div>
-								<div class="right btn2" v-else>
-									已领取
+								<div v-if="item.status == 2">
+									<div class="right btn" v-if="item.awardStatus == '未领取'" @click.stop="goWinningSpeech">
+										领奖
+									</div>
+									<div class="right btn2" v-else>
+										已领取
+									</div>
 								</div>
 							</div>
 			            </ul>

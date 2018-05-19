@@ -24,22 +24,6 @@ import shop_log from '@/views/shop/shop_log'
 const shopModule = [
 	// 商城模块
 	{
-		path: '/shop/o_success', //支付成功
-		name: 'o_success',
-		component: o_success,
-		meta: {
-			title:'支付成功'
-		}
-	},
-	{
-		path: '/shop/my_order', //我的订单
-		name: 'my_order',
-		component: my_order,
-		meta: {
-			title:'我的订单'
-		}
-	},
-	{
 		path: '/shop', //首页
 		name: 'shop',
 		component: shop,
@@ -60,43 +44,11 @@ const shopModule = [
 		}
 	},
 	{
-		path: '/shop/t_success', //交易成功
-		name: 't_success',
-		component: t_success,
+		path: '/shop/my_order', //我的订单
+		name: 'my_order',
+		component: my_order,
 		meta: {
-			title:'交易成功'
-		}
-	},
-	{
-		path: '/shop/shop_cart', //购物车
-		name: 'shop_cart',
-		component: shop_cart,
-		meta: {
-			title:'购物车'
-		}
-	},
-	{
-		path: '/shop/confirm', //确认订单
-		name: 'confirm',
-		component: confirm,
-		meta: {
-			title:'确认订单'
-		}
-	},
-	{
-		path: '/shop/logistics', //物流
-		name: 'logistics',
-		component: logistics,
-		meta: {
-			title:'物流动态'
-		}
-	},
-	{
-		path: '/shop/refund', //退货
-		name: 'refund',
-		component: refund,
-		meta: {
-			title:'申请退货'
+			title:'我的订单'
 		}
 	},
 	{
@@ -148,11 +100,68 @@ const shopModule = [
 		}
 	},
 	{
+		path: '/shop/shop_cart', //购物车
+		name: 'shop_cart',
+		component: shop_cart,
+		meta: {
+			title:'购物车'
+		}
+	},
+	{
+		path: '/shop/confirm', //确认订单
+		name: 'confirm',
+		component: confirm,
+		meta: {
+			title:'确认订单'
+		}
+	},
+	{
+		path: '/shop/o_success', //支付成功
+		name: 'o_success',
+		component: o_success,
+		meta: {
+			title:'支付成功'
+		}
+	},
+	{
+		path: '/shop/t_success', //交易成功
+		name: 't_success',
+		component: t_success,
+		meta: {
+			title:'交易成功'
+		}
+	},
+	
+	{
+		path: '/shop/logistics', //物流
+		name: 'logistics',
+		component: logistics,
+		meta: {
+			title:'物流动态'
+		}
+	},
+	{
+		path: '/shop/refund', //退货
+		name: 'refund',
+		component: refund,
+		meta: {
+			title:'申请退货'
+		}
+	},
+	{
 		path: '/shop/refund_details', //退款详情
 		name: 'refund_details',
 		component: refund_details,
 		meta: {
 			title:'退款详情'
+		}
+	},
+	{
+		path: '/shop/shop_log',//商品浏览
+		name: 'shop_log',
+		component: shop_log,
+		meta: {
+			title: '商品浏览'
 		}
 	},
 	{
@@ -201,14 +210,6 @@ const shopModule = [
 		component: store_qrcode,
 		meta: {
 			title:'店铺二维码'
-		}
-	},
-	{
-		path: '/shop/shop_log',//商品浏览
-		name: 'shop_log',
-		component: shop_log,
-		meta: {
-			title: '商品浏览'
 		}
 	}
 ];
