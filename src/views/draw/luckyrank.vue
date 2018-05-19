@@ -111,6 +111,7 @@
 	import noMore from '../../components/noMore'
 	import drawHeader from './components/header'
 	import url from '../../config/url'
+	import Qs from 'qs'
 	export default {
 		data(){
 			return {
@@ -186,6 +187,7 @@
 				let len = _this.rankList.lists.length;
 				let par = new URLSearchParams()
 				par.append('page',_this.page)
+				par.append('pagesize', 10)
 				if(_this.showNomore){
 					_this.show = false;
 					return 
@@ -213,12 +215,13 @@
 			},
 			getLuckRankData(){
 				let _this = this;
-				let par = new URLSearchParams()
-					par.append('pageSize', 10)
-				var params = new URLSearchParams()
-					params.append('pageSize', 10)
-				 
-				this.$http.post(url.draw.getLuckRankLists,par).then(function (response) {
+				let parJson = {
+					pagesize:10,
+					sort:1
+				}
+				let a = Qs.stringify(parJson)
+				
+				this.$http.post(url.draw.getLuckRankLists,a).then(function (response) {
 					if( response.status == 200 && response.data != null){
 						_this.numberList = response.data.result
 						_this.rankList = _this.numberList;
@@ -227,8 +230,10 @@
 				}).catch(function (error) {
 					console.log(error);
 				});
-				params.append('sort', '1')
-				this.$http.post(url.draw.getLuckRankLists,params).then(function (response) {
+
+				this.$http.post(url.draw.getLuckRankLists,{
+					pagesize:10,sort:1
+				}).then(function (response) {
 					if( response.status == 200 && response.data != null){
 						_this.moneyList = response.data.result
 					}
