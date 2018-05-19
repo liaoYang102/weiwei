@@ -16,28 +16,19 @@ axios.defaults.withCredentials = true // 允许请求携带token
 axios.interceptors.request.use(config => {
 	// isLoading方法
 	Vue.$isload.show()
-	if(sessionStorage.getItem('token')) {
-		let sign, token
-		let timestamp = Math.round(new Date().getTime() / 1000)
-		sign = MD5(config.url + timestamp + '123456')
-		token = sessionStorage.getItem('token')
-		config.headers = {
-			'Content-Type': 'application/json;charset=utf-8',
-			'timestamp': timestamp,
-			'sign': sign,
-			'token': token
-		}
-	} else {
-		let sign, token
-		let timestamp = Math.round(new Date().getTime() / 1000)
-		sign = MD5(config.url + timestamp)
-		token = sessionStorage.getItem('token')
-		config.headers = {
-			'Content-Type': 'application/json;charset=utf-8',
-			'timestamp': timestamp,
-			'sign': sign,
-			'token': token
-		}
+	let token = sessionStorage.getItem('token')
+	let timestamp = Math.round(new Date().getTime() / 1000)
+	let sign = token ? MD5(config.url + timestamp + '1234456') : MD5(config.url + timestamp)
+	let type = 'application/json;charset=utf-8'
+	let entry = config.url.slice(0,4)
+	if (entry === '/app') {
+		type = 'application/x-www-form-urlencoded'
+	}
+	config.headers = {
+		'Content-Type': type,
+		'timestamp': timestamp,
+		'sign': sign,
+		'token': token
 	}
 	return config
 }, error => {
@@ -54,7 +45,6 @@ axios.interceptors.response.use(res => { // 响应成功关闭loading
 			width: '50%'
 		})
 	}
-
 	return res
 }, error => {
 	Vue.$isload.hide({
@@ -70,13 +60,14 @@ axios.interceptors.response.use(res => { // 响应成功关闭loading
 })
 
 if(!sessionStorage.getItem('token')) {
-	axios.post('/datacenter/public/v1/login', {
+	let Login = axios.post('/datacenter/public/v1/login', {
 		audience: 'platform',
-		name: '123',
+		name: '1234',
 		passwd: '456'
 	}).then((res) => {
 		console.log(res)
 		sessionStorage.setItem('token', res.data.data.token)
+		sessionStorage.setItem('userId', 2)
 	})
 }
 export default axios
