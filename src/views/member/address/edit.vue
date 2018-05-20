@@ -2,11 +2,11 @@
 	<div class="content">
 		<settingHeader :title="title"></settingHeader>
 		<group :gutter="0" class="input-div">
-			<x-input class="address-item" placeholder="姓名" v-model="name" required></x-input>
-			<x-input class="address-item" placeholder="联系方式" type="text" v-model="vPhone" required></x-input>
-			<x-address :list="list" class="address-item address-check" v-model="address" title='' placeholder="请选择地址" value-text-align="left" @on-shadow-change="shadowChange"></x-address>
-			<x-input class="address-item" placeholder="详细地址" v-model="xaddress" :max="11" type="text" required></x-input>
-			<x-input class="address-item" placeholder="邮箱" v-model="email" type="text"></x-input>
+			<x-input class="address-item" placeholder="姓名" v-model="info.name" required></x-input>
+			<x-input class="address-item" placeholder="联系方式" type="text" v-model="info.mobile" required></x-input>
+			<x-address :list="list" class="address-item address-check" v-model="addArr" title='' placeholder="请选择地址" value-text-align="left"></x-address>
+			<x-input class="address-item" placeholder="详细地址" v-model="info.address" :max="11" type="text" required></x-input>
+			<x-input class="address-item" placeholder="邮政编码" v-model="info.postcode" type="text"></x-input>
 			<x-textarea class="address-tt" title="备注 :" v-model="remarks"></x-textarea>
 			<x-textarea class="address-tt" :height="40" title="标签 :" v-model="label" @on-change="isLabel"></x-textarea>
 			<div class="label-box">
@@ -30,25 +30,32 @@
 		data() {
 			return {
 				title: '编辑收货地址',
-				name: '',
-				vPhone: '',
+				info: {
+					name: '',
+					mobile: '',
+					countryId: '',
+					provinceId: '',
+					cityId: '',
+					areaId: '',
+					address: '',
+					postcode: ''
+				},
 				list: [],
-				address: [],
+				addArr: [],
 				xaddress: '',
 				email: '',
 				remarks: '',
 				label: '',
 				twoClass: ['家', '公司', '代收点', '丰巢'],
-				twoIndex: '',
-				addState: [0]
+				twoIndex: ''
 			}
 		},
 		created() {
 			var _this = this
-			_this.getRegionOptions(0)
-			_this.getRegionOptions('1')
-			// _this.getRegionOptions(20)
-			// _this.getRegionOptions(232)
+			_this.getRegionOptions(1)
+			_this.getRegionOptions(2)
+			_this.getRegionOptions(3)
+			_this.getRegionOptions(4)
 			//全局地址数据
 		},
 		methods: {
@@ -59,50 +66,35 @@
 			isLabel() {
 				
 			},
-			getRegionOptions (parentId) { // 获取地址选项
+			getRegionOptions (level) { // 获取地址选项
 				let _this = this
 				let param = {
-					'parentId': parentId,
-					'status': 1,
+					'level': level,
+					'curPage': 1,
+					'pageSize': 10000,
 				}
-				console.log(param)
 				_this.$http.get(_this.url.zone.area, {params:param}).then(resp => {
 					let temp = []
-					let arrData = resp.data.data
-					if (parentId) {
+					let arrData = resp.data.data.list
+					if (level===1) {
 						temp = arrData.map(function(item){
 							return {
 								name: item.name,
 								value: item.id,
-								parent: parentId
 							}
 						})
 					} else {
 						temp = arrData.map(function(item){
 							return {
 								name: item.name,
-        						value: item.id
+								value: item.id,
+								parent: item.parentId + ''
 							}
 						})
 					}
-					_this.addState.push(parentId)
 					_this.list = _this.list.concat(temp)
-					console.log(_this.list)	
+					console.log(_this.list)
 				})
-			},
-			shadowChange (id, arr) {
-				let _this = this
-				for (let key in id) {
-					console.log(key)
-					if (_this.addState.indexOf(key) === -1) {
-						_this.getRegionOptions(key)
-					}
-				}
-				// console.log(id[id.length-1])
-				
-				// if ()
-				// // _this.getRegionOptions(id[id.length-1])
-				// console.log(id, arr)
 			}
 		},
 		components: {

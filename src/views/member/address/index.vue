@@ -117,6 +117,7 @@
 			} else {
 				this.hShow = false;
 			}
+			this.getShippingAddress(1)
 		},
 		mounted: function() {
 			this.InitScroll() //初始化下拉组件
@@ -189,6 +190,17 @@
 				this.list.forEach(function(index, value, array) {
 					_this.list[value].isdefault = false
 					_this.list[i].isdefault = true
+				})
+			},
+			getShippingAddress (curPage) { // 获取收货diz
+				let _this = this
+				let param = {
+					'userId': sessionStorage['userId'],
+					'pageSize': 20,
+					'curPage': curPage
+				}
+				_this.$http.get(_this.url.user.getShippingAddress, {params:param}).then(resp => {
+					console.log(resp)
 				})
 			}
 		},
