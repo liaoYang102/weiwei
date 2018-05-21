@@ -5,10 +5,10 @@
             <tab-item selected @on-item-click="showPanel">
               {{ tabItem}} <!-- <img :src="downImg" alt="" width="13%"> -->
             </tab-item>
-            <tab-item class='vux-center' @on-item-click="onItemClick">销量<img v-lazy="numImg" alt="" width="12%"></tab-item>
+            <tab-item class='vux-center' @on-item-click="onItemClick">销量<img :src="numImg" alt="" width="12%"></tab-item>
             <tab-item @on-item-click="sort">
                 <span>价格</span>
-                <img v-lazy="priceImg" alt="" width="12%">
+                <img :src="priceImg" alt="" width="12%">
             </tab-item>
             <tab-item @on-item-click="onMenuClick">
                 筛选 <img src="../../assets/images/shop/screen.png" alt="" width="12%">

@@ -63,7 +63,7 @@
 			        			<div class="close" @click="showDialog=false"><img src="../../assets/images/draw/open.png"></div>
 			        		</div>
 
-			        		<!-- 已中奖\未中奖\未开奖 -->
+			        		<!-- 已中奖,未领取 -->
 			        		<div class="dia" v-else>
 			        			<div class="dia_top2">
 			        				<div class="dia_title">
@@ -143,8 +143,6 @@
 				// 2、等待审核 请您耐心等待审核 图片wait.png
 				// 3、审核未通过 审核未通过
 				// 4、已中奖 恭喜您成功领取奖金 点击查看详情 图片：5000元现金 timeline：
-				// 5、未开奖 还未开奖，请耐心等待 timeline：
-				// 6、未中奖 很遗憾，您未中奖 timeline：
 			}
 		},
 		mounted() {
