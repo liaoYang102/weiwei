@@ -185,22 +185,24 @@
 				var _this = this
 				_this.show = true
 				let len = _this.rankList.lists.length;
-				let par = new URLSearchParams()
-				par.append('page',_this.page)
-				par.append('pagesize', 10)
+				let parJson = {
+					pagesize:10
+				}
+				let a;
 				if(_this.showNomore){
 					_this.show = false;
 					return 
 				}
 				if(this.tab1){
-					par.append('sort', '0')
+					a = Qs.stringify(parJson)
 				}else{
-					par.append('sort', '1')
+					parJson.sort = 1;
+					a = Qs.stringify(parJson)
 				}
 				setTimeout(function(){
 					_this.show = false;
 					
-					_this.$http.post(url.draw.getLuckRankLists,par).then(function (response) {
+					_this.$http.post(url.draw.getLuckRankLists,a).then(function (response) {
 						if( response.status == 200 && response.data != null&&response.data.result.page == _this.page){
 							_this.rankList.lists = _this.rankList.lists.concat(response.data.result.lists)
 						}
@@ -216,28 +218,28 @@
 			getLuckRankData(){
 				let _this = this;
 				let parJson = {
-					pagesize:10,
-					sort:1
+					pagesize:10
 				}
 				let a = Qs.stringify(parJson)
-				
+				// let baseUrl = 'http://www.cgc999.com'
 				this.$http.post(url.draw.getLuckRankLists,a).then(function (response) {
 					if( response.status == 200 && response.data != null){
 						_this.numberList = response.data.result
 						_this.rankList = _this.numberList;
 					}
-					console.log(_this.numberList);
+					console.log('幸运排行接口数据',response);
 				}).catch(function (error) {
 					console.log(error);
 				});
 
-				this.$http.post(url.draw.getLuckRankLists,{
-					pagesize:10,sort:1
-				}).then(function (response) {
+				parJson.sort = 1;
+				let b = Qs.stringify(parJson);
+
+				this.$http.post(url.draw.getLuckRankLists,b).then(function (response) {
 					if( response.status == 200 && response.data != null){
 						_this.moneyList = response.data.result
 					}
-					console.log(_this.moneyList);
+					console.log('幸运排行累计金额数据',response);
 				}).catch(function (error) {
 					console.log(error);
 				});

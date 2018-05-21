@@ -19,8 +19,6 @@
 				<div class="li-text">
 					<span>{{ item.title}}</span>
 					<div v-if="title == '七彩云南'" class="pb">
-						<!-- <div class="red"></div> -->
-						<!-- <div class="coupons">信用积分</div> -->
 						<span class="red">{{ item.score}}</span>
 						<span class="coupons">信用积分</span>
 					</div>
