@@ -15,7 +15,7 @@
 					<x-input class="input-item" ref="zfb" v-model="zfbnum" :value="zfbnum" text-align="right" placeholder="未设置" type="text" @on-change="zfbChange"></x-input>
 				</cell>
 				<cell class="list-item" title="邮箱">
-					<x-input class="input-item" ref="mail" v-model="mail" :value="mail" text-align="right" placeholder="未设置" type="text" @on-change="mailChange"></x-input>
+					<x-input class="input-item" ref="email" v-model="email" :value="email" text-align="right" placeholder="未设置" type="text" @on-change="mailChange"></x-input>
 				</cell>
 				<cell class="list-item" title="QQ">
 					<x-input class="input-item" ref="qq" v-model="qq" :value="qq" text-align="right" placeholder="未设置" type="text" @on-change="qqChange"></x-input>
@@ -68,13 +68,13 @@
 				title: '详细资料',
 				wxnum: '',
 				zfbnum: '',
-				mail: '',
+				email: '',
 				qq: '',
 				contact: '',
 				contactnum: '',
 				showsex: false,
 				showrec: false,
-				sexlist: ['男', '女', '隐藏'],
+				sexlist: ['男', '女'],
 				reclist: ['小学', '初中', '高中', '大专', '本科'],
 				txt: '<span>请选择性别</span>',
 				backImages: [],
@@ -103,13 +103,30 @@
 			getUserInfo() {
 				var _this = this
 
+				_this.backImages = []
+				_this.fileIdList = []
+
 				this.$http.get(_this.url.user.getUserInfo, {
 					params: {
-						userId: 2
+						userId: sessionStorage.getItem('userId')
 					}
 				}).then((res) => {
-					if(res.status == '00000000') {
-						_this.info = res.data
+					if(res.data.status == '00000000') {
+						var info = res.data.data
+						_this.gender = info.gender
+						_this.xl = info.education
+						_this.birthday = _this.mainApp.frDateTimehp.getFormatTimesTamp(info.birthday)
+						_this.wxnum = info.wechat
+						_this.zfbnum = info.alipay
+						_this.email = info.email
+						_this.qq = info.qq
+						_this.contact = info.emergency
+						_this.contactnum = info.egmobile
+
+						info.imagelist.forEach((value, index, array) => {
+							_this.backImages.push(array[index].original)
+							_this.fileIdList.push(array[index].imageId)
+						})
 					}
 				})
 			},
@@ -125,8 +142,6 @@
 					this.sex = '男'
 				} else if(val == 1) {
 					this.sex = '女'
-				} else {
-					this.sex = '隐藏'
 				}
 			},
 			recclick(val) {
@@ -203,22 +218,50 @@
 				var _this = this
 				var data = {
 					gender: _this.gender,
-					birthday: _this.mainApp.frDateTimehp.getDateTimesTamp(_this.birthday),
+					birthday: _this.mainApp.frDateTimehp.getFormatDateTamp(_this.birthday),
 					education: _this.xl,
 					wechat: _this.wxnum,
 					qq: _this.qq,
 					alipay: _this.zfbnum,
-					email: _this.mail,
+					email: _this.email,
 					egmobile: _this.contactnum,
 					emergency: _this.contact,
-					imageIds: _this.fileIdList,
+					imageIds: _this.fileIdList.join() + ",",
 					userId: sessionStorage.getItem('userId')
 				}
 				_this.$http.post(_this.url.user.changeUserInfo, data).then((res) => {
-					if(res.status == '00000000') {
-						_this.info = res.data
+					if(res.data.status == '00000000') {
+						_this.$vux.toast.show({
+							width: '50%',
+							type: 'text',
+							position: 'middle',
+							text: '修改成功'
+						})
+						_this.getUserInfo()
 					}
 				})
+			},
+			watch: {
+				gender() {
+					if(this.sex == 0) {
+						return this.sex = '男'
+					} else {
+						return this.sex = '女'
+					}
+				},
+				xl() {
+					if(this.xl == 0) {
+						return this.education = '小学'
+					} else if(this.xl == 1) {
+						return this.education = '初中'
+					} else if(this.xl == 2) {
+						return this.education = '高中'
+					} else if(this.xl == 3) {
+						return this.education = '大专'
+					} else if(this.xl == 4) {
+						return this.education = '本科'
+					}
+				}
 			}
 		},
 		components: {
