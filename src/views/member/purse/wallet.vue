@@ -21,14 +21,14 @@
 					</div>
 					<p>{{isopen?10000000000000:'***'}}</p>
 				</div>
-				<div class="one-item">
+				<!--<div class="one-item">
 					<p>今日收益</p>
 					<p>100000</p>
-				</div>
+				</div>-->
 			</div>
 			<div class="bottom">
 				<div class="one-item">
-					<p>充值</p>
+					<p>充值奖励</p>
 					<p>300.00</p>
 				</div>
 				<div class="one-item">
@@ -36,7 +36,7 @@
 					<p>86.20</p>
 				</div>
 				<div class="one-item">
-					<p>中奖</p>
+					<p>中奖奖励</p>
 					<p>800.00</p>
 				</div>
 				<div class="one-item">
@@ -63,14 +63,14 @@
 					</div>
 					<p>{{isopen2?10000000000000:'***'}}</p>
 				</div>
-				<div class="one-item">
+				<!--<div class="one-item">
 					<p>今日收益</p>
 					<p>0.00</p>
-				</div>
+				</div>-->
 			</div>
 			<div class="bottom">
 				<div class="one-item">
-					<p>充值</p>
+					<p>充值奖励</p>
 					<p>200.00</p>
 				</div>
 				<div class="one-item">
@@ -78,18 +78,12 @@
 					<p>12.20</p>
 				</div>
 				<div class="one-item">
-					<p>中奖</p>
+					<p>推荐用户</p>
 					<p>5000.00</p>
 				</div>
 				<div class="one-item">
 					<p>分红奖励</p>
-					<p>860.00</p>
-				</div>
-				<div class="one-item">
-					<p>任务奖励</p>
 					<p>0.00</p>
-				</div>
-				<div class="one-item">
 				</div>
 			</div>
 		</div>
