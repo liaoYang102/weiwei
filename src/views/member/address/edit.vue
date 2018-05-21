@@ -4,7 +4,7 @@
 		<group :gutter="0" class="input-div">
 			<x-input class="address-item" placeholder="姓名" v-model="name" required></x-input>
 			<x-input class="address-item" placeholder="联系方式" type="text" v-model="vPhone" required></x-input>
-			<x-address :list="list" class="address-item address-check" v-model="address" title='' placeholder="请选择地址" value-text-align="left"></x-address>
+			<x-address :list="list" class="address-item address-check" v-model="address" title='' placeholder="请选择地址" value-text-align="left" @on-shadow-change="shadowChange"></x-address>
 			<x-input class="address-item" placeholder="详细地址" v-model="xaddress" :max="11" type="text" required></x-input>
 			<x-input class="address-item" placeholder="邮箱" v-model="email" type="text"></x-input>
 			<x-textarea class="address-tt" title="备注 :" v-model="remarks"></x-textarea>
@@ -40,10 +40,15 @@
 				label: '',
 				twoClass: ['家', '公司', '代收点', '丰巢'],
 				twoIndex: '',
+				addState: [0]
 			}
 		},
 		created() {
 			var _this = this
+			_this.getRegionOptions(0)
+			_this.getRegionOptions('1')
+			// _this.getRegionOptions(20)
+			// _this.getRegionOptions(232)
 			//全局地址数据
 		},
 		methods: {
@@ -53,6 +58,51 @@
 			},
 			isLabel() {
 				
+			},
+			getRegionOptions (parentId) { // 获取地址选项
+				let _this = this
+				let param = {
+					'parentId': parentId,
+					'status': 1,
+				}
+				console.log(param)
+				_this.$http.get(_this.url.zone.area, {params:param}).then(resp => {
+					let temp = []
+					let arrData = resp.data.data
+					if (parentId) {
+						temp = arrData.map(function(item){
+							return {
+								name: item.name,
+								value: item.id,
+								parent: parentId
+							}
+						})
+					} else {
+						temp = arrData.map(function(item){
+							return {
+								name: item.name,
+        						value: item.id
+							}
+						})
+					}
+					_this.addState.push(parentId)
+					_this.list = _this.list.concat(temp)
+					console.log(_this.list)	
+				})
+			},
+			shadowChange (id, arr) {
+				let _this = this
+				for (let key in id) {
+					console.log(key)
+					if (_this.addState.indexOf(key) === -1) {
+						_this.getRegionOptions(key)
+					}
+				}
+				// console.log(id[id.length-1])
+				
+				// if ()
+				// // _this.getRegionOptions(id[id.length-1])
+				// console.log(id, arr)
 			}
 		},
 		components: {

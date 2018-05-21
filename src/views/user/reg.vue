@@ -58,14 +58,40 @@
 				var _this = this
 				_this.showLoading = true
 
-//				_this.$http.post(_this.url.user.login, {
-//					audience: 'platform',
-//					name: _this.mobile,
-//					passwd: _this.password,
-//				}).then((res) => {
-//					sessionStorage.setItem('token', res.data.data.token)
-//				})
-
+				//获取云中心登录token
+				_this.$http.post(_this.url.user.login, {
+					audience: 'platform',
+					name: _this.mobile,
+					passwd: _this.password,
+				}).then((res) => {
+					sessionStorage.setItem('token', res.data.data.token)
+					_this.isCheckLogin()
+				})
+				_this.showLoading = false
+			},
+			reg() {
+				var _this = this
+				_this.$http.post(this.url.user.userRegister, {
+					mobile: _this.mobile,
+					password: _this.password,
+					smsVerificationCode: parseInt(_this.code),
+					platformId: _this.url.platformId
+				}).then(function(res) {
+					if(res.data.status == "00000000") {
+						_this.$vux.toast.show({
+							width: '50%',
+							type: 'text',
+							position: 'middle',
+							text: '注册成功',
+							onHide() {
+								_this.login()
+							}
+						})
+					}
+				})
+			},
+			isCheckLogin() {
+				var _this = this
 				if(_this.mainApp.isphone(_this.mobile)) {
 					//检测用户是否注册
 					_this.$http.post(_this.url.user.checkUserExistsByMobile, {
@@ -100,28 +126,6 @@
 						text: '用户名格式不正确'
 					})
 				}
-				_this.showLoading = false
-			},
-			reg() {
-				var _this = this
-				_this.$http.post(this.url.user.userRegister, {
-					mobile: _this.mobile,
-					password: _this.password,
-					smsVerificationCode: parseInt(_this.code),
-					platformId: _this.url.platformId
-				}).then(function(res) {
-					if(res.data.status == "00000000") {
-						_this.$vux.toast.show({
-							width: '50%',
-							type: 'text',
-							position: 'middle',
-							text: '注册成功',
-							onHide() {
-								_this.login()
-							}
-						})
-					}
-				})
 			},
 			login() {
 				var _this = this
