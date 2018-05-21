@@ -212,7 +212,7 @@
 					egmobile: _this.contactnum,
 					emergency: _this.contact,
 					imageIds: _this.fileIdList,
-					userId: 2
+					userId: sessionStorage.getItem('userId')
 				}
 				_this.$http.post(_this.url.user.changeUserInfo, data).then((res) => {
 					if(res.status == '00000000') {

@@ -52,7 +52,7 @@
 				var _this = this
 				_this.$http.get(_this.url.user.getBasicInfo, {
 					params: {
-						userId: 2
+						userId: sessionStorage.getItem('userId')
 					}
 				}).then((res) => {
 					console.log(res)
@@ -82,7 +82,7 @@
 				_this.$http.post(_this.url.user.fileuploadImage, data).then((res) => {
 					if(res.data.status == '00000000') {
 						_this.$http.post(_this.url.user.changeAvatar, {
-							userId: 2,
+							userId: sessionStorage.getItem('userId'),
 							avatarId: res.data.data.fileId
 						}).then((res) => {
 							_this.images = res.data.data.original

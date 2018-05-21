@@ -8,7 +8,7 @@
 			<group gutter="0" class="input-div">
 				<!--<cell class="input-item" title="国家" value="中国" is-link value-align="right"></cell>-->
 				<x-input class="input-item" ref="phone" v-model="mobile" placeholder="用户名" type="number" :max="11" :required="true" @on-change="nameChange"></x-input>
-				<x-input class="input-item" ref="password" v-model="password" placeholder="登录密码" type="password" :required="true"></x-input>
+				<x-input class="input-item" ref="password" v-model="password" placeholder="登录密码" type="password" :required="true" @on-change="passwordChange"></x-input>
 				<x-input v-if="!isReg" class="input-item bounceInUp animated" type="number" ref="code" v-model="code" placeholder="验证码" @on-change="codeChange">
 					<x-button slot="right" type="primary" mini @click.native="sendCode" :disabled="sendFlag">{{codeText}}</x-button>
 				</x-input>
@@ -57,16 +57,26 @@
 			submit() {
 				var _this = this
 				_this.showLoading = true
+				if(_this.mainApp.isphone(_this.mobile)) {
+					sessionStorage.setItem('userNp', _this.mobile + _this.password)
+					//获取云中心登录token
+					_this.$http.post(_this.url.user.login, {
+						audience: 'platform',
+						name: _this.mobile,
+						passwd: _this.password,
+					}).then((res) => {
+						sessionStorage.setItem('token', res.data.data.token)
+						_this.isCheckLogin()
+					})
+				} else {
+					_this.$vux.toast.show({
+						width: '50%',
+						type: 'text',
+						position: 'middle',
+						text: '用户名格式不正确'
+					})
+				}
 
-				//获取云中心登录token
-				_this.$http.post(_this.url.user.login, {
-					audience: 'platform',
-					name: _this.mobile,
-					passwd: _this.password,
-				}).then((res) => {
-					sessionStorage.setItem('token', res.data.data.token)
-					_this.isCheckLogin()
-				})
 				_this.showLoading = false
 			},
 			reg() {
@@ -92,7 +102,8 @@
 			},
 			isCheckLogin() {
 				var _this = this
-				if(_this.mainApp.isphone(_this.mobile)) {
+
+				_this.$nextTick(function() {
 					//检测用户是否注册
 					_this.$http.post(_this.url.user.checkUserExistsByMobile, {
 						mobile: _this.mobile
@@ -118,17 +129,12 @@
 							}
 						}
 					})
-				} else {
-					_this.$vux.toast.show({
-						width: '50%',
-						type: 'text',
-						position: 'middle',
-						text: '用户名格式不正确'
-					})
-				}
+				})
+
 			},
 			login() {
 				var _this = this
+
 				_this.$http.post(this.url.user.userLogin, {
 					platformId: _this.url.platformId,
 					mobile: _this.mobile,
@@ -136,7 +142,6 @@
 				}).then(function(res) {
 					sessionStorage.setItem('userToken', res.data.data.userToken)
 					sessionStorage.setItem('userId', res.data.data.userId)
-					sessionStorage.setItem('userNp', _this.mobile + _this.password)
 					if(res.data.status == "00000000") {
 						_this.$vux.toast.show({
 							width: '50%',
@@ -157,8 +162,12 @@
 					this.$refs.code.blur()
 				}
 			},
+			passwordChange() {
+				sessionStorage.removeItem('token')
+			},
 			nameChange(val) {
 				var _this = this
+				sessionStorage.removeItem('token')
 				if(val.length == 11) {
 					_this.$refs.phone.blur()
 					_this.$refs.password.focus()
