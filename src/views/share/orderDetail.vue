@@ -3,10 +3,12 @@
 		<settingHeader :title="title"></settingHeader>
 		<div class="top">
 			<router-link to="/multi_user_mall">
-				<div class="top-left">
-					<img src="../../assets/images/shop/UNIQLO.png">
-					<div class="left-text">优衣库旗舰店</div>
-					<img src="../../assets/images/shop/right.png" class="icon">
+				<div class="box-head">
+					<div class="fl">
+						<img src="../../assets/images/shop/UNIQLO.png" alt="" class='shop-logo'>
+						<span class="box-name">优衣库专卖店</span>
+						<img src="../../assets/images/shop/turn_right.png" alt="" class='turn-right'>
+					</div>
 				</div>
 			</router-link>
 			
@@ -129,7 +131,7 @@
 			font-size: 0.3rem;
 			color: #222222;
 			display: flex;
-			.top-left{
+			/*.top-left{
 				flex: 1;
 				margin: 0.33rem 0 0.33rem 0.32rem;
 				img{
@@ -161,6 +163,37 @@
 				.right-text{
 					font-size: 0.28rem;
 					color: #7386AD;
+				}
+			}*/
+
+			.box-head{
+				/*margin-top: 0.25rem;*/
+				height: 0.8rem;
+				line-height: 0.8rem;
+				background-color: #Fff;
+				.fr{
+					font-size: 0.28rem;
+					color: #336FFF;
+					margin-right: 0.2rem;
+				}
+				.fl{
+					.shop-logo{
+						margin-left: 0.32rem;
+						vertical-align: middle;
+						width: 0.36rem;
+						height: 0.36rem;
+					}
+					.box-name{
+						font-size: 0.3rem;
+						color: #1A2642;
+						margin-left: 0.15rem;
+						line-height: 0.36rem;
+					}
+					.turn-right{
+						width: 0.24rem;
+						height: 0.24rem;
+						/*vertical-align: middle;*/
+					}
 				}
 			}
 		}

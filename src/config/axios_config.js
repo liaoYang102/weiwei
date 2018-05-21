@@ -19,18 +19,32 @@ axios.interceptors.request.use(config => {
 
 	let token = sessionStorage.getItem('token')
 	let timestamp = Math.round(new Date().getTime() / 1000)
-	let sign = token ? MD5(config.url + timestamp + '1234456') : MD5(config.url + timestamp)
+	let sign = token ? MD5(config.url + timestamp + sessionStorage.getItem('userNp')) : MD5(config.url + timestamp)
 	let type = 'application/json;charset=utf-8'
-	let entry = config.url.slice(0,4)
-	if (entry === '/app') {
-		type = 'application/x-www-form-urlencoded'
+	let entry = config.url.slice(0, 4)
+	if(entry === 'http') {
+		config.headers = {
+			'Content-Type': 'application/x-www-form-urlencoded'
+		}
+	} else {
+		if(config.url == '/datacenter/v1/fileupload/image') { // 自定义图片上传
+			let type = 'Content-Type: multipart/form-data'
+			let form = new FormData()
+			for(let key in config.data) {
+				form.append(key, config.data[key])
+			}
+			config.data = form
+		} else {
+			let type = 'application/json;charset=utf-8'
+		}
+		config.headers = {
+			'Content-Type': type,
+			'timestamp': timestamp,
+			'sign': sign,
+			'token': token
+		}
 	}
-	config.headers = {
-		'Content-Type': type,
-		'timestamp': timestamp,
-		'sign': sign,
-		'token': token
-	}
+
 	return config
 }, error => {
 	return Promise.reject(error)
@@ -60,14 +74,4 @@ axios.interceptors.response.use(res => { // 响应成功关闭loading
 	return Promise.reject(error)
 })
 
-if(!sessionStorage.getItem('token')) {
-	let Login = axios.post('/datacenter/public/v1/login', {
-		audience: 'platform',
-		name: '1234',
-		passwd: '456'
-	}).then((res) => {
-		console.log(res)
-		sessionStorage.setItem('token', res.data.data.token)
-		sessionStorage.setItem('userId', 2)
-	})
-}export default axios
+export default axios

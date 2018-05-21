@@ -56,7 +56,7 @@
           	<x-dialog v-model="showDialog" :hide-on-blur="true">
           		<!-- 等待审核 -->
         		<div class="dia">
-        			<img class="img" src="../../../static/draw/wait.png">
+        			<img class="img" :src="imgSrc">
         			<div class="dia_top">
         				<div class="dia_content">
         					<p class="title">{{headMessage}}</p>
@@ -85,6 +85,7 @@
 	  		showDialog: false,
 	  		pindex:0,
 	  		headMessage: '请您耐心等待审核',
+	  		imgSrc: './static/draw/wait.png'
 	  	}
 	  },
 	  mounted:function(){

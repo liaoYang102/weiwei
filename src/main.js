@@ -32,7 +32,7 @@ Vue.prototype.url = url //全局url路径
 Vue.use(VueLazyLoad, {
 	preLoad: 1.3,
 	error: './static/images/warning.png',
-	loading: './static/images/loading.jpg',
+	loading: './static/images/loading.png',
 })
 // --------------------------------
 

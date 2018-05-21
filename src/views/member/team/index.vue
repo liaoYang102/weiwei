@@ -51,7 +51,7 @@
 
 								<div class="null-box" v-else>
 									<img src="../../../assets/images/index/null-data.png" alt="" />
-									<p>暂无数据</p>
+									<p>暂无伙伴</p>
 									<router-link to="/member/purse/qrcode">
 										<div class="add-btn">我要邀请</div>
 									</router-link>
@@ -193,7 +193,7 @@
 						width: 100%;
 						.null-box {
 							position: relative;
-							height: 11rem;
+							height: 100%;
 							text-align: center;
 							background: white;
 							img {
@@ -261,7 +261,6 @@
 				color: #FFFFFF;
 				letter-spacing: 0;
 			}
-			;
 		}
 	}
 	

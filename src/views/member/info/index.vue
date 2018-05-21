@@ -7,13 +7,9 @@
 					<div class="up-box">
 						<img class="tx" :src="images?images:'./static/images/mrtx.png'" />
 						<input class="upinput" type="file" name="" id="" value="" @change="up" ref="input" />
-						<!--<uploader :max="varmax" :showHeader="false" :images="images" :handle-click="false" :autoUpload="false" :capture="camera" :show-header="false" :readonly="true" :upload-url="uploadUrl" name="img" :params="params" size="small" @preview="previewMethod" :upload-image="up" @add-image="addImageMethod" @remove-image="removeImageMethod">
-						</uploader>-->
 					</div>
 				</cell>
-				<cell class="list-item" title="用户昵称" :value="userInfo.nickname" is-link link="/member/setting/nickname">
-					<!--<x-input class="input-div" ref="name" v-model="name" :value="name" text-align="right" :show-clear="false" placeholder="未设置" type="text" @on-change="nameChange" @on-enter="ok"></x-input>-->
-				</cell>
+				<cell class="list-item" title="用户昵称" :value="userInfo.nickname" is-link link="/member/setting/nickname"></cell>
 			</group>
 			<group>
 				<cell class="list-item" title="我的二维码" is-link link="/member/purse/qrcode"><img class="code" src="../../../assets/images/member/code@2x.png" /></cell>
@@ -39,7 +35,7 @@
 				varmax: 1, //图片最大张数
 				images: '', //图片数组
 				data5: 88,
-				userInfo:{}
+				userInfo: {}
 			}
 		},
 		created() {
@@ -56,12 +52,13 @@
 				var _this = this
 				_this.$http.get(_this.url.user.getBasicInfo, {
 					params: {
-						userId: 2
+						userId: sessionStorage.getItem('userId')
 					}
 				}).then((res) => {
 					console.log(res)
-					if(res.data.status == "00000000"){
+					if(res.data.status == "00000000") {
 						_this.userInfo = res.data.data
+						_this.images = res.data.data.avatar.original
 					}
 				})
 			},
@@ -76,13 +73,22 @@
 				var _this = this
 				var reader = new FileReader();
 				var file = e.target.files[0];
-				console.log(file)
-				reader.readAsDataURL(file); // 读出 base64
-				reader.onloadend = function(e) {
-					// 图片的 base64 格式, 可以直接当成 img 的 src 属性值        
-					var dataURL = reader.result;
-					_this.images = e.target.result
-				};
+				var imgdata = file
+				var data = {
+					type: 'user',
+					name: '1',
+					file: imgdata
+				}
+				_this.$http.post(_this.url.user.fileuploadImage, data).then((res) => {
+					if(res.data.status == '00000000') {
+						_this.$http.post(_this.url.user.changeAvatar, {
+							userId: sessionStorage.getItem('userId'),
+							avatarId: res.data.data.fileId
+						}).then((res) => {
+							_this.images = res.data.data.original
+						})
+					}
+				})
 			}
 		},
 		components: {
