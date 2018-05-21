@@ -20,17 +20,20 @@ axios.interceptors.request.use(config => {
 	let token = sessionStorage.getItem('token')
 	let timestamp = Math.round(new Date().getTime() / 1000)
 	let sign = token ? MD5(config.url + timestamp + '1234456') : MD5(config.url + timestamp)
-	let type = 'application/json;charset=utf-8'
 	let entry = config.url.slice(0,4)
-	if (entry === '/app') {
-		type = 'application/x-www-form-urlencoded'
+	if (entry === 'http') {
+		config.headers = {
+			'Content-Type': 'application/x-www-form-urlencoded'
+		}
+	} else {
+		config.headers = {
+			'Content-Type': 'application/json;charset=utf-8',
+			'timestamp': timestamp,
+			'sign': sign,
+			'token': token
+		}
 	}
-	config.headers = {
-		'Content-Type': type,
-		'timestamp': timestamp,
-		'sign': sign,
-		'token': token
-	}
+	
 	return config
 }, error => {
 	return Promise.reject(error)

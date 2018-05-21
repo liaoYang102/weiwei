@@ -15,8 +15,8 @@ var url = {
 		getShippingAddress:'/user/v1/user/getShippingAddress', // 获取收货地址
 	},
 	draw:{
-		getReviewLists: '/app/index.php?i=7&c=entry&m=mx_shop&do=mobile&r=copy.getReviewLists', //往期回顾
-		getLuckRankLists: '/app/index.php?i=7&c=entry&m=mx_shop&do=mobile&r=copy.getLuckyRankLists'//幸运排行
+		getReviewLists: 'http://www.cgc999.com/app/index.php?i=7&c=entry&m=mx_shop&do=mobile&r=copy.getReviewLists', //往期回顾
+		getLuckRankLists: 'http://www.cgc999.com/app/index.php?i=7&c=entry&m=mx_shop&do=mobile&r=copy.getLuckyRankLists'//幸运排行
 	},
 	zone: {
 		area: '/area/v1/area/getCountryList'
