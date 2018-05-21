@@ -49,7 +49,6 @@
 				this.$router.go(-1)
 			}
 		},
-		created() {},
 		mounted() {
 			this.$refs.phone.focus()
 		},
@@ -58,15 +57,17 @@
 				var _this = this
 				_this.showLoading = true
 				if(_this.mainApp.isphone(_this.mobile)) {
-					sessionStorage.setItem('userNp', _this.mobile + _this.password)
 					//获取云中心登录token
 					_this.$http.post(_this.url.user.login, {
 						audience: 'platform',
 						name: _this.mobile,
 						passwd: _this.password,
 					}).then((res) => {
-						sessionStorage.setItem('token', res.data.data.token)
-						_this.isCheckLogin()
+						if(res.data.status == "00000000") {
+							sessionStorage.setItem('userNp', _this.mobile + res.data.data.randomAccessCode)
+							sessionStorage.setItem('token', res.data.data.token)
+							_this.isCheckLogin()
+						}
 					})
 				} else {
 					_this.$vux.toast.show({
@@ -79,6 +80,7 @@
 
 				_this.showLoading = false
 			},
+			//注册
 			reg() {
 				var _this = this
 				_this.$http.post(this.url.user.userRegister, {
@@ -100,17 +102,16 @@
 					}
 				})
 			},
+			////检测用户是否注册
 			isCheckLogin() {
 				var _this = this
-
 				_this.$nextTick(function() {
-					//检测用户是否注册
 					_this.$http.post(_this.url.user.checkUserExistsByMobile, {
 						mobile: _this.mobile
 					}).then(res => {
 						if(res.data.status == "00000000") {
 							if(res.data.data == 'false') {
-								//已注册
+								//未注册
 								_this.$dialog.show({
 									type: 'warning',
 									headMessage: '提示',
@@ -125,6 +126,7 @@
 									}
 								})
 							} else {
+								//已注册
 								_this.login()
 							}
 						}
@@ -132,17 +134,17 @@
 				})
 
 			},
+			//登录
 			login() {
 				var _this = this
-
 				_this.$http.post(this.url.user.userLogin, {
 					platformId: _this.url.platformId,
 					mobile: _this.mobile,
 					password: _this.password
 				}).then(function(res) {
-					sessionStorage.setItem('userToken', res.data.data.userToken)
-					sessionStorage.setItem('userId', res.data.data.userId)
 					if(res.data.status == "00000000") {
+						sessionStorage.setItem('userToken', res.data.data.userToken)
+						sessionStorage.setItem('userId', res.data.data.userId)
 						_this.$vux.toast.show({
 							width: '50%',
 							type: 'text',
@@ -154,25 +156,34 @@
 								})
 							}
 						})
+					} else {
+						sessionStorage.removeItem('userNp')
+						sessionStorage.removeItem('token')
 					}
 				})
 			},
+			//验证码输入改变时
 			codeChange(val) {
 				if(val.length == 4) {
 					this.$refs.code.blur()
 				}
 			},
+			//密码输入改变时
 			passwordChange() {
+				sessionStorage.removeItem('userNp')
 				sessionStorage.removeItem('token')
 			},
+			//用户名输入改变时
 			nameChange(val) {
 				var _this = this
+				sessionStorage.removeItem('userNp')
 				sessionStorage.removeItem('token')
 				if(val.length == 11) {
 					_this.$refs.phone.blur()
 					_this.$refs.password.focus()
 				}
 			},
+			//发送验证码
 			sendCode() {
 				var _this = this
 				_this.$refs.code.focus()
@@ -194,6 +205,7 @@
 					}
 				})
 			},
+			//倒计时
 			reduce() {
 				var _this = this
 				if(_this.num == 0) {
@@ -211,6 +223,7 @@
 					_this.reduce()
 				}, 1000)
 			},
+			//忘记密码跳转
 			resetPass() {
 				this.$router.push({
 					path: '/user/changeLoginPassword'
