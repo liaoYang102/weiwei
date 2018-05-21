@@ -88,7 +88,7 @@
 				show1: false,
 				imgList: [],
 				showInputOption: false,
-				option: '选填',
+				option: '',
 				inputOption: '',
 				inputnum: null,
 				inputMobile: null,

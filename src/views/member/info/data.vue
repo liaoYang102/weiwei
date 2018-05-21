@@ -66,8 +66,8 @@
 		data() {
 			return {
 				title: '详细资料',
-				wxnum: 'zh43787835',
-				zfbnum: '18598572455',
+				wxnum: '',
+				zfbnum: '',
 				mail: '',
 				qq: '',
 				contact: '',
@@ -166,45 +166,15 @@
 						})
 						return
 					} else {
-						// _this.backImages = []
-						var reader = new FileReader()
-						reader.readAsDataURL(file[i]) // 读出 base64
-						reader.onloadend = function(e) {
-							// 图片的 base64 格式, 可以直接当成 img 的 src 属性值        
-							var dataURL = reader.result
-							if(_this.backImages.length < 3) {
-								_this.backImages.push(e.target.result)
-							}
-						}
-
 						var imgdata = file[i]
-
-						let sign, token
-						let timestamp = Math.round(new Date().getTime() / 1000)
-						sign = _this.MD5('/datacenter/v1/fileupload/image' + timestamp + "123456")
-						token = sessionStorage.getItem('token')
-						var instance = _this.$http.create({
-							headers: {
-								'Content-Type': 'multipart/form-data',
-								'timestamp': timestamp,
-								'sign': sign,
-								'token': token
-							}
-						})
-
 						var data = {
 							type: 'user',
 							name: '1',
 							file: imgdata
 						}
-						let formdata = new FormData()
-
-						formdata.append("type", data.type)
-						formdata.append("name", data.name)
-						formdata.append("file", data.file)
-
-						instance.post(_this.url.user.fileuploadImage, formdata).then((res) => {
-							if(res.status == '00000000') {
+						_this.$http.post(_this.url.user.fileuploadImage, data).then((res) => {
+							if(res.data.status == '00000000') {
+								_this.backImages.push(res.data.data.fileUrl)
 								_this.fileIdList.push(res.data.data.fileId)
 							}
 						})
@@ -227,6 +197,7 @@
 			},
 			shanc(index) {
 				this.backImages.splice(index, 1)
+				this.fileIdList.splice(index, 1)
 			},
 			changeUserInfo() {
 				var _this = this
@@ -240,8 +211,8 @@
 					email: _this.mail,
 					egmobile: _this.contactnum,
 					emergency: _this.contact,
-					imageIds:_this.fileIdList,
-					userId: 2
+					imageIds: _this.fileIdList,
+					userId: sessionStorage.getItem('userId')
 				}
 				_this.$http.post(_this.url.user.changeUserInfo, data).then((res) => {
 					if(res.status == '00000000') {

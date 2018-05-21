@@ -28,9 +28,8 @@
 			submit() {
 				let _this = this
 				let param = {
-					userId: 2,
+					userId: sessionStorage['userId'],
 					nickname: _this.name
-					// userToken: sessionStorage['token']
 				}
 				console.log(param)
 				_this.$http.post(_this.url.user.changeNickname, param).then(resp=>{

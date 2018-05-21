@@ -8,7 +8,9 @@
 				<cell class="list-item" title="密码管理" is-link link="/user/changelist"></cell>
 				<cell class="list-item" title="关于我们" is-link link="/member/setting/about"></cell>
 			</group>
-			<router-link to="/user/reg"><div class="logout-btn">退出登录</div></router-link>
+			<router-link to="/user/reg">
+				<div class="logout-btn" @click="logout">退出登录</div>
+			</router-link>
 		</div>
 	</div>
 </template>
@@ -27,7 +29,9 @@
 
 		},
 		methods: {
-
+			logout() {
+				sessionStorage.removeItem('userToken')
+			}
 		},
 		components: {
 			settingHeader
@@ -46,7 +50,7 @@
 			padding-top: 0!important;
 			padding-bottom: 0!important;
 		}
-		.logout-btn{
+		.logout-btn {
 			width: 100%;
 			margin: 0.21rem 0;
 			text-align: center;

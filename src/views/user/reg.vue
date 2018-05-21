@@ -8,13 +8,14 @@
 			<group gutter="0" class="input-div">
 				<!--<cell class="input-item" title="国家" value="中国" is-link value-align="right"></cell>-->
 				<x-input class="input-item" ref="phone" v-model="mobile" placeholder="用户名" type="number" :max="11" :required="true" @on-change="nameChange"></x-input>
-				<x-input class="input-item" ref="password" v-model="password" placeholder="登录密码" type="password" :required="true"></x-input>
+				<x-input class="input-item" ref="password" v-model="password" placeholder="登录密码" type="password" :required="true" @on-change="passwordChange"></x-input>
 				<x-input v-if="!isReg" class="input-item bounceInUp animated" type="number" ref="code" v-model="code" placeholder="验证码" @on-change="codeChange">
 					<x-button slot="right" type="primary" mini @click.native="sendCode" :disabled="sendFlag">{{codeText}}</x-button>
 				</x-input>
 			</group>
 			<div class="tip">
-				<x-button class="add-btn" @click.native="submit" :show-loading="showLoading">{{btnText}}</x-button>
+				<x-button class="add-btn" @click.native="submit" :show-loading="showLoading" v-if="isReg">立即登录</x-button>
+				<x-button class="add-btn" @click.native="reg" :show-loading="showLoading" v-else>立即注册</x-button>
 			</div>
 			<div class="login-re">
 				<span @click="resetPass">忘记密码?</span>
@@ -32,16 +33,20 @@
 				title: '用户登录', //头部标题
 				mobile: '', //手机号码
 				password: '', //密码
-				code: '', //验证码
+				code: null, //验证码
 				show: false,
 				regText: '提示',
-				isClick: true,
 				btnText: '立即登录',
 				isReg: true, //判断是否注册
 				codeText: '发送验证码',
 				num: 60,
 				sendFlag: false,
 				showLoading: false
+			}
+		},
+		beforeCreate() {
+			if(sessionStorage.getItem('userToken')) {
+				this.$router.go(-1)
 			}
 		},
 		created() {},
@@ -51,14 +56,17 @@
 		methods: {
 			submit() {
 				var _this = this
-
+				_this.showLoading = true
 				if(_this.mainApp.isphone(_this.mobile)) {
-					_this.$http.post(this.url.user.userLogin, {
-						platformId: '1',
-						mobile: _this.mobile,
-						passwd: _this.password
-					}).then(function(res) {
-						console.log(res)
+					sessionStorage.setItem('userNp', _this.mobile + _this.password)
+					//获取云中心登录token
+					_this.$http.post(_this.url.user.login, {
+						audience: 'platform',
+						name: _this.mobile,
+						passwd: _this.password,
+					}).then((res) => {
+						sessionStorage.setItem('token', res.data.data.token)
+						_this.isCheckLogin()
 					})
 				} else {
 					_this.$vux.toast.show({
@@ -69,85 +77,122 @@
 					})
 				}
 
+				_this.showLoading = false
 			},
-			submit2() {
+			reg() {
 				var _this = this
-				if(this.isReg) {
-					if(_this.phone == '17520439845' && _this.password == '123456') {
-						this.showLoading = true
-						setTimeout(() => {
-							_this.showLoading = false
-						}, 2000)
-					} else if(_this.phone.length == 11 && _this.phone != '17520439845') {
-						_this.$dialog.show({
-							type: 'warning',
-							headMessage: '提示',
-							message: '该账户没有注册,是否立即注册?',
-							buttons: ['确定', '取消'],
-							canel() {
-								_this.$dialog.hide()
-							},
-							confirm() {
-								_this.$dialog.hide()
-								_this.isReg = false
-								_this.showLoading = false
-								_this.btnText = "立即注册"
+				_this.$http.post(this.url.user.userRegister, {
+					mobile: _this.mobile,
+					password: _this.password,
+					smsVerificationCode: parseInt(_this.code),
+					platformId: _this.url.platformId
+				}).then(function(res) {
+					if(res.data.status == "00000000") {
+						_this.$vux.toast.show({
+							width: '50%',
+							type: 'text',
+							position: 'middle',
+							text: '注册成功',
+							onHide() {
+								_this.login()
 							}
 						})
 					}
-				} else {
-					if(this.code == '') {
-						this.$vux.toast.show({
+				})
+			},
+			isCheckLogin() {
+				var _this = this
+
+				_this.$nextTick(function() {
+					//检测用户是否注册
+					_this.$http.post(_this.url.user.checkUserExistsByMobile, {
+						mobile: _this.mobile
+					}).then(res => {
+						if(res.data.status == "00000000") {
+							if(res.data.data == 'false') {
+								//已注册
+								_this.$dialog.show({
+									type: 'warning',
+									headMessage: '提示',
+									message: '该账户没有注册,是否立即注册?',
+									buttons: ['确定', '取消'],
+									canel() {
+										_this.$dialog.hide()
+									},
+									confirm() {
+										_this.$dialog.hide()
+										_this.isReg = false
+									}
+								})
+							} else {
+								_this.login()
+							}
+						}
+					})
+				})
+
+			},
+			login() {
+				var _this = this
+
+				_this.$http.post(this.url.user.userLogin, {
+					platformId: _this.url.platformId,
+					mobile: _this.mobile,
+					password: _this.password
+				}).then(function(res) {
+					sessionStorage.setItem('userToken', res.data.data.userToken)
+					sessionStorage.setItem('userId', res.data.data.userId)
+					if(res.data.status == "00000000") {
+						_this.$vux.toast.show({
 							width: '50%',
 							type: 'text',
 							position: 'middle',
-							text: '验证码错误'
-						})
-					} else {
-						this.$vux.toast.show({
-							width: '50%',
-							type: 'text',
-							position: 'middle',
-							text: '注册成功'
+							text: '登陆成功',
+							onHide() {
+								_this.$router.push({
+									path: '/index'
+								})
+							}
 						})
 					}
-				}
+				})
 			},
 			codeChange(val) {
-				if(val.length == 5) {
+				if(val.length == 4) {
 					this.$refs.code.blur()
-					this.isClick = false
 				}
+			},
+			passwordChange() {
+				sessionStorage.removeItem('token')
 			},
 			nameChange(val) {
 				var _this = this
+				sessionStorage.removeItem('token')
 				if(val.length == 11) {
 					_this.$refs.phone.blur()
 					_this.$refs.password.focus()
-					this.isClick = false
-					
-					_this.$http(_this.url.user.checkUserExistsByMobile,{
-						mobile:_this.mobile
-					}).then(res=>{
-						console.log(res)
-					})
 				}
-			},
-			onConfirm() {
-				this.isReg = false
-				this.showLoading = false
-				this.btnText = "立即注册"
 			},
 			sendCode() {
 				var _this = this
 				_this.$refs.code.focus()
-				this.$vux.toast.show({
-					width: '50%',
-					type: 'text',
-					position: 'middle',
-					text: '验证码发送成功'
+				_this.code = null
+				_this.$http.post(this.url.user.getVerificationCode, {
+					mobile: _this.mobile,
+					type: 1
+				}).then(function(res) {
+					console.log(res)
+					if(res.data.status == "00000000") {
+						_this.$vux.toast.show({
+							width: '50%',
+							type: 'text',
+							position: 'middle',
+							text: '验证码发送成功'
+						})
+
+						_this.reduce()
+					}
 				})
-				this.reduce()
 			},
 			reduce() {
 				var _this = this
@@ -165,9 +210,6 @@
 				setTimeout(function() {
 					_this.reduce()
 				}, 1000)
-			},
-			codeLogin() {
-
 			},
 			resetPass() {
 				this.$router.push({
