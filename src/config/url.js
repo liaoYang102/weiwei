@@ -15,18 +15,21 @@ var url = {
 		changeNickname: '/user/v1/user/changeNickname', // 修改用户名
 		changeAvatar: '/user/v1/user/changeAvatar', //修改用户名称
 		addShippingAddress:'/user/v1/user/addShippingAddress', // 添加收货地址
-		getShippingAddress:'/user/v1/user/getShippingAddress', // 获取收货地址
+		getShippingAddress:'/user/v1/user/getshippingAddress', // 获取收货地址
+		deleteShippingAddress:'/user/v1/user/deleteShippingAddress', // 删除收货地址
+		setDefaultShippingAddress:'/user/v1/user/setDefaultShippingAddress', // 设置默认收货地址
 		forgetPassword:'/public/v1/user/forgetPassword',//重置密码
 		getConcernLists:'/user/v1/user/getConcernLists',//我的关注
 		getUserPayPassword:'/user/v1/user/getUserPayPassword', // 设置是否设置支付密码
 		getUserAuthInfo:'/user/v1/user/getUserAuthInfo', //获取用户认证状态
+		getShippingAddressById:'/user/v1/user/getShippingAddressById', // id获取收货地址详细信息
 	},
 	draw: {
 		getReviewLists: 'http://www.cgc999.com/app/index.php?i=7&c=entry&m=mx_shop&do=mobile&r=copy.getReviewLists', //往期回顾
 		getLuckRankLists: 'http://www.cgc999.com/app/index.php?i=7&c=entry&m=mx_shop&do=mobile&r=copy.getLuckyRankLists' //幸运排行
 	},
 	zone: {
-		area: '/area/v1/area/getCountryList'
+		area: '/area/v1/area/level' // 区域地址
 	}
 
 }

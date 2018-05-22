@@ -17,7 +17,7 @@
 		<div style="margin-top: 46px;" v-else>
 			<div class="shopImg">
     			<swiper :options="swiperOption" class="imgBox">
-			       	<swiper-slide v-for="(item,index) in shopImg">
+			       	<swiper-slide v-for="(item,index) in shopImg" :key="index">
 			       		<div class="imgBox-item">
                         	<img class="previewer-demo-img" v-lazy="item.src" @click="show(index)">
 			       		</div>
@@ -92,7 +92,7 @@
 						<div class="tip-box tip-af">
 							<p class="title">酒店条件</p>
 							<div class="tip-text">
-								<div class="one-item" v-for="item in tips">
+								<div class="one-item" v-for="(item, index) in tips" :key="index">
 									<span>{{item.one}}</span>
 									<span>{{item.two}}</span>
 								</div>
@@ -163,7 +163,7 @@
 					<div class="lay-box">
 						<p>选择房间类型 :</p>
 						<div class="lay-item">
-							<div v-for="(item,index) in layList" @click="choicelay(index,item)"><span :class="{'layactive':layIndex == index}">{{item}}</span></div>
+							<div v-for="(item,index) in layList" :key="index" @click="choicelay(index,item)"><span :class="{'layactive':layIndex == index}">{{item}}</span></div>
 						</div>
 					</div>
 					<div class="add-btn" @click="purchase">立即购买</div>

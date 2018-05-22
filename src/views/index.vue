@@ -3,7 +3,7 @@
 		<div class="wrapper" ref="wrapper">
 			<div class="content" style="padding-bottom: 0.2rem">
 				<swiper :options="swiperOption" class="swiper">
-					<swiper-slide v-for="item in demoList">
+					<swiper-slide v-for="(item, index) in demoList" :key="index">
 						<img :src="item">
 					</swiper-slide>
 					<div class="swiper-pagination" slot="pagination"></div>
@@ -22,7 +22,7 @@
 					<img src="../assets/images/index/notice.png" alt="">
 					<div style="padding-left: 0.15rem">
 						<marquee>
-							<marquee-item v-for="i in 5" :duration='3000' class="align-middle">魅族手机成功加盟CGC全球智慧产业联盟</marquee-item>
+							<marquee-item v-for="i in 5" :key="i" :duration='3000' class="align-middle">魅族手机成功加盟CGC全球智慧产业联盟</marquee-item>
 						</marquee>
 					</div>
 				</div>
@@ -54,7 +54,7 @@
 					<img class="auto-img" v-lazy="'../../static/images/IMG_3224 Copy@2x.png'" alt="" />
 				</router-link>-->
 				<div class="plate">
-					<div class="item" v-for="(item,index) in plateList">
+					<div class="item" v-for="(item,index) in plateList" :key="index">
 						<router-link :to="item.url">
 							<div class="b-w">
 								<img v-lazy="item.img" />
@@ -82,7 +82,7 @@
 				<section>
 					<div class="navigation">
 						<ul>
-							<li v-for="item in navList">
+							<li v-for="(item, index) in navList" :key="index">
 								<router-link :to="item.url">
 									<div class="li-box">
 										<img :src="item.img">
