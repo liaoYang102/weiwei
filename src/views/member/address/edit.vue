@@ -38,13 +38,16 @@
 					areaId: '',
 					address: '',
 					email: '',
-					remark: ''
+					remark: '',
+					townId: '',
+					tel: '',
+					default: 0
 				},
 				list: [{
 					name: '中国',
 					value: '1'
 				}],
-				addArr: [],
+				addArr: ['1','2','33','378'],
 				label: '',
 				twoClass: ['家', '公司', '代收点', '丰巢'],
 				twoIndex: ''
@@ -69,30 +72,19 @@
 			getRegionOptions (level) { // 获取地址选项
 				let _this = this
 				let param = {
-					'level': level,
-					'curPage': 1,
-					'pageSize': 10000,
+					'level': level
 				}
 				_this.$http.get(_this.url.zone.area, {params:param}).then(resp => {
-					let temp = []
-					let arrData = resp.data.data.list
-					// if (level===1) { // 国家数据的处理方式，暂时不用
-					// 	temp = arrData.map(function(item){
-					// 		return {
-					// 			name: item.name,
-					// 			value: item.id,
-					// 		}
-					// 	})
-					// } else {
-					temp = arrData.map(function(item){
-						return {
+					let temp
+					let arrData = resp.data.data
+					arrData.forEach(function(item) {
+						temp = {
 							name: item.name,
 							value: item.id,
 							parent: item.parentId + ''
 						}
+						_this.list.push(temp)
 					})
-					// }
-					_this.list = _this.list.concat(temp)
 				})
 			},
 			submit () {
@@ -123,6 +115,7 @@
 				_this.info.provinceId = _this.addArr[1]
 				_this.info.cityId = _this.addArr[2]
 				_this.info.areaId = _this.addArr[3]
+				_this.info.userId = sessionStorage['userId']
 				_this.$http.post(_this.url.user.addShippingAddress, _this.info).then(resp => {
 					console.log(resp)
 				})
