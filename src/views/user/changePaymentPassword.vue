@@ -50,11 +50,24 @@
 				isRemember: 3,
 			}
 		},
-		created() {},
+		created() {
+			this.getUserPayPassword()
+		},
 		mounted() {
 
 		},
 		methods: {
+			//检测是否设置支付密码
+			getUserPayPassword() {
+				var _this = this
+				_this.$http.get(_this.url.user.getUserPayPassword, {
+					userId: sessionStorage.getItem('userId')
+				}).then((res) => {
+					if(res.data.status == "00000000") {
+						console.log(res)
+					}
+				})
+			},
 			remember() {
 				var _this = this
 				_this.isRemember = 1

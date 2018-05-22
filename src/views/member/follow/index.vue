@@ -270,14 +270,34 @@
 				proState: 0,
 				storeState: 0,
 				noPro: '暂无商品',
-				noStore: '暂无店铺'
+				noStore: '暂无店铺',
+				pageSize: 20,
+				curPage: 1,
 			}
 		},
-		created() {},
+		created() {
+			this.getFollow()
+		},
 		mounted() {
 			this.InitScroll()
 		},
 		methods: {
+			getFollow(){
+				var _this = this
+				_this.$http.get(_this.url.user.getConcernLists, {
+					params: {
+						userId: sessionStorage.getItem('userId'),
+						type:1,
+						pageSize:_this.pageSize,
+						curPage:_this.curPage
+					}
+				}).then((res) => {
+					console.log(res)
+					if(res.data.status == "00000000") {
+						
+					}
+				})
+			},
 			InitScroll() {
 				this.$nextTick(() => {
 					if(!this.scroll) {
@@ -598,6 +618,9 @@
 		background-color: white;
 		height: 100%;
 		overflow: hidden;
+		.vux-header .vux-header-title {
+			margin: 0 66px;
+		}
 		.animated {
 			-webkit-animation-duration: 1s;
 			animation-duration: 1s;

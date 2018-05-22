@@ -44,7 +44,7 @@ const share =[
 		props:true,
 		meta: {
 			navShow: true,
-			navIndex:2,
+			navIndex:3,
 			title:'门店列表'
 		}
 	},

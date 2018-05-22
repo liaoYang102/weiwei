@@ -41,7 +41,8 @@
 				codeText: '发送验证码',
 				num: 60,
 				sendFlag: false,
-				showLoading: false
+				showLoading: false,
+				token: ''
 			}
 		},
 		beforeCreate() {
@@ -64,8 +65,8 @@
 						passwd: _this.password,
 					}).then((res) => {
 						if(res.data.status == "00000000") {
+							_this.token = res.data.data.token
 							sessionStorage.setItem('userNp', _this.mobile + res.data.data.randomAccessCode)
-							sessionStorage.setItem('token', res.data.data.token)
 							_this.isCheckLogin()
 						}
 					})
@@ -145,6 +146,7 @@
 					if(res.data.status == "00000000") {
 						sessionStorage.setItem('userToken', res.data.data.userToken)
 						sessionStorage.setItem('userId', res.data.data.userId)
+						sessionStorage.setItem('token', _this.token)
 						_this.$vux.toast.show({
 							width: '50%',
 							type: 'text',

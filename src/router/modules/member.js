@@ -143,7 +143,7 @@ const memberModule = [{
 		component: member,
 		meta: {
 			navShow: true,
-			navIndex: 3,
+			navIndex: 4,
 			title: '个人中心'
 		}
 	},
