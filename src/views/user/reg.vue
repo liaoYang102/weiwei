@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<div class="reg-box">
 		<settingHeader :title="title"></settingHeader>
 		<div class="content">
 			<div class="login-box">
@@ -10,22 +10,37 @@
 				<x-input class="input-item" ref="phone" v-model="mobile" placeholder="用户名" type="number" :max="11" :required="true" @on-change="nameChange"></x-input>
 				<x-input class="input-item" ref="password" v-model="password" placeholder="登录密码" type="password" :required="true" @on-change="passwordChange"></x-input>
 				<x-input v-if="!isReg" class="input-item bounceInUp animated" type="number" ref="code" v-model="code" placeholder="验证码" @on-change="codeChange">
-					<x-button slot="right" type="primary" mini @click.native="sendCode" :disabled="sendFlag">{{codeText}}</x-button>
+					<x-button class="codeBtn" slot="right" type="primary" mini @click.native="sendCode" :disabled="sendFlag">{{codeText}}</x-button>
 				</x-input>
 			</group>
 			<div class="tip">
+				<div class="agreement" v-if="!isReg">
+					<check-icon :value.sync="isAgree"></check-icon><span class="sg">我已阅读并同意</span><span @click="$router.push({path:'/user/agreement'})">《CGC平台注册协议》</span>
+				</div>
 				<x-button class="add-btn" @click.native="submit" :show-loading="showLoading" v-if="isReg">立即登录</x-button>
 				<x-button class="add-btn" @click.native="reg" :show-loading="showLoading" v-else>立即注册</x-button>
 			</div>
-			<div class="login-re">
+			<div class="login-re" v-if="isReg">
 				<span @click="resetPass">忘记密码?</span>
+				<div @click="resetPass">短信验证登录</div>
+			</div>
+			<div class="login-re" v-else>
+				<span @click="isReg = !isReg">返回登录</span>
+			</div>
+			<div class="Thirdparty" v-if="isReg">
+				<p class="title"><span>第三方登录</span></p>
+				<div>
+					<img src="../../assets/images/user/weibo.png" alt="" />
+					<img src="../../assets/images/user/weixin.png" alt="" />
+					<img src="../../assets/images/user/qq.png" alt="" />
+				</div>
 			</div>
 		</div>
 	</div>
 </template>
 
 <script>
-	import { XInput, Group, XButton, Cell, Loading, AlertModule, Confirm } from 'vux'
+	import { XInput, Group, XButton, Cell, Loading, AlertModule, Confirm, CheckIcon } from 'vux'
 	import settingHeader from '../../components/setting_header'
 	export default {
 		data() {
@@ -42,13 +57,14 @@
 				num: 60,
 				sendFlag: false,
 				showLoading: false,
-				token: ''
+				token: '',
+				isAgree: true
 			}
 		},
 		beforeCreate() {
-			if(sessionStorage.getItem('userToken')) {
-				this.$router.go(-1)
-			}
+//			if(sessionStorage.getItem('userToken')) {
+//				this.$router.go(-1)
+//			}
 		},
 		mounted() {
 			this.$refs.phone.focus()
@@ -57,7 +73,7 @@
 			submit() {
 				var _this = this
 				_this.showLoading = true
-				if(_this.mainApp.isphone(_this.mobile)) {
+				if(_this.mainApp.isphone(_this.mobile) && _this.password.length>0) {
 					//获取云中心登录token
 					_this.$http.post(_this.url.user.login, {
 						audience: 'platform',
@@ -75,19 +91,18 @@
 						width: '50%',
 						type: 'text',
 						position: 'middle',
-						text: '用户名格式不正确'
+						text: '用户名或密码格式不正确'
 					})
 				}
 
 				_this.showLoading = false
-			},
-			//注册
+			}, //注册
 			reg() {
 				var _this = this
 				_this.$http.post(this.url.user.userRegister, {
 					mobile: _this.mobile,
 					password: _this.password,
-					smsVerificationCode: parseInt(_this.code),
+					smsVerificationCode: _this.code,
 					platformId: _this.url.platformId
 				}).then(function(res) {
 					if(res.data.status == "00000000") {
@@ -188,24 +203,35 @@
 			//发送验证码
 			sendCode() {
 				var _this = this
-				_this.$refs.code.focus()
 				_this.code = null
-				_this.$http.post(this.url.user.getVerificationCode, {
-					mobile: _this.mobile,
-					type: 1
-				}).then(function(res) {
-					console.log(res)
-					if(res.data.status == "00000000") {
-						_this.$vux.toast.show({
-							width: '50%',
-							type: 'text',
-							position: 'middle',
-							text: '验证码发送成功'
-						})
+				if(_this.mainApp.isphone(_this.mobile)) {
+					_this.reduce()
+					_this.$refs.code.focus()
+					_this.$http.post(this.url.user.getVerificationCode, {
+						mobile: _this.mobile,
+						type: 1
+					}).then(function(res) {
+						console.log(res)
+						if(res.data.status == "00000000") {
+							_this.$vux.toast.show({
+								width: '50%',
+								type: 'text',
+								position: 'middle',
+								text: '验证码发送成功'
+							})
 
-						_this.reduce()
-					}
-				})
+							_this.reduce()
+						}
+					})
+				} else {
+					_this.$vux.toast.show({
+						width: '50%',
+						type: 'text',
+						position: 'middle',
+						text: '用户名格式不正确'
+					})
+					_this.$refs.phone.focus()
+				}
 			},
 			//倒计时
 			reduce() {
@@ -239,62 +265,141 @@
 			XButton,
 			Cell,
 			Loading,
-			Confirm
+			Confirm,
+			CheckIcon
 		}
 	}
 </script>
-
-<style lang="less" scoped>
-	.login-box {
-		width: 100%;
-		height: 3.5rem;
-		position: relative;
-		img {
-			position: absolute;
-			top: 50%;
-			left: 50%;
-			transform: translate(-50%, -50%);
-			width: 2rem;
-			height: auto;
-		}
-	}
-	
-	.input-item {
-		height: 1.02rem;
-		font-family: PingFangSC-Regular;
-		font-size: 0.28rem;
-		letter-spacing: 0;
-		padding-top: 0;
-		padding-bottom: 0;
+<style lang="less">
+	.reg-box {
+		height: 100%;
+		background-color: white;
+		padding: 0 0.5rem;
 		box-sizing: border-box;
-	}
-	
-	.tip {
-		padding: 10px 15px;
-		ont-family: PingFangSC-Regular;
-		font-size: 0.28rem;
-		color: #90A2C7;
-		letter-spacing: 0;
-		text-align: center;
-	}
-	
-	.add-btn {
-		height: 0.88rem;
-		margin-top: 0.55rem;
-		ont-family: PingFangSC-Regular;
-		font-size: 0.28rem;
-		color: #FFFFFF!important;
-		letter-spacing: 0;
-		background-color: #336FFF!important;
-		border-radius: 2px!important;
-	}
-	
-	.login-re {
-		padding: 10px 15px;
-		display: flex;
-		justify-content: space-between;
-		span {
+		overflow: hidden;
+		.login-box {
+			width: 100%;
+			height: 3.5rem;
+			position: relative;
+			img {
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				transform: translate(-50%, -50%);
+				width: 2rem;
+				height: auto;
+			}
+		}
+		.input-item {
+			height: 1.02rem;
+			font-family: PingFangSC-Regular;
+			font-size: 0.28rem;
+			letter-spacing: 0;
+			padding-top: 0;
+			padding-bottom: 0;
+			box-sizing: border-box;
+			.codeBtn {
+				background-color: white;
+				color: #256fff;
+			}
+			.weui-btn:after {
+				border: 1px solid transparent!important;
+			}
+		}
+		.weui-cell:before {
+			right: 15px!important;
+		}
+		.tip {
+			padding: 10px 0px;
+			ont-family: PingFangSC-Regular;
+			font-size: 0.28rem;
 			color: #90A2C7;
+			letter-spacing: 0;
+			text-align: center;
+			.agreement {
+				width: 100%;
+				text-align: center;
+				color: #151B34;
+				font-size: 0.24rem;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				height: 0.4rem;
+				.sg {
+					color: #60719D;
+				}
+				.vux-check-icon {
+					.weui-icon {
+						font-size: 0.3rem;
+					}
+				}
+			}
+		}
+		.add-btn {
+			height: 0.88rem;
+			margin-top: 0.55rem;
+			ont-family: PingFangSC-Regular;
+			font-size: 0.28rem;
+			color: #FFFFFF!important;
+			letter-spacing: 0;
+			background-color: #336FFF!important;
+			border-radius: 0px!important;
+		}
+		.login-re {
+			padding: 10px 0px;
+			display: flex;
+			justify-content: space-between;
+			span {
+				color: #90A2C7;
+			}
+		}
+		.Thirdparty {
+			position: absolute;
+			bottom: 0;
+			left: 0;
+			width: 100%;
+			padding: 0 0.5rem;
+			box-sizing: border-box;
+			div {
+				padding: 0.58rem 0;
+				box-sizing: border-box;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				img {
+					width: 0.9rem;
+					height: 0.9rem;
+					margin: 0 0.2rem;
+				}
+			}
+			.title {
+				position: relative;
+				text-align: center;
+				span {
+					position: relative;
+					background-color: white;
+					z-index: 15;
+					display: inline-block;
+					padding: 0 0.3rem;
+					color: #90A2C7;
+					font-size: 0.24rem;
+				}
+			}
+			.title:after {
+				content: " ";
+				position: absolute;
+				left: 0;
+				bottom: 45%;
+				right: 0;
+				height: 1px;
+				border-top: 1px solid #90A2C7;
+				color: #D9D9D9;
+				-webkit-transform-origin: 0 0;
+				transform-origin: 0 0;
+				-webkit-transform: scaleY(0.5);
+				transform: scaleY(0.5);
+				left: 0px;
+			}
 		}
 	}
 </style>

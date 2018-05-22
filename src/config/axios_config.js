@@ -2,10 +2,20 @@ import Vue from 'vue'
 import axios from 'axios'
 import store from '@/store'
 import isload from '@/components/isload'
+import router from '@/router'
 
 import MD5 from 'js-md5'
 
 Vue.use(isload)
+
+//REQUST_TIMESTAMP_NULL("apigw001", "requst_timestamp_null"),
+//REQUST_TIMESTAMP_TIMEOUT("apigw002", "requst_timestamp_timeout "),
+//REQUST_TIMESTAMP_CONVERT_EXCEPTION("apigw003", "requst_timestamp_convert_exception"),
+//REQUST_TOKEN_NULL("apigw004", "requst_token_null"),
+//REQUST_SIGN_NULL("apigw005", "requst_sign_null"),
+//REQUST_SIGN_NOT_MATCH("apigw006", "requst_sign_not_match "),
+//REQUST_THIRD_PARTY_INVALID("apigw007", "thirdparty invalid"),
+//API_GATEWAY_UNKNOW_EXCEPTION("apigw999", "api_gateway_unknow_exception"),
 
 axios.defaults.retry = 4 //请求次数
 axios.defaults.retryDelay = 1000 //请求间隙
@@ -52,17 +62,35 @@ axios.interceptors.request.use(config => {
 // http响应拦截器
 axios.interceptors.response.use(res => { // 响应成功关闭loading
 	Vue.$isload.hide({
-		ishide(){
-			
+		ishide() {
+
 		}
 	})
 	if(res.data.status != '00000000') {
-		Vue.$vux.toast.show({
-			text: res.data.message,
-			type: 'text',
-			position: 'middle',
-			width: '50%'
-		})
+		if(res.data.status == 'apigw004') {
+			Vue.$dialog.show({
+				type: 'warning',
+				headMessage: '提示',
+				message: '暂未登录,是否立即登录?',
+				buttons: ['确定', '取消'],
+				canel() {
+					Vue.$dialog.hide()
+				},
+				confirm() {
+					Vue.$dialog.hide()
+					router.push({
+						path: '/user/reg'
+					})
+				}
+			})
+		} else {
+			Vue.$vux.toast.show({
+				text: res.data.message,
+				type: 'text',
+				position: 'middle',
+				width: '50%'
+			})
+		}
 	}
 	return res
 }, error => {

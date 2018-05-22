@@ -256,6 +256,15 @@ var mainApp = {
 		} else {
 			return true
 		}
+	},
+	isemail(email) {
+		var reg = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/
+
+		if(!reg.test(email)) {
+			return false
+		} else {
+			return true
+		}
 	}
 }
 export default mainApp

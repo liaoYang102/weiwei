@@ -19,6 +19,7 @@ var url = {
 		forgetPassword:'/public/v1/user/forgetPassword',//重置密码
 		getConcernLists:'/user/v1/user/getConcernLists',//我的关注
 		getUserPayPassword:'/user/v1/user/getUserPayPassword', // 设置是否设置支付密码
+		getUserAuthInfo:'/user/v1/user/getUserAuthInfo', //获取用户认证状态
 	},
 	draw: {
 		getReviewLists: 'http://www.cgc999.com/app/index.php?i=7&c=entry&m=mx_shop&do=mobile&r=copy.getReviewLists', //往期回顾

@@ -27,29 +27,9 @@
 				</div>-->
 			</div>
 			<div class="bottom">
-				<div class="one-item">
-					<p>充值奖励</p>
-					<p>300.00</p>
-				</div>
-				<div class="one-item">
-					<p>购物奖励</p>
-					<p>86.20</p>
-				</div>
-				<div class="one-item">
-					<p>中奖奖励</p>
-					<p>800.00</p>
-				</div>
-				<div class="one-item">
-					<p>分红奖励</p>
-					<p>860.00</p>
-				</div>
-				<div class="one-item">
-					<p>任务奖励</p>
-					<p>0.00</p>
-				</div>
-				<div class="one-item" @click="$router.push({path:'/member/purse/recharge'})">
-					<p style="color: #336FFF">积分充值</p>
-					<p>充100送100</p>
+				<div class="one-item" v-for="(item,index) in tyList" @click="$router.push({path:item.url})">
+					<p :style="index == 5?color:''">{{item.title}}</p>
+					<p>{{item.money}}</p>
 				</div>
 			</div>
 		</div>
@@ -69,21 +49,9 @@
 				</div>-->
 			</div>
 			<div class="bottom">
-				<div class="one-item">
-					<p>充值奖励</p>
-					<p>200.00</p>
-				</div>
-				<div class="one-item">
-					<p>购物奖励</p>
-					<p>12.20</p>
-				</div>
-				<div class="one-item">
-					<p>推荐用户</p>
-					<p>5000.00</p>
-				</div>
-				<div class="one-item">
-					<p>分红奖励</p>
-					<p>0.00</p>
+				<div class="one-item" v-for="(item,index) in yList" @click="$router.push({path:item.url})">
+					<p>{{item.title}}</p>
+					<p>{{item.money}}</p>
 				</div>
 			</div>
 		</div>
@@ -101,6 +69,23 @@
 				name: '乐乐',
 				isopen: true,
 				isopen2: false,
+				color:{
+					color:'#336FFF'
+				},
+				tyList:[
+					{title:'充值奖励',money:'300.00',url:'/member/earnings/reward'},
+					{title:'购物奖励',money:'300.00',url:'/member/earnings/reward'},
+					{title:'中奖奖励',money:'300.00',url:'/member/earnings/reward'},
+					{title:'分红奖励',money:'300.00',url:'/member/earnings/reward'},
+					{title:'任务奖励',money:'300.00',url:'/member/earnings/reward'},
+					{title:'积分充值',money:'充100送100',url:'/member/purse/recharge'},
+				],
+				yList:[
+					{title:'充值奖励',money:'300.00',url:'/member/earnings/reward'},
+					{title:'购物奖励',money:'300.00',url:'/member/earnings/reward'},
+					{title:'推荐用户',money:'300.00',url:'/member/earnings/reward'},
+					{title:'分红奖励',money:'300.00',url:'/member/earnings/reward'},
+				]
 			}
 		},
 		created() {

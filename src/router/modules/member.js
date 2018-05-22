@@ -44,6 +44,7 @@ import logs from '@/views/member/earnings/logs'
 import profit from '@/views/member/earnings/profit'
 import strategy from '@/views/member/score/strategy'
 import scoreDetail from '@/views/member/score/detail'
+import agreement from '@/views/user/agreement'
 
 const memberModule = [{
 		path: '/index',
@@ -396,7 +397,15 @@ const memberModule = [{
 		meta: {
 			title: '积分详情'
 		}
-	}
+	},
+	{
+		path: '/user/agreement',
+		name: 'agreement',
+		component: agreement,
+		meta: {
+			title: 'CGC平台注册协议'
+		}
+	},
 ]
 
 export default memberModule
