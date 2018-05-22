@@ -8,7 +8,7 @@
 					
 				    <div class="themeTab">
             			<swiper :options="swiperOption">
-        			       	<swiper-slide v-for="(item,index) in tablist">
+        			       	<swiper-slide v-for="(item,index) in tablist" :key="index">
         			       		<div class="tab-item" :class="{'tab-active':act0==index}" @click="tabActive(index)">
 		                        	<span :class="{'tab-change': title == '海外购' && act0==index}">{{ item}}</span>
         			       		</div>
@@ -22,7 +22,7 @@
 				    	<div class="themeTitle">精选</div>
 	    	    		<div class="theme-list">
 	    			    	<div class="list">
-	    			    		<li class="li" v-for="(item,index) in themeList" @click="goShopdetails">
+	    			    		<li class="li" v-for="(item,index) in themeList" :key="index" @click="goShopdetails">
 	    			    			<div class="img"><img src="../../assets/images/shop/goods01.png"></div>
 	    			    			<div class="li-text">
 	    			    				<span>{{ item.goodsname}}...</span>

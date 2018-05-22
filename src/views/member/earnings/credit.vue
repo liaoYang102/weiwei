@@ -22,7 +22,7 @@
 			</div>
 			<div class="b-list">
 				<group :gutter='0'>
-					<cell class="item" primary="content" is-link v-for="item in bList" @click.native="link(item)">
+					<cell class="item" primary="content" is-link v-for="(item, index) in bList" :key="index" @click.native="link(item)">
 						<div class="left">
 							<img :src="item.img" alt="" />
 							<div>

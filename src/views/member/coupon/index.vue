@@ -4,7 +4,7 @@
 		<x-header class="b-w" :left-options="{backText:''}">
 			<div class="tar-box">
 				<tab class="tab" :line-width="2" active-color="#397df8" custom-bar-width="0.56rem">
-					<tab-item v-for="(item,index) in couponType" :selected="typeActive == index" @on-item-click="onItemClick(index)">{{item}}</tab-item>
+					<tab-item v-for="(item,index) in couponType" :key="index" :selected="typeActive == index" @on-item-click="onItemClick(index)">{{item}}</tab-item>
 				</tab>
 			</div>
 			<div class="edit-btn" @click="showDrawer" slot="right">
