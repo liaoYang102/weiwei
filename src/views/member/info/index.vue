@@ -58,7 +58,9 @@
 					console.log(res)
 					if(res.data.status == "00000000") {
 						_this.userInfo = res.data.data
-						_this.images = res.data.data.avatar.original
+						if(res.data.data.avatar.original) {
+							_this.images = res.data.data.avatar.original
+						}
 					}
 				})
 			},

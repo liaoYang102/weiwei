@@ -80,7 +80,6 @@
 				backImages: [],
 				pindex: 0,
 				sex: '', //性别
-				gender: '',
 				xl: '',
 				birthday: '', //生日
 				education: '', //学历
@@ -114,8 +113,20 @@
 					if(res.data.status == '00000000') {
 						var info = res.data.data
 						_this.gender = info.gender
+						_this.sex = info.gender == 0 ? '男' : '女'
 						_this.xl = info.education
-						_this.birthday = _this.mainApp.frDateTimehp.getFormatTimesTamp(info.birthday)
+						if(info.education == 0) {
+							_this.education = '小学'
+						} else if(info.education == 1) {
+							_this.education = '初中'
+						} else if(info.education == 2) {
+							_this.education = '高中'
+						} else if(info.education == 3) {
+							_this.education = '大专'
+						} else if(info.education == 4) {
+							_this.education = '本科'
+						}
+						_this.birthday = _this.mainApp.frDateTimehp.getFormatDateTamp(info.birthday*1000)
 						_this.wxnum = info.wechat
 						_this.zfbnum = info.alipay
 						_this.email = info.email
@@ -165,6 +176,7 @@
 					confirmText: '确定',
 					cancelText: '取消',
 					clearText: '请选择日期',
+					minYear:'1970',
 					onConfirm(val) {
 						_this.birthday = val
 					}
@@ -218,7 +230,7 @@
 				var _this = this
 				var data = {
 					gender: _this.gender,
-					birthday: _this.mainApp.frDateTimehp.getFormatDateTamp(_this.birthday),
+					birthday: _this.mainApp.frDateTimehp.getDateTimesTamp(_this.birthday),
 					education: _this.xl,
 					wechat: _this.wxnum,
 					qq: _this.qq,
@@ -240,28 +252,6 @@
 						_this.getUserInfo()
 					}
 				})
-			},
-			watch: {
-				gender() {
-					if(this.sex == 0) {
-						return this.sex = '男'
-					} else {
-						return this.sex = '女'
-					}
-				},
-				xl() {
-					if(this.xl == 0) {
-						return this.education = '小学'
-					} else if(this.xl == 1) {
-						return this.education = '初中'
-					} else if(this.xl == 2) {
-						return this.education = '高中'
-					} else if(this.xl == 3) {
-						return this.education = '大专'
-					} else if(this.xl == 4) {
-						return this.education = '本科'
-					}
-				}
 			}
 		},
 		components: {

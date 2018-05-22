@@ -51,7 +51,11 @@ axios.interceptors.request.use(config => {
 })
 // http响应拦截器
 axios.interceptors.response.use(res => { // 响应成功关闭loading
-	Vue.$isload.hide()
+	Vue.$isload.hide({
+		ishide(){
+			
+		}
+	})
 	if(res.data.status != '00000000') {
 		Vue.$vux.toast.show({
 			text: res.data.message,
