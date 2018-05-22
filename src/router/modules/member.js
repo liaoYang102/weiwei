@@ -44,6 +44,7 @@ import logs from '@/views/member/earnings/logs'
 import profit from '@/views/member/earnings/profit'
 import strategy from '@/views/member/score/strategy'
 import scoreDetail from '@/views/member/score/detail'
+import article from '@/views/member/article/index'
 
 const memberModule = [{
 		path: '/index',
@@ -395,6 +396,14 @@ const memberModule = [{
 		component: scoreDetail,
 		meta: {
 			title: '积分详情'
+		}
+	},
+	{
+		path: '/member/article/index',
+		name: 'article',
+		component: article,
+		meta: {
+			title: '快讯列表'
 		}
 	}
 ]
