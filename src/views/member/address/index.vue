@@ -11,14 +11,14 @@
 						</div>
 						<span>{{item.mobile}}</span>
 					</div>
-					<p>{{item.address}}</p>
+					<p>{{item.country}}{{item.province}}{{item.city}}{{item.area}} {{item.address}}</p>
 				</div>
 				<div class="bottom">
 					<div @click="ischange(item.addressId, index)">
-						<check-icon :value.sync="item.isdefault">设置为默认地址</check-icon>
+						<check-icon :value.sync="item.isDefault">设置为默认地址</check-icon>
 					</div>
 					<div>
-						<router-link to="/member/address/edit"><span>编辑</span></router-link>
+						<router-link :to="{ name: 'address_edit', params: { addressId: item.addressId }}"><span>编辑</span></router-link>
 						<span @click="deleteAddress(item.addressId)">删除</span>
 					</div>
 				</div>
@@ -69,25 +69,31 @@
 							userId: sessionStorage['userId'],
 							addressId: addressId
 						}
-						_this.$http.put(_this.url.user.deleteShippingAddress, param).then(resp => {
-							console.log(resp)
+						_this.$http.post(_this.url.user.deleteShippingAddress, param).then(resp => {
+							_this.$vux.toast.show({
+								type: 'text',
+								text: '成功删除'
+							})
 							_this.getShippingAddress()
 						})
 					}
 				})
 			},
-			ischange(addressId, index) { // 设置默认地址
+			ischange(addressId, i) { // 设置默认地址
 				let _this = this
 				let param = {
 					userId: sessionStorage['userId'],
 					addressId: addressId
 				}
 				_this.$http.put(_this.url.user.setDefaultShippingAddress, param).then(resp => {
-					console.log(resp)
-				})
-				this.list.forEach(function(index, value, array) {
-					_this.list[value].isdefault = false
-					_this.list[index].isdefault = true
+					if (resp.data.status === '00000000') {
+						_this.list.forEach(function(index, value, array) {
+							_this.list[value].isDefault = false
+							_this.list[i].isDefault = true
+						})
+					} else {
+						_this.list[i].isDefault = false
+					}
 				})
 			},
 			getShippingAddress () { // 获取收货地址列表
