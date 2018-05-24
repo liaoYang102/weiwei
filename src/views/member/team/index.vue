@@ -24,7 +24,7 @@
 									<div class="list" v-for="(item,index) in list" :key="index">
 										<div class="he">
 											<div class="user-img">
-												<img :src="item.avatar" />
+												<img :src="item.avatar.original" />
 											</div>
 											<div class="user-text">
 												<p>{{item.nickname}}</p>
@@ -77,7 +77,7 @@
 			return {
 				title: '我的团队',
 				showloading: false,
-				showNo:false,
+				showNo: false,
 				totalNums: 0,
 				list: [],
 				showloading: false,
@@ -97,7 +97,7 @@
 				var _this = this
 				_this.$http.get(_this.url.user.getMyTeam, {
 					params: {
-						userId: 2,
+						userId: sessionStorage.getItem('userId'),
 						curPage: _this.curPage,
 						pageSize: _this.pageSize
 					}
@@ -141,7 +141,7 @@
 					var _this = this
 				_this.$http.get(_this.url.user.getMyTeam, {
 					params: {
-						userId: 2,
+						userId: sessionStorage.getItem('userId'),
 						curPage: _this.curPage,
 						pageSize: _this.pageSize
 					}
@@ -153,7 +153,7 @@
 							_this.showLoading = false
 							_this.showNo = false
 							_this.list = _this.list.concat(data.list)
-						}else{
+						} else {
 							_this.showNo = true
 						}
 					}
@@ -193,7 +193,7 @@
 						width: 100%;
 						.null-box {
 							position: relative;
-							height: 100%;
+							height: 11rem;
 							text-align: center;
 							background: white;
 							img {

@@ -3,8 +3,8 @@
 		<div class="b-top">
 			<div class="item" v-for="(item,index) in barList" :class="{'factive':($route.meta.navIndex == index||$route.meta.navIndex == '/')}">
 				<router-link :to="item.url">
-					<img class="icon" :src="[$route.meta.navIndex == index?item.iconIn:item.icon]" />
-					<p>{{item.title}}</p>
+					<img class="icon" :class="{'zqm':index == 2}" :src="[$route.meta.navIndex == index?item.iconIn:item.icon]" />
+					<p v-if="index!=2">{{item.title}}</p>
 				</router-link>
 			</div>
 		</div>
@@ -14,11 +14,9 @@
 <script>
 	export default {
 		data() {
-			return {
-			}
+			return {}
 		},
-		created() {
-		},
+		created() {},
 		props: {
 			show: Boolean,
 			findex: Number,
@@ -36,11 +34,11 @@
 							title: '信用商城',
 							url: '/shop'
 						},
-//						{
-//							icon: './static/images/zqm.png',
-//							iconIn: './static/images/zqm.png',
-//							url: '/member/purse/qrcode'
-//						},
+						{
+							icon: './static/images/zqm.png',
+							iconIn: './static/images/zqm.png',
+							url: '/member/purse/qrcode'
+						},
 						{
 							icon: './static/images/cylm.png',
 							iconIn: './static/images/cylm_active.png',
@@ -58,7 +56,7 @@
 			}
 		},
 		methods: {
-			
+
 		}
 	}
 </script>
@@ -102,7 +100,7 @@
 				}
 			}
 			.factive {
-				p{
+				p {
 					color: rgba(51, 111, 255, 1)!important;
 				}
 			}

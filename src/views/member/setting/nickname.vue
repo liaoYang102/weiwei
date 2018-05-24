@@ -31,8 +31,11 @@
 					userId: sessionStorage['userId'],
 					nickname: _this.name
 				}
-				console.log(param)
 				_this.$http.post(_this.url.user.changeNickname, param).then(resp=>{
+					_this.$vux.toast.show({
+						type: 'text',
+						text: '修改成功'
+					})
 					_this.$router.go(-1)
 				})
 			}

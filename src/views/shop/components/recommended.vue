@@ -4,7 +4,7 @@
 			<div class="re-title">为你推荐</div>
 			<div class="ul-recommended">
 				<div>
-					<group v-for="(item, index) in goodslist">
+					<group v-for="(item, index) in goodslist" :key="index">
 						<cell is-link>
 							<div class="ul-top" @click="goShopdetails">
 								<div class="ul-left"><img src="../../../assets/images/shop/product.png"></div>

@@ -80,7 +80,6 @@
 				backImages: [],
 				pindex: 0,
 				sex: '', //性别
-				gender: '',
 				xl: '',
 				birthday: '', //生日
 				education: '', //学历
@@ -114,8 +113,20 @@
 					if(res.data.status == '00000000') {
 						var info = res.data.data
 						_this.gender = info.gender
+						_this.sex = info.gender == 0 ? '男' : '女'
 						_this.xl = info.education
-						_this.birthday = _this.mainApp.frDateTimehp.getFormatTimesTamp(info.birthday)
+						if(info.education == 0) {
+							_this.education = '小学'
+						} else if(info.education == 1) {
+							_this.education = '初中'
+						} else if(info.education == 2) {
+							_this.education = '高中'
+						} else if(info.education == 3) {
+							_this.education = '大专'
+						} else if(info.education == 4) {
+							_this.education = '本科'
+						}
+						_this.birthday = _this.mainApp.frDateTimehp.getFormatDateTamp(info.birthday * 1000)
 						_this.wxnum = info.wechat
 						_this.zfbnum = info.alipay
 						_this.email = info.email
@@ -123,10 +134,13 @@
 						_this.contact = info.emergency
 						_this.contactnum = info.egmobile
 
-						info.imagelist.forEach((value, index, array) => {
-							_this.backImages.push(array[index].original)
-							_this.fileIdList.push(array[index].imageId)
-						})
+						if(info.imagelist) {
+							info.imagelist.forEach((value, index, array) => {
+								_this.backImages.push(array[index].original)
+								_this.fileIdList.push(array[index].imageId)
+							})
+						}
+
 					}
 				})
 			},
@@ -165,6 +179,7 @@
 					confirmText: '确定',
 					cancelText: '取消',
 					clearText: '请选择日期',
+					minYear: '1970',
 					onConfirm(val) {
 						_this.birthday = val
 					}
@@ -198,17 +213,23 @@
 			},
 			cindex(index) {
 				this.pindex = index
-				console.log(this.pindex)
 			},
 			cone(e) {
 				var _this = this
 				var reader = new FileReader();
 				var file = e.target.files[0];
-				reader.readAsDataURL(file);
-				reader.onloadend = function(e) {
-					var dataURL = reader.result;
-					_this.backImages.splice(_this.pindex, 1, e.target.result)
-				};
+				var imgdata = file
+				var data = {
+					type: 'user',
+					name: '1',
+					file: imgdata
+				}
+				_this.$http.post(_this.url.user.fileuploadImage, data).then((res) => {
+					if(res.data.status == '00000000') {
+						_this.$set(_this.backImages,_this.pindex,res.data.data.fileUrl)
+						_this.$set(_this.fileIdList,_this.pindex,res.data.data.fileId)
+					}
+				})
 			},
 			shanc(index) {
 				this.backImages.splice(index, 1)
@@ -216,9 +237,30 @@
 			},
 			changeUserInfo() {
 				var _this = this
+
+				if(!_this.mainApp.isemail(_this.email)) {
+					_this.$vux.toast.show({
+						width: '50%',
+						type: 'text',
+						position: 'middle',
+						text: '邮箱格式不正确'
+					})
+					return false
+				}
+
+				if(!_this.mainApp.isphone(_this.contactnum)) {
+					_this.$vux.toast.show({
+						width: '50%',
+						type: 'text',
+						position: 'middle',
+						text: '联系人号码格式不正确'
+					})
+					return false
+				}
+
 				var data = {
 					gender: _this.gender,
-					birthday: _this.mainApp.frDateTimehp.getFormatDateTamp(_this.birthday),
+					birthday: _this.mainApp.frDateTimehp.getDateTimesTamp(_this.birthday),
 					education: _this.xl,
 					wechat: _this.wxnum,
 					qq: _this.qq,
@@ -240,28 +282,6 @@
 						_this.getUserInfo()
 					}
 				})
-			},
-			watch: {
-				gender() {
-					if(this.sex == 0) {
-						return this.sex = '男'
-					} else {
-						return this.sex = '女'
-					}
-				},
-				xl() {
-					if(this.xl == 0) {
-						return this.education = '小学'
-					} else if(this.xl == 1) {
-						return this.education = '初中'
-					} else if(this.xl == 2) {
-						return this.education = '高中'
-					} else if(this.xl == 3) {
-						return this.education = '大专'
-					} else if(this.xl == 4) {
-						return this.education = '本科'
-					}
-				}
 			}
 		},
 		components: {

@@ -44,6 +44,8 @@ import logs from '@/views/member/earnings/logs'
 import profit from '@/views/member/earnings/profit'
 import strategy from '@/views/member/score/strategy'
 import scoreDetail from '@/views/member/score/detail'
+import agreement from '@/views/user/agreement'
+import article from '@/views/member/article/index'
 
 const memberModule = [{
 		path: '/index',
@@ -142,7 +144,7 @@ const memberModule = [{
 		component: member,
 		meta: {
 			navShow: true,
-			navIndex: 3,
+			navIndex: 4,
 			title: '个人中心'
 		}
 	},
@@ -169,7 +171,7 @@ const memberModule = [{
 		meta: {
 			title: '修改地址'
 		}
-	},{
+	}, {
 		path: '/member/setting/nickname',
 		name: 'nickname',
 		component: nickname,
@@ -358,7 +360,7 @@ const memberModule = [{
 		meta: {
 			title: '奖励'
 		}
-	},{
+	}, {
 		path: '/member/earnings/rule',
 		name: 'rule',
 		component: rule,
@@ -395,6 +397,21 @@ const memberModule = [{
 		component: scoreDetail,
 		meta: {
 			title: '积分详情'
+		}
+	},
+	{
+		path: '/user/agreement',
+		name: 'agreement',
+		component: agreement,
+		meta: {
+			title: 'CGC平台注册协议'
+		}
+	}, {
+		path: '/member/article/index',
+		name: 'article',
+		component: article,
+		meta: {
+			title: '快讯列表'
 		}
 	}
 ]

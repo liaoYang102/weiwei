@@ -89,7 +89,7 @@
 			</section>
 			<section>
 				<group gutter="0">
-					<cell v-for="(item,index) in infoList" class="info-item" :title="item.text" is-link :link="item.url">
+					<cell v-for="(item,index) in infoList" :key="index" class="info-item" :title="item.text" is-link :link="item.url">
 						<img slot="icon" :src="item.img">
 					</cell>
 				</group>

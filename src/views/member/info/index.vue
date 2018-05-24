@@ -16,7 +16,7 @@
 				<cell class="list-item user-address" title="地址管理" is-link link="/member/address/index"></cell>
 			</group>
 			<group>
-				<cell class="list-item" title="实名认证" :value="userInfo.realName" is-link link='/member/setting/real'></cell>
+				<cell class="list-item" title="实名认证" :value="auth" is-link link='/member/setting/real'></cell>
 				<cell class="list-item" title="个人档案" is-link link='/member/info/data' primary="content">完整度{{data5}}%</cell>
 			</group>
 		</div>
@@ -35,12 +35,14 @@
 				varmax: 1, //图片最大张数
 				images: '', //图片数组
 				data5: 88,
-				userInfo: {}
+				userInfo: {},
+				auth:''
 			}
 		},
 		created() {
 
 			this.getUserInfo()
+			this.getUserAuthInfo()
 
 		},
 		mounted() {
@@ -58,7 +60,22 @@
 					console.log(res)
 					if(res.data.status == "00000000") {
 						_this.userInfo = res.data.data
-						_this.images = res.data.data.avatar.original
+						if(res.data.data.avatar.original) {
+							_this.images = res.data.data.avatar.original
+						}
+					}
+				})
+			},
+			getUserAuthInfo() {
+				var _this = this
+				_this.$http.get(_this.url.user.getUserAuthInfo, {
+					params: {
+						userId: sessionStorage.getItem('userId')
+					}
+				}).then((res) => {
+					console.log(res)
+					if(res.data.status == "00000000") {
+						_this.auth = res.data.data.auth
 					}
 				})
 			},
