@@ -51,7 +51,7 @@
 
 		<div class="content">
 			<ul class="ul-content">
-				<group>
+				<group gutter="0">
 				    <cell-form-preview :list="list"></cell-form-preview>
 				    <cell-form-preview :list="list2"></cell-form-preview>
 			    </group>
@@ -430,9 +430,6 @@ li{
 	margin-bottom: 0.2rem;
 }
 .ul-content .weui-cells{
-	margin-top: 0;
-}
-.vux-no-group-title{
 	margin-top: 0;
 }
 .ul-content .weui-form-preview__bd{

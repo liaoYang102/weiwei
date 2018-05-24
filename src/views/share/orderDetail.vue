@@ -30,7 +30,7 @@
 
 		<div class="content">
 			<ul class="ul-content">
-				<group>
+				<group gutter="0">
 				    <cell-form-preview :list="list"></cell-form-preview>
 				    <cell-form-preview :list="list2"></cell-form-preview>
 			    </group>
@@ -192,7 +192,6 @@
 					.turn-right{
 						width: 0.24rem;
 						height: 0.24rem;
-						/*vertical-align: middle;*/
 					}
 				}
 			}
@@ -353,9 +352,6 @@
 	margin-bottom: 0.2rem;
 }
 .ul-content .weui-cells{
-	margin-top: 0 !important;
-}
-.vux-no-group-title{
 	margin-top: 0 !important;
 }
 .ul-content .weui-form-preview__bd{
