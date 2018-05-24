@@ -44,7 +44,7 @@ import logs from '@/views/member/earnings/logs'
 import profit from '@/views/member/earnings/profit'
 import strategy from '@/views/member/score/strategy'
 import scoreDetail from '@/views/member/score/detail'
-import agreement from '@/views/user/agreement'
+import agreement from '@/views/member/setting/agreement'
 import article from '@/views/member/article/index'
 
 const memberModule = [{
@@ -85,7 +85,8 @@ const memberModule = [{
 		name: 'reg',
 		component: reg,
 		meta: {
-			title: '用户登录'
+			title: '用户登录',
+			keepAlive: true
 		}
 	},
 	{
@@ -400,13 +401,14 @@ const memberModule = [{
 		}
 	},
 	{
-		path: '/user/agreement',
+		path: '/member/setting/agreement',
 		name: 'agreement',
 		component: agreement,
 		meta: {
 			title: 'CGC平台注册协议'
 		}
-	}, {
+	},
+	{
 		path: '/member/article/index',
 		name: 'article',
 		component: article,

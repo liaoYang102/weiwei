@@ -105,6 +105,7 @@
 		data() {
 			return {
 				title: '个人中心',
+				userInfo:'',
 				infoList: [{
 						img: './static/member/member_1.png',
 						text: '我的优惠券',
@@ -148,7 +149,25 @@
 				yhqTip: '5张快过期'
 			}
 		},
-		created() {},
+		created() {
+			this.getUserInfo()
+		},
+		methods: {
+			//获取用户信息
+			getUserInfo() {
+				var _this = this
+				_this.$http.get(_this.url.user.getBasicInfo, {
+					params: {
+						userId: sessionStorage.getItem('userId')
+					}
+				}).then((res) => {
+					console.log(res)
+					if(res.data.status == "00000000") {
+						_this.userInfo = res.data.data
+					}
+				})
+			},
+		},
 		components: {
 			settingHeader,
 			Badge,

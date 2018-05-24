@@ -3,7 +3,7 @@
 		<settingHeader :title="title"></settingHeader>
 		<div class="h">
 			<div class="top">
-				<p>405.45</p>
+				<p>{{balanceInfo.totalBalance}}</p>
 				<p>累计奖励</p>
 			</div>
 			<div class="screen-box">
@@ -21,7 +21,7 @@
 							<ul>
 								<li v-for="item in list" @click="toDetail">
 									<div>
-										<p>{{typeText}}</p>
+										<p>{{item.typeText}}</p>
 										<p>{{item.date}}</p>
 									</div>
 									<p class="red">+{{item.money}}</p>
@@ -41,8 +41,11 @@
 			<popup v-model="show8" position="top">
 				<div class="position-vertical-demo">
 					<div class="twoClass">
-						<div class="type-item" v-for="(item,index) in twoClass">
-							<span :class="{'twoActive':twoIndex == index}" @click="twoChange(index,item)">{{item}}</span>
+						<div class="type-item" v-for="(item,index) in tyClass" v-if="$route.params.title == '通用积分'">
+							<span :class="{'twoActive':twoIndex == index}" @click="twoChange(index,item.type)">{{item.title}}</span>
+						</div>
+						<div class="type-item" v-for="(item,index) in xyClass" v-if="$route.params.title == '信用积分'">
+							<span :class="{'twoActive':twoIndex == index}" @click="twoChange(index,item.type)">{{item.title}}</span>
 						</div>
 					</div>
 				</div>
@@ -65,83 +68,60 @@
 				showNo: false,
 				show8: false,
 				twoIndex: 0,
-				typeText: '',
-				twoClass: ['充值奖励', '购物奖励', '推荐用户', '任务奖励'],
-				list: [{
-						date: '2018.05.28',
-						money: '130.00'
-					},
-					{
-						date: '2018.05.27',
-						money: '130.00'
-					},
-					{
-						date: '2018.05.26',
-						money: '130.00'
-					},
-					{
-						date: '2018.05.25',
-						money: '130.00'
-					},
-					{
-						date: '2018.05.24',
-						money: '130.00'
-					},
-					{
-						date: '2018.05.23',
-						money: '130.00'
-					},
-					{
-						date: '2018.05.22',
-						money: '130.00'
-					},
-					{
-						date: '2018.05.21',
-						money: '130.00'
-					},
-					{
-						date: '2018.05.20',
-						money: '130.00'
-					},
-					{
-						date: '2018.05.19',
-						money: '130.00'
-					},
-					{
-						date: '2018.05.18',
-						money: '130.00'
-					},
-					{
-						date: '2018.05.17',
-						money: '130.00'
-					},
-					{
-						date: '2018.05.16',
-						money: '130.00'
-					},
-					{
-						date: '2018.05.15',
-						money: '130.00'
-					},
-					{
-						date: '2018.05.14',
-						money: '130.00'
-					}
-				]
+				tyClass: [{title:'累计充值',type:3}, {title:'购物奖励',type:4}, {title:'中奖奖励',type:6}, {title:'分红奖励',type:5},{title:'任务奖励',type:7}],
+				xyClass: [{title:'累计充值',type:3}, {title:'中奖奖励',type:6},  {title:'消费奖励',type:2},{title:'推荐用户',type:5}],
+				list: [],
+				curPage:1,
+				pageSize:20,
+				balanceInfo:{}
 			}
 		},
 		created() {
-			this.twoIndex = this.$route.params.num
-			this.typeText = this.$route.params.title
+			console.log(this.$route.params)
+			//改变微信端title
 			if(this.$route.params.title) {
 				this.title = this.$route.params.title
 				document.title = this.$route.params.title
+			}
+			
+			//设置筛选对应选中状态
+			if(this.$route.params.title == '通用积分'){
+				this.getMyBalanceList(this.$route.params.type)
+				if(this.$route.params.type == 3){
+					this.twoIndex = 0
+				}else if(this.$route.params.type == 4){
+					this.twoIndex = 1
+				}else if(this.$route.params.type == 6){
+					this.twoIndex = 2
+				}else if(this.$route.params.type == 5){
+					this.twoIndex = 3
+				}else if(this.$route.params.type == 7){
+					this.twoIndex = 4
+				}
+			}else{
+				
 			}
 		},
 		mounted() {
 			this.InitScroll()
 		},
 		methods: {
+			getMyBalanceList(type){
+				var _this = this
+				_this.$http.get(_this.url.user.getMyBalanceList, {
+					params: {
+						userId: sessionStorage.getItem('userId'),
+						type:type,
+						curPage:_this.curPage,
+						pageSize:_this.pageSize
+					}
+				}).then((res) => {
+					if(res.data.status == "00000000") {
+						_this.balanceInfo = res.data.data
+						_this.list = res.data.data.list
+					}
+				})
+			},
 			toDetail(){
 				this.$router.push({
 					name: 'scoreDetail',
@@ -150,10 +130,12 @@
 					}
 				})
 			},
-			twoChange(index, item) {
-				this.twoIndex = index
-				this.typeText = item
-				this.show8 = false
+			twoChange(index, type) {
+				var _this = this
+				_this.twoIndex = index
+				_this.show8 = false
+				
+				_this.getMyBalanceList(type)
 			},
 			InitScroll() {
 				this.$nextTick(() => {

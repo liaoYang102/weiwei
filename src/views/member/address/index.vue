@@ -24,7 +24,9 @@
 				</div>
 			</div>
 		</div>
-		<noData v-if="list.length == 0" :status="2" stateText="暂无数据"></noData>
+		<div style="height: 100vh;background-color: white;">
+			<noData v-if="list.length == 0" :status="2" stateText="暂无数据"></noData>
+		</div>
 		<div class="add-btn-box">
 			<router-link to="/member/address/edit">
 				<div class="add-btn">添加地址</div>
@@ -86,7 +88,7 @@
 					addressId: addressId
 				}
 				_this.$http.put(_this.url.user.setDefaultShippingAddress, param).then(resp => {
-					if (resp.data.status === '00000000') {
+					if(resp.data.status === '00000000') {
 						_this.list.forEach(function(index, value, array) {
 							_this.list[value].isDefault = false
 							_this.list[i].isDefault = true
@@ -96,14 +98,16 @@
 					}
 				})
 			},
-			getShippingAddress () { // 获取收货地址列表
+			getShippingAddress() { // 获取收货地址列表
 				let _this = this
 				let param = {
 					'userId': sessionStorage['userId'],
 					'pageSize': 20,
 					'curPage': 1
 				}
-				_this.$http.get(_this.url.user.getShippingAddress, {params:param}).then(resp => {
+				_this.$http.get(_this.url.user.getShippingAddress, {
+					params: param
+				}).then(resp => {
 					_this.list = resp.data.data.list
 				})
 			}

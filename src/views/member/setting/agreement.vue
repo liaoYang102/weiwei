@@ -53,7 +53,7 @@
 </template>
 
 <script>
-	import scoreheader from '../../components/setting_header'
+	import scoreheader from '../../../components/setting_header'
 	export default {
 		components: {
 			scoreheader
@@ -62,6 +62,14 @@
 			return {
 				title: 'CGC平台注册协议',
 			}
+		},
+		beforeRouteLeave(to, from, next) {
+			if(to.path == '/user/reg') {
+				to.meta.keepAlive = true
+			} else {
+				to.meta.keepAlive = false
+			}
+			next()
 		},
 		methods: {
 

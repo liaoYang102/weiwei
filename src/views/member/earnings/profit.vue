@@ -214,6 +214,7 @@
 				align-items: center;
 				justify-content: space-between;
 				position: relative;
+				font-size: 0.28rem;
 			}
 			ul>li:before {
 				content: " ";

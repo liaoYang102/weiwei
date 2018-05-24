@@ -9,20 +9,21 @@
 				<!--<cell class="input-item" title="国家" value="中国" is-link value-align="right"></cell>-->
 				<x-input class="input-item" ref="phone" v-model="mobile" placeholder="用户名" type="number" :max="11" :required="true" @on-change="nameChange"></x-input>
 				<x-input class="input-item" ref="password" v-model="password" placeholder="登录密码" type="password" :required="true" @on-change="passwordChange"></x-input>
-				<x-input v-if="!isReg" class="input-item bounceInUp animated" type="number" ref="code" v-model="code" placeholder="验证码" @on-change="codeChange">
+				<x-input v-if="!isReg" class="input-item fadeInDown animated" type="number" ref="code" v-model="code" placeholder="验证码" @on-change="codeChange">
 					<x-button class="codeBtn" slot="right" type="primary" mini @click.native="sendCode" :disabled="sendFlag">{{codeText}}</x-button>
 				</x-input>
 			</group>
 			<div class="tip">
 				<div class="agreement" v-if="!isReg">
-					<check-icon :value.sync="isAgree"></check-icon><span class="sg">我已阅读并同意</span><span @click="$router.push({path:'/user/agreement'})">《CGC平台注册协议》</span>
+					<check-icon :value.sync="isAgree"></check-icon><span class="sg">我已阅读并同意</span>
+					<router-link to="/member/setting/agreement">《CGC平台注册协议》</router-link>
 				</div>
 				<x-button class="add-btn" @click.native="submit" :show-loading="showLoading" v-if="isReg">立即登录</x-button>
 				<x-button class="add-btn" @click.native="reg" :show-loading="showLoading" v-else>立即注册</x-button>
 			</div>
 			<div class="login-re" v-if="isReg">
-				<span @click="resetPass">忘记密码?</span>
-				<div @click="resetPass">短信验证登录</div>
+				<router-link to="/user/changeLoginPassword"><span>忘记密码?</span></router-link>
+				<router-link to=""><span>短信验证登录</span></router-link>
 			</div>
 			<div class="login-re" v-else>
 				<span @click="isReg = !isReg">返回登录</span>
@@ -43,6 +44,7 @@
 	import { XInput, Group, XButton, Cell, Loading, AlertModule, Confirm, CheckIcon } from 'vux'
 	import settingHeader from '../../components/setting_header'
 	export default {
+		name:'reg',
 		data() {
 			return {
 				title: '用户登录', //头部标题
@@ -62,18 +64,18 @@
 			}
 		},
 		beforeCreate() {
-//			if(sessionStorage.getItem('userToken')) {
-//				this.$router.go(-1)
-//			}
+			//			if(sessionStorage.getItem('userToken')) {
+			//				this.$router.go(-1)
+			//			}
 		},
 		mounted() {
-			this.$refs.phone.focus()
+			//			this.$refs.phone.focus()
 		},
 		methods: {
 			submit() {
 				var _this = this
 				_this.showLoading = true
-				if(_this.mainApp.isphone(_this.mobile) && _this.password.length>0) {
+				if(_this.mainApp.isphone(_this.mobile) && _this.password.length > 0) {
 					//获取云中心登录token
 					_this.$http.post(_this.url.user.login, {
 						audience: 'platform',
@@ -102,7 +104,7 @@
 				_this.$http.post(this.url.user.userRegister, {
 					mobile: _this.mobile,
 					password: _this.password,
-					smsVerificationCode: _this.code,
+					smsVerificationCode: 1233,
 					platformId: _this.url.platformId
 				}).then(function(res) {
 					if(res.data.status == "00000000") {
@@ -250,12 +252,6 @@
 				setTimeout(function() {
 					_this.reduce()
 				}, 1000)
-			},
-			//忘记密码跳转
-			resetPass() {
-				this.$router.push({
-					path: '/user/changeLoginPassword'
-				});
 			}
 		},
 		components: {
@@ -277,6 +273,7 @@
 		padding: 0 0.5rem;
 		box-sizing: border-box;
 		overflow: hidden;
+		user-select: none;
 		.login-box {
 			width: 100%;
 			height: 3.5rem;
@@ -301,6 +298,11 @@
 			.codeBtn {
 				background-color: white;
 				color: #256fff;
+				padding-right: 0;
+			}
+			.codeBtn:active {
+				color: #256FFF;
+				background-color: transparent!important;
 			}
 			.weui-btn:after {
 				border: 1px solid transparent!important;
@@ -338,12 +340,13 @@
 		.add-btn {
 			height: 0.88rem;
 			margin-top: 0.55rem;
-			ont-family: PingFangSC-Regular;
+			font-family: PingFangSC-Regular;
 			font-size: 0.28rem;
 			color: #FFFFFF!important;
 			letter-spacing: 0;
 			background-color: #336FFF!important;
-			border-radius: 0px!important;
+			/*border-radius: 0px!important;*/
+			border: none!important;
 		}
 		.login-re {
 			padding: 10px 0px;
@@ -354,10 +357,7 @@
 			}
 		}
 		.Thirdparty {
-			position: absolute;
-			bottom: 0;
-			left: 0;
-			width: 100%;
+			margin-top: 1.7rem;
 			padding: 0 0.5rem;
 			box-sizing: border-box;
 			div {
