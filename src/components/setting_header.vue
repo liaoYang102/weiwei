@@ -1,7 +1,6 @@
 <template>
 	<div v-if='show' style="height:46px;" class="settingHeader">
 		<x-header :left-options="{backText: '',preventGoBack: true}" style="background:#fff;" class="header" @on-click-back="changeBack">{{ title }}</x-header>
-
 	</div>
 </template>
 
@@ -29,6 +28,7 @@
 		methods: {
 			changeBack(){
 				this.$router.go(-1)
+				this.$store.state.page.back = true
 			}
 		}
 	}

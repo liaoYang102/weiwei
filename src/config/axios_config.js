@@ -59,16 +59,30 @@ axios.interceptors.response.use(res => { // 响应成功关闭loading
 	})
 	if(res.data.status != '00000000' && res.data.status != 1) {
 		if(res.data.status == '401') {
-			Vue.$dialog.show({
-				type: 'warning',
-				headMessage: '提示',
-				message: '暂未登录,是否立即登录?',
-				buttons: ['确定', '取消'],
-				canel() {
-					Vue.$dialog.hide()
-				},
-				confirm() {
-					Vue.$dialog.hide()
+			//			Vue.$dialog.show({
+			//				type: 'warning',
+			//				headMessage: '提示',
+			//				message: '暂未登录,请登录',
+			//				buttons: ['确定'],
+			//				delay: 2000,
+			//				ishide() {
+			//					router.push({
+			//						path: '/user/reg'
+			//					})
+			//				},
+			//				confirm() {
+			//					Vue.$dialog.hide()
+			//					router.push({
+			//						path: '/user/reg'
+			//					})
+			//				}
+			//			})
+			Vue.$vux.toast.show({
+				text: '请先登录',
+				type: 'text',
+				position: 'middle',
+				width: '50%',
+				onHide() {
 					router.push({
 						path: '/user/reg'
 					})

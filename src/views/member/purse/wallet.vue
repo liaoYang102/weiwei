@@ -28,25 +28,25 @@
 				</div>-->
 			</div>
 			<div class="bottom">
-				<div class="one-item" @click="toReward('通用积分',3)">
+				<div class="one-item" @click="toCurrencyReward('通用积分',3)">
 					<p>累计充值</p>
 					<p>{{fundInfo.recharge}}</p>
 				</div>
-				<div class="one-item" @click="toReward('通用积分',4)">
+				<div class="one-item" @click="toCurrencyReward('通用积分',4)">
 					<p>购物奖励</p>
 					<p>{{fundInfo.cashback}}</p>
 				</div>
-				<div class="one-item" @click="toReward('通用积分',6)">
+				<div class="one-item" @click="toCurrencyReward('通用积分',6)">
 					<p>中奖奖励</p>
 					<p>{{fundInfo.lottery}}</p>
 				</div>
-				<div class="one-item" @click="toReward('通用积分',5)">
+				<div class="one-item" @click="toCurrencyReward('通用积分',5)">
 					<p>分红奖励</p>
 					<p>{{fundInfo.commission}}</p>
 				</div>
-				<div class="one-item" @click="toReward('通用积分',7)">
+				<div class="one-item" @click="toCurrencyReward('通用积分',7)">
 					<p>任务奖励</p>
-					<p>{{fundInfo.task_balance}}</p>
+					<p>{{fundInfo.taskBalance}}</p>
 				</div>
 				<div class="one-item" @click="$router.push({path:'/member/purse/recharge'})">
 					<p style="color:#336FFF">积分充值</p>
@@ -136,20 +136,15 @@
 					isshowFund: _this.isshowFund == 0 ? 1 : 0
 				}).then((res) => {
 					if(res.data.status == "00000000") {
-						_this.$vux.toast.show({
-							width: '50%',
-							type: 'text',
-							position: 'middle',
-							text: '修改成功'
-						})
 						_this.getFundInfo()
 					}
 				})
 			},
-			toReward(title, type) {
+			//跳转通用积分
+			toCurrencyReward(title, type) {
 				this.$router.push({
-					name: 'reward',
-					params: {
+					name: 'currencyreward',
+					query: {
 						title: title,
 						type: type
 					}

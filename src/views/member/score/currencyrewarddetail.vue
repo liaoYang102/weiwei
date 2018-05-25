@@ -71,11 +71,11 @@
 			}
 		},
 		created() {
-			if(this.$route.params.title) {
-				document.title = this.$route.params.title
-			}
+			console.log(this.$route.query)
 		},
-		mounted() {},
+		mounted() {
+			
+		},
 		methods: {
 
 		},

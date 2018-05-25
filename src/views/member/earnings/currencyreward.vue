@@ -19,12 +19,12 @@
 					<div v-if="list.length >0">
 						<div class="list-box">
 							<ul>
-								<li v-for="item in list" @click="toDetail">
+								<li v-for="item in list" @click="toDetail(item.balanceId)">
 									<div>
-										<p>{{item.typeText}}</p>
-										<p>{{item.date}}</p>
+										<p>{{item.remark}}</p>
+										<p>{{item.createTime}}</p>
 									</div>
-									<p class="red">+{{item.money}}</p>
+									<p class="red">{{item.directType == 1?'+':'-'}}{{item.balance}}</p>
 								</li>
 							</ul>
 						</div>
@@ -41,10 +41,10 @@
 			<popup v-model="show8" position="top">
 				<div class="position-vertical-demo">
 					<div class="twoClass">
-						<div class="type-item" v-for="(item,index) in tyClass" v-if="$route.params.title == '通用积分'">
+						<div class="type-item" v-for="(item,index) in tyClass" v-if="$route.query.title == '通用积分'">
 							<span :class="{'twoActive':twoIndex == index}" @click="twoChange(index,item.type)">{{item.title}}</span>
 						</div>
-						<div class="type-item" v-for="(item,index) in xyClass" v-if="$route.params.title == '信用积分'">
+						<div class="type-item" v-for="(item,index) in xyClass" v-if="$route.query.title == '信用积分'">
 							<span :class="{'twoActive':twoIndex == index}" @click="twoChange(index,item.type)">{{item.title}}</span>
 						</div>
 					</div>
@@ -68,74 +68,141 @@
 				showNo: false,
 				show8: false,
 				twoIndex: 0,
-				tyClass: [{title:'累计充值',type:3}, {title:'购物奖励',type:4}, {title:'中奖奖励',type:6}, {title:'分红奖励',type:5},{title:'任务奖励',type:7}],
-				xyClass: [{title:'累计充值',type:3}, {title:'中奖奖励',type:6},  {title:'消费奖励',type:2},{title:'推荐用户',type:5}],
+				tyClass: [{
+					title: '全部',
+					type: 1
+				}, {
+					title: '消费',
+					type: 2
+				}, {
+					title: '累计充值',
+					type: 3
+				}, {
+					title: '购物奖励',
+					type: 4
+				}, {
+					title: '中奖奖励',
+					type: 6
+				}, {
+					title: '分红奖励',
+					type: 5
+				}, {
+					title: '任务奖励',
+					type: 7
+				}],
+				xyClass: [{
+					title: '全部',
+					type: 1
+				}, {
+					title: '消费奖励',
+					type: 2
+				}, {
+					title: '充值奖励',
+					type: 3
+				}, {
+					title: '中奖奖励',
+					type: 6
+				}, {
+					title: '推荐用户',
+					type: 5
+				}],
 				list: [],
-				curPage:1,
-				pageSize:20,
-				balanceInfo:{}
+				curPage: 1,
+				pageSize: 20,
+				balanceInfo: {},
+				type: '',
+				isload: false
 			}
 		},
 		created() {
-			console.log(this.$route.params)
+			console.log(this.$route.query)
 			//改变微信端title
-			if(this.$route.params.title) {
-				this.title = this.$route.params.title
-				document.title = this.$route.params.title
+			if(this.$route.query.title) {
+				this.title = this.$route.query.title
+				document.title = this.$route.query.title
 			}
-			
+
 			//设置筛选对应选中状态
-			if(this.$route.params.title == '通用积分'){
-				this.getMyBalanceList(this.$route.params.type)
-				if(this.$route.params.type == 3){
-					this.twoIndex = 0
-				}else if(this.$route.params.type == 4){
-					this.twoIndex = 1
-				}else if(this.$route.params.type == 6){
+			if(this.$route.query.title == '通用积分') {
+				this.type = this.$route.query.type
+				this.getMyBalanceList()
+				if(this.$route.query.type == 3) {
 					this.twoIndex = 2
-				}else if(this.$route.params.type == 5){
+				} else if(this.$route.query.type == 4) {
 					this.twoIndex = 3
-				}else if(this.$route.params.type == 7){
+				} else if(this.$route.query.type == 6) {
+					this.twoIndex = 4
+				} else if(this.$route.query.type == 5) {
+					this.twoIndex = 5
+				} else if(this.$route.query.type == 7) {
+					this.twoIndex = 6
+				}
+			} else if(this.$route.query.title == '信用积分') {
+				this.type = this.$route.query.type
+				this.getMyBalanceList()
+				if(this.$route.query.type == 3) {
+					this.twoIndex = 2
+				} else if(this.$route.query.type == 2) {
+					this.twoIndex = 1
+				} else if(this.$route.query.type == 6) {
+					this.twoIndex = 3
+				} else if(this.$route.query.type == 5) {
 					this.twoIndex = 4
 				}
-			}else{
-				
 			}
 		},
 		mounted() {
 			this.InitScroll()
 		},
 		methods: {
-			getMyBalanceList(type){
+			getMyBalanceList(type) {
 				var _this = this
 				_this.$http.get(_this.url.user.getMyBalanceList, {
 					params: {
 						userId: sessionStorage.getItem('userId'),
-						type:type,
-						curPage:_this.curPage,
-						pageSize:_this.pageSize
+						type: _this.type,
+						curPage: _this.curPage,
+						pageSize: _this.pageSize
 					}
 				}).then((res) => {
 					if(res.data.status == "00000000") {
 						_this.balanceInfo = res.data.data
-						_this.list = res.data.data.list
+						if(res.data.data.list.length > 0) {
+							_this.list = _this.list.concat(res.data.data.list)
+							if(_this.isload) {
+								_this.show = true
+								_this.showNo = false
+							}
+						} else {
+							if(_this.isload) {
+								_this.show = false
+								_this.showNo = true
+							}
+						}
 					}
 				})
 			},
-			toDetail(){
+			toDetail(id) {
 				this.$router.push({
-					name: 'scoreDetail',
-					params:{
-						title:'通用积分'
+					name: 'currencyrewarddetail',
+					query: {
+						id: id
 					}
 				})
 			},
 			twoChange(index, type) {
 				var _this = this
 				_this.twoIndex = index
+				_this.type = type
+				_this.$router.push({
+					query: _this.merge(_this.$route.query, {
+						'type': type
+					})
+				})
 				_this.show8 = false
-				
-				_this.getMyBalanceList(type)
+				_this.list = []
+
+				_this.getMyBalanceList()
 			},
 			InitScroll() {
 				this.$nextTick(() => {
@@ -162,23 +229,9 @@
 			},
 			LoadData() {
 				var _this = this
-				if(_this.list.length <= 25) {
-					_this.show = true
-					_this.showNo = false
-					_this.list = _this.list.concat({
-						date: '2018.05.15',
-						money: '130.00'
-					}, {
-						date: '2018.05.14',
-						money: '130.00'
-					})
-					setTimeout(function() {
-						_this.show = false
-					}, 1500)
-				} else {
-					_this.show = false
-					_this.showNo = true
-				}
+				_this.curPage++
+					_this.getMyBalanceList()
+				_this.isload = true
 			}
 		},
 		components: {

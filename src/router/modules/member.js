@@ -38,12 +38,12 @@ import earningsindex from '@/views/member/earnings/index'
 import earningscurrency from '@/views/member/earnings/currency'
 import earningscredit from '@/views/member/earnings/credit'
 import record from '@/views/member/earnings/record'
-import reward from '@/views/member/earnings/reward'
+import currencyreward from '@/views/member/earnings/currencyreward'
 import rule from '@/views/member/earnings/rule'
 import logs from '@/views/member/earnings/logs'
 import profit from '@/views/member/earnings/profit'
 import strategy from '@/views/member/score/strategy'
-import scoreDetail from '@/views/member/score/detail'
+import currencyrewarddetail from '@/views/member/score/currencyrewarddetail'
 import agreement from '@/views/member/setting/agreement'
 import article from '@/views/member/article/index'
 
@@ -355,11 +355,11 @@ const memberModule = [{
 			title: '累计记录'
 		}
 	}, {
-		path: '/member/earnings/reward',
-		name: 'reward',
-		component: reward,
+		path: '/member/earnings/currencyreward',
+		name: 'currencyreward',
+		component: currencyreward,
 		meta: {
-			title: '奖励'
+			title: '通用积分'
 		}
 	}, {
 		path: '/member/earnings/rule',
@@ -393,11 +393,11 @@ const memberModule = [{
 		}
 	},
 	{
-		path: '/member/score/detail',
-		name: 'scoreDetail',
-		component: scoreDetail,
+		path: '/member/score/currencyrewarddetail',
+		name: 'currencyrewarddetail',
+		component: currencyrewarddetail,
 		meta: {
-			title: '积分详情'
+			title: '通用积分详情'
 		}
 	},
 	{

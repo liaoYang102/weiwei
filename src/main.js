@@ -15,6 +15,8 @@ import FastClick from 'fastclick'
 import VueVideoPlayer from 'vue-video-player'
 import 'video.js/dist/video-js.css'
 import VueLazyLoad from 'vue-lazyload'
+import merge from 'webpack-merge'
+Vue.prototype.merge = merge
 
 import mainApp from './global/global'
 Vue.prototype.mainApp = mainApp
@@ -128,22 +130,32 @@ methods.forEach(key => {
 	}
 })
 
-router.beforeEach(function(to, from, next) {
+ window.onpopstate = function(e) {  
+    if((Date.now() - endTime) < 377){
+    	store.state.page.back = false
+    }else{
+    	store.state.page.back = true
+    }
+ }
 
+router.beforeEach(function(to, from, next) {
+	
 	const toIndex = history.getItem(to.path)
 	const fromIndex = history.getItem(from.path)
 
 	if(toIndex) {
 		if(!fromIndex || parseInt(toIndex, 10) > parseInt(fromIndex, 10) || (toIndex === '0' && fromIndex === '0')) {
 			// 判断是否是ios左滑返回
-			if(!isPush && (Date.now() - endTime) < 377) {
-				store.commit('UPDATE_DIRECTION', {
-					direction: ''
-				})
-			} else if(!isPush && (Date.now() - endTime) > 377) {
-				store.commit('UPDATE_DIRECTION', {
-					direction: ''
-				})
+			if(!isPush && (Date.now() - endTime) < 377 || !isPush && (Date.now() - endTime) > 377) {
+				if(store.state.page.back) {
+					store.commit('UPDATE_DIRECTION', {
+						direction: 'reverse'
+					})
+				} else {
+					store.commit('UPDATE_DIRECTION', {
+						direction: ''
+					})
+				}
 			} else {
 				store.commit('UPDATE_DIRECTION', {
 					direction: 'forward'
@@ -151,14 +163,16 @@ router.beforeEach(function(to, from, next) {
 			}
 		} else {
 			// 判断是否是ios左滑返回
-			if(!isPush && (Date.now() - endTime) < 377) {
-				store.commit('UPDATE_DIRECTION', {
-					direction: ''
-				})
-			} else if(!isPush && (Date.now() - endTime) > 377) {
-				store.commit('UPDATE_DIRECTION', {
-					direction: ''
-				})
+			if(!isPush && (Date.now() - endTime) < 377 || !isPush && (Date.now() - endTime) > 377) {
+				if(store.state.page.back) {
+					store.commit('UPDATE_DIRECTION', {
+						direction: 'reverse'
+					})
+				} else {
+					store.commit('UPDATE_DIRECTION', {
+						direction: ''
+					})
+				}
 			} else {
 				store.commit('UPDATE_DIRECTION', {
 					direction: 'reverse'
@@ -169,14 +183,16 @@ router.beforeEach(function(to, from, next) {
 		++historyCount
 		history.setItem('count', historyCount)
 		to.path !== '/' && history.setItem(to.path, historyCount)
-		if(!isPush && (Date.now() - endTime) < 377) {
-			store.commit('UPDATE_DIRECTION', {
-				direction: ''
-			})
-		} else if(!isPush && (Date.now() - endTime) > 377) {
-			store.commit('UPDATE_DIRECTION', {
-				direction: ''
-			})
+		if(!isPush && (Date.now() - endTime) < 377 || !isPush && (Date.now() - endTime) > 377) {
+			if(store.state.page.back) {
+				store.commit('UPDATE_DIRECTION', {
+					direction: 'reverse'
+				})
+			} else {
+				store.commit('UPDATE_DIRECTION', {
+					direction: ''
+				})
+			}
 		} else {
 			store.commit('UPDATE_DIRECTION', {
 				direction: 'forward'
@@ -188,12 +204,17 @@ router.beforeEach(function(to, from, next) {
 		let url = to.path.split('http')[1]
 		window.location.href = `http${url}`
 	} else {
-		next()
+		next(function() {
+			store.state.page.back = false
+		})
 	}
 })
 
 router.afterEach(function(to) {
 	isPush = false
+	store.commit('UPDATE_DACK', {
+		back: false
+	})
 })
 //const whiteList = ['/user/login', '/index', '/user/reg','/','/member/index'];// 不重定向白名单
 // router.beforeEach((to, from, next) => {

@@ -75,7 +75,7 @@
 		},
 		methods: {},
 		watch: {
-			'$route' (to, from) {
+			'$route' (to, from,next) {
 
 				var _this = this
 
@@ -94,8 +94,6 @@
 
 				this.$code.hide()
 				this.$dialog.hide()
-				
-				alert(this.direction)
 			}
 		}
 	}
