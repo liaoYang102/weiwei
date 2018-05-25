@@ -3,7 +3,7 @@
 		<settingHeader :title="title"></settingHeader>
 		<div class="alerts-tob">
 			<swiper :options="swiperOption" class="swiper">
-		        <swiper-slide v-for="(item,index) in tabData">
+		        <swiper-slide v-for="(item, index) in tabData" :key="index">
 		        	<div class="tab-item" :class="{'tab-item-active':actTab == index}" @click="actTab = index">
 	                    {{item}}
 	                </div>
