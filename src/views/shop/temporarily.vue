@@ -31,7 +31,6 @@
 		bottom:0;
 		width: 100%;
 		text-align: center;
-		height: 100%;
 		background-color: #fff;
 		padding-top: 1.95rem;
 		img{

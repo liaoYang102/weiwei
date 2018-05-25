@@ -299,8 +299,8 @@
 		    		var a = this.arr[0];
 		    		var b = this.arr[1];
 		    		if(a!='undefined'&&b!='undefined'){
-			    		console.log(this.proList[a].children[b].childrenContent);
-			    		console.log(this.proList);
+			    		// console.log(this.proList[a].children[b].childrenContent);
+			    		// console.log(this.proList);
 			    		// this.proList[a].children[b].childrenSize = this.proList[a].children[b].childrenContent;
 			    		this.$nextTick();
 		    		}

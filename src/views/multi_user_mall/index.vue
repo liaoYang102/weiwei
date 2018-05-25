@@ -55,7 +55,7 @@
 				</tab-item>
 			</tab>
 		</div>
-		<div style="height: 67.1%"  v-if="pyy!=2">
+		<div style="height: 63.1%"  v-if="pyy!=2">
 			<div class="wrapper" ref="wrapper">
 				<div class="content">
 					<div class="index" v-if='pyy==1'>
@@ -82,7 +82,7 @@
 		</div>
 		
 
-		<div style="height: 65.5%" v-else><shop style="height: 100%"></shop></div>
+		<div style="height: 63.1%" v-else><shop style="height: 100%"></shop></div>
 	</section>
 </template>
 
