@@ -71,19 +71,19 @@
 				</div>-->
 			</div>
 			<div class="bottom">
-				<div class="one-item" @click="toReward('信用积分',3)">
+				<div class="one-item" @click="toCreditReward('信用积分',3)">
 					<p>充值奖励</p>
 					<p>{{fundInfo.rechargePoints}}</p>
 				</div>
-				<div class="one-item" @click="toReward('信用积分',6)">
+				<div class="one-item" @click="toCreditReward('信用积分',6)">
 					<p>中奖奖励</p>
 					<p>{{fundInfo.lotteryPoints}}</p>
 				</div>
-				<div class="one-item" @click="toReward('信用积分',2)">
+				<div class="one-item" @click="toCreditReward('信用积分',2)">
 					<p>消费奖励</p>
 					<p>{{fundInfo.cashbackPoints}}</p>
 				</div>
-				<div class="one-item" @click="toReward('信用积分',5)">
+				<div class="one-item" @click="toCreditReward('信用积分',5)">
 					<p>推荐用户</p>
 					<p>{{fundInfo.recommendPoints}}</p>
 				</div>
@@ -144,6 +144,15 @@
 			toCurrencyReward(title, type) {
 				this.$router.push({
 					name: 'currencyreward',
+					query: {
+						title: title,
+						type: type
+					}
+				})
+			},
+			toCreditReward(title, type) {
+				this.$router.push({
+					name: 'creditreward',
 					query: {
 						title: title,
 						type: type

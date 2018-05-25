@@ -1,0 +1,347 @@
+<template>
+	<div class="reward-box">
+		<settingHeader :title="title"></settingHeader>
+		<div class="h">
+			<div class="top">
+				<p>{{balanceInfo.totalBalance}}</p>
+				<p>累计奖励</p>
+			</div>
+			<div class="screen-box">
+				<div>
+					查看全部
+				</div>
+				<div @click="show8 = true">
+					<span>筛选</span><img src="../../../assets/images/index/shaixuan.png" alt="" />
+				</div>
+			</div>
+			<div class="wrapper" ref="wrapper">
+				<div class="content">
+					<div v-if="list.length >0">
+						<div class="list-box">
+							<ul>
+								<li v-for="item in list" @click="toDetail(item.balanceId)">
+									<div>
+										<p>{{item.remark}}</p>
+										<p>{{item.createTime}}</p>
+									</div>
+									<p class="red">{{item.directType == 1?'+':'-'}}{{item.balance}}</p>
+								</li>
+							</ul>
+						</div>
+						<Loading v-if="show"></Loading>
+						<Nomore v-if="showNo"></Nomore>
+					</div>
+					<noData v-if="list.length == 0" :status="2" stateText="暂无数据"></noData>
+				</div>
+			</div>
+		</div>
+
+		<!--筛选菜单栏-->
+		<div v-transfer-dom>
+			<popup v-model="show8" position="top">
+				<div class="position-vertical-demo">
+					<div class="twoClass">
+						<div class="type-item" v-for="(item,index) in xyClass">
+							<span :class="{'twoActive':twoIndex == index}" @click="twoChange(index,item.type)">{{item.title}}</span>
+						</div>
+					</div>
+				</div>
+			</popup>
+		</div>
+	</div>
+</template>
+
+<script>
+	import BScroll from 'better-scroll'
+	import settingHeader from '../../../components/setting_header'
+	import Loading from '../../../components/loading'
+	import Nomore from '../../../components/noMore'
+	import noData from '../../../components/noData'
+	export default {
+		data() {
+			return {
+				title: '信用积分奖励',
+				show: false,
+				showNo: false,
+				show8: false,
+				twoIndex: 0,
+				xyClass: [{
+					title: '全部',
+					type: 1
+				}, {
+					title: '消费奖励',
+					type: 2
+				}, {
+					title: '充值奖励',
+					type: 3
+				}, {
+					title: '中奖奖励',
+					type: 6
+				}, {
+					title: '推荐用户',
+					type: 5
+				}],
+				list: [],
+				curPage: 1,
+				pageSize: 20,
+				balanceInfo: {},
+				type: '',
+				isload: false
+			}
+		},
+		created() {
+			console.log(this.$route.query)
+			//改变微信端title
+			if(this.$route.query.title) {
+				this.title = this.$route.query.title
+				document.title = this.$route.query.title
+			}
+
+			//设置筛选对应选中状态
+			if(this.$route.query.title == '信用积分') {
+				this.type = this.$route.query.type
+				this.getMyBalanceList()
+				if(this.$route.query.type == 3) {
+					this.twoIndex = 2
+				} else if(this.$route.query.type == 2) {
+					this.twoIndex = 1
+				} else if(this.$route.query.type == 6) {
+					this.twoIndex = 3
+				} else if(this.$route.query.type == 5) {
+					this.twoIndex = 4
+				}
+			}
+		},
+		mounted() {
+			this.InitScroll()
+		},
+		methods: {
+			getMyBalanceList(type) {
+				var _this = this
+				_this.$http.get(_this.url.user.getMyBalanceList, {
+					params: {
+						userId: sessionStorage.getItem('userId'),
+						type: _this.type,
+						curPage: _this.curPage,
+						pageSize: _this.pageSize
+					}
+				}).then((res) => {
+					if(res.data.status == "00000000") {
+						_this.balanceInfo = res.data.data
+						if(res.data.data.list.length > 0) {
+							_this.list = _this.list.concat(res.data.data.list)
+							if(_this.isload) {
+								_this.show = true
+								_this.showNo = false
+							}
+						} else {
+							if(_this.isload) {
+								_this.show = false
+								_this.showNo = true
+							}
+						}
+					}
+				})
+			},
+			toDetail(id) {
+				this.$router.push({
+					name: 'creditrewarddetail',
+					query: {
+						id: id
+					}
+				})
+			},
+			twoChange(index, type) {
+				var _this = this
+				_this.twoIndex = index
+				_this.type = type
+				_this.$router.push({
+					query: _this.merge(_this.$route.query, {
+						'type': type
+					})
+				})
+				_this.show8 = false
+				_this.list = []
+
+				_this.getMyBalanceList()
+			},
+			InitScroll() {
+				this.$nextTick(() => {
+					if(!this.scroll) {
+						this.scroll = new BScroll(this.$refs.wrapper, {
+							click: true,
+							scrollY: true,
+							pullUpLoad: {
+								threshold: -50, // 负值是当上拉到超过低部 70px；正值是距离底部距离 时，                    
+							}
+						})
+						this.scroll.on('pullingUp', (pos) => {
+							this.LoadData()
+							this.$nextTick(function() {
+								this.scroll.finishPullUp();
+								this.scroll.refresh();
+							});
+						})
+					} else {
+						this.scroll.refresh()
+					}
+				})
+
+			},
+			LoadData() {
+				var _this = this
+				_this.curPage++
+					_this.getMyBalanceList()
+				_this.isload = true
+			}
+		},
+		components: {
+			settingHeader,
+			Loading,
+			Nomore,
+			noData
+		}
+	}
+</script>
+
+<style lang="less">
+	.position-vertical-demo {
+		background: white;
+		.card-demo-flex {
+			display: flex;
+			align-items: center;
+		}
+		.twoClass {
+			display: flex;
+			flex-wrap: wrap;
+			padding: 0.2rem 0;
+			.type-item {
+				width: 25%;
+				padding: 0.08rem 0.25rem;
+				text-align: center;
+				box-sizing: border-box;
+				span {
+					display: inline-block;
+					width: 100%;
+					height: 0.66rem;
+					line-height: 0.66rem;
+					background: rgba(245, 246, 250, 1);
+					border-radius: 2px;
+					font-size: 0.24rem;
+					color: #1A2642;
+				}
+				.twoActive {
+					background: #336FFF;
+					color: white;
+				}
+			}
+		}
+	}
+	
+	.reward-box {
+		height: 100%;
+		font-family: PingFangSC-Medium;
+		background-color: white;
+		.h {
+			height: 100%;
+			position: relative;
+			.wrapper {
+				position: absolute;
+				top: 2.87rem;
+				bottom: 0;
+				width: 100%;
+				overflow: hidden;
+			}
+			.top {
+				height: 2rem;
+				background: url(../../../../static/member/record-bg.png) no-repeat;
+				background-size: 100% 100%;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				flex-direction: column;
+				color: rgba(255, 255, 255, 1);
+				p:nth-child(1) {
+					font-size: 0.70rem;
+				}
+				p:nth-child(2) {
+					font-size: 0.24rem;
+				}
+			}
+			.screen-box {
+				height: 0.87rem;
+				line-height: 0.87rem;
+				padding: 0 0.30rem;
+				box-sizing: border-box;
+				position: relative;
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+				font-size: 0.28rem;
+				div {
+					img {
+						width: 0.20rem;
+						height: 0.20rem;
+						color: rgba(26, 38, 66, 1);
+						margin-left: 0.13rem;
+					}
+				}
+			}
+			.screen-box:after {
+				content: " ";
+				position: absolute;
+				left: 0;
+				bottom: 0;
+				right: 0;
+				height: 1px;
+				border-top: 1px solid #D9D9D9;
+				color: #D9D9D9;
+				-webkit-transform-origin: 0 0;
+				transform-origin: 0 0;
+				-webkit-transform: scaleY(0.5);
+				transform: scaleY(0.5);
+				left: 0px;
+			}
+			.list-box {
+				padding: 0 0.30rem;
+				ul>li {
+					height: 1.46rem;
+					display: flex;
+					align-items: center;
+					justify-content: space-between;
+					position: relative;
+					div {
+						p:nth-child(1) {
+							font-size: 0.28rem;
+							color: rgba(26, 38, 66, 1);
+							margin-bottom: 0.15rem;
+						}
+						p:nth-child(2) {
+							font-size: 0.24rem;
+							color: rgba(144, 162, 199, 1);
+						}
+					}
+					.red {
+						font-size: 0.32rem;
+						color: rgba(242, 48, 48, 1);
+					}
+				}
+				ul>li:after {
+					content: " ";
+					position: absolute;
+					left: 0;
+					bottom: 0;
+					right: 0;
+					height: 1px;
+					border-top: 1px solid #D9D9D9;
+					color: #D9D9D9;
+					-webkit-transform-origin: 0 0;
+					transform-origin: 0 0;
+					-webkit-transform: scaleY(0.5);
+					transform: scaleY(0.5);
+					left: 0px;
+				}
+			}
+		}
+	}
+</style>

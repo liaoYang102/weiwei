@@ -66,7 +66,7 @@
 	export default {
 		data() {
 			return {
-				title: '通用积分详情',
+				title: '信用积分详情',
 				showDialogStyle: false
 			}
 		},

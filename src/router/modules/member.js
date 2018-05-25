@@ -39,11 +39,13 @@ import earningscurrency from '@/views/member/earnings/currency'
 import earningscredit from '@/views/member/earnings/credit'
 import record from '@/views/member/earnings/record'
 import currencyreward from '@/views/member/earnings/currencyreward'
+import creditreward from '@/views/member/earnings/creditreward'
 import rule from '@/views/member/earnings/rule'
 import logs from '@/views/member/earnings/logs'
 import profit from '@/views/member/earnings/profit'
 import strategy from '@/views/member/score/strategy'
 import currencyrewarddetail from '@/views/member/score/currencyrewarddetail'
+import creditrewarddetail from '@/views/member/score/creditrewarddetail'
 import agreement from '@/views/member/setting/agreement'
 import article from '@/views/member/article/index'
 import vip from '@/views/member/vip/index'
@@ -360,7 +362,14 @@ const memberModule = [{
 		name: 'currencyreward',
 		component: currencyreward,
 		meta: {
-			title: '通用积分'
+			title: '通用积分奖励'
+		}
+	}, {
+		path: '/member/earnings/creditreward',
+		name: 'creditreward',
+		component: creditreward,
+		meta: {
+			title: '信用积分奖励'
 		}
 	}, {
 		path: '/member/earnings/rule',
@@ -399,6 +408,13 @@ const memberModule = [{
 		component: currencyrewarddetail,
 		meta: {
 			title: '通用积分详情'
+		}
+	}, {
+		path: '/member/score/creditrewarddetail',
+		name: 'creditrewarddetail',
+		component: creditrewarddetail,
+		meta: {
+			title: '信用积分详情'
 		}
 	},
 	{
