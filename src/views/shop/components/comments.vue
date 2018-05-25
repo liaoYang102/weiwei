@@ -17,7 +17,7 @@
 
 		            		<div class="imgList">
 		            			<swiper :options="swiperOption" class="box1">
-	            			       	<swiper-slide v-for="(item,index) in list">
+	            			       	<swiper-slide v-for="(item,index) in list" :key="index">
 	            			       		<div class="box1-item">
     			                        	<img  class="previewer-demo-img" v-lazy="item.src" width="100" @click="show(index)">
 	            			       		</div>

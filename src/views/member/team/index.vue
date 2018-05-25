@@ -141,7 +141,7 @@
 					var _this = this
 				_this.$http.get(_this.url.user.getMyTeam, {
 					params: {
-						userId: 2,
+						userId: sessionStorage.getItem('userId'),
 						curPage: _this.curPage,
 						pageSize: _this.pageSize
 					}
@@ -193,7 +193,7 @@
 						width: 100%;
 						.null-box {
 							position: relative;
-							height: 100%;
+							height: 11rem;
 							text-align: center;
 							background: white;
 							img {

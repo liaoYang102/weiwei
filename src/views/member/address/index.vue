@@ -1,112 +1,49 @@
 <template>
 	<div class="address-box">
 		<settingHeader :title="title"></settingHeader>
-		<div class="wrapper" ref="wrapper" :class="{'top46':hShow==false}">
-			<div class="content">
-				<div v-if="list.length>0">
-					<div class="list" v-for="(item,index) in list">
-						<div class="top">
-							<div class="pro">
-								<div>
-									<span>{{item.name}}</span>
-									<span class="label">家</span>
-								</div>
-								<span>{{item.phone}}</span>
-							</div>
-							<p>{{item.address}}</p>
+		<div v-if="list.length>0">
+			<div class="list" v-for="(item,index) in list" :key="index">
+				<div class="top">
+					<div class="pro">
+						<div>
+							<span>{{item.name}}</span>
+							<span class="label" v-if="item.remark">{{item.remark}}</span>
 						</div>
-						<div class="bottom">
-							<div @click="ischange(index)">
-								<check-icon :value.sync="item.isdefault">设置为默认地址</check-icon>
-							</div>
-							<div>
-								<router-link to="/member/address/edit"><span>编辑</span></router-link>
-								<span @click="deleteAddress">删除</span>
-							</div>
-						</div>
+						<span>{{item.mobile}}</span>
 					</div>
-					<Loading v-if="show"></Loading>
-					<Nomore v-if="showNo"></Nomore>
+					<p>{{item.country}}{{item.province}}{{item.city}}{{item.area}} {{item.address}}</p>
 				</div>
-				<noData v-if="list.length == 0" :status="2" stateText="暂无数据"></noData>
+				<div class="bottom">
+					<div @click="ischange(item.addressId, index)">
+						<check-icon :value.sync="item.isDefault">设置为默认地址</check-icon>
+					</div>
+					<div>
+						<router-link :to="{ name: 'address_edit', params: { addressId: item.addressId }}"><span>编辑</span></router-link>
+						<span @click="deleteAddress(item.addressId)">删除</span>
+					</div>
+				</div>
 			</div>
 		</div>
-
+		<div style="height: 100vh;background-color: white;">
+			<noData v-if="list.length == 0" :status="2" stateText="暂无数据"></noData>
+		</div>
 		<div class="add-btn-box">
 			<router-link to="/member/address/edit">
 				<div class="add-btn">添加地址</div>
 			</router-link>
 		</div>
-		<!--<scroller lock-x height="-46">
-			<div class="box2">
-				<div class="list" v-for="(item,index) in list">
-					<div class="top">
-						<div class="pro">
-							<span>{{item.name}}</span>
-							<span>{{item.phone}}</span>
-						</div>
-						<p>{{item.address}}</p>
-					</div>
-					<div class="bottom">
-						<check-icon :value.sync="item.isdefault">设置为默认地址</check-icon>
-						<div>
-							<router-link to="/member/address/edit"><span>编辑</span></router-link>
-							<span>删除</span>
-						</div>
-					</div>
-				</div>
-			</div>
-		</scroller>-->
-
 	</div>
 </template>
 
 <script>
-	import BScroll from 'better-scroll'
 	import { Scroller, CheckIcon, XButton } from 'vux'
 	import settingHeader from '../../../components/setting_header'
-	import Loading from '../../../components/loading'
-	import Nomore from '../../../components/noMore'
 	import noData from '../../../components/noData'
 	export default {
 		data() {
 			return {
 				title: '管理收货地址',
-				demo1: false,
-				show: false,
-				hShow: false,
-				showNo: false,
-				list: [{
-					name: '张广',
-					phone: '18520496787',
-					address: '广州市番禺区橘树北街43号',
-					isdefault: true
-				}, {
-					name: '张广',
-					phone: '18520496787',
-					address: '广州市番禺区橘树北街43号',
-					isdefault: false
-				}, {
-					name: '张广',
-					phone: '18520496787',
-					address: '广州市番禺区橘树北街43号',
-					isdefault: false
-				}, {
-					name: '张广',
-					phone: '18520496787',
-					address: '广州市番禺区橘树北街43号',
-					isdefault: false
-				}, {
-					name: '张广',
-					phone: '18520496787',
-					address: '广州市番禺区橘树北街43号',
-					isdefault: false
-				}, {
-					name: '张广',
-					phone: '18520496787',
-					address: '广州市番禺区橘树北街43号',
-					isdefault: false
-				}]
+				list: []
 			}
 		},
 		created() { //判断是否微信端
@@ -117,14 +54,12 @@
 			} else {
 				this.hShow = false;
 			}
-			this.getShippingAddress(1)
-		},
-		mounted: function() {
-			this.InitScroll() //初始化下拉组件
+			this.getShippingAddress()
 		},
 		methods: {
-			deleteAddress() {
-				this.$dialog.show({
+			deleteAddress(addressId) { // 删除地址
+				let _this = this
+				_this.$dialog.show({
 					type: 'warning',
 					headMessage: '提示',
 					message: '确定删除该地址吗?',
@@ -132,75 +67,48 @@
 						console.log('取消')
 					},
 					confirm() {
-						console.log('确定')
-
+						let param = {
+							userId: sessionStorage['userId'],
+							addressId: addressId
+						}
+						_this.$http.post(_this.url.user.deleteShippingAddress, param).then(resp => {
+							_this.$vux.toast.show({
+								type: 'text',
+								text: '成功删除'
+							})
+							_this.getShippingAddress()
+						})
 					}
 				})
 			},
-			InitScroll() {
-				this.$nextTick(() => {
-					if(!this.scroll) {
-						this.scroll = new BScroll(this.$refs.wrapper, {
-							click: true,
-							scrollY: true,
-							pullUpLoad: {
-								threshold: -30, // 负值是当上拉到超过低部 70px；正值是距离底部距离 时，                    
-							}
-						})
-						this.scroll.on('pullingUp', (pos) => {
-							this.show = true;
-							this.LoadData()
-							this.$nextTick(function() {
-								this.scroll.finishPullUp();
-								this.scroll.refresh();
-							});
+			ischange(addressId, i) { // 设置默认地址
+				let _this = this
+				let param = {
+					userId: sessionStorage['userId'],
+					addressId: addressId
+				}
+				_this.$http.put(_this.url.user.setDefaultShippingAddress, param).then(resp => {
+					if(resp.data.status === '00000000') {
+						_this.list.forEach(function(index, value, array) {
+							_this.list[value].isDefault = false
+							_this.list[i].isDefault = true
 						})
 					} else {
-						this.scroll.refresh()
+						_this.list[i].isDefault = false
 					}
 				})
-
 			},
-			LoadData() {
-				var _this = this
-				if(_this.list.length <= 11) {
-					_this.show = true
-					_this.showNo = false
-					_this.list = _this.list.concat({
-						name: '张广',
-						phone: '18520496787',
-						address: '广州市番禺区橘树北街43号',
-						isdefault: false
-					}, {
-						name: '张广',
-						phone: '18520496787',
-						address: '广州市番禺区橘树北街43号',
-						isdefault: false
-					})
-					setTimeout(function() {
-						_this.show = false
-					}, 1500)
-				} else {
-					_this.show = false
-					_this.showNo = true
-				}
-			},
-			ischange(i) {
-				var _this = this
-				this.list.forEach(function(index, value, array) {
-					_this.list[value].isdefault = false
-					_this.list[i].isdefault = true
-				})
-			},
-			getShippingAddress (curPage) { // 获取收货diz
+			getShippingAddress() { // 获取收货地址列表
 				let _this = this
 				let param = {
 					'userId': sessionStorage['userId'],
 					'pageSize': 20,
-					'curPage': curPage
+					'curPage': 1
 				}
-				_this.$http.get(_this.url.user.getShippingAddress, {params:param}).then(resp => {
-					console.log(resp)
+				_this.$http.get(_this.url.user.getShippingAddress, {
+					params: param
+				}).then(resp => {
+					_this.list = resp.data.data.list
 				})
 			}
 		},
@@ -209,8 +117,6 @@
 			CheckIcon,
 			XButton,
 			Scroller,
-			Loading,
-			Nomore,
 			noData
 		}
 	}
@@ -220,7 +126,6 @@
 	.address-box {
 		background: #F5F6FA;
 		padding-bottom: 1rem;
-		height: 100%;
 		position: relative;
 		.settingHeader {
 			position: relative;
@@ -264,13 +169,6 @@
 		.top46 {
 			top: 47px!important;
 		}
-		.wrapper {
-			position: fixed;
-			top: 0px;
-			bottom: 0.88rem;
-			width: 100%;
-			overflow: hidden;
-		}
 		.list {
 			box-sizing: border-box;
 			margin-bottom: 0.21rem;
@@ -288,13 +186,13 @@
 					align-items: center;
 					.label {
 						display: inline-block;
-						width: 0.8rem;
+						// width: 0.8rem;
 						border: 1px solid #1c70f1;
 						border-radius: 2px;
 						margin-left: 0.18rem;
 						text-align: center;
 						font-size: 0.24rem;
-						padding: 0.02rem 0;
+						padding: 0.02rem 0.1rem;
 					}
 				}
 				p {

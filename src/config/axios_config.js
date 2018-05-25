@@ -2,6 +2,7 @@ import Vue from 'vue'
 import axios from 'axios'
 import store from '@/store'
 import isload from '@/components/isload'
+import router from '@/router'
 
 import MD5 from 'js-md5'
 
@@ -52,17 +53,35 @@ axios.interceptors.request.use(config => {
 // http响应拦截器
 axios.interceptors.response.use(res => { // 响应成功关闭loading
 	Vue.$isload.hide({
-		ishide(){
-			
+		ishide() {
+
 		}
 	})
-	if(res.data.status != '00000000') {
-		Vue.$vux.toast.show({
-			text: res.data.message,
-			type: 'text',
-			position: 'middle',
-			width: '50%'
-		})
+	if(res.data.status != '00000000' && res.data.status != 1) {
+		if(res.data.status == '401') {
+			Vue.$dialog.show({
+				type: 'warning',
+				headMessage: '提示',
+				message: '暂未登录,是否立即登录?',
+				buttons: ['确定', '取消'],
+				canel() {
+					Vue.$dialog.hide()
+				},
+				confirm() {
+					Vue.$dialog.hide()
+					router.push({
+						path: '/user/reg'
+					})
+				}
+			})
+		} else {
+			Vue.$vux.toast.show({
+				text: res.data.message,
+				type: 'text',
+				position: 'middle',
+				width: '50%'
+			})
+		}
 	}
 	return res
 }, error => {

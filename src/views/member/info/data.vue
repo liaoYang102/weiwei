@@ -126,7 +126,7 @@
 						} else if(info.education == 4) {
 							_this.education = '本科'
 						}
-						_this.birthday = _this.mainApp.frDateTimehp.getFormatDateTamp(info.birthday*1000)
+						_this.birthday = _this.mainApp.frDateTimehp.getFormatDateTamp(info.birthday * 1000)
 						_this.wxnum = info.wechat
 						_this.zfbnum = info.alipay
 						_this.email = info.email
@@ -134,10 +134,13 @@
 						_this.contact = info.emergency
 						_this.contactnum = info.egmobile
 
-						info.imagelist.forEach((value, index, array) => {
-							_this.backImages.push(array[index].original)
-							_this.fileIdList.push(array[index].imageId)
-						})
+						if(info.imagelist) {
+							info.imagelist.forEach((value, index, array) => {
+								_this.backImages.push(array[index].original)
+								_this.fileIdList.push(array[index].imageId)
+							})
+						}
+
 					}
 				})
 			},
@@ -176,7 +179,7 @@
 					confirmText: '确定',
 					cancelText: '取消',
 					clearText: '请选择日期',
-					minYear:'1970',
+					minYear: '1970',
 					onConfirm(val) {
 						_this.birthday = val
 					}
@@ -210,17 +213,23 @@
 			},
 			cindex(index) {
 				this.pindex = index
-				console.log(this.pindex)
 			},
 			cone(e) {
 				var _this = this
 				var reader = new FileReader();
 				var file = e.target.files[0];
-				reader.readAsDataURL(file);
-				reader.onloadend = function(e) {
-					var dataURL = reader.result;
-					_this.backImages.splice(_this.pindex, 1, e.target.result)
-				};
+				var imgdata = file
+				var data = {
+					type: 'user',
+					name: '1',
+					file: imgdata
+				}
+				_this.$http.post(_this.url.user.fileuploadImage, data).then((res) => {
+					if(res.data.status == '00000000') {
+						_this.$set(_this.backImages,_this.pindex,res.data.data.fileUrl)
+						_this.$set(_this.fileIdList,_this.pindex,res.data.data.fileId)
+					}
+				})
 			},
 			shanc(index) {
 				this.backImages.splice(index, 1)
@@ -228,6 +237,27 @@
 			},
 			changeUserInfo() {
 				var _this = this
+
+				if(!_this.mainApp.isemail(_this.email)) {
+					_this.$vux.toast.show({
+						width: '50%',
+						type: 'text',
+						position: 'middle',
+						text: '邮箱格式不正确'
+					})
+					return false
+				}
+
+				if(!_this.mainApp.isphone(_this.contactnum)) {
+					_this.$vux.toast.show({
+						width: '50%',
+						type: 'text',
+						position: 'middle',
+						text: '联系人号码格式不正确'
+					})
+					return false
+				}
+
 				var data = {
 					gender: _this.gender,
 					birthday: _this.mainApp.frDateTimehp.getDateTimesTamp(_this.birthday),

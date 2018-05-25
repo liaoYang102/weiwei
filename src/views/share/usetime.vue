@@ -3,7 +3,7 @@
 		<settingHeader :title="title"></settingHeader>
 		<div class="lunbo">
 			<swiper :options="swiperOption">
-				<swiper-slide v-for="(item,index) in data">
+				<swiper-slide v-for="(item,index) in data" :key="index">
 					<div class="sw_wrap">
 						<div class="content">
 							<p class="tit ellipsis">{{item.name}}<span>（多台设备时，可左右滑动切换）</span></p>

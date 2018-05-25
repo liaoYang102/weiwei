@@ -1,16 +1,16 @@
 <template>
 	<div id="app" ref="fBox" v-cloak>
 		<transition :name="viewTransition" :css="!!direction">
-			<router-view class="router-view"></router-view>
+			<keep-alive>
+				<router-view v-if="$route.meta.keepAlive">
+					<!-- 这里是会被缓存的视图组件 -->
+				</router-view>
+			</keep-alive>
+		</transition>
+		<transition :name="viewTransition" :css="!!direction">
+			<router-view class="router-view" v-if="!$route.meta.keepAlive"></router-view>
 		</transition>
 		<settingFooter v-if="$route.meta.navShow"></settingFooter>
-		<!-- <div v-transfer-dom>
-	      <x-dialog v-model="orientation" class="dialog-demo">
-	        <div class="img-box">
-	          <img src="../static/images/orientation.jpg" style="max-width:100%">
-	        </div>
-	      </x-dialog>
-	    </div> -->
 		<div v-transfer-dom>
 			<x-dialog v-model="orientation" class="dialog-demo" hide-on-blur>
 				<div class="img-box">
@@ -67,20 +67,13 @@
 				this.show = true;
 				return false;
 			}
-			
-			
-			console.log(_this.$store.state.page.isLoading)
 		},
 		components: {
 			ButtonTab,
 			ButtonTabItem,
 			settingFooter
 		},
-		methods: {
-			handleClick: function() {
-				this.$toast('Hello world!')
-			},
-		},
+		methods: {},
 		watch: {
 			'$route' (to, from) {
 
@@ -95,8 +88,14 @@
 					document.title = '大健康App'
 				}
 
+				if(from.path == '/user/reg') {
+					from.meta.keepAlive = false
+				}
+
 				this.$code.hide()
 				this.$dialog.hide()
+				
+				alert(this.direction)
 			}
 		}
 	}

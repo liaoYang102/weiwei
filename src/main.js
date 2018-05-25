@@ -17,10 +17,10 @@ import 'video.js/dist/video-js.css'
 import VueLazyLoad from 'vue-lazyload'
 
 import mainApp from './global/global'
-Vue.prototype.mainApp = mainApp 
+Vue.prototype.mainApp = mainApp
 
 import MD5 from 'js-md5'
-Vue.prototype.MD5 = MD5 
+Vue.prototype.MD5 = MD5
 
 import axios from './config/axios_config'
 Vue.prototype.$http = axios //定义axios组件用法  this.$http(opt).then(fn)
@@ -140,6 +140,10 @@ router.beforeEach(function(to, from, next) {
 				store.commit('UPDATE_DIRECTION', {
 					direction: ''
 				})
+			} else if(!isPush && (Date.now() - endTime) > 377) {
+				store.commit('UPDATE_DIRECTION', {
+					direction: ''
+				})
 			} else {
 				store.commit('UPDATE_DIRECTION', {
 					direction: 'forward'
@@ -148,6 +152,10 @@ router.beforeEach(function(to, from, next) {
 		} else {
 			// 判断是否是ios左滑返回
 			if(!isPush && (Date.now() - endTime) < 377) {
+				store.commit('UPDATE_DIRECTION', {
+					direction: ''
+				})
+			} else if(!isPush && (Date.now() - endTime) > 377) {
 				store.commit('UPDATE_DIRECTION', {
 					direction: ''
 				})
@@ -162,6 +170,10 @@ router.beforeEach(function(to, from, next) {
 		history.setItem('count', historyCount)
 		to.path !== '/' && history.setItem(to.path, historyCount)
 		if(!isPush && (Date.now() - endTime) < 377) {
+			store.commit('UPDATE_DIRECTION', {
+				direction: ''
+			})
+		} else if(!isPush && (Date.now() - endTime) > 377) {
 			store.commit('UPDATE_DIRECTION', {
 				direction: ''
 			})

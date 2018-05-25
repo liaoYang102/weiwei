@@ -1,7 +1,7 @@
 <template>
 	<div class="isload">
 		<x-dialog v-model="show" :hide-on-blur="true" @on-hide="ishide">
-			<div class="load-box">
+			<div class="load-bw">
 				<img class="load-img" :src="'./static/index/isload.gif'" />
 			</div>
 		</x-dialog>
@@ -32,7 +32,7 @@
 </script>
 
 <style lang="less">
-	.load-box{
+	.load-bw{
 		width: 1.1rem;
 		height: 1.1rem;
 		border-radius: 8px;

@@ -2,40 +2,27 @@
 	<div class="recharge-box">
 		<settingHeader :title="title"></settingHeader>
 		<div class="item">
-			<div class="left">
-				<p>健康平台</p>
-				<p>当前平台</p>
+			<div>
+				<span>当前平台</span><span>健康平台</span>
 			</div>
-			<div class="right">
-				当前余额: <span>500000000000.0</span>
+			<div>
+				<span>当前积分</span><span>89.24</span>
 			</div>
 		</div>
 		<div class="change-box">
 			<div class="change-tip">
-				<img src="../../../assets/images/member/icon-paid.png" alt="" /> 选择支付套餐 :</div>
+				<span>通用积分充值</span><span>充值记录</span>
+			</div>
 			<div class="change-row">
 				<div v-for="(item,index) in moneyList" class="row-item" :class="{'moneyActive':index == moneyIndex}" @click="changeMoney(index)">
 					<div class="box">
+						<p>{{item.now}}元</p>
 						<p>{{item.old}}元</p>
-						<p>售价{{item.now}}元</p>
 					</div>
 				</div>
 			</div>
 		</div>
-		<div class="change-box">
-			<div class="change-tip">
-				<img src="../../../assets/images/member/icon-more.png" alt="" /> 可用消费平台 :</div>
-			<div class="change-row">
-				<div v-for="item in ptList" class="row-item">
-					<div>
-						<p>
-							<img :src="item.img" />
-						</p>
-						<p style="color:#666666">{{item.name}}</p>
-					</div>
-				</div>
-			</div>
-		</div>
+		<p class="gy">充值未到账?</p>
 
 		<div class="btn-box">
 			<x-button class="add-btn" @click.native="submit">确认充值</x-button>
@@ -79,37 +66,26 @@
 				}],
 				show1: false,
 				moneyList: [{
-						now: '499',
-						old: '500.0'
+						now: '1000',
+						old: '赠送1000信用积分'
 					},
 					{
-						now: '499',
-						old: '500.0'
+						now: '2000',
+						old: '赠送2000信用积分'
 					},
 					{
-						now: '499',
-						old: '500.0'
+						now: '5000',
+						old: '赠送5000信用积分'
 					},
 					{
-						now: '499',
-						old: '50000.0'
-					},
-				],
-				ptList: [{
-						img: './static/member/hairdressing1.png',
-						name: '美容平台'
-					},
-					{
-						img: './static/member/traval.png',
-						name: '旅游平台'
-					},
-					{
-						img: './static/member/shopping1.png',
-						name: '餐饮平台'
-					},
-					{
-						img: './static/member/catering.png',
-						name: '购物平台'
+						now: '8000',
+						old: '赠送8000信用积分'
+					},{
+						now: '10000',
+						old: '赠送10000信用积分'
+					},{
+						now: '20000',
+						old: '赠送20000信用积分'
 					},
 				]
 			}
@@ -168,43 +144,49 @@
 		position: relative;
 		font-family: PingFangSC-Medium;
 		background-color: #F5F6FA;
+		.gy {
+			text-align: center;
+			font-size:0.24rem;
+			font-family: PingFangSC-Regular;
+			color: rgba(144, 162, 199, 1);
+		}
 		.item {
-			padding: 0 0.25rem;
-			height: 1.13rem;
+			padding: 0.31rem 0.22rem;
+			box-sizing: border-box;
+			height: 1.97rem;
+			background-color: white;
 			display: flex;
-			align-items: center;
 			justify-content: space-between;
-			background: url(../../../assets/images/member/index-bg.png) no-repeat;
-			background-size: 100%;
-			color: white;
-			.left {
-				p:nth-child(1) {
-					font-size: 0.32rem;
+			flex-direction: column;
+			margin-bottom: 0.2rem;
+			div {
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+				font-size: 0.28rem;
+				span:nth-child(1) {
+					color: rgba(144, 162, 199, 1);
 				}
-				p:nth-child(2) {
-					font-size: 0.18rem;
-					color: #d5d5d6;
-				}
-			}
-			.right {
-				font-size: 0.24rem;
-				span {
-					font-size: 0.28rem;
+				span:nth-child(2) {
+					color: #1A2642
 				}
 			}
 		}
 		.change-box {
-			padding: 0.25rem;
+			padding: 0 0.22rem 0.58rem 0.22rem;
 			background-color: white;
 			margin-bottom: 0.21rem;
 			.change-tip {
-				color: #555555;
-				font-size: 0.24rem;
-				text-indent: 0.2rem;
-				margin-bottom: 0.2rem;
-				img {
-					width: 0.25rem;
-					vertical-align: sub;
+				height: 1.13rem;
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+				color: rgba(26, 38, 66, 1);
+				span:nth-child(1) {
+					font-size: 0.32rem;
+				}
+				span:nth-child(2) {
+					font-size: 0.24rem;
 				}
 			}
 			.change-row {
@@ -220,7 +202,7 @@
 						align-items: center;
 						justify-content: center;
 						flex-direction: column;
-						height: 1.1rem;
+						height: 1.3rem;
 						border-radius: 3px;
 						color: #C6CCDA;
 						p:nth-child(1) {
@@ -236,14 +218,22 @@
 					}
 					.box {
 						width: 1.91rem;
-						background: #F4F4F4;
+						background: rgba(26, 38, 66, 1);
+						box-shadow: 0px 2px 10px 0px rgba(26, 38, 66, 0.4);
+						border-radius: 3px;
+						color: white;
+						padding: 0 0.15rem;
+						box-sizing: border-box;
+						p:nth-child(2){
+							font-size: 0.20rem;
+						}
 					}
 				}
 				.moneyActive {
 					.box {
 						color: white;
 						background: #336fff;
-						transition: all 0.3s linear;
+						transition: all 0.2s linear;
 					}
 				}
 				.ptActive {
