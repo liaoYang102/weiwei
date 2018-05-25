@@ -46,6 +46,7 @@ import strategy from '@/views/member/score/strategy'
 import scoreDetail from '@/views/member/score/detail'
 import agreement from '@/views/member/setting/agreement'
 import article from '@/views/member/article/index'
+import vip from '@/views/member/vip/index'
 
 const memberModule = [{
 		path: '/index',
@@ -414,6 +415,14 @@ const memberModule = [{
 		component: article,
 		meta: {
 			title: '快讯列表'
+		}
+	},
+	{
+		path: '/member/vip/index',
+		name: 'vip',
+		component: vip,
+		meta: {
+			title: '会员等级'
 		}
 	}
 ]
