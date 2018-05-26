@@ -38,6 +38,7 @@
 							<li>{{payNum[2]}}</li>
 							<li>{{payNum[3]}}</li>
 							<li>{{payNum[4]}}</li>
+							<li>{{payNum[5]}}</li>
 						</ul>
 						<p @click="forgetpassword">忘记密码了？</p>
 					</div>
@@ -84,10 +85,10 @@
 		},
 		methods: {
 			keyActive(num, index) {
-				
+
 				var _this = this
-				
-				if(_this.payNum.length < 5 && index != 9 && index != 11) {
+
+				if(_this.payNum.length < 6 && index != 9 && index != 11) {
 					_this.payNum.push('●')
 				} else if(index == 9) {
 					_this.payNum = []
@@ -96,7 +97,7 @@
 				}
 			},
 			one(val) {
-				if(val.length == 5) {
+				if(val.length == 6) {
 					this.$refs.one.blur()
 				}
 				this.codeChange()
@@ -113,15 +114,22 @@
 				this.payNum = []
 				this.showCode = false
 			},
-			forgetpassword(){
+			forgetpassword() {
 				console.log(this.vm)
-				this.vm.$router.push({path:'/user/changePaymentPassword'})
+				this.vm.$router.push({
+					path: '/user/changePaymentPassword'
+				})
 			}
 		},
-		watch:{
-			payNum(){
-				if(this.payNum.length == 5){
+		watch: {
+			payNum() {
+				if(this.payNum.length == 6) {
 					this.change()
+				}
+			},
+			showCode(){
+				if(this.showCode == false){
+					this.payNum = []
 				}
 			}
 		},
@@ -137,13 +145,13 @@
 
 <style lang="less">
 	.pay-popup {
-		background:rgba(245,248,249,1)!important;
+		background: rgba(245, 248, 249, 1)!important;
 		z-index: 666!important;
 		display: flex;
 		flex-direction: column;
 		justify-content: space-between;
 		user-select: none;
-		font-family:MicrosoftYaHei;
+		font-family: MicrosoftYaHei;
 		.pay-input {
 			background-color: white;
 			padding: 0.57rem 0.43rem;
@@ -156,19 +164,42 @@
 					width: 20%;
 					height: 0.93rem;
 					line-height: 0.93rem;
-					border: 1px solid #D8DFF0;
+					border-top: 1px solid #C7C7C7;
+					border-bottom: 1px solid #C7C7C7;
 					text-align: center;
 					font-size: 0.40rem;
 					box-sizing: border-box;
+					position: relative;
 				}
-				li:not(:last-child) {
-					border-right: none;
+				li:nth-child(1) {
+					border-top-left-radius: 3px;
+					border-bottom-left-radius: 3px;
+					border-left: 1px solid #C7C7C7;
+				}
+				li:last-child {
+					border-top-right-radius: 3px;
+					border-bottom-right-radius: 3px;
+					border-right: 1px solid #C7C7C7;
+				}
+				li:not(:last-child):after {
+					content: " ";
+					position: absolute;
+					right: 0;
+					top: 0;
+					width: 1px;
+					bottom: 0;
+					border-right: 1px solid #C7C7C7;
+					color: #C7C7C7;
+					-webkit-transform-origin: 100% 0;
+					transform-origin: 100% 0;
+					-webkit-transform: scaleX(0.5);
+					transform: scaleX(0.5);
 				}
 			}
 			p {
 				text-align: right;
 				margin-top: 0.30rem;
-				font-size: 0.24;
+				font-size: 0.24rem;
 				color: #90A2C7;
 			}
 		}

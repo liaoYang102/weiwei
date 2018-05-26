@@ -7,10 +7,10 @@
 					<router-link to="/member/setting/index"><img class="setting-img" src="../../assets/images/member/shezi.png" /></router-link>
 					<div class="avatar">
 						<router-link to="/member/info/index">
-							<img src="../../assets/images/member/score_1.png" alt="" />
+							<img :src="images" alt="" />
 						</router-link>
-						<p class="nickname">yang</p>
-						<p class="status">1级会员</p>
+						<p class="nickname">{{userInfo.nickname}}</p>
+						<p class="status">{{userInfo.levelName}}</p>
 					</div>
 
 					<div class="account">
@@ -18,7 +18,7 @@
 							<div class="universal">
 								<p>
 									<div class="num">
-										<span class="money">1000.49</span>
+										<span class="money">{{userInfo.balance}}</span>
 										<!--<badge></badge>-->
 									</div>
 								</p>
@@ -28,7 +28,7 @@
 						<router-link to="/member/earnings/credit">
 							<div class="universal">
 								<div class="num">
-									<span class="money">2800.01 </span>
+									<span class="money">{{userInfo.availablePoints}}</span>
 
 								</div>
 								<p class="universalAccount">信用积分</p>
@@ -105,7 +105,8 @@
 		data() {
 			return {
 				title: '个人中心',
-				userInfo:'',
+				userInfo:{},
+				images:'',
 				infoList: [{
 						img: './static/member/member_1.png',
 						text: '我的优惠券',
@@ -164,6 +165,9 @@
 					console.log(res)
 					if(res.data.status == "00000000") {
 						_this.userInfo = res.data.data
+						if(res.data.data.avatar.original) {
+							_this.images = res.data.data.avatar.original
+						}
 					}
 				})
 			},

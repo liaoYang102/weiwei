@@ -7,7 +7,7 @@
 		</div>
 		<div class="g-list">
 			<group :gutter='0' class="b-no">
-				<cell class="item" primary="content" is-link @click.native="toRecord">
+				<cell class="item" primary="content" is-link @click.native="toCreditReward('信用积分',1)">
 					<div class="left">
 						<p>累计信用积分</p>
 						<p>{{fundInfo.income}}</p>
@@ -22,7 +22,7 @@
 			</div>
 			<div class="b-list">
 				<group :gutter='0'>
-					<cell class="item" primary="content" is-link>
+					<cell class="item" primary="content" is-link @click.native="toCreditReward('信用积分',3)">
 						<div class="left">
 							<img :src="'./static/member/czjl.png'" alt="" />
 							<div>
@@ -31,25 +31,25 @@
 							</div>
 						</div>
 					</cell>
-					<cell class="item" primary="content" is-link>
+					<cell class="item" primary="content" is-link @click.native="toCreditReward('信用积分',6)">
 						<div class="left">
-							<img :src="'./static/member/cjjl.png'" alt="" />
+							<img :src="'./static/member/zjjl.png'" alt="" />
 							<div>
-								<p>抽奖奖励</p>
+								<p>中奖奖励</p>
 								<p>累计奖励：{{fundInfo.lotteryPoints}}</p>
 							</div>
 						</div>
 					</cell>
-					<cell class="item" primary="content" is-link>
+					<cell class="item" primary="content" is-link @click.native="toCreditReward('信用积分',2)">
 						<div class="left">
-							<img :src="'./static/member/rwjl2.png'" alt="" />
+							<img :src="'./static/member/xfjl.png'" alt="" />
 							<div>
-								<p>任务奖励</p>
+								<p>消费奖励</p>
 								<p>累计奖励：{{fundInfo.taskPoints}}</p>
 							</div>
 						</div>
 					</cell>
-					<cell class="item" primary="content" is-link>
+					<cell class="item" primary="content" is-link @click.native="toCreditReward('信用积分',5)">
 						<div class="left">
 							<img :src="'./static/member/tjjl.png'" alt="" />
 							<div>
@@ -72,7 +72,7 @@
 			return {
 				title: '信用积分',
 				thao: './static/member/thao.png',
-				fundInfo:{}
+				fundInfo: {}
 			}
 		},
 		created() {
@@ -92,20 +92,13 @@
 					}
 				})
 			},
-			toRecord(){
+			//跳转信用积分
+			toCreditReward(title, type) {
 				this.$router.push({
-					name: 'record',
-					params:{
-						title:'信用积分'
-					}
-				})
-			},
-			link(item){
-				this.$router.push({
-					name: 'reward',
-					params:{
-						num:item.num,
-						title:item.tip
+					name: 'creditreward',
+					query: {
+						title: title,
+						type: type
 					}
 				})
 			}

@@ -118,6 +118,12 @@ let isPush = false
 let endTime = Date.now()
 let methods = ['push', 'go', 'replace', 'forward', 'back']
 
+var startX = 0
+//touchStart事件
+document.addEventListener('touchstart', function(event) {
+	startX = event.targetTouches[0].pageX
+}, false)
+//touchend事件
 document.addEventListener('touchend', (e) => {
 	endTime = Date.now()
 })
@@ -130,20 +136,20 @@ methods.forEach(key => {
 	}
 })
 
- window.onpopstate = function(e) {
- 	console.log(e)
-    if((Date.now() - endTime) < 377){
-    	store.state.page.back = false
-    }else{
-    	store.state.page.back = true
-    }
- }
+window.onpopstate = function(e) {
+	if((Date.now() - endTime) < 377) {
+		store.state.page.back = false
+	}else if((Date.now() - endTime) > 377 && startX > 160){
+		store.state.page.back = false
+	} else {
+		store.state.page.back = true
+	}
+}
 
 router.beforeEach(function(to, from, next) {
-	
+
 	const toIndex = history.getItem(to.path)
 	const fromIndex = history.getItem(from.path)
-	
 
 	if(toIndex) {
 		if(!fromIndex || parseInt(toIndex, 10) > parseInt(fromIndex, 10) || (toIndex === '0' && fromIndex === '0')) {
@@ -151,7 +157,7 @@ router.beforeEach(function(to, from, next) {
 			if(!isPush && (Date.now() - endTime) < 377 || !isPush && (Date.now() - endTime) > 377) {
 				if(store.state.page.back) {
 					store.commit('UPDATE_DIRECTION', {
-						direction: ''
+						direction: 'reverse'
 					})
 				} else {
 					store.commit('UPDATE_DIRECTION', {
@@ -177,7 +183,7 @@ router.beforeEach(function(to, from, next) {
 				}
 			} else {
 				store.commit('UPDATE_DIRECTION', {
-					direction: ''
+					direction: 'reverse'
 				})
 			}
 		}
@@ -214,6 +220,7 @@ router.beforeEach(function(to, from, next) {
 
 router.afterEach(function(to) {
 	isPush = false
+	startX = 0
 	store.commit('UPDATE_DACK', {
 		back: false
 	})

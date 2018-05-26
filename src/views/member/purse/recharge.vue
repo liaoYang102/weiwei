@@ -17,7 +17,7 @@
 				<div v-for="(item,index) in moneyList" class="row-item" :class="{'moneyActive':index == moneyIndex}" @click="changeMoney(index)">
 					<div class="box">
 						<p>{{item.now}}元</p>
-						<p>{{item.old}}元</p>
+						<p>{{item.old}}</p>
 					</div>
 				</div>
 			</div>

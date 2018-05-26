@@ -7,7 +7,7 @@
 		</div>
 		<div class="g-list">
 			<group :gutter='0'>
-				<cell class="item" primary="content" is-link @click.native="toReward">
+				<cell class="item" primary="content" is-link @click.native="toCurrencyReward('通用积分',1)">
 					<div class="left">
 						<p>累计通用积分</p>
 						<p>{{fundInfo.income}}</p>
