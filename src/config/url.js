@@ -30,6 +30,7 @@ var url = {
 		getFundInfo: uri1 + '/v1/user/getFundInfo', //获取用户资金信息
 		changeFundShow: uri1 + '/v1/user/changeFundShow', //修改用户资产显示状态
 		getMyBalanceList: uri1 + '/v1/user/getMyBalanceList', //获取用户积分列表
+		getMyPointsList:uri1 + '/v1/user/getMyPointsList',//获取用户信用积分列表
 	},
 	draw: {
 		getReviewLists: 'http://www.cgc999.com/app/index.php?i=7&c=entry&m=mx_shop&do=mobile&r=copy.getReviewLists', //往期回顾

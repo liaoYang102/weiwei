@@ -19,12 +19,12 @@
 					<div v-if="list.length >0">
 						<div class="list-box">
 							<ul>
-								<li v-for="item in list" @click="toDetail(item.balanceId)">
+								<li v-for="item in list" @click="toDetail(item.pointId)">
 									<div>
 										<p>{{item.remark}}</p>
 										<p>{{item.createTime}}</p>
 									</div>
-									<p class="red">{{item.directType == 1?'+':'-'}}{{item.balance}}</p>
+									<p class="red">{{item.directType == 1?'+':'-'}}{{item.point}}</p>
 								</li>
 							</ul>
 						</div>
@@ -91,6 +91,7 @@
 		},
 		created() {
 			console.log(this.$route.query)
+			// console.log(sessionStorage.getItem('userId'))
 			//改变微信端title
 			if(this.$route.query.title) {
 				this.title = this.$route.query.title
@@ -100,7 +101,7 @@
 			//设置筛选对应选中状态
 			if(this.$route.query.title == '信用积分') {
 				this.type = this.$route.query.type
-				this.getMyBalanceList()
+				this.getMyBalanceList();
 				if(this.$route.query.type == 3) {
 					this.twoIndex = 2
 				} else if(this.$route.query.type == 2) {
@@ -117,34 +118,40 @@
 		},
 		methods: {
 			getMyBalanceList(type) {
-				var _this = this
-				_this.$http.get(_this.url.user.getMyBalanceList, {
-					params: {
-						userId: sessionStorage.getItem('userId'),
-						type: _this.type,
-						curPage: _this.curPage,
-						pageSize: _this.pageSize
+
+				// console.log(type)
+
+				var _this=this;
+				_this.$http.get(_this.url.user.getMyPointsList,{
+					params:{
+						userId:sessionStorage.getItem('userId'),
+						type:_this.type,
+						curPage:_this.curPage,
+						pageSize:_this.pageSize
 					}
-				}).then((res) => {
-					if(res.data.status == "00000000") {
-						_this.balanceInfo = res.data.data
-						if(res.data.data.list.length > 0) {
-							_this.list = _this.list.concat(res.data.data.list)
-							if(_this.isload) {
-								_this.show = true
-								_this.showNo = false
+				}).then((res)=>{
+					if(res.data.status == '00000000'){
+						_this.balanceInfo = res.data.data;
+						console.log(_this.balanceInfo);
+						if(res.data.data.list.length > 0){
+							_this.list = _this.list.concat(res.data.data.list);
+							if(_this.isload){
+								_this.show = true;
+								_this.showNo = false;
 							}
-						} else {
-							if(_this.isload) {
-								_this.show = false
-								_this.showNo = true
+						}else{
+							if(_this.isload){
+								_this.show = false;
+								_this.showNo = true;
 							}
 						}
+						
 					}
-				})
+				});
+				console.log(_this.type)
 			},
 			toDetail(id) {
-				this.$router.push({
+				this.$router.replace({
 					name: 'creditrewarddetail',
 					query: {
 						id: id
@@ -160,8 +167,8 @@
 						'type': type
 					})
 				})
-				_this.show8 = false
-				_this.list = []
+				_this.show8 = false;
+				_this.list = [];
 
 				_this.getMyBalanceList()
 			},
@@ -191,7 +198,7 @@
 			LoadData() {
 				var _this = this
 				_this.curPage++
-					_this.getMyBalanceList()
+				// _this.getMyBalanceList()
 				_this.isload = true
 			}
 		},
