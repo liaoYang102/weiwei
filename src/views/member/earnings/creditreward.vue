@@ -145,6 +145,7 @@
 								_this.showNo = true;
 							}
 						}
+						
 					}
 				});
 				console.log(_this.type)
