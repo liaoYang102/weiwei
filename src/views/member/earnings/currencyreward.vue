@@ -41,10 +41,7 @@
 			<popup v-model="show8" position="top">
 				<div class="position-vertical-demo">
 					<div class="twoClass">
-						<div class="type-item" v-for="(item,index) in tyClass" v-if="$route.query.title == '通用积分'">
-							<span :class="{'twoActive':twoIndex == index}" @click="twoChange(index,item.type)">{{item.title}}</span>
-						</div>
-						<div class="type-item" v-for="(item,index) in xyClass" v-if="$route.query.title == '信用积分'">
+						<div class="type-item" v-for="(item,index) in tyClass">
 							<span :class="{'twoActive':twoIndex == index}" @click="twoChange(index,item.type)">{{item.title}}</span>
 						</div>
 					</div>
@@ -90,22 +87,6 @@
 					title: '任务奖励',
 					type: 7
 				}],
-				xyClass: [{
-					title: '全部',
-					type: 1
-				}, {
-					title: '消费奖励',
-					type: 2
-				}, {
-					title: '充值奖励',
-					type: 3
-				}, {
-					title: '中奖奖励',
-					type: 6
-				}, {
-					title: '推荐用户',
-					type: 5
-				}],
 				list: [],
 				curPage: 1,
 				pageSize: 20,
@@ -115,41 +96,20 @@
 			}
 		},
 		created() {
-			console.log(this.$route.query)
-			//改变微信端title
-			if(this.$route.query.title) {
-				this.title = this.$route.query.title
-				document.title = this.$route.query.title
+			this.type = this.$route.query.type
+			//设置对应筛选INDEX
+			if(this.$route.query.type == 3) {
+				this.twoIndex = 2
+			} else if(this.$route.query.type == 4) {
+				this.twoIndex = 3
+			} else if(this.$route.query.type == 6) {
+				this.twoIndex = 4
+			} else if(this.$route.query.type == 5) {
+				this.twoIndex = 5
+			} else if(this.$route.query.type == 7) {
+				this.twoIndex = 6
 			}
-
-			//设置筛选对应选中状态
-			if(this.$route.query.title == '通用积分') {
-				this.type = this.$route.query.type
-				this.getMyBalanceList()
-				if(this.$route.query.type == 3) {
-					this.twoIndex = 2
-				} else if(this.$route.query.type == 4) {
-					this.twoIndex = 3
-				} else if(this.$route.query.type == 6) {
-					this.twoIndex = 4
-				} else if(this.$route.query.type == 5) {
-					this.twoIndex = 5
-				} else if(this.$route.query.type == 7) {
-					this.twoIndex = 6
-				}
-			} else if(this.$route.query.title == '信用积分') {
-				this.type = this.$route.query.type
-				this.getMyBalanceList()
-				if(this.$route.query.type == 3) {
-					this.twoIndex = 2
-				} else if(this.$route.query.type == 2) {
-					this.twoIndex = 1
-				} else if(this.$route.query.type == 6) {
-					this.twoIndex = 3
-				} else if(this.$route.query.type == 5) {
-					this.twoIndex = 4
-				}
-			}
+			this.getMyBalanceList()
 		},
 		mounted() {
 			this.InitScroll()
@@ -194,7 +154,7 @@
 				var _this = this
 				_this.twoIndex = index
 				_this.type = type
-				_this.$router.push({
+				_this.$router.replace({
 					query: _this.merge(_this.$route.query, {
 						'type': type
 					})

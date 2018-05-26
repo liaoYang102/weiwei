@@ -130,7 +130,7 @@ methods.forEach(key => {
 	}
 })
 
- window.onpopstate = function(e) {  
+ window.onpopstate = function(e) {
     if((Date.now() - endTime) < 377){
     	store.state.page.back = false
     }else{
@@ -216,33 +216,7 @@ router.afterEach(function(to) {
 		back: false
 	})
 })
-//const whiteList = ['/user/login', '/index', '/user/reg','/','/member/index'];// 不重定向白名单
-// router.beforeEach((to, from, next) => {
-//     if (store.getters.userstate) { // 
-//         if (to.path === '/user/login') {
-//           next();
-//         } 
-//         else {
-//             //避免F5刷新时，vex数据全无，所以需要重新获取一次数据
-//             if(!store.getters.username){ //判断是否有用户信息 把token换成userInfo
-//                 console.log('未获取到用户',store.getters.username) 
-//                 store.dispatch('setUser').then(res => { 
-//                     next();                 
-//                 }).catch(err => {
-//                     console.log(err);
-//                 });
-//             }
-//         }
-//     } else {  
-//         if (whiteList.indexOf(to.path) !== -1) { // 在免登录白名单，直接进入
-//             next()
-//         } else {
-//             next('/user/login'); // 否则全部重定向到登录页
-//         }
-//     }   
-// });
 
-/* eslint-disable no-new */
 Vue.prototype.vm = new Vue({
 	el: '#app',
 	router,

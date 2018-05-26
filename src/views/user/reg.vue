@@ -43,6 +43,7 @@
 <script>
 	import { XInput, Group, XButton, Cell, Loading, AlertModule, Confirm, CheckIcon } from 'vux'
 	import settingHeader from '../../components/setting_header'
+	import agreement from '@/views/member/setting/agreement'
 	export default {
 		name:'reg',
 		data() {
@@ -68,9 +69,7 @@
 			//				this.$router.go(-1)
 			//			}
 		},
-		mounted() {
-			//			this.$refs.phone.focus()
-		},
+		mounted() {},
 		methods: {
 			submit() {
 				var _this = this

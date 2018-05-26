@@ -6,8 +6,15 @@
 				<div class="box-h">
 					<div class="top">
 						<div>
-							<p>1000000.00</p>
-							<p>积分金额</p>
+							<p>{{balanceDetail.balance}}</p>
+							<p v-if="balanceDetail.type == 1">消费</p>
+							<p v-if="balanceDetail.type == 2">用户充值</p>
+							<p v-if="balanceDetail.type == 3">后台充值</p>
+							<p v-if="balanceDetail.type == 4">购物奖励</p>
+							<p v-if="balanceDetail.type == 5">分红奖励</p>
+							<p v-if="balanceDetail.type == 6">中奖奖励</p>
+							<p v-if="balanceDetail.type == 7">任务奖励</p>
+							<p v-if="balanceDetail.type == 8">新人奖励</p>
 						</div>
 					</div>
 					<div class="bottom">
@@ -15,11 +22,11 @@
 							<div slot="content" class="card-demo-flex card-demo-content01">
 								<div class="vux-1px-r">
 									<p>5000.0</p>
-									<span>增加余额</span>
+									<span>到账收益</span>
 								</div>
 								<div class="vux-1px-r">
 									<p>500.0</p>
-									<span>冻结余额</span>
+									<span>总计收益</span>
 								</div>
 							</div>
 						</card>
@@ -31,31 +38,17 @@
 			</div>
 			<section>
 				<group gutter="0">
-					<cell class="info-item" title="当前状态" value="已收入"></cell>
-					<cell class="info-item" title="来源" value="体验 威伐光11014"></cell>
-					<cell class="info-item" title="完成时间" value="2018.04.19 11:30"></cell>
-					<cell class="info-item" title="编号" value="2018041017080385390"></cell>
+					<cell class="info-item" title="来源平台" value=""></cell>
+					<cell class="info-item" title="说明" :value="balanceDetail.remark"></cell>
+					<cell class="info-item" title="创建时间" :value="balanceDetail.createTime"></cell>
+					<cell class="info-item" title="订单编号" :value="balanceDetail.orderSn" v-if="balanceDetail.type == 2 || balanceDetail.type == 4"></cell>
+					<cell class="info-item" :title="balanceDetail.mobile" v-if="balanceDetail.type == 5">
+						<div class="up-box">
+							<img class="tx" :src="'./static/images/mrtx.png'" />
+						</div>
+					</cell>
 				</group>
 			</section>
-			<div class="lw-box">
-				<div class="all-h">
-					<img src="../../../../static/member/lw1.png" />
-					<div>
-						<p>更多惊喜礼品兑换</p>
-						<p>点击进入积分商城</p>
-					</div>
-				</div>
-			</div>
-			<div v-transfer-dom>
-				<x-dialog v-model="showDialogStyle" hide-on-blur :dialog-style="{'max-width': '100%', width: '100%', height: '50%', 'background-color': 'transparent'}">
-					<p class="gz-box" @click="showDialogStyle = false">
-						<span style="font-size:0.32rem;color: white;">商品的退货期内，返现的余额是冻结的</span>
-						<br>
-						<br>
-						<x-icon type="ios-close-outline" style="fill:#fff;"></x-icon>
-					</p>
-				</x-dialog>
-			</div>
 		</div>
 	</div>
 </template>
@@ -67,17 +60,31 @@
 		data() {
 			return {
 				title: '通用积分详情',
-				showDialogStyle: false
+				balanceDetail: {}
 			}
 		},
 		created() {
 			console.log(this.$route.query)
+			this.getMyBalanceDetail(this.$route.query.id)
 		},
 		mounted() {
-			
+
 		},
 		methods: {
-
+			getMyBalanceDetail(id) {
+				var _this = this
+				_this.$http.get(_this.url.user.getMyBalanceDetail, {
+					params: {
+						userId: sessionStorage.getItem('userId'),
+						balanceId: id
+					}
+				}).then((res) => {
+					if(res.data.status == "00000000") {
+						console.log(res.data.data)
+						_this.balanceDetail = res.data.data
+					}
+				})
+			},
 		},
 		components: {
 			settingHeader,
@@ -133,6 +140,19 @@
 			}
 			.weui-cell__ft {
 				color: #1A2642;
+			}
+		}
+		.info-item {
+			font-family: PingFangSC-Regular;
+			font-size: 0.28rem;
+			color: #1A2642;
+			letter-spacing: 0;
+			height: 0.6rem;
+			.tx {
+				width: 0.6rem;
+				height: 0.6rem;
+				border-radius: 50%;
+				vertical-align: middle;
 			}
 		}
 		.purse-box1 {
