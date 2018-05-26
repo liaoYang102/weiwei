@@ -51,7 +51,7 @@
 				title: '用户登录', //头部标题
 				mobile: '', //手机号码
 				password: '', //密码
-				code: null, //验证码
+				code: '', //验证码
 				show: false,
 				regText: '提示',
 				btnText: '立即登录',
@@ -100,10 +100,11 @@
 			}, //注册
 			reg() {
 				var _this = this
+				console.log(typeof( _this.code), _this.code)
 				_this.$http.post(this.url.user.userRegister, {
 					mobile: _this.mobile,
 					password: _this.password,
-					smsVerificationCode: 1233,
+					smsVerificationCode: _this.code,
 					platformId: _this.url.platformId
 				}).then(function(res) {
 					if(res.data.status == "00000000") {
@@ -182,6 +183,7 @@
 			},
 			//验证码输入改变时
 			codeChange(val) {
+				console.log(val.length)
 				if(val.length == 4) {
 					this.$refs.code.blur()
 				}
@@ -204,15 +206,13 @@
 			//发送验证码
 			sendCode() {
 				var _this = this
-				_this.code = null
+				_this.code = ''
 				if(_this.mainApp.isphone(_this.mobile)) {
-					_this.reduce()
 					_this.$refs.code.focus()
 					_this.$http.post(this.url.user.getVerificationCode, {
 						mobile: _this.mobile,
 						type: 1
 					}).then(function(res) {
-						console.log(res)
 						if(res.data.status == "00000000") {
 							_this.$vux.toast.show({
 								width: '50%',
@@ -271,7 +271,6 @@
 		background-color: white;
 		padding: 0 0.5rem;
 		box-sizing: border-box;
-		overflow: hidden;
 		user-select: none;
 		.login-box {
 			width: 100%;
@@ -356,7 +355,7 @@
 			}
 		}
 		.Thirdparty {
-			margin-top: 1.7rem;
+			margin-top: 0.6rem;
 			padding: 0 0.5rem;
 			box-sizing: border-box;
 			div {

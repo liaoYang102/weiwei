@@ -7,7 +7,7 @@
 				<p>累计奖励</p>
 			</div>
 			<div class="screen-box">
-				<div>
+				<div @click="lookAll">
 					查看全部
 				</div>
 				<div @click="show8 = true">
@@ -24,7 +24,7 @@
 										<p>{{item.remark}}</p>
 										<p>{{item.createTime}}</p>
 									</div>
-									<p class="red">{{item.directType == 1?'+':'-'}}{{item.balance}}</p>
+									<p class="red">{{item.directType == 1?'+':'-'}} {{item.balance}}</p>
 								</li>
 							</ul>
 						</div>
@@ -163,6 +163,12 @@
 				_this.list = []
 
 				_this.getMyBalanceList()
+			},
+			lookAll(){
+				this.type = 1
+				this.twoIndex = 0
+				this.list = []
+				this.getMyBalanceList()
 			},
 			InitScroll() {
 				this.$nextTick(() => {

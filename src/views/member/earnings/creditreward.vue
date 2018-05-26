@@ -7,7 +7,7 @@
 				<p>累计奖励</p>
 			</div>
 			<div class="screen-box">
-				<div>
+				<div @click="lookAll">
 					查看全部
 				</div>
 				<div @click="show8 = true">
@@ -24,7 +24,7 @@
 										<p>{{item.remark}}</p>
 										<p>{{item.createTime}}</p>
 									</div>
-									<p class="red">{{item.directType == 1?'+':'-'}}{{item.point}}</p>
+									<p class="red">{{item.directType == 1?'+':'-'}} {{item.point}}</p>
 								</li>
 							</ul>
 						</div>
@@ -90,67 +90,54 @@
 			}
 		},
 		created() {
-			console.log(this.$route.query)
-			// console.log(sessionStorage.getItem('userId'))
-			//改变微信端title
-			if(this.$route.query.title) {
-				this.title = this.$route.query.title
-				document.title = this.$route.query.title
+			this.type = this.$route.query.type
+			if(this.$route.query.type == 3) {
+				this.twoIndex = 2
+			} else if(this.$route.query.type == 2) {
+				this.twoIndex = 1
+			} else if(this.$route.query.type == 6) {
+				this.twoIndex = 3
+			} else if(this.$route.query.type == 5) {
+				this.twoIndex = 4
 			}
 
-			//设置筛选对应选中状态
-			if(this.$route.query.title == '信用积分') {
-				this.type = this.$route.query.type
-				this.getMyBalanceList();
-				if(this.$route.query.type == 3) {
-					this.twoIndex = 2
-				} else if(this.$route.query.type == 2) {
-					this.twoIndex = 1
-				} else if(this.$route.query.type == 6) {
-					this.twoIndex = 3
-				} else if(this.$route.query.type == 5) {
-					this.twoIndex = 4
-				}
-			}
+			this.getMyPointsList()
 		},
 		mounted() {
 			this.InitScroll()
 		},
 		methods: {
-			getMyBalanceList(type) {
+			getMyPointsList(type) {
 
-				// console.log(type)
-
-				var _this=this;
-				_this.$http.get(_this.url.user.getMyPointsList,{
-					params:{
-						userId:sessionStorage.getItem('userId'),
-						type:_this.type,
-						curPage:_this.curPage,
-						pageSize:_this.pageSize
+				var _this = this;
+				_this.$http.get(_this.url.user.getMyPointsList, {
+					params: {
+						userId: sessionStorage.getItem('userId'),
+						type: _this.type,
+						curPage: _this.curPage,
+						pageSize: _this.pageSize
 					}
-				}).then((res)=>{
-					if(res.data.status == '00000000'){
+				}).then((res) => {
+					if(res.data.status == '00000000') {
 						_this.balanceInfo = res.data.data;
 						console.log(_this.balanceInfo);
-						if(res.data.data.list.length > 0){
+						if(res.data.data.list.length > 0) {
 							_this.list = _this.list.concat(res.data.data.list);
-							if(_this.isload){
+							if(_this.isload) {
 								_this.show = true;
 								_this.showNo = false;
 							}
-						}else{
-							if(_this.isload){
+						} else {
+							if(_this.isload) {
 								_this.show = false;
 								_this.showNo = true;
 							}
 						}
 					}
-				});
-				console.log(_this.type)
+				})
 			},
 			toDetail(id) {
-				this.$router.replace({
+				this.$router.push({
 					name: 'creditrewarddetail',
 					query: {
 						id: id
@@ -161,7 +148,7 @@
 				var _this = this
 				_this.twoIndex = index
 				_this.type = type
-				_this.$router.push({
+				_this.$router.replace({
 					query: _this.merge(_this.$route.query, {
 						'type': type
 					})
@@ -169,7 +156,13 @@
 				_this.show8 = false;
 				_this.list = [];
 
-				_this.getMyBalanceList()
+				_this.getMyPointsList()
+			},
+			lookAll(){
+				this.type = 1
+				this.twoIndex = 0
+				this.list = []
+				this.getMyPointsList()
 			},
 			InitScroll() {
 				this.$nextTick(() => {
@@ -178,7 +171,7 @@
 							click: true,
 							scrollY: true,
 							pullUpLoad: {
-								threshold: -50, // 负值是当上拉到超过低部 70px；正值是距离底部距离 时，                    
+								threshold: -50        
 							}
 						})
 						this.scroll.on('pullingUp', (pos) => {
@@ -197,7 +190,6 @@
 			LoadData() {
 				var _this = this
 				_this.curPage++
-				// _this.getMyBalanceList()
 				_this.isload = true
 			}
 		},

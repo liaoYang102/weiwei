@@ -8,9 +8,7 @@
 				<cell class="list-item" title="密码管理" is-link link="/user/changelist"></cell>
 				<cell class="list-item" title="关于我们" is-link link="/member/setting/about"></cell>
 			</group>
-			<router-link to="/user/reg">
-				<div class="logout-btn" @click="logout">退出登录</div>
-			</router-link>
+			<div class="logout-btn" @click="logout">退出登录</div>
 		</div>
 	</div>
 </template>
@@ -30,7 +28,15 @@
 		},
 		methods: {
 			logout() {
-				sessionStorage.removeItem('userToken')
+				var _this = this;
+				_this.$http.post(_this.url.user.logout, {
+					userId: sessionStorage.getItem('userId'),
+					platformId: _this.url.platformId
+				}).then((res) => {
+					if(res.data.status == '00000000') {
+						console.log(res)
+					}
+				})
 			}
 		},
 		components: {

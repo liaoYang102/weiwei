@@ -131,6 +131,7 @@ methods.forEach(key => {
 })
 
  window.onpopstate = function(e) {
+ 	console.log(e)
     if((Date.now() - endTime) < 377){
     	store.state.page.back = false
     }else{

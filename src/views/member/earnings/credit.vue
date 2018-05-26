@@ -2,7 +2,7 @@
 	<div class="currency-box">
 		<settingHeader :title="title"></settingHeader>
 		<div class="top">
-			<p>753.01</p>
+			<p>{{fundInfo.availablePoints}}</p>
 			<p>当前信用积分</p>
 		</div>
 		<div class="g-list">
@@ -10,7 +10,7 @@
 				<cell class="item" primary="content" is-link @click.native="toRecord">
 					<div class="left">
 						<p>累计信用积分</p>
-						<p>1000.00</p>
+						<p>{{fundInfo.income}}</p>
 					</div>
 				</cell>
 			</group>
@@ -22,12 +22,39 @@
 			</div>
 			<div class="b-list">
 				<group :gutter='0'>
-					<cell class="item" primary="content" is-link v-for="(item, index) in bList" :key="index" @click.native="link(item)">
+					<cell class="item" primary="content" is-link>
 						<div class="left">
-							<img :src="item.img" alt="" />
+							<img :src="'./static/member/czjl.png'" alt="" />
 							<div>
-								<p>{{item.tip}}</p>
-								<p>累计奖励：{{item.money}}</p>
+								<p>充值奖励</p>
+								<p>累计奖励：{{fundInfo.rechargePoints}}</p>
+							</div>
+						</div>
+					</cell>
+					<cell class="item" primary="content" is-link>
+						<div class="left">
+							<img :src="'./static/member/cjjl.png'" alt="" />
+							<div>
+								<p>抽奖奖励</p>
+								<p>累计奖励：{{fundInfo.lotteryPoints}}</p>
+							</div>
+						</div>
+					</cell>
+					<cell class="item" primary="content" is-link>
+						<div class="left">
+							<img :src="'./static/member/rwjl2.png'" alt="" />
+							<div>
+								<p>任务奖励</p>
+								<p>累计奖励：{{fundInfo.taskPoints}}</p>
+							</div>
+						</div>
+					</cell>
+					<cell class="item" primary="content" is-link>
+						<div class="left">
+							<img :src="'./static/member/tjjl.png'" alt="" />
+							<div>
+								<p>推荐用户</p>
+								<p>累计奖励：{{fundInfo.recommendPoints}}</p>
 							</div>
 						</div>
 					</cell>
@@ -45,38 +72,26 @@
 			return {
 				title: '信用积分',
 				thao: './static/member/thao.png',
-				bList: [{
-					    num:0,
-						tip: '充值',
-						money: '400.50',
-						img: './static/member/czjl.png'
-					},
-					{
-						num:1,
-						tip: '购物奖励',
-						money: '200.50',
-						img: './static/member/gwjl.png'
-					},
-					{
-						num:2,
-						tip: '推荐用户',
-						money: '400.50',
-						img: './static/member/tjjl.png'
-					},
-					{
-						num:3,
-						tip: '任务奖励',
-						money: '6700.50',
-						img: './static/member/rwjl2.png'
-					}
-				]
+				fundInfo:{}
 			}
 		},
 		created() {
-
+			this.getFundInfo()
 		},
 		mounted() {},
 		methods: {
+			getFundInfo() {
+				var _this = this
+				_this.$http.get(_this.url.user.getFundInfo, {
+					params: {
+						userId: sessionStorage.getItem('userId')
+					}
+				}).then((res) => {
+					if(res.data.status == "00000000") {
+						_this.fundInfo = res.data.data
+					}
+				})
+			},
 			toRecord(){
 				this.$router.push({
 					name: 'record',
