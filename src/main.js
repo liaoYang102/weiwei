@@ -118,6 +118,12 @@ let isPush = false
 let endTime = Date.now()
 let methods = ['push', 'go', 'replace', 'forward', 'back']
 
+var startX = 0
+//touchStart事件
+document.addEventListener('touchstart', function(event) {
+	startX = event.targetTouches[0].pageX
+}, false)
+//touchend事件
 document.addEventListener('touchend', (e) => {
 	endTime = Date.now()
 })
@@ -130,19 +136,20 @@ methods.forEach(key => {
 	}
 })
 
- window.onpopstate = function(e) {  
-    if((Date.now() - endTime) < 377){
-    	store.state.page.back = false
-    }else{
-    	store.state.page.back = true
-    }
- }
+window.onpopstate = function(e) {
+	if((Date.now() - endTime) < 377) {
+		store.state.page.back = false
+	}else if((Date.now() - endTime) > 377 && startX > 160){
+		store.state.page.back = false
+	} else {
+		store.state.page.back = true
+	}
+}
 
 router.beforeEach(function(to, from, next) {
-	
+
 	const toIndex = history.getItem(to.path)
 	const fromIndex = history.getItem(from.path)
-	
 
 	if(toIndex) {
 		if(!fromIndex || parseInt(toIndex, 10) > parseInt(fromIndex, 10) || (toIndex === '0' && fromIndex === '0')) {
@@ -150,7 +157,7 @@ router.beforeEach(function(to, from, next) {
 			if(!isPush && (Date.now() - endTime) < 377 || !isPush && (Date.now() - endTime) > 377) {
 				if(store.state.page.back) {
 					store.commit('UPDATE_DIRECTION', {
-						direction: ''
+						direction: 'reverse'
 					})
 				} else {
 					store.commit('UPDATE_DIRECTION', {
@@ -213,37 +220,12 @@ router.beforeEach(function(to, from, next) {
 
 router.afterEach(function(to) {
 	isPush = false
+	startX = 0
 	store.commit('UPDATE_DACK', {
 		back: false
 	})
 })
-//const whiteList = ['/user/login', '/index', '/user/reg','/','/member/index'];// 不重定向白名单
-// router.beforeEach((to, from, next) => {
-//     if (store.getters.userstate) { // 
-//         if (to.path === '/user/login') {
-//           next();
-//         } 
-//         else {
-//             //避免F5刷新时，vex数据全无，所以需要重新获取一次数据
-//             if(!store.getters.username){ //判断是否有用户信息 把token换成userInfo
-//                 console.log('未获取到用户',store.getters.username) 
-//                 store.dispatch('setUser').then(res => { 
-//                     next();                 
-//                 }).catch(err => {
-//                     console.log(err);
-//                 });
-//             }
-//         }
-//     } else {  
-//         if (whiteList.indexOf(to.path) !== -1) { // 在免登录白名单，直接进入
-//             next()
-//         } else {
-//             next('/user/login'); // 否则全部重定向到登录页
-//         }
-//     }   
-// });
 
-/* eslint-disable no-new */
 Vue.prototype.vm = new Vue({
 	el: '#app',
 	router,

@@ -2,15 +2,15 @@
 	<div class="currency-box">
 		<settingHeader :title="title"></settingHeader>
 		<div class="top">
-			<p>753.01</p>
+			<p>{{fundInfo.balance}}</p>
 			<p>当前通用积分</p>
 		</div>
 		<div class="g-list">
 			<group :gutter='0'>
-				<cell class="item" primary="content" is-link @click.native="toReward">
+				<cell class="item" primary="content" is-link @click.native="toCurrencyReward('通用积分',1)">
 					<div class="left">
 						<p>累计通用积分</p>
-						<p>1000.00</p>
+						<p>{{fundInfo.income}}</p>
 					</div>
 				</cell>
 			</group>
@@ -22,12 +22,48 @@
 			</div>
 			<div class="b-list">
 				<group :gutter='0'>
-					<cell class="item" primary="content" is-link v-for="(item, index) in bList" :key="index" @click.native="link(item)">
+					<cell class="item" primary="content" is-link @click.native="toCurrencyReward('通用积分',3)">
 						<div class="left">
-							<img :src="item.img" alt="" />
+							<img :src="'./static/member/czjl.png'" alt="" />
 							<div>
-								<p>{{item.tip}}</p>
-								<p>累计奖励：{{item.money}}</p>
+								<p>累计充值</p>
+								<p>累计奖励：{{fundInfo.income}}</p>
+							</div>
+						</div>
+					</cell>
+					<cell class="item" primary="content" is-link @click.native="toCurrencyReward('通用积分',4)">
+						<div class="left">
+							<img :src="'./static/member/gwjl.png'" alt="" />
+							<div>
+								<p>购物奖励</p>
+								<p>累计奖励：{{fundInfo.cashback}}</p>
+							</div>
+						</div>
+					</cell>
+					<cell class="item" primary="content" is-link @click.native="toCurrencyReward('通用积分',6)">
+						<div class="left">
+							<img :src="'./static/member/zjjl.png'" alt="" />
+							<div>
+								<p>中奖奖励</p>
+								<p>累计奖励：{{fundInfo.lottery}}</p>
+							</div>
+						</div>
+					</cell>
+					<cell class="item" primary="content" is-link @click.native="toCurrencyReward('通用积分',5)">
+						<div class="left">
+							<img :src="'./static/member/fhjl.png'" alt="" />
+							<div>
+								<p>分红奖励</p>
+								<p>累计奖励：{{fundInfo.commission}}</p>
+							</div>
+						</div>
+					</cell>
+					<cell class="item" primary="content" is-link @click.native="toCurrencyReward('通用积分',7)">
+						<div class="left">
+							<img :src="'./static/member/rwjl.png'" alt="" />
+							<div>
+								<p>任务奖励</p>
+								<p>累计奖励：{{fundInfo.taskBalance}}</p>
 							</div>
 						</div>
 					</cell>
@@ -45,53 +81,33 @@
 			return {
 				title: '通用积分',
 				thao: './static/member/thao.png',
-				bList: [{
-						tip: '充值',
-						money: '400.50',
-						img: './static/member/czjl.png'
-					},
-					{
-						tip: '购物奖励',
-						money: '200.50',
-						img: './static/member/gwjl.png'
-					},
-					{
-						tip: '分红奖励',
-						money: '400.50',
-						img: './static/member/fhjl.png'
-					},
-					{
-						tip: '任务奖励',
-						money: '6700.50',
-						img: './static/member/rwjl.png'
-					},
-					{
-						tip: '中奖',
-						money: '9900.50',
-						img: './static/member/zjjl.png'
-					},
-				]
+				fundInfo:{}
 			}
 		},
 		created() {
-
+			this.getFundInfo()
 		},
 		mounted() {},
 		methods: {
-			toReward(){
-				this.$router.push({
-					name: 'reward',
-					params:{
-						title:'通用积分'
+			getFundInfo() {
+				var _this = this
+				_this.$http.get(_this.url.user.getFundInfo, {
+					params: {
+						userId: sessionStorage.getItem('userId')
+					}
+				}).then((res) => {
+					if(res.data.status == "00000000") {
+						_this.fundInfo = res.data.data
 					}
 				})
 			},
-			link(item){
+			//跳转通用积分
+			toCurrencyReward(title, type) {
 				this.$router.push({
-					name: 'reward',
-					params:{
-						num:item.num,
-						title:item.tip
+					name: 'currencyreward',
+					query: {
+						title: title,
+						type: type
 					}
 				})
 			}

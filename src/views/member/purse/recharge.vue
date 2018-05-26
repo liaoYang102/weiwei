@@ -17,7 +17,7 @@
 				<div v-for="(item,index) in moneyList" class="row-item" :class="{'moneyActive':index == moneyIndex}" @click="changeMoney(index)">
 					<div class="box">
 						<p>{{item.now}}元</p>
-						<p>{{item.old}}元</p>
+						<p>{{item.old}}</p>
 					</div>
 				</div>
 			</div>
@@ -80,19 +80,35 @@
 					{
 						now: '8000',
 						old: '赠送8000信用积分'
-					},{
+					}, {
 						now: '10000',
 						old: '赠送10000信用积分'
-					},{
+					}, {
 						now: '20000',
 						old: '赠送20000信用积分'
 					},
 				]
 			}
 		},
-		created() {},
+		created() {
+			this.getRechargeList()
+		},
 		mounted() {},
 		methods: {
+			getRechargeList() {
+				var _this = this
+				_this.$http.get(_this.url.user.getRechargeList, {
+					params: {
+						platformId: _this.url.platformId,
+						curPage: _this.curPage,
+						pageSize: _this.pageSize
+					}
+				}).then((res) => {
+					if(res.data.status == "00000000") {
+						console.log(res)
+					}
+				})
+			},
 			changeMoney(index) {
 				this.moneyIndex = index
 			},
@@ -146,7 +162,7 @@
 		background-color: #F5F6FA;
 		.gy {
 			text-align: center;
-			font-size:0.24rem;
+			font-size: 0.24rem;
 			font-family: PingFangSC-Regular;
 			color: rgba(144, 162, 199, 1);
 		}
@@ -210,6 +226,7 @@
 						}
 						p:nth-child(2) {
 							font-size: 0.20rem;
+							text-align: center;
 						}
 						img {
 							width: 0.4rem;
@@ -224,7 +241,7 @@
 						color: white;
 						padding: 0 0.15rem;
 						box-sizing: border-box;
-						p:nth-child(2){
+						p:nth-child(2) {
 							font-size: 0.20rem;
 						}
 					}

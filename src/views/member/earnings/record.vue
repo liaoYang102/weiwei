@@ -48,7 +48,7 @@
 	export default {
 		data() {
 			return {
-				title: '累计记录',
+				title: '信用积分累计记录',
 				show: false,
 				showNo: false,
 				isWx: true,

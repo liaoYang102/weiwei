@@ -355,7 +355,7 @@ const memberModule = [{
 		name: 'record',
 		component: record,
 		meta: {
-			title: '累计记录'
+			title: '累计收益'
 		}
 	}, {
 		path: '/member/earnings/currencyreward',
