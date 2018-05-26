@@ -13,17 +13,18 @@
 		</header>
 		<section class="condition">
 			<section class="level">
-				<span class='fl'><img src="../../../assets/images/shop/turn_right.png" alt="" class='left'> 上一级</span>
+				<span class='fl' @click="level = level-1;oldLevel=level"><img src="../../../assets/images/shop/turn_right.png" alt="" class='left'> 上一级</span>
 				<span class="text">满足以下要求可升级VIP2</span>
-				<span class="fr">下一级 <img src="../../../assets/images/shop/turn_right.png" alt=""></span>
+				<span class="fr" @click="level = level+ 1;oldLevel=level">下一级 <img src="../../../assets/images/shop/turn_right.png" alt=""></span>
 			</section>
-			<section class="achieve">
+
+			<section class="achieve" v-if="level == oldLevel">
 				<section class="achieveLeft">
 					<span class="brige">1,100.00</span>
 					<section class="achieveCondition">
 						<section class="recharge fl">
 							<img src="../../../assets/images/member/vip-account.png" alt="">
-							<p class="rechargeName">积分充值</p>
+							<p class="rechargeName">积分充值{{level}}</p>
 						</section>
 						<img src="../../../assets/images/member/vip-right.png" alt="" class='fl'>
 						<span class="rechargePrice fl">120000<span class="text">元</span></span>
@@ -45,6 +46,7 @@
 					<p class="achieveText">再充值840元即可满足条件</p>
 				</section>
 			</section>
+
 		</section>
 		<section class="levelRules">
 			<nav class='fr'>等级规则 <img src="../../../assets/images/shop/turn_right.png" alt=""></nav>
@@ -100,7 +102,9 @@
 	export default {
 		data(){
 			return{
-				title:"会员等级"
+				title:"会员等级",
+				level: 0,
+				oldLevel: 0
 			}
 		},
 		components: {

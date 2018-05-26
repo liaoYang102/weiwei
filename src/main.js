@@ -143,6 +143,7 @@ router.beforeEach(function(to, from, next) {
 	
 	const toIndex = history.getItem(to.path)
 	const fromIndex = history.getItem(from.path)
+	
 
 	if(toIndex) {
 		if(!fromIndex || parseInt(toIndex, 10) > parseInt(fromIndex, 10) || (toIndex === '0' && fromIndex === '0')) {
@@ -150,7 +151,7 @@ router.beforeEach(function(to, from, next) {
 			if(!isPush && (Date.now() - endTime) < 377 || !isPush && (Date.now() - endTime) > 377) {
 				if(store.state.page.back) {
 					store.commit('UPDATE_DIRECTION', {
-						direction: 'reverse'
+						direction: ''
 					})
 				} else {
 					store.commit('UPDATE_DIRECTION', {
@@ -176,7 +177,7 @@ router.beforeEach(function(to, from, next) {
 				}
 			} else {
 				store.commit('UPDATE_DIRECTION', {
-					direction: 'reverse'
+					direction: ''
 				})
 			}
 		}

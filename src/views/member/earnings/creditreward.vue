@@ -24,7 +24,11 @@
 										<p>{{item.remark}}</p>
 										<p>{{item.createTime}}</p>
 									</div>
+<<<<<<< HEAD
 									<p class="red">{{item.directType == 1?'+':'-'}} {{item.point}}</p>
+=======
+									<p class="red">{{item.directType == 1?'+':'-'}}{{item.point}}</p>
+>>>>>>> c7d0dccd07a1c11a46e9c51c9017e922255f4db7
 								</li>
 							</ul>
 						</div>
@@ -90,6 +94,7 @@
 			}
 		},
 		created() {
+<<<<<<< HEAD
 			this.type = this.$route.query.type
 			if(this.$route.query.type == 3) {
 				this.twoIndex = 2
@@ -102,11 +107,36 @@
 			}
 
 			this.getMyPointsList()
+=======
+			console.log(this.$route.query)
+			// console.log(sessionStorage.getItem('userId'))
+			//改变微信端title
+			if(this.$route.query.title) {
+				this.title = this.$route.query.title
+				document.title = this.$route.query.title
+			}
+
+			//设置筛选对应选中状态
+			if(this.$route.query.title == '信用积分') {
+				this.type = this.$route.query.type
+				this.getMyBalanceList();
+				if(this.$route.query.type == 3) {
+					this.twoIndex = 2
+				} else if(this.$route.query.type == 2) {
+					this.twoIndex = 1
+				} else if(this.$route.query.type == 6) {
+					this.twoIndex = 3
+				} else if(this.$route.query.type == 5) {
+					this.twoIndex = 4
+				}
+			}
+>>>>>>> c7d0dccd07a1c11a46e9c51c9017e922255f4db7
 		},
 		mounted() {
 			this.InitScroll()
 		},
 		methods: {
+<<<<<<< HEAD
 			getMyPointsList(type) {
 
 				var _this = this;
@@ -129,15 +159,43 @@
 							}
 						} else {
 							if(_this.isload) {
+=======
+			getMyBalanceList(type) {
+
+				// console.log(type)
+
+				var _this=this;
+				_this.$http.get(_this.url.user.getMyPointsList,{
+					params:{
+						userId:sessionStorage.getItem('userId'),
+						type:_this.type,
+						curPage:_this.curPage,
+						pageSize:_this.pageSize
+					}
+				}).then((res)=>{
+					if(res.data.status == '00000000'){
+						_this.balanceInfo = res.data.data;
+						console.log(_this.balanceInfo);
+						if(res.data.data.list.length > 0){
+							_this.list = _this.list.concat(res.data.data.list);
+							if(_this.isload){
+								_this.show = true;
+								_this.showNo = false;
+							}
+						}else{
+							if(_this.isload){
+>>>>>>> c7d0dccd07a1c11a46e9c51c9017e922255f4db7
 								_this.show = false;
 								_this.showNo = true;
 							}
 						}
+						
 					}
-				})
+				});
+				console.log(_this.type)
 			},
 			toDetail(id) {
-				this.$router.push({
+				this.$router.replace({
 					name: 'creditrewarddetail',
 					query: {
 						id: id
@@ -190,6 +248,10 @@
 			LoadData() {
 				var _this = this
 				_this.curPage++
+<<<<<<< HEAD
+=======
+				// _this.getMyBalanceList()
+>>>>>>> c7d0dccd07a1c11a46e9c51c9017e922255f4db7
 				_this.isload = true
 			}
 		},
