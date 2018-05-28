@@ -3,6 +3,7 @@
 		<!-- <drawHeader :title="title"></drawHeader> -->
 		<div class="wrapper" ref="wrapper">
 			<div class="content">
+				<settingHeader :title="title"></settingHeader>
 				<div class="head">
 					<span class="receiveText">中奖信息</span>
 					<span class="receiveMoney">张三先生恭喜您获得一等奖五千元</span>
@@ -71,11 +72,11 @@
 
 <script>
 	import { XInput, XDialog} from 'vux'
-	import drawHeader from './components/header'
+	import settingHeader from '../../components/setting_header'
 	import BScroll from 'better-scroll'
 	export default {
 	  components: {
-	    XInput,drawHeader,XDialog
+	    XInput,settingHeader,XDialog
 	  },
 	  data(){
 	  	return {

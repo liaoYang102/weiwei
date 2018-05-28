@@ -2,7 +2,7 @@
 	<section style="height: 100%;background-color: #E32921;">
 		<div class="wrapper" ref="wrapper">
 			<div class="content">
-				<!-- <drawHeader :title="title"></drawHeader> -->
+				<settingHeader :title="title"></settingHeader>
 				<!-- 轮播 -->
 				<!-- <swiper :options="swiperOption" class="swiper">
 			        <swiper-slide v-for="item in imgList">
@@ -49,11 +49,11 @@
 	import Loading from '../../components/loading'
 	import noMore from '../../components/noMore'
 	import { swiper, swiperSlide } from 'vue-awesome-swiper'
-	import drawHeader from './components/header'
+	import settingHeader from '../../components/setting_header'
 	import url from '../../config/url'
 	export default {
 		components: {
-			Loading,noMore,swiper, swiperSlide, drawHeader
+			Loading,noMore,swiper, swiperSlide, settingHeader
 		},
 		data(){
 			return {
