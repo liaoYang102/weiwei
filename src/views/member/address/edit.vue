@@ -88,7 +88,7 @@
 						arrData.forEach(function(item) {
 							temp = {
 								name: item.name,
-								value: item.id
+								value: item.areaId
 							}
 							_this.list.push(temp)
 						})
@@ -96,7 +96,7 @@
 						arrData.forEach(function(item) {
 							temp = {
 								name: item.name,
-								value: item.id,
+								value: item.areaId,
 								parent: item.parentId + ''
 							}
 							_this.list.push(temp)

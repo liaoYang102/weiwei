@@ -4,7 +4,7 @@
 		<div class="h">
 			<div class="top">
 				<p>{{balanceInfo.totalBalance}}</p>
-				<p>累计奖励</p>
+				<p>{{typeTitle}}</p>
 			</div>
 			<div class="screen-box">
 				<div @click="lookAll">
@@ -42,7 +42,7 @@
 				<div class="position-vertical-demo">
 					<div class="twoClass">
 						<div class="type-item" v-for="(item,index) in xyClass">
-							<span :class="{'twoActive':twoIndex == index}" @click="twoChange(index,item.type)">{{item.title}}</span>
+							<span :class="{'twoActive':twoIndex == index}" @click="twoChange(index,item)">{{item.title}}</span>
 						</div>
 					</div>
 				</div>
@@ -86,19 +86,26 @@
 				pageSize: 20,
 				balanceInfo: {},
 				type: '',
-				isload: false
+				isload: false,
+				typeTitle:''
 			}
 		},
 		created() {
 			this.type = this.$route.query.type
 			if(this.$route.query.type == 3) {
 				this.twoIndex = 2
+				this.typeTitle = '充值奖励'
 			} else if(this.$route.query.type == 2) {
 				this.twoIndex = 1
+				this.typeTitle = '消费奖励'
 			} else if(this.$route.query.type == 6) {
 				this.twoIndex = 3
+				this.typeTitle = '中奖奖励'
 			} else if(this.$route.query.type == 5) {
 				this.twoIndex = 4
+				this.typeTitle = '推荐用户奖励'
+			}else if(this.$route.query.type == 1){
+				this.typeTitle = '全部奖励'
 			}
 
 			this.getMyPointsList()
@@ -119,10 +126,9 @@
 					}
 				}).then((res) => {
 					if(res.data.status == '00000000') {
-						_this.balanceInfo = res.data.data;
-						console.log(_this.balanceInfo);
-						if(res.data.data.list.length > 0) {
-							_this.list = _this.list.concat(res.data.data.list);
+						_this.balanceInfo = res.data.data
+						if(res.data.data.pageBean.list.length > 0) {
+							_this.list = _this.list.concat(res.data.data.pageBean.list)
 							if(_this.isload) {
 								_this.show = true;
 								_this.showNo = false;
@@ -144,13 +150,14 @@
 					}
 				})
 			},
-			twoChange(index, type) {
+			twoChange(index, item) {
 				var _this = this
 				_this.twoIndex = index
-				_this.type = type
+				_this.type = item.type
+				_this.typeTitle = item.title
 				_this.$router.replace({
 					query: _this.merge(_this.$route.query, {
-						'type': type
+						'type': item.type
 					})
 				})
 				_this.show8 = false;
@@ -161,6 +168,7 @@
 			lookAll() {
 				this.type = 1
 				this.twoIndex = 0
+				this.typeTitle = '全部奖励'
 				this.list = []
 				this.getMyPointsList()
 			},
