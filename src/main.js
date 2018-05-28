@@ -183,7 +183,7 @@ router.beforeEach(function(to, from, next) {
 				}
 			} else {
 				store.commit('UPDATE_DIRECTION', {
-					direction: 'reverse'
+					direction: ''
 				})
 			}
 		}
