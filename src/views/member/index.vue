@@ -7,7 +7,7 @@
 					<router-link to="/member/setting/index"><img class="setting-img" src="../../assets/images/member/shezi.png" /></router-link>
 					<div class="avatar">
 						<router-link to="/member/info/index">
-							<img :src="images" alt="" />
+							<img :src="images?images:'./static/images/mrtx.png'" alt="" />
 						</router-link>
 						<p class="nickname">{{userInfo.nickname}}</p>
 						<p class="status">{{userInfo.levelName}}</p>
@@ -162,7 +162,6 @@
 						userId: sessionStorage.getItem('userId')
 					}
 				}).then((res) => {
-					console.log(res)
 					if(res.data.status == "00000000") {
 						_this.userInfo = res.data.data
 						if(res.data.data.avatar.original) {

@@ -27,7 +27,7 @@
 							<img :src="'./static/member/czjl.png'" alt="" />
 							<div>
 								<p>累计充值</p>
-								<p>累计奖励：{{fundInfo.income}}</p>
+								<p>累计奖励：{{fundInfo.recharge}}</p>
 							</div>
 						</div>
 					</cell>

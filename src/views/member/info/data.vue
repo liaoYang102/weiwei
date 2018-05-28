@@ -7,7 +7,7 @@
 				<cell class="list-item" title="出生日期" :value="birthday" is-link @click.native="showDate"></cell>
 				<cell class="list-item" title="最高学历" :value="education" is-link @click.native="showrec = true"></cell>
 			</group>
-			<group>
+			<group class="input-div">
 				<cell class="list-item" title="微信号">
 					<x-input class="input-item" ref="wx" v-model="wxnum" :value="wxnum" text-align="right" placeholder="未设置" type="text" @on-change="wxChange"></x-input>
 				</cell>

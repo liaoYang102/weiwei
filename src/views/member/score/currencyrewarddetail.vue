@@ -6,26 +6,19 @@
 				<div class="box-h">
 					<div class="top">
 						<div>
-							<p>{{balanceDetail.balance}}</p>
-							<p v-if="balanceDetail.type == 1">消费</p>
-							<p v-if="balanceDetail.type == 2">用户充值</p>
-							<p v-if="balanceDetail.type == 3">后台充值</p>
-							<p v-if="balanceDetail.type == 4">购物奖励</p>
-							<p v-if="balanceDetail.type == 5">分红奖励</p>
-							<p v-if="balanceDetail.type == 6">中奖奖励</p>
-							<p v-if="balanceDetail.type == 7">任务奖励</p>
-							<p v-if="balanceDetail.type == 8">新人奖励</p>
+							<p>{{balanceDetail.directType==1?'+':'-'}} {{balanceDetail.balance}}</p>
+							<p>{{balanceDetail.remark}}</p>
 						</div>
 					</div>
 					<div class="bottom">
 						<card>
 							<div slot="content" class="card-demo-flex card-demo-content01">
 								<div class="vux-1px-r">
-									<p>5000.0</p>
+									<p>{{balanceDetail.profit}}</p>
 									<span>到账收益</span>
 								</div>
 								<div class="vux-1px-r">
-									<p>500.0</p>
+									<p>{{balanceDetail.forzenProfit}}</p>
 									<span>总计收益</span>
 								</div>
 							</div>
@@ -42,8 +35,9 @@
 					<cell class="info-item" title="说明" :value="balanceDetail.remark"></cell>
 					<cell class="info-item" title="创建时间" :value="balanceDetail.createTime"></cell>
 					<cell class="info-item" title="订单编号" :value="balanceDetail.orderSn" v-if="balanceDetail.type == 2 || balanceDetail.type == 4"></cell>
-					<cell class="info-item" :title="balanceDetail.mobile" v-if="balanceDetail.type == 5">
+					<cell class="info-item" :title="balanceDetail.nickname" v-if="balanceDetail.type == 5">
 						<div class="up-box">
+							<span>{{balanceDetail.mobile}}</span>
 							<img class="tx" :src="'./static/images/mrtx.png'" />
 						</div>
 					</cell>

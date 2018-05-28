@@ -4,7 +4,7 @@
 		<div class="h">
 			<div class="top">
 				<p>{{balanceInfo.totalBalance}}</p>
-				<p>累计奖励</p>
+				<p>{{typeTitle}}</p>
 			</div>
 			<div class="screen-box">
 				<div @click="lookAll">
@@ -42,7 +42,7 @@
 				<div class="position-vertical-demo">
 					<div class="twoClass">
 						<div class="type-item" v-for="(item,index) in tyClass">
-							<span :class="{'twoActive':twoIndex == index}" @click="twoChange(index,item.type)">{{item.title}}</span>
+							<span :class="{'twoActive':twoIndex == index}" @click="twoChange(index,item)">{{item.title}}</span>
 						</div>
 					</div>
 				</div>
@@ -60,13 +60,14 @@
 	export default {
 		data() {
 			return {
-				title: '奖励',
+				title: '通用积分奖励',
 				show: false,
 				showNo: false,
 				show8: false,
 				twoIndex: 0,
+				typeTitle:'',
 				tyClass: [{
-					title: '全部',
+					title: '全部奖励',
 					type: 1
 				}, {
 					title: '消费',
@@ -100,14 +101,23 @@
 			//设置对应筛选INDEX
 			if(this.$route.query.type == 3) {
 				this.twoIndex = 2
+				this.typeTitle = '累计充值'
 			} else if(this.$route.query.type == 4) {
 				this.twoIndex = 3
+				this.typeTitle = '购物奖励'
 			} else if(this.$route.query.type == 6) {
 				this.twoIndex = 4
+				this.typeTitle = '中奖奖励'
 			} else if(this.$route.query.type == 5) {
 				this.twoIndex = 5
+				this.typeTitle = '分红奖励'
 			} else if(this.$route.query.type == 7) {
 				this.twoIndex = 6
+				this.typeTitle = '任务奖励'
+			}else if(this.$route.query.type == 1){
+				this.typeTitle = '全部奖励'
+			}else if(this.$route.query.type == 2){
+				this.typeTitle = '消费'
 			}
 			this.getMyBalanceList()
 		},
@@ -126,9 +136,10 @@
 					}
 				}).then((res) => {
 					if(res.data.status == "00000000") {
+						console.log(res.data.data)
 						_this.balanceInfo = res.data.data
-						if(res.data.data.list.length > 0) {
-							_this.list = _this.list.concat(res.data.data.list)
+						if(res.data.data.pageBean.list.length > 0) {
+							_this.list = _this.list.concat(res.data.data.pageBean.list)
 							if(_this.isload) {
 								_this.show = true
 								_this.showNo = false
@@ -150,13 +161,14 @@
 					}
 				})
 			},
-			twoChange(index, type) {
+			twoChange(index, item) {
 				var _this = this
 				_this.twoIndex = index
-				_this.type = type
+				_this.type = item.type
+				_this.typeTitle = item.title
 				_this.$router.replace({
 					query: _this.merge(_this.$route.query, {
-						'type': type
+						'type': item.type
 					})
 				})
 				_this.show8 = false
@@ -167,6 +179,7 @@
 			lookAll(){
 				this.type = 1
 				this.twoIndex = 0
+				_this.typeTitle = '全部奖励'
 				this.list = []
 				this.getMyBalanceList()
 			},
