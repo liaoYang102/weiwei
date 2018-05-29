@@ -1,6 +1,6 @@
 <template>
 	<section style="background-color: #F3F3F3;height: 100%;">
-		<!-- <settingHeader :title="title"></settingHeader> -->
+		<settingHeader :title="title"></settingHeader>
 		<div class="content">
 			<p class="title left">番禺国美店周末幸运大抽奖</p>
 			<p class="times left">12356期</p>

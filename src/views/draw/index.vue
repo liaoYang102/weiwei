@@ -2,7 +2,7 @@
 	<section style="height: 100%;background: #E32921;">
 		<div class="wrapper" ref="wrapper">
 			<div class="content">
-				<!-- <drawHeader :title="title"></drawHeader> -->
+				<settingHeader :title="title"></settingHeader>
 
 				<div class="head">
 					<img src="../../assets/images/draw/lottery_index1.png">
@@ -74,11 +74,11 @@
 	import BScroll from 'better-scroll'
 	import Loading from '../../components/loading'
 	import noMore from '../../components/noMore'
-	import drawHeader from './components/header'
+	import settingHeader from '../../components/setting_header'
 	import url from '../../config/url'
 	export default {
 		components: {
-			Loading,noMore,drawHeader
+			Loading,noMore,settingHeader
 		},
 		data(){
 			return {

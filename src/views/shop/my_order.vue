@@ -23,17 +23,20 @@
 			    				<div class="clear"></div>
 			    			</div>
 			    			<div class="box-detail" @click="goOrderdetails">
-			    				<div class="shop-detail">
+			    				<div class="shop-detail" v-for="(item,sIndex) in order.shopList">
 			    					<img src="../../assets/images/shop/order_detail1.png" alt="" class='fl'>
 			    					<div class="fl shop-details">
-			    						<p class="shop-name">{{order.shop}}</p>
-			    						<p class="shop-size">{{order.size}}</p>
+			    						<p class="shop-name">{{item.shopname}}</p>
+			    						<p class="shop-size">{{item.size}}</p>
 			    					</div>
 			    					<div class="clear"></div>
 			    				</div>
+			    				<div class="viewAll" v-if="order.shopList.length >= 10" @click.stop="viewAll(index)">
+			    					查看全部 <img src="../../assets/images/shop/dropdown.png">
+			    				</div>
 			    				<div class="shop-total">
 			    					<p class="fr">
-			    						共 {{order.num}} 件 合计：<span class="shop-price">{{order.score}}积分+{{order.money}}元</span>
+			    						共 {{order.shopList.length}} 件 合计：<span class="shop-price">{{order.score}}积分+{{order.money}}元</span>
 			    					</p>
 			    					<div class="clear"></div>
 			    				</div>
@@ -82,27 +85,44 @@
 				imgSrc: './static/shop/noOrder.png', //./static/shop/404.png 页面丢失  //./static/shop/network.png  网络异常
 				status:'暂无订单',//./static/shop/noShop.png 暂无商品
 				orderList: [
-					{	store:'优衣库冒牌店',status: 0,statusContent: '等待买家付款',shop: '女装U宽腿牛仔裤(水洗产品)',size:'颜色:蓝色；尺码:L/170修身',num: '1',score: '100',money: '30',btnStatus: ["付款","取消订单"]
+					{	store:'优衣库冒牌店',status: 0,statusContent: '等待买家付款',
+						shopList:[
+							{shopname: '1女装U宽腿牛仔裤(水洗产品)',size:'颜色:蓝色；尺码:L/170修身',num: '1'},
+							{shopname: '2女装U宽腿牛仔裤(水洗产品)',size:'颜色:蓝色；尺码:L/170修身',num: '1'},
+							{shopname: '3女装U宽腿牛仔裤(水洗产品)',size:'颜色:蓝色；尺码:L/170修身',num: '1'},
+							{shopname: '4女装U宽腿牛仔裤(水洗产品)',size:'颜色:蓝色；尺码:L/170修身',num: '1'},
+							{shopname: '5女装U宽腿牛仔裤(水洗产品)',size:'颜色:蓝色；尺码:L/170修身',num: '1'},
+							{shopname: '6女装U宽腿牛仔裤(水洗产品)',size:'颜色:蓝色；尺码:L/170修身',num: '1'},
+							{shopname: '7女装U宽腿牛仔裤(水洗产品)',size:'颜色:蓝色；尺码:L/170修身',num: '1'},
+							{shopname: '8女装U宽腿牛仔裤(水洗产品)',size:'颜色:蓝色；尺码:L/170修身',num: '1'},
+							{shopname: '9女装U宽腿牛仔裤(水洗产品)',size:'颜色:蓝色；尺码:L/170修身',num: '1'},
+							{shopname: '10女装U宽腿牛仔裤(水洗产品)',size:'颜色:蓝色；尺码:L/170修身',num: '1'}
+						],
+						score: '100',money: '30',btnStatus: ["付款","取消订单"]
 					},
-					{	store:'优衣库专卖店',status: 1,statusContent: '买家已付款',shop: '女装U宽腿牛仔裤(水洗产品)',size:'颜色:蓝色；尺码:L/170修身',num: '1',score: '100',money: '30',btnStatus: ["提醒发货"]
+					{	store:'优衣库专卖店',status: 1,statusContent: '买家已付款',
+						shopList:[{shopname: '女装U宽腿牛仔裤(水洗产品)',size:'颜色:蓝色；尺码:L/170修身',num: '1'}],score: '100',money: '30',btnStatus: ["提醒发货"]
 					},
-					{	store:'优衣库专卖店',status: 2,statusContent: '卖家已发货',shop: '女装U宽腿牛仔裤(水洗产品)',size:'颜色:蓝色；尺码:L/170修身',num: '1',score: '100',money: '30',btnStatus: ["确认收货","查看物流"]
+					{	store:'优衣库专卖店',status: 2,statusContent: '卖家已发货',shopList:[{shopname: '女装U宽腿牛仔裤(水洗产品)',size:'颜色:蓝色；尺码:L/170修身',num: '1'}],score: '100',money: '30',btnStatus: ["确认收货","查看物流"]
 					},
-					{	store:'优衣库专卖店',status: 3,statusContent: '交易成功',shop: '女装U宽腿牛仔裤(水洗产品)',size:'颜色:蓝色；尺码:L/170修身',num: '1',score: '100',money: '30',btnStatus: ["确认收货","退货","查看物流"]
+					{	store:'优衣库专卖店',status: 3,statusContent: '交易成功',shopList:[{shopname: '女装U宽腿牛仔裤(水洗产品)',size:'颜色:蓝色；尺码:L/170修身',num: '1'}],score: '100',money: '30',btnStatus: ["确认收货","退货","查看物流"]
 					},
-					{	store:'优衣库冒牌店',status: 4,statusContent: '交易关闭',shop: '女装U宽腿牛仔裤(水洗产品)',size:'颜色:蓝色；尺码:L/170修身',num: '1',score: '100',money: '30',btnStatus: ["删除订单"]
+					{	store:'优衣库冒牌店',status: 4,statusContent: '交易关闭',shopList:[{shopname: '女装U宽腿牛仔裤(水洗产品)',size:'颜色:蓝色；尺码:L/170修身',num: '1'}],score: '100',money: '30',btnStatus: ["删除订单"]
 					}
 				],
 				allList: [
-					{	store:'优衣库冒牌店',status: 0,statusContent: '等待买家付款',shop: '女装U宽腿牛仔裤(水洗产品)',size:'颜色:蓝色；尺码:L/170修身',num: '1',score: '100',money: '30',btnStatus: ["付款","取消订单"]
+					{	store:'优衣库冒牌店',status: 0,statusContent: '等待买家付款',
+						shopList:[{shopname: '女装U宽腿牛仔裤(水洗产品)',size:'颜色:蓝色；尺码:L/170修身',num: '1'}],
+						score: '100',money: '30',btnStatus: ["付款","取消订单"]
 					},
-					{	store:'优衣库专卖店',status: 1,statusContent: '买家已付款',shop: '女装U宽腿牛仔裤(水洗产品)',size:'颜色:蓝色；尺码:L/170修身',num: '1',score: '100',money: '30',btnStatus: ["提醒发货"]
+					{	store:'优衣库专卖店',status: 1,statusContent: '买家已付款',
+						shopList:[{shopname: '女装U宽腿牛仔裤(水洗产品)',size:'颜色:蓝色；尺码:L/170修身',num: '1'}],score: '100',money: '30',btnStatus: ["提醒发货"]
 					},
-					{	store:'优衣库专卖店',status: 2,statusContent: '卖家已发货',shop: '女装U宽腿牛仔裤(水洗产品)',size:'颜色:蓝色；尺码:L/170修身',num: '1',score: '100',money: '30',btnStatus: ["确认收货","查看物流"]
+					{	store:'优衣库专卖店',status: 2,statusContent: '卖家已发货',shopList:[{shopname: '女装U宽腿牛仔裤(水洗产品)',size:'颜色:蓝色；尺码:L/170修身',num: '1'}],score: '100',money: '30',btnStatus: ["确认收货","查看物流"]
 					},
-					{	store:'优衣库专卖店',status: 3,statusContent: '交易成功',shop: '女装U宽腿牛仔裤(水洗产品)',size:'颜色:蓝色；尺码:L/170修身',num: '1',score: '100',money: '30',btnStatus: ["确认收货","退货","查看物流"]
+					{	store:'优衣库专卖店',status: 3,statusContent: '交易成功',shopList:[{shopname: '女装U宽腿牛仔裤(水洗产品)',size:'颜色:蓝色；尺码:L/170修身',num: '1'}],score: '100',money: '30',btnStatus: ["确认收货","退货","查看物流"]
 					},
-					{	store:'优衣库冒牌店',status: 4,statusContent: '交易关闭',shop: '女装U宽腿牛仔裤(水洗产品)',size:'颜色:蓝色；尺码:L/170修身',num: '1',score: '100',money: '30',btnStatus: ["删除订单"]
+					{	store:'优衣库冒牌店',status: 4,statusContent: '交易关闭',shopList:[{shopname: '女装U宽腿牛仔裤(水洗产品)',size:'颜色:蓝色；尺码:L/170修身',num: '1'}],score: '100',money: '30',btnStatus: ["删除订单"]
 					}
 				]
 			}
@@ -273,6 +293,23 @@
 		    	}
 		    	this.orderList = arr;
 		    	this.$nextTick();
+		    },
+		    // 查看全部
+		    viewAll(o){
+		    	let a = {shopname: '11女装U宽腿牛仔裤(水洗产品)',size:'颜色:蓝色；尺码:L/170修身',num: '1'}
+		    	if(this.orderList[o].shopList.length == 10){
+		    		this.orderList[o].shopList.push(a)
+		    	}else if(this.orderList[o].shopList.length > 10){
+		    		this.orderList[o].shopList.pop()
+		    	}
+		    	console.log('this.orderList[o].shopList',this.orderList[o].shopList)
+		    	let imgs = document.getElementsByClassName('viewAll')[0].children[0];
+    			if (imgs.className.indexOf("rotate") == -1) {
+    	            imgs.className = "rotate";
+
+    	        } else {
+    	            imgs.className = "";
+    	        }
 		    }
 		}
 	}
@@ -357,6 +394,24 @@
 						font-size: 0.24rem;
 						color: #90A2C7;
 					}
+				}
+			}
+
+			.viewAll{
+				width: 82.4%;
+				margin: 0.15rem auto;
+				border-radius:4px;
+				border:1px solid #90A2C7;
+				text-align: center;
+				color: #7386AD;
+				font-size: 0.24rem;
+				padding: 0.11rem 0;
+				img{
+					width: 5%;
+					vertical-align: middle;
+				}
+				.rotate{
+					transform: rotate(180deg);
 				}
 			}
 			.shop-total{

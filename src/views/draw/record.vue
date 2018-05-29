@@ -2,6 +2,7 @@
 	<section style="background: #E32921;height: 100%;">
         <div class="wrapper" ref="wrapper">
 			<div class="content">
+				<settingHeader :title="title"></settingHeader>
 		        <div class="recordList">
 					<div v-if="recordList.length==0">
 		        		<div class="noRecord">
@@ -107,10 +108,10 @@
 	import BScroll from 'better-scroll'
 	import Loading from '../../components/loading'
 	import noMore from '../../components/noMore'
-	import drawHeader from './components/header'
+	import settingHeader from '../../components/setting_header'
 	export default {
 		components:{
-			ButtonTab,ButtonTabItem,Loading,noMore,drawHeader,XDialog
+			ButtonTab,ButtonTabItem,Loading,noMore,settingHeader,XDialog
 		},
 		data(){
 			return {

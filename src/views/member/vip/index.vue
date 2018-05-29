@@ -12,41 +12,42 @@
 			</section>
 		</header>
 		<section class="condition">
-			<section class="level">
-				<span class='fl' @click="level = level-1;oldLevel=level"><img src="../../../assets/images/shop/turn_right.png" alt="" class='left'> 上一级</span>
+			<section class="level"><!-- @click="level = level-1;oldLevel=level"   @click="level = level+ 1;oldLevel=level" -->
+				<span class='fl' @click="back"><img src="../../../assets/images/shop/turn_right.png" alt="" class='left'> 上一级</span>
 				<span class="text">满足以下要求可升级VIP2</span>
-				<span class="fr" @click="level = level+ 1;oldLevel=level">下一级 <img src="../../../assets/images/shop/turn_right.png" alt=""></span>
+				<span class="fr" @click="forword">下一级 <img src="../../../assets/images/shop/turn_right.png" alt=""></span>
 			</section>
 
-			<section class="achieve" v-if="level == oldLevel">
-				<section class="achieveLeft">
-					<span class="brige">1,100.00</span>
-					<section class="achieveCondition">
-						<section class="recharge fl">
-							<img src="../../../assets/images/member/vip-account.png" alt="">
-							<p class="rechargeName">积分充值{{level}}</p>
+			<div class="levContent" style="left: -375px;">
+				<section class="achieve left" v-for="(item, index) in 5">
+					<section class="achieveLeft">
+						<span class="brige">1,100.00</span>
+						<section class="achieveCondition">
+							<section class="recharge fl">
+								<img src="../../../assets/images/member/vip-account.png" alt="">
+								<p class="rechargeName">积分充值{{index}}</p>
+							</section>
+							<img src="../../../assets/images/member/vip-right.png" alt="" class='fl'>
+							<span class="rechargePrice fl">120000<span class="text">元</span></span>
+							<section class="clear"></section>
 						</section>
-						<img src="../../../assets/images/member/vip-right.png" alt="" class='fl'>
-						<span class="rechargePrice fl">120000<span class="text">元</span></span>
-						<section class="clear"></section>
+						<p class="achieveText">再充值100元即可满足条件</p>
 					</section>
-					<p class="achieveText">再充值100元即可满足条件</p>
-				</section>
-				<section class="achieveRight">
-					<span class="brige">360</span>
-					<section class="achieveCondition">
-						<section class="recharge fl">
-							<img src="../../../assets/images/member/vip-buy.png" alt="">
-							<p class="rechargeName">消费购物</p>
+					<section class="achieveRight">
+						<span class="brige">360</span>
+						<section class="achieveCondition">
+							<section class="recharge fl">
+								<img src="../../../assets/images/member/vip-buy.png" alt="">
+								<p class="rechargeName">消费购物</p>
+							</section>
+							<img src="../../../assets/images/member/vip-right.png" alt="" class='fl'>
+							<span class="rechargePrice fl">120000<span class="text">元</span></span>
+							<section class="clear"></section>
 						</section>
-						<img src="../../../assets/images/member/vip-right.png" alt="" class='fl'>
-						<span class="rechargePrice fl">120000<span class="text">元</span></span>
-						<section class="clear"></section>
+						<p class="achieveText">再充值840元即可满足条件</p>
 					</section>
-					<p class="achieveText">再充值840元即可满足条件</p>
 				</section>
-			</section>
-
+			</div>
 		</section>
 		<section class="levelRules">
 			<nav class='fr'>等级规则 <img src="../../../assets/images/shop/turn_right.png" alt=""></nav>
@@ -103,12 +104,39 @@
 		data(){
 			return{
 				title:"会员等级",
-				level: 0,
-				oldLevel: 0
+				level: 1,
 			}
 		},
 		components: {
 			settingHeader,
+		},
+		methods:{
+			back(){
+				this.level --;
+			  	// var newLeft = parseInt(wrap.style.left)+width;
+			  	if(this.level<0){
+  	                this.level = 0;
+  	            }
+  	            this.change()
+			},
+			forword(){
+				this.level ++;
+				// let wrap=document.getElementsByClassName('levContent')[0];
+				// var width = window.innerWidth;
+				// var newLeft = parseInt(wrap.style.left)-width;
+				if(this.level >= 4){
+				    this.level = 4
+				}
+				this.change()
+			},
+			change(){
+				let wrap=document.getElementsByClassName('levContent')[0];
+				var width = window.innerWidth;
+				wrap.style.left = 0 +'px';
+				let dis = -(width * this.level)
+			    wrap.style.transform = 'translate3d(' + dis + 'px, 0, 0)'; 
+   				wrap.style.transition = 'transform .2s ease-out'; 
+			}
 		}
 	}
 </script>
@@ -154,6 +182,8 @@
 			padding: 0.28rem 0.24rem;
 			position: relative;
 			box-shadow: 0px 2px 30px 0px rgba(26,38,66,0.1);
+			overflow: hidden;
+			height: 3rem;
 			.level{
 				text-align: center;
 				.fl,.fr{
@@ -165,6 +195,7 @@
 					}
 					.left{
 						transform: rotate(180deg);
+						margin-top: 0.08rem;
 					}
 				}
 				.text{
@@ -173,7 +204,14 @@
 					color: #1A2642;
 				}
 			}
+			.levContent{
+				position: absolute;
+				width: 40rem;
+				height: 2.42rem;
+				z-index: 2;
+			}
 			.achieve{
+				width: 7.5rem;
 				margin-top: 0.3rem;
 				display: flex;
 				.achieveLeft{
@@ -295,6 +333,9 @@
 						color: #90A2C7;
 					}
 				}
+			}
+			.left{
+				float: left;
 			}
 		}
 		.levelRules{

@@ -1,6 +1,7 @@
 <template>
 	<section style="background-color: #E32921;height: 100%;">
         <div class="luckyrank">
+        	<settingHeader :title="title"></settingHeader>
         	<tab active-color="#E32921" custom-bar-width="80px" default-color="#333">
 		      	<tab-item selected @on-item-click="showNumber">中奖次数</tab-item>
 		      	<tab-item @on-item-click="showMoney">中奖累计金额</tab-item>
@@ -109,7 +110,7 @@
 	import BScroll from 'better-scroll'
 	import Loading from '../../components/loading'
 	import noMore from '../../components/noMore'
-	import drawHeader from './components/header'
+	import settingHeader from '../../components/setting_header'
 	import url from '../../config/url'
 	import Qs from 'qs'
 	export default {
@@ -130,7 +131,7 @@
 			}
 		},
 		components:{
-			ButtonTab,ButtonTabItem,Loading,noMore,drawHeader
+			ButtonTab,ButtonTabItem,Loading,noMore,settingHeader
 		},
 		beforeCreate:function(){
 			// this.getLuckRankData()
