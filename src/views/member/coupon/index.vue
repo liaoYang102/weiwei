@@ -17,17 +17,36 @@
 				<div class="content">
 					<div v-if="couponList.length>0">
 						<div v-for="(item,index) in couponList" :style="[!item.show?mb:'']">
-							<div class="rollOne" :class="[{'red':item.bq == 1},{'blue':item.bq == 0},{'gq':item.timeout}]">
-								<div class="left">
-									<p><i>￥</i>{{item.money}}</p>
-									<p>{{item.emoney}}</p>
-								</div>
+							<div class="rollOne">
+								
 								<div class="right">
 									<div class="top">
-										<span>{{item.bq == 1?'官方':'商家'}}</span><span>{{item.type}}</span>
+										<!-- <span>{{item.bq == 1?'官方':'商家'}}</span> --><span>{{item.type}}</span>
+										<span>仅可购买服饰类/护肤类/彩妆类的部分商品</span>
 									</div>
-									<div class="middle">{{item.time}}</div>
-									<div class="bottom" @click="item.show = !item.show">查看详情</div>
+									<div class="middle">
+										<div>
+										 	<span>满500元减100元</span> <br>
+										 	<span>{{item.time}}</span>
+										</div>
+										<div class="bottom" @click="item.show = !item.show">查看详情 <img :src="iconImg"></div>
+									</div>
+									
+								</div>
+								<div class="left">
+									<!-- <img src="../../../../static/member/yhq-redBg.png" v-if="item.bq == 1" class="img">
+									<img src="../../../../static/member/yhq-blueBg.png" v-else-if="item.bq == 0" class="img">
+									<img src="../../../../static/member/yhq-grayBg.png" v-else class="img"> -->
+									<div class="img" :class="[{'red':item.bq == 1},{'blue':item.bq == 0},{'gq':item.timeout}]"></div>
+									<div v-if="item.bq == 1">
+										<p><i>￥</i>{{item.money}}</p>
+									</div>
+									<div v-if="item.bq == 0" style="width:50%;margin: 0 auto;text-align: center;margin-bottom: 0.2rem;">
+										<img src="../../../../static/member/type3.png" style="width:100%;">
+									</div>
+									
+									<div class="useBtn">去使用</div>
+									<!-- <p>{{item.emoney}}</p> -->
 								</div>
 							</div>
 							<div class="detail" v-if="item.show">
@@ -108,8 +127,21 @@
 						emoney: '满100元减5元',
 						timeout: true,
 						show:false
+					},
+					{
+						bq: '0',
+						tip: '仅限威伐光门店使用',
+						time: '2018.03.29-2018.04.08',
+						type: '体验券',
+						money: '100',
+						emoney: '满100元减5元',
+						timeout: true,
+						show:false
 					}
-				]
+				],
+				getCoupon: null,
+				tagImg: './static/member/yhq-redBg.png',
+				iconImg: './static/member/yhq-down.png'
 			}
 		},
 		created() {
@@ -124,6 +156,7 @@
 		},
 		mounted: function() {
 			this.InitScroll() //初始化下拉组件
+			this.getCouponList()
 		},
 		methods: {
 			onItemClick(index) {
@@ -183,7 +216,26 @@
 					_this.show = false
 					_this.showNo = true
 				}
-			}
+			},
+			//获取优惠券
+			getCouponList() {
+				var _this = this
+				_this.$http.get(_this.url.user.getUserCouponList, {
+					params: {
+						userId: 'appUser796345684600000001',
+						type: 0,
+						status: 0,
+						curPage: 1,
+						pageSize: 20
+					}
+				}).then((res) => {
+					console.log('--11',res);
+					if(res.data.status == "00000000") {
+						console.log('---coupon', res)
+						_this.getCoupon = res.data.data
+					}
+				})
+			},
 		},
 		components: {
 			Tab,
@@ -276,18 +328,10 @@
 				box-sizing: border-box;
 			}
 			.bgImgThree {
-				background: url(../../../assets/images/user/rollBg4.png) no-repeat;
+				/*background: url(../../../assets/images/user/rollBg4.png) no-repeat;*/
 				background-size: 100% 100%;
 			}
-			.red {
-				background: url(../../../assets/images/member/yhq-red.png) no-repeat;
-			}
-			.blue {
-				background: url(../../../assets/images/member/yhq-blue.png) no-repeat;
-			}
-			.gq {
-				background: url(../../../assets/images/member/yhq-gq.png) no-repeat;
-			}
+			
 			.detail{
 				padding: 0.27rem;
 				box-sizing: border-box;
@@ -300,60 +344,102 @@
 				height: 2.16rem;
 				background-size: 100% 100%;
 				display: flex;
+				background: url(../../../assets/images/member/yhq-bg.png) no-repeat;
 				.left {
-					width: 2.66rem;
+					width: 2.12rem;
+					position: relative;
 					display: flex;
 					align-items: center;
 					justify-content: center;
 					flex-direction: column;
 					font-family: MicrosoftYaHei;
-					color: rgba(255, 255, 255, 1);
-					p:nth-child(1) {
+					color: #fff;
+					.img{
+						position: absolute;
+						width: 99%;
+						top: 0.22rem;
+						right: 0;
+						background: url(../../../../static/member/yhq-redBg.png) no-repeat;
+						background-size: 100% 90%;
+						height: -webkit-fill-available;
+					}
+					.red {
+						background: url(../../../../static/member/yhq-redBg.png) no-repeat;
+						background-size: 100% 90%;
+					}
+					.blue {
+						background: url(../../../../static/member/yhq-blueBg.png) no-repeat;
+						background-size: 100% 90%;
+					}
+					.gq {
+						background: url(../../../../static/member/yhq-grayBg.png) no-repeat;
+						background-size: 100% 90%;
+					}
+					div{
+						position: relative;
+						z-index: 12;
+					}
+					p{
+						
 						font-size: 0.68rem;
+						margin-bottom: 0.2rem;
 						i {
 							font-size: 0.39rem;
 						}
 					}
-					p:nth-child(2) {
-						font-size: 0.24rem;
+					.useBtn{
+						position: relative;
+						z-index: 12;
+						width: 1.54rem;
+						text-align: center;
+						background: rgba(255,255,255,0);
+						border: 1px solid #fff;
+						padding: 0.09rem 0;
+						border-radius: 0.3rem;
 					}
+					
 				}
 				.right {
 					flex: 1;
-					padding: 0rem 0.24rem;
+					padding: 0.15rem 0.15rem 0 0.4rem;
 					box-sizing: border-box;
 					display: flex;
 					flex-direction: column;
 					justify-content: space-between;
 					.top {
-						height: 0.35rem;
+						height: auto;
 						line-height: 0.35rem;
 						margin-top: 0.29rem;
-						span:nth-child(1) {
-							width: 0.72rem;
-							background: rgba(255, 83, 101, 1);
-							border-radius: 3px;
-							color: rgba(255, 255, 255, 1);
-							font-size: 0.22rem;
-							display: inline-block;
-							text-align: center;
-							margin-right: 0.2rem;
-						}
-						span:nth-child(2) {
+						word-wrap : break-word ;
+
+						span{
 							font-size: 0.28rem;
 							color: rgba(66, 88, 132, 1);
+							word-wrap : break-word ;
 						}
 					}
 					.middle {
+						width: 100%;
+						position: relative;
+						display: flex;
 						font-size: 0.28rem;
 						color: rgba(144, 162, 199, 1);
+						.bottom {
+							position: absolute;
+							bottom: 0.05rem;
+							right: 0;
+							width: auto;
+							flex: 1;
+							font-size: 0.24rem;
+							color: #425884;
+							img{
+								width: 15%;
+								vertical-align: middle;
+
+							}
+						}
 					}
-					.bottom {
-						height: 0.6rem;
-						line-height: 0.6rem;
-						font-size: 0.24rem;
-						color: rgba(144, 162, 199, 1);
-					}
+					
 				}
 			}
 		}

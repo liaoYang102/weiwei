@@ -33,6 +33,7 @@ var url = {
 		getMyPointsList: uri1 + '/v1/user/getMyPointsList', //获取用户信用积分列表
 		getMyBalanceDetail: uri1 + '/v1/user/getMyBalanceDetail', //获取通用积分详情
 		getMyPointDetail: uri1 + '/v1/user/getMyPointDetail', //获取信用积分详情
+		getUserCouponList: uri1 + '/user/v1/user/getUserCouponList', //获取优惠券列表
 	},
 	qy: {
 		getBasicInfo: uri1 + '/public/v1/enterprise/getBasicInfo', //获取企业基本信息

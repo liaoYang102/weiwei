@@ -218,12 +218,13 @@
 				.li-nav {
 				    text-align: center;
 				    flex: 1;
-				    border-radius: 0.49rem ; 
+				    border-radius: 0.62rem ; 
 				    border: 1px solid #FF2D4F;
 				    margin-right: 0.64rem;
 				    color: #FF3B5A;
 				    font-size: 0.32rem;
-				    padding: 0.25rem 0.6rem; 
+				    padding: 0.25rem 0; 
+				    width: 44.5%;
 				}
 				li:nth-child(2) {
 			      	margin-right: 0;
@@ -233,7 +234,7 @@
                 width:81.5%; 
 				background:linear-gradient(-90deg,rgba(255,92,52,1),rgba(255,42,75,1));
 				box-shadow:0px 0px 30px 0px rgba(255,81,58,0.5);
-				border-radius:0.49rem;
+				border-radius:0.48rem;
 				color: #fff;
 				text-align: center;
 				font-size: 0.32rem;
