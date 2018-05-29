@@ -18,9 +18,14 @@ axios.interceptors.request.use(config => {
 	// isLoading方法
 	Vue.$isload.show()
 
-	let token = sessionStorage.getItem('token')
+	let token = localStorage.getItem('token')
 	let timestamp = Math.round(new Date().getTime() / 1000)
-	let sign = token ? MD5(config.url + timestamp + sessionStorage.getItem('userNp')) : MD5(config.url + timestamp)
+	let sign = ''
+	if(token && config.url.split('/')[2] != 'public') {
+		sign = MD5(config.url + timestamp + localStorage.getItem('userNp'))
+	} else {
+		sign = MD5(config.url + timestamp)
+	}
 	let type = 'application/json;charset=utf-8'
 	let entry = config.url.slice(0, 4)
 	if(entry === 'http') {
@@ -59,34 +64,26 @@ axios.interceptors.response.use(res => { // 响应成功关闭loading
 	})
 	if(res.data.status != '00000000' && res.data.status != 1) {
 		if(res.data.status == '401') {
-			//			Vue.$dialog.show({
-			//				type: 'warning',
-			//				headMessage: '提示',
-			//				message: '暂未登录,请登录',
-			//				buttons: ['确定'],
-			//				delay: 2000,
-			//				ishide() {
-			//					router.push({
-			//						path: '/user/reg'
-			//					})
-			//				},
-			//				confirm() {
-			//					Vue.$dialog.hide()
-			//					router.push({
-			//						path: '/user/reg'
-			//					})
-			//				}
-			//			})
+			store.state.page.isLogin = false
+			router.push({
+				path: '/user/reg'
+			})
 			Vue.$vux.toast.show({
 				text: '请先登录',
 				type: 'text',
 				position: 'middle',
-				width: '50%',
-				onHide() {
-					router.push({
-						path: '/user/reg'
-					})
-				}
+				width: '50%'
+			})
+		} else if(res.data.status == 'utils007') {
+			store.state.page.isLogin = false
+			router.push({
+				path: '/user/reg'
+			})
+			Vue.$vux.toast.show({
+				text: '登录已过期,请重新登录',
+				type: 'text',
+				position: 'middle',
+				width: '60%'
 			})
 		} else {
 			Vue.$vux.toast.show({

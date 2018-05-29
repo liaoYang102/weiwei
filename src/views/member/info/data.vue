@@ -107,7 +107,7 @@
 
 				this.$http.get(_this.url.user.getUserInfo, {
 					params: {
-						userId: sessionStorage.getItem('userId')
+						userId: localStorage.getItem('userId')
 					}
 				}).then((res) => {
 					if(res.data.status == '00000000') {
@@ -238,7 +238,7 @@
 			changeUserInfo() {
 				var _this = this
 
-				if(!_this.mainApp.isemail(_this.email)) {
+				if(!_this.mainApp.isemail(_this.email) && _this.email) {
 					_this.$vux.toast.show({
 						width: '50%',
 						type: 'text',
@@ -248,7 +248,7 @@
 					return false
 				}
 
-				if(!_this.mainApp.isphone(_this.contactnum)) {
+				if(!_this.mainApp.isphone(_this.contactnum) && _this.contactnum) {
 					_this.$vux.toast.show({
 						width: '50%',
 						type: 'text',
@@ -269,7 +269,7 @@
 					egmobile: _this.contactnum,
 					emergency: _this.contact,
 					imageIds: _this.fileIdList.join() + ",",
-					userId: sessionStorage.getItem('userId')
+					userId: localStorage.getItem('userId')
 				}
 				_this.$http.post(_this.url.user.changeUserInfo, data).then((res) => {
 					if(res.data.status == '00000000') {

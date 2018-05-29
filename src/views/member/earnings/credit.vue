@@ -1,7 +1,7 @@
 <template>
 	<div class="currency-box">
 		<settingHeader :title="title"></settingHeader>
-		<div class="top">
+		<div class="top" @click="toCreditReward('通用积分',1)">
 			<p>{{fundInfo.availablePoints}}</p>
 			<p>当前信用积分</p>
 		</div>
@@ -10,7 +10,7 @@
 				<cell class="item" primary="content" is-link @click.native="toCreditReward('信用积分',1)">
 					<div class="left">
 						<p>累计信用积分</p>
-						<p>{{fundInfo.income}}</p>
+						<p>{{fundInfo.totalPoints}}</p>
 					</div>
 				</cell>
 			</group>
@@ -31,6 +31,15 @@
 							</div>
 						</div>
 					</cell>
+					<cell class="item" primary="content" is-link @click.native="toCreditReward('信用积分',2)">
+						<div class="left">
+							<img :src="'./static/member/xfjl.png'" alt="" />
+							<div>
+								<p>消费</p>
+								<p>累计奖励：{{fundInfo.taskPoints}}</p>
+							</div>
+						</div>
+					</cell>
 					<cell class="item" primary="content" is-link @click.native="toCreditReward('信用积分',6)">
 						<div class="left">
 							<img :src="'./static/member/zjjl.png'" alt="" />
@@ -40,21 +49,21 @@
 							</div>
 						</div>
 					</cell>
-					<cell class="item" primary="content" is-link @click.native="toCreditReward('信用积分',2)">
-						<div class="left">
-							<img :src="'./static/member/xfjl.png'" alt="" />
-							<div>
-								<p>消费奖励</p>
-								<p>累计奖励：{{fundInfo.taskPoints}}</p>
-							</div>
-						</div>
-					</cell>
 					<cell class="item" primary="content" is-link @click.native="toCreditReward('信用积分',5)">
 						<div class="left">
 							<img :src="'./static/member/tjjl.png'" alt="" />
 							<div>
 								<p>推荐用户</p>
 								<p>累计奖励：{{fundInfo.recommendPoints}}</p>
+							</div>
+						</div>
+					</cell>
+					<cell class="item" primary="content" is-link @click.native="toCreditReward('信用积分',7)">
+						<div class="left">
+							<img :src="'./static/member/rwjl2.png'" alt="" />
+							<div>
+								<p>任务奖励</p>
+								<p>累计奖励：{{fundInfo.taskPoints}}</p>
 							</div>
 						</div>
 					</cell>
@@ -84,7 +93,7 @@
 				var _this = this
 				_this.$http.get(_this.url.user.getFundInfo, {
 					params: {
-						userId: sessionStorage.getItem('userId')
+						userId: localStorage.getItem('userId')
 					}
 				}).then((res) => {
 					if(res.data.status == "00000000") {

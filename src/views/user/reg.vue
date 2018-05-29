@@ -45,7 +45,7 @@
 	import settingHeader from '../../components/setting_header'
 	import agreement from '@/views/member/setting/agreement'
 	export default {
-		name:'reg',
+		name: 'reg',
 		data() {
 			return {
 				title: '用户登录', //头部标题
@@ -65,7 +65,7 @@
 			}
 		},
 		beforeCreate() {
-			//			if(sessionStorage.getItem('userToken')) {
+			//			if(localStorage.getItem('userToken')) {
 			//				this.$router.go(-1)
 			//			}
 		},
@@ -83,7 +83,7 @@
 					}).then((res) => {
 						if(res.data.status == "00000000") {
 							_this.token = res.data.data.token
-							sessionStorage.setItem('userNp', _this.mobile + res.data.data.randomAccessCode)
+							localStorage.setItem('userNp', _this.mobile + res.data.data.randomAccessCode)
 							_this.isCheckLogin()
 						}
 					})
@@ -100,7 +100,7 @@
 			}, //注册
 			reg() {
 				var _this = this
-				console.log(typeof( _this.code), _this.code)
+				console.log(typeof(_this.code), _this.code)
 				_this.$http.post(this.url.user.userRegister, {
 					mobile: _this.mobile,
 					password: _this.password,
@@ -161,9 +161,10 @@
 					password: _this.password
 				}).then(function(res) {
 					if(res.data.status == "00000000") {
-						sessionStorage.setItem('userToken', res.data.data.userToken)
-						sessionStorage.setItem('userId', res.data.data.userId)
-						sessionStorage.setItem('token', _this.token)
+						//localStorage.setItem('userId', res.data.data.userId)
+						localStorage.setItem('userId', 'appUser2018051900000001')
+						localStorage.setItem('token', _this.token)
+						_this.$store.state.page.isLogin = true
 						_this.$vux.toast.show({
 							width: '50%',
 							type: 'text',
@@ -176,8 +177,8 @@
 							}
 						})
 					} else {
-						sessionStorage.removeItem('userNp')
-						sessionStorage.removeItem('token')
+						localStorage.removeItem('userNp')
+						localStorage.removeItem('token')
 					}
 				})
 			},
@@ -190,14 +191,14 @@
 			},
 			//密码输入改变时
 			passwordChange() {
-				sessionStorage.removeItem('userNp')
-				sessionStorage.removeItem('token')
+				localStorage.removeItem('userNp')
+				localStorage.removeItem('token')
 			},
 			//用户名输入改变时
 			nameChange(val) {
 				var _this = this
-				sessionStorage.removeItem('userNp')
-				sessionStorage.removeItem('token')
+				localStorage.removeItem('userNp')
+				localStorage.removeItem('token')
 				if(val.length == 11) {
 					_this.$refs.phone.blur()
 					_this.$refs.password.focus()
@@ -343,7 +344,7 @@
 			color: #FFFFFF!important;
 			letter-spacing: 0;
 			background-color: #336FFF!important;
-			/*border-radius: 0px!important;*/
+			border-radius: 2px!important;
 			border: none!important;
 		}
 		.login-re {

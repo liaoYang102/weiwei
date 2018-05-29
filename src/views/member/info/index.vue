@@ -17,7 +17,7 @@
 			</group>
 			<group>
 				<cell class="list-item" title="实名认证" :value="auth" is-link link='/member/setting/real'></cell>
-				<cell class="list-item" title="个人档案" is-link link='/member/info/data' primary="content">完整度{{data5}}%</cell>
+				<cell class="list-item" title="个人档案" is-link link='/member/info/data' primary="content">完整度{{userInfo.percentage}}%</cell>
 			</group>
 		</div>
 	</div>
@@ -34,7 +34,6 @@
 				name: "", //用户名
 				varmax: 1, //图片最大张数
 				images: '', //图片数组
-				data5: 88,
 				userInfo: {},
 				auth:''
 			}
@@ -54,7 +53,7 @@
 				var _this = this
 				_this.$http.get(_this.url.user.getBasicInfo, {
 					params: {
-						userId: sessionStorage.getItem('userId')
+						userId: localStorage.getItem('userId')
 					}
 				}).then((res) => {
 					console.log(res)
@@ -70,10 +69,9 @@
 				var _this = this
 				_this.$http.get(_this.url.user.getUserAuthInfo, {
 					params: {
-						userId: sessionStorage.getItem('userId')
+						userId: localStorage.getItem('userId')
 					}
 				}).then((res) => {
-					console.log(res)
 					if(res.data.status == "00000000") {
 						_this.auth = res.data.data.auth
 					}
@@ -99,7 +97,7 @@
 				_this.$http.post(_this.url.user.fileuploadImage, data).then((res) => {
 					if(res.data.status == '00000000') {
 						_this.$http.post(_this.url.user.changeAvatar, {
-							userId: sessionStorage.getItem('userId'),
+							userId: localStorage.getItem('userId'),
 							avatarId: res.data.data.fileId
 						}).then((res) => {
 							_this.images = res.data.data.original

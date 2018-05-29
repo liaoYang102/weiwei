@@ -12,7 +12,7 @@ var url = {
 		fileuploadImage: uri2 + '/v1/fileupload/image', //上传图片
 		login: uri2 + '/public/v1/login', //云中心登录
 		userLogin: uri1 + '/public/v1/user/login', //用户登录
-		logout: uri1 + '/v1/logout', //用户登出
+		logout:uri1 + '/v1/user/logout', //用户登出
 		userRegister: uri1 + '/public/v1/user/register', //用户注册
 		checkUserExistsByMobile: uri1 + '/public/v1/user/checkUserExistsByMobile', //用户是否注册
 		getVerificationCode: uri1 + '/public/v1/sms/getVerificationCode', //获取验证码
@@ -32,6 +32,12 @@ var url = {
 		getMyBalanceList: uri1 + '/v1/user/getMyBalanceList', //获取用户积分列表
 		getMyPointsList: uri1 + '/v1/user/getMyPointsList', //获取用户信用积分列表
 		getMyBalanceDetail: uri1 + '/v1/user/getMyBalanceDetail', //获取通用积分详情
+		getMyPointDetail: uri1 + '/v1/user/getMyPointDetail', //获取信用积分详情
+	},
+	qy: {
+		getBasicInfo: uri1 + '/public/v1/enterprise/getBasicInfo', //获取企业基本信息
+		getThumbInfo: uri1 + '/public/v1/enterprise/getThumbInfo', //获取企业图册
+		getAllianceConcern: uri1 + '/v1/enterprise/getAllianceConcern', //获取用户是否关注联盟企业角色接口
 	},
 	draw: {
 		getReviewLists: 'http://www.cgc999.com/app/index.php?i=7&c=entry&m=mx_shop&do=mobile&r=copy.getReviewLists', //往期回顾

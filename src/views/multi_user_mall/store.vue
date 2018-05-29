@@ -3,18 +3,18 @@
 		<!-- <settingHeader :title='title'></settingHeader> -->
 		<div class="shop">
 			<div class="fl">
-				<img src="../../assets/images/shop/UNIQLO.png" alt="">
+				<img :src="logo" alt="">
 			</div>
 			<div class="fl" style="padding-top:0.13rem;">
-				<p class='shop-name'>优衣库番禺店</p>
+				<p class='shop-name'>{{pinfo.name}}</p>
 				<p class='shop-size'>3.8w关注</p>
 			</div>
 			<div class="clear"></div>
 		</div>
 		<div class="select">
 			<group>
-		      <cell title="店铺号" value="10552555" :border-intent="false"></cell>
-		      <cell title="开店时间" value="2015-12-06 20:24:22" :border-intent="false"></cell>
+		      <cell title="店铺号" :value="pinfo.number" :border-intent="false"></cell>
+		      <cell title="开店时间" :value="pinfo.joinTime" :border-intent="false"></cell>
 		      <cell title="好评率" value="99.5%" :border-intent="false"></cell>
 		    </group>
 		    <group class="center">
@@ -23,15 +23,15 @@
     					<img src="../../assets/images/multi_user_mall/qrcode.png" alt="">
     		      	</cell>
 		    	</router-link>
-		      <cell title="店铺名" value="优衣库" :border-intent="false"></cell>
-		      <cell title="服务电话" value="130293840592" :border-intent="false"></cell>
+		      <cell title="店铺名" :value="pinfo.name" :border-intent="false"></cell>
+		      <cell title="服务电话" :value="pinfo.tel" :border-intent="false"></cell>
 		    </group>
 		    <!-- <group>
 		      <cell title="退款说明" value="选填" :border-intent="false"></cell>
 		    </group> -->
 		    <group style="margin-top:0.2rem">
 		    	<div @click="navigation">
-		    		<cell title="店铺地址" :border-intent="false" is-link></cell>
+		    		<cell title="店铺地址" :value="address" :border-intent="false" is-link></cell>
 		    	</div>
 		    </group>
 		</div>
@@ -43,11 +43,17 @@
 	import { PopupHeader } from 'vux'
 	import { Radio } from 'vux'
 	export default{
+		props:{
+			info:Object
+		},
 		data(){
 			return{
 				title:"店铺信息",
 				show1: false,
 				// timer: '',
+				address:'',
+				pinfo:{},
+				logo:''
 			}
 		},
 		components:{
@@ -56,6 +62,11 @@
 		created(){
 			// document.title = '店铺信息';
 			// var int1 = window.setInterval(this.time,1000);
+			this.pinfo = this.info
+			this.address = this.info.area.province + this.info.area.city
+			if(this.info.logo){
+				this.logo = this.info.logo.original
+			}
 		},
 		methods:{
 			time(){

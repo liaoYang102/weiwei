@@ -10,7 +10,7 @@
 							<p>{{balanceDetail.remark}}</p>
 						</div>
 					</div>
-					<div class="bottom">
+					<div class="bottom" v-if="balanceDetail.type == 1 || balanceDetail.type == 4">
 						<card>
 							<div slot="content" class="card-demo-flex card-demo-content01">
 								<div class="vux-1px-r">
@@ -18,7 +18,7 @@
 									<span>到账收益</span>
 								</div>
 								<div class="vux-1px-r">
-									<p>{{balanceDetail.forzenProfit}}</p>
+									<p>{{total}}</p>
 									<span>总计收益</span>
 								</div>
 							</div>
@@ -31,14 +31,14 @@
 			</div>
 			<section>
 				<group gutter="0">
-					<cell class="info-item" title="来源平台" value=""></cell>
+					<cell class="info-item" title="来源平台" :value="balanceDetail.platformName"></cell>
 					<cell class="info-item" title="说明" :value="balanceDetail.remark"></cell>
 					<cell class="info-item" title="创建时间" :value="balanceDetail.createTime"></cell>
-					<cell class="info-item" title="订单编号" :value="balanceDetail.orderSn" v-if="balanceDetail.type == 2 || balanceDetail.type == 4"></cell>
+					<cell class="info-item" title="订单编号" :value="balanceDetail.orderSn" v-if="balanceDetail.type == 1 || balanceDetail.type == 4"></cell>
 					<cell class="info-item" :title="balanceDetail.nickname" v-if="balanceDetail.type == 5">
 						<div class="up-box">
 							<span>{{balanceDetail.mobile}}</span>
-							<img class="tx" :src="'./static/images/mrtx.png'" />
+							<img class="tx" :src="balanceDetail.avatar.original" />
 						</div>
 					</cell>
 				</group>
@@ -54,7 +54,8 @@
 		data() {
 			return {
 				title: '通用积分详情',
-				balanceDetail: {}
+				balanceDetail: {},
+				total: 0,
 			}
 		},
 		created() {
@@ -69,13 +70,14 @@
 				var _this = this
 				_this.$http.get(_this.url.user.getMyBalanceDetail, {
 					params: {
-						userId: sessionStorage.getItem('userId'),
+						userId: localStorage.getItem('userId'),
 						balanceId: id
 					}
 				}).then((res) => {
 					if(res.data.status == "00000000") {
 						console.log(res.data.data)
 						_this.balanceDetail = res.data.data
+						_this.total = Number(res.data.data.profit + res.data.data.forzenProfit)
 					}
 				})
 			},

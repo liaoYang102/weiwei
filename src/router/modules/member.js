@@ -145,7 +145,7 @@ const memberModule = [{
 	{
 		path: '/member/index',
 		name: 'member',
-		component: member,
+		component: resolve => require(['@/views/member/index'], resolve),
 		meta: {
 			navShow: true,
 			navIndex: 4,

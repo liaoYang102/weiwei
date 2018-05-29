@@ -7,7 +7,7 @@
 			<cell title="中国" value-align="left" class="addr-cell">
 				<x-address :list="list" class="address-item address-check" v-model="addArr" title='' placeholder="请选择地址" value-text-align="left"></x-address>
 			</cell>
-			<x-input class="address-item" placeholder="详细地址" v-model="info.address" :max="11" type="text" required></x-input>
+			<x-input class="address-item" placeholder="详细地址" v-model="info.address" type="text" required></x-input>
 			<x-input class="address-item" placeholder="邮箱" v-model="info.email" type="text"></x-input>
 			<x-textarea class="address-tt" :height="40" title="标签 :" v-model="info.remark"></x-textarea>
 			<div class="label-box">
@@ -60,7 +60,7 @@
 			_this.getRegionOptions(4)
 			//全局地址数据
 		},
-		mounted () {
+		mounted() {
 			if(this.$route.params.addressId) {
 				this.getShippingAddressById(this.$route.params.addressId)
 			}
@@ -68,7 +68,7 @@
 		methods: {
 			twoChange(index, item) {
 				let _this = this
-				if (_this.twoIndex === index) {
+				if(_this.twoIndex === index) {
 					_this.twoIndex = ''
 					_this.info.remark = ''
 				} else {
@@ -76,15 +76,17 @@
 					_this.info.remark = item
 				}
 			},
-			getRegionOptions (level) { // 获取地址选项
+			getRegionOptions(level) { // 获取地址选项
 				let _this = this
 				let param = {
 					'level': level
 				}
-				_this.$http.get(_this.url.zone.area, {params:param}).then(resp => {
+				_this.$http.get(_this.url.zone.area, {
+					params: param
+				}).then(resp => {
 					let temp
 					let arrData = resp.data.data
-					if (level===2) {
+					if(level === 2) {
 						arrData.forEach(function(item) {
 							temp = {
 								name: item.name,
@@ -104,33 +106,52 @@
 					}
 				})
 			},
-			submit () {
+			submit() {
 				let _this = this
-				if (!_this.info.name) {
+				if(!_this.info.name) {
 					_this.$vux.toast.show({
 						type: 'text',
+						width: '50%',
 						text: '请输入姓名'
 					})
 					return
 				}
-				if (!_this.info.mobile) {
+				if(!_this.mainApp.isphone(_this.info.mobile)) {
 					_this.$vux.toast.show({
 						type: 'text',
-						text: '请输入联系方式'
+						width: '50%',
+						text: '请输入正确的联系方式'
 					})
 					return
 				}
-				if (_this.addArr.length !== 3 || !_this.info.address) {
+				if(_this.addArr.length !== 3) {
 					_this.$vux.toast.show({
 						type: 'text',
-						text: '请输入地址'
+						width: '50%',
+						text: '请选择正确的地址'
+					})
+					return
+				}
+				if(!_this.info.address) {
+					_this.$vux.toast.show({
+						type: 'text',
+						width: '50%',
+						text: '请输入正确的详细地址'
+					})
+					return
+				}
+				if(_this.info.email && !_this.mainApp.isemail(_this.info.email)) {
+					_this.$vux.toast.show({
+						type: 'text',
+						width: '50%',
+						text: '请输入正确的邮箱地址'
 					})
 					return
 				}
 				_this.info.provinceId = _this.addArr[0]
 				_this.info.cityId = _this.addArr[1]
 				_this.info.areaId = _this.addArr[2]
-				_this.info.userId = sessionStorage['userId']
+				_this.info.userId = localStorage['userId']
 				let tempUrl = _this.info.addressId ? _this.url.user.editShippingAddress : _this.url.user.addShippingAddress
 				_this.$http.post(tempUrl, _this.info).then(resp => {
 					_this.$vux.toast.show({
@@ -140,13 +161,15 @@
 					_this.$router.go(-1)
 				})
 			},
-			getShippingAddressById (addressId) { // 获取地址选项
+			getShippingAddressById(addressId) { // 获取地址选项
 				let _this = this
 				let param = {
-					userId: sessionStorage['userId'],
+					userId: localStorage['userId'],
 					addressId: addressId
 				}
-				_this.$http.get(_this.url.user.getShippingAddressById, {params:param}).then(resp => {
+				_this.$http.get(_this.url.user.getShippingAddressById, {
+					params: param
+				}).then(resp => {
 					_this.info = resp.data.data
 					_this.info.addressId = _this.$route.params.addressId
 					_this.addArr = [_this.info.provinceId, _this.info.cityId, _this.info.areaId]
@@ -244,6 +267,7 @@
 			border-radius: 2px;
 		}
 	}
+	
 	.addr-cell {
 		padding-top: 0;
 		padding-right: 0;

@@ -97,7 +97,7 @@
 				var _this = this
 				_this.$http.get(_this.url.user.getMyTeam, {
 					params: {
-						userId: sessionStorage.getItem('userId'),
+						userId: localStorage.getItem('userId'),
 						curPage: _this.curPage,
 						pageSize: _this.pageSize
 					}
@@ -141,7 +141,7 @@
 					var _this = this
 				_this.$http.get(_this.url.user.getMyTeam, {
 					params: {
-						userId: sessionStorage.getItem('userId'),
+						userId: localStorage.getItem('userId'),
 						curPage: _this.curPage,
 						pageSize: _this.pageSize
 					}

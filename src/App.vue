@@ -3,7 +3,7 @@
 		<transition :name="viewTransition" :css="!!direction">
 			<keep-alive>
 				<router-view v-if="$route.meta.keepAlive">
-					<!-- 这里是会被缓存的视图组件 -->
+					<!-- 被缓存的视图组件 -->
 				</router-view>
 			</keep-alive>
 		</transition>
@@ -79,19 +79,23 @@
 
 				var _this = this
 
+				//路由切换返回顶部
 				document.body.scrollTop = 0
 				document.documentElement.scrollTop = 0
 
+				//设置微信端头部标题
 				if(this.$route.meta.title) {
 					document.title = this.$route.meta.title
 				} else {
 					document.title = '大健康App'
 				}
-
+				
+				//清除注册页面的缓存
 				if(from.path == '/user/reg') {
 					from.meta.keepAlive = false
 				}
 
+				//自定义组件关闭
 				this.$code.hide()
 				this.$dialog.hide()
 			}
@@ -174,7 +178,7 @@
 	/*input框架  高度100%*/
 	
 	.input-div {
-		.weui-cell__bd {
+		.weui-cell__bd{
 			height: 100%;
 			input {
 				height: 100%;

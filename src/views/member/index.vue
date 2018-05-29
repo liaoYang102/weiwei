@@ -159,7 +159,7 @@
 				var _this = this
 				_this.$http.get(_this.url.user.getBasicInfo, {
 					params: {
-						userId: sessionStorage.getItem('userId')
+						userId: localStorage.getItem('userId')
 					}
 				}).then((res) => {
 					if(res.data.status == "00000000") {

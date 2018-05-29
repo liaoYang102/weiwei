@@ -1,16 +1,16 @@
 <template>
 	<section class="multi_user_mall">
-		
+
 		<settingHeader :title="title"></settingHeader>
-		<div class="top">
+		<div class="top" :style="{background: 'url('+ img +') no-repeat'}">
 			<div class="store">
-				<img src="../../assets/images/shop/UNIQLO.png">
+				<img :src="logo">
 				<div class="name">
-					<div><span>优衣库官方旗舰店</span></div>
+					<div><span>{{info.name}}</span></div>
 					<div class="positionImg">
 						<!-- <img src="../../assets/images/multi_user_mall/position.png"> -->
 						<!-- <span class="small">距离正佳广场0.2km</span> -->
-						<img src="../../assets/images/multi_user_mall/right.png" class="rightImg">
+						<img :src="logo" class="rightImg">
 					</div>
 				</div>
 				<div class="btn" @click="focus" :class="{'btnActive': focusStatus == '已关注'}">{{focusStatus}}</div>
@@ -55,7 +55,7 @@
 				</tab-item>
 			</tab>
 		</div>
-		<div style="height: 63.1%"  v-if="pyy!=2">
+		<div style="height: 63.1%" v-if="pyy!=2">
 			<div class="wrapper" ref="wrapper">
 				<div class="content">
 					<div class="index" v-if='pyy==1'>
@@ -72,17 +72,18 @@
 						<mallTheme :themeTitle="themeTitle"></mallTheme>
 						<mallTheme :themeTitle="themeTitle1"></mallTheme>
 					</div>
-					
+
 					<service v-else-if="pyy==3"></service>
-					<store v-else-if="pyy==4"></store>
+					<store v-else-if="pyy==4" :info="info"></store>
 					<loading v-if="show && pyy!=3 && pyy!=4 && pyy!= 1"></loading>
 					<noMore v-if="showNomore && pyy!=3 && pyy!=4"></noMore>
 				</div>
 			</div>
 		</div>
-		
 
-		<div style="height: 63.1%" v-else><shop style="height: 100%"></shop></div>
+		<div style="height: 63.1%" v-else>
+			<shop style="height: 100%"></shop>
+		</div>
 	</section>
 </template>
 
@@ -104,7 +105,11 @@
 				themeTitle1: '男子休闲',
 				show: false,
 				showNomore: false,
-				focusStatus: '关注'
+				focusStatus: '关注',
+				img: '../../assets/images/multi_user_mall/Mask.png',
+
+				info: {},
+				logo: ''
 			}
 		},
 		components: {
@@ -117,10 +122,54 @@
 			settingHeader
 		},
 		mounted() {
+			this.getBasicInfo()
+			this.getThumbInfo()
+			this.getAllianceConcern()
 			this.InitScroll()
 		},
 		methods: {
-			changeScroll(){
+			getBasicInfo() {
+				var _this = this
+				_this.$http.get(_this.url.qy.getBasicInfo, {
+					params: {
+						enterpriseId: 'enterpriseBasic2018051200000009'
+					}
+				}).then((res) => {
+					if(res.data.status == "00000000") {
+						console.log(res.data.data)
+						_this.info = res.data.data
+						if(_this.info.logo) {
+							_this.logo = _this.info.logo.original
+						}
+					}
+				})
+			},
+			getThumbInfo() {
+				var _this = this
+				_this.$http.get(_this.url.qy.getThumbInfo, {
+					params: {
+						enterpriseId: 'enterpriseBasic2018051200000009'
+					}
+				}).then((res) => {
+					if(res.data.status == "00000000") {
+						console.log(res.data.data)
+					}
+				})
+			},
+			getAllianceConcern() {
+				var _this = this 
+				_this.$http.get(_this.url.qy.getAllianceConcern, {
+					params: {
+						userId:localStorage.getItem('userId'),
+						allianceId: 'enterpriseBasic2018051200000009'
+					}
+				}).then((res) => {
+					if(res.data.status == "00000000") {
+						console.log(res.data.data)
+					}
+				})
+			},
+			changeScroll() {
 				this.$nextTick(() => {
 					this.scroll = new BScroll(this.$refs.wrapper, {
 						click: true,
@@ -219,7 +268,7 @@
 	.top {
 		width: 100%;
 		height: 2.36rem;
-		background: url('../../assets/images/multi_user_mall/Mask.png') no-repeat;
+		/*background: url('../../assets/images/multi_user_mall/Mask.png') no-repeat;*/
 		.store {
 			padding-top: 1.15rem;
 			img {
@@ -348,6 +397,7 @@
 	.multi_user_mall .mallTab .vux-tab {
 		height: 1.2rem;
 	}
+	
 	.multi_user_mall .mallTab .vux-tab-warp {
 		padding-top: 1.2rem;
 	}
@@ -356,11 +406,10 @@
 		color: #1A2642;
 		font-size: 0.24rem;
 		line-height: normal;
-		border:none;
+		border: none;
 	}
 	
 	.multi_user_mall .mallTab .vux-tab .vux-tab-selected {
 		color: #336FFF !important;
 	}
-	
 </style>

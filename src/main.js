@@ -110,7 +110,7 @@ store.registerModule('vux', {
 	}
 })
 
-const history = window.localStorage
+const history = window.sessionStorage
 history.clear()
 let historyCount = history.getItem('count') * 1;
 
@@ -122,6 +122,10 @@ var startX = 0
 //touchStart事件
 document.addEventListener('touchstart', function(event) {
 	startX = event.targetTouches[0].pageX
+}, false)
+//touchEnd事件
+document.addEventListener('touchend', function(event) {
+	startX = 0
 }, false)
 //touchend事件
 document.addEventListener('touchend', (e) => {
@@ -137,9 +141,10 @@ methods.forEach(key => {
 })
 
 window.onpopstate = function(e) {
+	console.log(e)
 	if((Date.now() - endTime) < 377) {
 		store.state.page.back = false
-	}else if((Date.now() - endTime) > 377 && startX > 160){
+	} else if((Date.now() - endTime) > 377 && startX > 160) {
 		store.state.page.back = false
 	} else {
 		store.state.page.back = true
@@ -183,7 +188,7 @@ router.beforeEach(function(to, from, next) {
 				}
 			} else {
 				store.commit('UPDATE_DIRECTION', {
-					direction: ''
+					direction: 'reverse'
 				})
 			}
 		}
@@ -212,9 +217,19 @@ router.beforeEach(function(to, from, next) {
 		let url = to.path.split('http')[1]
 		window.location.href = `http${url}`
 	} else {
-		next(function() {
-			store.state.page.back = false
-		})
+		//       路由切换 没有登录  重定向至登录页
+		//		if(store.state.page.isLogin == false) {
+		//			if(to.path != '/user/reg') {
+		//				next({
+		//					path: '/user/reg'
+		//				})
+		//			} else {
+		//				next()
+		//			}
+		//		} else {
+		//			next()
+		//		}
+		next()
 	}
 })
 
@@ -224,6 +239,7 @@ router.afterEach(function(to) {
 	store.commit('UPDATE_DACK', {
 		back: false
 	})
+	store.state.page.isLogin = true
 })
 
 Vue.prototype.vm = new Vue({

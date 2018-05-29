@@ -19,8 +19,7 @@
 						<span>通用积分</span>
 						<img @click="changeFundShow" :src="fundInfo.isshowFund == 1?'./static/member/openeyes.png':'./static/member/closedeyes.png'" alt="" />
 					</div>
-					<p v-if="fundInfo.isshowFund">{{fundInfo.balance}}</p>
-					<p v-else>***</p>
+					<p>{{fundInfo.isshowFund?fundInfo.balance:'****'}}</p>
 				</div>
 				<!--<div class="one-item">
 					<p>今日收益</p>
@@ -30,23 +29,23 @@
 			<div class="bottom">
 				<div class="one-item" @click="toCurrencyReward('通用积分',3)">
 					<p>累计充值</p>
-					<p>{{fundInfo.recharge}}</p>
+					<p>{{fundInfo.isshowFund?fundInfo.recharge:'****'}}</p>
 				</div>
 				<div class="one-item" @click="toCurrencyReward('通用积分',4)">
 					<p>购物奖励</p>
-					<p>{{fundInfo.cashback}}</p>
+					<p>{{fundInfo.isshowFund?fundInfo.cashback:'****'}}</p>
 				</div>
 				<div class="one-item" @click="toCurrencyReward('通用积分',6)">
 					<p>中奖奖励</p>
-					<p>{{fundInfo.lottery}}</p>
+					<p>{{fundInfo.isshowFund?fundInfo.lottery:'****'}}</p>
 				</div>
 				<div class="one-item" @click="toCurrencyReward('通用积分',5)">
 					<p>分红奖励</p>
-					<p>{{fundInfo.commission}}</p>
+					<p>{{fundInfo.isshowFund?fundInfo.commission:'****'}}</p>
 				</div>
 				<div class="one-item" @click="toCurrencyReward('通用积分',7)">
 					<p>任务奖励</p>
-					<p>{{fundInfo.taskBalance}}</p>
+					<p>{{fundInfo.isshowFund?fundInfo.taskBalance:'****'}}</p>
 				</div>
 				<div class="one-item" @click="$router.push({path:'/member/purse/recharge'})">
 					<p style="color:#336FFF">积分充值</p>
@@ -62,8 +61,7 @@
 						<span>信用积分</span>
 						<img @click="changeFundShow" :src="fundInfo.isshowFund == 1?'./static/member/openeyes.png':'./static/member/closedeyes.png'" alt="" />
 					</div>
-					<p v-if="fundInfo.isshowFund">{{fundInfo.availablePoints}}</p>
-					<p v-else>***</p>
+					<p>{{fundInfo.isshowFund?fundInfo.availablePoints:'****'}}</p>
 				</div>
 				<!--<div class="one-item">
 					<p>今日收益</p>
@@ -73,19 +71,26 @@
 			<div class="bottom">
 				<div class="one-item" @click="toCreditReward('信用积分',3)">
 					<p>充值奖励</p>
-					<p>{{fundInfo.rechargePoints}}</p>
+					<p>{{fundInfo.isshowFund?fundInfo.rechargePoints:'****'}}</p>
+				</div>
+				<div class="one-item" @click="toCreditReward('信用积分',2)">
+					<p>消费</p>
+					<p>{{fundInfo.isshowFund?fundInfo.cashbackPoints:'****'}}</p>
 				</div>
 				<div class="one-item" @click="toCreditReward('信用积分',6)">
 					<p>中奖奖励</p>
-					<p>{{fundInfo.lotteryPoints}}</p>
-				</div>
-				<div class="one-item" @click="toCreditReward('信用积分',2)">
-					<p>消费奖励</p>
-					<p>{{fundInfo.cashbackPoints}}</p>
+					<p>{{fundInfo.isshowFund?fundInfo.lotteryPoints:'****'}}</p>
 				</div>
 				<div class="one-item" @click="toCreditReward('信用积分',5)">
 					<p>推荐用户</p>
-					<p>{{fundInfo.recommendPoints}}</p>
+					<p>{{fundInfo.isshowFund?fundInfo.recommendPoints:'****'}}</p>
+				</div>
+				<div class="one-item" @click="toCreditReward('信用积分',7)">
+					<p>任务奖励</p>
+					<p>{{fundInfo.isshowFund?fundInfo.taskPoints:'****'}}</p>
+				</div>
+				<div class="one-item">
+					
 				</div>
 			</div>
 		</div>
@@ -118,7 +123,7 @@
 				var _this = this
 				_this.$http.get(_this.url.user.getFundInfo, {
 					params: {
-						userId: sessionStorage.getItem('userId')
+						userId: localStorage.getItem('userId')
 					}
 				}).then((res) => {
 					if(res.data.status == "00000000") {
@@ -132,7 +137,7 @@
 			changeFundShow() {
 				var _this = this
 				_this.$http.post(_this.url.user.changeFundShow, {
-					userId: sessionStorage.getItem('userId'),
+					userId: localStorage.getItem('userId'),
 					isshowFund: _this.isshowFund == 0 ? 1 : 0
 				}).then((res) => {
 					if(res.data.status == "00000000") {
@@ -150,6 +155,7 @@
 					}
 				})
 			},
+			//跳转信用积分
 			toCreditReward(title, type) {
 				this.$router.push({
 					name: 'creditreward',

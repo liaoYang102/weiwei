@@ -1,19 +1,9 @@
 <template>
 	<div class="currency-box">
 		<settingHeader :title="title"></settingHeader>
-		<div class="top">
+		<div class="top"  @click="toCurrencyReward('通用积分',1)">
 			<p>{{fundInfo.balance}}</p>
 			<p>当前通用积分</p>
-		</div>
-		<div class="g-list">
-			<group :gutter='0'>
-				<cell class="item" primary="content" is-link @click.native="toCurrencyReward('通用积分',1)">
-					<div class="left">
-						<p>累计通用积分</p>
-						<p>{{fundInfo.income}}</p>
-					</div>
-				</cell>
-			</group>
 		</div>
 		<div class="bottom">
 			<div class="title">
@@ -93,7 +83,7 @@
 				var _this = this
 				_this.$http.get(_this.url.user.getFundInfo, {
 					params: {
-						userId: sessionStorage.getItem('userId')
+						userId: localStorage.getItem('userId')
 					}
 				}).then((res) => {
 					if(res.data.status == "00000000") {

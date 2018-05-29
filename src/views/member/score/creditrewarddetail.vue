@@ -6,23 +6,9 @@
 				<div class="box-h">
 					<div class="top">
 						<div>
-							<p>1000000.00</p>
-							<p>积分金额</p>
+							<p>{{pointDetail.directType==1?'+':'-'}} {{pointDetail.point}}</p>
+							<p>{{pointDetail.remark}}</p>
 						</div>
-					</div>
-					<div class="bottom">
-						<card>
-							<div slot="content" class="card-demo-flex card-demo-content01">
-								<div class="vux-1px-r">
-									<p>5000.0</p>
-									<span>增加余额</span>
-								</div>
-								<div class="vux-1px-r">
-									<p>500.0</p>
-									<span>冻结余额</span>
-								</div>
-							</div>
-						</card>
 					</div>
 				</div>
 				<div class="gz" @click="$router.push({path:'/member/earnings/rule'})">
@@ -31,10 +17,16 @@
 			</div>
 			<section>
 				<group gutter="0">
-					<cell class="info-item" title="当前状态" value="已收入"></cell>
-					<cell class="info-item" title="来源" value="体验 威伐光11014"></cell>
-					<cell class="info-item" title="完成时间" value="2018.04.19 11:30"></cell>
-					<cell class="info-item" title="编号" value="2018041017080385390"></cell>
+					<cell class="info-item" title="来源平台" :value="pointDetail.platformName"></cell>
+					<cell class="info-item" title="说明" :value="pointDetail.remark"></cell>
+					<cell class="info-item" title="创建时间" :value="pointDetail.createTime"></cell>
+					<cell class="info-item" title="订单编号" :value="pointDetail.orderSn" v-if="pointDetail.type == 1 || pointDetail.type == 4"></cell>
+					<cell class="info-item" :title="pointDetail.nickname" v-if="pointDetail.type == 5">
+						<div class="up-box">
+							<span>{{pointDetail.mobile}}</span>
+							<img class="tx" :src="pointDetail.avatar.original" />
+						</div>
+					</cell>
 				</group>
 			</section>
 			<div class="lw-box">
@@ -45,16 +37,6 @@
 						<p>点击进入积分商城</p>
 					</div>
 				</div>
-			</div>
-			<div v-transfer-dom>
-				<x-dialog v-model="showDialogStyle" hide-on-blur :dialog-style="{'max-width': '100%', width: '100%', height: '50%', 'background-color': 'transparent'}">
-					<p class="gz-box" @click="showDialogStyle = false">
-						<span style="font-size:0.32rem;color: white;">商品的退货期内，返现的余额是冻结的</span>
-						<br>
-						<br>
-						<x-icon type="ios-close-outline" style="fill:#fff;"></x-icon>
-					</p>
-				</x-dialog>
 			</div>
 		</div>
 	</div>
@@ -67,17 +49,31 @@
 		data() {
 			return {
 				title: '信用积分详情',
-				showDialogStyle: false
+				pointDetail: {}
 			}
 		},
 		created() {
 			console.log(this.$route.query)
+			this.getMyPointDetail(this.$route.query.id)
 		},
 		mounted() {
-			
+
 		},
 		methods: {
-
+			getMyPointDetail(id) {
+				var _this = this
+				_this.$http.get(_this.url.user.getMyPointDetail, {
+					params: {
+						userId: localStorage.getItem('userId'),
+						pointId: id
+					}
+				}).then((res) => {
+					if(res.data.status == "00000000") {
+						console.log(res.data.data)
+						_this.pointDetail = res.data.data
+					}
+				})
+			},
 		},
 		components: {
 			settingHeader,
@@ -145,7 +141,7 @@
 				background-size: 100%;
 				.top {
 					display: flex;
-					height: 1.64rem;
+					height: 100%;
 					div {
 						flex: 1;
 						display: flex;

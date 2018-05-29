@@ -3,7 +3,8 @@ const page = {
 		direction: 'forward',
 		addressData: '',
 		isLoading: false,
-		back: false
+		back: false,
+		isLogin: false
 	},
 	mutations: {
 		UPDATE_DIRECTION(state, payload) {

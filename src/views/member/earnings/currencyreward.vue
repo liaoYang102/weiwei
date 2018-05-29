@@ -7,7 +7,7 @@
 				<p>{{typeTitle}}</p>
 			</div>
 			<div class="screen-box">
-				<div @click="lookAll">
+				<div @click="lookAll" style="color: #336fff;">
 					查看全部
 				</div>
 				<div @click="show8 = true">
@@ -67,7 +67,7 @@
 				twoIndex: 0,
 				typeTitle:'',
 				tyClass: [{
-					title: '全部奖励',
+					title: '全部列表',
 					type: 1
 				}, {
 					title: '消费',
@@ -115,7 +115,7 @@
 				this.twoIndex = 6
 				this.typeTitle = '任务奖励'
 			}else if(this.$route.query.type == 1){
-				this.typeTitle = '全部奖励'
+				this.typeTitle = '全部列表'
 			}else if(this.$route.query.type == 2){
 				this.typeTitle = '消费'
 			}
@@ -129,7 +129,7 @@
 				var _this = this
 				_this.$http.get(_this.url.user.getMyBalanceList, {
 					params: {
-						userId: sessionStorage.getItem('userId'),
+						userId: localStorage.getItem('userId'),
 						type: _this.type,
 						curPage: _this.curPage,
 						pageSize: _this.pageSize
@@ -179,7 +179,12 @@
 			lookAll(){
 				this.type = 1
 				this.twoIndex = 0
-				_this.typeTitle = '全部奖励'
+				this.typeTitle = '全部列表'
+				this.$router.push({
+					query: this.merge(this.$route.query, {
+						'type': 1
+					})
+				})
 				this.list = []
 				this.getMyBalanceList()
 			},
@@ -209,7 +214,7 @@
 			LoadData() {
 				var _this = this
 				_this.curPage++
-					_this.getMyBalanceList()
+				_this.getMyBalanceList()
 				_this.isload = true
 			}
 		},
