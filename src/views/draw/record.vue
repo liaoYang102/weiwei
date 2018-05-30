@@ -74,7 +74,12 @@
 			        				<div class="dia_content2">
 			        					<p class="title">{{headMessage}}</p>
 			        					<p class="note">买单报手机号赢<span>5000元</span>大奖</p>
-			        					<img src="../../assets/images/draw/tag.png" width="90%">
+			        					<div class="yhq">
+			        						<img src="../../assets/images/draw/tag.png" width="100%">
+			        						<div class="yhqMoney">
+			        							￥<span>5000</span>现金
+			        						</div>
+			        					</div>
 			        					<!-- <div class="btn-link" @click="$router.push({path: '/draw/details'})">点击查看详情 <img src="../../assets/images/draw/crown.png"></div> -->
 			        					<div  class="time-line">
 			        						<timeline>
@@ -413,6 +418,7 @@
 				margin-top: 0.8rem;
 			}
 			
+			
 		}
 		.dia_top2{
 			width: 100%;
@@ -463,6 +469,20 @@
 						vertical-align: middle;
 					}
 				}
+				.yhq{
+					position: relative;
+					.yhqMoney{
+						position: absolute;
+						top: 23%;
+						left: 11%;
+						color: #fff;
+						font-size: 0.48rem;
+						span{
+							font-size: 0.6rem;
+							letter-spacing: 2px;
+						}
+					}
+				}
 			}
 		}
 		.close{
@@ -495,7 +515,7 @@
 	}
 
 	.time-line{
-		margin-top: 0.3rem;
+		/*margin-top: 0.3rem;*/
 		.vux-timeline{
 			padding: 0.3rem 0.3rem 0 0.3rem;
 		}
