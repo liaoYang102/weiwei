@@ -64,7 +64,7 @@
 			        			<div class="close" @click="showDialog=false"><img src="../../assets/images/draw/open.png"></div>
 			        		</div>
 
-			        		<!-- 已中奖,未领取 -->
+			        		<!-- 已中奖 -->
 			        		<div class="dia" v-else>
 			        			<div class="dia_top2">
 			        				<div class="dia_title">
@@ -74,8 +74,13 @@
 			        				<div class="dia_content2">
 			        					<p class="title">{{headMessage}}</p>
 			        					<p class="note">买单报手机号赢<span>5000元</span>大奖</p>
-			        					<img src="../../assets/images/draw/tag.png" width="90%">
-			        					<div class="btn-link" @click="$router.push({path: '/draw/details'})">点击查看详情 <img src="../../assets/images/draw/crown.png"></div>
+			        					<div class="yhq">
+			        						<img src="../../assets/images/draw/tag.png" width="100%">
+			        						<div class="yhqMoney">
+			        							￥<span>5000</span>现金
+			        						</div>
+			        					</div>
+			        					<!-- <div class="btn-link" @click="$router.push({path: '/draw/details'})">点击查看详情 <img src="../../assets/images/draw/crown.png"></div> -->
 			        					<div  class="time-line">
 			        						<timeline>
 			        							<timeline-item v-for="(item, index) in count" :key="index">
@@ -301,7 +306,7 @@
 	      	padding-left: 0.4rem;
 		  	border-bottom: 1px solid #F3F3F3;
 		  	padding-top: 0.05rem;
-		  	padding-bottom: 0.39rem;
+		  	padding-bottom: 0.29rem;
 		  	overflow: hidden;
 		    .period{
 		      	color: #fff;
@@ -319,7 +324,7 @@
 		      	color: #666666;
 		      	font-size: 0.28rem;
 		      	text-align: center;
-		      	border-radius: 0.28rem;
+		      	border-radius: 0.37rem;
 		      	margin-right: 0.2rem;
 		    }
 	  	}
@@ -336,9 +341,9 @@
 
 	  	.btn{
 	  		background:linear-gradient(-121.4deg,#FF5C34,#FF2A4B);
-	  		border-radius:0.48rem;
+	  		border-radius:0.52rem;
 	  		box-shadow:0.07rem 0.09rem 0.27rem rgba(255,53,70,0.4);
-	  		padding: 0.33rem 0.65rem;
+	  		padding: 0.3rem 0.65rem;
 	  		text-align: center;
 	  		color: #fff;
 	  		font-size: 0.32rem;
@@ -347,8 +352,8 @@
 	  	}
 	  	.btn2{
 	  		background:#E5EAEF;
-	  		border-radius:0.48rem;
-	  		padding: 0.33rem 0.5rem;
+	  		border-radius:0.52rem;
+	  		padding: 0.3rem 0.5rem;
 	  		text-align: center;
 	  		color: #666666;
 	  		font-size: 0.32rem;
@@ -413,6 +418,7 @@
 				margin-top: 0.8rem;
 			}
 			
+			
 		}
 		.dia_top2{
 			width: 100%;
@@ -463,6 +469,20 @@
 						vertical-align: middle;
 					}
 				}
+				.yhq{
+					position: relative;
+					.yhqMoney{
+						position: absolute;
+						top: 23%;
+						left: 11%;
+						color: #fff;
+						font-size: 0.48rem;
+						span{
+							font-size: 0.6rem;
+							letter-spacing: 2px;
+						}
+					}
+				}
 			}
 		}
 		.close{
@@ -495,7 +515,7 @@
 	}
 
 	.time-line{
-		margin-top: 0.3rem;
+		/*margin-top: 0.3rem;*/
 		.vux-timeline{
 			padding: 0.3rem 0.3rem 0 0.3rem;
 		}

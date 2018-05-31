@@ -16,25 +16,46 @@
 			<div class="wrapper" :class="{'top46':hShow}" ref="wrapper">
 				<div class="content">
 					<div v-if="couponList.length>0">
-						<div v-for="(item,index) in couponList" :style="[!item.show?mb:'']">
-							<div class="rollOne" :class="[{'red':item.bq == 1},{'blue':item.bq == 0},{'gq':item.timeout}]">
-								<div class="left">
-									<p><i>￥</i>{{item.money}}</p>
-									<p>{{item.emoney}}</p>
-								</div>
+						<div v-for="(item,index) in couponList" :style="[!item.show?mb:'']" class="roll"><!-- -->
+							<div class="rollOne">
 								<div class="right">
-									<div class="top">
-										<span>{{item.bq == 1?'官方':'商家'}}</span><span>{{item.type}}</span>
+									<div class="top" :class="{'textColor': item.status != 1}">
+										<span>{{item.name}}</span>
+										<span>仅可购买服饰类/护肤类/彩妆类的部分商品</span>
 									</div>
-									<div class="middle">{{item.time}}</div>
-									<div class="bottom" @click="item.show = !item.show">查看详情</div>
+									<div class="middle">
+										<div>
+										 	<span>满{{item.condition}}元减{{item.denomination}}元</span><br>
+										 	<span>{{item.startTime}} - {{item.endTime}}</span>
+										</div>
+										<div class="bottom" @click="view(index)">查看详情 <img :src="iconImg"></div>
+									</div>
+									
+								</div>
+								<div class="left">
+									<div class="img" :class="[{'red':item.status == 1 && item.type !=10 && item.type !=40},{'blue':item.status == 1 && item.type !=20 && item.type !=30 && item.type !=50},{'gq':item.status != 1}]"></div>
+
+									<div v-if="item.type !=10 && item.type !=40">
+										<p v-if="item.type != 2"><i>￥</i>{{item.denomination}}</p>
+										<p v-else>{{item.discount}}<i>折</i></p>
+									</div>
+									<div v-if="item.type !=20 && item.type !=30 && item.type !=50" class="typeImg">
+										<img src="../../../../static/member/type3.png" style="width:100%;" v-if="item.type == 3">
+										<img src="../../../../static/member/type4.png" style="width:100%;" v-else>
+									</div>
+									
+									<div class="useBtn" v-if="item.status == 1">去使用</div>
+
+									<div v-if="item.status != 1" class="statusImg">
+										<img src="../../../../static/member/expired.png" width="100%" v-if="item.status == 3">
+										<img src="../../../../static/member/used.png" width="100%" v-else>
+									</div>
 								</div>
 							</div>
 							<div class="detail" v-if="item.show">
-								仅限135******95会员使用
+								{{item.content}}2222
 							</div>
 						</div>
-
 						<Loading v-if="show"> </Loading>
 						<Nomore v-if="showNo"></Nomore>
 					</div>
@@ -78,38 +99,108 @@
 				hShow: '',
 				show9: false,
 				showNo: false,
-				showIndex: '',
-				mb: {
-					marginBottom: '0.2rem'
+				showIndex:'',
+				mb:{
+					marginBottom:'0.2rem'
 				},
-				couponList: [{
-						bq: '1',
-						tip: '仅限威伐光门店使用',
-						time: '2018.03.29-2018.04.08',
-						type: '满减券',
-						money: '100',
-						emoney: '满100元减5元',
+				couponList: [
+					{
+						condition:100,//满多少元
+						content:'仅限威伐光门店使用',//详情描述
+						denomination:5,//优惠金额
+						discount:0,//折扣
+						endTime:0,
+						name:"满减券",
+						startTime:0,
+						status:1,
+						type:1,
 						show: false
 					},
 					{
-						bq: '0',
-						tip: '仅限威伐光门店使用',
-						time: '2018.03.29-2018.04.08',
-						type: '满减券',
-						money: '100',
-						emoney: '满100元减5元',
+						condition:100,//满多少元
+						content:'仅限威伐光门店使用',//详情描述
+						denomination:5,//优惠金额
+						discount:0,//折扣
+						endTime:0,
+						name:"满减券",
+						startTime:0,
+						status:2,
+						type:1,
 						show: false
-					}, {
-						bq: '2',
-						tip: '仅限威伐光门店使用',
-						time: '2018.03.29-2018.04.08',
-						type: '满减券',
-						money: '100',
-						emoney: '满100元减5元',
-						timeout: true,
+					},
+					{
+						condition:100,//满多少元
+						content:'仅限威伐光门店使用',//详情描述
+						denomination:5,//优惠金额
+						discount:0,//折扣
+						endTime:0,
+						name:"满减券",
+						startTime:0,
+						status:3,
+						type:1,
+						show: false
+					},
+					{
+						condition:0,//满多少元
+						content:'仅限威伐光门店使用',//详情描述
+						denomination:0,//优惠金额
+						discount:9,//折扣
+						endTime:0,
+						name:"折扣券",
+						startTime:0,
+						status:1,
+						type:2,
+						show: false
+					},
+					{
+						condition:0,//满多少元
+						content:'仅限威伐光门店使用',//详情描述
+						denomination:0,//优惠金额
+						discount:9,//折扣
+						endTime:0,
+						name:"体验券",
+						startTime:0,
+						status:1,
+						type:3,
+						show: false
+					},
+					{
+						condition:0,//满多少元
+						content:'仅限威伐光门店使用',//详情描述
+						denomination:0,//优惠金额
+						discount:9,//折扣
+						endTime:0,
+						name:"运费券",
+						startTime:0,
+						status:1,
+						type:4,
+						show: false
+					},
+					{
+						condition:0,//满多少元
+						content:'仅限威伐光门店使用',//详情描述
+						denomination:0,//优惠金额
+						discount:9,//折扣
+						endTime:0,
+						name:"现金券",
+						startTime:0,
+						status:1,
+						type:5,
 						show: false
 					}
-				]
+				],
+				iconImg: './static/member/yhq-down.png',
+				all: null,
+				unused: null,
+				used: null,
+				expired: null,
+				type1: null,//满减券
+				discount: null,//折扣券
+				experience: null,//体验券
+				par: {
+					type: 0,status: 0
+				}
+
 			}
 		},
 		created() {
@@ -121,29 +212,18 @@
 			} else {
 				this.hShow = false;
 			}
-			this.getUserCouponList()
 		},
 		mounted: function() {
 			this.InitScroll() //初始化下拉组件
+			this.getData()
 		},
 		methods: {
-			getUserCouponList() {
-				var _this = this
-				_this.$http.get(_this.url.user.getUserCouponList, {
-					params: {
-						userId: localStorage.getItem('userId'),
-						type: 0,
-						status: 1,
-						curPage: 1,
-						pageSize: 20
-					}
-				}).then((res) => {
-					console.log(res)
-				})
-			},
 			onItemClick(index) {
 				this.typeActive = index
 				this.show = false
+				this.par.status = index
+				this.getCouponList(this.par)
+				console.log('--tab', this.par)
 			},
 			showDrawer() {
 				this.show9 = true
@@ -154,6 +234,10 @@
 			twoChange(index, item) {
 				this.twoIndex = index
 				this.show9 = false
+				this.par.status = 0
+				this.par.type = index * 10;
+				this.getCouponList(this.par)
+				console.log('--shaixuan', this.par)
 			},
 			InitScroll() {
 				this.$nextTick(() => {
@@ -186,10 +270,15 @@
 					_this.show = true
 					_this.showNo = false
 					_this.couponList = _this.couponList.concat({
-						title: '购物券1',
-						tip: '仅限威伐光门店使用',
-						time: '2018.03.29-2018.04.08',
-						type: '满减券'
+						condition:0,//满多少元
+						content:'仅限威伐光门店使用',//详情描述
+						denomination:0,//优惠金额
+						discount:9,//折扣
+						endTime:0,
+						name:"现金券",
+						startTime:0,
+						status:1,
+						type:5
 					})
 					setTimeout(function() {
 						_this.show = false
@@ -198,6 +287,44 @@
 					_this.show = false
 					_this.showNo = true
 				}
+			},
+			// 获取数据
+			getData(){
+				this.getCouponList(this.par)//全部
+			},
+			//获取优惠券
+			getCouponList(obj) {
+				var _this = this
+				_this.$http.get(_this.url.user.getUserCouponList, {
+					params: {
+						userId: 'appUser796345684600000001',
+						type: obj.type,
+						status: obj.status,
+						curPage: 1,
+						pageSize: 20
+					}
+				}).then((res) => {
+					if(res.data.status == "00000000") {
+						_this.couponList = res.data.data.list
+						_this.addShow()
+						console.log('---get',_this.couponList)
+						// _this.setData(obj,res.data.data)
+					}
+				})
+			},
+			// 数据加个属性 show
+			addShow(){
+				for(let i = 0;i<this.couponList.length;i++){
+					this.couponList[i].show = false;
+				}
+				console.log('--couponList', this.couponList)
+			},
+			// 查看详情
+			view(i){
+				let obj = this.couponList[i];
+				obj.show = !this.couponList[i].show;
+				this.$set(this.couponList,i,obj);
+				// this.couponList[i].show = !this.couponList[i].show;
 			}
 		},
 		components: {
@@ -291,23 +418,16 @@
 				box-sizing: border-box;
 			}
 			.bgImgThree {
-				background: url(../../../assets/images/user/rollBg4.png) no-repeat;
+				/*background: url(../../../assets/images/user/rollBg4.png) no-repeat;*/
 				background-size: 100% 100%;
 			}
-			.red {
-				background: url(../../../assets/images/member/yhq-red.png) no-repeat;
-			}
-			.blue {
-				background: url(../../../assets/images/member/yhq-blue.png) no-repeat;
-			}
-			.gq {
-				background: url(../../../assets/images/member/yhq-gq.png) no-repeat;
-			}
-			.detail {
+			
+			.detail{
+				margin-left: 0.2rem;
 				padding: 0.27rem;
 				box-sizing: border-box;
 				background-color: white;
-				color: rgba(66, 88, 132, 1);
+				color:rgba(66,88,132,1);
 				font-size: 0.24rem;
 				margin-bottom: 0.2rem;
 			}
@@ -315,59 +435,111 @@
 				height: 2.16rem;
 				background-size: 100% 100%;
 				display: flex;
+				background: url(../../../assets/images/member/yhq-bg.png) no-repeat;
 				.left {
-					width: 2.66rem;
+					width: 2.12rem;
+					position: relative;
 					display: flex;
 					align-items: center;
 					justify-content: center;
 					flex-direction: column;
 					font-family: MicrosoftYaHei;
-					color: rgba(255, 255, 255, 1);
-					p:nth-child(1) {
+					color: #fff;
+					.img{
+						position: absolute;
+						width: 99%;
+						top: 0.22rem;
+						right: 0;
+						background: url(../../../../static/member/yhq-redBg.png) no-repeat;
+						background-size: 100% 90%;
+						height: -webkit-fill-available;
+					}
+					.red {
+						background: url(../../../../static/member/yhq-redBg.png) no-repeat;
+						background-size: 100% 90%;
+					}
+					.blue {
+						background: url(../../../../static/member/yhq-blueBg.png) no-repeat;
+						background-size: 100% 90%;
+					}
+					.gq {
+						background: url(../../../../static/member/yhq-grayBg.png) no-repeat;
+						background-size: 100% 90%;
+					}
+					div{
+						position: relative;
+						z-index: 12;
+					}
+					p{
+						
 						font-size: 0.68rem;
+						margin-bottom: 0.2rem;
 						i {
 							font-size: 0.39rem;
 						}
 					}
-					p:nth-child(2) {
-						font-size: 0.24rem;
+					.useBtn{
+						position: relative;
+						z-index: 12;
+						width: 1.54rem;
+						text-align: center;
+						background: rgba(255,255,255,0);
+						border: 1px solid #fff;
+						padding: 0.09rem 0;
+						border-radius: 0.3rem;
+					}
+					.typeImg{
+						width:60%;
+						margin: 0.2rem auto;
+						text-align: center;
+						margin-bottom: 0.25rem;
+					}
+					.statusImg{
+						position: absolute;
+						bottom: -22%;
+						right: -2%;
+						width: 60%;
+						height: auto;
 					}
 				}
 				.right {
 					flex: 1;
-					padding: 0rem 0.24rem;
+					padding: 0.15rem 0.15rem 0 0.4rem;
 					box-sizing: border-box;
 					display: flex;
 					flex-direction: column;
 					justify-content: space-between;
 					.top {
-						height: 0.35rem;
+						height: auto;
 						line-height: 0.35rem;
 						margin-top: 0.29rem;
-						span:nth-child(1) {
-							width: 0.72rem;
-							background: rgba(255, 83, 101, 1);
-							border-radius: 3px;
-							color: rgba(255, 255, 255, 1);
-							font-size: 0.22rem;
-							display: inline-block;
-							text-align: center;
-							margin-right: 0.2rem;
-						}
-						span:nth-child(2) {
-							font-size: 0.28rem;
-							color: rgba(66, 88, 132, 1);
-						}
+						word-wrap : break-word ;
+						font-size: 0.28rem;
+						color: #425884;
 					}
 					.middle {
+						width: 100%;
+						position: relative;
+						display: flex;
 						font-size: 0.28rem;
-						color: rgba(144, 162, 199, 1);
+						color: #90a2c7;
+						.bottom {
+							position: absolute;
+							bottom: 0.05rem;
+							right: 0;
+							width: auto;
+							flex: 1;
+							font-size: 0.24rem;
+							color: #425884;
+							img{
+								width: 15%;
+								vertical-align: middle;
+
+							}
+						}
 					}
-					.bottom {
-						height: 0.6rem;
-						line-height: 0.6rem;
-						font-size: 0.24rem;
-						color: rgba(144, 162, 199, 1);
+					.textColor{
+						color: #90a2c7;
 					}
 				}
 			}

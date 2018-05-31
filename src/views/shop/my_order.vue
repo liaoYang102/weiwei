@@ -32,7 +32,7 @@
 			    					<div class="clear"></div>
 			    				</div>
 			    				<div class="viewAll" v-if="order.shopList.length >= 10" @click.stop="viewAll(index)">
-			    					查看全部 <img src="../../assets/images/shop/dropdown.png">
+			    					{{viewText}} <img src="../../assets/images/shop/dropdown.png">
 			    				</div>
 			    				<div class="shop-total">
 			    					<p class="fr">
@@ -124,7 +124,8 @@
 					},
 					{	store:'优衣库冒牌店',status: 4,statusContent: '交易关闭',shopList:[{shopname: '女装U宽腿牛仔裤(水洗产品)',size:'颜色:蓝色；尺码:L/170修身',num: '1'}],score: '100',money: '30',btnStatus: ["删除订单"]
 					}
-				]
+				],
+				viewText: '查看全部'
 			}
 		},
 		components: {
@@ -299,8 +300,10 @@
 		    	let a = {shopname: '11女装U宽腿牛仔裤(水洗产品)',size:'颜色:蓝色；尺码:L/170修身',num: '1'}
 		    	if(this.orderList[o].shopList.length == 10){
 		    		this.orderList[o].shopList.push(a)
+		    		this.viewText = '收起'
 		    	}else if(this.orderList[o].shopList.length > 10){
 		    		this.orderList[o].shopList.pop()
+		    		this.viewText = '查看全部'
 		    	}
 		    	console.log('this.orderList[o].shopList',this.orderList[o].shopList)
 		    	let imgs = document.getElementsByClassName('viewAll')[0].children[0];
