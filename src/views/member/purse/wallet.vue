@@ -2,7 +2,7 @@
 	<div class="wallet-box">
 		<settingHeader :title="title"></settingHeader>
 		<group :gutter='0'>
-			<cell class="top-item" :title="fundInfo.nickname" value="使用积分" is-link>
+			<cell class="top-item" :title="fundInfo.nickname" value="使用积分" is-link link='/shop'>
 				<img slot="icon" :src="userImg">
 			</cell>
 		</group>

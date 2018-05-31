@@ -17,6 +17,9 @@ export default {
 				$code.type = obj.type
 				$code.codeChange = obj.codeChange
 				$code.change = obj.change
+				if(obj.ishide){
+					$code.ishide = obj.ishide
+				}
 			},
 			hide(){
 				$code.showCode = false

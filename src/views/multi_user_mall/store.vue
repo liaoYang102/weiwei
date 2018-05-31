@@ -7,7 +7,8 @@
 			</div>
 			<div class="fl" style="padding-top:0.13rem;">
 				<p class='shop-name'>{{pinfo.name}}</p>
-				<p class='shop-size'>3.8w关注</p>
+				<p class='shop-size' v-if="pinfo.isAlliance == 1">{{pinfo.allianceConcern}}关注</p>
+				<p class='shop-size' v-if="pinfo.isChains == 1">{{pinfo.chainsConcern}}关注</p>
 			</div>
 			<div class="clear"></div>
 		</div>
@@ -15,7 +16,7 @@
 			<group>
 		      <cell title="店铺号" :value="pinfo.number" :border-intent="false"></cell>
 		      <cell title="开店时间" :value="pinfo.joinTime" :border-intent="false"></cell>
-		      <cell title="好评率" value="99.5%" :border-intent="false"></cell>
+		      <cell title="图册" :border-intent="false" is-link></cell>
 		    </group>
 		    <group class="center">
 		    	<router-link to='/multi_user_mall/store_qrcode'>
@@ -30,7 +31,7 @@
 		      <cell title="退款说明" value="选填" :border-intent="false"></cell>
 		    </group> -->
 		    <group style="margin-top:0.2rem">
-		    	<div @click="navigation">
+		    	<div @click="navigation(pinfo.lat,pinfo.lng,pinfo.address)">
 		    		<cell title="店铺地址" :value="address" :border-intent="false" is-link></cell>
 		    	</div>
 		    </group>
@@ -82,14 +83,14 @@
 				// 	window.clearInterval(int1);
 				// }
 			},
-			navigation() {
+			navigation(lat,lng,address) {
 				var marker = new AMap.Marker({
-					position: [113.370196,22.979898]
+					position: [lng,lat]
 				})
 
 				marker.markOnAMAP({
 					position: marker.getPosition(),
-					name: '广州市番禺区天安科技园' //name属性在移动端有效
+					name: address //name属性在移动端有效
 				})
 			},
 		}

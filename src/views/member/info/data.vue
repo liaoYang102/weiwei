@@ -74,7 +74,7 @@
 				contactnum: '',
 				showsex: false,
 				showrec: false,
-				sexlist: ['男', '女'],
+				sexlist: ['男', '女','未设置'],
 				reclist: ['小学', '初中', '高中', '大专', '本科'],
 				txt: '<span>请选择性别</span>',
 				backImages: [],
@@ -113,7 +113,13 @@
 					if(res.data.status == '00000000') {
 						var info = res.data.data
 						_this.gender = info.gender
-						_this.sex = info.gender == 0 ? '男' : '女'
+						if(info.gender == 1){
+							_this.sex = '男'
+						}else if(info.gender == 2){
+							_this.sex = '女'
+						}else{
+							_this.sex = '未设置'
+						}
 						_this.xl = info.education
 						if(info.education == 0) {
 							_this.education = '小学'
@@ -151,11 +157,15 @@
 			contactChange(val) {},
 			contactnumChange(val) {},
 			sexclick(val) {
-				this.gender = val
 				if(val == 0) {
 					this.sex = '男'
+					this.gender = 1
 				} else if(val == 1) {
 					this.sex = '女'
+					this.gender = 2
+				}else if(val == 2){
+					this.sex = '未设置'
+					this.gender = 0
 				}
 			},
 			recclick(val) {

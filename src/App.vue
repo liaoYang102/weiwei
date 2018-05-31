@@ -1,14 +1,9 @@
 <template>
 	<div id="app" ref="fBox" v-cloak>
 		<transition :name="viewTransition" :css="!!direction">
-			<keep-alive>
-				<router-view v-if="$route.meta.keepAlive">
-					<!-- 被缓存的视图组件 -->
-				</router-view>
+			<keep-alive :include="includeList">
+				<router-view></router-view>
 			</keep-alive>
-		</transition>
-		<transition :name="viewTransition" :css="!!direction">
-			<router-view class="router-view" v-if="!$route.meta.keepAlive"></router-view>
 		</transition>
 		<settingFooter v-if="$route.meta.navShow"></settingFooter>
 		<div v-transfer-dom>
@@ -33,6 +28,7 @@
 		computed: {
 			...mapState({
 				direction: state => state.page.direction,
+				includeList: state => state.page.includeList
 			}),
 			viewTransition() {
 				if(!this.direction) return ''
@@ -46,7 +42,8 @@
 			}
 		},
 		created() {
-			var _this = this;
+			var _this = this
+
 			window.onorientationchange = function() {
 				if(window.orientation == 90 || window.orientation == -90) {
 					_this.orientation = true;
@@ -75,7 +72,7 @@
 		},
 		methods: {},
 		watch: {
-			'$route' (to, from,next) {
+			'$route' (to, from, next) {
 
 				var _this = this
 
@@ -88,11 +85,6 @@
 					document.title = this.$route.meta.title
 				} else {
 					document.title = '大健康App'
-				}
-				
-				//清除注册页面的缓存
-				if(from.path == '/user/reg') {
-					from.meta.keepAlive = false
 				}
 
 				//自定义组件关闭
@@ -178,7 +170,7 @@
 	/*input框架  高度100%*/
 	
 	.input-div {
-		.weui-cell__bd{
+		.weui-cell__bd {
 			height: 100%;
 			input {
 				height: 100%;

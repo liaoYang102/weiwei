@@ -2,9 +2,12 @@ var uri1 = '/user',
 	uri2 = '/datacenter'
 
 var url = {
-	platformId: 2018051600000004,
+	platformId: 2018050800000002,
 
 	user: {
+		getAuthorizationUrl: uri1 + '/pubilc/v1/user/getAuthorizationUrl', //获取第三方应用授权链接接口
+		getAuthorizationUrl1: 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx7a4933a7a3c33ec8&redirect_uri=https%3A%2F%2Fnew.cgc999.com%2Fapigw%2Fuser%2Fthirdparty%2Fwechat%2Fnotify&response_type=code&scope=snsapi_userinfo&state=20180508000000021527669875A2a3a5d99d9a73ddc406adcdc42fe04bdA2018050800000002',
+
 		getBasicInfo: uri1 + '/v1/user/getBasicInfo', //基本信息
 		getMyTeam: uri1 + '/v1/user/getMyTeam', //我的团队
 		getUserInfo: uri1 + '/v1/user/getUserInfo', //个人资料
@@ -12,7 +15,7 @@ var url = {
 		fileuploadImage: uri2 + '/v1/fileupload/image', //上传图片
 		login: uri2 + '/public/v1/login', //云中心登录
 		userLogin: uri1 + '/public/v1/user/login', //用户登录
-		logout:uri1 + '/v1/user/logout', //用户登出
+		logout: uri1 + '/v1/user/logout', //用户登出
 		userRegister: uri1 + '/public/v1/user/register', //用户注册
 		checkUserExistsByMobile: uri1 + '/public/v1/user/checkUserExistsByMobile', //用户是否注册
 		getVerificationCode: uri1 + '/public/v1/sms/getVerificationCode', //获取验证码
@@ -23,7 +26,8 @@ var url = {
 		deleteShippingAddress: uri1 + '/v1/user/deleteShippingAddress', //删除收货地址
 		setDefaultShippingAddress: uri1 + '/v1/user/setDefaultShippingAddress', //设置默认收货地址
 		forgetPassword: '/public/v1/user/forgetPassword', //重置密码
-		getConcernLists: uri1 + '/v1/user/getConcernLists', //我的关注
+		getConcernLists: uri1 + '/v1/user/getConcernLists', //获取用户关注商品/联盟企业/联营企业接口
+		deleteConcern: uri1 + '/v1/user/deleteConcern', //用户取消关注商品/联盟企业/联营企业接口
 		getUserPayPassword: uri1 + '/v1/user/getUserPayPassword', //设置是否设置支付密码
 		getUserAuthInfo: uri1 + '/v1/user/getUserAuthInfo', //获取用户认证状态
 		getShippingAddressById: uri1 + '/v1/user/getShippingAddressById', //id获取收货地址详细信息
@@ -38,7 +42,8 @@ var url = {
 	qy: {
 		getBasicInfo: uri1 + '/public/v1/enterprise/getBasicInfo', //获取企业基本信息
 		getThumbInfo: uri1 + '/public/v1/enterprise/getThumbInfo', //获取企业图册
-		getAllianceConcern: uri1 + '/v1/enterprise/getAllianceConcern', //获取用户是否关注联盟企业角色接口
+		getAllianceConcern: '/v1/enterprise/getAllianceConcern', //获取用户是否关注联盟企业角色接口
+		getChainsConcern: uri1 + '/v1/enterprise/getChainsConcern', //获取用户是否关注联盟企业角色
 	},
 	draw: {
 		getReviewLists: 'http://www.cgc999.com/app/index.php?i=7&c=entry&m=mx_shop&do=mobile&r=copy.getReviewLists', //往期回顾

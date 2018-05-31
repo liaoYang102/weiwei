@@ -1,15 +1,15 @@
 <template>
-	<div class="content">
+	<div class="addressEdit-box">
 		<settingHeader :title="title"></settingHeader>
 		<group :gutter="0" class="input-div">
 			<x-input class="address-item" placeholder="姓名" v-model="info.name" required></x-input>
 			<x-input class="address-item" placeholder="联系方式" type="text" v-model="info.mobile" required></x-input>
 			<cell title="中国" value-align="left" class="addr-cell">
-				<x-address :list="list" class="address-item address-check" v-model="addArr" title='' placeholder="请选择地址" value-text-align="left"></x-address>
+				<x-address :list="list" class="address-item address-check" v-model="addArr" title='' placeholder="请选择地址" value-text-align="left" @on-show="onAddArr"></x-address>
 			</cell>
 			<x-input class="address-item" placeholder="详细地址" v-model="info.address" type="text" required></x-input>
 			<x-input class="address-item" placeholder="邮箱" v-model="info.email" type="text"></x-input>
-			<x-textarea class="address-tt" :height="40" title="标签 :" v-model="info.remark"></x-textarea>
+			<x-textarea class="address-tt" :height="40" title="标签 :" v-model="info.remark" @on-change="labelChange" type="text"></x-textarea>
 			<div class="label-box">
 				<div class="twoClass">
 					<div class="type-item" v-for="(item,index) in twoClass">
@@ -61,11 +61,23 @@
 			//全局地址数据
 		},
 		mounted() {
-			if(this.$route.params.addressId) {
-				this.getShippingAddressById(this.$route.params.addressId)
+			console.log(this.$route.query.addressId)
+			if(this.$route.query.addressId) {
+				this.getShippingAddressById(this.$route.query.addressId)
 			}
 		},
 		methods: {
+			labelChange(val) {
+				var _this = this
+				for(var i = 0; i < _this.twoClass.length; i++) {
+					if(_this.twoClass[i] == val) {
+						_this.twoIndex = i
+						return false
+					} else {
+						_this.twoIndex = ''
+					}
+				}
+			},
 			twoChange(index, item) {
 				let _this = this
 				if(_this.twoIndex === index) {
@@ -174,6 +186,9 @@
 					_this.info.addressId = _this.$route.params.addressId
 					_this.addArr = [_this.info.provinceId, _this.info.cityId, _this.info.areaId]
 				})
+			},
+			onAddArr (val) {
+				this.addArr = this.addArr.concat() // 进行数组深拷贝并赋值,触发vue更新视图
 			}
 		},
 		components: {
@@ -197,82 +212,85 @@
 	}
 </script>
 
-<style lang="less" scoped>
-	.label-box {
-		padding: 0px 15px;
-		.twoClass {
-			display: flex;
-			flex-wrap: wrap;
-			padding: 0.2rem 0;
-			justify-content: flex-start;
-			.type-item {
-				width: 25%;
-				text-align: center;
-				box-sizing: border-box;
-				padding: 0rem 0.25rem;
-				margin-bottom: 0.1rem;
-				div {
-					display: inline-block;
-					width: 100%;
-					height: 0.5rem;
-					line-height: 0.55rem;
-					background: #eaeaea;
-					border-radius: 2px;
-					font-size: 0.20rem;
-				}
-				.twoActive {
-					background: #336FFF;
-					color: white;
+<style lang="less">
+	.addressEdit-box {
+		.label-box {
+			padding: 0px 15px;
+			.twoClass {
+				display: flex;
+				flex-wrap: wrap;
+				padding: 0.2rem 0;
+				justify-content: flex-start;
+				.type-item {
+					width: 25%;
+					text-align: center;
+					box-sizing: border-box;
+					padding: 0rem 0.25rem;
+					margin-bottom: 0.1rem;
+					div {
+						display: inline-block;
+						width: 100%;
+						height: 0.5rem;
+						line-height: 0.55rem;
+						background: #eaeaea;
+						border-radius: 2px;
+						font-size: 0.20rem;
+					}
+					.twoActive {
+						background: #336FFF;
+						color: white;
+					}
 				}
 			}
 		}
-	}
-	
-	.address-tt {
-		font-family: PingFangSC-Regular;
-		font-size: 0.28rem!important;
-		color: #1A2642!important;
-	}
-	
-	.address-item {
-		font-family: PingFangSC-Regular;
-		font-size: 0.28rem!important;
-		color: #1A2642;
-		letter-spacing: 0;
-		padding-top: 0;
-		padding-bottom: 0;
-		height: 1.02rem;
-	}
-	
-	.address-check {
-		padding-top: 0.1rem;
-		box-sizing: border-box;
-	}
-	
-	.tip {
-		padding: 10px 15px;
-		ont-family: PingFangSC-Regular;
-		font-size: 0.28rem;
-		color: #90A2C7;
-		letter-spacing: 0;
-		.add-btn {
-			height: 0.88rem;
-			line-height: 0.88rem;
-			background: rgba(51, 111, 255, 1);
-			margin-top: 0.6rem;
-			font-size: 0.28rem;
-			text-align: center;
-			font-family: MicrosoftYaHei;
-			color: rgba(255, 255, 255, 1);
-			border-radius: 2px;
+		.address-tt {
+			font-family: PingFangSC-Regular;
+			font-size: 0.28rem!important;
+			color: #1A2642!important;
 		}
-	}
-	
-	.addr-cell {
-		padding-top: 0;
-		padding-right: 0;
-		padding-bottom: 0;
-		font-size: .28rem;
-		color: #999;
+		.address-item {
+			font-family: PingFangSC-Regular;
+			font-size: 0.28rem!important;
+			color: #1A2642;
+			letter-spacing: 0;
+			padding-top: 0;
+			padding-bottom: 0;
+			height: 1.02rem;
+		}
+		.address-check {
+			box-sizing: border-box;
+			.weui-cell {
+				height: 100%!important;
+				box-sizing: border-box;
+				.vux-cell-value {
+					color: #1A2642;
+				}
+			}
+		}
+		.tip {
+			padding: 10px 15px;
+			ont-family: PingFangSC-Regular;
+			font-size: 0.28rem;
+			color: #90A2C7;
+			letter-spacing: 0;
+			.add-btn {
+				height: 0.88rem;
+				line-height: 0.88rem;
+				background: rgba(51, 111, 255, 1);
+				margin-top: 0.6rem;
+				font-size: 0.28rem;
+				text-align: center;
+				font-family: MicrosoftYaHei;
+				color: rgba(255, 255, 255, 1);
+				border-radius: 2px;
+			}
+		}
+		.addr-cell {
+			padding-top: 0;
+			padding-right: 0;
+			padding-bottom: 0;
+			font-size: .28rem;
+			color: #1A2642;
+		}
 	}
 </style>
