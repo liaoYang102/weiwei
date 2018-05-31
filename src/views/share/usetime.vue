@@ -383,7 +383,7 @@
 		}
 		.footer{
 			width: 100%;
-			height: 2rem;
+			height: 1.6rem;
 			background: url('../../assets/images/share/sharefoot.png');
 			background-size: 100% 100%;
 			position: fixed;
@@ -393,7 +393,7 @@
 				font-size: .32rem;
 				color: #1A2642;
 				font-weight: bold;
-				margin-top: .64rem;
+				margin-top: .5rem;
 			}
 			.address{
 				font-size: .24rem;
