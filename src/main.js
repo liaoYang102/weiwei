@@ -123,10 +123,7 @@ var startX = 0
 document.addEventListener('touchstart', function(event) {
 	startX = event.targetTouches[0].pageX
 }, false)
-//touchEnd事件
-document.addEventListener('touchend', function(event) {
-	startX = 0
-}, false)
+
 //touchend事件
 document.addEventListener('touchend', (e) => {
 	endTime = Date.now()
@@ -140,76 +137,132 @@ methods.forEach(key => {
 	}
 })
 
-window.onpopstate = function(e) {
-	console.log(e)
-	if((Date.now() - endTime) < 377) {
-		store.state.page.back = false
-	} else if((Date.now() - endTime) > 377 && startX > 160) {
-		store.state.page.back = false
-	} else {
-		store.state.page.back = true
-	}
-}
-
 router.beforeEach(function(to, from, next) {
 
-	const toIndex = history.getItem(to.path)
-	const fromIndex = history.getItem(from.path)
+	//缓存路由页面
+	store.state.page.includeList = []
 
-	if(toIndex) {
-		if(!fromIndex || parseInt(toIndex, 10) > parseInt(fromIndex, 10) || (toIndex === '0' && fromIndex === '0')) {
-			// 判断是否是ios左滑返回
-			if(!isPush && (Date.now() - endTime) < 377 || !isPush && (Date.now() - endTime) > 377) {
-				if(store.state.page.back) {
+	if(to.path == '/user/reg') {
+		to.meta.keepAlive = true
+	} else if(from.path == '/user/reg' && to.path != '/member/setting/agreement') {
+		from.meta.keepAlive = false
+	} else if(from.path == '/user/reg' && to.path == '/member/setting/agreement') {
+		from.meta.keepAlive = true
+	}
+
+	if(to.meta.keepAlive) {
+		store.state.page.includeList.push(to.name)
+	}
+	if(from.meta.keepAlive) {
+		store.state.page.includeList.push(from.name)
+	}
+
+	//判断微信版本
+	var wechatInfo = navigator.userAgent.match(/MicroMessenger\/([\d\.]+)/i)
+	if(wechatInfo) {
+		if(wechatInfo[1] < '6.6.7') {
+
+			//touchEnd事件
+			document.addEventListener('touchend', function(event) {
+				startX = 0
+			}, false)
+
+			window.onpopstate = function(e) {
+				if((Date.now() - endTime) < 377) {
+					store.state.page.back = false
+				} else if((Date.now() - endTime) > 377 && startX > 160) {
+					store.state.page.back = false
+				} else {
+					store.state.page.back = true
+				}
+			}
+
+			const toIndex = history.getItem(to.path)
+			const fromIndex = history.getItem(from.path)
+
+			if(toIndex) {
+				if(!fromIndex || parseInt(toIndex, 10) > parseInt(fromIndex, 10) || (toIndex === '0' && fromIndex === '0')) {
+					// 判断是否是ios左滑返回
+					if(!isPush && (Date.now() - endTime) < 377 || !isPush && (Date.now() - endTime) > 377) {
+						if(store.state.page.back) {
+							store.commit('UPDATE_DIRECTION', {
+								direction: 'reverse'
+							})
+						} else {
+							store.commit('UPDATE_DIRECTION', {
+								direction: ''
+							})
+						}
+					} else {
+						store.commit('UPDATE_DIRECTION', {
+							direction: 'forward'
+						})
+					}
+				} else {
+					// 判断是否是ios左滑返回
+					if(!isPush && (Date.now() - endTime) < 377 || !isPush && (Date.now() - endTime) > 377) {
+						if(store.state.page.back) {
+							store.commit('UPDATE_DIRECTION', {
+								direction: 'reverse'
+							})
+						} else {
+							store.commit('UPDATE_DIRECTION', {
+								direction: ''
+							})
+						}
+					} else {
+						store.commit('UPDATE_DIRECTION', {
+							direction: 'reverse'
+						})
+					}
+				}
+			} else {
+				++historyCount
+				history.setItem('count', historyCount)
+				to.path !== '/' && history.setItem(to.path, historyCount)
+				if(!isPush && (Date.now() - endTime) < 377 || !isPush && (Date.now() - endTime) > 377) {
+					if(store.state.page.back) {
+						store.commit('UPDATE_DIRECTION', {
+							direction: 'reverse'
+						})
+					} else {
+						store.commit('UPDATE_DIRECTION', {
+							direction: ''
+						})
+					}
+				} else {
+					store.commit('UPDATE_DIRECTION', {
+						direction: 'forward'
+					})
+				}
+			}
+		} else {
+			const toIndex = history.getItem(to.path)
+			const fromIndex = history.getItem(from.path)
+			if(toIndex) {
+				if(!fromIndex || parseInt(toIndex, 10) > parseInt(fromIndex, 10) || (toIndex === '0' && fromIndex === '0')) {
+					store.commit('UPDATE_DIRECTION', {
+						direction: 'forward'
+					})
+				} else {
 					store.commit('UPDATE_DIRECTION', {
 						direction: 'reverse'
+					})
+				}
+			} else {
+				++historyCount
+				history.setItem('count', historyCount)
+				to.path !== '/' && history.setItem(to.path, historyCount)
+				if(startX > 0) {
+					store.commit('UPDATE_DIRECTION', {
+						direction: 'forward'
 					})
 				} else {
 					store.commit('UPDATE_DIRECTION', {
 						direction: ''
 					})
 				}
-			} else {
-				store.commit('UPDATE_DIRECTION', {
-					direction: 'forward'
-				})
 			}
-		} else {
-			// 判断是否是ios左滑返回
-			if(!isPush && (Date.now() - endTime) < 377 || !isPush && (Date.now() - endTime) > 377) {
-				if(store.state.page.back) {
-					store.commit('UPDATE_DIRECTION', {
-						direction: 'reverse'
-					})
-				} else {
-					store.commit('UPDATE_DIRECTION', {
-						direction: ''
-					})
-				}
-			} else {
-				store.commit('UPDATE_DIRECTION', {
-					direction: 'reverse'
-				})
-			}
-		}
-	} else {
-		++historyCount
-		history.setItem('count', historyCount)
-		to.path !== '/' && history.setItem(to.path, historyCount)
-		if(!isPush && (Date.now() - endTime) < 377 || !isPush && (Date.now() - endTime) > 377) {
-			if(store.state.page.back) {
-				store.commit('UPDATE_DIRECTION', {
-					direction: 'reverse'
-				})
-			} else {
-				store.commit('UPDATE_DIRECTION', {
-					direction: ''
-				})
-			}
-		} else {
-			store.commit('UPDATE_DIRECTION', {
-				direction: 'forward'
-			})
 		}
 	}
 

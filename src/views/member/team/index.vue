@@ -17,10 +17,10 @@
 
 			<div class="list-box">
 				<div class="scroll-box">
-					<div class="wrapper" ref="wrapper">
+					<div class="wrapper" ref="wrapper" v-if="list.length>0">
 						<div class="content">
 							<div class="box2">
-								<div v-if="list.length>0">
+								<div>
 									<div class="list" v-for="(item,index) in list" :key="index">
 										<div class="he">
 											<div class="user-img">
@@ -48,17 +48,15 @@
 									<Loading v-if="showloading"></Loading>
 									<Nomore v-if="showNo"></Nomore>
 								</div>
-
-								<div class="null-box" v-else>
-									<img src="../../../assets/images/index/null-data.png" alt="" />
-									<p>暂无伙伴</p>
-									<router-link to="/member/purse/qrcode">
-										<div class="add-btn">我要邀请</div>
-									</router-link>
-								</div>
-
 							</div>
 						</div>
+					</div>
+					<div class="null-box" v-else>
+						<img src="../../../assets/images/index/null-data.png" alt="" />
+						<p>暂无伙伴</p>
+						<router-link to="/member/purse/qrcode">
+							<div class="add-btn">我要邀请</div>
+						</router-link>
 					</div>
 				</div>
 			</div>
@@ -89,7 +87,7 @@
 			this.getMyTeam()
 		},
 		mounted() {
-			this.InitScroll()
+
 		},
 		methods: {
 
@@ -107,6 +105,7 @@
 						var data = res.data.data
 						this.list = data.list
 						this.totalNums = data.totalNums
+						this.InitScroll()
 					}
 				})
 			},
@@ -191,29 +190,29 @@
 						top: 0;
 						bottom: 0;
 						width: 100%;
-						.null-box {
-							position: relative;
-							height: 11rem;
-							text-align: center;
-							background: white;
-							img {
-								width: auto;
-								height: 4.12rem;
-							}
-							p {
-								font-size: 0.32rem;
-								font-family: PingFangSC-Medium;
-								color: rgba(26, 38, 66, 1);
-							}
-							.add-btn {
-								width: 6.18rem;
-								height: 0.88rem;
-								line-height: 0.88rem;
-								color: white;
-								background: rgba(51, 111, 255, 1);
-								border-radius: 4px;
-								margin: 1.91rem auto;
-							}
+					}
+					.null-box {
+						position: relative;
+						height: 100%;
+						text-align: center;
+						background: white;
+						img {
+							width: auto;
+							height: 4.12rem;
+						}
+						p {
+							font-size: 0.32rem;
+							font-family: PingFangSC-Medium;
+							color: rgba(26, 38, 66, 1);
+						}
+						.add-btn {
+							width: 6.18rem;
+							height: 0.88rem;
+							line-height: 0.88rem;
+							color: white;
+							background: rgba(51, 111, 255, 1);
+							border-radius: 4px;
+							margin: 1.91rem auto;
 						}
 					}
 				}

@@ -2,9 +2,9 @@
 	<section class="multi_user_mall">
 
 		<settingHeader :title="title"></settingHeader>
-		<div class="top" :style="{background: 'url('+ img +') no-repeat'}">
+		<div class="top">
 			<div class="store">
-				<img :src="logo">
+				<img :src="logo?logo:'./static/shop/storeLogo.png'">
 				<div class="name">
 					<div><span>{{info.name}}</span></div>
 					<div class="positionImg">
@@ -19,38 +19,38 @@
 		<div class="searchBox">
 			<div class="search">
 				<img src="../../assets/images/shop/search.png">
-				<input type="search" placeholder="搜索商品" @click="goSearch">
+				<input style="border-radius: 0;" type="search" placeholder="搜索商品" @click="goSearch">
 			</div>
 		</div>
 
 		<div class="mallTab">
-			<tab :line-width="3" :scroll-threshold="4">
+			<tab :line-width="3" :scroll-threshold="4" custom-bar-width="0.6rem">
 				<tab-item selected @on-item-click="index">
 					<div class="tab-item">
 						<img src="../../assets/images/multi_user_mall/index1.png" v-if='pyy==1'>
 						<img src="../../assets/images/multi_user_mall/index.png" v-else><br>
-						<span>首页</span>
+						<div>首页</div>
 					</div>
 				</tab-item>
-				<tab-item @on-item-click="onItemClick">
+				<tab-item @on-item-click="onItemClick" v-if="info.isChains == 1">
 					<div class="tab-item">
 						<img src="../../assets/images/multi_user_mall/shop1.png" v-if='pyy==2'>
 						<img src="../../assets/images/multi_user_mall/shop.png" v-else><br>
-						<span>商品</span>
+						<div>商品</div>
 					</div>
 				</tab-item>
-				<tab-item @on-item-click="service">
+				<tab-item @on-item-click="service" v-if="info.isAlliance == 1">
 					<div class="tab-item">
 						<img src="../../assets/images/multi_user_mall/service1.png" v-if='pyy==3'>
 						<img src="../../assets/images/multi_user_mall/service.png" v-else><br>
-						<span>服务</span>
+						<div>服务</div>
 					</div>
 				</tab-item>
 				<tab-item @on-item-click="store">
 					<div class="tab-item">
 						<img src="../../assets/images/multi_user_mall/store1.png" v-if='pyy==4'>
 						<img src="../../assets/images/multi_user_mall/store.png" v-else><br>
-						<span>简介</span>
+						<div>简介</div>
 					</div>
 				</tab-item>
 			</tab>
@@ -106,7 +106,6 @@
 				show: false,
 				showNomore: false,
 				focusStatus: '关注',
-				img: '../../assets/images/multi_user_mall/Mask.png',
 
 				info: {},
 				logo: ''
@@ -132,7 +131,7 @@
 				var _this = this
 				_this.$http.get(_this.url.qy.getBasicInfo, {
 					params: {
-						enterpriseId: 'enterpriseBasic2018051200000009'
+						enterpriseId: _this.$router.query.id
 					}
 				}).then((res) => {
 					if(res.data.status == "00000000") {
@@ -157,10 +156,10 @@
 				})
 			},
 			getAllianceConcern() {
-				var _this = this 
+				var _this = this
 				_this.$http.get(_this.url.qy.getAllianceConcern, {
 					params: {
-						userId:localStorage.getItem('userId'),
+						userId: localStorage.getItem('userId'),
 						allianceId: 'enterpriseBasic2018051200000009'
 					}
 				}).then((res) => {
@@ -268,13 +267,15 @@
 	.top {
 		width: 100%;
 		height: 2.36rem;
+		background-color: #90A2C7;
 		/*background: url('../../assets/images/multi_user_mall/Mask.png') no-repeat;*/
 		.store {
-			padding-top: 1.15rem;
+			padding: 1rem 0rem 0 0.14rem;
 			img {
 				width: 16.5%;
 				float: left;
 				margin-right: 0.16rem;
+				background-color: #F5F6FA;
 			}
 			.name {
 				float: left;
@@ -307,7 +308,8 @@
 				float: right;
 				text-align: center;
 				width: 1.16rem;
-				padding: 0.06rem 0 0.03rem 0;
+				height: 0.55rem;
+				line-height: 0.6rem;
 				background: #336FFF;
 				color: #fff;
 				font-size: 0.25rem;
@@ -326,7 +328,7 @@
 		.tab-item {
 			padding-top: 0.19rem;
 			img {
-				width: 20%;
+				width: 0.5rem;
 				display: inline-block;
 			}
 		}
@@ -354,7 +356,6 @@
 		width: 100%;
 		background: #fff;
 		padding-bottom: 0.14rem;
-		border-bottom: 0.01rem solid #D8DFF0;
 		.search {
 			position: relative;
 			width: 92%;
@@ -363,13 +364,12 @@
 			img {
 				position: absolute;
 				width: 5%;
-				top: 0.25rem;
+				top: 0.26rem;
 				left: 0.26rem;
 			}
 			input {
 				width: 100%;
 				background: #F5F6FA;
-				border-radius: 0.06rem;
 				color: #1A2642;
 				padding: 0.14rem 0.1rem 0.12rem 0.78rem;
 			}

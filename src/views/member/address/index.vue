@@ -18,7 +18,7 @@
 						<check-icon :value.sync="item.isDefault">设置为默认地址</check-icon>
 					</div>
 					<div>
-						<router-link :to="{ name: 'address_edit', params: { addressId: item.addressId }}"><span>编辑</span></router-link>
+						<span @click="toEdit(item.addressId)">编辑</span>
 						<span @click="deleteAddress(item.addressId)">删除</span>
 					</div>
 				</div>
@@ -57,6 +57,14 @@
 			this.getShippingAddress()
 		},
 		methods: {
+			toEdit(id){
+				this.$router.push({
+					name:'address_edit',
+					query:{
+						'addressId':id
+					}
+				})
+			},
 			deleteAddress(addressId) { // 删除地址
 				let _this = this
 				_this.$dialog.show({

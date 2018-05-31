@@ -4,7 +4,8 @@ const page = {
 		addressData: '',
 		isLoading: false,
 		back: false,
-		isLogin: false
+		isLogin: false,
+		includeList:[]
 	},
 	mutations: {
 		UPDATE_DIRECTION(state, payload) {

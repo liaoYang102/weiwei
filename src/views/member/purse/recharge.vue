@@ -14,8 +14,8 @@
 				<span>通用积分充值</span><span>充值记录</span>
 			</div>
 			<div class="change-row">
-				<div v-for="(item,index) in moneyList" class="row-item" :class="{'moneyActive':index == moneyIndex}" @click="changeMoney(index)">
-					<div class="box">
+				<div v-for="(item,index) in moneyList" class="row-item" :class="{'moneyActive':index == moneyIndex}" @click="changeMoney(index,item.null)">
+					<div class="box" :class="{'nohas':item.null}">
 						<p>{{item.now}}元</p>
 						<p>{{item.old}}</p>
 					</div>
@@ -71,7 +71,8 @@
 					},
 					{
 						now: '2000',
-						old: '赠送2000信用积分'
+						old: '赠送2000信用积分',
+						null: true
 					},
 					{
 						now: '5000',
@@ -109,8 +110,17 @@
 					}
 				})
 			},
-			changeMoney(index) {
-				this.moneyIndex = index
+			changeMoney(index, isnull) {
+				if(isnull) {
+					this.$vux.toast.show({
+						width: '50%',
+						type: 'text',
+						position: 'top',
+						text: '暂无此商品'
+					})
+				} else {
+					this.moneyIndex = index
+				}
 			},
 			changePt(index) {
 				this.ptIndex = index
@@ -122,15 +132,19 @@
 				console.log('change:', value, label)
 			},
 			pay() {
-				this.$code.show({
+				var _this = this
+				_this.show1 = false
+				_this.$code.show({
 					type: 'pay',
 					showCode: true,
 					change() {
+						_this.$code.hide()
 						this.$dialog.show({
 							type: 'success',
 							headMessage: '提示',
 							message: '支付成功',
 							buttons: ['我知道了'],
+							delay: 2000,
 							canel() {
 								console.log(123)
 							},
@@ -138,6 +152,9 @@
 								console.log(123)
 							}
 						})
+					},
+					ishide() {
+						console.log('关闭了支付窗口')
 					}
 				})
 			}
@@ -239,11 +256,14 @@
 						box-shadow: 0px 2px 10px 0px rgba(26, 38, 66, 0.4);
 						border-radius: 3px;
 						color: white;
-						padding: 0 0.15rem;
+						padding: 0 0.1rem;
 						box-sizing: border-box;
 						p:nth-child(2) {
 							font-size: 0.20rem;
 						}
+					}
+					.nohas {
+						background: #90a2c7!important;
 					}
 				}
 				.moneyActive {

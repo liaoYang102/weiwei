@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<div v-if="type == 'code'">
-			<popup class="code-popup" height="100%" v-model="showCode" @on-hide="payNum = []">
+			<popup class="code-popup" height="100%" v-model="showCode" @on-hide="hide">
 				<x-header class="code-header" :left-options="{showBack: false}">
 					请输入验证码
 					<a slot="right" @click="showCode = false">关闭</a>
@@ -25,7 +25,7 @@
 		</div>
 
 		<div v-if="type == 'pay'">
-			<popup class="pay-popup" v-model="showCode">
+			<popup class="pay-popup" v-model="showCode" @on-hide="hide">
 				<div>
 					<x-header class="code-header" :left-options="{showBack: false}">
 						请输入支付密码
@@ -40,7 +40,7 @@
 							<li>{{payNum[4]}}</li>
 							<li>{{payNum[5]}}</li>
 						</ul>
-						<p @click="forgetpassword">忘记密码了？</p>
+						<p @click="forgetpassword">忘记密码？</p>
 					</div>
 				</div>
 
@@ -119,16 +119,25 @@
 				this.vm.$router.push({
 					path: '/user/changePaymentPassword'
 				})
+			},
+			hide() {
+				if(this.type == 'pay') {
+					this.payNum = []
+					this.ishide()
+				}
 			}
 		},
 		watch: {
 			payNum() {
-				if(this.payNum.length == 6) {
-					this.change()
+				var _this = this
+				if(_this.payNum.length == 6) {
+					setTimeout(function(){
+						_this.change()
+					},100)
 				}
 			},
-			showCode(){
-				if(this.showCode == false){
+			showCode() {
+				if(this.showCode == false) {
 					this.payNum = []
 				}
 			}

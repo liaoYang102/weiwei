@@ -78,9 +78,9 @@
 				hShow: '',
 				show9: false,
 				showNo: false,
-				showIndex:'',
-				mb:{
-					marginBottom:'0.2rem'
+				showIndex: '',
+				mb: {
+					marginBottom: '0.2rem'
 				},
 				couponList: [{
 						bq: '1',
@@ -89,7 +89,7 @@
 						type: '满减券',
 						money: '100',
 						emoney: '满100元减5元',
-						show:false
+						show: false
 					},
 					{
 						bq: '0',
@@ -98,7 +98,7 @@
 						type: '满减券',
 						money: '100',
 						emoney: '满100元减5元',
-						show:false
+						show: false
 					}, {
 						bq: '2',
 						tip: '仅限威伐光门店使用',
@@ -107,7 +107,7 @@
 						money: '100',
 						emoney: '满100元减5元',
 						timeout: true,
-						show:false
+						show: false
 					}
 				]
 			}
@@ -121,11 +121,26 @@
 			} else {
 				this.hShow = false;
 			}
+			this.getUserCouponList()
 		},
 		mounted: function() {
 			this.InitScroll() //初始化下拉组件
 		},
 		methods: {
+			getUserCouponList() {
+				var _this = this
+				_this.$http.get(_this.url.user.getUserCouponList, {
+					params: {
+						userId: localStorage.getItem('userId'),
+						type: 0,
+						status: 1,
+						curPage: 1,
+						pageSize: 20
+					}
+				}).then((res) => {
+					console.log(res)
+				})
+			},
 			onItemClick(index) {
 				this.typeActive = index
 				this.show = false
@@ -288,11 +303,11 @@
 			.gq {
 				background: url(../../../assets/images/member/yhq-gq.png) no-repeat;
 			}
-			.detail{
+			.detail {
 				padding: 0.27rem;
 				box-sizing: border-box;
 				background-color: white;
-				color:rgba(66,88,132,1);
+				color: rgba(66, 88, 132, 1);
 				font-size: 0.24rem;
 				margin-bottom: 0.2rem;
 			}

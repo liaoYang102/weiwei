@@ -6,35 +6,37 @@
 
 <script>
 	export default {
-		data(){
-			return{
-				show:''
+		data() {
+			return {
+				show: ''
 			}
 		},
-		created(){
+		created() {
 			var ua = navigator.userAgent.toLowerCase();
 			var isWeixin = ua.indexOf('micromessenger') != -1;
-			if (isWeixin) {
+			if(isWeixin) {
 				this.show = false;
-			    return true;
-			}else{
+				return true;
+			} else {
 				this.show = true;
-			    return false;
+				return false;
 			}
 		},
 		props: {
 			title: String //定义传值的类型<br>    }
 		},
 		methods: {
-			changeBack(){
+			changeBack() {
 				this.$router.go(-1)
-				this.$store.state.page.back = true
+				this.$store.commit('UPDATE_DACK', {
+					back: true
+				})
 			}
 		}
 	}
 </script>
 <style lang='less'>
-	.settingHeader{
+	.settingHeader {
 		.vux-header .vux-header-left .left-arrow:before {
 			border: 1px solid #222;
 			border-width: 1px 0 0 1px;

@@ -18,7 +18,7 @@
 					<check-icon :value.sync="isAgree"></check-icon><span class="sg">我已阅读并同意</span>
 					<router-link to="/member/setting/agreement">《CGC平台注册协议》</router-link>
 				</div>
-				<x-button class="add-btn" @click.native="submit" :show-loading="showLoading" v-if="isReg">立即登录</x-button>
+				<x-button class="add-btn" @click.native="submit" :show-loading="showLoading" v-if="isReg">立即登录/注册</x-button>
 				<x-button class="add-btn" @click.native="reg" :show-loading="showLoading" v-else>立即注册</x-button>
 			</div>
 			<div class="login-re" v-if="isReg">
@@ -32,7 +32,7 @@
 				<p class="title"><span>第三方登录</span></p>
 				<div>
 					<img src="../../assets/images/user/weibo.png" alt="" />
-					<img src="../../assets/images/user/weixin.png" alt="" />
+					<img @click="wxLogin" src="../../assets/images/user/weixin.png" alt="" />
 					<img src="../../assets/images/user/qq.png" alt="" />
 				</div>
 			</div>
@@ -64,12 +64,9 @@
 				isAgree: true
 			}
 		},
-		beforeCreate() {
-			//			if(localStorage.getItem('userToken')) {
-			//				this.$router.go(-1)
-			//			}
+		mounted() {
+
 		},
-		mounted() {},
 		methods: {
 			submit() {
 				var _this = this
@@ -169,13 +166,9 @@
 							width: '50%',
 							type: 'text',
 							position: 'middle',
-							text: '登陆成功',
-							onHide() {
-								_this.$router.push({
-									path: '/index'
-								})
-							}
+							text: '登陆成功'
 						})
+						_this.$router.go(-1)
 					} else {
 						localStorage.removeItem('userNp')
 						localStorage.removeItem('token')
@@ -184,7 +177,6 @@
 			},
 			//验证码输入改变时
 			codeChange(val) {
-				console.log(val.length)
 				if(val.length == 4) {
 					this.$refs.code.blur()
 				}
@@ -252,6 +244,20 @@
 				setTimeout(function() {
 					_this.reduce()
 				}, 1000)
+			},
+			wxLogin() {
+				var _this = this
+				//				_this.$http(_this.url.user.getAuthorizationUrl,{
+				//					params:{
+				//						platformId:_this.url.platformId,
+				//						type:1
+				//					}
+				//				}).then((res)=>{
+				//					console.log(res)
+				//				})
+				_this.$http(_this.url.user.getAuthorizationUrl1).then((res) => {
+					console.log(res)
+				})
 			}
 		},
 		components: {

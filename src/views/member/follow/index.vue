@@ -1,8 +1,8 @@
 <template>
 	<div class="follow-box">
-		<x-header class="b-w" :left-options="{backText:''}" @on-click-more="edit">
+		<x-header class="b-w" :left-options="{backText: '',preventGoBack: true}" @on-click-more="edit" @on-click-back="changeBack">
 			<div class="tar-box">
-				<tab v-model="index" :line-width="2" active-color="#397df8" custom-bar-width="0.56rem">
+				<tab v-model="index" :line-width="2" active-color="#397df8" custom-bar-width="1.1rem">
 					<tab-item selected @on-item-click="active">联盟企业</tab-item>
 					<tab-item @on-item-click="active">联营企业</tab-item>
 					<tab-item @on-item-click="active">商品</tab-item>
@@ -15,20 +15,20 @@
 				<div class="store-list">
 					<div class="wrapper3" ref="wrapper3">
 						<div class="content">
-							<div class="list-item" v-for="(item,index) in storeList2" v-if="storeList2.length>0">
+							<div class="list-item" v-for="(item,index) in lyList" v-if="lyList.length>0">
 								<div @click="changeStore2()">
 									<check-icon v-if="storeShow2" class="check-btn" :value.sync="item.ischeck"></check-icon>
 								</div>
-								<div class="img-box"><img :src="item.img" /></div>
+								<div class="img-box" @click="toDetail(item.enterpriseId)"><img v-if="item.logo" :src="item.logo.original" /></div>
 								<div class="pro-box">
 									<p>{{item.name}}</p>
 									<div class="storbtn-box">
-										<!-- <span>标签</span> --><span>关注人数：5850人</span>
+										<!-- <span>标签</span> --><span>关注人数：{{item.concernSum}}人</span>
 									</div>
 								</div>
 							</div>
 							<Loading v-if="show3"> </Loading>
-							<noData v-if="storeList2.length==0" :status="storeState" :stateText="noStore"></noData>
+							<noData v-if="lyList.length==0" :status="storeState" :stateText="noStore"></noData>
 						</div>
 					</div>
 				</div>
@@ -37,20 +37,20 @@
 				<div class="store-list">
 					<div class="wrapper2" ref="wrapper2">
 						<div class="content">
-							<div class="list-item" v-for="(item,index) in storeList" v-if="storeList.length>0">
+							<div class="list-item" v-for="(item,index) in lmList" v-if="lmList.length>0">
 								<div @click="changeStore()">
 									<check-icon v-if="storeShow" class="check-btn" :value.sync="item.ischeck"></check-icon>
 								</div>
-								<div class="img-box"><img :src="item.img" /></div>
+								<div class="img-box" @click="toDetail(item.enterpriseId)"><img v-if="item.logo" :src="item.logo.original" /></div>
 								<div class="pro-box">
 									<p>{{item.name}}</p>
 									<div class="storbtn-box">
-										<!-- <span>标签</span> --><span>关注人数：5850人</span>
+										<!-- <span>标签</span> --><span>关注人数：{{item.concernSum}}人</span>
 									</div>
 								</div>
 							</div>
 							<Loading v-if="show2"> </Loading>
-							<noData v-if="storeList.length==0" :status="storeState" :stateText="noStore"></noData>
+							<noData v-if="lmList.length==0" :status="storeState" :stateText="noStore"></noData>
 						</div>
 					</div>
 				</div>
@@ -97,7 +97,7 @@
 						<check-icon v-if="isBj && index==0" class="check-btn" :value.sync="allstCheck2">全部店铺<span v-if="!allstCheck2">已选<i>{{storeidList2.length}}</i>间店铺</span></check-icon>
 					</div>
 					<div class="qx-box">
-						<div class="add-btn">取消关注</div>
+						<div class="add-btn" @click="deleteConcern">取消关注</div>
 					</div>
 				</div>
 			</popup>
@@ -127,27 +127,9 @@
 				allstCheck: false, //全选店铺
 				allstCheck2: false, //全选店铺
 				results: [], //搜索值
-				proList: [{
-					img: 'https://ss0.bdstatic.com/-0U0bnSm1A5BphGlnYG/tam-ogel/299c55e31d7f50ae4dc85faa90d6f445_121_121.jpg',
-					name: '热风2018年小清新女士星星休闲双肩包拉链方形背包B52W8201',
-					money: '50.0',
-					ischeck: false,
-					id: 1
-				}],
-				storeList2: [{
-					img: 'https://ss0.bdstatic.com/-0U0bnSm1A5BphGlnYG/tam-ogel/299c55e31d7f50ae4dc85faa90d6f445_121_121.jpg',
-					name: '热风2018年小清新女士星星休闲双肩包拉链方形背包B52W8201',
-					money: '50.0',
-					ischeck: false,
-					id: 1
-				}],
-				storeList: [{
-					img: 'https://ss0.bdstatic.com/-0U0bnSm1A5BphGlnYG/tam-ogel/299c55e31d7f50ae4dc85faa90d6f445_121_121.jpg',
-					name: '热风2018年小清新女士星星休闲双肩包拉链方形背包B52W8201',
-					money: '50.0',
-					ischeck: false,
-					id: 1
-				}],
+				proList: [],
+				lyList: [],
+				lmList: [],
 				proidList: [],
 				storeidList: [],
 				storeidList2: [],
@@ -160,7 +142,8 @@
 				noStore: '暂无店铺',
 				pageSize: 20,
 				curPage: 1,
-				type: 2
+				type: 2,
+				back: Function
 			}
 		},
 		created() {
@@ -170,19 +153,57 @@
 			this.InitScroll()
 		},
 		methods: {
+			changeBack() {
+				this.$router.go(-1)
+				this.$store.state.page.back = true
+			},
 			getFollow() {
 				var _this = this
 				_this.$http.get(_this.url.user.getConcernLists, {
 					params: {
-						userId: sessionStorage.getItem('userId'),
+						userId: localStorage.getItem('userId'),
 						type: _this.type,
 						pageSize: _this.pageSize,
 						curPage: _this.curPage
 					}
 				}).then((res) => {
-					console.log(res)
 					if(res.data.status == "00000000") {
+						//联盟企业
+						if(_this.type == 2) {
+							_this.lyList = res.data.data.list
+							_this.lyList.forEach((value) => {
+								value.ischeck = false
+							})
+							console.log(_this.lyList)
+						} else if(_this.type == 3) {
+							_this.lmList = res.data.data.list
+							_this.lmList.forEach((value) => {
+								value.ischeck = false
+							})
 
+						}
+					}
+				})
+			},
+			deleteConcern() {
+				var _this = this
+				if(_this.type == 2) {
+					var concernIds = _this.storeidList2.join(',')
+				} else if(_this.type == 3) {
+					var concernIds = _this.storeidList.join(',')
+				}
+				_this.$http.post(_this.url.user.deleteConcern, {
+					userId: localStorage.getItem('userId'),
+					type: _this.type,
+					concernIds: concernIds
+				}).then((res) => {
+					if(res.data.status == "00000000") {
+						_this.$vux.toast.show({
+							width: '50%',
+							type: 'text',
+							position: 'middle',
+							text: '已取消关注'
+						})
 					}
 				})
 			},
@@ -283,26 +304,26 @@
 					console.log(this.proidList, 'pro')
 				} else if(this.index == 0) {
 					if(this.allstCheck2 == true) {
-						for(var i = 0; i < this.storeList2.length; i++) {
-							this.storeList2[i].ischeck = true
-							this.storeidList2.push(this.storeList2[i].id)
+						for(var i = 0; i < this.lyList.length; i++) {
+							this.lyList[i].ischeck = true
+							this.storeidList2.push(this.lyList[i].objectId)
 						}
 					} else {
-						for(var i = 0; i < this.storeList2.length; i++) {
-							this.storeList2[i].ischeck = false
+						for(var i = 0; i < this.lyList.length; i++) {
+							this.lyList[i].ischeck = false
 							this.storeidList2 = []
 						}
 					}
-					console.log(this.storeidList, 'store2')
+					console.log(this.storeidList2, 'store2')
 				} else if(this.index == 1) {
 					if(this.allstCheck == true) {
-						for(var i = 0; i < this.storeList.length; i++) {
-							this.storeList[i].ischeck = true
-							this.storeidList.push(this.storeList[i].id)
+						for(var i = 0; i < this.lmList.length; i++) {
+							this.lmList[i].ischeck = true
+							this.storeidList.push(this.lmList[i].objectId)
 						}
 					} else {
-						for(var i = 0; i < this.storeList.length; i++) {
-							this.storeList[i].ischeck = false
+						for(var i = 0; i < this.lmList.length; i++) {
+							this.lmList[i].ischeck = false
 							this.storeidList = []
 						}
 					}
@@ -334,16 +355,21 @@
 				for(var i = 0; i < this.proList.length; i++) {
 					this.proList[i].ischeck = false
 				}
-				for(var i = 0; i < this.storeList.length; i++) {
-					this.storeList[i].ischeck = false
+				for(var i = 0; i < this.lmList.length; i++) {
+					this.lmList[i].ischeck = false
+				}
+				for(var i = 0; i < this.lyList.length; i++) {
+					this.lyList[i].ischeck = false
 				}
 
-				this.isBj = !this.isBj
-				if(this.index == 2) {
+				if(this.index == 2 && this.proList.length > 0) {
+					this.isBj = !this.isBj
 					this.proShow = !this.proShow
-				} else if(this.index == 1) {
+				} else if(this.index == 1 && this.lmList.length > 0) {
+					this.isBj = !this.isBj
 					this.storeShow = !this.storeShow
-				} else {
+				} else if(this.index == 0 && this.lyList.length > 0) {
+					this.isBj = !this.isBj
 					this.storeShow2 = !this.storeShow2
 				}
 			},
@@ -361,24 +387,22 @@
 			//店铺选择
 			changeStore() {
 				var idList = []
-				for(var i = 0; i < this.storeList.length; i++) {
-					if(this.storeList[i].ischeck == true) {
-						idList.push(this.storeList[i].id)
+				for(var i = 0; i < this.lmList.length; i++) {
+					if(this.lmList[i].ischeck == true) {
+						idList.push(this.lmList[i].objectId)
 					}
 				}
 				this.storeidList = idList
-				console.log(this.storeidList, 'store')
 			},
 			//店铺选择
 			changeStore2() {
 				var idList = []
-				for(var i = 0; i < this.storeList2.length; i++) {
-					if(this.storeList2[i].ischeck == true) {
-						idList.push(this.storeList2[i].id)
+				for(var i = 0; i < this.lyList.length; i++) {
+					if(this.lyList[i].ischeck == true) {
+						idList.push(this.lyList[i].objectId)
 					}
 				}
 				this.storeidList2 = idList
-				console.log(this.storeidList, 'store2')
 			},
 			sousShow() {
 				this.show10 = true
@@ -394,6 +418,14 @@
 			},
 			onCancel() {
 				console.log('on cancel')
+			},
+			toDetail(id) {
+				this.$router.push({
+					name: 'multi_user_mall',
+					query: {
+						id: id
+					}
+				})
 			}
 		},
 		watch: {
@@ -405,14 +437,14 @@
 				}
 			},
 			storeidList() {
-				if(this.storeidList.length == this.storeList.length) {
+				if(this.storeidList.length == this.lmList.length) {
 					this.allstCheck = true
 				} else {
 					this.allstCheck = false
 				}
 			},
 			storeidList2() {
-				if(this.storeidList2.length == this.storeList2.length) {
+				if(this.storeidList2.length == this.lyList.length) {
 					this.allstCheck2 = true
 				} else {
 					this.allstCheck2 = false
