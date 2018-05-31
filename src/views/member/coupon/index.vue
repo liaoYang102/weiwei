@@ -36,11 +36,11 @@
 									<div class="img" :class="[{'red':item.status == 1 && item.type !=10 && item.type !=40},{'blue':item.status == 1 && item.type !=20 && item.type !=30 && item.type !=50},{'gq':item.status != 1}]"></div>
 
 									<div v-if="item.type !=10 && item.type !=40">
-										<p v-if="item.type != 2"><i>￥</i>{{item.denomination}}</p>
+										<p v-if="item.type != 30"><i>￥</i>{{item.denomination}}</p>
 										<p v-else>{{item.discount}}<i>折</i></p>
 									</div>
 									<div v-if="item.type !=20 && item.type !=30 && item.type !=50" class="typeImg">
-										<img src="../../../../static/member/type3.png" style="width:100%;" v-if="item.type == 3">
+										<img src="../../../../static/member/type3.png" style="width:100%;" v-if="item.type == 10">
 										<img src="../../../../static/member/type4.png" style="width:100%;" v-else>
 									</div>
 									
@@ -151,56 +151,12 @@
 						status:1,
 						type:2,
 						show: false
-					},
-					{
-						condition:0,//满多少元
-						content:'仅限威伐光门店使用',//详情描述
-						denomination:0,//优惠金额
-						discount:9,//折扣
-						endTime:0,
-						name:"体验券",
-						startTime:0,
-						status:1,
-						type:3,
-						show: false
-					},
-					{
-						condition:0,//满多少元
-						content:'仅限威伐光门店使用',//详情描述
-						denomination:0,//优惠金额
-						discount:9,//折扣
-						endTime:0,
-						name:"运费券",
-						startTime:0,
-						status:1,
-						type:4,
-						show: false
-					},
-					{
-						condition:0,//满多少元
-						content:'仅限威伐光门店使用',//详情描述
-						denomination:0,//优惠金额
-						discount:9,//折扣
-						endTime:0,
-						name:"现金券",
-						startTime:0,
-						status:1,
-						type:5,
-						show: false
 					}
 				],
 				iconImg: './static/member/yhq-down.png',
-				all: null,
-				unused: null,
-				used: null,
-				expired: null,
-				type1: null,//满减券
-				discount: null,//折扣券
-				experience: null,//体验券
 				par: {
 					type: 0,status: 0
 				}
-
 			}
 		},
 		created() {
@@ -300,6 +256,7 @@
 						userId: 'appUser796345684600000001',
 						type: obj.type,
 						status: obj.status,
+						timeType:0,
 						curPage: 1,
 						pageSize: 20
 					}
@@ -347,19 +304,22 @@
 		display: flex;
 		flex-wrap: wrap;
 		padding: 0.2rem 0;
+		background: #F5F6FA;
 		.type-item {
 			width: 25%;
 			padding: 0.08rem 0.25rem;
 			text-align: center;
 			box-sizing: border-box;
+
 			span {
 				display: inline-block;
 				width: 100%;
 				height: 0.5rem;
 				line-height: 0.5rem;
-				background: #eaeaea;
 				border-radius: 2px;
 				font-size: 0.20rem;
+				background: #D8DFF0;
+				color: #90A2C7;
 			}
 			.twoActive {
 				background-color: #336fff;

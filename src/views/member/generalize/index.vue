@@ -1,7 +1,7 @@
 <template>
 	<div class="wrap">
 		<settingHeader :title="title"></settingHeader>
-		<!-- <div class="alerts-tob">
+		<div class="alerts-tob">
 			<swiper :options="swiperOption" class="swiper">
 		        <swiper-slide v-for="(item, index) in tabData" :key="index">
 		        	<div class="tab-item" :class="{'tab-item-active':actTab == index}" @click="actTab = index">
@@ -10,7 +10,7 @@
 		        </swiper-slide>
 		    </swiper>
 	        <div class="white"></div>
-       </div> -->
+       </div>
        <div class="wrapper" ref="wrapper">
 			<div class="content">
 		       <div class="news">
@@ -108,8 +108,8 @@
 	export default {
 		data(){
 			return {
-				title:'快讯列表',
-				tabData:['成功商学院','活动通告','新品发布','品牌故事','新闻中心'],
+				title:'推广助手',
+				tabData:['新闻类','活动类','品牌类','视频推广','领导关怀'],
 				swiperOption:{
 					slidesPerView : 'auto',
 					spaceBetween : 20,
@@ -216,7 +216,7 @@
 				    width: auto;
 				    border: 0;
 				    position: relative;
-				    margin-left: 0.2rem;
+				    margin-left: 0.25rem;
 				    padding-right: 0.2rem;
 				}
 				.swiper-slide:last-child{

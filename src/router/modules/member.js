@@ -49,6 +49,7 @@ import creditrewarddetail from '@/views/member/score/creditrewarddetail'
 import agreement from '@/views/member/setting/agreement'
 import article from '@/views/member/article/index'
 import vip from '@/views/member/vip/index'
+import generalize from '@/views/member/generalize/index'
 
 const memberModule = [{
 		path: '/index',
@@ -439,6 +440,14 @@ const memberModule = [{
 		component: vip,
 		meta: {
 			title: '会员等级'
+		}
+	},
+	{
+		path: '/member/generalize/index',
+		name: 'generalize',
+		component: generalize,
+		meta: {
+			title: '推广助手'
 		}
 	}
 ]
