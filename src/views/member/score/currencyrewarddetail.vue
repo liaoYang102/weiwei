@@ -4,7 +4,7 @@
 		<div class="scoreDetail-box">
 			<div class="purse-box1">
 				<div class="box-h">
-					<div class="top">
+					<div class="top" :class="balanceDetail.type == 4 || balanceDetail.type == 1?'':'h100'">
 						<div>
 							<p>{{balanceDetail.directType==1?'+':'-'}} {{balanceDetail.balance}}</p>
 							<p>{{balanceDetail.remark}}</p>
@@ -178,6 +178,9 @@
 							color: rgba(255, 255, 255, 1);
 						}
 					}
+				}
+				.h100 {
+					height: 100%;
 				}
 				.bottom {
 					height: 1.15rem;

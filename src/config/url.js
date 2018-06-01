@@ -26,8 +26,9 @@ var url = {
 		deleteShippingAddress: uri1 + '/v1/user/deleteShippingAddress', //删除收货地址
 		setDefaultShippingAddress: uri1 + '/v1/user/setDefaultShippingAddress', //设置默认收货地址
 		forgetPassword: '/public/v1/user/forgetPassword', //重置密码
-		getConcernLists: uri1 + '/v1/user/getConcernLists', //获取用户关注商品/联盟企业/联营企业接口
-		deleteConcern: uri1 + '/v1/user/deleteConcern', //用户取消关注商品/联盟企业/联营企业接口
+		addConcern: uri1 + '/v1/user/addConcern', //用户添加关注商品/联盟企业/联营企业
+		getConcernLists: uri1 + '/v1/user/getConcernLists', //获取用户关注商品/联盟企业/联营企业
+		deleteConcern: uri1 + '/v1/user/deleteConcern', //用户取消关注商品/联盟企业/联营企业
 		getUserPayPassword: uri1 + '/v1/user/getUserPayPassword', //设置是否设置支付密码
 		getUserAuthInfo: uri1 + '/v1/user/getUserAuthInfo', //获取用户认证状态
 		getShippingAddressById: uri1 + '/v1/user/getShippingAddressById', //id获取收货地址详细信息
@@ -42,8 +43,8 @@ var url = {
 	qy: {
 		getBasicInfo: uri1 + '/public/v1/enterprise/getBasicInfo', //获取企业基本信息
 		getThumbInfo: uri1 + '/public/v1/enterprise/getThumbInfo', //获取企业图册
-		getAllianceConcern: '/v1/enterprise/getAllianceConcern', //获取用户是否关注联盟企业角色接口
-		getChainsConcern: uri1 + '/v1/enterprise/getChainsConcern', //获取用户是否关注联盟企业角色
+		getAllianceConcern: uri1 + '/user/v1/enterprise/getAllianceConcern', //获取用户是否关注联盟企业角色接口
+		getChainsConcern: uri1 + '/user/v1/enterprise/getChainsConcern', //获取用户是否关注联盟企业角色
 	},
 	draw: {
 		getReviewLists: 'http://www.cgc999.com/app/index.php?i=7&c=entry&m=mx_shop&do=mobile&r=copy.getReviewLists', //往期回顾

@@ -36,13 +36,13 @@
 				<router-link to="/member/purse/recharge">
 					<div>
 						<img src="../../../assets/images/member/purse2.png" />
-						<span>余额充值</span>
+						<span>积分充值</span>
 					</div>
 				</router-link>
 				<router-link to="/member/purse/banlancelog">
 					<div>
 						<img src="../../../assets/images/member/purse4.png" />
-						<span>余额日志</span>
+						<span>积分日志</span>
 					</div>
 				</router-link>
 			</div>
@@ -89,7 +89,7 @@
 					},
 					{
 						img: './static/member/follow2.png',
-						tip: '可用余额（元）',
+						tip: '可用积分（元）',
 						money: '5000.0'
 					},
 					{
@@ -99,7 +99,7 @@
 					},
 					{
 						img: './static/member/follow4.png',
-						tip: '冻结余额（元）',
+						tip: '冻结积分（元）',
 						money: '5000.0'
 					},
 					{

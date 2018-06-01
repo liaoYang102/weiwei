@@ -49,7 +49,7 @@
 				</div>
 				<div class="one-item" @click="$router.push({path:'/member/purse/recharge'})">
 					<p style="color:#336FFF">积分充值</p>
-					<p>充100送100</p>
+					<p>充值1000赠送1000</p>
 				</div>
 			</div>
 		</div>

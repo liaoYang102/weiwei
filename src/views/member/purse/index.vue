@@ -17,15 +17,15 @@
 					<card>
 						<div slot="content" class="card-demo-flex card-demo-content01">
 							<div class="vux-1px-r">
-								<span>余额</span>
+								<span>积分</span>
 								<p>5000.0</p>
 							</div>
 							<div class="vux-1px-r">
-								<span>可用余额</span>
+								<span>可用积分</span>
 								<p>5000.0</p>
 							</div>
 							<div class="vux-1px-r">
-								<span>冻结余额</span>
+								<span>冻结积分</span>
 								<p>5000.0</p>
 							</div>
 						</div>
@@ -36,7 +36,7 @@
 				<router-link to="/member/purse/recharge">
 					<div>
 						<img src="../../../assets/images/member/purse2.png" />
-						<span>余额充值</span>
+						<span>积分充值</span>
 					</div>
 				</router-link>
 				<!--<router-link to="/member/purse/recharge">
@@ -48,7 +48,7 @@
 				<router-link to="/member/purse/banlancelog">
 					<div>
 						<img src="../../../assets/images/member/purse4.png" />
-						<span>余额日志</span>
+						<span>积分日志</span>
 					</div>
 				</router-link>
 			</div>
@@ -61,16 +61,16 @@
 				</div>-->
 				<group gutter="0">
 					<cell class="item" title='累计收益' value="200.0"></cell>
-					<cell class="item" title='返现余额' value="88.0"></cell>
+					<cell class="item" title='返现积分' value="88.0"></cell>
 					<cell class="item" title='返现积分' value="150.0"></cell>
 				</group>
 			</div>
 			<div class="chart-box">
 				<div class="banlance">
-					<p>余额收入</p>
+					<p>积分收入</p>
 					<div class="sign">
 						<span class="s_top"></span>
-						<span class="sur">冻结余额</span>
+						<span class="sur">冻结积分</span>
 						<div class="tz">
 							<span class="s_bottom"></span>
 							<span class="sur">当日返现</span>
@@ -177,7 +177,7 @@
 						},
 					}],
 					series: [{
-							name: '冻结余额',
+							name: '冻结积分',
 							barWidth: 7,
 							type: 'bar',
 							itemStyle: {

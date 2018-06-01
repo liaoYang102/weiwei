@@ -173,14 +173,14 @@
 				})
 				_this.show8 = false
 				_this.list = []
-
+				_this.curPage = 1
 				_this.getMyBalanceList()
 			},
 			lookAll(){
 				this.type = 1
 				this.twoIndex = 0
 				this.typeTitle = '全部列表'
-				this.$router.push({
+				this.$router.replace({
 					query: this.merge(this.$route.query, {
 						'type': 1
 					})

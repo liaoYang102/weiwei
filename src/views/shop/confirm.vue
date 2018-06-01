@@ -48,8 +48,8 @@
                 	 <cell title="店铺优惠" value="省10元：100减5" :border-intent="false" is-link></cell>
                 </router-link>
                 <cell :border-intent="false">
-					<span slot="title" style="color:#F23030;">CGC通用余额抵扣</span>
-					<span class="banlance" style='font-size: 0.24rem;color: #90A2C7;'><x-switch title="余额: ￥23400" sytle="padding-right: 0 ;"></x-switch></span>
+					<span slot="title" style="color:#F23030;">CGC通用积分抵扣</span>
+					<span class="banlance" style='font-size: 0.24rem;color: #90A2C7;'><x-switch title="积分: ￥23400" sytle="padding-right: 0 ;"></x-switch></span>
 
                 </cell>
                 <cell title="兑换方式" value="积分+现金" :border-intent="false"></cell>

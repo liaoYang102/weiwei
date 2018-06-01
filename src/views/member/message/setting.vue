@@ -9,7 +9,7 @@
 						<x-switch class="list-item" title="消息取消"></x-switch>
 						<x-switch class="list-item" title="下单成功"></x-switch>
 						<x-switch class="list-item" title="收获成功"></x-switch>
-						<x-switch class="list-item" title="余额到账"></x-switch>
+						<x-switch class="list-item" title="积分到账"></x-switch>
 					</group>
 					<group gutter="0" title="积分类" title-color="#90A2C7">
 						<x-switch class="list-item" title="积分到账"></x-switch>

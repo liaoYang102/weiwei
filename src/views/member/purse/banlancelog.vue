@@ -12,7 +12,7 @@
 						<router-link to="/member/purse/banlance">
 							<div class="list-item" v-for="i in 11">
 								<div>
-									<span>充值-余额：10000</span>
+									<span>充值-积分：10000</span>
 									<span>+10000</span>
 								</div>
 								<div>
@@ -62,7 +62,7 @@
 	export default {
 		data() {
 			return {
-				title: '余额日志',
+				title: '积分日志',
 				show: false,
 				show9: false,
 				hShow: false,

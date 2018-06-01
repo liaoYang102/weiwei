@@ -47,6 +47,7 @@ import strategy from '@/views/member/score/strategy'
 import currencyrewarddetail from '@/views/member/score/currencyrewarddetail'
 import creditrewarddetail from '@/views/member/score/creditrewarddetail'
 import agreement from '@/views/member/setting/agreement'
+import preview from '@/views/member/setting/preview'
 import article from '@/views/member/article/index'
 import vip from '@/views/member/vip/index'
 
@@ -287,7 +288,7 @@ const memberModule = [{
 		name: 'recharge',
 		component: recharge,
 		meta: {
-			title: '余额充值'
+			title: '积分充值'
 		}
 	},
 	{
@@ -310,7 +311,7 @@ const memberModule = [{
 		name: 'banlancelog',
 		component: banlancelog,
 		meta: {
-			title: '余额日志'
+			title: '积分日志'
 		}
 	},
 	{
@@ -318,7 +319,7 @@ const memberModule = [{
 		name: 'banlance',
 		component: banlance,
 		meta: {
-			title: '余额详情'
+			title: '积分详情'
 		}
 	},
 	{
@@ -439,6 +440,14 @@ const memberModule = [{
 		component: vip,
 		meta: {
 			title: '会员等级'
+		}
+	},
+	{
+		path: '/member/setting/preview',
+		name: 'preview',
+		component: preview,
+		meta: {
+			title: '图册'
 		}
 	}
 ]

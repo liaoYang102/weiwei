@@ -5,7 +5,8 @@ const page = {
 		isLoading: false,
 		back: false,
 		isLogin: false,
-		includeList:[]
+		includeList:[],
+		ispreview:false
 	},
 	mutations: {
 		UPDATE_DIRECTION(state, payload) {

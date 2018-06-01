@@ -10,16 +10,16 @@
 					<div class="positionImg">
 						<!-- <img src="../../assets/images/multi_user_mall/position.png"> -->
 						<!-- <span class="small">距离正佳广场0.2km</span> -->
-						<img :src="logo" class="rightImg">
 					</div>
 				</div>
-				<div class="btn" @click="focus" :class="{'btnActive': focusStatus == '已关注'}">{{focusStatus}}</div>
+				<div class="btn" @click="changeAlliance(info.allianceId)" :class="{'btnActive': isAlliance}" v-if='info.isAlliance == 1'>{{isAlliance?'已关注':'关注'}}</div>
+				<div class="btn" @click="changeChains(info.chainsId)" :class="{'btnActive': isChains}" v-if='info.isChains == 1'>{{isChains?'已关注':'关注'}}</div>
 			</div>
 		</div>
 		<div class="searchBox">
 			<div class="search">
 				<img src="../../assets/images/shop/search.png">
-				<input style="border-radius: 0;" type="search" placeholder="搜索商品" @click="goSearch">
+				<input style="border-radius: 0;" type="text" placeholder="搜索商品" @click="goSearch">
 			</div>
 		</div>
 
@@ -108,7 +108,9 @@
 				focusStatus: '关注',
 
 				info: {},
-				logo: ''
+				logo: '',
+				isAlliance: false, //联盟
+				isChains: false, //联营
 			}
 		},
 		components: {
@@ -123,31 +125,34 @@
 		mounted() {
 			this.getBasicInfo()
 			this.getThumbInfo()
-			this.getAllianceConcern()
 			this.InitScroll()
 		},
 		methods: {
+			// 获取企业详情
 			getBasicInfo() {
 				var _this = this
 				_this.$http.get(_this.url.qy.getBasicInfo, {
 					params: {
-						enterpriseId: _this.$router.query.id
+						enterpriseId: _this.$route.query.id
 					}
 				}).then((res) => {
 					if(res.data.status == "00000000") {
 						console.log(res.data.data)
 						_this.info = res.data.data
+						_this.getAllianceConcern(res.data.data.enterpriseBasic2018051500000001)
+						_this.getChainsConcern(res.data.data.chainsId)
 						if(_this.info.logo) {
 							_this.logo = _this.info.logo.original
 						}
 					}
 				})
 			},
+			// 获取企业图册
 			getThumbInfo() {
 				var _this = this
 				_this.$http.get(_this.url.qy.getThumbInfo, {
 					params: {
-						enterpriseId: 'enterpriseBasic2018051200000009'
+						enterpriseId: _this.$route.query.id
 					}
 				}).then((res) => {
 					if(res.data.status == "00000000") {
@@ -155,16 +160,36 @@
 					}
 				})
 			},
-			getAllianceConcern() {
+			// 获取用户是否关注联盟企业角色接口
+			getAllianceConcern(id) {
 				var _this = this
 				_this.$http.get(_this.url.qy.getAllianceConcern, {
 					params: {
 						userId: localStorage.getItem('userId'),
-						allianceId: 'enterpriseBasic2018051200000009'
+						allianceId: _this.$route.query.id
 					}
 				}).then((res) => {
-					if(res.data.status == "00000000") {
-						console.log(res.data.data)
+					if(res.data.status == '00000000') {
+						if(res.data.data.status == 1) {
+
+							_this.isAlliance = true
+						}
+					}
+				})
+			},
+			// 获取用户是否关注联营企业角色接口
+			getChainsConcern(id) {
+				var _this = this
+				_this.$http.get(_this.url.qy.getChainsConcern, {
+					params: {
+						userId: localStorage.getItem('userId'),
+						chainsId: _this.$route.query.id
+					}
+				}).then((res) => {
+					if(res.data.status == '00000000') {
+						if(res.data.data.status == 1) {
+							_this.isChains = true
+						}
 					}
 				})
 			},
@@ -232,13 +257,59 @@
 				//     console.log(_this.moneylist);
 				// },3000)
 			},
-			focus() {
-				if(this.focusStatus == '关注') {
-					this.focusStatus = '已关注'
+			changeAlliance(id) {
+				var _this = this
+				//取消关注联盟企业
+				if(_this.isAlliance) {
+					_this.$http.post(_this.url.user.deleteConcern, {
+						userId: localStorage.getItem('userId'),
+						type: 2,
+						concernIds: id
+					}).then((res) => {
+						if(res.data.status == "00000000") {
+							_this.$vux.toast.show({
+								width: '50%',
+								type: 'text',
+								position: 'middle',
+								text: '已取消关注'
+							})
+						}
+					})
 				} else {
-					this.focusStatus = '关注'
+					//关注联盟企业
+					_this.$http.post(_this.url.user.addConcern, {
+						userId: localStorage.getItem('userId'),
+						type: 2,
+						platformId: _this.url.platformId,
+						objectId: id
+					}).then((res) => {
+						if(res.data.status == "00000000") {
+							_this.$vux.toast.show({
+								width: '50%',
+								type: 'text',
+								position: 'middle',
+								text: '已关注'
+							})
+						}
+					})
 				}
-
+			},
+			changeChains(id) {
+				var _this = this
+				_this.$http.post(_this.url.user.deleteConcern, {
+					userId: localStorage.getItem('userId'),
+					type: 3,
+					concernIds: id
+				}).then((res) => {
+					if(res.data.status == "00000000") {
+						_this.$vux.toast.show({
+							width: '50%',
+							type: 'text',
+							position: 'middle',
+							text: '已取消关注'
+						})
+					}
+				})
 			},
 			goSearch() {
 				this.$router.push({
@@ -276,6 +347,7 @@
 				float: left;
 				margin-right: 0.16rem;
 				background-color: #F5F6FA;
+				border-radius: 2px;
 			}
 			.name {
 				float: left;
@@ -372,6 +444,7 @@
 				background: #F5F6FA;
 				color: #1A2642;
 				padding: 0.14rem 0.1rem 0.12rem 0.78rem;
+				box-sizing: border-box;
 			}
 			input::-webkit-input-placeholder {
 				color: #90A2C7 !important; // WebKit browsers 

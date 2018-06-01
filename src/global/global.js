@@ -265,6 +265,9 @@ var mainApp = {
 		} else {
 			return true
 		}
+	},
+	getCs(name) {
+		return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.href) || [, ""])[1].replace(/\+/g, '%20')) || null;
 	}
 }
 export default mainApp

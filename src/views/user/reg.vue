@@ -7,8 +7,8 @@
 			</div>
 			<group gutter="0" class="input-div">
 				<!--<cell class="input-item" title="国家" value="中国" is-link value-align="right"></cell>-->
-				<x-input class="input-item" ref="phone" v-model="mobile" placeholder="用户名" type="number" :max="11" :required="true" @on-change="nameChange"></x-input>
-				<x-input class="input-item" ref="password" v-model="password" placeholder="登录密码" type="password" :required="true" @on-change="passwordChange"></x-input>
+				<x-input class="input-item" ref="phone" v-model="mobile" placeholder="手机号码" type="number" :max="11" @on-change="nameChange"></x-input>
+				<x-input class="input-item" ref="password" v-model="password" placeholder="登录密码" type="password" @on-change="passwordChange"></x-input>
 				<x-input v-if="!isReg" class="input-item fadeInDown animated" type="number" ref="code" v-model="code" placeholder="验证码" @on-change="codeChange">
 					<x-button class="codeBtn" slot="right" type="primary" mini @click.native="sendCode" :disabled="sendFlag">{{codeText}}</x-button>
 				</x-input>
@@ -18,7 +18,7 @@
 					<check-icon :value.sync="isAgree"></check-icon><span class="sg">我已阅读并同意</span>
 					<router-link to="/member/setting/agreement">《CGC平台注册协议》</router-link>
 				</div>
-				<x-button class="add-btn" @click.native="submit" :show-loading="showLoading" v-if="isReg">立即登录/注册</x-button>
+				<x-button class="add-btn" @click.native="submit" :show-loading="showLoading" v-if="isReg">立即登录 / 注册</x-button>
 				<x-button class="add-btn" @click.native="reg" :show-loading="showLoading" v-else>立即注册</x-button>
 			</div>
 			<div class="login-re" v-if="isReg">
@@ -61,11 +61,12 @@
 				sendFlag: false,
 				showLoading: false,
 				token: '',
-				isAgree: true
+				isAgree: true,
+				parentId: ''
 			}
 		},
-		mounted() {
-
+		created() {
+			this.parentId = this.mainApp.getCs('parentId')
 		},
 		methods: {
 			submit() {
@@ -168,7 +169,13 @@
 							position: 'middle',
 							text: '登陆成功'
 						})
-						_this.$router.go(-1)
+						if(_this.parentId) {
+							_this.$router.push({
+								path: '/index'
+							})
+						} else {
+							_this.$router.go(-1)
+						}
 					} else {
 						localStorage.removeItem('userNp')
 						localStorage.removeItem('token')

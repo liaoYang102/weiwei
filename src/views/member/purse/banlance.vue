@@ -7,7 +7,7 @@
 					<div class="top">
 						<div>
 							<p>1000000.00</p>
-							<p>余额</p>
+							<p>积分</p>
 						</div>
 					</div>
 					<div class="bottom">
@@ -15,11 +15,11 @@
 							<div slot="content" class="card-demo-flex card-demo-content01">
 								<div class="vux-1px-r">
 									<p>+ 5000.0</p> 
-									<span>增加余额</span>
+									<span>增加积分</span>
 								</div>
 								<div class="vux-1px-r">
 									<p>500.0</p>
-									<span>冻结余额</span>
+									<span>冻结积分</span>
 								</div>
 							</div>
 						</card>
@@ -32,7 +32,7 @@
 			<section>
 				<group gutter="0">
 					<cell class="info-item" title="当前状态" value="已收入"></cell>
-					<cell class="info-item" title="余额说明" value="充值"></cell>
+					<cell class="info-item" title="积分说明" value="充值"></cell>
 					<cell class="info-item" title="账单类型" value="后台充值"></cell>
 					<cell class="info-item" title="创建时间" value="2018.04.19 11:30"></cell>
 					<cell class="info-item" title="编号" value="2018041017080385390"></cell>
@@ -58,7 +58,7 @@
 	export default {
 		data() {
 			return {
-				title: '余额详情',
+				title: '积分详情',
 				showDialogStyle: false
 			}
 		},

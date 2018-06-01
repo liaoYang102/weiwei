@@ -48,7 +48,7 @@
 	export default {
 		data() {
 			return {
-				title: '余额充值',
+				title: '积分充值',
 				moneyIndex: 0, //套餐默认选中
 				ptIndex: 0,
 				list: [{

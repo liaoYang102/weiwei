@@ -21,9 +21,9 @@
                 </cell>
                 <cell title="店铺优惠" value="省10元：100减5" :border-intent="false"></cell>
                 <cell :border-intent="false">
-					<span slot="title" style="color:#F23030; width: 3rem;display: inline-block;">CGC通用余额抵扣</span>
+					<span slot="title" style="color:#F23030; width: 3rem;display: inline-block;">CGC通用积分抵扣</span>
 					<span class="banlance" style='font-size: 0.24rem;color: #90A2C7;'>
-						<x-switch :title="'余额: ￥'+balance" v-model="defaultValue" @on-change="onPrice" :value-map="[0,1]" sytle="padding-right: 10 !important;"></x-switch>
+						<x-switch :title="'积分: ￥'+balance" v-model="defaultValue" @on-change="onPrice" :value-map="[0,1]" sytle="padding-right: 10 !important;"></x-switch>
 					</span>
 
                 </cell>

@@ -1,10 +1,13 @@
 <template>
 	<div id="app" ref="fBox" v-cloak>
+		<!--动画  页面缓存-->
 		<transition :name="viewTransition" :css="!!direction">
 			<keep-alive :include="includeList">
 				<router-view></router-view>
 			</keep-alive>
 		</transition>
+		<!--图片预览插件-->
+		<lg-preview v-if="$store.state.page.ispreview"></lg-preview>
 		<settingFooter v-if="$route.meta.navShow"></settingFooter>
 		<div v-transfer-dom>
 			<x-dialog v-model="orientation" class="dialog-demo" hide-on-blur>

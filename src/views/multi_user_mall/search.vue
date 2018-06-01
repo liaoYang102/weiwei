@@ -4,7 +4,7 @@
 		<div class="searchBox">
 			<div class="searchInput">
 				<img src="../../assets/images/shop/search.png">
-				<input type="search" placeholder="搜索商品" @click="showCanel" ref="search" @focus="showCanel">
+				<input type="text" placeholder="搜索商品" @click="showCanel" ref="search" @focus="showCanel">
 			</div>
 			<p class="canel" v-if="canel == true" @click="back">取消</p>
 			<div class="clear"></div>
@@ -93,15 +93,16 @@
 		img{
 			position: absolute;
 			width: 5%;
-			top: 0.25rem;
+			top: 0.28rem;
 			left: 0.26rem;
 		}
 		input{
 			width: 100%;
 			background: #E4EBFB;
-			border-radius: 0.29rem;
+			border-radius: 2px;
 			color: #1A2642;
 			padding: 0.14rem 0.1rem 0.12rem 0.78rem;
+			box-sizing: border-box;
 		}
 		input::-webkit-input-placeholder {
 		    color: #90A2C7 !important; // WebKit browsers 

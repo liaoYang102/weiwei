@@ -24,6 +24,9 @@ Vue.prototype.mainApp = mainApp
 import MD5 from 'js-md5'
 Vue.prototype.MD5 = MD5
 
+import vuePicturePreview from 'vue-picture-preview'
+Vue.use(vuePicturePreview)
+
 import axios from './config/axios_config'
 Vue.prototype.$http = axios //定义axios组件用法  this.$http(opt).then(fn)
 
