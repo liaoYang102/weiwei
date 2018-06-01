@@ -69,12 +69,12 @@
 							</router-link>
 						</li>
 						<li>
-							<router-link to="/member/purse/qrcode">
+							<a @click="toQrcode(userInfo)">
 								<div class="li-box">
 									<img src="../../assets/images/member/member_code.png">
 								</div>
 								<p>推广码</p>
-							</router-link>
+							</a>
 						</li>
 					</ul>
 				</div>
@@ -105,8 +105,8 @@
 		data() {
 			return {
 				title: '个人中心',
-				userInfo:{},
-				images:'',
+				userInfo: {},
+				images: '',
 				infoList: [{
 						img: './static/member/member_1.png',
 						text: '我的优惠券',
@@ -170,6 +170,17 @@
 					}
 				})
 			},
+			toQrcode(info) {
+				var _this = this
+				_this.$router.push({
+					path: '/member/purse/qrcode',
+					query: {
+						name: info.realName,
+						tel: info.mobile,
+						tx: _this.images
+					}
+				})
+			}
 		},
 		components: {
 			settingHeader,

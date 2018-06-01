@@ -6,12 +6,13 @@
 			<div class="bg">
 				<p class="title">我的赚钱码</p>
 				<div class="b-w">
-					<img class="code" src="../../../assets/images/lock/qcode.png" />
+					<!--<img class="code" src="../../../assets/images/lock/qcode.png" />-->
+					<qrcode :value="qrcodeVal" :size="width" type="img" class="qrcode"></qrcode>
 					<div class="bottom">
-						<img src="../../../assets/images/draw/photo2.png" alt="" />
+						<img :src="tx" alt="" />
 						<div>
-							<p>张某某</p>
-							<p>18520485288</p>
+							<p>{{name}}</p>
+							<p>{{title}}</p>
 						</div>
 					</div>
 				</div>
@@ -84,17 +85,26 @@
 			return {
 				title: '我的二维码',
 				grade: 1,
+				name: '',
+				tel: '',
+				tx: '',
+				width:''
 			}
 		},
 		created() {
-
+			this.name = this.$route.query.name
+			this.title = this.$route.query.tel
+			this.tx = this.$route.query.tx
+			this.qrcodeVal = 'http://192.168.3.145:8080/#/user/reg?parentId=' + localStorage.getItem('userId')
+			this.width =  Number(document.body.clientWidth * 0.6773333333333333)
 		},
 		mounted() {},
 		methods: {
 
 		},
 		components: {
-			settingHeader
+			settingHeader,
+			Qrcode
 		}
 	}
 </script>
@@ -103,6 +113,9 @@
 	.qrcode-box {
 		height: 100%;
 		font-family: PingFangSC-Medium;
+		.qrcode {
+			text-align: center;
+		}
 		/*2*/
 		.bg-w {
 			height: 100%;
@@ -297,6 +310,7 @@
 						width: 1rem;
 						height: 1rem;
 						margin-right: 0.22rem;
+						border-radius:50%;
 					}
 					div {
 						font-family: PingFangSC-Regular;

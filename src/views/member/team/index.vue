@@ -105,7 +105,9 @@
 						var data = res.data.data
 						this.list = data.list
 						this.totalNums = data.totalNums
-						this.InitScroll()
+						if(data.list.length > 0) {
+							this.InitScroll()
+						}
 					}
 				})
 			},

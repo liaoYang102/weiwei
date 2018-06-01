@@ -103,7 +103,8 @@
 					mobile: _this.mobile,
 					password: _this.password,
 					smsVerificationCode: _this.code,
-					platformId: _this.url.platformId
+					platformId: _this.url.platformId,
+					parentUserId:_this.parentId
 				}).then(function(res) {
 					if(res.data.status == "00000000") {
 						_this.$vux.toast.show({
