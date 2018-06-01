@@ -12,6 +12,7 @@ import OrderDetail from '@/views/share/orderDetail'
 import OrderEval from '@/views/share/orderEval'
 import UseTime from '@/views/share/usetime'
 import Qrcode from '@/views/share/qrcode'
+import instrumentCode from '@/views/share/instrumentCode'
 
 
 const share =[
@@ -134,6 +135,14 @@ const share =[
 		component:Qrcode,
 		meta: {
 			title:'二维码'
+		}
+	},
+	{
+		path: '/share/instrumentCode',
+		name: 'instrumentCode',
+		component:instrumentCode,
+		meta: {
+			title: '仪器扫码'
 		}
 	}
 ]

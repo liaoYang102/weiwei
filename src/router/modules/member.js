@@ -50,6 +50,7 @@ import agreement from '@/views/member/setting/agreement'
 import preview from '@/views/member/setting/preview'
 import article from '@/views/member/article/index'
 import vip from '@/views/member/vip/index'
+import generalize from '@/views/member/generalize/index'
 
 const memberModule = [{
 		path: '/index',
@@ -448,6 +449,13 @@ const memberModule = [{
 		component: preview,
 		meta: {
 			title: '图册'
+		}
+	}, {
+		path: '/member/generalize/index',
+		name: 'generalize',
+		component: generalize,
+		meta: {
+			title: '推广助手'
 		}
 	}
 ]

@@ -5,7 +5,7 @@
 			<x-input class="address-item" placeholder="姓名" v-model="info.name" required></x-input>
 			<x-input class="address-item" placeholder="联系方式" type="text" v-model="info.mobile" required></x-input>
 			<cell title="中国" value-align="left" class="addr-cell">
-				<x-address :list="list" class="address-item address-check" v-model="addArr" title='' placeholder="请选择地址" value-text-align="left"></x-address>
+				<x-address :list="list" class="address-item address-check" v-model="addArr" title='' placeholder="请选择地址" value-text-align="left" @on-show="onAddArr"></x-address>
 			</cell>
 			<x-input class="address-item" placeholder="详细地址" v-model="info.address" type="text" required></x-input>
 			<x-input class="address-item" placeholder="邮箱" v-model="info.email" type="text"></x-input>
@@ -186,6 +186,9 @@
 					_this.info.addressId = _this.$route.params.addressId
 					_this.addArr = [_this.info.provinceId, _this.info.cityId, _this.info.areaId]
 				})
+			},
+			onAddArr (val) {
+				this.addArr = this.addArr.concat() // 进行数组深拷贝并赋值,触发vue更新视图
 			}
 		},
 		components: {
