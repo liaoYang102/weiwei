@@ -75,13 +75,12 @@
 				if(_this.mainApp.isphone(_this.mobile) && _this.password.length > 0) {
 					//获取云中心登录token
 					_this.$http.post(_this.url.user.login, {
-						audience: 'platform',
+						audience: 'user',
 						name: _this.mobile,
 						passwd: _this.password,
 					}).then((res) => {
 						if(res.data.status == "00000000") {
 							_this.token = res.data.data.token
-							localStorage.setItem('userNp', _this.mobile + res.data.data.randomAccessCode)
 							_this.isCheckLogin()
 						}
 					})
@@ -104,7 +103,7 @@
 					password: _this.password,
 					smsVerificationCode: _this.code,
 					platformId: _this.url.platformId,
-					parentUserId:_this.parentId
+					parentUserId: _this.parentId
 				}).then(function(res) {
 					if(res.data.status == "00000000") {
 						_this.$vux.toast.show({
@@ -155,12 +154,14 @@
 			login() {
 				var _this = this
 				_this.$http.post(this.url.user.userLogin, {
+					audience: 'user',
 					platformId: _this.url.platformId,
 					mobile: _this.mobile,
 					password: _this.password
 				}).then(function(res) {
 					if(res.data.status == "00000000") {
 						//localStorage.setItem('userId', res.data.data.userId)
+						localStorage.setItem('userNp', 'appUser2018051900000001' + res.data.data.randomAccessCode)
 						localStorage.setItem('userId', 'appUser2018051900000001')
 						localStorage.setItem('token', _this.token)
 						_this.$store.state.page.isLogin = true
@@ -170,13 +171,9 @@
 							position: 'middle',
 							text: '登陆成功'
 						})
-						if(_this.parentId) {
-							_this.$router.push({
-								path: '/index'
-							})
-						} else {
-							_this.$router.go(-1)
-						}
+						_this.$router.push({
+							path: '/index'
+						})
 					} else {
 						localStorage.removeItem('userNp')
 						localStorage.removeItem('token')
