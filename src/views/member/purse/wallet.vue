@@ -94,7 +94,10 @@
 				</div>
 			</div>
 		</div>
-		<img style="display: block;width: 100%;height: auto;" :src="'./static/images/integral-bg.png'" alt="" />
+		<router-link to='/draw'>
+			<img style="display: block;width: 100%;height: auto;" :src="'./static/images/integral-bg.png'" alt="" />
+		</router-link>
+		
 	</div>
 </template>
 

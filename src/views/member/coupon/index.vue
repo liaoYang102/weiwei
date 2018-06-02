@@ -16,7 +16,8 @@
 			<div class="wrapper" :class="{'top46':hShow}" ref="wrapper">
 				<div class="content">
 					<div v-if="couponList.length>0">
-						<div v-for="(item,index) in couponList" :style="[!item.show?mb:'']" class="roll"><!-- -->
+						<div v-for="(item,index) in couponList" :style="[!item.show?mb:'']" class="roll">
+							<!-- -->
 							<div class="rollOne">
 								<div class="right">
 									<div class="top" :class="{'textColor': item.status != 1}">
@@ -25,12 +26,12 @@
 									</div>
 									<div class="middle">
 										<div>
-										 	<span>满{{item.condition}}元减{{item.denomination}}元</span><br>
-										 	<span>{{item.startTime}} - {{item.endTime}}</span>
+											<span>满{{item.condition}}元减{{item.denomination}}元</span><br>
+											<span>{{item.startTime}} - {{item.endTime}}</span>
 										</div>
-										<div class="bottom" @click="view(index)">查看详情 <img :src="iconImg"></div>
+										<div class="bottom" @click="view(index)">查看详情 <img :class="{'noshow':!item.show}" :src="iconImg"></div>
 									</div>
-									
+
 								</div>
 								<div class="left">
 									<div class="img" :class="[{'red':item.status == 1 && item.type !=10 && item.type !=40},{'blue':item.status == 1 && item.type !=20 && item.type !=30 && item.type !=50},{'gq':item.status != 1}]"></div>
@@ -43,7 +44,7 @@
 										<img src="../../../../static/member/type3.png" style="width:100%;" v-if="item.type == 10">
 										<img src="../../../../static/member/type4.png" style="width:100%;" v-else>
 									</div>
-									
+
 									<div class="useBtn" v-if="item.status == 1">去使用</div>
 
 									<div v-if="item.status != 1" class="statusImg">
@@ -53,7 +54,7 @@
 								</div>
 							</div>
 							<div class="detail" v-if="item.show">
-								{{item.content}}2222
+								{{item.content}}
 							</div>
 						</div>
 						<Loading v-if="show"> </Loading>
@@ -99,63 +100,63 @@
 				hShow: '',
 				show9: false,
 				showNo: false,
-				showIndex:'',
-				mb:{
-					marginBottom:'0.2rem'
+				showIndex: '',
+				mb: {
+					marginBottom: '0.2rem'
 				},
-				couponList: [
-					{
-						condition:100,//满多少元
-						content:'仅限威伐光门店使用',//详情描述
-						denomination:5,//优惠金额
-						discount:0,//折扣
-						endTime:0,
-						name:"满减券",
-						startTime:0,
-						status:1,
-						type:1,
+				couponList: [{
+						condition: 100, //满多少元
+						content: '仅限威伐光门店使用', //详情描述
+						denomination: 5, //优惠金额
+						discount: 0, //折扣
+						endTime: 0,
+						name: "满减券",
+						startTime: 0,
+						status: 1,
+						type: 1,
 						show: false
 					},
 					{
-						condition:100,//满多少元
-						content:'仅限威伐光门店使用',//详情描述
-						denomination:5,//优惠金额
-						discount:0,//折扣
-						endTime:0,
-						name:"满减券",
-						startTime:0,
-						status:2,
-						type:1,
+						condition: 100, //满多少元
+						content: '仅限威伐光门店使用', //详情描述
+						denomination: 5, //优惠金额
+						discount: 0, //折扣
+						endTime: 0,
+						name: "满减券",
+						startTime: 0,
+						status: 2,
+						type: 1,
 						show: false
 					},
 					{
-						condition:100,//满多少元
-						content:'仅限威伐光门店使用',//详情描述
-						denomination:5,//优惠金额
-						discount:0,//折扣
-						endTime:0,
-						name:"满减券",
-						startTime:0,
-						status:3,
-						type:1,
+						condition: 100, //满多少元
+						content: '仅限威伐光门店使用', //详情描述
+						denomination: 5, //优惠金额
+						discount: 0, //折扣
+						endTime: 0,
+						name: "满减券",
+						startTime: 0,
+						status: 3,
+						type: 1,
 						show: false
 					},
 					{
-						condition:0,//满多少元
-						content:'仅限威伐光门店使用',//详情描述
-						denomination:0,//优惠金额
-						discount:9,//折扣
-						endTime:0,
-						name:"折扣券",
-						startTime:0,
-						status:1,
-						type:2,
+						condition: 0, //满多少元
+						content: '仅限威伐光门店使用', //详情描述
+						denomination: 0, //优惠金额
+						discount: 9, //折扣
+						endTime: 0,
+						name: "折扣券",
+						startTime: 0,
+						status: 1,
+						type: 2,
 						show: false
 					}
 				],
 				iconImg: './static/member/yhq-down.png',
 				par: {
-					type: 0,status: 0
+					type: 0,
+					status: 0
 				}
 			}
 		},
@@ -226,15 +227,15 @@
 					_this.show = true
 					_this.showNo = false
 					_this.couponList = _this.couponList.concat({
-						condition:0,//满多少元
-						content:'仅限威伐光门店使用',//详情描述
-						denomination:0,//优惠金额
-						discount:9,//折扣
-						endTime:0,
-						name:"现金券",
-						startTime:0,
-						status:1,
-						type:5
+						condition: 0, //满多少元
+						content: '仅限威伐光门店使用', //详情描述
+						denomination: 0, //优惠金额
+						discount: 9, //折扣
+						endTime: 0,
+						name: "现金券",
+						startTime: 0,
+						status: 1,
+						type: 5
 					})
 					setTimeout(function() {
 						_this.show = false
@@ -245,8 +246,8 @@
 				}
 			},
 			// 获取数据
-			getData(){
-				this.getCouponList(this.par)//全部
+			getData() {
+				this.getCouponList(this.par) //全部
 			},
 			//获取优惠券
 			getCouponList(obj) {
@@ -256,7 +257,7 @@
 						userId: 'appUser796345684600000001',
 						type: obj.type,
 						status: obj.status,
-						timeType:0,
+						timeType: 0,
 						curPage: 1,
 						pageSize: 20
 					}
@@ -264,23 +265,23 @@
 					if(res.data.status == "00000000") {
 						_this.couponList = res.data.data.list
 						_this.addShow()
-						console.log('---get',_this.couponList)
+						console.log('---get', _this.couponList)
 						// _this.setData(obj,res.data.data)
 					}
 				})
 			},
 			// 数据加个属性 show
-			addShow(){
-				for(let i = 0;i<this.couponList.length;i++){
+			addShow() {
+				for(let i = 0; i < this.couponList.length; i++) {
 					this.couponList[i].show = false;
 				}
 				console.log('--couponList', this.couponList)
 			},
 			// 查看详情
-			view(i){
+			view(i) {
 				let obj = this.couponList[i];
 				obj.show = !this.couponList[i].show;
-				this.$set(this.couponList,i,obj);
+				this.$set(this.couponList, i, obj);
 				// this.couponList[i].show = !this.couponList[i].show;
 			}
 		},
@@ -310,7 +311,6 @@
 			padding: 0.08rem 0.25rem;
 			text-align: center;
 			box-sizing: border-box;
-
 			span {
 				display: inline-block;
 				width: 100%;
@@ -374,20 +374,19 @@
 				bottom: 0px;
 				overflow: hidden;
 				width: 100%;
-				padding: 0.23rem 0.21rem;
+				padding: 0rem 0.21rem;
 				box-sizing: border-box;
 			}
 			.bgImgThree {
 				/*background: url(../../../assets/images/user/rollBg4.png) no-repeat;*/
 				background-size: 100% 100%;
 			}
-			
-			.detail{
-				margin-left: 0.2rem;
+			.detail {
+				margin-left: 0.13rem;
 				padding: 0.27rem;
 				box-sizing: border-box;
 				background-color: white;
-				color:rgba(66,88,132,1);
+				color: rgba(66, 88, 132, 1);
 				font-size: 0.24rem;
 				margin-bottom: 0.2rem;
 			}
@@ -405,7 +404,7 @@
 					flex-direction: column;
 					font-family: MicrosoftYaHei;
 					color: #fff;
-					.img{
+					.img {
 						position: absolute;
 						width: 99%;
 						top: 0.22rem;
@@ -426,38 +425,37 @@
 						background: url(../../../../static/member/yhq-grayBg.png) no-repeat;
 						background-size: 100% 90%;
 					}
-					div{
+					div {
 						position: relative;
 						z-index: 12;
 					}
-					p{
-						
+					p {
 						font-size: 0.68rem;
 						margin-bottom: 0.2rem;
 						i {
 							font-size: 0.39rem;
 						}
 					}
-					.useBtn{
+					.useBtn {
 						position: relative;
 						z-index: 12;
 						width: 1.54rem;
 						text-align: center;
-						background: rgba(255,255,255,0);
+						background: rgba(255, 255, 255, 0);
 						border: 1px solid #fff;
 						padding: 0.09rem 0;
 						border-radius: 0.3rem;
 					}
-					.typeImg{
-						width:60%;
+					.typeImg {
+						width: 60%;
 						margin: 0.2rem auto;
 						text-align: center;
 						margin-bottom: 0.25rem;
 					}
-					.statusImg{
+					.statusImg {
 						position: absolute;
-						bottom: -22%;
-						right: -2%;
+						bottom: -4%;
+						right: 0%;
 						width: 60%;
 						height: auto;
 					}
@@ -473,7 +471,7 @@
 						height: auto;
 						line-height: 0.35rem;
 						margin-top: 0.29rem;
-						word-wrap : break-word ;
+						word-wrap: break-word;
 						font-size: 0.28rem;
 						color: #425884;
 					}
@@ -491,14 +489,16 @@
 							flex: 1;
 							font-size: 0.24rem;
 							color: #425884;
-							img{
+							img {
 								width: 15%;
 								vertical-align: middle;
-
+							}
+							.noshow {
+								transform: rotateX(180deg);
 							}
 						}
 					}
-					.textColor{
+					.textColor {
 						color: #90a2c7;
 					}
 				}

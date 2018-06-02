@@ -4,12 +4,14 @@
 		<settingHeader :title="title"></settingHeader>
 		<div class="top">
 			<div class="store">
-				<img :src="logo?logo:'./static/shop/storeLogo.png'">
-				<div class="name">
-					<div><span>{{info.name}}</span></div>
-					<div class="positionImg">
-						<!-- <img src="../../assets/images/multi_user_mall/position.png"> -->
-						<!-- <span class="small">距离正佳广场0.2km</span> -->
+				<div class="one">
+					<img :src="logo?logo:'./static/shop/storeLogo.png'">
+					<div class="name">
+						<div><span>{{info.name}}</span></div>
+						<div class="positionImg">
+							<!-- <img src="../../assets/images/multi_user_mall/position.png"> -->
+							<!-- <span class="small">距离正佳广场0.2km</span> -->
+						</div>
 					</div>
 				</div>
 				<div class="btn" @click="changeAlliance(info.allianceId)" :class="{'btnActive': isAlliance}" v-if='info.isAlliance == 1'>{{isAlliance?'已关注':'关注'}}</div>
@@ -55,7 +57,7 @@
 				</tab-item>
 			</tab>
 		</div>
-		<div style="height: 63.1%" v-if="pyy!=2">
+		<div style="height: 60.8%" v-if="pyy!=2">
 			<div class="wrapper" ref="wrapper">
 				<div class="content">
 					<div class="index" v-if='pyy==1'>
@@ -341,43 +343,47 @@
 		background-color: #90A2C7;
 		/*background: url('../../assets/images/multi_user_mall/Mask.png') no-repeat;*/
 		.store {
-			padding: 1rem 0rem 0 0.14rem;
-			img {
-				width: 16.5%;
-				float: left;
-				margin-right: 0.16rem;
-				background-color: #F5F6FA;
-				border-radius: 2px;
-			}
-			.name {
-				float: left;
-				font-size: 0.32rem;
-				color: #fff;
-				padding-top: 0.15rem;
-				line-height: 0.9rem;
-				.positionImg {
-					float: left;
-					img {
-						width: 10%;
+			height: 100%;
+			padding: 15px 15px;
+			box-sizing: border-box;
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			.one {
+				display: flex;
+				align-items: center;
+				img {
+					width: 16.5%;
+					margin-right: 0.16rem;
+					background-color: #F5F6FA;
+					border-radius: 2px;
+				}
+				.name {
+					font-size: 0.32rem;
+					color: #fff;
+					.positionImg {
 						float: left;
-						vertical-align: middle;
-						margin-top: 0.07rem;
-					}
-					.small {
-						display: inline-block;
-						float: left;
-						font-size: 0.24rem;
-						line-height: 0.55rem;
-					}
-					.rightImg {
-						width: 5%;
-						margin-top: 0.19rem;
-						margin-left: 0.05rem;
+						img {
+							width: 10%;
+							float: left;
+							vertical-align: middle;
+							margin-top: 0.07rem;
+						}
+						.small {
+							display: inline-block;
+							float: left;
+							font-size: 0.24rem;
+							line-height: 0.55rem;
+						}
+						.rightImg {
+							width: 5%;
+							margin-top: 0.19rem;
+							margin-left: 0.05rem;
+						}
 					}
 				}
 			}
 			.btn {
-				float: right;
 				text-align: center;
 				width: 1.16rem;
 				height: 0.55rem;
@@ -385,8 +391,6 @@
 				background: #336FFF;
 				color: #fff;
 				font-size: 0.25rem;
-				margin-right: 0.2rem;
-				margin-top: 0.4rem;
 				border-radius: 2px;
 			}
 			.btnActive {

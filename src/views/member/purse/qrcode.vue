@@ -291,7 +291,6 @@
 			}
 			.b-w {
 				width: 5.78rem;
-				height: 7.45rem;
 				border-radius: 5px;
 				background-color: white;
 				margin: 0 auto;

@@ -83,56 +83,6 @@
 </script>
 
 <style lang="less">
-	/*.lg-preview-wrapper>.lg-preview-nav-right {
-		height: 50px!important;
-		width: 50px!important;
-		top: 50%!important;
-		right: 0!important;
-		transform: translate(0%, -50%)!important;
-		margin-left: 0!important;
-		border-radius: 50%!important;
-		background-color: #ffbe00b3!important;
-		z-index: 1111!important;
-		.lg-preview-nav-arrow {
-			width: 50%!important;
-			height: 50%!important;
-			margin-top: -0.19rem!important;
-			position: relative!important;
-			display: inline-block!important;
-			top: 44%!important;
-			left: 11%!important;
-		}
-	}
-	
-	.lg-preview-wrapper>.lg-preview-nav-left {
-		height: 50px!important;
-		width: 50px!important;
-		top: 50%!important;
-		right: 0!important;
-		transform: translate(0%, -50%)!important;
-		margin-left: 0!important;
-		border-radius: 50%!important;
-		background-color: #ffbe00b3!important;
-		z-index: 1111!important;
-		.lg-preview-nav-arrow {
-			width: 50%!important;
-			height: 50%!important;
-			margin-top: -0.19rem!important;
-			position: relative!important;
-			display: inline-block!important;
-			top: 44%!important;
-			left: -10%!important;
-		}
-	}
-	
-	.lg-preview-wrapper>.lg-preview-nav-left {
-		margin-left: 5px!important;
-	}
-	
-	.lg-preview-wrapper>.lg-preview-img {
-		z-index: 15;
-	}*/
-	
 	.preview-box {
 		height: 100%;
 		text-align: center;
