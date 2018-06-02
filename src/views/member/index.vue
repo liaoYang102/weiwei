@@ -164,6 +164,7 @@
 				}).then((res) => {
 					if(res.data.status == "00000000") {
 						_this.userInfo = res.data.data
+						_this.$store.state.page.userInfo = res.data.data
 						if(res.data.data.avatar.original) {
 							_this.images = res.data.data.avatar.original
 						}

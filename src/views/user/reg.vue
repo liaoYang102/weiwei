@@ -62,28 +62,24 @@
 				showLoading: false,
 				token: '',
 				isAgree: true,
-				parentId: ''
+				parentId: '',
+				frompath: ''
 			}
 		},
 		created() {
 			this.parentId = this.mainApp.getCs('parentId')
+		},
+		beforeRouteEnter(to, from, next) {
+			next(vm => {
+				vm.frompath = from.path
+			})
 		},
 		methods: {
 			submit() {
 				var _this = this
 				_this.showLoading = true
 				if(_this.mainApp.isphone(_this.mobile) && _this.password.length > 0) {
-					//获取云中心登录token
-					_this.$http.post(_this.url.user.login, {
-						audience: 'user',
-						name: _this.mobile,
-						passwd: _this.password,
-					}).then((res) => {
-						if(res.data.status == "00000000") {
-							_this.token = res.data.data.token
-							_this.isCheckLogin()
-						}
-					})
+					_this.isCheckLogin()
 				} else {
 					_this.$vux.toast.show({
 						width: '50%',
@@ -160,10 +156,10 @@
 					password: _this.password
 				}).then(function(res) {
 					if(res.data.status == "00000000") {
-						//localStorage.setItem('userId', res.data.data.userId)
-						localStorage.setItem('userNp', 'appUser2018051900000001' + res.data.data.randomAccessCode)
-						localStorage.setItem('userId', 'appUser2018051900000001')
-						localStorage.setItem('token', _this.token)
+						localStorage.setItem('userId', res.data.data.id)
+						localStorage.setItem('userNp', res.data.data.id + res.data.data.randomAccessCode)
+//						localStorage.setItem('userId', 'appUser2018051900000001')
+						localStorage.setItem('token', res.data.data.token)
 						_this.$store.state.page.isLogin = true
 						_this.$vux.toast.show({
 							width: '50%',
@@ -171,9 +167,21 @@
 							position: 'middle',
 							text: '登陆成功'
 						})
-						_this.$router.push({
-							path: '/index'
-						})
+						if(_this.$store.state.page.hasRouter) {
+							if(_this.frompath) {
+								_this.$router.replace({
+									path: _this.frompath
+								})
+							} else {
+								_this.$router.replace({
+									path: '/index'
+								})
+							}
+						} else {
+							_this.$router.replace({
+								path: '/index'
+							})
+						}
 					} else {
 						localStorage.removeItem('userNp')
 						localStorage.removeItem('token')
@@ -252,15 +260,12 @@
 			},
 			wxLogin() {
 				var _this = this
-				//				_this.$http(_this.url.user.getAuthorizationUrl,{
-				//					params:{
-				//						platformId:_this.url.platformId,
-				//						type:1
-				//					}
-				//				}).then((res)=>{
-				//					console.log(res)
-				//				})
-				_this.$http(_this.url.user.getAuthorizationUrl1).then((res) => {
+				_this.$http(_this.url.user.getAuthorizationUrl, {
+					params: {
+						platformId: _this.url.platformId,
+						type: 1
+					}
+				}).then((res) => {
 					console.log(res)
 				})
 			}

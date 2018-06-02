@@ -92,9 +92,9 @@
 			<popup v-model="isBj" position="bottom" height="0.94rem" :show-mask="false">
 				<div class="bjBtn-box">
 					<div style="flex: 1;" @click="isallcheck">
-						<check-icon v-if="isBj && index==2" class="check-btn" :value.sync="allprCheck">全部商品 <span v-if="!allprCheck">已选<i>{{proidList.length}}</i>个商品</span></check-icon>
-						<check-icon v-if="isBj && index==1" class="check-btn" :value.sync="allstCheck">全部店铺<span v-if="!allstCheck">已选<i>{{storeidList.length}}</i>间店铺</span></check-icon>
-						<check-icon v-if="isBj && index==0" class="check-btn" :value.sync="allstCheck2">全部店铺<span v-if="!allstCheck2">已选<i>{{storeidList2.length}}</i>间店铺</span></check-icon>
+						<check-icon v-if="isBj && index==2" class="check-btn" :value.sync="allprCheck">全部商品 <span v-if="!allprCheck">已选 <i>{{proidList.length}}</i> 个商品</span></check-icon>
+						<check-icon v-if="isBj && index==1" class="check-btn" :value.sync="allstCheck">全部店铺<span v-if="!allstCheck">已选 <i>{{storeidList.length}}</i> 间店铺</span></check-icon>
+						<check-icon v-if="isBj && index==0" class="check-btn" :value.sync="allstCheck2">全部店铺<span v-if="!allstCheck2">已选 <i>{{storeidList2.length}}</i> 间店铺</span></check-icon>
 					</div>
 					<div class="qx-box">
 						<div class="add-btn" @click="deleteConcern">取消关注</div>

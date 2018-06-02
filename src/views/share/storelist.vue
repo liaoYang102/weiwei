@@ -212,15 +212,29 @@
 			noMore
 		},
 		created(){
-			this.InitScroll();
+			this.InitScroll()
+			this.getEnterpriseListInfo()
 		},
 		mounted(){
-			// this.InitScroll();
 		},
 		computed:{
 			
 		},
 		methods:{
+			getEnterpriseListInfo(){
+				var _this = this
+				_this.$http.get(_this.url.qy.getEnterpriseListInfo, {
+					params: {
+						listType:1,
+						type:1
+					}
+				}).then((res) => {
+					if(res.data.status == "00000000") {
+						console.log(res.data.data)
+						
+					}
+				})
+			},
 			InitScroll() {
 				this.$nextTick(() => {
 					if(!this.scroll) {

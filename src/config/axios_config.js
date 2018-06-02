@@ -21,9 +21,6 @@ axios.interceptors.request.use(config => {
 	let sign = ''
 	if(token && config.url.split('/')[2] != 'public') {
 		sign = MD5(config.url + timestamp + localStorage.getItem('userNp'))
-		console.log(config.url)
-		console.log(timestamp)
-		console.log(localStorage.getItem('userNp'))
 	} else {
 		sign = MD5(config.url + timestamp)
 	}
