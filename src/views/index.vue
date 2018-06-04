@@ -25,6 +25,11 @@
 							<marquee-item v-for="i in 5" :key="i" :duration='3000' class="align-middle">魅族手机成功加盟CGC全球智慧产业联盟</marquee-item>
 						</marquee>
 					</div>
+					<router-link to="/member/article/index">
+						<div class="notMore">
+							<img src="../assets/images/shop/turn_right.png">
+						</div>
+					</router-link>
 				</div>
 				<!--<div class="lottery">
 					<img class="auto-img" src="../assets/images/index/group.png" alt="">
@@ -229,7 +234,7 @@
 				navList:[
 					{title:'抽奖中心',img:'./static/images/cj.png',url:'/draw'},
 					{title:'邀请有奖',img:'./static/images/yq.png',url:'/member/purse/qrcode'},
-					{title:'推广助手',img:'./static/images/tg.png',url:'/member/purse/qrcode'},
+					{title:'推广助手',img:'./static/images/tg.png',url:'/member/generalize/index'},
 					{title:'赚钱攻略',img:'./static/images/gl.png',url:'/member/purse/qrcode'},
 					{title:'充值有奖',img:'./static/images/cz.png',url:'/member/purse/recharge'},
 					{title:'我的优惠券',img:'./static/images/yh.png',url:'/member/coupon/index'},
@@ -486,6 +491,18 @@
 				height: 0.6rem;
 				border-right: 1px solid #E1E1E1;
 				padding-right: 0.2rem;
+			}
+			.notMore{
+			    img{
+			    	width: 0.3rem;
+			    	height: 0.3rem;
+			    	border: none;
+			    	border-left: 1px solid #D8DFF0;
+			    	display: inline-block;
+			    	padding: 0.15rem 0;
+			    	padding-left: 0.6rem;
+			    	margin-left: 0.2rem;
+			    }
 			}
 		}
 		/*抽奖模块*/
