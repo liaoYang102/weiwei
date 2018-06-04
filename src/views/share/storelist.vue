@@ -95,12 +95,13 @@
 						    <div class="screening">
 						    	<div class="logo">
 				    				<group>
-				    					<cell is-link :title="logoTitle" :border-intent="false" :arrow-direction="showContent ? 'up' : 'down'" @click.native="down()">
-				    					
+				    					<!-- <cell islink :title="logoTitle" :border-intent="false" :arrow-direction="showContent ? 'up' : 'down'" @click.native="down()"> -->
+				    					<cell :title="logoTitle" :border-intent="false">
 				    					</cell>
 				    					<div>
 				    						<div class="logolist">
 				    							<li class="item" v-for="(item, index) in logolist" @click="changeCss($event)">{{ item.name}}</li>
+				    							<input type="number" placeholder="请输入距离" class="distance" />
 				    						</div>
 				    				    </div>
 				    				</group>
@@ -210,15 +211,12 @@
 				show1:false,
 				logoTitle: '门店',
 				logolist: [
-					{ name:'logo'},
-					{ name:'logo'},
-					{ name:'logo'},
-					{ name:'logo'},
-					{ name:'logo'},
-					{ name:'logo'},
-					{ name:'logo'},
-					{ name:'logo'},
-					{ name:'logo'}
+					{ name:'全部'},
+					{ name:'5公里'},
+					{ name:'10公里'},
+					{ name:'20公里'},
+					{ name:'50公里'},
+					{ name:'100公里'},
 				],
 				screeningContent: [
 					{ title: '美食', options: [ {name: '全部'},{name: '甜点饮品'},{name: '自助餐'}]},
@@ -370,22 +368,22 @@
 				this.$router.push({ path: '/multi_user_mall/search'})
 			},
 	    	// 下拉
-	    	down: function() {
-	    		let list = this.logolist;
-	    		let length= list.length;
-	    		let obj = { name: 'logo'};
+	   //  	down: function() {
+	   //  		let list = this.logolist;
+	   //  		let length= list.length;
+	   //  		let obj = { name: 'logo'};
 
-				if(length == 9) {
-					for(let i =0; i<6;i++){
-						list.push(obj)
-						this.showContent = false;
-					}
-				}else{
-					list.splice(9,6)
-					this.showContent = true;
-				}
-				console.log(this.scroll2);
-	    	},
+				// if(length == 9) {
+				// 	for(let i =0; i<6;i++){
+				// 		list.push(obj)
+				// 		this.showContent = false;
+				// 	}
+				// }else{
+				// 	list.splice(9,6)
+				// 	this.showContent = true;
+				// }
+				// console.log(this.scroll2);
+	   //  	},
 	    	// 切换样式
 	    	changeCss: function(e){
 				if (e.target.className.indexOf("li-selected") == -1) {
@@ -838,7 +836,7 @@
 	height: 90%;
 	overflow: hidden;
 	.content{
-		padding-top: 0.6rem;
+		padding-top: 0.4rem;
 		padding-bottom: 0.7rem;
 	}
 }
@@ -872,11 +870,18 @@
 			margin-right: 0.255rem;
 		}
 		.logolist{
-			margin: 0.24rem 0.32rem 0 0.15rem;
+			margin: 0.24rem 0 0 0;
+			color: #1A2642;
 			.item{
-				width: 1.86rem;
-				margin: 0 0.1rem 0.1rem 0;
-				padding: 0.32rem 0;
+				width: 1.92rem;
+				margin: 0 0.18rem 0.1rem 0;
+				padding: 0.26rem 0;
+			}
+			.distance{
+			    width: 96%;
+			    text-align: center;
+			    background: #F5F6FA;
+			    padding: 0.22rem 0;
 			}
 		}
 	}
@@ -892,10 +897,11 @@
 		.category{
 			margin-left: 0.07rem;
 			margin-bottom: 0.24rem;
+			color: #90A2C7;
 		}
 		.item{
 			width: 1.96rem;
-			padding: 0.15rem 0;
+			padding: 0.2rem 0;
 			border-radius: 0.04rem;
 			margin-right: 0.18rem;
 			margin-bottom: 0.18rem;
@@ -945,6 +951,7 @@
 	}
 	.vux-label{
 		font-size: 0.28rem;
+		color: #90A2C7;
 	}
 } 
 
