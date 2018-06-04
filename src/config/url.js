@@ -52,7 +52,8 @@ var url = {
 		getLuckRankLists: 'http://www.cgc999.com/app/index.php?i=7&c=entry&m=mx_shop&do=mobile&r=copy.getLuckyRankLists' //幸运排行
 	},
 	zone: {
-		area: '/area/v1/area/level' //区域地址
+		area: '/area/v1/area/level', //区域地址
+		address: '/area/v1/area/getInfo' //三级联动地址
 	}
 
 }
