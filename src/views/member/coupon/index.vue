@@ -38,7 +38,7 @@
         <div v-transfer-dom class="popupTop">
           	<popup v-model="statusShang" position="top">
             	<group>
-    		    	<radio title="title" :options="opStatus" value="1" @on-change="changeStatus" :selected-label-style="{color: '#336FFF'}"></radio>
+    		    	<radio title="title" :options="opStatus" @on-change="changeStatus" :selected-label-style="{color: '#336FFF'}"></radio>
     		  	</group>
           	</popup>
         </div>
