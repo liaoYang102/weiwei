@@ -156,10 +156,12 @@
 					password: _this.password
 				}).then(function(res) {
 					if(res.data.status == "00000000") {
+
 						localStorage.setItem('userId', res.data.data.id)
 						localStorage.setItem('userNp', res.data.data.id + res.data.data.randomAccessCode)
 //						localStorage.setItem('userId', 'appUser2018051900000001')
 						localStorage.setItem('token', res.data.data.token)
+						
 						_this.$store.state.page.isLogin = true
 						_this.$vux.toast.show({
 							width: '50%',
