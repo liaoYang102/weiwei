@@ -43,8 +43,8 @@ var url = {
 	qy: {
 		getBasicInfo: uri1 + '/public/v1/enterprise/getBasicInfo', //获取企业基本信息
 		getThumbInfo: uri1 + '/public/v1/enterprise/getThumbInfo', //获取企业图册
-		getAllianceConcern: uri1 + '/user/v1/enterprise/getAllianceConcern', //获取用户是否关注联盟企业角色接口
-		getChainsConcern: uri1 + '/user/v1/enterprise/getChainsConcern', //获取用户是否关注联盟企业角色
+		getAllianceConcern: uri1 + '/v1/enterprise/getAllianceConcern', //获取用户是否关注联盟企业角色接口
+		getChainsConcern: uri1 + '/v1/enterprise/getChainsConcern', //获取用户是否关注联盟企业角色
 	},
 	draw: {
 		getReviewLists: 'http://www.cgc999.com/app/index.php?i=7&c=entry&m=mx_shop&do=mobile&r=copy.getReviewLists', //往期回顾

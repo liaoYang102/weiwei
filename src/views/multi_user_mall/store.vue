@@ -2,15 +2,12 @@
 	<section class='store'>
 		<!-- <settingHeader :title='title'></settingHeader> -->
 		<div class="shop">
-			<div class="fl">
-				<img :src="logo" alt="">
-			</div>
-			<div class="fl" style="padding-top:0.13rem;">
+			<img :src="logo" alt="">
+			<div>
 				<p class='shop-name'>{{pinfo.name}}</p>
 				<p class='shop-size' v-if="pinfo.isAlliance == 1">{{pinfo.allianceConcern}}关注</p>
 				<p class='shop-size' v-if="pinfo.isChains == 1">{{pinfo.chainsConcern}}关注</p>
 			</div>
-			<div class="clear"></div>
 		</div>
 		<div class="select">
 			<group>
@@ -20,15 +17,15 @@
 			</group>
 			<group class="center">
 				<cell title="店铺二维码" :border-intent="false" is-link class="code" @click.native="toStoreQc(pinfo)">
-						<img src="../../assets/images/multi_user_mall/qrcode.png" alt="">
-					</cell>
+					<img src="../../assets/images/multi_user_mall/qrcode.png" alt="">
+				</cell>
 				<cell title="店铺名" :value="pinfo.name" :border-intent="false"></cell>
 				<cell title="服务电话" :value="pinfo.tel" :border-intent="false"></cell>
 			</group>
 			<!-- <group>
 		      <cell title="退款说明" value="选填" :border-intent="false"></cell>
 		    </group> -->
-			<group style="margin-top:0.2rem">
+			<group style="margin:0.2rem 0">
 				<div @click="navigation(pinfo.lat,pinfo.lng,pinfo.address)">
 					<cell title="店铺地址" :value="address" :border-intent="false" is-link></cell>
 				</div>
@@ -70,20 +67,20 @@
 			}
 		},
 		methods: {
-			toStoreQc(pinfo){
-				if(pinfo.isAlliance == 1){
+			toStoreQc(pinfo) {
+				if(pinfo.isAlliance == 1) {
 					var type = '联盟企业'
-				}else if(pinfo.isChains == 1){
+				} else if(pinfo.isChains == 1) {
 					var type = '联营企业'
-				}else{
+				} else {
 					var type = '其他'
 				}
 				this.$router.push({
-					path:'/multi_user_mall/store_qrcode',
-					query:{
-						allianceId:123,
-						title:pinfo.enterpriseName,
-						type:type
+					path: '/multi_user_mall/store_qrcode',
+					query: {
+						allianceId: 123,
+						title: pinfo.enterpriseName,
+						type: type
 					}
 				})
 			},
@@ -123,10 +120,13 @@
 	.store {
 		background-color: #F5F8F9;
 		.shop {
-			/*border-top: 1px solid #E1E1E1;*/
+			box-sizing: border-box;
 			background-color: #fff;
 			margin-bottom: 0.2rem;
-			padding: 0.25rem 0 0.25rem 0.5rem;
+			padding: 15px 15px;
+			display: flex;
+			align-items: center;
+			
 			img {
 				width: 1rem;
 				height: 1rem;
