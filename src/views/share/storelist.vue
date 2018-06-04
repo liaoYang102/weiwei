@@ -11,7 +11,7 @@
 
 		<div class="nav">
 			<div class="area" @click="onArea()">
-				<p>{{region}}<i class="iconfont" :class="areaShang ? 'icon-shixinjiantou' : 'icon-shixinjiantou-copy'"></i></p>
+				<p class="areaDetail">{{region}}<i class="iconfont" :class="areaShang ? 'icon-shixinjiantou' : 'icon-shixinjiantou-copy'"></i></p>
 			</div>
 			<div class="price" @click="onPrice()">
 				<p>{{priceType}}<i class="iconfont" :class="priceShang ? 'icon-shixinjiantou' : 'icon-shixinjiantou-copy'"></i></p>
@@ -19,6 +19,23 @@
 			<div class="type" @click="onScreening()">
 				<p>{{screening}}<img src="../../assets/images/shop/screen.png" alt=""></p>
 			</div>
+			<ul class="address animated" :class="isActive? 'maskTive' : ''">
+				<li class="category">
+					<i class="iconfont">&#xe60b;</i>
+                    <span class="province" :class="addressKey==1? 'active':'' " @click="provice">省份</span>
+                    <span class="city" :class="addressKey==2? 'active':'' " @click="city">城市</span>
+                    <span class="district" :class="addressKey==3? 'active':'' " @click="district">区县</span>
+				</li>
+				<li v-for="item in items" @click="next(item.areaId,item.name)">
+                    <span>{{item.name}}</span>
+                    <i class="fr">></i>
+                </li>
+			</ul>
+			<popup v-model="priceShang" id="distanceType" :show-mask="false">
+	        	<group>
+			    	<radio title="title" :options="opPrice" value="01" @on-change="changePrice"></radio>
+			  	</group>
+	     	 </popup>
 		</div>
 
 		<div class="wrapper" ref="wrapper">
@@ -47,26 +64,27 @@
 			</div>
 			
 		</div>
-
+		
+		<div class="mask animated" :class="maskActive? 'maskTive' : ''" @click="hide"></div>
 		
 		<!-- //区域框 -->
-		<div v-transfer-dom>
-	      <popup v-model="areaShang" position="top">
-	        <div class="change_area">
+		<!-- <div v-transfer-dom> -->
+	      <!-- <popup v-model="areaShang" position="top"> -->
+	        <!-- <div class="change_area">
 	        	<div class="title">
 	        		<i class="iconfont icon-dizhi1"></i>
 	        		<span class="adre">广州</span>
 	        		<span class="again">重新定位</span>
 	        	</div>
 	        	<div class="list">
-	        		<ul class="clearfix">
+	        		<ul class="clearfix"> -->
 	        			<!-- <li class="first">不限</li> -->
-	        			<li v-for="(item,index) in adList" @click="toggle(index,$event)" :class="{current:index==active}">{{item}}</li>
+	        			<!-- <li v-for="(item,index) in adList" @click="toggle(index,$event)" :class="{current:index==active}">{{item}}</li>
 	        		</ul>
 	        	</div>
-	        </div>
-	      </popup>
-	    </div>
+	        </div> -->
+	      <!-- </popup> -->
+	    <!-- </div> -->
 
 	    <!-- 筛选 -->
     	<div style="height: 100%;" v-if="show1">
@@ -77,12 +95,13 @@
 						    <div class="screening">
 						    	<div class="logo">
 				    				<group>
-				    					<cell is-link :title="logoTitle" :border-intent="false" :arrow-direction="showContent ? 'up' : 'down'" @click.native="down()">
-				    					
+				    					<!-- <cell islink :title="logoTitle" :border-intent="false" :arrow-direction="showContent ? 'up' : 'down'" @click.native="down()"> -->
+				    					<cell :title="logoTitle" :border-intent="false">
 				    					</cell>
 				    					<div>
 				    						<div class="logolist">
 				    							<li class="item" v-for="(item, index) in logolist" @click="changeCss($event)">{{ item.name}}</li>
+				    							<input type="number" placeholder="请输入距离" class="distance" />
 				    						</div>
 				    				    </div>
 				    				</group>
@@ -107,13 +126,13 @@
 		</div>
 
 	    <!-- 价格/距离框 -->
-	    <div v-transfer-dom class="aa">
+	    <!-- <div v-transfer-dom class="aa">
 	      <popup v-model="priceShang" position="top">
 	        	<group>
 			    	<radio title="title" :options="opPrice" value="01" @on-change="changePrice"></radio>
 			  	</group>
 	      </popup>
-	    </div>
+	    </div> -->
 		
 
 	</div>
@@ -130,13 +149,21 @@
 			return {
 				title: '门店列表',
 				data:[],
+				addressDetail:null,//选中的市
+				addressKey:1,//省 市 区的状态切换
+				isActive:false,//地址框的显隐
+				maskActive:false,//遮罩层的显隐
+				proviceItem:null,//省级数据暂存
+				cityItem:null,//城市数据暂存
+				districtItem:null,//市区数据暂存
 				region:'区域',//区域
 				screening:'筛选',//类型
-				priceType:'价格',//价格
+				priceType:'类型',//价格
 				areaShang:false,//区域箭头
 				typeShang:false,//类型箭头
 				priceShang:false,//价格箭头
 				active:1,//列表选中样式（地址）
+				items:null,//三级联动地址
 				// options:['美容院','老人院','月子中心'],//类型筛选
 				// value3:true,
 				options:[
@@ -165,7 +192,7 @@
 					},
 					{
 						key:'02',
-						value:'价格最低'
+						value:'智能推荐'
 					}
 				],
 
@@ -184,15 +211,12 @@
 				show1:false,
 				logoTitle: '门店',
 				logolist: [
-					{ name:'logo'},
-					{ name:'logo'},
-					{ name:'logo'},
-					{ name:'logo'},
-					{ name:'logo'},
-					{ name:'logo'},
-					{ name:'logo'},
-					{ name:'logo'},
-					{ name:'logo'}
+					{ name:'全部'},
+					{ name:'5公里'},
+					{ name:'10公里'},
+					{ name:'20公里'},
+					{ name:'50公里'},
+					{ name:'100公里'},
 				],
 				screeningContent: [
 					{ title: '美食', options: [ {name: '全部'},{name: '甜点饮品'},{name: '自助餐'}]},
@@ -212,8 +236,9 @@
 			noMore
 		},
 		created(){
-			this.InitScroll()
-			this.getEnterpriseListInfo()
+			this.InitScroll();
+			this.itemsInit();
+			this.getEnterpriseListInfo();
 		},
 		mounted(){
 		},
@@ -268,10 +293,14 @@
 			onArea(){
 				//点击区域
 				if(this.areaShang){
-					this.areaShang=false;
+					// this.areaShang=false;
+					// this.isActive = false;
+					// this.maskActive = false;
+					this.hide();
 				}else{
 					this.areaShang=true;
-
+					this.isActive = true;
+					this.maskActive = true;
 				}
 			},
 			onScreening(){
@@ -291,23 +320,27 @@
 					})
 				})
 				
+				//地址选择框消失
+				this.hide();
 			},
 			onPrice(){
+				// this.hide();
 				//点击价格
 				if(this.priceShang){
-					this.priceShang=false;
+					this.hide();
 				}else{
-					this.priceShang=true
+					this.priceShang=true;
+					this.maskActive = true;
 				}
 			},
 			toggle(index,e){
-				this.active=index;
-				console.log(e.target.innerText)
-				var _this=this;
-				setTimeout(function(){
-					_this.region = e.target.innerText;
-					_this.areaShang=false;
-				},50);
+				// this.active=index;
+				// console.log(e.target.innerText)
+				// var _this=this;
+				// setTimeout(function(){
+				// 	_this.region = e.target.innerText;
+				// 	_this.areaShang=false;
+				// },50);
 			},
 			changePrice(value,label){//改变价格，距离
 				var _this=this;
@@ -316,6 +349,7 @@
 					_this.priceType=label;
 					_this.priceShang=false;
 				},50);
+				this.hide();
 			},
 			changeType(value,label){//改变类型
 				var _this=this;
@@ -334,22 +368,22 @@
 				this.$router.push({ path: '/multi_user_mall/search'})
 			},
 	    	// 下拉
-	    	down: function() {
-	    		let list = this.logolist;
-	    		let length= list.length;
-	    		let obj = { name: 'logo'};
+	   //  	down: function() {
+	   //  		let list = this.logolist;
+	   //  		let length= list.length;
+	   //  		let obj = { name: 'logo'};
 
-				if(length == 9) {
-					for(let i =0; i<6;i++){
-						list.push(obj)
-						this.showContent = false;
-					}
-				}else{
-					list.splice(9,6)
-					this.showContent = true;
-				}
-				console.log(this.scroll2);
-	    	},
+				// if(length == 9) {
+				// 	for(let i =0; i<6;i++){
+				// 		list.push(obj)
+				// 		this.showContent = false;
+				// 	}
+				// }else{
+				// 	list.splice(9,6)
+				// 	this.showContent = true;
+				// }
+				// console.log(this.scroll2);
+	   //  	},
 	    	// 切换样式
 	    	changeCss: function(e){
 				if (e.target.className.indexOf("li-selected") == -1) {
@@ -389,7 +423,68 @@
 	    		this.$router.push({path:'/multi_user_mall',params:{
 					id:id
 				}});
-	    	}
+	    	}, 
+	    	/*
+	    	 *     三级联动地址框选择
+	    	 */
+	    	itemsInit(){
+				let param = {
+					'parentId': 1
+				}
+				this.$http.get(this.url.zone.address, {
+					params: param
+				}).then(resp => {
+					this.items = resp.data.data;
+					this.proviceItem = this.items;
+				})
+	    	},
+	    	next(id,name){
+	    		if(this.addressKey==3){
+	    			this.areaShang=false;
+					this.isActive = false;
+					this.maskActive = false;
+					this.region=this.addressDetail+' '+name;
+					return
+	    		}
+				let param = {
+					'parentId': id
+				}
+				this.$http.get(this.url.zone.address, {
+					params: param
+				}).then(resp => {
+					console.log(resp.data.data);
+					this.items = resp.data.data;
+					this.addressKey++;
+					if(this.addressKey==2){
+						this.cityItem = this.items;
+					}else if(this.addressKey ==3){
+						this.districtItem = this.items;
+						this.addressDetail = name;
+					}
+				})
+			},
+			provice(){
+				this.items = this.proviceItem;
+				this.addressKey = 1;
+			},
+			city(){
+				if(this.cityItem){
+					this.items = this.cityItem;
+					this.addressKey = 2;
+				}
+			},
+			district(){
+				if(this.districtItem){
+					this.items = this.districtItem;
+					this.addressKey = 3;
+				}
+			},
+			hide(){
+				this.areaShang=false;
+				this.priceShang=false;
+				this.isActive = false;
+				this.maskActive = false;
+			}
 		}
 	}
 </script>
@@ -405,11 +500,25 @@
 	.aa .vux-no-group-title{
 		margin-top: 0;
 	}
-
+	/*
+	 *   类型推荐
+	*/
+	#distanceType{
+	    position: absolute;
+        top: 0.9rem;
+        bottom:inherit;
+        max-height: 500%;
+	}
+	.vux-no-group-title{
+    	margin-top: 0!important;
+    }
 </style>
 <style lang="less" scoped>
 	/*@import url('../../../static/css/global'); */
-
+	
+	.storelistMask{
+		top: 3rem!important;
+	}
 	.wrapper{
 		height:80%;
 		overflow:hidden; 
@@ -427,9 +536,57 @@
 		height:.9rem;
 		display:flex;
 		align-items: center;
+		position: relative;
 		/*position: fixed;*/
 		border-bottom:1px solid #D8DFF0;
-		div{
+		.areaDetail{
+		    width: 2rem;
+		    text-align: center;
+		    overflow: hidden;
+		    white-space: nowrap;
+		    text-overflow: ellipsis;
+		}
+		.address{
+			display: none;
+			transition: opacity 800ms;
+			opacity: 0;
+			position: absolute;
+			top: 0.9rem;
+			left:0;
+			height: 6rem;
+			width: 100%;
+			background:#fff;
+			z-index: 501;
+			overflow: auto;
+			li{
+				position: relative;
+    			overflow: hidden;
+    			text-align: left;
+			    font-size: 0.24rem;
+			    line-height: 0.72rem;
+			    border-top: 1px solid #c8c7cc;
+			    /*border-bottom: 1px solid #c8c7cc;*/
+			    padding: 0 0.22rem;
+				list-style: none;
+			}
+			.category{
+				i{
+				    font-size: 0.16rem;
+   					color: #5497ff;
+				}
+				span{
+					display: inline-block;
+				    color: #999;
+				    padding: 0 10px;
+				    font-size: 0.28rem;
+				}
+				span.active{
+					color: #000;
+    				border-bottom: 0.04rem solid #256fff;
+				}
+			}
+		}
+		.area,.price,.type{
 			flex: 1;
 			display: flex;
 			justify-content: center;
@@ -564,7 +721,22 @@
 		}
 	}
 
-
+	.mask{
+	    display: none;
+	    position: fixed;
+	    top: 2.65rem;
+	    left: 0;
+	    width: 100%;
+	    height: 100%;
+	    background: rgba(0, 0, 0, 0.5);
+	    opacity: 0;
+	    z-index: 500;
+	    transition: opacity 800ms;
+	}
+	.maskTive{
+		display: block!important;
+		opacity: 1!important;
+	}
 	/*地址遮罩*/
 	.storelist .vux-popup-dialog{
 		background: #fff;
@@ -664,7 +836,7 @@
 	height: 90%;
 	overflow: hidden;
 	.content{
-		padding-top: 0.6rem;
+		padding-top: 0.4rem;
 		padding-bottom: 0.7rem;
 	}
 }
@@ -698,11 +870,18 @@
 			margin-right: 0.255rem;
 		}
 		.logolist{
-			margin: 0.24rem 0.32rem 0 0.15rem;
+			margin: 0.24rem 0 0 0;
+			color: #1A2642;
 			.item{
-				width: 1.86rem;
-				margin: 0 0.1rem 0.1rem 0;
-				padding: 0.32rem 0;
+				width: 1.92rem;
+				margin: 0 0.18rem 0.1rem 0;
+				padding: 0.26rem 0;
+			}
+			.distance{
+			    width: 96%;
+			    text-align: center;
+			    background: #F5F6FA;
+			    padding: 0.22rem 0;
 			}
 		}
 	}
@@ -718,10 +897,11 @@
 		.category{
 			margin-left: 0.07rem;
 			margin-bottom: 0.24rem;
+			color: #90A2C7;
 		}
 		.item{
 			width: 1.96rem;
-			padding: 0.15rem 0;
+			padding: 0.2rem 0;
 			border-radius: 0.04rem;
 			margin-right: 0.18rem;
 			margin-bottom: 0.18rem;
@@ -748,6 +928,8 @@
 		color: #fff;
 	}
 }
+	
+
 </style>
 
 <style lang="less">
@@ -769,6 +951,7 @@
 	}
 	.vux-label{
 		font-size: 0.28rem;
+		color: #90A2C7;
 	}
 } 
 

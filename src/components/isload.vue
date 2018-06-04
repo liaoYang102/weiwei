@@ -1,6 +1,6 @@
 <template>
 	<div class="isload">
-		<x-dialog v-model="show" :hide-on-blur="true" @on-hide="ishide">
+		<x-dialog class="w1" v-model="show" :hide-on-blur="true" @on-hide="ishide">
 			<div class="load-bw">
 				<img class="load-img" :src="'./static/index/isload.gif'" />
 			</div>
@@ -32,6 +32,10 @@
 </script>
 
 <style lang="less">
+	.w1 .weui-dialog{
+		width: 1.1rem !important;
+		background: transparent !important; 
+	}
 	.load-bw{
 		width: 1.1rem;
 		height: 1.1rem;
