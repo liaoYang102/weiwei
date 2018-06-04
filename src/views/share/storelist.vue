@@ -19,7 +19,7 @@
 			<div class="type" @click="onScreening()">
 				<p>{{screening}}<img src="../../assets/images/shop/screen.png" alt=""></p>
 			</div>
-			<ul class="address" :class="isActive? 'maskTive' : ''">
+			<ul class="address fadeIn animated" :class="isActive? 'maskTive' : ''">
 				<li class="category">
 					<i class="iconfont">&#xe60b;</i>
                     <span class="province" :class="addressKey==1? 'active':'' " @click="provice">省份</span>
@@ -60,7 +60,7 @@
 			
 		</div>
 		
-		<div class="mask" :class="isActive? 'maskTive' : ''" @click="hide"></div>
+		<div class="mask fadeIn animated" :class="isActive? 'maskTive' : ''" @click="hide"></div>
 		
 		<!-- //区域框 -->
 		<!-- <div v-transfer-dom> -->
@@ -231,9 +231,9 @@
 			noMore
 		},
 		created(){
-			this.itemsInit()
-			this.InitScroll()
-			this.getEnterpriseListInfo()
+			this.InitScroll();
+			this.itemsInit();
+			this.getEnterpriseListInfo();
 		},
 		mounted(){
 		},
@@ -514,7 +514,8 @@
 		/*position: fixed;*/
 		border-bottom:1px solid #D8DFF0;
 		.address{
-			transition: opacity 400ms;
+			display: none;
+			transition: opacity 800ms;
 			opacity: 0;
 			position: absolute;
 			top: 0.9rem;
@@ -689,18 +690,19 @@
 	}
 
 	.mask{
-	    display: block;
+	    display: none;
 	    position: fixed;
-	    top: 3rem;
+	    top: 2.65rem;
 	    left: 0;
 	    width: 100%;
 	    height: 100%;
 	    background: rgba(0, 0, 0, 0.5);
 	    opacity: 0;
 	    z-index: 500;
-	    transition: opacity 400ms;
+	    transition: opacity 800ms;
 	}
 	.maskTive{
+		display: block!important;
 		opacity: 1!important;
 	}
 	/*地址遮罩*/
