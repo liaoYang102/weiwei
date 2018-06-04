@@ -19,6 +19,18 @@
 			<div class="type" @click="onScreening()">
 				<p>{{screening}}<img src="../../assets/images/shop/screen.png" alt=""></p>
 			</div>
+			<ul class="address" :class="isActive? 'maskTive' : ''">
+				<li class="category">
+					<i class="iconfont">&#xe60b;</i>
+                    <span class="province" :class="addressKey==1? 'active':'' " @click="provice">省份</span>
+                    <span class="city" :class="addressKey==2? 'active':'' " @click="city">城市</span>
+                    <span class="district" :class="addressKey==3? 'active':'' " @click="district">区县</span>
+				</li>
+				<li v-for="item in items" @click="next(item.areaId)">
+                    <span>{{item.name}}</span>
+                    <i class="fr">></i>
+                </li>
+			</ul>
 		</div>
 
 		<div class="wrapper" ref="wrapper">
@@ -47,26 +59,27 @@
 			</div>
 			
 		</div>
-
+		
+		<div class="mask" :class="isActive? 'maskTive' : ''" @click="hide"></div>
 		
 		<!-- //区域框 -->
-		<div v-transfer-dom>
-	      <popup v-model="areaShang" position="top">
-	        <div class="change_area">
+		<!-- <div v-transfer-dom> -->
+	      <!-- <popup v-model="areaShang" position="top"> -->
+	        <!-- <div class="change_area">
 	        	<div class="title">
 	        		<i class="iconfont icon-dizhi1"></i>
 	        		<span class="adre">广州</span>
 	        		<span class="again">重新定位</span>
 	        	</div>
 	        	<div class="list">
-	        		<ul class="clearfix">
+	        		<ul class="clearfix"> -->
 	        			<!-- <li class="first">不限</li> -->
-	        			<li v-for="(item,index) in adList" @click="toggle(index,$event)" :class="{current:index==active}">{{item}}</li>
+	        			<!-- <li v-for="(item,index) in adList" @click="toggle(index,$event)" :class="{current:index==active}">{{item}}</li>
 	        		</ul>
 	        	</div>
-	        </div>
-	      </popup>
-	    </div>
+	        </div> -->
+	      <!-- </popup> -->
+	    <!-- </div> -->
 
 	    <!-- 筛选 -->
     	<div style="height: 100%;" v-if="show1">
@@ -130,6 +143,11 @@
 			return {
 				title: '门店列表',
 				data:[],
+				addressKey:1,//省 市 区的状态切换
+				isActive:false,//地址框的显隐
+				proviceItem:null,//省级数据暂存
+				cityItem:null,//城市数据暂存
+				districtItem:null,//市区数据暂存
 				region:'区域',//区域
 				screening:'筛选',//类型
 				priceType:'价格',//价格
@@ -137,6 +155,7 @@
 				typeShang:false,//类型箭头
 				priceShang:false,//价格箭头
 				active:1,//列表选中样式（地址）
+				items:null,//三级联动地址
 				// options:['美容院','老人院','月子中心'],//类型筛选
 				// value3:true,
 				options:[
@@ -212,6 +231,7 @@
 			noMore
 		},
 		created(){
+			this.itemsInit()
 			this.InitScroll()
 			this.getEnterpriseListInfo()
 		},
@@ -269,9 +289,10 @@
 				//点击区域
 				if(this.areaShang){
 					this.areaShang=false;
+					this.isActive = false;
 				}else{
 					this.areaShang=true;
-
+					this.isActive = true;
 				}
 			},
 			onScreening(){
@@ -291,6 +312,8 @@
 					})
 				})
 				
+				//地址选择框消失
+				this.hide();
 			},
 			onPrice(){
 				//点击价格
@@ -299,15 +322,17 @@
 				}else{
 					this.priceShang=true
 				}
+				//地址选择框消失
+				this.hide();
 			},
 			toggle(index,e){
-				this.active=index;
-				console.log(e.target.innerText)
-				var _this=this;
-				setTimeout(function(){
-					_this.region = e.target.innerText;
-					_this.areaShang=false;
-				},50);
+				// this.active=index;
+				// console.log(e.target.innerText)
+				// var _this=this;
+				// setTimeout(function(){
+				// 	_this.region = e.target.innerText;
+				// 	_this.areaShang=false;
+				// },50);
 			},
 			changePrice(value,label){//改变价格，距离
 				var _this=this;
@@ -389,7 +414,63 @@
 	    		this.$router.push({path:'/multi_user_mall',params:{
 					id:id
 				}});
-	    	}
+	    	}, 
+	    	/*
+	    	 *     三级联动地址框选择
+	    	 */
+	    	itemsInit(){
+				let param = {
+					'parentId': 1
+				}
+				this.$http.get(this.url.zone.address, {
+					params: param
+				}).then(resp => {
+					this.items = resp.data.data;
+					this.proviceItem = this.items;
+				})
+	    	},
+	    	next(id){
+	    		if(this.addressKey==3){
+	    			this.areaShang=false;
+					this.isActive = false;
+					return
+	    		}
+				let param = {
+					'parentId': id
+				}
+				this.$http.get(this.url.zone.address, {
+					params: param
+				}).then(resp => {
+					console.log(resp.data.data);
+					this.items = resp.data.data;
+					this.addressKey++;
+					if(this.addressKey==2){
+						this.cityItem = this.items;
+					}else if(this.addressKey ==3){
+						this.districtItem = this.items;
+					}
+				})
+			},
+			provice(){
+				this.items = this.proviceItem;
+				this.addressKey = 1;
+			},
+			city(){
+				if(this.cityItem){
+					this.items = this.cityItem;
+					this.addressKey = 2;
+				}
+			},
+			district(){
+				if(this.districtItem){
+					this.items = this.districtItem;
+					this.addressKey = 3;
+				}
+			},
+			hide(){
+				this.areaShang=false;
+				this.isActive = false;
+			}
 		}
 	}
 </script>
@@ -409,7 +490,9 @@
 </style>
 <style lang="less" scoped>
 	/*@import url('../../../static/css/global'); */
-
+	.storelistMask{
+		top: 3rem!important;
+	}
 	.wrapper{
 		height:80%;
 		overflow:hidden; 
@@ -427,8 +510,49 @@
 		height:.9rem;
 		display:flex;
 		align-items: center;
+		position: relative;
 		/*position: fixed;*/
 		border-bottom:1px solid #D8DFF0;
+		.address{
+			transition: opacity 400ms;
+			opacity: 0;
+			position: absolute;
+			top: 0.9rem;
+			left:0;
+			height: 6rem;
+			width: 100%;
+			background:#fff;
+			z-index: 501;
+			overflow: auto;
+			li{
+				position: relative;
+    			overflow: hidden;
+    			text-align: left;
+			    font-size: 0.24rem;
+			    line-height: 0.72rem;
+			    border-top: 1px solid #c8c7cc;
+			    /*border-bottom: 1px solid #c8c7cc;*/
+			    padding: 0 0.22rem;
+				list-style: none;
+			}
+			.category{
+				
+				i{
+				    font-size: 0.16rem;
+   					color: #5497ff;
+				}
+				span{
+					display: inline-block;
+				    color: #999;
+				    padding: 0 10px;
+				    font-size: 0.28rem;
+				}
+				span.active{
+					color: #000;
+    				border-bottom: 0.04rem solid #256fff;
+				}
+			}
+		}
 		div{
 			flex: 1;
 			display: flex;
@@ -564,7 +688,21 @@
 		}
 	}
 
-
+	.mask{
+	    display: block;
+	    position: fixed;
+	    top: 3rem;
+	    left: 0;
+	    width: 100%;
+	    height: 100%;
+	    background: rgba(0, 0, 0, 0.5);
+	    opacity: 0;
+	    z-index: 500;
+	    transition: opacity 400ms;
+	}
+	.maskTive{
+		opacity: 1!important;
+	}
 	/*地址遮罩*/
 	.storelist .vux-popup-dialog{
 		background: #fff;
