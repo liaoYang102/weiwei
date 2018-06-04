@@ -7,12 +7,10 @@
 					<p>{{totalNums}}</p>
 					<p>合伙人( 人 )</p>
 				</div>
-				<router-link to="/member/purse/qrcode">
-					<div class="right">
-						<img src="../../../assets/images/member/yq@2x.png" />
-						<span>我要邀请</span>
-					</div>
-				</router-link>
+				<div class="right" @click="toQrcode">
+					<img src="../../../assets/images/member/yq@2x.png" />
+					<span>我要邀请</span>
+				</div>
 			</div>
 
 			<div class="list-box">
@@ -81,10 +79,12 @@
 				showloading: false,
 				pageSize: 20,
 				curPage: 1,
+				userInfo: {}
 			}
 		},
 		created() {
 			this.getMyTeam()
+			this.userInfo = this.$store.state.page.userInfo
 		},
 		mounted() {
 
@@ -108,6 +108,18 @@
 						if(data.list.length > 0) {
 							this.InitScroll()
 						}
+					}
+				})
+			},
+
+			toQrcode() {
+				var _this = this
+				_this.$router.push({
+					path: '/member/purse/qrcode',
+					query: {
+						name: _this.userInfo.realName,
+						tel: _this.userInfo.mobile,
+						tx: _this.userInfo.avatar.original
 					}
 				})
 			},

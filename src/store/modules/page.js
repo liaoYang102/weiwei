@@ -6,7 +6,9 @@ const page = {
 		back: false,
 		isLogin: false,
 		includeList:[],
-		ispreview:false
+		ispreview:false,
+		hasRouter:false,
+		userInfo:{}
 	},
 	mutations: {
 		UPDATE_DIRECTION(state, payload) {
