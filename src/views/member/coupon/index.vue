@@ -254,7 +254,7 @@
 				var _this = this
 				_this.$http.get(_this.url.user.getUserCouponList, {
 					params: {
-						userId: 'appUser796345684600000001',
+						userId: localStorage['userId'],
 						type: obj.type,
 						status: obj.status,
 						timeType: 0,

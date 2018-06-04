@@ -1,90 +1,85 @@
 <template>
 	<section class="multi_user_mall">
-
 		<settingHeader :title="title"></settingHeader>
-		<div class="top">
-			<div class="store">
-				<div class="one">
-					<img :src="logo?logo:'./static/shop/storeLogo.png'">
-					<div class="name">
-						<div><span>{{info.name}}</span></div>
-						<div class="positionImg">
-							<!-- <img src="../../assets/images/multi_user_mall/position.png"> -->
-							<!-- <span class="small">距离正佳广场0.2km</span> -->
-						</div>
-					</div>
-				</div>
-				<div class="btn" @click="changeAlliance(info.allianceId)" :class="{'btnActive': isAlliance}" v-if='info.isAlliance == 1'>{{isAlliance?'已关注':'关注'}}</div>
-				<div class="btn" @click="changeChains(info.chainsId)" :class="{'btnActive': isChains}" v-if='info.isChains == 1'>{{isChains?'已关注':'关注'}}</div>
-			</div>
-		</div>
-		<div class="searchBox">
-			<div class="search">
-				<img src="../../assets/images/shop/search.png">
-				<input style="border-radius: 0;" type="text" placeholder="搜索商品" @click="goSearch">
-			</div>
-		</div>
-
-		<div class="mallTab">
-			<tab :line-width="3" :scroll-threshold="4" custom-bar-width="0.6rem">
-				<tab-item selected @on-item-click="index">
-					<div class="tab-item">
-						<img src="../../assets/images/multi_user_mall/index1.png" v-if='pyy==1'>
-						<img src="../../assets/images/multi_user_mall/index.png" v-else><br>
-						<div>首页</div>
-					</div>
-				</tab-item>
-				<tab-item @on-item-click="onItemClick" v-if="info.isChains == 1">
-					<div class="tab-item">
-						<img src="../../assets/images/multi_user_mall/shop1.png" v-if='pyy==2'>
-						<img src="../../assets/images/multi_user_mall/shop.png" v-else><br>
-						<div>商品</div>
-					</div>
-				</tab-item>
-				<tab-item @on-item-click="service" v-if="info.isAlliance == 1">
-					<div class="tab-item">
-						<img src="../../assets/images/multi_user_mall/service1.png" v-if='pyy==3'>
-						<img src="../../assets/images/multi_user_mall/service.png" v-else><br>
-						<div>服务</div>
-					</div>
-				</tab-item>
-				<tab-item @on-item-click="store">
-					<div class="tab-item">
-						<img src="../../assets/images/multi_user_mall/store1.png" v-if='pyy==4'>
-						<img src="../../assets/images/multi_user_mall/store.png" v-else><br>
-						<div>简介</div>
-					</div>
-				</tab-item>
-			</tab>
-		</div>
-		<div style="height: 60.8%" v-if="pyy!=2">
-			<div class="wrapper" ref="wrapper">
-				<div class="content">
-					<div class="index" v-if='pyy==1'>
-						<img src="../../assets/images/multi_user_mall/banner0.png" style="width: 100%">
-
-						<div class="imgList">
-							<div class="img" v-for="(item, index) in 3">
-								<img src="../../assets/images/multi_user_mall/1.png">
+		<div v-if="!nohas">
+			<div class="top">
+				<div class="store">
+					<div class="one">
+						<img :src="logo?logo:'./static/shop/storeLogo.png'">
+						<div class="name">
+							<div><span>{{info.name}}</span></div>
+							<div class="positionImg">
+								<!-- <img src="../../assets/images/multi_user_mall/position.png"> -->
+								<!-- <span class="small">距离正佳广场0.2km</span> -->
 							</div>
 						</div>
-
-						<img src="../../assets/images/multi_user_mall/Bitmap.png" style="width: 100%;">
-
-						<mallTheme :themeTitle="themeTitle"></mallTheme>
-						<mallTheme :themeTitle="themeTitle1"></mallTheme>
 					</div>
+					<div class="btn" @click="changeAlliance(info.allianceId)" :class="{'btnActive': isAlliance}" v-if='info.isAlliance == 1'>{{isAlliance?'已关注':'关注'}}</div>
+					<div class="btn" @click="changeChains(info.chainsId)" :class="{'btnActive': isChains}" v-if='info.isChains == 1'>{{isChains?'已关注':'关注'}}</div>
+				</div>
+			</div>
+			<div class="searchBox">
+				<div class="search">
+					<img src="../../assets/images/shop/search.png">
+					<input style="border-radius: 0;" type="text" placeholder="搜索商品" @click="goSearch">
+				</div>
+			</div>
 
-					<service v-else-if="pyy==3"></service>
-					<store v-else-if="pyy==4" :info="info"></store>
-					<loading v-if="show && pyy!=3 && pyy!=4 && pyy!= 1"></loading>
-					<noMore v-if="showNomore && pyy!=3 && pyy!=4"></noMore>
+			<div class="mallTab">
+				<tab :line-width="3" :scroll-threshold="4" custom-bar-width="0.6rem">
+					<tab-item selected @on-item-click="index">
+						<div class="tab-item">
+							<img src="../../assets/images/multi_user_mall/shop1.png" v-if="tabIndex==0">
+							<img src="../../assets/images/multi_user_mall/shop.png" v-else>
+							<div>首页</div>
+						</div>
+					</tab-item>
+					<tab-item @on-item-click="index">
+						<div class="tab-item" v-if="info.isChains == 1">
+							<img src="../../assets/images/multi_user_mall/shop1.png" v-if="tabIndex==1">
+							<img src="../../assets/images/multi_user_mall/shop.png" v-else>
+							<div>商品</div>
+						</div>
+						<div class="tab-item" v-if="info.isAlliance == 1">
+							<img src="../../assets/images/multi_user_mall/service1.png" v-if="tabIndex==1">
+							<img src="../../assets/images/multi_user_mall/service.png" v-else>
+							<div>服务</div>
+						</div>
+					</tab-item>
+					<tab-item @on-item-click="index">
+						<div class="tab-item">
+							<img src="../../assets/images/multi_user_mall/store1.png" v-if="tabIndex==2">
+							<img src="../../assets/images/multi_user_mall/store.png" v-else>
+							<div>简介</div>
+						</div>
+					</tab-item>
+				</tab>
+			</div>
+			<div style="height: 60.8%">
+				<div class="wrapper" ref="wrapper">
+					<div class="content">
+						<div class="index" v-if='tabIndex==0'>
+							<img src="../../assets/images/multi_user_mall/banner0.png" style="width: 100%">
+							<div class="imgList">
+								<div class="img" v-for="(item, index) in 3">
+									<img src="../../assets/images/multi_user_mall/1.png">
+								</div>
+							</div>
+							<img src="../../assets/images/multi_user_mall/Bitmap.png" style="width: 100%;">
+							<mallTheme :themeTitle="themeTitle"></mallTheme>
+							<mallTheme :themeTitle="themeTitle1"></mallTheme>
+						</div>
+						<service v-if="tabIndex==1 && info.isAlliance == 1"></service>
+						<shop v-if="tabIndex==1 && info.isChains == 1"></shop>
+						<store v-if="tabIndex==2" :info="info"></store>
+						<loading v-if="tabIndex==1 && show"></loading>
+						<noMore v-if="tabIndex==1 && showNomore"></noMore>
+					</div>
 				</div>
 			</div>
 		</div>
-
-		<div style="height: 63.1%" v-else>
-			<shop style="height: 100%"></shop>
+		<div style="height: 100%;background-color: white;" v-else>
+			<noData :status="2" stateText="找不到该企业" ></noData>
 		</div>
 	</section>
 </template>
@@ -98,6 +93,7 @@
 	import shop from './productList'
 	import service from './service'
 	import store from './store'
+	import noData from '../../components/noData'
 	export default {
 		data() {
 			return {
@@ -113,6 +109,8 @@
 				logo: '',
 				isAlliance: false, //联盟
 				isChains: false, //联营
+				tabIndex: 0,
+				nohas: false
 			}
 		},
 		components: {
@@ -122,12 +120,12 @@
 			shop,
 			service,
 			store,
-			settingHeader
+			settingHeader,
+			noData
 		},
 		mounted() {
 			this.getBasicInfo()
 			this.getThumbInfo()
-			this.InitScroll()
 		},
 		methods: {
 			// 获取企业详情
@@ -141,11 +139,19 @@
 					if(res.data.status == "00000000") {
 						console.log(res.data.data)
 						_this.info = res.data.data
-						_this.getAllianceConcern(res.data.data.enterpriseBasic2018051500000001)
-						_this.getChainsConcern(res.data.data.chainsId)
+						this.InitScroll()
 						if(_this.info.logo) {
 							_this.logo = _this.info.logo.original
 						}
+
+						if(_this.info.isAlliance == 1) {
+							_this.getAllianceConcern(_this.info.allianceId)
+						} else if(_this.info.isChains == 1) {
+							_this.getChainsConcern(res.data.data.chainsId)
+						}
+					} else if(res.data.status == 'plat-0003') {
+						_this.nohas = true
+						console.log(_this.nohas)
 					}
 				})
 			},
@@ -168,13 +174,14 @@
 				_this.$http.get(_this.url.qy.getAllianceConcern, {
 					params: {
 						userId: localStorage.getItem('userId'),
-						allianceId: _this.$route.query.id
+						allianceId: id
 					}
 				}).then((res) => {
 					if(res.data.status == '00000000') {
 						if(res.data.data.status == 1) {
-
 							_this.isAlliance = true
+						} else {
+							_this.isAlliance = false
 						}
 					}
 				})
@@ -185,12 +192,14 @@
 				_this.$http.get(_this.url.qy.getChainsConcern, {
 					params: {
 						userId: localStorage.getItem('userId'),
-						chainsId: _this.$route.query.id
+						chainsId: id
 					}
 				}).then((res) => {
 					if(res.data.status == '00000000') {
 						if(res.data.data.status == 1) {
 							_this.isChains = true
+						} else {
+							_this.isChains = false
 						}
 					}
 				})
@@ -206,25 +215,10 @@
 					})
 				})
 			},
-			onItemClick() {
-				this.pyy = 2;
-			},
-			index() {
-				this.pyy = 1;
+			index(index) {
+				console.log(index)
+				this.tabIndex = index
 				this.changeScroll()
-			},
-			service() {
-				this.pyy = 3;
-				this.changeScroll()
-			},
-			store() {
-				this.pyy = 4;
-				this.changeScroll()
-			},
-			goSearch() {
-				this.$router.push({
-					name: 'search'
-				})
 			},
 			InitScroll() {
 				this.$nextTick(() => {
@@ -249,16 +243,7 @@
 					}
 				})
 			},
-			LoadData() {
-				// var _this = this
-				// setTimeout(function(){
-				//     _this.show = false;
-				//     let obj = [{ name: 'Vivo X21 屏幕指纹版全面...', presentprice: '￥3598' ,orprice: '￥4355', pin: '月销4714', score: '265积分', status: 2},
-				//     { name: 'Vivo X21 屏幕指纹版全面...', presentprice: '￥3598' ,orprice: '￥4355', pin: '月销4714', score: '265积分', status: 2}];
-				//     _this.moneylist = _this.moneylist.concat(obj);
-				//     console.log(_this.moneylist);
-				// },3000)
-			},
+			LoadData() {},
 			changeAlliance(id) {
 				var _this = this
 				//取消关注联盟企业
@@ -276,6 +261,7 @@
 								text: '已取消关注'
 							})
 						}
+						_this.getBasicInfo()
 					})
 				} else {
 					//关注联盟企业
@@ -293,25 +279,48 @@
 								text: '已关注'
 							})
 						}
+						_this.getBasicInfo()
 					})
 				}
 			},
 			changeChains(id) {
 				var _this = this
-				_this.$http.post(_this.url.user.deleteConcern, {
-					userId: localStorage.getItem('userId'),
-					type: 3,
-					concernIds: id
-				}).then((res) => {
-					if(res.data.status == "00000000") {
-						_this.$vux.toast.show({
-							width: '50%',
-							type: 'text',
-							position: 'middle',
-							text: '已取消关注'
-						})
-					}
-				})
+				//取消关注联盟企业
+				if(_this.isChains) {
+					_this.$http.post(_this.url.user.deleteConcern, {
+						userId: localStorage.getItem('userId'),
+						type: 3,
+						concernIds: id
+					}).then((res) => {
+						if(res.data.status == "00000000") {
+							_this.$vux.toast.show({
+								width: '50%',
+								type: 'text',
+								position: 'middle',
+								text: '已取消关注'
+							})
+						}
+						_this.getBasicInfo()
+					})
+				} else {
+					//关注联盟企业
+					_this.$http.post(_this.url.user.addConcern, {
+						userId: localStorage.getItem('userId'),
+						type: 3,
+						platformId: _this.url.platformId,
+						objectId: id
+					}).then((res) => {
+						if(res.data.status == "00000000") {
+							_this.$vux.toast.show({
+								width: '50%',
+								type: 'text',
+								position: 'middle',
+								text: '已关注'
+							})
+						}
+						_this.getBasicInfo()
+					})
+				}
 			},
 			goSearch() {
 				this.$router.push({

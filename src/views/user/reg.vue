@@ -158,7 +158,7 @@
 					if(res.data.status == "00000000") {
 						localStorage.setItem('userId', res.data.data.id)
 						localStorage.setItem('userNp', res.data.data.id + res.data.data.randomAccessCode)
-//						localStorage.setItem('userId', 'appUser2018051900000001')
+						//						localStorage.setItem('userId', 'appUser2018051900000001')
 						localStorage.setItem('token', res.data.data.token)
 						_this.$store.state.page.isLogin = true
 						_this.$vux.toast.show({
@@ -167,21 +167,35 @@
 							position: 'middle',
 							text: '登陆成功'
 						})
-						if(_this.$store.state.page.hasRouter) {
+						if(window.sessionStorage.length>2) {
 							if(_this.frompath) {
 								_this.$router.replace({
 									path: _this.frompath
 								})
+								console.log(1)
 							} else {
 								_this.$router.replace({
 									path: '/index'
 								})
+								console.log(2)
 							}
 						} else {
 							_this.$router.replace({
 								path: '/index'
 							})
+							console.log(3)
 						}
+
+						//获取用户信息
+						_this.$http.get(_this.url.user.getBasicInfo, {
+							params: {
+								userId:res.data.data.id
+							}
+						}).then((res) => {
+							if(res.data.status == "00000000") {
+								localStorage.setItem('userInfo',JSON.stringify(res.data.data))
+							}
+						})
 					} else {
 						localStorage.removeItem('userNp')
 						localStorage.removeItem('token')
@@ -235,7 +249,7 @@
 						width: '50%',
 						type: 'text',
 						position: 'middle',
-						text: '用户名格式不正确'
+						text: '手机号码格式不正确'
 					})
 					_this.$refs.phone.focus()
 				}

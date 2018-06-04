@@ -19,23 +19,29 @@ var url = {
 		userRegister: uri1 + '/public/v1/user/register', //用户注册
 		checkUserExistsByMobile: uri1 + '/public/v1/user/checkUserExistsByMobile', //用户是否注册
 		getVerificationCode: uri1 + '/public/v1/sms/getVerificationCode', //获取验证码
+		authVerification: uri1 + '/public/v1/sms/authVerificationCode', //检测验证码是否正确
+		setPayPassword: uri1 + '/v1/user/setPayPassword', //设置支付密码
 		changeNickname: uri1 + '/v1/user/changeNickname', //修改用户名
 		changeAvatar: uri1 + '/v1/user/changeAvatar', //修改用户名称
 		addShippingAddress: uri1 + '/v1/user/addShippingAddress', //添加收货地址
 		getShippingAddress: uri1 + '/v1/user/getshippingAddress', //获取收货地址
 		deleteShippingAddress: uri1 + '/v1/user/deleteShippingAddress', //删除收货地址
 		setDefaultShippingAddress: uri1 + '/v1/user/setDefaultShippingAddress', //设置默认收货地址
+		editShippingAddress: uri1 + '/v1/user/editShippingAddress', //修改收货地址
 		forgetPassword: '/public/v1/user/forgetPassword', //重置密码
 		addConcern: uri1 + '/v1/user/addConcern', //用户添加关注商品/联盟企业/联营企业
 		getConcernLists: uri1 + '/v1/user/getConcernLists', //获取用户关注商品/联盟企业/联营企业
 		deleteConcern: uri1 + '/v1/user/deleteConcern', //用户取消关注商品/联盟企业/联营企业
 		getUserPayPassword: uri1 + '/v1/user/getUserPayPassword', //设置是否设置支付密码
+		authPayPassword: uri1 + '/v1/user/authPayPassword', //检测支付密码正确性
+		setPayPasswordByOld: uri1 + '/v1/user/setPayPasswordByOld', //根据旧支付密码设置新支付密码
 		getUserAuthInfo: uri1 + '/v1/user/getUserAuthInfo', //获取用户认证状态
 		getShippingAddressById: uri1 + '/v1/user/getShippingAddressById', //id获取收货地址详细信息
 		getFundInfo: uri1 + '/v1/user/getFundInfo', //获取用户资金信息
 		changeFundShow: uri1 + '/v1/user/changeFundShow', //修改用户资产显示状态
 		getMyBalanceList: uri1 + '/v1/user/getMyBalanceList', //获取用户积分列表
 		getMyPointsList: uri1 + '/v1/user/getMyPointsList', //获取用户信用积分列表
+		getDayBalanceList: uri1 + '/v1/user/getDayBalanceList', //通用积分每日累计变更列表信息接口
 		getMyBalanceDetail: uri1 + '/v1/user/getMyBalanceDetail', //获取通用积分详情
 		getMyPointDetail: uri1 + '/v1/user/getMyPointDetail', //获取信用积分详情
 		getUserCouponList: uri1 + '/v1/user/getUserCouponList', //获取优惠券列表

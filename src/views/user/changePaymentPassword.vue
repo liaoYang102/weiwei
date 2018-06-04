@@ -3,7 +3,7 @@
 		<settingHeader :title="title"></settingHeader>
 		<div v-if="isRemember == 3">
 			<div class="tips">
-				<div>您是否记得账号<span>17520439845</span></div>
+				<div>您是否记得账号<span>{{phone}}</span></div>
 				<div>当前使用的支付密码</div>
 			</div>
 			<div class="two-btn">
@@ -13,9 +13,9 @@
 		</div>
 		<div class="content bounceInRight animated" v-if="isRemember == 0">
 			<group gutter="0" class="input-div">
-				<x-input class="input-item" ref="phone" v-model="phone" placeholder="输入手机号码" type="number" :max="11" :required="true" @on-change="phoneChange"></x-input>
-				<x-input class="input-item" type="number" ref="code" v-model="code" placeholder="验证码" @on-change="codeChange">
-					<x-button slot="right" type="primary" mini @click.native="sendCode" :disabled="sendFlag">{{codeText}}</x-button>
+				<x-input class="input-item" ref="phone" v-model="phone" placeholder="输入手机号码" type="number" disabled :max="11" @on-change="phoneChange"></x-input>
+				<x-input class="input-item" type="number" ref="code" v-model="code" :max="4" placeholder="验证码" @on-change="codeChange">
+					<x-button class="codeBtn" slot="right" type="primary" mini @click.native="sendCode" :disabled="sendFlag">{{codeText}}</x-button>
 				</x-input>
 			</group>
 			<div class="tip">
@@ -24,10 +24,10 @@
 		</div>
 		<div class="content bounceInRight animated" v-if="isRemember == 1">
 			<group gutter="0" class="input-div">
-				<x-input class="input-item" ref="oldpassword" v-model="phone" placeholder="输入旧密码" type="number" :max="4" :required="true" @on-change="oldpasswordChange"></x-input>
+				<x-input class="input-item" ref="oldpassword" v-model="oldpassword" placeholder="输入旧密码" type="password" :max="6" @on-change="oldpasswordChange"></x-input>
 			</group>
 			<div class="tip">
-				<x-button class="add-btn" @click.native="submit" :show-loading="showLoading">下一步</x-button>
+				<x-button class="add-btn" @click.native="submit2" :show-loading="showLoading">下一步</x-button>
 			</div>
 		</div>
 	</div>
@@ -39,7 +39,7 @@
 	export default {
 		data() {
 			return {
-				title: '设置登录密码', //头部标题
+				title: '设置支付密码', //头部标题
 				phone: '', //手机号码
 				code: '', //验证码
 				regText: '提示',
@@ -48,9 +48,11 @@
 				sendFlag: false,
 				showLoading: false,
 				isRemember: 3,
+				oldpassword: '',
 			}
 		},
 		created() {
+			this.phone = JSON.parse(localStorage['userInfo']).mobile
 			this.getUserPayPassword()
 		},
 		mounted() {
@@ -61,57 +63,147 @@
 			getUserPayPassword() {
 				var _this = this
 				_this.$http.get(_this.url.user.getUserPayPassword, {
-					userId: sessionStorage.getItem('userId')
+					params: {
+						userId: localStorage.getItem('userId')
+					}
 				}).then((res) => {
 					if(res.data.status == "00000000") {
-						console.log(res)
+						if(res.data.data == 2) {
+							_this.isRemember = 0
+						} else {
+
+						}
 					}
 				})
 			},
 			remember() {
 				var _this = this
 				_this.isRemember = 1
-				_this.$nextTick(function() {
-					_this.$refs.oldpassword.focus()
-				})
 			},
 			forget() {
 				var _this = this
 				_this.isRemember = 0
-				_this.$nextTick(function() {
-					_this.$refs.phone.focus()
-				})
 			},
 			submit() {
-				this.$router.push({
-					path: '/user/changePaymentPassword2'
-				})
+				var _this = this
+				if(_this.code) {
+					_this.$http.post(_this.url.user.authVerification, {
+						type: 5,
+						mobile: _this.phone,
+						code: _this.code
+					}).then((res) => {
+						if(res.data.status == "00000000") {
+							if(res.data.data) {
+								_this.$router.push({
+									path: '/user/changePaymentPassword2',
+									query: {
+										code: _this.code
+									}
+								})
+							} else {
+								_this.$vux.toast.show({
+									width: '50%',
+									type: 'text',
+									position: 'middle',
+									text: '验证码不正确'
+								})
+							}
+						}
+					})
+				} else {
+					_this.$vux.toast.show({
+						width: '50%',
+						type: 'text',
+						position: 'middle',
+						text: '请输入正确的验证码'
+					})
+				}
+			},
+			submit2() {
+				var _this = this
+				if(_this.oldpassword) {
+					_this.$http.post(_this.url.user.authPayPassword, {
+						userId: localStorage['userId'],
+						payPassword: _this.MD5(_this.oldpassword)
+					}).then((res) => {
+						if(res.data.status == "00000000") {
+							if(res.data.data == 1) {
+								_this.$router.push({
+									path: '/user/changePaymentPassword2',
+									query: {
+										oldPayPassword: _this.MD5(_this.oldpassword)
+									}
+								})
+							} else {
+								_this.$vux.toast.show({
+									width: '50%',
+									type: 'text',
+									position: 'middle',
+									text: '旧的支付密码不正确'
+								})
+							}
+						}
+					})
+				} else {
+					_this.$vux.toast.show({
+						width: '50%',
+						type: 'text',
+						position: 'middle',
+						text: '请输入旧的支付密码'
+					})
+				}
 			},
 			oldpasswordChange(val) {
-
+				if(val.length == 6) {
+					this.$refs.oldpassword.blur()
+				}
 			},
 			codeChange(val) {
-
+				if(val.length == 4) {
+					this.$refs.code.blur()
+				}
 			},
 			phoneChange(val) {
 				if(val.length == 11) {
 					this.$refs.phone.blur()
 				}
 			},
+			//发送验证码
 			sendCode() {
 				var _this = this
-				_this.$refs.code.focus()
-				this.$vux.toast.show({
-					width: '50%',
-					type: 'text',
-					text: '验证码发送成功'
-				})
-				this.reduce()
+				_this.code = ''
+				if(_this.mainApp.isphone(_this.phone)) {
+					_this.$refs.code.focus()
+					_this.$http.post(this.url.user.getVerificationCode, {
+						mobile: _this.phone,
+						type: 5
+					}).then(function(res) {
+						if(res.data.status == "00000000") {
+							_this.$vux.toast.show({
+								width: '50%',
+								type: 'text',
+								position: 'middle',
+								text: '验证码发送成功'
+							})
+
+							_this.reduce()
+						}
+					})
+				} else {
+					_this.$vux.toast.show({
+						width: '50%',
+						type: 'text',
+						position: 'middle',
+						text: '手机号码格式不正确'
+					})
+					_this.$refs.phone.focus()
+				}
 			},
+			//倒计时
 			reduce() {
 				var _this = this
 				if(_this.num == 0) {
-					_this.codeText = "发送验证码";
+					_this.codeText = "重新发送验证码";
 					_this.num = 60;
 					_this.sendFlag = false
 					return;
@@ -189,6 +281,19 @@
 			padding-top: 0;
 			padding-bottom: 0;
 			box-sizing: border-box;
+			color: #1A2642;
+			.codeBtn {
+				background-color: white;
+				color: #256fff;
+				padding-right: 0;
+			}
+			.codeBtn:active {
+				color: #256FFF;
+				background-color: transparent!important;
+			}
+			.weui-btn:after {
+				border: 1px solid transparent!important;
+			}
 		}
 		.tip {
 			padding: 10px 15px;

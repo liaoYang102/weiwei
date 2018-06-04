@@ -11,8 +11,8 @@
 					<div class="bottom">
 						<img :src="tx" alt="" />
 						<div>
-							<p>{{name}}</p>
-							<p>{{title}}</p>
+							<p>{{userInfo.nickname}}</p>
+							<p>{{userInfo.mobile}}</p>
 						</div>
 					</div>
 				</div>
@@ -85,16 +85,13 @@
 			return {
 				title: '我的二维码',
 				grade: 1,
-				name: '',
-				tel: '',
-				tx: '',
-				width:''
+				width:'',
+				userInfo:{}
 			}
 		},
 		created() {
-			this.name = this.$route.query.name
-			this.tel = this.$route.query.tel
-			this.tx = this.$route.query.tx
+			this.userInfo = JSON.parse(localStorage['userInfo'])
+			this.tx = this.userInfo.avatar.original
 			this.qrcodeVal = 'http://192.168.3.145:8080/#/user/reg?parentId=' + localStorage.getItem('userId')
 			this.width =  Number(document.body.clientWidth * 0.6773333333333333)
 		},

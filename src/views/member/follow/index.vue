@@ -15,20 +15,26 @@
 				<div class="store-list">
 					<div class="wrapper3" ref="wrapper3">
 						<div class="content">
-							<div class="list-item" v-for="(item,index) in lyList" v-if="lyList.length>0">
+							<div class="list-item" v-for="(item,index) in lyList" v-if="lyList.length>0" @click="toDetail(item.enterpriseId)">
 								<div @click="changeStore2()">
 									<check-icon v-if="storeShow2" class="check-btn" :value.sync="item.ischeck"></check-icon>
 								</div>
-								<div class="img-box" @click="toDetail(item.enterpriseId)"><img v-if="item.logo" :src="item.logo.original" /></div>
+								<div class="img-box"><img v-if="item.logo" :src="item.logo.original" /></div>
 								<div class="pro-box">
-									<p>{{item.name}}</p>
-									<div class="storbtn-box">
-										<!-- <span>标签</span> --><span>关注人数：{{item.concernSum}}人</span>
+									<div>
+										<p>{{item.name}}</p>
+										<div class="storbtn-box">
+											<!-- <span>标签</span> --><span>关注人数：{{item.concernSum}} 人</span>
+										</div>
+									</div>
+									<div class="go" v-if="!isBj">
+										<span>进入店铺</span>
+										<i class="icon iconfont icon-arrow-right"></i>
 									</div>
 								</div>
 							</div>
 							<Loading v-if="show3"> </Loading>
-							<noData v-if="lyList.length==0" :status="storeState" :stateText="noStore"></noData>
+							<noData v-if="lyList.length==0" :status="storeState" :stateText="noly"></noData>
 						</div>
 					</div>
 				</div>
@@ -37,20 +43,26 @@
 				<div class="store-list">
 					<div class="wrapper2" ref="wrapper2">
 						<div class="content">
-							<div class="list-item" v-for="(item,index) in lmList" v-if="lmList.length>0">
+							<div class="list-item" v-for="(item,index) in lmList" v-if="lmList.length>0" @click="toDetail(item.enterpriseId)">
 								<div @click="changeStore()">
 									<check-icon v-if="storeShow" class="check-btn" :value.sync="item.ischeck"></check-icon>
 								</div>
-								<div class="img-box" @click="toDetail(item.enterpriseId)"><img v-if="item.logo" :src="item.logo.original" /></div>
+								<div class="img-box"><img v-if="item.logo" :src="item.logo.original" /></div>
 								<div class="pro-box">
-									<p>{{item.name}}</p>
-									<div class="storbtn-box">
-										<!-- <span>标签</span> --><span>关注人数：{{item.concernSum}}人</span>
+									<div>
+										<p>{{item.name}}</p>
+										<div class="storbtn-box">
+											<!-- <span>标签</span> --><span>关注人数：{{item.concernSum}} 人</span>
+										</div>
+									</div>
+									<div class="go" v-if="!isBj">
+										<span>进入店铺</span>
+										<i class="icon iconfont icon-arrow-right"></i>
 									</div>
 								</div>
 							</div>
 							<Loading v-if="show2"> </Loading>
-							<noData v-if="lmList.length==0" :status="storeState" :stateText="noStore"></noData>
+							<noData v-if="lmList.length==0" :status="storeState" :stateText="nolm"></noData>
 						</div>
 					</div>
 				</div>
@@ -139,7 +151,8 @@
 				proState: 0,
 				storeState: 0,
 				noPro: '暂无商品',
-				noStore: '暂无店铺',
+				noly: '暂无联营企业',
+				nolm: '暂无联盟企业',
 				pageSize: 20,
 				curPage: 1,
 				type: 2,
@@ -147,6 +160,11 @@
 			}
 		},
 		created() {
+			if(this.$route.query.index){
+				this.index = Number(this.$route.query.index)
+			}else{
+				this.index = 0
+			}
 			this.getFollow()
 		},
 		mounted() {
@@ -204,6 +222,7 @@
 							position: 'middle',
 							text: '已取消关注'
 						})
+						_this.getFollow()
 					}
 				})
 			},
@@ -332,15 +351,30 @@
 			},
 			//商品  店铺切换
 			active(index) {
-				this.isBj = false //重置编辑
-				this.storeShow = false //重置商品选择框
-				this.proShow = false //重置店铺选择框
-				this.allprCheck = false
-				this.allstCheck = false
-				this.proidList = []
-				this.storeidList = []
-				this.show = false
-				this.show2 = false
+				var _this = this
+				_this.isBj = false //重置编辑
+				_this.storeShow = false //重置商品选择框
+				_this.proShow = false //重置店铺选择框
+				_this.allprCheck = false
+				_this.allstCheck = false
+				_this.proidList = []
+				_this.storeidList = []
+				_this.show = false
+				_this.show2 = false
+				
+				if(index == 1){
+					_this.type = 3
+				}else if(index == 0){
+					_this.type = 2
+				}else if(index == 2){
+					_this.type = 1
+				}
+				_this.index = index
+				_this.$router.replace({
+					query: _this.merge(_this.$route.query, {
+						'index': index
+					})
+				})
 			},
 			//点击编辑
 			edit() {
@@ -420,12 +454,14 @@
 				console.log('on cancel')
 			},
 			toDetail(id) {
-				this.$router.push({
-					name: 'multi_user_mall',
-					query: {
-						id: id
-					}
-				})
+				if(!this.isBj) {
+					this.$router.push({
+						name: 'multi_user_mall',
+						query: {
+							id: id
+						}
+					})
+				}
 			}
 		},
 		watch: {
@@ -628,6 +664,20 @@
 				.pro-box {
 					box-sizing: border-box;
 					padding-left: 0.35rem;
+					width: 100%;
+					box-sizing: border-box;
+					display: flex;
+					align-items: center;
+					justify-content: space-between;
+					.go {
+						font-size: 0.24rem;
+						color: #90a2c7;
+						display: flex;
+						align-items: center;
+						i {
+							font-size: 0.45rem;
+						}
+					}
 					p:nth-child(1) {
 						font-size: 0.24rem;
 						color: rgba(26, 38, 66, 1);
