@@ -14,11 +14,11 @@
 					</div>
 					<div class="right">
 						<div>
-							<img src="../../assets/images/member/member_2.png">
+							<img src="../../assets/images/share/pd.png">
 							<span>产品简介</span>
 						</div>
 						<div>
-							<img src="../../assets/images/member/member_2.png">
+							<img src="../../assets/images/share/direction.png">
 							<span>使用指导</span>
 						</div>
 					</div>
@@ -27,7 +27,7 @@
 				<div class="codeTitle">
 					<p>可使用通用积分付款</p>
 					<div class="forword"> 
-						<span>前往充值</span> 
+						<span>前往充值</span>
 						<img src="../../assets/images/share/arrow.png">
 					</div>
 				</div>
@@ -50,7 +50,6 @@
 				</div>
 			</div>
 		</div>
-		
 	</section>
 </template>
 
@@ -135,7 +134,7 @@
 		font-size: 0.24rem;
 		.left{
 			flex: 1;
-			margin: 0.55rem 0 0.9rem 0.41rem;
+			margin: 0.55rem 0.2rem 0.9rem 0.41rem;
 			p:nth-child(1){
 				font-size: 0.36rem;
 				line-height: 0.5rem;
@@ -170,21 +169,18 @@
 		}
 		.right{
 			display: flex;
-			margin: 0.9rem 0.53rem 0 0;
+			margin: 0.9rem 0 0 0;
 			font-size: 0.22rem;
 			div{
 				flex: 1;
 				text-align: center;
 				img{
-					width: 85%;
+					width: 50%;
 					display: block;
 					margin: 0 auto;
 					margin-bottom: 0.11rem;
 					vertical-align: middle;
 				}
-			}
-			div:nth-child(1){
-				margin-right: 0.43rem;
 			}
 		}
 	}
