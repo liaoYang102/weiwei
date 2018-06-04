@@ -11,7 +11,7 @@
 
 		<div class="nav">
 			<div class="area" @click="onArea()">
-				<p>{{region}}<i class="iconfont" :class="areaShang ? 'icon-shixinjiantou' : 'icon-shixinjiantou-copy'"></i></p>
+				<p class="areaDetail">{{region}}<i class="iconfont" :class="areaShang ? 'icon-shixinjiantou' : 'icon-shixinjiantou-copy'"></i></p>
 			</div>
 			<div class="price" @click="onPrice()">
 				<p>{{priceType}}<i class="iconfont" :class="priceShang ? 'icon-shixinjiantou' : 'icon-shixinjiantou-copy'"></i></p>
@@ -19,18 +19,23 @@
 			<div class="type" @click="onScreening()">
 				<p>{{screening}}<img src="../../assets/images/shop/screen.png" alt=""></p>
 			</div>
-			<ul class="address fadeIn animated" :class="isActive? 'maskTive' : ''">
+			<ul class="address animated" :class="isActive? 'maskTive' : ''">
 				<li class="category">
 					<i class="iconfont">&#xe60b;</i>
                     <span class="province" :class="addressKey==1? 'active':'' " @click="provice">省份</span>
                     <span class="city" :class="addressKey==2? 'active':'' " @click="city">城市</span>
                     <span class="district" :class="addressKey==3? 'active':'' " @click="district">区县</span>
 				</li>
-				<li v-for="item in items" @click="next(item.areaId)">
+				<li v-for="item in items" @click="next(item.areaId,item.name)">
                     <span>{{item.name}}</span>
                     <i class="fr">></i>
                 </li>
 			</ul>
+			<popup v-model="priceShang" id="distanceType" :show-mask="false">
+	        	<group>
+			    	<radio title="title" :options="opPrice" value="01" @on-change="changePrice"></radio>
+			  	</group>
+	     	 </popup>
 		</div>
 
 		<div class="wrapper" ref="wrapper">
@@ -60,7 +65,7 @@
 			
 		</div>
 		
-		<div class="mask fadeIn animated" :class="isActive? 'maskTive' : ''" @click="hide"></div>
+		<div class="mask animated" :class="maskActive? 'maskTive' : ''" @click="hide"></div>
 		
 		<!-- //区域框 -->
 		<!-- <div v-transfer-dom> -->
@@ -120,13 +125,13 @@
 		</div>
 
 	    <!-- 价格/距离框 -->
-	    <div v-transfer-dom class="aa">
+	    <!-- <div v-transfer-dom class="aa">
 	      <popup v-model="priceShang" position="top">
 	        	<group>
 			    	<radio title="title" :options="opPrice" value="01" @on-change="changePrice"></radio>
 			  	</group>
 	      </popup>
-	    </div>
+	    </div> -->
 		
 
 	</div>
@@ -143,14 +148,16 @@
 			return {
 				title: '门店列表',
 				data:[],
+				addressDetail:null,//选中的市
 				addressKey:1,//省 市 区的状态切换
 				isActive:false,//地址框的显隐
+				maskActive:false,//遮罩层的显隐
 				proviceItem:null,//省级数据暂存
 				cityItem:null,//城市数据暂存
 				districtItem:null,//市区数据暂存
 				region:'区域',//区域
 				screening:'筛选',//类型
-				priceType:'价格',//价格
+				priceType:'类型',//价格
 				areaShang:false,//区域箭头
 				typeShang:false,//类型箭头
 				priceShang:false,//价格箭头
@@ -184,7 +191,7 @@
 					},
 					{
 						key:'02',
-						value:'价格最低'
+						value:'智能推荐'
 					}
 				],
 
@@ -288,11 +295,14 @@
 			onArea(){
 				//点击区域
 				if(this.areaShang){
-					this.areaShang=false;
-					this.isActive = false;
+					// this.areaShang=false;
+					// this.isActive = false;
+					// this.maskActive = false;
+					this.hide();
 				}else{
 					this.areaShang=true;
 					this.isActive = true;
+					this.maskActive = true;
 				}
 			},
 			onScreening(){
@@ -316,14 +326,14 @@
 				this.hide();
 			},
 			onPrice(){
+				// this.hide();
 				//点击价格
 				if(this.priceShang){
-					this.priceShang=false;
+					this.hide();
 				}else{
-					this.priceShang=true
+					this.priceShang=true;
+					this.maskActive = true;
 				}
-				//地址选择框消失
-				this.hide();
 			},
 			toggle(index,e){
 				// this.active=index;
@@ -341,6 +351,7 @@
 					_this.priceType=label;
 					_this.priceShang=false;
 				},50);
+				this.hide();
 			},
 			changeType(value,label){//改变类型
 				var _this=this;
@@ -429,10 +440,12 @@
 					this.proviceItem = this.items;
 				})
 	    	},
-	    	next(id){
+	    	next(id,name){
 	    		if(this.addressKey==3){
 	    			this.areaShang=false;
 					this.isActive = false;
+					this.maskActive = false;
+					this.region=this.addressDetail+' '+name;
 					return
 	    		}
 				let param = {
@@ -448,6 +461,7 @@
 						this.cityItem = this.items;
 					}else if(this.addressKey ==3){
 						this.districtItem = this.items;
+						this.addressDetail = name;
 					}
 				})
 			},
@@ -469,7 +483,9 @@
 			},
 			hide(){
 				this.areaShang=false;
+				this.priceShang=false;
 				this.isActive = false;
+				this.maskActive = false;
 			}
 		}
 	}
@@ -486,10 +502,22 @@
 	.aa .vux-no-group-title{
 		margin-top: 0;
 	}
-
+	/*
+	 *   类型推荐
+	*/
+	#distanceType{
+	    position: absolute;
+        top: 0.9rem;
+        bottom:inherit;
+        max-height: 500%;
+	}
+	.vux-no-group-title{
+    	margin-top: 0!important;
+    }
 </style>
 <style lang="less" scoped>
 	/*@import url('../../../static/css/global'); */
+	
 	.storelistMask{
 		top: 3rem!important;
 	}
@@ -513,6 +541,13 @@
 		position: relative;
 		/*position: fixed;*/
 		border-bottom:1px solid #D8DFF0;
+		.areaDetail{
+		    width: 2rem;
+		    text-align: center;
+		    overflow: hidden;
+		    white-space: nowrap;
+		    text-overflow: ellipsis;
+		}
 		.address{
 			display: none;
 			transition: opacity 800ms;
@@ -537,7 +572,6 @@
 				list-style: none;
 			}
 			.category{
-				
 				i{
 				    font-size: 0.16rem;
    					color: #5497ff;
@@ -554,7 +588,7 @@
 				}
 			}
 		}
-		div{
+		.area,.price,.type{
 			flex: 1;
 			display: flex;
 			justify-content: center;
@@ -888,6 +922,8 @@
 		color: #fff;
 	}
 }
+	
+
 </style>
 
 <style lang="less">
