@@ -61,7 +61,6 @@
 			//全局地址数据
 		},
 		mounted() {
-			console.log(this.$route.query.addressId)
 			if(this.$route.query.addressId) {
 				this.getShippingAddressById(this.$route.query.addressId)
 			}
@@ -183,12 +182,14 @@
 					params: param
 				}).then(resp => {
 					_this.info = resp.data.data
-					_this.info.addressId = _this.$route.params.addressId
+					_this.info.addressId = _this.$route.query.addressId
 					_this.addArr = [_this.info.provinceId, _this.info.cityId, _this.info.areaId]
 				})
 			},
 			onAddArr (val) {
-				this.addArr = this.addArr.concat() // 进行数组深拷贝并赋值,触发vue更新视图
+				if(this.addArr.length != 0){
+					this.addArr = this.addArr.concat() // 进行数组深拷贝并赋值,触发vue更新视图
+				}
 			}
 		},
 		components: {

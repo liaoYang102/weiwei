@@ -3,8 +3,8 @@
 		<settingHeader :title="title"></settingHeader>
 		<div class="content">
 			<group gutter="0" class="input-div">
-				<x-input class="input-item" ref="password" v-model="password" placeholder="输入新密码" type="password" :max="11" :required="true" @on-change="newpasswordChange"></x-input>
-				<x-input class="input-item" ref="password1" v-model="password1" placeholder="再次输入新密码" type="password" :required="true" @on-change="newpasswordChange1"></x-input>
+				<x-input class="input-item" ref="password" v-model="password" placeholder="输入新密码" type="password" :max="6" @on-change="newpasswordChange"></x-input>
+				<x-input class="input-item" ref="password1" v-model="password1" placeholder="再次输入新密码" type="password" :max="6" @on-change="newpasswordChange1"></x-input>
 			</group>
 			<div class="tip">
 				<x-button class="add-btn" @click.native="submit" :show-loading="showLoading">提交</x-button>
@@ -14,30 +14,83 @@
 </template>
 
 <script>
-	import { XInput, Group, XButton, Cell,  } from 'vux'
+	import { XInput, Group, XButton, Cell, } from 'vux'
 	import settingHeader from '../../components/setting_header'
 	export default {
 		data() {
 			return {
 				title: '设置支付密码', //头部标题
-				password:'',
-				password1:'',
-				showLoading:false
+				password: '',
+				password1: '',
+				showLoading: false
 			}
 		},
 		created() {},
-		mounted() {
-			this.$refs.password.focus()
-		},
 		methods: {
 			submit() {
-				
+				var _this = this
+				if(_this.password.length != 6 || _this.password1.length != 6) {
+					_this.$vux.toast.show({
+						width: '50%',
+						type: 'text',
+						position: 'middle',
+						text: '请输入6位数字密码'
+					})
+					return false
+				}
+
+				if(_this.password != _this.password1) {
+					_this.$vux.toast.show({
+						width: '50%',
+						type: 'text',
+						position: 'middle',
+						text: '两次密码输入不一致'
+					})
+					return false
+				}
+
+				if(_this.$route.query.code) {
+					var uri = _this.url.user.setPayPassword //根据验证码修改
+					var data = {
+						userId: localStorage['userId'],
+						payPassword: _this.MD5(_this.password),
+						code: _this.$route.query.code,
+						platformId: _this.url.platformId
+					}
+				} else if(_this.$route.query.oldPayPassword) {
+					var uri = _this.url.user.setPayPasswordByOld //根据旧密码修改
+					var data = {
+						userId: localStorage['userId'],
+						payPassword: _this.MD5(_this.password),
+						oldPayPassword: _this.$route.query.oldPayPassword,
+						platformId: _this.url.platformId
+					}
+				}
+
+				_this.$http.post(uri, data).then((res) => {
+					if(res.data.status == "00000000") {
+						_this.$vux.toast.show({
+							width: '50%',
+							type: 'text',
+							position: 'middle',
+							text: '密码保存成功'
+						})
+					}
+					_this.$router.replace({
+						path: '/member/index'
+					})
+				})
 			},
 			newpasswordChange(val) {
-				
+				if(val.length == 6) {
+					this.$refs.password.blur()
+					this.$refs.password1.focus()
+				}
 			},
 			newpasswordChange1(val) {
-				
+				if(val.length == 6) {
+					this.$refs.password1.blur()
+				}
 			},
 		},
 		components: {
@@ -93,11 +146,12 @@
 		letter-spacing: 0;
 		background-color: #336FFF!important;
 	}
-	.login-re{
+	
+	.login-re {
 		padding: 10px 15px;
 		display: flex;
 		justify-content: space-between;
-		span{
+		span {
 			color: #10aeff;
 		}
 	}

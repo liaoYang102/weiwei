@@ -228,7 +228,7 @@
 						title: '推广码',
 						tip: '赢5000大奖',
 						img: './static/images/tgm.png',
-						url: '/shop'
+						url: '/member/purse/qrcode'
 					}
 				],
 				navList:[

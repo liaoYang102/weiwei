@@ -151,35 +151,17 @@
 			}
 		},
 		created() {
-			this.getUserInfo()
+			this.userInfo = JSON.parse(localStorage['userInfo'])
+			
+			if(this.userInfo.avatar.original) {
+				this.images = this.userInfo.avatar.original
+			}
 		},
 		methods: {
-			//获取用户信息
-			getUserInfo() {
-				var _this = this
-				_this.$http.get(_this.url.user.getBasicInfo, {
-					params: {
-						userId: localStorage.getItem('userId')
-					}
-				}).then((res) => {
-					if(res.data.status == "00000000") {
-						_this.userInfo = res.data.data
-						_this.$store.state.page.userInfo = res.data.data
-						if(res.data.data.avatar.original) {
-							_this.images = res.data.data.avatar.original
-						}
-					}
-				})
-			},
 			toQrcode(info) {
 				var _this = this
 				_this.$router.push({
-					path: '/member/purse/qrcode',
-					query: {
-						name: info.realName,
-						tel: info.mobile,
-						tx: _this.images
-					}
+					path: '/member/purse/qrcode'
 				})
 			}
 		},

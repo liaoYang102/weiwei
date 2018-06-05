@@ -287,10 +287,6 @@ router.beforeEach(function(to, from, next) {
 		//		}
 		next()
 	}
-	
-	if(history.length>2){
-		store.state.page.hasRouter = true
-	}
 })
 
 router.afterEach(function(to) {
