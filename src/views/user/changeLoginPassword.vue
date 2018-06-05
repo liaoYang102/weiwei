@@ -1,11 +1,11 @@
 <template>
-	<div class="login-box">
+	<div class="loginps-box">
 		<settingHeader :title="title"></settingHeader>
 		<div class="content">
 			<group gutter="0" class="input-div">
-				<x-input class="input-item" ref="phone" v-model="phone" placeholder="输入手机号码" type="number" :max="11" :required="true" @on-change="phoneChange"></x-input>
+				<x-input class="input-item" ref="phone" v-model="phone" placeholder="输入手机号码" type="number" :max="11" @on-change="phoneChange"></x-input>
 				<x-input class="input-item" type="number" ref="code" v-model="code" placeholder="验证码" @on-change="codeChange">
-					<x-button slot="right" type="primary" mini @click.native="sendCode" :disabled="sendFlag">{{codeText}}</x-button>
+					<x-button class="codeBtn" slot="right" type="primary" mini @click.native="sendCode" :disabled="sendFlag">{{codeText}}</x-button>
 				</x-input>
 			</group>
 			<div class="tip">
@@ -31,38 +31,92 @@
 				showLoading: false
 			}
 		},
-		created() {},
-		mounted() {
-			this.$refs.phone.focus()
+		created() {
+
 		},
 		methods: {
 			submit() {
-				this.$router.push({
-					path: '/user/changeLoginPassword2'
-				})
+				var _this = this
+				if(_this.mainApp.isphone(_this.phone) && _this.code.length == 4) {
+					_this.$http.post(_this.url.user.authVerification, {
+						type: 2,
+						mobile: _this.phone,
+						code: _this.code
+					}).then((res) => {
+						if(res.data.status == "00000000") {
+							if(res.data.data) {
+								_this.$router.push({
+									path: '/user/changeLoginPassword2',
+									query: {
+										mobile:_this.phone,
+										code: _this.code
+									}
+								})
+							} else {
+								_this.$vux.toast.show({
+									width: '50%',
+									type: 'text',
+									position: 'middle',
+									text: '验证码不正确'
+								})
+							}
+						}
+					})
+				} else {
+					_this.$vux.toast.show({
+						width: '50%',
+						type: 'text',
+						position: 'middle',
+						text: '手机号码或验证码不正确'
+					})
+				}
 			},
 			codeChange(val) {
-
+				if(val.length == 4) {
+					this.$refs.code.blur()
+				}
 			},
 			phoneChange(val) {
 				if(val.length == 11) {
 					this.$refs.phone.blur()
 				}
 			},
+			//发送验证码
 			sendCode() {
 				var _this = this
-				_this.$refs.code.focus()
-				this.$vux.toast.show({
-					width: '50%',
-					type: 'text',
-					text: '验证码发送成功'
-				})
-				this.reduce()
+				_this.code = ''
+				if(_this.mainApp.isphone(_this.phone)) {
+					_this.$refs.code.focus()
+					_this.$http.post(this.url.user.getVerificationCode, {
+						mobile: _this.phone,
+						type: 2
+					}).then(function(res) {
+						if(res.data.status == "00000000") {
+							_this.$vux.toast.show({
+								width: '50%',
+								type: 'text',
+								position: 'middle',
+								text: '验证码发送成功'
+							})
+
+							_this.reduce()
+						}
+					})
+				} else {
+					_this.$vux.toast.show({
+						width: '50%',
+						type: 'text',
+						position: 'middle',
+						text: '手机号码格式不正确'
+					})
+					_this.$refs.phone.focus()
+				}
 			},
+			//倒计时
 			reduce() {
 				var _this = this
 				if(_this.num == 0) {
-					_this.codeText = "发送验证码";
+					_this.codeText = "重新发送验证码";
 					_this.num = 60;
 					_this.sendFlag = false
 					return;
@@ -87,8 +141,8 @@
 	}
 </script>
 
-<style lang="less" scoped>
-	.login-box {
+<style lang="less">
+	.loginps-box {
 		.input-item {
 			height: 1.02rem;
 			font-family: PingFangSC-Regular;
@@ -97,6 +151,18 @@
 			padding-top: 0;
 			padding-bottom: 0;
 			box-sizing: border-box;
+			.codeBtn {
+				background-color: white;
+				color: #256fff;
+				padding-right: 0;
+			}
+			.codeBtn:active {
+				color: #256FFF;
+				background-color: transparent!important;
+			}
+			.weui-btn:after {
+				border: 1px solid transparent!important;
+			}
 		}
 		.tip {
 			padding: 10px 15px;

@@ -10,7 +10,7 @@ import './assets/icons_font/iconfont.css'
 import './style/global.css'
 import 'swiper/dist/css/swiper.css'
 import './config/wy_rem'
-import { Group, DatetimeRange, Cell, XDialog, Tab, TabItem, CellBox, XHeader, Scroller, LoadMore, TransferDom, Confirm, Popup, Toast, Swiper, InlineXNumber, CheckIcon, CellFormPreview, XSwitch, XNumber, Badge, Previewer, Timeline, TimelineItem, Rater, XTextarea, Radio } from 'vux'
+import { Group, DatetimeRange, Cell, XDialog, Tab, TabItem, CellBox, XHeader, Scroller, LoadMore, TransferDom, Confirm, Popup, Toast, Swiper, InlineXNumber, CheckIcon, CellFormPreview, XSwitch, XNumber, Badge, Previewer, Timeline, TimelineItem, Rater, XTextarea, Radio, Swipeout, SwipeoutItem, SwipeoutButton } from 'vux'
 import FastClick from 'fastclick'
 import VueVideoPlayer from 'vue-video-player'
 import 'video.js/dist/video-js.css'
@@ -32,6 +32,8 @@ Vue.prototype.$http = axios //定义axios组件用法  this.$http(opt).then(fn)
 
 import url from './config/url'
 Vue.prototype.url = url //全局url路径
+
+Vue.config.silent = true
 
 // 懒加载图片
 Vue.use(VueLazyLoad, {
@@ -73,6 +75,9 @@ Vue.component('rater', Rater)
 Vue.component('x-textarea', XTextarea)
 Vue.component('radio', Radio)
 Vue.component('x-dialog', XDialog)
+Vue.component('swipeout', Swipeout)
+Vue.component('swipeout-item', SwipeoutItem)
+Vue.component('swipeout-button', SwipeoutButton)
 
 Vue.config.productionTip = false
 

@@ -17,6 +17,7 @@ var url = {
 		userLogin: uri1 + '/public/v1/user/login', //用户登录
 		logout: uri1 + '/v1/user/logout', //用户登出
 		userRegister: uri1 + '/public/v1/user/register', //用户注册
+		forgetPassword: uri1 + '/public/v1/user/forgetPassword', //重置登录密码
 		checkUserExistsByMobile: uri1 + '/public/v1/user/checkUserExistsByMobile', //用户是否注册
 		getVerificationCode: uri1 + '/public/v1/sms/getVerificationCode', //获取验证码
 		authVerification: uri1 + '/public/v1/sms/authVerificationCode', //检测验证码是否正确
@@ -28,7 +29,6 @@ var url = {
 		deleteShippingAddress: uri1 + '/v1/user/deleteShippingAddress', //删除收货地址
 		setDefaultShippingAddress: uri1 + '/v1/user/setDefaultShippingAddress', //设置默认收货地址
 		editShippingAddress: uri1 + '/v1/user/editShippingAddress', //修改收货地址
-		forgetPassword: '/public/v1/user/forgetPassword', //重置密码
 		addConcern: uri1 + '/v1/user/addConcern', //用户添加关注商品/联盟企业/联营企业
 		getConcernLists: uri1 + '/v1/user/getConcernLists', //获取用户关注商品/联盟企业/联营企业
 		deleteConcern: uri1 + '/v1/user/deleteConcern', //用户取消关注商品/联盟企业/联营企业

@@ -4,6 +4,7 @@
 		<div class="wrapper" ref="wrapper">
 			<div class="content">
 				<div class="box2" v-if="proList.length != 0">
+					
 			      	<div class="list" v-for="(item,index) in proList">
 						<div class="storeName">
 							<check-icon :value.sync='item.ischeck' @click.native="storecheck(index)" style="width:0.88rem;height:0.88rem;text-align:center;line-height:0.88rem;" class='fl'></check-icon>
@@ -15,41 +16,59 @@
 								<div class="fr edit" @click='edit($event,index)'>编辑</div>
 							</div>
 						</div>
-						<div class="store-shop" v-for="(children,chIndex) in item.children">
-							<check-icon :value.sync="children.ischeck" @click.native="shopcheck(index)" style="width:0.88rem;height:2.24rem;text-align:center;line-height:2.24rem;" class='fl'></check-icon>
-							<div class="fr" style="width:6.62rem;padding-bottom:0.2rem;border-bottom:1px solid #D8DFF0;padding-top:0.2rem;">
-								<div class="fl">
-									<img v-lazy="children.childrenImg" alt="">
-								</div>
-								<div class="fl shop-content" v-if='item.shopEdit'  @click="goShopDetails">
-									<p class="shop-name">{{children.childrenName}}</p>
-									<p class="shop-size">{{children.childrenSize}}<span class="fr">X{{children.childrenNum}}</span></p>
-									<p class="shop-price"><span class="priceNum">￥{{children.childrenPrice}}</span> <span class="shopAcount">+{{children.childrenAccount}}积分</span></p>
-								</div>
-								<div class="fr shopEdit" v-else>
-									<div class="fl">
-										<group>
-											<x-number width="1.8rem" v-model="children.childrenNum" :min="1"></x-number>
-										</group>
-										<div class="editSize" @click="showMask(index,chIndex)">
+						<div class="vux-1px-t">
+    
+    				<swipeout>
+						<swipeout-item @on-close="handleEvents('on-close')" @on-open="handleEvents('on-open')" transition-mode="follow" v-for="(children,chIndex) in item.children" :key="item.chIndex">
+					        <div slot="right-menu" v-if='item.shopEdit'>
+				                <swipeout-button @click.native="onButtonClick('fav')" type="primary">移入关注</swipeout-button>
+					            <swipeout-button @click.native="onButtonClick('delete')" type="warn">删除</swipeout-button>
+					        </div>
+					        <div slot="content" class="demo-content vux-1px-t">
+					        	<div class="store-shop" >
+									<check-icon :value.sync="children.ischeck" @click.native="shopcheck(index)" style="width:0.88rem;height:2.24rem;text-align:center;line-height:2.24rem;" class='fl'></check-icon>
+									<div class="fr" style="width:6.62rem;padding-bottom:0.2rem;border-bottom:1px solid #D8DFF0;padding-top:0.2rem;">
+										<div class="fl">
+											<img v-lazy="children.childrenImg" alt="">
+										</div>
+										<div class="fl shop-content" v-if='item.shopEdit'  @click="goShopDetails">
+											<p class="shop-name">{{children.childrenName}}</p>
+											<p class="shop-size">{{children.childrenSize}}<span class="fr">X{{children.childrenNum}}</span></p>
+											<p class="shop-price"><span class="priceNum">￥{{children.childrenPrice}}</span> <span class="shopAcount">+{{children.childrenAccount}}积分</span></p>
+										</div>
+										<div class="fr shopEdit" v-else>
 											<div class="fl">
-												<!-- <span v-for="(item,index) in children.childrenContent"> -->
-													<!-- <span v-if="index== children.childrenContent.length-1">{{item}}</span>
-													<span v-else>{{item}};</span> -->
-												<!-- </span> -->
-												<span>{{children.childrenContent}}</span>
+												<group>
+													<x-number width="1.8rem" v-model="children.childrenNum" :min="1"></x-number>
+												</group>
+												<div class="editSize" @click="showMask(index,chIndex)">
+													<div class="fl">
+														<!-- <span v-for="(item,index) in children.childrenContent"> -->
+															<!-- <span v-if="index== children.childrenContent.length-1">{{item}}</span>
+															<span v-else>{{item}};</span> -->
+														<!-- </span> -->
+														<span>{{children.childrenContent}}</span>
+													</div>
+													<div class="fr"><img src="../../assets/images/shop/modify.png" alt=""></div>
+												</div>
 											</div>
-											<div class="fr"><img src="../../assets/images/shop/modify.png" alt=""></div>
+											<div class="fr delete" @click="del(index,chIndex,$event)">
+												删除
+											</div>
 										</div>
 									</div>
-									<div class="fr delete" @click="del(index,chIndex,$event)">
-										删除
-									</div>
+									<div class="clear"></div>
 								</div>
-							</div>
-							<div class="clear"></div>
-						</div>
+					        </div>
+				        </swipeout-item>
+</swipeout>
+  </div>
+
+						
 					</div>
+					
+    
+    				
 					<div class="clear"></div>
 					<loading v-if="show"></loading>
 					<noMore v-if="showNomore"></noMore>
@@ -265,6 +284,12 @@
 			this.InitScroll()
 		},
 		methods:{
+			onButtonClick (type) {
+		      alert('on button click ' + type)
+		    },
+		    handleEvents (type) {
+		      console.log('event: ', type)
+		    },
 			InitScroll() {
 				this.$nextTick(() => {
 					if(!this.scroll) {
@@ -425,6 +450,9 @@
 </script>
 
 <style lang="less" scoped>
+	.vux-swipeout-button{
+		line-height: 100%;
+	}
 	.wrapper {
 		height: 92%;
 		overflow: hidden;

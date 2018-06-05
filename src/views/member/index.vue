@@ -151,13 +151,25 @@
 			}
 		},
 		created() {
-			this.userInfo = JSON.parse(localStorage['userInfo'])
-			
-			if(this.userInfo.avatar.original) {
-				this.images = this.userInfo.avatar.original
-			}
+			this.getUserInfo()
 		},
 		methods: {
+			getUserInfo() {
+				var _this = this
+				//获取用户信息
+				_this.$http.get(_this.url.user.getBasicInfo, {
+					params: {
+						userId: localStorage['userId']
+					}
+				}).then((res) => {
+					if(res.data.status == "00000000") {
+						_this.userInfo = res.data.data
+						if(_this.userInfo.avatar.original) {
+							_this.images = _this.userInfo.avatar.original
+						}
+					}
+				})
+			},
 			toQrcode(info) {
 				var _this = this
 				_this.$router.push({
