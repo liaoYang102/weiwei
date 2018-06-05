@@ -617,7 +617,7 @@
 	.no_data{
 		width: 100%;
 		background: #fff;
-		padding: 1.3rem 0;
+		padding: 1.5rem 0;
 		.none-data {
 		    text-align: center;
 		    width: 100%;

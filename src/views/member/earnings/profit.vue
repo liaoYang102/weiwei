@@ -7,16 +7,17 @@
 		</div>
 		<div class="wrapper" ref="wrapper" :class="{'h':isWx == false}">
 			<div class="content">
-				<div class="log-list">
+				<div class="log-list" v-if="list.length>0">
 					<ul>
 						<li v-for="item in list">
-							<p>{{item.date}}</p>
-							<p>+ {{item.money}}</p>
+							<p>{{item.total}}</p>
+							<p>+ {{item.day_time}}</p>
 						</li>
 					</ul>
 				</div>
 				<Loading v-if="show"></Loading>
 				<Nomore v-if="showNo"></Nomore>
+				<noData v-if="list.length == 0" :status="2" stateText="暂无变更记录"></noData>
 			</div>
 		</div>
 	</div>
@@ -28,6 +29,7 @@
 	import settingHeader from '../../../components/setting_header'
 	import Loading from '../../../components/loading'
 	import Nomore from '../../../components/noMore'
+	import noData from '../../../components/noData'
 	export default {
 		data() {
 			return {
@@ -35,67 +37,10 @@
 				show: false,
 				showNo: false,
 				isWx: true,
-				list: [{
-						date: '2018.05.28',
-						money: '130.00'
-					},
-					{
-						date: '2018.05.27',
-						money: '130.00'
-					},
-					{
-						date: '2018.05.26',
-						money: '130.00'
-					},
-					{
-						date: '2018.05.25',
-						money: '130.00'
-					},
-					{
-						date: '2018.05.24',
-						money: '130.00'
-					},
-					{
-						date: '2018.05.23',
-						money: '130.00'
-					},
-					{
-						date: '2018.05.22',
-						money: '130.00'
-					},
-					{
-						date: '2018.05.21',
-						money: '130.00'
-					},
-					{
-						date: '2018.05.20',
-						money: '130.00'
-					},
-					{
-						date: '2018.05.19',
-						money: '130.00'
-					},
-					{
-						date: '2018.05.18',
-						money: '130.00'
-					},
-					{
-						date: '2018.05.17',
-						money: '130.00'
-					},
-					{
-						date: '2018.05.16',
-						money: '130.00'
-					},
-					{
-						date: '2018.05.15',
-						money: '130.00'
-					},
-					{
-						date: '2018.05.14',
-						money: '130.00'
-					},
-				]
+				type:0,
+				curPage:1,
+				pageSize:20,
+				list: []
 			}
 		},
 		created() {
@@ -107,11 +52,39 @@
 			} else {
 				this.isWx = false
 			}
+
+			this.getDayBalanceList()
 		},
 		mounted() {
 			this.InitScroll()
 		},
 		methods: {
+			getDayBalanceList() {
+				var _this = this
+				_this.$http.get(_this.url.user.getDayBalanceList, {
+					params: {
+						userId: localStorage.getItem('userId'),
+						type: _this.type,
+						curPage: _this.curPage,
+						pageSize: _this.pageSize
+					}
+				}).then((res) => {
+					if(res.data.status == "00000000") {
+						if(res.data.data.list.length > 0) {
+							_this.list = _this.list.concat(res.data.data.list)
+							if(_this.isload) {
+								_this.show = true
+								_this.showNo = false
+							}
+						} else {
+							if(_this.isload) {
+								_this.show = false
+								_this.showNo = true
+							}
+						}
+					}
+				})
+			},
 			InitScroll() {
 				this.$nextTick(() => {
 					if(!this.scroll) {
@@ -136,31 +109,17 @@
 
 			},
 			LoadData() {
-				console.log(this.list.length)
 				var _this = this
-				if(_this.list.length <= 25) {
-					_this.show = true
-					_this.showNo = false
-					_this.list = _this.list.concat({
-						date: '2018.05.15',
-						money: '130.00'
-					}, {
-						date: '2018.05.14',
-						money: '130.00'
-					})
-					setTimeout(function() {
-						_this.show = false
-					}, 1500)
-				} else {
-					_this.show = false
-					_this.showNo = true
-				}
+				_this.curPage ++
+				_this.getDayBalanceList()
+				_this.isload = true
 			}
 		},
 		components: {
 			settingHeader,
 			Loading,
-			Nomore
+			Nomore,
+			noData
 		},
 	}
 </script>
