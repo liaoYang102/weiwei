@@ -187,17 +187,6 @@
 							})
 							console.log(3)
 						}
-
-						//获取用户信息
-						_this.$http.get(_this.url.user.getBasicInfo, {
-							params: {
-								userId:res.data.data.id
-							}
-						}).then((res) => {
-							if(res.data.status == "00000000") {
-								localStorage.setItem('userInfo',JSON.stringify(res.data.data))
-							}
-						})
 					} else {
 						localStorage.removeItem('userNp')
 						localStorage.removeItem('token')

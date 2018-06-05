@@ -9,7 +9,7 @@
 					<!--<img class="code" src="../../../assets/images/lock/qcode.png" />-->
 					<qrcode :value="qrcodeVal" :size="width" type="img" class="qrcode"></qrcode>
 					<div class="bottom">
-						<img :src="tx" alt="" />
+						<img :src="images" alt="" />
 						<div>
 							<p>{{userInfo.nickname}}</p>
 							<p>{{userInfo.mobile}}</p>
@@ -85,19 +85,34 @@
 			return {
 				title: '我的二维码',
 				grade: 1,
-				width:'',
-				userInfo:{}
+				width: '',
+				userInfo: {},
+				images:''
 			}
 		},
 		created() {
-			this.userInfo = JSON.parse(localStorage['userInfo'])
-			this.tx = this.userInfo.avatar.original
+			this.getUserInfo()
 			this.qrcodeVal = 'http://192.168.3.145:8080/#/user/reg?parentId=' + localStorage.getItem('userId')
-			this.width =  Number(document.body.clientWidth * 0.6773333333333333)
+			this.width = Number(document.body.clientWidth * 0.6773333333333333)
 		},
 		mounted() {},
 		methods: {
-
+			getUserInfo() {
+				var _this = this
+				//获取用户信息
+				_this.$http.get(_this.url.user.getBasicInfo, {
+					params: {
+						userId: localStorage['userId']
+					}
+				}).then((res) => {
+					if(res.data.status == "00000000") {
+						_this.userInfo = res.data.data
+						if(_this.userInfo.avatar.original) {
+							_this.images = _this.userInfo.avatar.original
+						}
+					}
+				})
+			},
 		},
 		components: {
 			settingHeader,
@@ -306,7 +321,7 @@
 						width: 1rem;
 						height: 1rem;
 						margin-right: 0.22rem;
-						border-radius:50%;
+						border-radius: 50%;
 					}
 					div {
 						font-family: PingFangSC-Regular;

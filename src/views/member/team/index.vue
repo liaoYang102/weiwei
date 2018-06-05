@@ -115,12 +115,7 @@
 			toQrcode() {
 				var _this = this
 				_this.$router.push({
-					path: '/member/purse/qrcode',
-					query: {
-						name: _this.userInfo.realName,
-						tel: _this.userInfo.mobile,
-						tx: _this.userInfo.avatar.original
-					}
+					path: '/member/purse/qrcode'
 				})
 			},
 
