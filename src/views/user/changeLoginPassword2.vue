@@ -3,8 +3,8 @@
 		<settingHeader :title="title"></settingHeader>
 		<div class="content">
 			<group gutter="0" class="input-div">
-				<x-input class="input-item" ref="password" v-model="password" placeholder="输入新密码" type="text" :max="11" :required="true" @on-change="newpasswordChange"></x-input>
-				<x-input class="input-item" ref="password1" v-model="password1" placeholder="再次输入新密码" type="text" :required="true" @on-change="newpasswordChange1"></x-input>
+				<x-input class="input-item" ref="password" v-model="password" placeholder="输入新密码" type="text" :max="11" @on-change="newpasswordChange"></x-input>
+				<x-input class="input-item" ref="password1" v-model="password1" placeholder="再次输入新密码" type="text" @on-change="newpasswordChange1"></x-input>
 			</group>
 			<div class="tip">
 				<x-button class="add-btn" @click.native="submit" :show-loading="showLoading">提交</x-button>
@@ -14,30 +14,66 @@
 </template>
 
 <script>
-	import { XInput, Group, XButton, Cell,  } from 'vux'
+	import { XInput, Group, XButton, Cell, } from 'vux'
 	import settingHeader from '../../components/setting_header'
 	export default {
 		data() {
 			return {
 				title: '设置登录密码', //头部标题
-				password:'',
-				password1:'',
-				showLoading:false
+				password: '',
+				password1: '',
+				showLoading: false
 			}
 		},
 		created() {},
-		mounted() {
-			this.$refs.password.focus()
-		},
 		methods: {
 			submit() {
+				var _this = this
+
+				if(_this.password == '' || _this.password1 == '') {
+					_this.$vux.toast.show({
+						width: '50%',
+						type: 'text',
+						position: 'middle',
+						text: '密码不能为空'
+					})
+					return false
+				}
+
+				if(_this.password !=  _this.password1) {
+					_this.$vux.toast.show({
+						width: '50%',
+						type: 'text',
+						position: 'middle',
+						text: '两次密码输入不一致'
+					})
+					return false
+				}
 				
+				_this.$http.post(_this.url.user.forgetPassword,{
+					mobile:_this.$route.query.mobile,
+					smsVerificationCode:_this.$route.query.code,
+					newPassword:_this.MD5(_this.password),
+					platformId:_this.url.platformId
+				}).then((res) => {
+					if(res.data.status == "00000000") {
+						_this.$vux.toast.show({
+							width: '50%',
+							type: 'text',
+							position: 'middle',
+							text: '密码修改成功'
+						})
+					}
+					_this.$router.replace({
+						path: '/user/reg'
+					})
+				})
 			},
 			newpasswordChange(val) {
-				
+
 			},
 			newpasswordChange1(val) {
-				
+
 			},
 		},
 		components: {
@@ -93,11 +129,12 @@
 		letter-spacing: 0;
 		background-color: #336FFF!important;
 	}
-	.login-re{
+	
+	.login-re {
 		padding: 10px 15px;
 		display: flex;
 		justify-content: space-between;
-		span{
+		span {
 			color: #10aeff;
 		}
 	}
