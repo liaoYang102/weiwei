@@ -452,6 +452,14 @@ const memberModule = [{
 		meta: {
 			title: '推广助手'
 		}
+	},
+	{
+		path: '/member/benefits/index',
+		name: 'benefits',
+		component: resolve => require(['@/views/member/benefits/index'], resolve),
+		meta: {
+			title: '会员权益'
+		}
 	}
 ]
 
