@@ -29,7 +29,7 @@ const share =[
 	{
 		path:'/share/sdetail',//门店详情
 		name:'sdetail',
-		component:Sdetail,
+		component:resolve => require(['@/views/share/sdetail'], resolve),
 		meta: {
 			title:'门店详情'
 		}
@@ -41,7 +41,7 @@ const share =[
 	{
 		path:'/share/storelist',//门店列表
 		name:'storelist',
-		component:StoreList,
+		component:resolve => require(['@/views/share/storelist'], resolve),
 		props:true,
 		meta: {
 			navShow: true,
@@ -52,7 +52,7 @@ const share =[
 	{
 		path:'/share/storelist2',//门店列表2
 		name:'storelist2',
-		component:StoreList2,
+		component:resolve => require(['@/views/share/storelist2'], resolve),
 		meta: {
 			title:'门店列表2'
 		}
@@ -60,7 +60,7 @@ const share =[
 	{
 		path:'/share/meaidetail',//套餐详情
 		name:'meaidetail',
-		component:MeaiDetail,
+		component:resolve => require(['@/views/share/meaidetail'], resolve),
 		meta: {
 			title:'套餐详情'
 		}
@@ -68,7 +68,7 @@ const share =[
 	{
 		path:'/share/pintroduce',//威伐光介绍
 		name:'pintroduce',
-		component:PIntroduce,
+		component:resolve => require(['@/views/share/pintroduce'], resolve),
 		meta: {
 			title:'威伐光介绍'
 		}
@@ -76,7 +76,7 @@ const share =[
 	{
 		path:'/share/join',//招商加盟
 		name:'join',
-		component:Join,
+		component:resolve => require(['@/views/share/join'], resolve),
 		meta: {
 			title:'招商加盟'
 		}
@@ -84,7 +84,7 @@ const share =[
 	{
 		path:'/share/treatment',//治疗指导
 		name:'treatment',
-		component:TreatMent,
+		component:resolve => require(['@/views/share/treatment'], resolve),
 		meta: {
 			title:'治疗指导'
 		}
@@ -92,7 +92,7 @@ const share =[
 	{
 		path:'/share/comfirmOrder',//确认订单
 		name:'comfirmOrder',
-		component:ComfirmOrder,
+		component:resolve => require(['@/views/share/comfirmOrder'], resolve),
 		meta: {
 			title:'确认订单'
 		}
@@ -100,7 +100,7 @@ const share =[
 	{
 		path:'/share/orderSuccess',//支付成功
 		name:'orderSuccess',
-		component:OrderSuccess,
+		component:resolve => require(['@/views/share/orderSuccess'], resolve),
 		meta: {
 			title:'支付成功'
 		}
@@ -108,7 +108,7 @@ const share =[
 	{
 		path:'/share/orderDetail',//订单详情
 		name:'orderDetail',
-		component:OrderDetail,
+		component:resolve => require(['@/views/share/orderDetail'], resolve),
 		meta: {
 			title:'订单详情'
 		}
@@ -116,7 +116,7 @@ const share =[
 	{
 		path:'/share/orderEval',//订单评价
 		name:'orderEval',
-		component:OrderEval,
+		component:resolve => require(['@/views/share/orderEval'], resolve),
 		meta: {
 			title:'订单评价'
 		}
@@ -124,7 +124,7 @@ const share =[
 	{
 		path:'/share/usetime',//使用时间
 		name:'usetime',
-		component:UseTime,
+		component:resolve => require(['@/views/share/usetime'], resolve),
 		meta: {
 			title:'使用时间'
 		}
@@ -132,7 +132,7 @@ const share =[
 	{
 		path:'/share/qrcode',//二维码
 		name:'shareQrcode',
-		component:Qrcode,
+		component:resolve => require(['@/views/share/qrcode'], resolve),
 		meta: {
 			title:'二维码'
 		}
@@ -140,7 +140,7 @@ const share =[
 	{
 		path: '/share/instrumentCode',
 		name: 'instrumentCode',
-		component:instrumentCode,
+		component:resolve => require(['@/views/share/instrumentCode'], resolve),
 		meta: {
 			title: '仪器扫码'
 		}
