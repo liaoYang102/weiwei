@@ -112,6 +112,10 @@
 		z-index: 10000;
 	}
 	
+	.add-btn{
+		border-radius: 2px!important;
+	}
+	
 	#app {
 		height: 100%;
 		background-color: #F5F6FA;

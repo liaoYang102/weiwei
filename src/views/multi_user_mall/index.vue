@@ -55,7 +55,7 @@
 					</tab-item>
 				</tab>
 			</div>
-			<div style="height: 60.8%">
+			<div style="height: 6.8rem">
 				<div class="wrapper" ref="wrapper">
 					<div class="content">
 						<div class="index" v-if='tabIndex==0'>

@@ -33,6 +33,8 @@ Vue.prototype.$http = axios //定义axios组件用法  this.$http(opt).then(fn)
 import url from './config/url'
 Vue.prototype.url = url //全局url路径
 
+Vue.config.silent = true
+
 // 懒加载图片
 Vue.use(VueLazyLoad, {
 	preLoad: 1.3,
