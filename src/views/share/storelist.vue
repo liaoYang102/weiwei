@@ -298,6 +298,7 @@
 					// this.maskActive = false;
 					this.hide();
 				}else{
+					this.hide();
 					this.areaShang=true;
 					this.isActive = true;
 					this.maskActive = true;
@@ -329,6 +330,7 @@
 				if(this.priceShang){
 					this.hide();
 				}else{
+					this.hide();
 					this.priceShang=true;
 					this.maskActive = true;
 				}
