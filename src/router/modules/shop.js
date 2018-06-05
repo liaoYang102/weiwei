@@ -26,7 +26,7 @@ const shopModule = [
 	{
 		path: '/shop', //首页
 		name: 'shop',
-		component: resolve => require(['@/views/shop/index'], resolve),
+		component: resolve => require(['@/views/shop/temporarily'], resolve),
 		meta: {
 			navShow: true,
 			navIndex:1,
@@ -36,7 +36,7 @@ const shopModule = [
 	{
 		path: '/shop/index', //首页
 		name: 'shop',
-		component:  resolve => require(['@/views/shop/index'], resolve),
+		component:  resolve => require(['@/views/shop/temporarily'], resolve),
 		meta: {
 			navShow: true,
 			navIndex:1,
