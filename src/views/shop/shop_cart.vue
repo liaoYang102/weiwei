@@ -19,8 +19,8 @@
 						<div class="vux-1px-t">
     
     				<swipeout>
-						<swipeout-item @on-close="handleEvents('on-close')" @on-open="handleEvents('on-open')" transition-mode="follow" v-for="(children,chIndex) in item.children">
-					        <div slot="right-menu">
+						<swipeout-item @on-close="handleEvents('on-close')" @on-open="handleEvents('on-open')" transition-mode="follow" v-for="(children,chIndex) in item.children" :key="item.chIndex">
+					        <div slot="right-menu" v-if='item.shopEdit'>
 				                <swipeout-button @click.native="onButtonClick('fav')" type="primary">移入关注</swipeout-button>
 					            <swipeout-button @click.native="onButtonClick('delete')" type="warn">删除</swipeout-button>
 					        </div>
