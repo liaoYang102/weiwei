@@ -58,7 +58,7 @@
 				<router-link to="">
 					<img class="auto-img" v-lazy="'../../static/images/IMG_3224 Copy@2x.png'" alt="" />
 				</router-link>-->
-				<div class="plate">
+				<!-- <div class="plate">
 					<div class="item" v-for="(item,index) in plateList" :key="index">
 						<router-link :to="item.url">
 							<div class="b-w">
@@ -71,9 +71,7 @@
 						</router-link>
 					</div>
 				</div>
-				<router-link to="/share">
-					<img class="auto-img" v-lazy="'./static/images/jiam2.png'" alt="" />
-				</router-link>
+				 -->
 				<!--<div class="alliance">
 					<card>
 						<div slot="content" class="card-demo-flex">
@@ -98,9 +96,21 @@
 						</ul>
 					</div>
 				</section>
-				<router-link to="/share">
-					<img class="auto-img" v-lazy="'./static/images/fn.png'" alt="" />
-				</router-link>
+
+				<div>
+					<router-link to="/share">
+						<img class="auto-img mt20" v-lazy="'./static/images/share1.png'" alt="" />
+					</router-link>
+					<router-link to="/share">
+						<img class="auto-img mt20" v-lazy="'./static/images/wfg2.png'" alt="" />
+					</router-link>
+					<img class="auto-img mt20" v-lazy="'./static/images/mxqy2.png'" alt="" />
+					<img class="auto-img mt20" v-lazy="'./static/images/gmdq.png'" alt="" />
+					<img class="auto-img mt20" v-lazy="'./static/images/hxmkl2.png'" alt="" />
+					<img class="auto-img mt20" v-lazy="'./static/images/hdjt.png'" alt="" />
+					<img class="auto-img mt20" v-lazy="'./static/images/mz2.png'" alt="" />
+				</div>
+				
 				<!--<div class="pro-allbox" v-for="item in proList">
 					<div class="titlebox">{{item.title}}</div>
 					<img class="auto-img" v-lazy="item.img" />
@@ -113,8 +123,8 @@
 					</div>
 					<img class="auto-img" v-if="item.twoimg" v-lazy="item.twoimg" alt="" />
 				</div>-->
-				<div class="pro-allbox">
-					<!--<div class="titlebox">明星商家</div>-->
+				<!-- <div class="pro-allbox">
+					<div class="titlebox">明星商家</div>
 					<img style="margin-top: 0.2rem;" class="auto-img" v-lazy="'./static/images/mxqy.png'" alt="" />
 					<div class="store-box">
 						<div class="item-box">
@@ -145,10 +155,10 @@
 							<img v-lazy="'./static/images/mz.png'" alt="" />
 						</div>
 					</div>
-					<!--<div class="titlebox">
+					<div class="titlebox">
 						<span>查看附件商家</span>
-					</div>-->
-				</div>
+					</div>
+				</div> -->
 				<!--<div class="pro-allbox">
 					<div class="titlebox">猜你喜欢</div>
 					<div class="cai-box">
@@ -235,10 +245,10 @@
 					{title:'抽奖中心',img:'./static/images/cj.png',url:'/draw'},
 					{title:'邀请有奖',img:'./static/images/yq.png',url:'/member/purse/qrcode'},
 					{title:'推广助手',img:'./static/images/tg.png',url:'/member/generalize/index'},
-					{title:'赚钱攻略',img:'./static/images/gl.png',url:'/member/purse/qrcode'},
+					{title:'赚钱攻略',img:'./static/images/gl.png',url:'/member/strategy/index'},
 					{title:'充值有奖',img:'./static/images/cz.png',url:'/member/purse/recharge'},
 					{title:'我的优惠券',img:'./static/images/yh.png',url:'/member/coupon/index'},
-					{title:'会员权益',img:'./static/images/hy.png',url:''},
+					{title:'会员权益',img:'./static/images/hy.png',url:'/member/benefits/index'},
 					{title:'我的资产',img:'./static/images/zc.png',url:'/member/purse/wallet'},
 				],
 				allianceList: [{
@@ -413,6 +423,9 @@
 			height: auto;
 			display: block
 		}
+		.mt20{
+			margin-top: 0.2rem;
+		}
 		/*banner顶部*/
 		.swiperTop {
 			z-index: 1000;
@@ -500,8 +513,8 @@
 			    	border-left: 1px solid #D8DFF0;
 			    	display: inline-block;
 			    	padding: 0.15rem 0;
-			    	padding-left: 0.6rem;
-			    	margin-left: 0.2rem;
+			    	padding-left: 0.3rem;
+			    	margin-left: 0.85rem;
 			    }
 			}
 		}

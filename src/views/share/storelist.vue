@@ -566,7 +566,7 @@
     			text-align: left;
 			    font-size: 0.24rem;
 			    line-height: 0.72rem;
-			    border-top: 1px solid #c8c7cc;
+			    border-top: 1px solid #D8DFF0;
 			    /*border-bottom: 1px solid #c8c7cc;*/
 			    padding: 0 0.22rem;
 				list-style: none;

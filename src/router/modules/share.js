@@ -13,6 +13,7 @@ import OrderEval from '@/views/share/orderEval'
 import UseTime from '@/views/share/usetime'
 import Qrcode from '@/views/share/qrcode'
 import instrumentCode from '@/views/share/instrumentCode'
+import ceshi from '@/views/share/ceshi'
 
 
 const share =[
@@ -143,6 +144,14 @@ const share =[
 		component:resolve => require(['@/views/share/instrumentCode'], resolve),
 		meta: {
 			title: '仪器扫码'
+		}
+	},
+	{
+		path: '/share/ceshi',
+		name: 'ceshi',
+		component:resolve => require(['@/views/share/ceshi'], resolve),
+		meta: {
+			title: '测试'
 		}
 	}
 ]
