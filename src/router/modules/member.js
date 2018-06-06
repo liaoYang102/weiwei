@@ -460,6 +460,14 @@ const memberModule = [{
 		meta: {
 			title: '会员权益'
 		}
+	},
+	{
+		path: '/member/strategy/index',
+		name: 'strategy',
+		component: resolve => require(['@/views/member/strategy/index'], resolve),
+		meta: {
+			title: '赚钱攻略'
+		}
 	}
 ]
 
