@@ -5,9 +5,7 @@ var url = {
 	platformId: 2018050800000002,
 
 	user: {
-		getAuthorizationUrl: uri1 + '/pubilc/v1/user/getAuthorizationUrl', //获取第三方应用授权链接接口
-		getAuthorizationUrl1: 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx7a4933a7a3c33ec8&redirect_uri=https%3A%2F%2Fnew.cgc999.com%2Fapigw%2Fuser%2Fthirdparty%2Fwechat%2Fnotify&response_type=code&scope=snsapi_userinfo&state=20180508000000021527669875A2a3a5d99d9a73ddc406adcdc42fe04bdA2018050800000002',
-
+		getAuthorizationUrl: uri1 + '/public/v1/user/getAuthorizationUrl', //获取第三方应用授权链接接口
 		getBasicInfo: uri1 + '/v1/user/getBasicInfo', //基本信息
 		getMyTeam: uri1 + '/v1/user/getMyTeam', //我的团队
 		getUserInfo: uri1 + '/v1/user/getUserInfo', //个人资料

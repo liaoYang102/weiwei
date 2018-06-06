@@ -49,7 +49,7 @@
 					})
 					return false
 				}
-				
+				alert(_this.$route.query.code)
 				_this.$http.post(_this.url.user.forgetPassword, {
 					mobile: _this.$route.query.mobile,
 					smsVerificationCode: _this.$route.query.code,
@@ -61,7 +61,7 @@
 							width: '50%',
 							type: 'text',
 							position: 'middle',
-							text: '密码修改成功'
+							text: '密码保存成功'
 						})
 						_this.$router.replace({
 							path: '/user/reg'

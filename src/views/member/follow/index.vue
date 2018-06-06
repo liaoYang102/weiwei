@@ -160,11 +160,8 @@
 			}
 		},
 		created() {
-			if(this.$route.query.index){
-				this.index = Number(this.$route.query.index)
-			}else{
-				this.index = 0
-			}
+			
+			this.$route.query.index ? this.index = Number(this.$route.query.index) : this.index = 0
 			this.getFollow()
 		},
 		mounted() {
@@ -361,20 +358,15 @@
 				_this.storeidList = []
 				_this.show = false
 				_this.show2 = false
-				
-				if(index == 1){
+
+				if(index == 1) {
 					_this.type = 3
-				}else if(index == 0){
+				} else if(index == 0) {
 					_this.type = 2
-				}else if(index == 2){
+				} else if(index == 2) {
 					_this.type = 1
 				}
 				_this.index = index
-				_this.$router.replace({
-					query: _this.merge(_this.$route.query, {
-						'index': index
-					})
-				})
 			},
 			//点击编辑
 			edit() {
@@ -505,6 +497,12 @@
 				} else {
 					this.type = 1 //商品
 				}
+
+				this.$router.replace({
+					query: this.merge(this.$route.query, {
+						'index': this.index
+					})
+				})
 
 				this.getFollow()
 			}

@@ -33,7 +33,7 @@
 		created(){
 			this.title = this.mainApp.getCs('title')
 			this.type = this.mainApp.getCs('type')
-			this.storeUrl = 'http://192.168.3.145:8080/#/multi_user_mall?id=' + this.mainApp.getCs('allianceId')
+			this.storeUrl = 'http://192.168.3.145:8080/#/multi_user_mall?id=' + this.mainApp.getCs('enterpriseId')
 		},
 		data(){
 			return {

@@ -27,14 +27,14 @@
 
 			<div class="mallTab">
 				<tab :line-width="3" :scroll-threshold="4" custom-bar-width="0.6rem">
-					<tab-item selected @on-item-click="index">
+					<tab-item :selected="tabIndex==0" @on-item-click="index">
 						<div class="tab-item">
 							<img src="../../assets/images/multi_user_mall/shop1.png" v-if="tabIndex==0">
 							<img src="../../assets/images/multi_user_mall/shop.png" v-else>
 							<div>首页</div>
 						</div>
 					</tab-item>
-					<tab-item @on-item-click="index">
+					<tab-item :selected="tabIndex==1" @on-item-click="index">
 						<div class="tab-item" v-if="info.isChains == 1">
 							<img src="../../assets/images/multi_user_mall/shop1.png" v-if="tabIndex==1">
 							<img src="../../assets/images/multi_user_mall/shop.png" v-else>
@@ -46,7 +46,7 @@
 							<div>服务</div>
 						</div>
 					</tab-item>
-					<tab-item @on-item-click="index">
+					<tab-item :selected="tabIndex==2" @on-item-click="index">
 						<div class="tab-item">
 							<img src="../../assets/images/multi_user_mall/store1.png" v-if="tabIndex==2">
 							<img src="../../assets/images/multi_user_mall/store.png" v-else>
@@ -55,31 +55,27 @@
 					</tab-item>
 				</tab>
 			</div>
-			<div style="height: 6.8rem">
-				<div class="wrapper" ref="wrapper">
-					<div class="content">
-						<div class="index" v-if='tabIndex==0'>
-							<img src="../../assets/images/multi_user_mall/banner0.png" style="width: 100%">
-							<div class="imgList">
-								<div class="img" v-for="(item, index) in 3">
-									<img src="../../assets/images/multi_user_mall/1.png">
-								</div>
-							</div>
-							<img src="../../assets/images/multi_user_mall/Bitmap.png" style="width: 100%;">
-							<mallTheme :themeTitle="themeTitle"></mallTheme>
-							<mallTheme :themeTitle="themeTitle1"></mallTheme>
+			<div>
+				<div class="index" v-if='tabIndex==0'>
+					<img src="../../assets/images/multi_user_mall/banner0.png" style="width: 100%">
+					<div class="imgList">
+						<div class="img" v-for="(item, index) in 3">
+							<img src="../../assets/images/multi_user_mall/1.png">
 						</div>
-						<service v-if="tabIndex==1 && info.isAlliance == 1"></service>
-						<shop v-if="tabIndex==1 && info.isChains == 1"></shop>
-						<store v-if="tabIndex==2" :info="info"></store>
-						<loading v-if="tabIndex==1 && show"></loading>
-						<noMore v-if="tabIndex==1 && showNomore"></noMore>
 					</div>
+					<img src="../../assets/images/multi_user_mall/Bitmap.png" style="width: 100%;">
+					<mallTheme :themeTitle="themeTitle"></mallTheme>
+					<mallTheme :themeTitle="themeTitle1"></mallTheme>
 				</div>
+				<service v-if="tabIndex==1 && info.isAlliance == 1"></service>
+				<shop v-if="tabIndex==1 && info.isChains == 1"></shop>
+				<store v-if="tabIndex==2"></store>
+				<loading v-if="tabIndex==1 && show"></loading>
+				<noMore v-if="tabIndex==1 && showNomore"></noMore>
 			</div>
 		</div>
 		<div style="height: 100%;background-color: white;" v-else>
-			<noData :status="2" stateText="找不到该企业" ></noData>
+			<noData :status="2" stateText="找不到该企业"></noData>
 		</div>
 	</section>
 </template>
@@ -124,6 +120,9 @@
 			noData
 		},
 		mounted() {
+
+			this.$route.query.tabIndex ? this.tabIndex = this.$route.query.tabIndex : this.tabIndex = 0
+
 			this.getBasicInfo()
 			this.getThumbInfo()
 		},
@@ -139,7 +138,7 @@
 					if(res.data.status == "00000000") {
 						console.log(res.data.data)
 						_this.info = res.data.data
-						this.InitScroll()
+						localStorage.setItem('storeInfo',JSON.stringify(res.data.data))
 						if(_this.info.logo) {
 							_this.logo = _this.info.logo.original
 						}
@@ -151,7 +150,6 @@
 						}
 					} else if(res.data.status == 'plat-0003') {
 						_this.nohas = true
-						console.log(_this.nohas)
 					}
 				})
 			},
@@ -204,46 +202,15 @@
 					}
 				})
 			},
-			changeScroll() {
-				this.$nextTick(() => {
-					this.scroll = new BScroll(this.$refs.wrapper, {
-						click: true,
-						scrollY: true,
-						pullUpLoad: {
-							threshold: -30, // 负值是当上拉到超过低部 70px；正值是距离底部距离 时，                    
-						}
+			index(index) {
+				var _this = this
+				_this.tabIndex = index
+				_this.$router.replace({
+					query: _this.merge(_this.$route.query, {
+						'tabIndex': index
 					})
 				})
 			},
-			index(index) {
-				console.log(index)
-				this.tabIndex = index
-				this.changeScroll()
-			},
-			InitScroll() {
-				this.$nextTick(() => {
-					if(!this.scroll) {
-						this.scroll = new BScroll(this.$refs.wrapper, {
-							click: true,
-							scrollY: true,
-							pullUpLoad: {
-								threshold: -30, // 负值是当上拉到超过低部 70px；正值是距离底部距离 时，                    
-							}
-						})
-						this.scroll.on('pullingUp', (pos) => {
-							this.show = true;
-							this.LoadData()
-							this.$nextTick(function() {
-								this.scroll.finishPullUp();
-								this.scroll.refresh();
-							});
-						})
-					} else {
-						this.scroll.refresh()
-					}
-				})
-			},
-			LoadData() {},
 			changeAlliance(id) {
 				var _this = this
 				//取消关注联盟企业

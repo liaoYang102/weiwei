@@ -121,7 +121,7 @@
 			},
 			submit2() {
 				var _this = this
-				if(_this.oldpassword) {
+				if(_this.oldpassword.length == 6) {
 					_this.$http.post(_this.url.user.authPayPassword, {
 						userId: localStorage['userId'],
 						payPassword: _this.MD5(_this.oldpassword)
@@ -146,10 +146,10 @@
 					})
 				} else {
 					_this.$vux.toast.show({
-						width: '50%',
+						width: '60%',
 						type: 'text',
 						position: 'middle',
-						text: '请输入旧的支付密码'
+						text: '请输入旧的6位数字支付密码'
 					})
 				}
 			},

@@ -1,6 +1,5 @@
 <template>
 	<section class='store'>
-		<!-- <settingHeader :title='title'></settingHeader> -->
 		<div class="shop">
 			<img :src="logo" alt="">
 			<div>
@@ -16,7 +15,7 @@
 				<cell title="图册" :border-intent="false" is-link @click.native="isLook"></cell>
 			</group>
 			<group class="center">
-				<cell title="店铺二维码" :border-intent="false" is-link class="code" @click.native="toStoreQc(pinfo)">
+				<cell title="店铺二维码" :border-intent="false" is-link class="code" @click.native="toStoreQc(pinfo)" @click.stop="">
 					<img src="../../assets/images/multi_user_mall/qrcode.png" alt="">
 				</cell>
 				<cell title="店铺名" :value="pinfo.name" :border-intent="false"></cell>
@@ -35,13 +34,9 @@
 </template>
 
 <script>
-	// import settingHeader from '../../components/setting_header'
 	import { PopupHeader } from 'vux'
 	import { Radio } from 'vux'
 	export default {
-		props: {
-			info: Object
-		},
 		data() {
 			return {
 				title: "店铺信息",
@@ -57,17 +52,17 @@
 			Radio
 		},
 		created() {
-			console.log(this.info)
-			this.pinfo = this.info
-			if(this.info.area) {
-				this.address = this.info.area.province + this.info.area.city
+			this.pinfo = JSON.parse(localStorage['storeInfo'])
+			if(this.pinfo.area) {
+				this.address = this.pinfo.area.province + this.pinfo.area.city
 			}
-			if(this.info.logo) {
-				this.logo = this.info.logo.original
+			if(this.pinfo.logo) {
+				this.logo = this.pinfo.logo.original
 			}
 		},
 		methods: {
 			toStoreQc(pinfo) {
+				var _this = this
 				if(pinfo.isAlliance == 1) {
 					var type = '联盟企业'
 				} else if(pinfo.isChains == 1) {
@@ -75,14 +70,15 @@
 				} else {
 					var type = '其他'
 				}
-				this.$router.push({
+				_this.$router.push({
 					path: '/multi_user_mall/store_qrcode',
 					query: {
-						allianceId: 123,
+						enterpriseId: _this.$route.query.id,
 						title: pinfo.enterpriseName,
 						type: type
 					}
 				})
+				return false
 			},
 			isLook() {
 				this.$router.push({
@@ -126,7 +122,6 @@
 			padding: 15px 15px;
 			display: flex;
 			align-items: center;
-			
 			img {
 				width: 1rem;
 				height: 1rem;

@@ -137,6 +137,7 @@
 			box-sizing: border-box;
 			z-index: 15;
 			background-color: white;
+			font-size: 0.28rem;
 		}
 		.top:before {
 			content: " ";

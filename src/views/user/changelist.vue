@@ -4,7 +4,7 @@
 		<div class="list">
 			<group gutter="0">
 				<cell class="list-item" title="设置支付密码" is-link link="/user/changePaymentPassword"></cell>
-				<cell class="list-item" title="设置登录密码" is-link link="/user/changeLoginPassword"></cell>
+				<cell class="list-item" title="设置登录密码" is-link :link="{path:'/user/changeLoginPassword',query:{isLogin: true}}"></cell>
 			</group>
 		</div>
 	</div>

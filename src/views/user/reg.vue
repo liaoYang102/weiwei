@@ -85,7 +85,7 @@
 						width: '50%',
 						type: 'text',
 						position: 'middle',
-						text: '用户名或密码格式不正确'
+						text: '手机号码或密码格式不正确'
 					})
 				}
 
@@ -265,13 +265,15 @@
 			},
 			wxLogin() {
 				var _this = this
-				_this.$http(_this.url.user.getAuthorizationUrl, {
+				_this.$http.get(_this.url.user.getAuthorizationUrl, {
 					params: {
 						platformId: _this.url.platformId,
 						type: 1
 					}
 				}).then((res) => {
-					console.log(res)
+					_this.$http.get(res.data.data).then((res)=>{
+						console.log(res)
+					})
 				})
 			}
 		},
