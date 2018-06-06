@@ -3,8 +3,8 @@
 		<settingHeader :title="title"></settingHeader>
 		<div class="content">
 			<group gutter="0" class="input-div">
-				<x-input class="input-item" ref="password" v-model="password" placeholder="输入新密码" type="text" :max="11" @on-change="newpasswordChange"></x-input>
-				<x-input class="input-item" ref="password1" v-model="password1" placeholder="再次输入新密码" type="text" @on-change="newpasswordChange1"></x-input>
+				<x-input class="input-item" ref="password" v-model="password" placeholder="输入六位新密码" type="password" :max="20"></x-input>
+				<x-input class="input-item" ref="password1" v-model="password1" placeholder="确认新密码" type="password"></x-input>
 			</group>
 			<div class="tip">
 				<x-button class="add-btn" @click.native="submit" :show-loading="showLoading">提交</x-button>
@@ -35,12 +35,12 @@
 						width: '50%',
 						type: 'text',
 						position: 'middle',
-						text: '密码不能为空'
+						text: '密码不能少于六位'
 					})
 					return false
 				}
 
-				if(_this.password !=  _this.password1) {
+				if(_this.password != _this.password1) {
 					_this.$vux.toast.show({
 						width: '50%',
 						type: 'text',
@@ -50,11 +50,11 @@
 					return false
 				}
 				
-				_this.$http.post(_this.url.user.forgetPassword,{
-					mobile:_this.$route.query.mobile,
-					smsVerificationCode:_this.$route.query.code,
-					newPassword:_this.MD5(_this.password),
-					platformId:_this.url.platformId
+				_this.$http.post(_this.url.user.forgetPassword, {
+					mobile: _this.$route.query.mobile,
+					smsVerificationCode: _this.$route.query.code,
+					newPassword: _this.MD5(_this.password),
+					platformId: _this.url.platformId
 				}).then((res) => {
 					if(res.data.status == "00000000") {
 						_this.$vux.toast.show({
@@ -63,18 +63,12 @@
 							position: 'middle',
 							text: '密码修改成功'
 						})
+						_this.$router.replace({
+							path: '/user/reg'
+						})
 					}
-					_this.$router.replace({
-						path: '/user/reg'
-					})
 				})
-			},
-			newpasswordChange(val) {
-
-			},
-			newpasswordChange1(val) {
-
-			},
+			}
 		},
 		components: {
 			settingHeader,
