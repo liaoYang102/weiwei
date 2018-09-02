@@ -59,7 +59,7 @@ const memberModule = [{
 		meta: {
 			navShow: true,
 			navIndex: 0,
-			title: '首页'
+			title: '首页这只是一个测试'
 		}
 	},
 	{
@@ -69,7 +69,7 @@ const memberModule = [{
 		meta: {
 			navShow: true,
 			navIndex: 0,
-			title: '首页'
+			title: '首页这只是一个测试'
 		}
 	},
 	{
